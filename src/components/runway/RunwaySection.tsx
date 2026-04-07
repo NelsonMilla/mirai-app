@@ -23,7 +23,7 @@ export default function RunwaySection() {
   }, []);
 
   return (
-    <section ref={sectionRef as React.RefObject<HTMLElement>} className={`section reveal ${isIntersecting ? 'in' : ''}`} id="runway">
+    <section ref={sectionRef as React.RefObject<HTMLElement>} className={`section reveal-track ${isIntersecting ? 'in' : ''}`} id="runway">
       <div className="section-label">The Runway</div>
 
       <div className="runway-block" ref={blockRef}>

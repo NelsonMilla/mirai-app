@@ -3,6 +3,7 @@ export interface Track {
   name: string;
   type: string;
   color: string;
+  colorBright: string;
   colorRgb: string;
   darkBg: string;
   hint: string;
@@ -16,6 +17,7 @@ export const tracks: Track[] = [
     name: 'Devices Residency',
     type: 'Medical Devices',
     color: '#6DB5F5',
+    colorBright: '#8DC8F8',
     colorRgb: '109,181,245',
     darkBg: '#0d1520',
     hint: 'Lab infrastructure for first-in-human prototypes.',
@@ -32,6 +34,7 @@ export const tracks: Track[] = [
     name: 'Therapies Residency',
     type: 'Therapeutics',
     color: '#F5D34E',
+    colorBright: '#F8E06A',
     colorRgb: '245,211,78',
     darkBg: '#1a1710',
     hint: 'Connect directly with PMDA for conditional approval.',
@@ -48,6 +51,7 @@ export const tracks: Track[] = [
     name: 'Builder Pass',
     type: 'Community',
     color: '#F56B6B',
+    colorBright: '#F88A8A',
     colorRgb: '245,107,107',
     darkBg: '#1a1012',
     hint: 'Full access to everything. Build, connect, explore.',
@@ -318,6 +322,8 @@ export interface Fighter {
   photo?: string;
   tag: string;
   mystery?: boolean;
+  special?: string;
+  stats?: { label: string; value: number }[]; // 0-100
 }
 
 export const fighters: Fighter[] = [
@@ -326,48 +332,60 @@ export const fighters: Fighter[] = [
     fullName: 'Rodney Kelly',
     title: 'European Ambassador · Mediso',
     bio: 'Systems thinker who sees the blueprint before the first prototype. Bridges electrical engineering with biocompatible design.',
-    photo: '/images/speakers/rodney.png',
+    photo: '/images/speakers/rodney.jpg',
     tag: 'Devices',
+    special: 'Blueprint Vision',
+    stats: [{ label: 'ENG', value: 92 }, { label: 'BIO', value: 78 }, { label: 'REG', value: 85 }],
   },
   {
     name: 'Rob',
     fullName: 'Rob Claar',
     title: 'Founder · HekaBio',
     bio: 'Moves fast and ships faster. Three startups deep, each one more ambitious. Turns caffeine into working prototypes.',
-    photo: '/images/speakers/rob.png',
+    photo: '/images/speakers/rob.jpg',
     tag: 'Builder',
+    special: 'Rapid Prototype',
+    stats: [{ label: 'SPD', value: 95 }, { label: 'BLD', value: 90 }, { label: 'SHP', value: 88 }],
   },
   {
     name: 'Juliette',
     fullName: 'Juliette Humer',
     title: 'Founder · MuseBio',
     bio: "Former pharma insider who left to build what the industry wouldn't. Knows where the bodies are buried in every regulatory framework.",
-    photo: '/images/speakers/juliette.png',
+    photo: '/images/speakers/juliette.jpg',
     tag: 'Therapies',
+    special: 'Regulatory Bypass',
+    stats: [{ label: 'REG', value: 98 }, { label: 'STR', value: 82 }, { label: 'NET', value: 90 }],
   },
   {
     name: 'Laurence',
     fullName: 'Laurence Ion',
     title: 'Founder · Viva City',
     bio: 'Community architect and popup city veteran. Designs the spaces and systems that turn strangers into collaborators in record time.',
-    photo: '/images/speakers/laurence.png',
+    photo: '/images/speakers/laurence.jpg',
     tag: 'Builder',
+    special: 'Community Forge',
+    stats: [{ label: 'COM', value: 96 }, { label: 'DSN', value: 88 }, { label: 'OPS', value: 85 }],
   },
   {
     name: 'Masa',
     fullName: 'Masa Nakatsu',
     title: 'Devices Residency · Founder of Orb',
     bio: 'Building at the intersection of hardware and human augmentation. Founder of Orb — turning bold biotech visions into devices you can hold.',
-    photo: '/images/speakers/masa.png',
+    photo: '/images/speakers/masa.jpg',
     tag: 'Devices',
+    special: 'Augment Core',
+    stats: [{ label: 'HW', value: 94 }, { label: 'AUG', value: 90 }, { label: 'VIS', value: 86 }],
   },
   {
     name: 'Zoe',
     fullName: 'Zoe',
     title: 'Founder of Primordia Grants & Aevitas',
     bio: 'Fueling the next wave of longevity science. Builds the funding infrastructure that turns breakthrough research into real-world therapies.',
-    photo: '/images/speakers/zoe.png',
+    photo: '/images/speakers/zoe.jpg',
     tag: 'Therapies',
+    special: 'Fund Catalyst',
+    stats: [{ label: 'FND', value: 95 }, { label: 'SCI', value: 88 }, { label: 'NET', value: 92 }],
   },
   {
     name: '???',

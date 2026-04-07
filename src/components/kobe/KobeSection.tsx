@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { useIntersection } from '@/hooks/useIntersection';
-import Terminal from './Terminal';
+import CaveScene from './CaveScene';
 import LifestyleCard from './LifestyleCard';
 import CardOverlay from './CardOverlay';
 import IsometricMap from './IsometricMap';
@@ -16,6 +16,7 @@ export default function KobeSection() {
   const handleOpenOverlay = (card: LifestyleCardType) => {
     setSelectedCard(card);
     setIsOverlayOpen(true);
+    window.dispatchEvent(new CustomEvent('lifestyle-card-open', { detail: { cardId: card.id } }));
   };
 
   const handleCloseOverlay = () => {
@@ -25,7 +26,7 @@ export default function KobeSection() {
 
   return (
     <>
-      <section ref={sectionRef as React.RefObject<HTMLElement>} className={`section reveal ${isIntersecting ? 'in' : ''}`} id="kobe" data-section="kobe">
+      <section ref={sectionRef as React.RefObject<HTMLElement>} className={`section reveal-track ${isIntersecting ? 'in' : ''}`} id="kobe" data-section="kobe">
         {/* BEAT 1: Regulatory argument + Terminal */}
         <div className="kobe-beat-1">
           <div className="section-label stagger">Why Kobe</div>
@@ -39,7 +40,7 @@ export default function KobeSection() {
             Japan's regulatory framework for regenerative medicine and medical devices is the fastest legal path from clinical evidence to patients.
           </p>
 
-          <Terminal />
+          <CaveScene />
         </div>
 
         {/* BEAT 2: Lifestyle cards */}
@@ -48,10 +49,11 @@ export default function KobeSection() {
             Life on Port Island
           </h3>
           <div className="life-cards-grid">
-            {lifestyleCards.map((card) => (
+            {lifestyleCards.map((card, idx) => (
               <LifestyleCard
                 key={card.id}
                 card={card}
+                index={idx}
                 onOpenOverlay={handleOpenOverlay}
               />
             ))}

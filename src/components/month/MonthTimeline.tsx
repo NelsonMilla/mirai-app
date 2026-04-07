@@ -69,7 +69,7 @@ export default function MonthTimeline() {
   return (
     <section
       ref={sectionRef as React.RefObject<HTMLElement>}
-      className={`section reveal ${isIntersecting ? 'in' : ''}`}
+      className={`section reveal-track ${isIntersecting ? 'in' : ''}`}
       id="month"
     >
       <div className="section-label stagger">The month</div>

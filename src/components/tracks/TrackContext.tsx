@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, useContext, useState, ReactNode } from 'react';
+import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { tracks } from '@/lib/constants';
 
 interface TrackState {
@@ -37,6 +37,22 @@ export function TrackProvider({ children }: { children: ReactNode }) {
       setSelectedTrack(null);
     },
   };
+
+  // Set accent CSS custom properties and data-track attribute on <html>
+  useEffect(() => {
+    const root = document.documentElement;
+    if (track) {
+      root.style.setProperty('--accent', track.color);
+      root.style.setProperty('--accent-bright', track.colorBright);
+      root.style.setProperty('--accent-rgb', track.colorRgb);
+      root.dataset.track = track.id;
+    } else {
+      root.style.setProperty('--accent', '#F5A0B5');
+      root.style.setProperty('--accent-bright', '#FF6B92');
+      root.style.setProperty('--accent-rgb', '245,160,181');
+      delete root.dataset.track;
+    }
+  }, [track]);
 
   return <TrackContext.Provider value={value}>{children}</TrackContext.Provider>;
 }

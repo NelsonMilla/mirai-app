@@ -10,13 +10,14 @@ export function ScrollProgress() {
   const { progress } = useScrollState();
 
   return (
-    <div className="fixed top-0 left-0 w-full h-1 bg-gradient-to-r from-pink to-pink-bright z-50 origin-left">
+    <div className="fixed top-0 left-0 w-full h-1 z-50 origin-left" style={{ background: 'transparent' }}>
       <div
-        className="h-full bg-gradient-to-r from-pink to-pink-bright"
+        className="h-full"
         id="progressFill"
         style={{
           width: `${progress * 100}%`,
-          transition: 'width 0.1s ease-out',
+          background: 'linear-gradient(to right, var(--accent), var(--accent-bright))',
+          transition: 'width 0.1s ease-out, background 0.4s',
         }}
         aria-hidden="true"
       />

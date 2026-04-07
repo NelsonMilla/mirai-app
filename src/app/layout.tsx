@@ -7,6 +7,7 @@ import { SoundProvider } from "@/components/audio/AmbientAudio";
 import { CustomCursor } from "@/components/ui/CustomCursor";
 import { GrainOverlay } from "@/components/ui/GrainOverlay";
 import { ScrollProgress } from "@/components/ui/ScrollProgress";
+import { BackgroundParticles } from "@/components/ui/BackgroundParticles";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -24,6 +25,53 @@ export const metadata: Metadata = {
   title: "Mirai Tech PopUp City — Kobe Port Island · October 2026",
   description:
     "Three tracks. One month. Kobe's Port Island. Biomedical devices, therapeutic pathways, and the builder community — culminating in the Frontier Human Fashion Show.",
+  keywords: [
+    "biotech",
+    "popup city",
+    "Kobe",
+    "Port Island",
+    "medical devices",
+    "regenerative medicine",
+    "longevity",
+    "human enhancement",
+    "Japan",
+    "SAKIGAKE",
+    "residency",
+    "biomedical",
+    "fashion show",
+    "frontier humans",
+  ],
+  authors: [{ name: "Frontier Humans" }],
+  creator: "Frontier Humans",
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://mirai.tech",
+    siteName: "Mirai Tech PopUp City",
+    title: "Mirai Tech PopUp City — Build the Future of Biotech in 4 Weeks",
+    description:
+      "Three tracks. One month. Kobe's Port Island. Biomedical devices, therapeutic pathways, and the builder community — culminating in the Frontier Human Fashion Show. October 2026.",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Mirai Tech PopUp City — Kobe Port Island · October 2026",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Mirai Tech PopUp City — Kobe · October 2026",
+    description:
+      "Three tracks. One month. Biomedical devices, therapeutic pathways, and the builder community on Kobe's Port Island.",
+    images: ["/og-image.png"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+  metadataBase: new URL("https://mirai.tech"),
 };
 
 export default function RootLayout({
@@ -51,6 +99,7 @@ export default function RootLayout({
               <ScrollProgress />
               <CustomCursor />
               <GrainOverlay />
+              <BackgroundParticles />
               {children}
             </SoundProvider>
           </TrackProvider>
