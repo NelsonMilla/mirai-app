@@ -5,13 +5,16 @@ import { LifestyleCard as LifestyleCardType } from '@/lib/constants';
 
 interface LifestyleCardProps {
   card: LifestyleCardType;
+  index: number;
   onOpenOverlay: (card: LifestyleCardType) => void;
 }
 
-export default function LifestyleCard({ card, onOpenOverlay }: LifestyleCardProps) {
+export default function LifestyleCard({ card, index, onOpenOverlay }: LifestyleCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
   const shineRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
+  const [isFlipped, setIsFlipped] = useState(false);
+  const flipTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // 3D tilt effect
   useEffect(() => {
@@ -76,6 +79,23 @@ export default function LifestyleCard({ card, onOpenOverlay }: LifestyleCardProp
     return () => observer.disconnect();
   }, []);
 
+  // Cleanup flip timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (flipTimeoutRef.current) clearTimeout(flipTimeoutRef.current);
+    };
+  }, []);
+
+  const handleClick = () => {
+    if (isFlipped) return; // prevent double-click
+    setIsFlipped(true);
+    flipTimeoutRef.current = setTimeout(() => {
+      onOpenOverlay(card);
+      // Reset flip after overlay transition takes over
+      setTimeout(() => setIsFlipped(false), 400);
+    }, 800);
+  };
+
   const colorMap: Record<string, { rgb: string; accent: string }> = {
     onsen: { rgb: '232,201,125', accent: '#E8C97D' },
     food: { rgb: '255,107,146', accent: '#FF6B92' },
@@ -99,10 +119,14 @@ export default function LifestyleCard({ card, onOpenOverlay }: LifestyleCardProp
       style={{
         '--card-rgb': colors.rgb,
         '--card-accent': colors.accent,
+        '--card-i': index,
       } as React.CSSProperties}
-      onClick={() => onOpenOverlay(card)}
+      onClick={handleClick}
     >
-      <div className="life-card-inner">
+      <div
+        className="life-card-inner"
+        style={isFlipped ? { transform: 'rotateY(180deg)' } : undefined}
+      >
         {/* FRONT FACE — TCG LAYOUT */}
         <div className="life-front">
           <div className="life-frame">

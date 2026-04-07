@@ -5,6 +5,8 @@ import RunwaySection from "@/components/runway/RunwaySection";
 import KobeSection from "@/components/kobe/KobeSection";
 import RosterSection from "@/components/roster/RosterSection";
 import { ApplySection } from "@/components/apply/ApplySection";
+import { FaqSection } from "@/components/apply/FaqSection";
+import { PostCredits } from "@/components/apply/PostCredits";
 import { ScrollCompanion } from "@/components/apply/ScrollCompanion";
 import { Navbar } from "@/components/ui/Navbar";
 
@@ -19,6 +21,8 @@ export default function Home() {
       <KobeSection />
       <RosterSection />
       <ApplySection />
+      <FaqSection />
+      <PostCredits />
       <ScrollCompanion />
     </main>
   );

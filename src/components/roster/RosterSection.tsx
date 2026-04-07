@@ -1,55 +1,40 @@
 'use client';
 
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import Image from 'next/image';
-import { fighters, rosterPartners, rosterQuote, Fighter } from '@/lib/constants';
+import { fighters, rosterPartners, rosterQuote } from '@/lib/constants';
 import { useIntersection } from '@/hooks/useIntersection';
+import { useSound } from '@/components/audio/SoundContext';
 
 export default function RosterSection() {
   const { ref: sectionRef, isIntersecting } = useIntersection({ threshold: 0.05, triggerOnce: true });
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [flash, setFlash] = useState(false);
-  const [counted, setCounted] = useState(false);
-  const [countValue, setCountValue] = useState(0);
-  const countRef = useRef<HTMLDivElement>(null);
+  const [slotsRevealed, setSlotsRevealed] = useState(false);
+  const { playPing } = useSound();
 
   const selectedFighter = fighters[selectedIndex];
 
-  const selectFighter = useCallback((idx: number, skipFlash?: boolean) => {
-    setSelectedIndex(idx);
-    if (!skipFlash) {
-      setFlash(false);
-      // Force reflow then trigger flash
-      requestAnimationFrame(() => {
-        setFlash(true);
-      });
+  // Stagger slot reveals when section enters view
+  React.useEffect(() => {
+    if (isIntersecting && !slotsRevealed) {
+      setSlotsRevealed(true);
     }
-  }, []);
+  }, [isIntersecting, slotsRevealed]);
 
-  // Count-up animation
-  useEffect(() => {
-    if (!countRef.current || counted) return;
-    const target = fighters.filter(f => !f.mystery).length + 2; // 6 confirmed + 2 mystery = 8
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting && !counted) {
-            setCounted(true);
-            let current = 0;
-            const step = () => {
-              current++;
-              setCountValue(current);
-              if (current < target) setTimeout(step, 80);
-            };
-            step();
-          }
-        });
-      },
-      { threshold: 0.5 }
-    );
-    observer.observe(countRef.current);
-    return () => observer.disconnect();
-  }, [counted]);
+  const selectFighter = useCallback((idx: number) => {
+    setSelectedIndex(idx);
+    setFlash(false);
+    requestAnimationFrame(() => setFlash(true));
+    playPing(300 + idx * 60, 0.04);
+  }, [playPing]);
+
+  const tagColor: Record<string, string> = {
+    Devices: '#6DB5F5',
+    Therapies: '#F5C542',
+    Builder: '#FF6B92',
+    Incoming: '#8585A8',
+  };
 
   return (
     <section
@@ -59,20 +44,26 @@ export default function RosterSection() {
     >
       {/* Header */}
       <div className="roster-header">
-        <div className="roster-title">Select Your Fighter</div>
-        <div className="roster-subtitle">Speakers &amp; Residents</div>
+        <div className="roster-title mono">Select Your Fighter</div>
+        <div className="roster-subtitle display"><em>Speakers</em> &amp; Residents</div>
       </div>
 
       {/* Arena: left selector + right detail */}
       <div className="roster-arena">
         {/* LEFT: Character selector grid */}
         <div className="roster-selector">
-          <div className="selector-label">Choose a fighter</div>
+          <div className="selector-label mono">Choose a fighter</div>
           <div className="roster-grid">
             {fighters.map((fighter, idx) => (
               <div
                 key={idx}
-                className={`roster-slot ${selectedIndex === idx ? 'selected' : ''} ${fighter.mystery ? 'mystery' : ''}`}
+                className={[
+                  'roster-slot',
+                  selectedIndex === idx ? 'selected' : '',
+                  fighter.mystery ? 'mystery' : '',
+                  slotsRevealed ? 'slot-revealed' : '',
+                ].filter(Boolean).join(' ')}
+                style={{ '--slot-i': idx } as React.CSSProperties}
                 onClick={() => selectFighter(idx)}
               >
                 <div className="slot-portrait">
@@ -90,7 +81,7 @@ export default function RosterSection() {
                 </div>
                 <div className="slot-nameplate">
                   <span className="slot-name">{fighter.name}</span>
-                  <span className="slot-tag">{fighter.tag}</span>
+                  <span className="slot-tag" style={{ color: tagColor[fighter.tag] || '#8585A8' }}>{fighter.tag}</span>
                 </div>
               </div>
             ))}
@@ -113,33 +104,51 @@ export default function RosterSection() {
               )}
             </div>
             <div className="fighter-meta">
-              <div className="fighter-name">{selectedFighter.fullName}</div>
-              <div className="fighter-title">{selectedFighter.title}</div>
-              <div className="fighter-bio">{selectedFighter.bio}</div>
+              <div className="fighter-name display">{selectedFighter.fullName}</div>
+              <div className="fighter-title mono">{selectedFighter.title}</div>
+              {selectedFighter.special && (
+                <div className="fighter-special mono">
+                  <span className="special-label">SPECIAL</span>
+                  <span className="special-name">{selectedFighter.special}</span>
+                </div>
+              )}
+              {selectedFighter.stats && (
+                <div className="fighter-stats">
+                  {selectedFighter.stats.map((s, i) => (
+                    <div key={i} className="fighter-stat">
+                      <span className="fighter-stat-label mono">{s.label}</span>
+                      <div className="fighter-stat-bar">
+                        <div
+                          className="fighter-stat-fill"
+                          style={{ width: flash || !selectedFighter.mystery ? `${s.value}%` : '0%' }}
+                        />
+                      </div>
+                      <span className="fighter-stat-val mono">{s.value}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
+              {!selectedFighter.stats && (
+                <div className="fighter-bio">{selectedFighter.bio}</div>
+              )}
             </div>
           </div>
         </div>
       </div>
 
-      {/* Roster count */}
-      <div className="roster-count" ref={countRef}>
-        <div className="roster-count-num">
-          <span>{countValue}</span> / 24
+      {/* Bottom row: count + partners */}
+      <div className="roster-bottom">
+        <div className="roster-count-inline">
+          <span className="roster-count-num display">{fighters.filter(f => !f.mystery).length + 2}</span>
+          <span className="roster-count-sep">/</span>
+          <span className="roster-count-total">24</span>
+          <span className="roster-count-label mono">Fighters confirmed</span>
         </div>
-        <div className="roster-count-label">Fighters confirmed &middot; Full roster September 2026</div>
-      </div>
-
-      {/* Quote */}
-      <div className="roster-quote">
-        <blockquote>&ldquo;{rosterQuote.text}&rdquo;</blockquote>
-        <cite>{rosterQuote.cite}</cite>
-      </div>
-
-      {/* Partners */}
-      <div className="roster-partners">
-        {rosterPartners.map((partner) => (
-          <span key={partner} className="roster-partner">{partner}</span>
-        ))}
+        <div className="roster-partners">
+          {rosterPartners.map((partner) => (
+            <span key={partner} className="roster-partner mono">{partner}</span>
+          ))}
+        </div>
       </div>
     </section>
   );
