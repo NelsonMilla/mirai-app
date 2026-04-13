@@ -17,7 +17,7 @@ export function Navbar() {
           <a href="#tracks">Tracks</a>
           <a href="#month">Program</a>
           <a href="#kobe">Kobe</a>
-          <a className="btn btn-primary" href="#apply">Apply Now</a>
+          <a className="btn btn-primary" href="/apply">Apply Now</a>
         </div>
       </nav>
       <button

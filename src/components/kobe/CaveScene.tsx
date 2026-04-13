@@ -50,14 +50,30 @@ export default function CaveScene() {
     tick();
   }, []);
 
-  // Mouse parallax on the lab scene
+  // Mouse parallax on the lab scene (desktop), gentle idle sway (mobile)
   useEffect(() => {
     const lab = labRef.current;
     if (!lab) return;
 
+    const isTouch = window.matchMedia('(pointer: coarse)').matches;
+
+    if (isTouch) {
+      // Gentle idle sway animation via CSS custom properties
+      let frame: number;
+      const start = performance.now();
+      const animate = (now: number) => {
+        const t = (now - start) / 1000;
+        lab.style.setProperty('--px', `${Math.sin(t * 0.5) * 3}px`);
+        lab.style.setProperty('--py', `${Math.cos(t * 0.7) * 2}px`);
+        frame = requestAnimationFrame(animate);
+      };
+      frame = requestAnimationFrame(animate);
+      return () => cancelAnimationFrame(frame);
+    }
+
     const handleMouseMove = (e: MouseEvent) => {
       const rect = lab.getBoundingClientRect();
-      const x = (e.clientX - rect.left) / rect.width - 0.5;  // -0.5 to 0.5
+      const x = (e.clientX - rect.left) / rect.width - 0.5;
       const y = (e.clientY - rect.top) / rect.height - 0.5;
       lab.style.setProperty('--px', `${x * 8}px`);
       lab.style.setProperty('--py', `${y * 4}px`);

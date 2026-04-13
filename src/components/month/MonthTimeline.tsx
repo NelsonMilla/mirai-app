@@ -202,7 +202,7 @@ function ChapterCard({ chapter, index, isVisible, isEntered, isActive, onClick, 
     >
       {/* Background artwork */}
       <div className="ch-art">
-        <img src={chapter.imageSrc} alt="" loading="lazy" />
+        <img src={chapter.imageSrc} alt={`${chapter.ep} — ${chapter.title}`} loading="lazy" />
       </div>
       {/* Floating particles */}
       <div className="ch-particles">

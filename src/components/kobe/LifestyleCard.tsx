@@ -21,18 +21,12 @@ export default function LifestyleCard({ card, index, onOpenOverlay }: LifestyleC
     const cardElement = cardRef.current;
     if (!cardElement) return;
 
-    const handleMouseMove = (e: MouseEvent) => {
-      const rect = cardElement.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-
-      // Calculate rotation based on mouse position
+    const applyTilt = (x: number, y: number, rect: DOMRect) => {
       const rotateX = ((y - rect.height / 2) / rect.height) * 15;
       const rotateY = ((x - rect.width / 2) / rect.width) * -15;
 
       cardElement.style.transform = `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
 
-      // Move shine effect
       if (shineRef.current) {
         const shineX = (x / rect.width) * 100;
         const shineY = (y / rect.height) * 100;
@@ -41,7 +35,7 @@ export default function LifestyleCard({ card, index, onOpenOverlay }: LifestyleC
       }
     };
 
-    const handleMouseLeave = () => {
+    const resetTilt = () => {
       cardElement.style.transform = 'perspective(1200px) rotateX(0) rotateY(0)';
       if (shineRef.current) {
         shineRef.current.style.setProperty('--shine-x', '50%');
@@ -49,12 +43,27 @@ export default function LifestyleCard({ card, index, onOpenOverlay }: LifestyleC
       }
     };
 
+    const handleMouseMove = (e: MouseEvent) => {
+      const rect = cardElement.getBoundingClientRect();
+      applyTilt(e.clientX - rect.left, e.clientY - rect.top, rect);
+    };
+
+    const handleTouchMove = (e: TouchEvent) => {
+      const touch = e.touches[0];
+      const rect = cardElement.getBoundingClientRect();
+      applyTilt(touch.clientX - rect.left, touch.clientY - rect.top, rect);
+    };
+
     cardElement.addEventListener('mousemove', handleMouseMove);
-    cardElement.addEventListener('mouseleave', handleMouseLeave);
+    cardElement.addEventListener('mouseleave', resetTilt);
+    cardElement.addEventListener('touchmove', handleTouchMove, { passive: true });
+    cardElement.addEventListener('touchend', resetTilt);
 
     return () => {
       cardElement.removeEventListener('mousemove', handleMouseMove);
-      cardElement.removeEventListener('mouseleave', handleMouseLeave);
+      cardElement.removeEventListener('mouseleave', resetTilt);
+      cardElement.removeEventListener('touchmove', handleTouchMove);
+      cardElement.removeEventListener('touchend', resetTilt);
     };
   }, []);
 

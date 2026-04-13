@@ -17,7 +17,8 @@ export default function FaqAccordion() {
             className="faq-q"
             onClick={() => setOpenIndex(openIndex === idx ? null : idx)}
           >
-            {item.question}
+            <span>{item.question}</span>
+            <span className="arrow">+</span>
           </button>
           <div className="faq-a">{item.answer}</div>
         </div>

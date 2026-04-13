@@ -8,6 +8,7 @@ import { CustomCursor } from "@/components/ui/CustomCursor";
 import { GrainOverlay } from "@/components/ui/GrainOverlay";
 import { ScrollProgress } from "@/components/ui/ScrollProgress";
 import { BackgroundParticles } from "@/components/ui/BackgroundParticles";
+import LoadingScreen from "@/components/ui/LoadingScreen";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -100,6 +101,7 @@ export default function RootLayout({
               <CustomCursor />
               <GrainOverlay />
               <BackgroundParticles />
+              <LoadingScreen />
               {children}
             </SoundProvider>
           </TrackProvider>

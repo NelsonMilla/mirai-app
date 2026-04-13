@@ -8,7 +8,7 @@ import { useIntersection } from '@/hooks/useIntersection';
 
 export function TracksSection() {
   const { selectedTrack, selectedName, selectedColor } = useTrack();
-  const { ref, isIntersecting } = useIntersection({ threshold: 0.1 });
+  const { ref, isIntersecting } = useIntersection({ threshold: 0.1, triggerOnce: true });
 
   return (
     <section

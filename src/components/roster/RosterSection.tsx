@@ -93,14 +93,26 @@ export default function RosterSection() {
           <div className="fighter-detail">
             <div className={`fighter-portrait ${flash ? 'flash' : ''}`} onAnimationEnd={() => setFlash(false)}>
               {selectedFighter.photo && (
-                <Image
-                  src={selectedFighter.photo}
-                  alt={selectedFighter.fullName}
-                  fill
-                  sizes="660px"
-                  style={{ objectFit: 'cover', objectPosition: 'center top' }}
-                  priority
-                />
+                <>
+                  <Image
+                    src={selectedFighter.photo}
+                    alt=""
+                    fill
+                    sizes="660px"
+                    className="fighter-portrait-blur"
+                    style={{ objectFit: 'cover', objectPosition: 'center 20%' }}
+                    aria-hidden="true"
+                  />
+                  <Image
+                    src={selectedFighter.photo}
+                    alt={selectedFighter.fullName}
+                    fill
+                    sizes="660px"
+                    className="fighter-portrait-main"
+                    style={{ objectFit: 'contain', objectPosition: 'center top' }}
+                    priority
+                  />
+                </>
               )}
             </div>
             <div className="fighter-meta">
