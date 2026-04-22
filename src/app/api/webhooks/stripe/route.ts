@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { stripe } from '@/lib/stripe';
-import { markPaid } from '@/lib/payments';
-import { updateApplicationStatusByEmail } from '@/lib/applicants';
+import { markApplicationPaid } from '@/lib/applicants';
 import { sendPaymentConfirmation } from '@/lib/email';
 
 export async function POST(req: NextRequest) {
@@ -28,30 +27,22 @@ export async function POST(req: NextRequest) {
 
   if (event.type === 'checkout.session.completed') {
     const session = event.data.object;
-    const token = session.client_reference_id;
-    const email = session.customer_email;
+    const email = session.customer_email ?? session.customer_details?.email ?? null;
+    const name = session.customer_details?.name ?? '';
 
-    console.log(`Payment completed: email=${email}, token=${token?.slice(0, 20)}...`);
+    console.log(`Payment completed: email=${email}, session=${session.id}`);
 
-    if (email && token) {
-      // Critical: record payment in Notion. Return 500 on failure so Stripe retries.
+    if (email) {
+      // Critical: ensure Applications has a Paid row for this email.
+      // Returning 500 lets Stripe retry on transient Notion failures.
       try {
-        await markPaid(email, session.id, token);
+        await markApplicationPaid({ email, stripeSessionId: session.id, name });
       } catch (err) {
-        console.error('Failed to record payment in whitelist:', err);
+        console.error('Failed to mark application as Paid:', err);
         return NextResponse.json({ error: 'Failed to record payment' }, { status: 500 });
       }
 
-      // Update applications DB — best-effort (user may have come through whitelist only)
-      try {
-        await updateApplicationStatusByEmail(email, 'Paid');
-      } catch (err) {
-        console.error('Failed to update application status to Paid:', err);
-      }
-    }
-
-    // Confirmation email — fire-and-forget (not worth failing the webhook over)
-    if (email) {
+      // Confirmation email — fire-and-forget
       try {
         await sendPaymentConfirmation({ to: email });
       } catch (err) {

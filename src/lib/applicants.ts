@@ -129,16 +129,25 @@ export async function listApplications(
 }
 
 /**
- * Find an application by email and update its status.
- * Used by the Stripe webhook to mark applications as "Paid".
+ * Mark a paying customer in the Applications DB.
+ *
+ * - If an Application exists for this email → update Status to "Paid"
+ *   plus Stripe Session ID + Paid At metadata.
+ * - If not → create a stub row (Profile=Skipped-Application). This is
+ *   the path for VIP/whitelist users who skipped the application form.
+ *
+ * Source of truth for paid attendees lives here, not in the Whitelist DB.
  */
-export async function updateApplicationStatusByEmail(
-  email: string,
-  status: ApplicationStatus,
-): Promise<void> {
+export async function markApplicationPaid(args: {
+  email: string;
+  stripeSessionId: string;
+  name: string;
+}): Promise<void> {
   const { apiKey, dbId } = getCredentials();
+  const email = args.email.toLowerCase();
+  const paidAt = new Date().toISOString();
 
-  const res = await fetch(`${NOTION_API}/databases/${dbId}/query`, {
+  const queryRes = await fetch(`${NOTION_API}/databases/${dbId}/query`, {
     method: 'POST',
     headers: {
       Authorization: `Bearer ${apiKey}`,
@@ -146,24 +155,68 @@ export async function updateApplicationStatusByEmail(
       'Notion-Version': NOTION_VERSION,
     },
     body: JSON.stringify({
-      filter: { property: 'Email', email: { equals: email.toLowerCase() } },
+      filter: { property: 'Email', email: { equals: email } },
       page_size: 1,
     }),
   });
 
-  if (!res.ok) {
-    const err = await res.text();
-    console.error('Notion query error (updateApplicationStatusByEmail):', err);
-    throw new Error('Failed to find application by email');
+  if (!queryRes.ok) {
+    const err = await queryRes.text();
+    console.error('Notion query error (markApplicationPaid):', err);
+    throw new Error('Failed to query Applications by email');
   }
 
-  const data = (await res.json()) as { results: Array<{ id: string }> };
-  if (data.results.length === 0) {
-    // No application found — user may have come through whitelist only
+  const queryData = (await queryRes.json()) as { results: Array<{ id: string }> };
+
+  const paymentProperties = {
+    Status: { select: { name: 'Paid' as const } },
+    'Stripe Session ID': { rich_text: [{ text: { content: args.stripeSessionId } }] },
+    'Paid At': { date: { start: paidAt } },
+  };
+
+  if (queryData.results.length > 0) {
+    const pageId = queryData.results[0].id;
+    const updateRes = await fetch(`${NOTION_API}/pages/${pageId}`, {
+      method: 'PATCH',
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        'Content-Type': 'application/json',
+        'Notion-Version': NOTION_VERSION,
+      },
+      body: JSON.stringify({ properties: paymentProperties }),
+    });
+
+    if (!updateRes.ok) {
+      const err = await updateRes.text();
+      console.error('Notion update error (markApplicationPaid):', err);
+      throw new Error('Failed to mark application as Paid');
+    }
     return;
   }
 
-  await updateApplicationStatus(data.results[0].id, status);
+  const createRes = await fetch(`${NOTION_API}/pages`, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+      'Content-Type': 'application/json',
+      'Notion-Version': NOTION_VERSION,
+    },
+    body: JSON.stringify({
+      parent: { database_id: dbId },
+      properties: {
+        Name: { title: [{ text: { content: args.name || email } }] },
+        Email: { email },
+        Profile: { select: { name: 'Skipped-Application' } },
+        ...paymentProperties,
+      },
+    }),
+  });
+
+  if (!createRes.ok) {
+    const err = await createRes.text();
+    console.error('Notion create error (markApplicationPaid):', err);
+    throw new Error('Failed to create Skipped-Application row for paid user');
+  }
 }
 
 export async function updateApplicationStatus(
