@@ -59,17 +59,25 @@ export function PostCredits() {
     return () => clearInterval(interval);
   }, []);
 
-  // Generate stars once
-  const [stars] = useState(() =>
-    Array.from({ length: 50 }, (_, i) => ({
-      id: i,
-      left: `${Math.random() * 100}%`,
-      top: `${Math.random() * 100}%`,
-      delay: `${Math.random() * 3}s`,
-      duration: `${2 + Math.random() * 3}s`,
-      size: `${1 + Math.random() * 2}px`,
-    }))
-  );
+  // Generate stars on the client only — Math.random() in a useState initializer
+  // runs on both server and client, producing different values and a hydration
+  // mismatch. Render empty on the server, fill in after mount.
+  const [stars, setStars] = useState<
+    Array<{ id: number; left: string; top: string; delay: string; duration: string; size: string }>
+  >([]);
+
+  useEffect(() => {
+    setStars(
+      Array.from({ length: 50 }, (_, i) => ({
+        id: i,
+        left: `${Math.random() * 100}%`,
+        top: `${Math.random() * 100}%`,
+        delay: `${Math.random() * 3}s`,
+        duration: `${2 + Math.random() * 3}s`,
+        size: `${1 + Math.random() * 2}px`,
+      }))
+    );
+  }, []);
 
   const SpriteComponent = selectedTrack
     ? defaultSprites[selectedTrack] ?? Volt

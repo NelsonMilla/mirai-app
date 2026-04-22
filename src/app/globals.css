@@ -149,7 +149,8 @@ nav {
 .nav-links a:hover { color: var(--accent); }
 
 @media (max-width: 640px) {
-  .nav-links a:not(.btn) { display: none; }
+  .nav-links a:not(.btn):not(.invite-code-link) { display: none; }
+  .nav-links .invite-code-link--nav { display: inline-flex; }
 }
 
 /* Sound toggle button — main styles in SOUND TOGGLE STYLES section below */
@@ -7301,4 +7302,259 @@ body.loading .hero-ctas {
 /* BUG-13: FAQ expand/collapse indicator rotation */
 .faq-item.open .faq-q .arrow {
   transform: rotate(45deg);
+}
+
+/* ============================================
+   QUICK ACTIONS COMPONENT (v1)
+   ============================================ */
+
+.quick-actions {
+  position: relative;
+  padding: 3rem 1.5rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.quick-actions--compact { padding: 2rem 1rem; }
+.quick-actions--stacked { padding: 2.5rem 1rem; }
+
+.quick-actions-head {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.quick-actions-title {
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  letter-spacing: -0.01em;
+  margin: 0.35rem 0 0.5rem;
+  background: linear-gradient(135deg, var(--white) 0%, var(--iri-1) 50%, var(--iri-2) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.quick-actions-sub {
+  color: var(--slate);
+  font-size: var(--fs-secondary);
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.quick-actions-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.quick-actions--stacked .quick-actions-grid {
+  grid-template-columns: 1fr;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+@media (max-width: 880px) {
+  .quick-actions-grid { grid-template-columns: 1fr; }
+}
+
+.qa-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1.5rem 1.25rem 1.25rem;
+  border-radius: 16px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.025), rgba(255,255,255,0.01));
+  border: 1px solid rgba(255,255,255,0.06);
+  text-decoration: none;
+  color: var(--white);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1),
+              border-color 0.3s,
+              background 0.3s,
+              box-shadow 0.3s;
+  cursor: none;
+}
+
+.qa-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at top, rgba(var(--accent-rgb), 0.08), transparent 60%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+
+a.qa-card:hover,
+.qa-card--telegram:hover,
+.qa-card--login:hover {
+  transform: translateY(-3px);
+  border-color: rgba(var(--accent-rgb), 0.35);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.25), 0 0 0 1px rgba(var(--accent-rgb), 0.1) inset;
+}
+
+a.qa-card:hover::before { opacity: 1; }
+
+.qa-card--telegram { --qa-tone: 38, 164, 223; }
+.qa-card--mailing  { --qa-tone: var(--accent-rgb); }
+.qa-card--login    { --qa-tone: 212, 184, 255; }
+
+.qa-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(var(--qa-tone), 0.12);
+  color: rgb(var(--qa-tone));
+  border: 1px solid rgba(var(--qa-tone), 0.25);
+}
+
+.qa-body { display: flex; flex-direction: column; gap: 0.35rem; }
+
+.qa-card-label {
+  font-size: var(--fs-label);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--slate);
+}
+
+.qa-card-title {
+  font-family: var(--font-fraunces), serif;
+  font-variation-settings: 'SOFT' 60, 'opsz' 144;
+  font-size: 1.15rem;
+  line-height: 1.2;
+  color: var(--white);
+}
+
+.qa-card-desc {
+  font-size: var(--fs-secondary);
+  color: var(--slate);
+  line-height: 1.5;
+}
+
+.qa-card-cta {
+  margin-top: auto;
+  font-size: var(--fs-label);
+  letter-spacing: 0.1em;
+  color: rgb(var(--qa-tone));
+  opacity: 0.85;
+}
+
+/* Mailing mini-form — stacked so the email has room to breathe */
+.qa-mailing-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.6rem;
+}
+
+.qa-mailing-input {
+  width: 100%;
+  padding: 0.7rem 0.85rem;
+  background: rgba(0,0,0,0.3);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  color: var(--white);
+  font-size: var(--fs-secondary);
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.2s, background 0.2s;
+  cursor: none;
+}
+
+.qa-mailing-input::placeholder { color: rgba(133,133,168,0.7); }
+
+.qa-mailing-input:focus {
+  border-color: rgba(var(--accent-rgb), 0.5);
+  background: rgba(0,0,0,0.4);
+}
+
+.qa-mailing-btn {
+  width: 100%;
+  padding: 0.7rem 1rem;
+  border-radius: 10px;
+  background: var(--accent);
+  color: var(--ink);
+  border: none;
+  font-family: var(--font-jetbrains), monospace;
+  font-size: var(--fs-label);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: none;
+  transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+}
+
+.qa-mailing-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(var(--accent-rgb), 0.25);
+  background: var(--accent-bright);
+}
+
+.qa-mailing-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.qa-card--mailing { min-width: 0; }
+
+.qa-mailing-success {
+  font-size: var(--fs-label);
+  color: #7FD97F;
+  margin-top: 0.5rem;
+}
+
+.qa-mailing-err {
+  font-size: var(--fs-label);
+  color: #F58A9B;
+  margin-top: 0.4rem;
+}
+
+/* ============================================
+   INVITE CODE LINK (discreet)
+   ============================================ */
+
+.invite-code-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.4rem 0.7rem;
+  border-radius: 999px;
+  color: rgba(255,255,255,0.45);
+  font-size: var(--fs-label);
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color 0.25s, background 0.25s, border-color 0.25s;
+  border: 1px solid transparent;
+  cursor: none;
+}
+
+.invite-code-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(var(--accent-rgb), 0.55);
+  box-shadow: 0 0 8px rgba(var(--accent-rgb), 0.5);
+  flex-shrink: 0;
+}
+
+.invite-code-link:hover {
+  color: var(--accent);
+  background: rgba(var(--accent-rgb), 0.06);
+  border-color: rgba(var(--accent-rgb), 0.2);
+}
+
+.invite-code-link--nav {
+  padding: 0.35rem 0.6rem;
+  font-size: var(--fs-label);
+}
+
+.invite-code-link--footer {
+  margin: 1.5rem auto 0;
+  display: flex;
+}
+
+@media (max-width: 640px) {
+  .invite-code-link--nav .invite-code-text { display: none; }
+  .invite-code-link--nav { padding: 0.35rem; }
 }

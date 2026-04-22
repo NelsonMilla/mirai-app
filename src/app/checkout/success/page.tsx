@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { QuickActions } from '@/components/ui/QuickActions';
 
 export default function CheckoutSuccessPage() {
   return (
@@ -28,6 +29,13 @@ export default function CheckoutSuccessPage() {
             Back to Mirai
           </Link>
         </div>
+
+        <QuickActions
+          variant="stacked"
+          source="checkout-success"
+          heading="Your next steps"
+          subheading="Join the community, stay in the loop, and set up your platform access."
+        />
       </div>
     </main>
   );

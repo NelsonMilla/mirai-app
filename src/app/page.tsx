@@ -9,6 +9,7 @@ import { FaqSection } from "@/components/apply/FaqSection";
 import { PostCredits } from "@/components/apply/PostCredits";
 import { ScrollCompanion } from "@/components/apply/ScrollCompanion";
 import { Navbar } from "@/components/ui/Navbar";
+import { QuickActions } from "@/components/ui/QuickActions";
 
 export default function Home() {
   return (
@@ -21,6 +22,7 @@ export default function Home() {
       <KobeSection />
       <RosterSection />
       <ApplySection />
+      <QuickActions source="home" />
       <FaqSection />
       <PostCredits />
       <ScrollCompanion />

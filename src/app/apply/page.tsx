@@ -1,6 +1,8 @@
 import { ApplyForm } from './ApplyForm';
 import { MailingListForm } from './MailingListForm';
 import { CursorGlow } from './CursorGlow';
+import { QuickActions } from '@/components/ui/QuickActions';
+import { InviteCodeLink } from '@/components/ui/InviteCodeLink';
 
 export const metadata = {
   title: 'Apply — Builder Pass · Mirai Tech PopUp City',
@@ -27,6 +29,7 @@ export default function ApplyPage() {
           <p className="apply-page-upgrade mono">
             Applying as Builder? You can upgrade to Devices or Therapies track after acceptance.
           </p>
+          <InviteCodeLink variant="footer" />
         </header>
 
         {/* ── APPLICATION FORM ── */}
@@ -39,7 +42,7 @@ export default function ApplyPage() {
           <span className="apply-divider-line" />
         </div>
 
-        {/* ── MAILING LIST ── */}
+        {/* ── MAILING LIST (track-specific notifier) ── */}
         <section className="mailing-list-section">
           <h3 className="display" style={{ fontSize: 'clamp(1.2rem, 2.5vw, 1.6rem)', marginBottom: '0.5rem' }}>
             Get notified when other tracks open
@@ -49,6 +52,13 @@ export default function ApplyPage() {
           </p>
           <MailingListForm />
         </section>
+
+        {/* ── QUICK ACTIONS (community + login) ── */}
+        <QuickActions
+          source="apply"
+          heading="Other ways to plug in"
+          subheading="Not ready to apply? Stay close to the community while you think it over."
+        />
       </div>
     </main>
   );

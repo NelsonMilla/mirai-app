@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { useSound } from '@/components/audio/SoundContext';
+import { InviteCodeLink } from '@/components/ui/InviteCodeLink';
 
 export function Navbar() {
   const { soundEnabled, toggleSound } = useSound();
@@ -17,6 +18,7 @@ export function Navbar() {
           <a href="#tracks">Tracks</a>
           <a href="#month">Program</a>
           <a href="#kobe">Kobe</a>
+          <InviteCodeLink variant="nav" />
           <a className="btn btn-primary" href="/apply">Apply Now</a>
         </div>
       </nav>
