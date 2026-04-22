@@ -663,7 +663,7 @@ function WhitelistPanel({ onCountChange }: { onCountChange?: (n: number) => void
 
   async function handleAdd(e: React.FormEvent) {
     e.preventDefault();
-    if (!name.trim() || !emailVal.trim()) return;
+    if (!name.trim()) return;
     setAdding(true);
     setFeedback(null);
 
@@ -673,7 +673,7 @@ function WhitelistPanel({ onCountChange }: { onCountChange?: (n: number) => void
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           name: name.trim(),
-          email: emailVal.trim(),
+          email: emailVal.trim() || undefined,
           code: code.trim() || undefined,
         }),
       });
@@ -712,7 +712,7 @@ function WhitelistPanel({ onCountChange }: { onCountChange?: (n: number) => void
         <input
           type="email"
           className="whitelist-input"
-          placeholder="Email"
+          placeholder="Email (optional)"
           value={emailVal}
           onChange={(e) => setEmailVal(e.target.value)}
           disabled={adding}
@@ -729,7 +729,7 @@ function WhitelistPanel({ onCountChange }: { onCountChange?: (n: number) => void
         <button
           type="submit"
           className="btn btn-primary"
-          disabled={!name.trim() || !emailVal.trim() || adding}
+          disabled={!name.trim() || adding}
           style={{ padding: '0.65rem 1.25rem' }}
         >
           {adding ? 'Adding...' : 'Add'}

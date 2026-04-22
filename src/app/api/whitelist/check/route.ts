@@ -35,10 +35,20 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    // Code has no email on file — collect it from the user before checkout.
+    // Don't mark as used yet; that happens when they submit their email.
+    if (!result.email) {
+      return NextResponse.json({
+        whitelisted: true,
+        needsEmail: true,
+        name: result.name,
+      });
+    }
+
     // Mark entry as used
     await markCodeUsed(result.pageId);
 
-    const token = generatePaymentToken(result.email || input);
+    const token = generatePaymentToken(result.email);
 
     return NextResponse.json({
       whitelisted: true,

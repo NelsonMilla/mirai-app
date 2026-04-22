@@ -151,12 +151,23 @@ export async function addToWhitelist({
   code,
 }: {
   name: string;
-  email: string;
+  email?: string;
   code?: string;
 }): Promise<{ id: string }> {
   const { apiKey, dbId } = getCredentials();
 
   const generatedCode = code || Math.random().toString(36).slice(2, 8).toUpperCase();
+
+  const properties: Record<string, unknown> = {
+    Name: { title: [{ text: { content: name } }] },
+    Code: { rich_text: [{ text: { content: generatedCode } }] },
+    Used: { checkbox: false },
+  };
+
+  const trimmedEmail = email?.trim();
+  if (trimmedEmail) {
+    properties.Email = { email: trimmedEmail.toLowerCase() };
+  }
 
   const res = await fetch(`${NOTION_API}/pages`, {
     method: 'POST',
@@ -167,12 +178,7 @@ export async function addToWhitelist({
     },
     body: JSON.stringify({
       parent: { database_id: dbId },
-      properties: {
-        Name: { title: [{ text: { content: name } }] },
-        Email: { email: email.toLowerCase() },
-        Code: { rich_text: [{ text: { content: generatedCode } }] },
-        Used: { checkbox: false },
-      },
+      properties,
     }),
   });
 
@@ -211,5 +217,33 @@ export async function markCodeUsed(pageId: string): Promise<void> {
     const err = await res.text();
     console.error('Failed to mark code as used:', err);
     throw new Error('Failed to mark code as used');
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Set email on a whitelist entry (used when redeemer fills it in at redemption)
+// ---------------------------------------------------------------------------
+
+export async function setWhitelistEmail(pageId: string, email: string): Promise<void> {
+  const { apiKey } = getCredentials();
+
+  const res = await fetch(`${NOTION_API}/pages/${pageId}`, {
+    method: 'PATCH',
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+      'Content-Type': 'application/json',
+      'Notion-Version': NOTION_VERSION,
+    },
+    body: JSON.stringify({
+      properties: {
+        Email: { email: email.toLowerCase() },
+      },
+    }),
+  });
+
+  if (!res.ok) {
+    const err = await res.text();
+    console.error('Failed to set whitelist email:', err);
+    throw new Error('Failed to set whitelist email');
   }
 }

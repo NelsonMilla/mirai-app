@@ -6,7 +6,7 @@ import {
 } from '@/lib/inviteCodes';
 import { generatePaymentToken } from '@/lib/tokens';
 
-const VALID_PROFILES = new Set(['Founder', 'Researcher', 'Engineer', 'Investor', 'Other']);
+const VALID_PROFILES = new Set(['Entrepreneur', 'Academic', 'Artist', 'Investor', 'Operator', 'Student', 'Other']);
 
 export async function POST(req: NextRequest) {
   try {

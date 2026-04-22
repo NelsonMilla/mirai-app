@@ -4,10 +4,10 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
-type Step = 'enter-code' | 'mini-form';
+type Step = 'enter-code' | 'mini-form' | 'needs-email';
 type Status = 'idle' | 'loading' | 'success' | 'not-found' | 'used' | 'expired' | 'exhausted' | 'inactive' | 'error';
 
-const PROFILES = ['Founder', 'Researcher', 'Engineer', 'Investor', 'Other'];
+const PROFILES = ['Entrepreneur', 'Academic', 'Artist', 'Investor', 'Operator', 'Student', 'Other'];
 
 export default function InvitePage() {
   const router = useRouter();
@@ -24,6 +24,9 @@ export default function InvitePage() {
   const [formTelegram, setFormTelegram] = useState('');
   const [formProfile, setFormProfile] = useState('');
   const [submitting, setSubmitting] = useState(false);
+
+  // Needs-email step (for whitelist codes added without an email)
+  const [needsEmailValue, setNeedsEmailValue] = useState('');
 
   async function handleSubmitCode(e: React.FormEvent) {
     e.preventDefault();
@@ -84,6 +87,13 @@ export default function InvitePage() {
         return;
       }
 
+      if (data.whitelisted && data.needsEmail) {
+        setWelcomeName(data.name || '');
+        setStep('needs-email');
+        setStatus('idle');
+        return;
+      }
+
       if (data.whitelisted) {
         setWelcomeName(data.name || '');
         setStatus('success');
@@ -133,6 +143,102 @@ export default function InvitePage() {
       setErrorMsg('Connection error. Please try again.');
       setSubmitting(false);
     }
+  }
+
+  async function handleSubmitEmailOnly(e: React.FormEvent) {
+    e.preventDefault();
+    const trimmed = needsEmailValue.trim();
+    if (!trimmed) return;
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed)) {
+      setErrorMsg('Please enter a valid email address.');
+      return;
+    }
+
+    setSubmitting(true);
+    setErrorMsg('');
+
+    try {
+      const res = await fetch('/api/whitelist/claim', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ code: input.trim(), email: trimmed }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok || !data.success) {
+        setErrorMsg(data.error || 'Something went wrong. Please try again.');
+        setSubmitting(false);
+        return;
+      }
+
+      router.push(data.redirectUrl);
+    } catch {
+      setErrorMsg('Connection error. Please try again.');
+      setSubmitting(false);
+    }
+  }
+
+  // ---- Needs-email step (whitelist code had no email on file) ----
+  if (step === 'needs-email') {
+    return (
+      <main className="invite-page">
+        <div className="invite-container">
+          <Link href="/" className="invite-back">&larr; Back to Mirai</Link>
+
+          <div className="invite-card">
+            <div className="section-label" style={{ marginBottom: '0.5rem' }}>Invite Accepted</div>
+            <h1 className="invite-title">
+              {welcomeName ? `Welcome, ${welcomeName}.` : 'Welcome.'}
+            </h1>
+            <p className="invite-subtitle">
+              We just need your email to send your ticket and receipt.
+            </p>
+
+            <form className="invite-form" onSubmit={handleSubmitEmailOnly} style={{ gap: '0.75rem' }}>
+              <input
+                type="email"
+                className="whitelist-input invite-input"
+                placeholder="your@email.com"
+                value={needsEmailValue}
+                onChange={(e) => setNeedsEmailValue(e.target.value)}
+                disabled={submitting}
+                autoFocus
+                required
+              />
+
+              <button
+                type="submit"
+                className="btn btn-primary"
+                style={{ width: '100%', justifyContent: 'center', padding: '0.9rem' }}
+                disabled={!needsEmailValue.trim() || submitting}
+              >
+                {submitting ? 'Continuing...' : 'Continue to checkout \u2192'}
+              </button>
+
+              <button
+                type="button"
+                className="btn"
+                style={{ width: '100%', justifyContent: 'center', padding: '0.65rem', border: '1px solid var(--charcoal)' }}
+                onClick={() => {
+                  setStep('enter-code');
+                  setStatus('idle');
+                  setErrorMsg('');
+                  setNeedsEmailValue('');
+                }}
+                disabled={submitting}
+              >
+                Use a different code
+              </button>
+            </form>
+
+            {errorMsg && (
+              <div className="whitelist-msg whitelist-error">{errorMsg}</div>
+            )}
+          </div>
+        </div>
+      </main>
+    );
   }
 
   // ---- Mini-form step ----

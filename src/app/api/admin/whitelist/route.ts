@@ -30,15 +30,16 @@ export async function POST(req: NextRequest) {
       code?: string;
     };
 
-    if (!name || !email) {
-      return NextResponse.json({ error: 'Name and email are required' }, { status: 400 });
+    if (!name) {
+      return NextResponse.json({ error: 'Name is required' }, { status: 400 });
     }
 
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    const trimmedEmail = email?.trim();
+    if (trimmedEmail && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmedEmail)) {
       return NextResponse.json({ error: 'Invalid email address' }, { status: 400 });
     }
 
-    const result = await addToWhitelist({ name, email, code });
+    const result = await addToWhitelist({ name, email: trimmedEmail, code });
     return NextResponse.json({ added: true, id: result.id });
   } catch (err) {
     console.error('[admin/whitelist] POST error:', err);

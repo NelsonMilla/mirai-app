@@ -325,7 +325,7 @@ export async function createInviteApplication(input: InviteApplicantInput): Prom
         Email: { email: input.email.toLowerCase() },
         Telegram: { rich_text: [{ text: { content: input.telegram } }] },
         Profile: { select: { name: input.profile } },
-        Track: { select: { name: input.profile } },
+        Track: { select: { name: 'Skipped-Application' } },
         Status: { select: { name: 'Approved' } },
         'Promo Code': { rich_text: [{ text: { content: input.inviteCode } }] },
       },
