@@ -4,16 +4,28 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
-type Status = 'idle' | 'loading' | 'success' | 'not-found' | 'used' | 'error';
+type Step = 'enter-code' | 'mini-form';
+type Status = 'idle' | 'loading' | 'success' | 'not-found' | 'used' | 'expired' | 'exhausted' | 'inactive' | 'error';
+
+const PROFILES = ['Founder', 'Researcher', 'Engineer', 'Investor', 'Other'];
 
 export default function InvitePage() {
   const router = useRouter();
+  const [step, setStep] = useState<Step>('enter-code');
   const [input, setInput] = useState('');
   const [status, setStatus] = useState<Status>('idle');
-  const [name, setName] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
+  const [codeLabel, setCodeLabel] = useState('');
+  const [welcomeName, setWelcomeName] = useState('');
 
-  async function handleSubmit(e: React.FormEvent) {
+  // Mini-form fields (shown only after multi-use code validates)
+  const [formName, setFormName] = useState('');
+  const [formEmail, setFormEmail] = useState('');
+  const [formTelegram, setFormTelegram] = useState('');
+  const [formProfile, setFormProfile] = useState('');
+  const [submitting, setSubmitting] = useState(false);
+
+  async function handleSubmitCode(e: React.FormEvent) {
     e.preventDefault();
     const trimmed = input.trim();
     if (!trimmed) return;
@@ -21,8 +33,43 @@ export default function InvitePage() {
     setStatus('loading');
     setErrorMsg('');
 
+    const isEmail = trimmed.includes('@');
+
     try {
-      const isEmail = trimmed.includes('@');
+      // If it looks like a code (not an email), try multi-use invite codes first
+      if (!isEmail) {
+        const inviteRes = await fetch('/api/invite/check', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ code: trimmed }),
+        });
+
+        const inviteData = await inviteRes.json();
+
+        if (inviteRes.ok && inviteData.valid) {
+          setCodeLabel(inviteData.label ?? '');
+          setStep('mini-form');
+          setStatus('idle');
+          return;
+        }
+
+        // Code recognised but invalid in some way — surface matching error
+        if (inviteRes.ok && inviteData.reason === 'expired') {
+          setStatus('expired');
+          return;
+        }
+        if (inviteRes.ok && inviteData.reason === 'exhausted') {
+          setStatus('exhausted');
+          return;
+        }
+        if (inviteRes.ok && inviteData.reason === 'inactive') {
+          setStatus('inactive');
+          return;
+        }
+        // reason === 'not-found' → fall through to whitelist check
+      }
+
+      // Fall back to existing single-use whitelist (email lookup or legacy codes)
       const res = await fetch('/api/whitelist/check', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -38,7 +85,7 @@ export default function InvitePage() {
       }
 
       if (data.whitelisted) {
-        setName(data.name || '');
+        setWelcomeName(data.name || '');
         setStatus('success');
         setTimeout(() => router.push(data.redirectUrl), 1500);
       } else if (data.reason?.includes('already been used')) {
@@ -52,6 +99,141 @@ export default function InvitePage() {
     }
   }
 
+  async function handleSubmitMiniForm(e: React.FormEvent) {
+    e.preventDefault();
+    if (!formName.trim() || !formEmail.trim() || !formTelegram.trim() || !formProfile) return;
+
+    setSubmitting(true);
+    setErrorMsg('');
+
+    try {
+      const res = await fetch('/api/invite/redeem', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          code: input.trim(),
+          name: formName.trim(),
+          email: formEmail.trim(),
+          telegram: formTelegram.trim(),
+          profile: formProfile,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok || !data.success) {
+        setErrorMsg(data.error || 'Something went wrong. Please try again.');
+        setSubmitting(false);
+        return;
+      }
+
+      // Redirect to Stripe checkout
+      window.location.href = data.paymentUrl;
+    } catch {
+      setErrorMsg('Connection error. Please try again.');
+      setSubmitting(false);
+    }
+  }
+
+  // ---- Mini-form step ----
+  if (step === 'mini-form') {
+    return (
+      <main className="invite-page">
+        <div className="invite-container">
+          <Link href="/" className="invite-back">&larr; Back to Mirai</Link>
+
+          <div className="invite-card">
+            <div className="section-label" style={{ marginBottom: '0.5rem' }}>Invite Accepted</div>
+            <h1 className="invite-title">Just a few details.</h1>
+            <p className="invite-subtitle">
+              {codeLabel
+                ? `Welcome (${codeLabel}). `
+                : 'Welcome. '}
+              Fill these in and you&rsquo;ll go straight to checkout.
+            </p>
+
+            <form className="invite-form" onSubmit={handleSubmitMiniForm} style={{ gap: '0.75rem' }}>
+              <input
+                type="text"
+                className="whitelist-input invite-input"
+                placeholder="Full name"
+                value={formName}
+                onChange={(e) => setFormName(e.target.value)}
+                disabled={submitting}
+                autoFocus
+                required
+              />
+              <input
+                type="email"
+                className="whitelist-input invite-input"
+                placeholder="Email"
+                value={formEmail}
+                onChange={(e) => setFormEmail(e.target.value)}
+                disabled={submitting}
+                required
+              />
+              <input
+                type="text"
+                className="whitelist-input invite-input"
+                placeholder="Telegram handle (e.g. @yourname)"
+                value={formTelegram}
+                onChange={(e) => setFormTelegram(e.target.value)}
+                disabled={submitting}
+                required
+              />
+              <select
+                className="whitelist-input invite-input"
+                value={formProfile}
+                onChange={(e) => setFormProfile(e.target.value)}
+                disabled={submitting}
+                required
+              >
+                <option value="">Profile / role...</option>
+                {PROFILES.map((p) => (
+                  <option key={p} value={p}>{p}</option>
+                ))}
+              </select>
+
+              <button
+                type="submit"
+                className="btn btn-primary"
+                style={{ width: '100%', justifyContent: 'center', padding: '0.9rem' }}
+                disabled={
+                  !formName.trim() ||
+                  !formEmail.trim() ||
+                  !formTelegram.trim() ||
+                  !formProfile ||
+                  submitting
+                }
+              >
+                {submitting ? 'Continuing...' : 'Continue to checkout \u2192'}
+              </button>
+
+              <button
+                type="button"
+                className="btn"
+                style={{ width: '100%', justifyContent: 'center', padding: '0.65rem', border: '1px solid var(--charcoal)' }}
+                onClick={() => {
+                  setStep('enter-code');
+                  setStatus('idle');
+                  setErrorMsg('');
+                }}
+                disabled={submitting}
+              >
+                Use a different code
+              </button>
+            </form>
+
+            {errorMsg && (
+              <div className="whitelist-msg whitelist-error">{errorMsg}</div>
+            )}
+          </div>
+        </div>
+      </main>
+    );
+  }
+
+  // ---- Enter-code step ----
   return (
     <main className="invite-page">
       <div className="invite-container">
@@ -64,7 +246,7 @@ export default function InvitePage() {
             Enter your email address or invite code to skip the application and go straight to checkout.
           </p>
 
-          <form className="invite-form" onSubmit={handleSubmit}>
+          <form className="invite-form" onSubmit={handleSubmitCode}>
             <input
               type="text"
               className="whitelist-input invite-input"
@@ -89,7 +271,7 @@ export default function InvitePage() {
 
           {status === 'success' && (
             <div className="whitelist-msg whitelist-success">
-              {name ? `Welcome, ${name}!` : 'You\u2019re on the list!'} Redirecting...
+              {welcomeName ? `Welcome, ${welcomeName}!` : 'You\u2019re on the list!'} Redirecting...
             </div>
           )}
 
@@ -102,6 +284,24 @@ export default function InvitePage() {
           {status === 'used' && (
             <div className="whitelist-msg whitelist-notfound">
               This invite code has already been used.
+            </div>
+          )}
+
+          {status === 'expired' && (
+            <div className="whitelist-msg whitelist-notfound">
+              This invite code has expired.
+            </div>
+          )}
+
+          {status === 'exhausted' && (
+            <div className="whitelist-msg whitelist-notfound">
+              This invite code has reached its usage limit.
+            </div>
+          )}
+
+          {status === 'inactive' && (
+            <div className="whitelist-msg whitelist-notfound">
+              This invite code is no longer active.
             </div>
           )}
 

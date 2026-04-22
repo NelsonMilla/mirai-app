@@ -34,6 +34,11 @@ interface ApprovalEmailParams {
   paymentUrl: string;
 }
 
+interface ApplicationReceivedParams {
+  to: string;
+  name: string;
+}
+
 interface LoginCodeParams {
   to: string;
   code: string;
@@ -189,6 +194,25 @@ function smallNote(text: string): string {
 // Plain text fallbacks
 // ---------------------------------------------------------------------------
 
+function applicationReceivedPlainText(name: string): string {
+  return [
+    `Hi ${name},`,
+    '',
+    'We received your application for Mirai Tech PopUp City. Thanks for applying!',
+    '',
+    "Our team reviews every application carefully. You'll hear back from us within 7\u201310 days with a decision.",
+    '',
+    'Event details:',
+    '  Dates: October 1\u201331, 2026',
+    '  Location: Port Island, Kobe, Japan',
+    '  Venue: KBIC (Kobe Biomedical Innovation Cluster)',
+    '',
+    'In the meantime, keep an eye on your inbox \u2014 and feel free to reply to this email if you have questions.',
+    '',
+    '\u2014 The Mirai Team',
+  ].join('\n');
+}
+
 function approvalPlainText(name: string, paymentUrl: string): string {
   return [
     `Hi ${name},`,
@@ -243,6 +267,44 @@ function paymentConfirmationPlainText(name?: string): string {
 // ---------------------------------------------------------------------------
 // Email senders
 // ---------------------------------------------------------------------------
+
+export async function sendApplicationReceivedEmail({
+  to,
+  name,
+}: ApplicationReceivedParams): Promise<EmailResult> {
+  try {
+    const resend = getResend();
+
+    const html = emailLayout(
+      [
+        heading('We got your application'),
+        paragraph(`Hi ${name}, thanks for applying to Mirai Tech PopUp City &mdash; we've received your submission.`),
+        paragraph("Our team reviews every application carefully. You'll hear back from us within 7&ndash;10 days with a decision."),
+        detailsBox([
+          `${label('Dates')} &nbsp; October 1&ndash;31, 2026`,
+          `${label('Location')} &nbsp; Port Island, Kobe, Japan`,
+          `${label('Venue')} &nbsp; KBIC (Kobe Biomedical Innovation Cluster)`,
+        ]),
+        smallNote('In the meantime, keep an eye on your inbox. Feel free to reply to this email if you have questions.'),
+      ].join('\n'),
+      `Thanks for applying to Mirai Tech PopUp City. We'll be in touch within 7\u201310 days.`,
+    );
+
+    await resend.emails.send({
+      from: fromAddress(),
+      to,
+      subject: "We got your application \u2014 Mirai Tech PopUp City",
+      html,
+      text: applicationReceivedPlainText(name),
+    });
+
+    return { success: true };
+  } catch (err) {
+    const message = err instanceof Error ? err.message : String(err);
+    console.error('[email] sendApplicationReceivedEmail failed', { to, name, error: message });
+    return { success: false, error: message };
+  }
+}
 
 export async function sendApprovalEmail({
   to,

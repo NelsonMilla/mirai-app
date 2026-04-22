@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, Fragment } from 'react';
 import Link from 'next/link';
 
 // ---------------------------------------------------------------------------
@@ -47,7 +47,19 @@ interface WhitelistEntry {
   paymentStatus: string;
 }
 
-type AdminTab = 'events' | 'applications' | 'whitelist';
+interface InviteCode {
+  id: string;
+  code: string;
+  maxUses: number | null;
+  usesCount: number;
+  expiresAt: string | null;
+  active: boolean;
+  label: string;
+  usedBy: string;
+  createdAt: string;
+}
+
+type AdminTab = 'events' | 'applications' | 'whitelist' | 'invite-codes';
 
 // ---------------------------------------------------------------------------
 // Console Client
@@ -60,6 +72,7 @@ export function ConsoleClient({ initial }: { initial: InitialState }) {
   const [tab, setTab] = useState<AdminTab>('events');
   const [appCount, setAppCount] = useState(0);
   const [wlCount, setWlCount] = useState(0);
+  const [icCount, setIcCount] = useState(0);
 
   if (!loggedIn) {
     return (
@@ -111,11 +124,19 @@ export function ConsoleClient({ initial }: { initial: InitialState }) {
             Whitelist
             {wlCount > 0 && <span className="console-nav-count">{wlCount}</span>}
           </button>
+          <button
+            className={`console-nav-item ${tab === 'invite-codes' ? 'active' : ''}`}
+            onClick={() => setTab('invite-codes')}
+          >
+            Invite Codes
+            {icCount > 0 && <span className="console-nav-count">{icCount}</span>}
+          </button>
         </nav>
         <div className="console-content">
           {tab === 'events' && <EventsList />}
           {tab === 'applications' && <AdminPanel onCountChange={setAppCount} />}
           {tab === 'whitelist' && <WhitelistPanel onCountChange={setWlCount} />}
+          {tab === 'invite-codes' && <InviteCodesPanel onCountChange={setIcCount} />}
         </div>
       </div>
     </ConsoleShell>
@@ -754,6 +775,234 @@ function WhitelistPanel({ onCountChange }: { onCountChange?: (n: number) => void
                 </td>
               </tr>
             ))}
+          </tbody>
+        </table>
+      )}
+    </section>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// Invite Codes Panel
+// ---------------------------------------------------------------------------
+
+function InviteCodesPanel({ onCountChange }: { onCountChange?: (n: number) => void }) {
+  const [codes, setCodes] = useState<InviteCode[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [code, setCode] = useState('');
+  const [label, setLabel] = useState('');
+  const [maxUses, setMaxUses] = useState('');
+  const [expiresAt, setExpiresAt] = useState('');
+  const [adding, setAdding] = useState(false);
+  const [feedback, setFeedback] = useState<{ ok: boolean; msg: string } | null>(null);
+  const [expanded, setExpanded] = useState<Record<string, boolean>>({});
+
+  const fetchCodes = useCallback(() => {
+    setLoading(true);
+    fetch('/api/admin/invite-codes')
+      .then((r) => r.json())
+      .then((d) => {
+        const list = d.codes ?? [];
+        setCodes(list);
+        onCountChange?.(list.length);
+      })
+      .catch(() => {})
+      .finally(() => setLoading(false));
+  }, [onCountChange]);
+
+  useEffect(() => {
+    fetchCodes();
+  }, [fetchCodes]);
+
+  async function handleAdd(e: React.FormEvent) {
+    e.preventDefault();
+    if (!code.trim()) return;
+    setAdding(true);
+    setFeedback(null);
+
+    try {
+      const body: Record<string, unknown> = {
+        code: code.trim(),
+        label: label.trim() || undefined,
+        active: true,
+      };
+      if (maxUses.trim()) body.maxUses = Number(maxUses);
+      if (expiresAt.trim()) body.expiresAt = expiresAt;
+
+      const res = await fetch('/api/admin/invite-codes', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      });
+      const data = await res.json();
+
+      if (!res.ok) {
+        setFeedback({ ok: false, msg: data.error || 'Failed to add' });
+        return;
+      }
+
+      setFeedback({ ok: true, msg: `Created code ${code.trim()}` });
+      setCode('');
+      setLabel('');
+      setMaxUses('');
+      setExpiresAt('');
+      fetchCodes();
+    } catch {
+      setFeedback({ ok: false, msg: 'Connection error' });
+    } finally {
+      setAdding(false);
+    }
+  }
+
+  async function toggleActive(entry: InviteCode) {
+    try {
+      const res = await fetch(`/api/admin/invite-codes/${entry.id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ active: !entry.active }),
+      });
+      if (!res.ok) return;
+      fetchCodes();
+    } catch {}
+  }
+
+  async function handleDelete(entry: InviteCode) {
+    if (!confirm(`Delete code "${entry.code}"? Past redemptions stay in Applications.`)) return;
+    try {
+      const res = await fetch(`/api/admin/invite-codes/${entry.id}`, { method: 'DELETE' });
+      if (!res.ok) return;
+      fetchCodes();
+    } catch {}
+  }
+
+  return (
+    <section className="console-section">
+      <h2 className="console-section-title">Invite Codes</h2>
+      <p className="console-muted" style={{ marginTop: '-0.5rem', marginBottom: '1rem' }}>
+        Shareable codes that skip the application. Expiration and max uses are optional.
+      </p>
+
+      <form className="wl-add-form" onSubmit={handleAdd} style={{ flexWrap: 'wrap' }}>
+        <input
+          type="text"
+          className="whitelist-input"
+          placeholder="Code (e.g. EARLY2026)"
+          value={code}
+          onChange={(e) => setCode(e.target.value)}
+          disabled={adding}
+        />
+        <input
+          type="text"
+          className="whitelist-input"
+          placeholder="Label (internal note)"
+          value={label}
+          onChange={(e) => setLabel(e.target.value)}
+          disabled={adding}
+        />
+        <input
+          type="number"
+          className="whitelist-input"
+          placeholder="Max uses"
+          value={maxUses}
+          onChange={(e) => setMaxUses(e.target.value)}
+          disabled={adding}
+          min="1"
+          style={{ maxWidth: '120px' }}
+        />
+        <input
+          type="date"
+          className="whitelist-input"
+          value={expiresAt}
+          onChange={(e) => setExpiresAt(e.target.value)}
+          disabled={adding}
+          style={{ maxWidth: '170px' }}
+        />
+        <button
+          type="submit"
+          className="btn btn-primary"
+          disabled={!code.trim() || adding}
+          style={{ padding: '0.65rem 1.25rem' }}
+        >
+          {adding ? 'Creating...' : 'Create'}
+        </button>
+      </form>
+
+      {feedback && (
+        <div className={`wl-feedback ${feedback.ok ? 'wl-feedback-ok' : 'wl-feedback-err'}`}>
+          {feedback.msg}
+        </div>
+      )}
+
+      {loading ? (
+        <p className="console-muted">Loading invite codes...</p>
+      ) : codes.length === 0 ? (
+        <p className="wl-empty">No invite codes yet.</p>
+      ) : (
+        <table className="wl-table">
+          <thead>
+            <tr>
+              <th>Code</th>
+              <th>Label</th>
+              <th>Uses</th>
+              <th>Expires</th>
+              <th>Status</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {codes.map((entry) => {
+              const isExpanded = expanded[entry.id];
+              const usesStr = entry.maxUses !== null ? `${entry.usesCount} / ${entry.maxUses}` : `${entry.usesCount}`;
+              return (
+                <Fragment key={entry.id}>
+                  <tr>
+                    <td><span className="wl-code">{entry.code}</span></td>
+                    <td>{entry.label || '—'}</td>
+                    <td>{usesStr}</td>
+                    <td>{entry.expiresAt || '—'}</td>
+                    <td>
+                      <span className={`wl-used ${entry.active ? 'wl-used-no' : 'wl-used-yes'}`}>
+                        {entry.active ? 'Active' : 'Disabled'}
+                      </span>
+                    </td>
+                    <td style={{ whiteSpace: 'nowrap' }}>
+                      {entry.usesCount > 0 && (
+                        <button
+                          className="btn"
+                          style={{ padding: '0.35rem 0.7rem', fontSize: '0.8rem', marginRight: '0.4rem', border: '1px solid var(--charcoal)' }}
+                          onClick={() => setExpanded((prev) => ({ ...prev, [entry.id]: !prev[entry.id] }))}
+                        >
+                          {isExpanded ? 'Hide' : 'Redeemers'}
+                        </button>
+                      )}
+                      <button
+                        className="btn"
+                        style={{ padding: '0.35rem 0.7rem', fontSize: '0.8rem', marginRight: '0.4rem', border: '1px solid var(--charcoal)' }}
+                        onClick={() => toggleActive(entry)}
+                      >
+                        {entry.active ? 'Disable' : 'Enable'}
+                      </button>
+                      <button
+                        className="btn"
+                        style={{ padding: '0.35rem 0.7rem', fontSize: '0.8rem', border: '1px solid var(--charcoal)', color: '#F56B6B' }}
+                        onClick={() => handleDelete(entry)}
+                      >
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                  {isExpanded && entry.usedBy && (
+                    <tr>
+                      <td colSpan={6} style={{ background: 'rgba(255,255,255,0.02)', fontSize: '0.85rem' }}>
+                        <pre style={{ margin: 0, whiteSpace: 'pre-wrap', color: 'var(--slate)' }}>
+                          {entry.usedBy}
+                        </pre>
+                      </td>
+                    </tr>
+                  )}
+                </Fragment>
+              );
+            })}
           </tbody>
         </table>
       )}

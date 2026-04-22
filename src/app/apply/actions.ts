@@ -1,5 +1,7 @@
 'use server';
 
+import { sendApplicationReceivedEmail } from '@/lib/email';
+
 interface ApplicationData {
   profile: string;
   name: string;
@@ -134,6 +136,12 @@ export async function submitApplication(
       const err = await response.text();
       console.error('Notion API error:', err);
       return { success: false, message: 'Something went wrong. Please try again.' };
+    }
+
+    // Fire-and-forget confirmation email — don't fail the submission if it errors
+    const emailResult = await sendApplicationReceivedEmail({ to: data.email, name: data.name });
+    if (!emailResult.success) {
+      console.error('[apply] Confirmation email failed:', emailResult.error);
     }
 
     return { success: true, message: 'Application submitted! We\'ll be in touch soon.' };
