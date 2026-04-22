@@ -427,8 +427,19 @@ export function ApplyForm() {
 
   const summary = step === 4 ? getSummary() : null;
 
+  // Block implicit Enter-key submission on inputs — submission is intent-only
+  // via the Submit Application button. Allow Enter inside textareas (newlines)
+  // and on the submit button itself (keyboard activation).
+  const handleKeyDown = useCallback((e: React.KeyboardEvent<HTMLFormElement>) => {
+    if (e.key !== 'Enter') return;
+    const target = e.target as HTMLElement;
+    if (target.tagName === 'TEXTAREA') return;
+    if (target.tagName === 'BUTTON' && (target as HTMLButtonElement).type === 'submit') return;
+    e.preventDefault();
+  }, []);
+
   return (
-    <form action={formAction} className="apply-form">
+    <form action={formAction} className="apply-form" onKeyDown={handleKeyDown}>
       {/* ── STEP COUNTER ── */}
       <div className="step-counter">
         {STEPS.map((s, i) => (
