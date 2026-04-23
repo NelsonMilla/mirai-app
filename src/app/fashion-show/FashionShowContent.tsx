@@ -235,7 +235,7 @@ export function FashionShowContent() {
             </div>
             <div className="fs-hero-visual" aria-hidden="true">
               <Image
-                src="/images/FS/frontier-helmet.png"
+                src="/images/fs/frontier-helmet.png"
                 alt=""
                 width={720}
                 height={720}
@@ -331,7 +331,7 @@ export function FashionShowContent() {
             <article className="fs-lineage-card fs-lineage-card--upcoming">
               <div className="fs-lineage-img-wrap">
                 <Image
-                  src="/images/FS/luma.png"
+                  src="/images/fs/luma.png"
                   alt="Enhanced Fashion Show — Kobe, Japan · October 2026"
                   fill
                   sizes="(max-width: 980px) 100vw, 33vw"
@@ -354,7 +354,7 @@ export function FashionShowContent() {
             <article className="fs-lineage-card fs-lineage-card--past">
               <div className="fs-lineage-img-wrap">
                 <Image
-                  src="/images/FS/fttokyo.png"
+                  src="/images/fs/fttokyo.png"
                   alt="Frontier Humans · Enhanced Fashion Meetup — Tokyo"
                   fill
                   sizes="(max-width: 980px) 100vw, 33vw"
@@ -377,7 +377,7 @@ export function FashionShowContent() {
             <article className="fs-lineage-card fs-lineage-card--past">
               <div className="fs-lineage-img-wrap">
                 <Image
-                  src="/images/FS/hum.png"
+                  src="/images/fs/hum.png"
                   alt="Human Augmentation Summit — MIT Media Lab"
                   fill
                   sizes="(max-width: 980px) 100vw, 33vw"
@@ -417,7 +417,7 @@ export function FashionShowContent() {
         <section className="fs-what fs-reveal">
           <div className="fs-what-image">
             <Image
-              src="/images/FS/fashion.png"
+              src="/images/fs/fashion.png"
               alt="Frontier Human Fashion Show — four models showcasing futuristic couture and bionic enhancements"
               fill
               sizes="(max-width: 980px) 100vw, 50vw"
@@ -607,7 +607,7 @@ export function FashionShowContent() {
           <div className="fs-attribution">
             <span className="mono fs-attribution-text">An event by</span>
             <Image
-              src="/images/FS/frontierHumans.svg"
+              src="/images/fs/frontierHumans.svg"
               alt="Frontier Humans"
               width={220}
               height={36}
