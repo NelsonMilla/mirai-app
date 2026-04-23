@@ -358,16 +358,6 @@ export const fighters: Fighter[] = [
     stats: [{ label: 'REG', value: 98 }, { label: 'STR', value: 82 }, { label: 'NET', value: 90 }],
   },
   {
-    name: 'Laurence',
-    fullName: 'Laurence Ion',
-    title: 'Founder · Viva City',
-    bio: 'Community architect and popup city veteran. Designs the spaces and systems that turn strangers into collaborators in record time.',
-    photo: '/images/speakers/laurence.jpg',
-    tag: 'Builder',
-    special: 'Community Forge',
-    stats: [{ label: 'COM', value: 96 }, { label: 'DSN', value: 88 }, { label: 'OPS', value: 85 }],
-  },
-  {
     name: 'Masa',
     fullName: 'Masa Nakatsu',
     title: 'Devices Residency · Founder of Orb',
