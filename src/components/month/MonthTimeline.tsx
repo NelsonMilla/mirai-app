@@ -3,9 +3,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { chapters } from '@/lib/constants';
 import { useIntersection } from '@/hooks/useIntersection';
-import { useSound } from '@/components/audio/SoundContext';
-// C major arpeggio — ascending glass chime across the 4 cards
-const CHAPTER_TONES = [261.63, 329.63, 392.0, 523.25];
 
 // Color map for the detail strip (which lives outside card divs)
 const chColorMap: Record<string, { rgb: string; color: string }> = {
@@ -21,7 +18,6 @@ export default function MonthTimeline() {
   const [visibleCards, setVisibleCards] = useState<boolean[]>(new Array(chapters.length).fill(false));
   const [enteredCards, setEnteredCards] = useState<boolean[]>(new Array(chapters.length).fill(false));
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
-  const { playPing } = useSound();
 
   // Staggered entrance when grid scrolls into view
   useEffect(() => {
@@ -84,7 +80,6 @@ export default function MonthTimeline() {
             isEntered={enteredCards[idx]}
             isActive={activeIndex === idx}
             onClick={() => handleClick(idx)}
-            playPing={playPing}
           />
         ))}
       </div>
@@ -140,10 +135,9 @@ interface ChapterCardProps {
   isEntered: boolean;
   isActive: boolean;
   onClick: () => void;
-  playPing?: (freq: number, vol?: number) => void;
 }
 
-function ChapterCard({ chapter, index, isVisible, isEntered, isActive, onClick, playPing }: ChapterCardProps) {
+function ChapterCard({ chapter, index, isVisible, isEntered, isActive, onClick }: ChapterCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
   const shineRef = useRef<HTMLDivElement>(null);
 
@@ -178,10 +172,6 @@ function ChapterCard({ chapter, index, isVisible, isEntered, isActive, onClick, 
     };
   }, [isEntered]);
 
-  const handleMouseEnter = useCallback(() => {
-    if (playPing) playPing(CHAPTER_TONES[index], 0.04);
-  }, [playPing, index]);
-
   const classes = [
     'chapter-card',
     chapter.colorClass,
@@ -198,7 +188,6 @@ function ChapterCard({ chapter, index, isVisible, isEntered, isActive, onClick, 
       className={classes}
       style={{ '--ch-i': index } as React.CSSProperties}
       onClick={onClick}
-      onMouseEnter={handleMouseEnter}
     >
       {/* Background artwork */}
       <div className="ch-art">

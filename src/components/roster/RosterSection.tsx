@@ -4,14 +4,12 @@ import React, { useState, useCallback } from 'react';
 import Image from 'next/image';
 import { fighters, rosterPartners, rosterQuote } from '@/lib/constants';
 import { useIntersection } from '@/hooks/useIntersection';
-import { useSound } from '@/components/audio/SoundContext';
 
 export default function RosterSection() {
   const { ref: sectionRef, isIntersecting } = useIntersection({ threshold: 0.05, triggerOnce: true });
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [flash, setFlash] = useState(false);
   const [slotsRevealed, setSlotsRevealed] = useState(false);
-  const { playPing } = useSound();
 
   const selectedFighter = fighters[selectedIndex];
 
@@ -26,8 +24,7 @@ export default function RosterSection() {
     setSelectedIndex(idx);
     setFlash(false);
     requestAnimationFrame(() => setFlash(true));
-    playPing(300 + idx * 60, 0.04);
-  }, [playPing]);
+  }, []);
 
   const tagColor: Record<string, string> = {
     Devices: '#6DB5F5',

@@ -3,7 +3,6 @@ import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { ScrollProvider } from "@/hooks/useScrollState";
 import { TrackProvider } from "@/components/tracks/TrackContext";
-import { SoundProvider } from "@/components/audio/AmbientAudio";
 import { CustomCursor } from "@/components/ui/CustomCursor";
 import { GrainOverlay } from "@/components/ui/GrainOverlay";
 import { ScrollProgress } from "@/components/ui/ScrollProgress";
@@ -96,14 +95,12 @@ export default function RootLayout({
       <body suppressHydrationWarning>
         <ScrollProvider>
           <TrackProvider>
-            <SoundProvider>
-              <ScrollProgress />
-              <CustomCursor />
-              <GrainOverlay />
-              <BackgroundParticles />
-              <LoadingScreen />
-              {children}
-            </SoundProvider>
+            <ScrollProgress />
+            <CustomCursor />
+            <GrainOverlay />
+            <BackgroundParticles />
+            <LoadingScreen />
+            {children}
           </TrackProvider>
         </ScrollProvider>
       </body>
