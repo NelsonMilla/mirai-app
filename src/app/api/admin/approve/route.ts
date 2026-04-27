@@ -3,6 +3,7 @@ import { getSession, isAdmin } from '@/lib/auth';
 import { updateApplicationStatus } from '@/lib/applicants';
 import { generatePaymentToken } from '@/lib/tokens';
 import { sendApprovalEmail } from '@/lib/email';
+import { getPostHogClient } from '@/lib/posthog-server';
 
 export async function POST(req: NextRequest) {
   try {
@@ -42,6 +43,10 @@ export async function POST(req: NextRequest) {
         error: 'Approved but email failed to send',
       });
     }
+
+    const posthog = getPostHogClient();
+    posthog.capture({ distinctId: email, event: 'application_approved', properties: { approved_by: session.email, email_sent: true } });
+    await posthog.shutdown();
 
     return NextResponse.json({ approved: true, emailSent: true });
   } catch (err) {

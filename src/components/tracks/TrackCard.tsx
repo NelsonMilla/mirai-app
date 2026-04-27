@@ -5,6 +5,7 @@ import { useTrack } from './TrackContext';
 import { useIntersection } from '@/hooks/useIntersection';
 import { useRef } from 'react';
 import { Volt, Voltaic, Helix, Helion, Ember, Kindling } from '@/sprites';
+import posthog from 'posthog-js';
 
 const spriteMapStage1 = {
   devices: Volt,
@@ -32,7 +33,10 @@ export function TrackCard({ track }: TrackCardProps) {
           '--tk-dark': track.darkBg,
         } as React.CSSProperties
       }
-      onClick={() => selectTrack(track.id)}
+      onClick={() => {
+        selectTrack(track.id);
+        posthog.capture('track_selected', { track_id: track.id, track_name: track.name });
+      }}
     >
       {/* Face Down */}
       <div className="track-facedown">

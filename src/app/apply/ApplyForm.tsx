@@ -2,6 +2,7 @@
 
 import { useActionState, useState, useCallback, useMemo } from 'react';
 import { submitApplication } from './actions';
+import posthog from 'posthog-js';
 
 /* ── PROFILE ICONS (20×20, stroke currentColor) ── */
 
@@ -357,7 +358,8 @@ export function ApplyForm() {
     setDirection('forward');
     setStepError(null);
     setStep(target);
-  }, [step, validate]);
+    posthog.capture('application_step_advanced', { from_step: step, to_step: target, profile });
+  }, [step, validate, profile]);
 
   /* ── Gather form summary for step 4 ── */
   const getSummary = useCallback(() => {
@@ -374,6 +376,16 @@ export function ApplyForm() {
       commitment: fd.get('commitment') as string || '',
     };
   }, [profile, selectedGoals]);
+
+  const handleSubmit = useCallback((e: React.FormEvent<HTMLFormElement>) => {
+    const fd = new FormData(e.currentTarget);
+    const email = fd.get('email') as string;
+    const name = fd.get('name') as string;
+    const country = fd.get('country') as string;
+    if (email) {
+      posthog.identify(email, { name, profile: profile ?? undefined, country });
+    }
+  }, [profile]);
 
   if (state?.success) {
     return (
@@ -439,7 +451,7 @@ export function ApplyForm() {
   }, []);
 
   return (
-    <form action={formAction} className="apply-form" onKeyDown={handleKeyDown}>
+    <form action={formAction} className="apply-form" onKeyDown={handleKeyDown} onSubmit={handleSubmit}>
       {/* ── STEP COUNTER ── */}
       <div className="step-counter">
         {STEPS.map((s, i) => (

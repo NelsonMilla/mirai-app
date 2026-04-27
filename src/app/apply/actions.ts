@@ -1,6 +1,7 @@
 'use server';
 
 import { sendApplicationReceivedEmail } from '@/lib/email';
+import { getPostHogClient } from '@/lib/posthog-server';
 
 interface ApplicationData {
   profile: string;
@@ -144,9 +145,30 @@ export async function submitApplication(
       console.error('[apply] Confirmation email failed:', emailResult.error);
     }
 
+    const posthog = getPostHogClient();
+    posthog.identify({ distinctId: data.email, properties: { name: data.name, profile: data.profile, country: data.country } });
+    posthog.capture({
+      distinctId: data.email,
+      event: 'application_submitted',
+      properties: {
+        profile: data.profile,
+        country: data.country,
+        goals: data.goals,
+        commitment: data.commitment,
+        has_promo_code: !!data.promoCode,
+        referral: data.referral || null,
+      },
+    });
+    await posthog.shutdown();
+
     return { success: true, message: 'Application submitted! We\'ll be in touch soon.' };
   } catch (error) {
     console.error('Submit error:', error);
+    try {
+      const posthog = getPostHogClient();
+      posthog.capture({ distinctId: 'anonymous', event: 'application_submission_failed', properties: { reason: 'server_error' } });
+      await posthog.shutdown();
+    } catch { /* ignore posthog errors */ }
     return { success: false, message: 'Something went wrong. Please try again.' };
   }
 }
@@ -202,6 +224,10 @@ export async function joinMailingList(
 
       return { success: false, message: 'Something went wrong. Please try again.' };
     }
+
+    const posthog = getPostHogClient();
+    posthog.capture({ distinctId: email, event: 'mailing_list_joined', properties: { track_interest: track } });
+    await posthog.shutdown();
 
     return { success: true, message: 'You\'re on the list! We\'ll notify you when applications open.' };
   } catch (error) {

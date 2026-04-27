@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { generateLoginCode } from '@/lib/auth';
 import { checkLoginCodeRateLimit, sendLoginCode } from '@/lib/email';
+import { getPostHogClient } from '@/lib/posthog-server';
 
 export async function POST(req: NextRequest) {
   try {
@@ -25,6 +26,10 @@ export async function POST(req: NextRequest) {
       console.error('[send-code] Email send failed:', result.error);
       return NextResponse.json({ error: 'Failed to send code' }, { status: 500 });
     }
+
+    const posthog = getPostHogClient();
+    posthog.capture({ distinctId: email, event: 'login_code_requested' });
+    await posthog.shutdown();
 
     return NextResponse.json({ sent: true });
   } catch (err) {

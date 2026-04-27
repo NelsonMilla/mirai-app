@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { stripe } from '@/lib/stripe';
 import { markApplicationPaid } from '@/lib/applicants';
 import { sendPaymentConfirmation } from '@/lib/email';
+import { getPostHogClient } from '@/lib/posthog-server';
 
 export async function POST(req: NextRequest) {
   const body = await req.text();
@@ -47,6 +48,23 @@ export async function POST(req: NextRequest) {
         await sendPaymentConfirmation({ to: email });
       } catch (err) {
         console.error('Failed to send payment confirmation email:', err);
+      }
+
+      // Track payment completion in PostHog
+      try {
+        const posthog = getPostHogClient();
+        posthog.capture({
+          distinctId: email,
+          event: 'payment_completed',
+          properties: {
+            stripe_session_id: session.id,
+            amount_total: session.amount_total,
+            currency: session.currency,
+          },
+        });
+        await posthog.shutdown();
+      } catch (err) {
+        console.error('PostHog capture failed:', err);
       }
     }
   }

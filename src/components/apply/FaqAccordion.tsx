@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { faqItems } from '@/lib/constants';
+import posthog from 'posthog-js';
 
 export default function FaqAccordion() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
@@ -15,7 +16,11 @@ export default function FaqAccordion() {
         >
           <button
             className="faq-q"
-            onClick={() => setOpenIndex(openIndex === idx ? null : idx)}
+            onClick={() => {
+              const opening = openIndex !== idx;
+              setOpenIndex(opening ? idx : null);
+              if (opening) posthog.capture('faq_opened', { question: item.question, index: idx });
+            }}
           >
             <span>{item.question}</span>
             <span className="arrow">+</span>

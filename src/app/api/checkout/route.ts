@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { validatePaymentToken } from '@/lib/tokens';
 import { createCheckoutSession } from '@/lib/stripe';
+import { getPostHogClient } from '@/lib/posthog-server';
 
 export async function GET(req: NextRequest) {
   const token = req.nextUrl.searchParams.get('token');
@@ -30,6 +31,10 @@ export async function GET(req: NextRequest) {
     if (!session.url) {
       return NextResponse.redirect(new URL('/checkout/cancel?error=stripe', req.url));
     }
+
+    const posthog = getPostHogClient();
+    posthog.capture({ distinctId: result.email, event: 'checkout_session_created', properties: { stripe_session_id: session.id } });
+    await posthog.shutdown();
 
     return NextResponse.redirect(session.url);
   } catch (error) {

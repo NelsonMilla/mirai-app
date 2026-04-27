@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import posthog from 'posthog-js';
 
 type Step = 'enter-code' | 'mini-form' | 'needs-email';
 type Status = 'idle' | 'loading' | 'success' | 'not-found' | 'used' | 'expired' | 'exhausted' | 'inactive' | 'error';
@@ -53,6 +54,7 @@ export default function InvitePage() {
           setCodeLabel(inviteData.label ?? '');
           setStep('mini-form');
           setStatus('idle');
+          posthog.capture('invite_code_validated', { method: 'invite_code' });
           return;
         }
 
@@ -91,12 +93,14 @@ export default function InvitePage() {
         setWelcomeName(data.name || '');
         setStep('needs-email');
         setStatus('idle');
+        posthog.capture('invite_code_validated', { method: isEmail ? 'email' : 'whitelist_code' });
         return;
       }
 
       if (data.whitelisted) {
         setWelcomeName(data.name || '');
         setStatus('success');
+        posthog.capture('invite_code_validated', { method: isEmail ? 'email' : 'whitelist_code' });
         setTimeout(() => router.push(data.redirectUrl), 1500);
       } else if (data.reason?.includes('already been used')) {
         setStatus('used');
@@ -137,6 +141,9 @@ export default function InvitePage() {
         return;
       }
 
+      // Identify user and capture redemption before redirecting to Stripe
+      posthog.identify(formEmail.trim(), { name: formName.trim(), profile: formProfile });
+      posthog.capture('invite_code_redeemed', { profile: formProfile });
       // Redirect to Stripe checkout
       window.location.href = data.paymentUrl;
     } catch {

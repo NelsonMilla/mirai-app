@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { verifyLoginCode, setSessionCookie, isAdmin } from '@/lib/auth';
+import { getPostHogClient } from '@/lib/posthog-server';
 
 export async function POST(req: NextRequest) {
   try {
@@ -16,9 +17,15 @@ export async function POST(req: NextRequest) {
 
     await setSessionCookie(email);
 
+    const admin = isAdmin(email);
+    const posthog = getPostHogClient();
+    posthog.identify({ distinctId: email, properties: { email, is_admin: admin } });
+    posthog.capture({ distinctId: email, event: 'login_code_verified', properties: { is_admin: admin } });
+    await posthog.shutdown();
+
     return NextResponse.json({
       verified: true,
-      isAdmin: isAdmin(email),
+      isAdmin: admin,
     });
   } catch (err) {
     console.error('[verify-code] Unexpected error:', err);
