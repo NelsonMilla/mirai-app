@@ -6,93 +6,19 @@ import Image from 'next/image';
 const SHOW_DATE = new Date('2026-10-31T19:00:00+09:00');
 
 const CATEGORIES = [
-  {
-    tag: 'EXO',
-    name: 'Exoskeletons',
-    desc: 'Worn robotics that augment strength, mobility, or endurance.',
-  },
-  {
-    tag: 'NEUR',
-    name: 'Neural Interfaces',
-    desc: 'BCIs and non-invasive neurotech, on-body for the first time.',
-  },
-  {
-    tag: 'PROS',
-    name: 'Smart Prosthetics',
-    desc: 'Next-gen limbs — sensor-rich, actuated, intent-aware.',
-  },
-  {
-    tag: 'BIO',
-    name: 'Biosensors',
-    desc: 'Garments and patches that read physiology in real time.',
-  },
-  {
-    tag: 'HAP',
-    name: 'Haptic Suits',
-    desc: 'Whole-body feedback systems for sensory augmentation.',
-  },
-  {
-    tag: 'BION',
-    name: 'Bionics',
-    desc: 'Hybrid devices that blur the line between hardware and body.',
-  },
-  {
-    tag: 'WEAR',
-    name: 'Smart Wearables',
-    desc: 'Adaptive clothing, on-skin UI, and ambient health tech.',
-  },
-  {
-    tag: 'AR/VR',
-    name: 'Spatial Medical',
-    desc: 'Optics and spatial compute as medical-grade interfaces.',
-  },
-  {
-    tag: 'GEN',
-    name: 'Genes & Cells',
-    desc: 'Therapeutic products visualized through wearable delivery.',
-  },
-] as const;
-
-const AUDIENCE_MIX = [
-  { label: 'Founders & residents', pct: 30 },
-  { label: 'Investors (check-cutters on-site)', pct: 20 },
-  { label: 'Operators & engineers', pct: 20 },
-  { label: 'Press & media', pct: 15 },
-  { label: 'Fashion / design industry', pct: 10 },
-  { label: 'Invited VIPs & partners', pct: 5 },
-] as const;
-
-const SPONSOR_FAQ = [
-  {
-    q: 'When do sponsors need to commit?',
-    a: 'Title and Runway tiers close 60 days out (Sep 1, 2026) to allow for broadcast integration, branding production, and press announcements. Category and Media tiers remain open until 30 days out.',
-  },
-  {
-    q: 'What rights come with the livestream package?',
-    a: 'Your tier-appropriate branding runs for the full 90-minute live broadcast and in all replays. Sponsors receive raw and edited footage with perpetual usage rights for their own channels.',
-  },
-  {
-    q: 'Is category exclusivity available?',
-    a: 'Yes. Category Sponsors own their category on stage and on-broadcast. Title and Runway tiers are always exclusive by definition.',
-  },
-  {
-    q: 'Who owns the broadcast footage post-event?',
-    a: 'Frontier Humans retains the master. Sponsors get asset rights per tier. Each cohort\'s 8-minute segment (Walk + Demo + Conversation) is distributed as a standalone clip.',
-  },
-  {
-    q: 'Can we host our own VIPs on-site?',
-    a: 'Yes. Tier-appropriate VIP seat allocations, pre-show reception access, and a private on-site hospitality option for Title and Runway partners.',
-  },
-  {
-    q: 'Are on-site activations allowed?',
-    a: 'Brand lounges, demo pods, and co-branded installations are available as add-ons. Subject to venue approval and tier.',
-  },
+  { tag: 'EXO',   kanji: '鎧', name: 'Exoskeletons',     desc: 'Worn robotics that augment strength, mobility, or endurance.' },
+  { tag: 'NEUR',  kanji: '脳', name: 'Neural Interfaces',desc: 'BCIs and non-invasive neurotech, on-body for the first time.' },
+  { tag: 'PROS',  kanji: '義', name: 'Smart Prosthetics',desc: 'Next-gen limbs — sensor-rich, actuated, intent-aware.' },
+  { tag: 'BIO',   kanji: '感', name: 'Biosensors',       desc: 'Garments and patches that read physiology in real time.' },
+  { tag: 'HAP',   kanji: '触', name: 'Haptic Suits',     desc: 'Whole-body feedback systems for sensory augmentation.' },
+  { tag: 'BION',  kanji: '機', name: 'Bionics',          desc: 'Hybrid devices that blur the line between hardware and body.' },
+  { tag: 'WEAR',  kanji: '衣', name: 'Smart Wearables',  desc: 'Adaptive clothing, on-skin UI, and ambient health tech.' },
+  { tag: 'AR/VR', kanji: '視', name: 'Spatial Medical',  desc: 'Optics and spatial compute as medical-grade interfaces.' },
+  { tag: 'GEN',   kanji: '命', name: 'Genes & Cells',    desc: 'Therapeutic products visualized through wearable delivery.' },
 ] as const;
 
 const SPONSOR_MAILTO =
   'mailto:pedro@frontierhumans.com?subject=Fashion%20Show%20Sponsor%20Deck%20Request';
-const BOOK_CALL_MAILTO =
-  'mailto:pedro@frontierhumans.com?subject=Sponsor%20Intro%20Call%20-%20Fashion%20Show';
 
 function useCountdown(target: Date): number | null {
   const [days, setDays] = useState<number | null>(null);
@@ -114,7 +40,7 @@ export function FashionShowContent() {
   const daysOut = useCountdown(SHOW_DATE);
   const [progress, setProgress] = useState(0);
   const [showStickyCta, setShowStickyCta] = useState(false);
-  const [openFaq, setOpenFaq] = useState<number | null>(0);
+  const [heroOffset, setHeroOffset] = useState(0);
 
   useEffect(() => {
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -160,6 +86,7 @@ export function FashionShowContent() {
         ? heroRef.current.getBoundingClientRect().bottom
         : 0;
       setShowStickyCta(heroBottom < 80);
+      setHeroOffset(y);
     };
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
@@ -177,145 +104,173 @@ export function FashionShowContent() {
             <span className="fs-sticky-mark jp">未</span>
             <span>FRONTIER HUMAN FASHION SHOW · KOBE · OCT 2026</span>
           </a>
-          <a className="btn btn-primary fs-sticky-cta" href={SPONSOR_MAILTO}>
-            Sponsor the Show
+          <a className="btn btn-primary fs-sticky-cta" href="/apply">
+            Apply to Walk
           </a>
         </div>
         <div className="fs-sticky-progress" style={{ width: `${progress * 100}%` }} />
       </div>
 
-      <div className="fs-kanji-watermark jp" aria-hidden="true">服</div>
-
       <div className="fs-page-inner">
-        {/* ── HERO ── */}
+        {/* ── SCENE 01: HERO ── */}
         <header className="fs-hero" ref={heroRef}>
           <a href="/" className="fs-back mono">&larr; mirai.tech</a>
-          <div className="fs-hero-grid">
-            <div className="fs-hero-text">
-              <div className="fs-eyebrow mono">[ THE EVENT ]</div>
-              <h1 className="fs-title display">
-                The Frontier Human<br />
-                <em>Fashion Show</em>
-              </h1>
-              <p className="fs-tagline">
-                A live demo day, reimagined as a runway. Device residents debut
-                first-in-human prototypes on models &mdash; blending medical
-                technology with high fashion.
-                <br />
-                <span className="fs-tagline-emph">
-                  One night in Kobe. 90 minutes, broadcast worldwide to
-                  investors, press, and operators.
-                </span>
-              </p>
-              <div className="fs-meta mono">
-                <span>OCT 2026</span>
-                <span className="fs-meta-dot" />
-                <span>KOBE PORT ISLAND</span>
-                <span className="fs-meta-dot" />
-                <span>ONE NIGHT ONLY</span>
-              </div>
-              <div className="fs-countdown mono">
-                <span className="fs-countdown-num">
-                  {daysOut !== null ? daysOut : '—'}
-                </span>
-                <span className="fs-countdown-label">DAYS OUT · OCT 2026</span>
-              </div>
-              <div className="fs-hero-ctas">
-                <a className="btn btn-primary fs-btn-solid" href={SPONSOR_MAILTO}>
-                  Sponsor the Show →
-                </a>
-                <a className="btn btn-outline" href="/apply">
-                  Apply to Walk
-                </a>
-              </div>
-              <p className="fs-hero-proof">
-                Produced by <strong>Frontier Humans</strong> &mdash; community
-                meetups and talks in Tokyo and Cambridge.
-              </p>
-            </div>
-            <div className="fs-hero-visual" aria-hidden="true">
-              <Image
-                src="/images/fs/frontier-helmet.png"
-                alt=""
-                width={720}
-                height={720}
-                className="fs-hero-img"
-                priority
-                sizes="(max-width: 980px) 60vw, 480px"
-              />
-              <div className="fs-hero-glow" />
+          <div
+            className="fs-hero-kanji jp"
+            aria-hidden="true"
+            style={{ ['--py' as string]: `${heroOffset * -0.12}px` } as React.CSSProperties}
+          >
+            服
+          </div>
+          <div className="fs-hero-rim" aria-hidden="true" />
+          <div className="fs-hero-text">
+            <div className="fs-eyebrow mono">[ KOBE · OCT 31 · 2026 ]</div>
+            <h1 className="fs-title display">
+              <span>Frontier</span>
+              <span>Human</span>
+              <em>Fashion Show</em>
+            </h1>
+            <p className="fs-tagline">
+              First-in-human prototypes on a runway.<br />
+              <span className="fs-tagline-emph">One night. 90 minutes. Broadcast worldwide.</span>
+            </p>
+            <div className="fs-hero-ctas">
+              <a className="btn btn-primary fs-btn-solid" href="/apply">
+                Apply to Walk →
+              </a>
+              <a className="btn btn-outline" href="#lineup">
+                See the Lineup
+              </a>
             </div>
           </div>
+          <div className="fs-hero-scroll mono" aria-hidden="true">SCROLL ↓</div>
         </header>
 
-        {/* ── §4.2 BROADCAST AS ASSET ── */}
-        <section className="fs-broadcast fs-reveal" aria-labelledby="fs-broadcast-h">
-          <div className="section-label">The broadcast is the asset</div>
-          <h2 id="fs-broadcast-h" className="display fs-h2">
-            One sponsorship. Three audiences.
+        {/* ── SCENE 02: DATE SLATE ── */}
+        <section className="fs-slate fs-reveal" aria-labelledby="fs-slate-h">
+          <div className="fs-slate-eyebrow mono">[ ONE NIGHT ONLY ]</div>
+          <h2 id="fs-slate-h" className="fs-slate-date display">
+            <span>10</span>
+            <span className="fs-slate-slash">/</span>
+            <span>31</span>
+            <span className="fs-slate-slash">/</span>
+            <span>2026</span>
           </h2>
-          <p className="fs-broadcast-lede">
-            Kobe is the venue. The broadcast is the product. Sponsors show up
-            in the room, on the stream, and on the clips that live forever.
-          </p>
-          <div className="fs-broadcast-grid">
-            <article className="fs-broadcast-card">
-              <div className="fs-broadcast-num mono">01 · IN-PERSON</div>
-              <h3 className="fs-broadcast-name display">Kobe Port Island</h3>
-              <p>
-                Seated audience of founders, investors, and press. Front row:
-                Builder Pass holders and invited VIPs. The room every sponsor
-                wants their brand standing in.
-              </p>
-              <div className="fs-broadcast-stat mono">ONE NIGHT · OCT 31</div>
-            </article>
-            <article className="fs-broadcast-card fs-broadcast-card--primary">
-              <div className="fs-broadcast-num mono">02 · LIVE BROADCAST</div>
-              <h3 className="fs-broadcast-name display">90 Minutes, Worldwide</h3>
-              <p>
-                Streamed to investors, press, and operators who couldn&apos;t
-                fly to Kobe. Targeted reach:{' '}
-                <strong>2,500 concurrent · 25,000 replay</strong>{' '}
-                <span className="fs-small">(projection)</span>.
-              </p>
-              <div className="fs-broadcast-stat mono">LIVE + ON-DEMAND</div>
-            </article>
-            <article className="fs-broadcast-card">
-              <div className="fs-broadcast-num mono">03 · POST-EVENT</div>
-              <h3 className="fs-broadcast-name display">Evergreen Clips</h3>
-              <p>
-                Each cohort&apos;s 8-minute segment (Walk + Demo + Conversation)
-                becomes a standalone clip, distributed to press and posted to
-                YouTube + X. Sponsors get asset rights.
-              </p>
-              <div className="fs-broadcast-stat mono">PERPETUAL USAGE</div>
-            </article>
+          <div className="fs-slate-meta mono">
+            <span>KOBE PORT ISLAND</span>
+            <span className="fs-slate-dot" />
+            <span>19:00 JST</span>
+            <span className="fs-slate-dot" />
+            <span>{daysOut !== null ? `${daysOut} DAYS OUT` : 'COUNTDOWN LOADING'}</span>
           </div>
         </section>
 
-        {/* ── §4.4 WHO'S IN THE ROOM ── */}
-        <section className="fs-audience fs-reveal" aria-labelledby="fs-audience-h">
-          <div className="section-label">Who&apos;s in the room</div>
-          <h2 id="fs-audience-h" className="display fs-h2">
-            A room underwritten by check-cutters and press.
-          </h2>
-          <p className="fs-audience-lede">
-            Target mix for Kobe, modeled on prior Frontier Humans community events.
+        {/* ── SCENE 03: CONCEPT ── */}
+        <section className="fs-concept fs-reveal" aria-label="Enhanced Fashion">
+          <div className="fs-concept-circuit" aria-hidden="true" />
+          <div className="fs-concept-eyebrow mono">[ THE CONCEPT ]</div>
+          <h2 className="fs-concept-title mono">ENHANCED FASHION</h2>
+          <p className="fs-concept-sub">
+            CES meets Tokyo Fashion Week. Every look on the runway is a working
+            prototype — exoskeleton, neural interface, smart prosthetic, biosensor
+            garment, haptic suit. <em>On a person. On a runway.</em>
           </p>
-          <ul className="fs-audience-list" role="list">
-            {AUDIENCE_MIX.map((row) => (
-              <li key={row.label} className="fs-audience-row">
-                <div className="fs-audience-label">{row.label}</div>
-                <div className="fs-audience-track">
-                  <div className="fs-audience-fill" style={{ width: `${row.pct * 2}%` }} />
+        </section>
+
+        {/* ── SCENE 04: FORMAT TRIPTYCH ── */}
+        <section className="fs-triptych fs-reveal" aria-labelledby="fs-tri-h">
+          <div className="section-label">The format</div>
+          <h2 id="fs-tri-h" className="display fs-h2">A 90-minute live broadcast.</h2>
+
+          <div className="fs-tri-scene fs-tri-scene--01">
+            <div className="fs-tri-num mono">01</div>
+            <div className="fs-tri-body">
+              <h3 className="fs-tri-name display">The Walk</h3>
+              <p>
+                Each Device cohort gets a 6-minute slot. Their prototype walks
+                under stage lighting, soundtracked by a custom score.
+                <em> No slides. No pitch. The device speaks.</em>
+              </p>
+              <p className="fs-tri-cue mono">RUNTIME · 06:00 · CUSTOM SCORE</p>
+            </div>
+          </div>
+
+          <div className="fs-tri-scene fs-tri-scene--02">
+            <div className="fs-tri-num mono">02</div>
+            <div className="fs-tri-body">
+              <h3 className="fs-tri-name display">The Live Demo</h3>
+              <p>
+                The resident steps to the front of the runway and demonstrates
+                the device working in real time. Five minutes, one camera,
+                <em> no edits</em>.
+              </p>
+              <p className="fs-tri-cue mono">RUNTIME · 05:00 · ONE CAMERA</p>
+            </div>
+          </div>
+
+          <div className="fs-tri-scene fs-tri-scene--03">
+            <div className="fs-tri-num mono">03</div>
+            <div className="fs-tri-body">
+              <h3 className="fs-tri-name display">The Conversation</h3>
+              <p>
+                A short on-stage interview: what it does, who it&apos;s for, where
+                it goes. Streamed live to investors, press, and operators worldwide.
+              </p>
+              <p className="fs-tri-cue mono">RUNTIME · 04:00 · LIVE BROADCAST</p>
+            </div>
+          </div>
+        </section>
+
+        {/* ── SCENE 05: LINEUP ── */}
+        <section
+          id="lineup"
+          className="fs-lineup fs-reveal"
+          aria-labelledby="fs-lineup-h"
+        >
+          <div className="fs-lineup-header">
+            <div className="section-label">Cohort FH-01</div>
+            <h2 id="fs-lineup-h" className="display fs-h2">
+              Nine slots. Nine reveals.
+            </h2>
+            <p className="fs-lineup-sub mono">
+              0 / 9 PRESENTERS REVEALED · ANNOUNCEMENTS BEGIN SUMMER 2026
+            </p>
+          </div>
+          <ul className="fs-lineup-grid" role="list">
+            {CATEGORIES.map((c) => (
+              <li
+                key={c.name}
+                className="fs-lineup-card"
+                style={
+                  {
+                    ['--cat-tag' as string]: `'${c.tag}'`,
+                  } as React.CSSProperties
+                }
+              >
+                <span className="fs-lineup-tag mono">{c.tag}</span>
+                <span className="fs-lineup-stamp mono" aria-hidden="true">TBA</span>
+                <span className="fs-lineup-kanji jp" aria-hidden="true">{c.kanji}</span>
+                <div className="fs-lineup-silhouette" aria-hidden="true">
+                  <svg viewBox="0 0 60 100" preserveAspectRatio="xMidYMid meet">
+                    <path
+                      d="M30 8 q-7 0 -7 8 q0 6 3 9 q-9 4 -10 14 l-2 16 q0 4 4 4 l4 0 l1 30 q0 3 3 3 l8 0 q3 0 3 -3 l1 -30 l4 0 q4 0 4 -4 l-2 -16 q-1 -10 -10 -14 q3 -3 3 -9 q0 -8 -7 -8 z"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="0.6"
+                    />
+                  </svg>
                 </div>
-                <div className="fs-audience-pct mono">{row.pct}%</div>
+                <div className="fs-lineup-meta">
+                  <h3 className="fs-lineup-name">{c.name}</h3>
+                  <p className="fs-lineup-desc">{c.desc}</p>
+                </div>
+                <div className="fs-lineup-status mono">RESIDENT · TBA</div>
               </li>
             ))}
           </ul>
         </section>
 
-        {/* ── §4.5 LINEAGE (promoted up) ── */}
+        {/* ── SCENE 06: LINEAGE ── */}
         <section className="fs-lineage fs-reveal" aria-labelledby="fs-lineage-heading">
           <div className="fs-lineage-header">
             <div className="section-label">Community lineage</div>
@@ -323,7 +278,7 @@ export function FashionShowContent() {
               Built on a community we&apos;ve been gathering for years.
             </h2>
             <p className="fs-lineage-sub mono">
-              TOKYO &middot; CAMBRIDGE &middot; COMMUNITY EVENTS &middot; BACKED BY THE $1T ENHANCED-FASHION CATEGORY
+              TOKYO · CAMBRIDGE · COMMUNITY EVENTS · BACKED BY THE $1T ENHANCED-FASHION CATEGORY
             </p>
           </div>
 
@@ -339,15 +294,13 @@ export function FashionShowContent() {
                 />
               </div>
               <div className="fs-lineage-meta">
-                <span className="fs-lineage-tag mono">UPCOMING &middot; JAPAN</span>
-                <h3 className="fs-lineage-name display">
-                  Enhanced Fashion Show
-                </h3>
+                <span className="fs-lineage-tag mono">UPCOMING · JAPAN</span>
+                <h3 className="fs-lineage-name display">Enhanced Fashion Show</h3>
                 <p className="fs-lineage-desc">
-                  Kobe Port Island. The inaugural edition &mdash; closing
-                  Mirai Tech PopUp City, October 2026.
+                  Kobe Port Island. The inaugural edition — closing Mirai Tech
+                  PopUp City, October 2026.
                 </p>
-                <p className="fs-lineage-press mono">DOORS OPEN &middot; OCT 2026</p>
+                <p className="fs-lineage-press mono">DOORS OPEN · OCT 2026</p>
               </div>
             </article>
 
@@ -362,15 +315,12 @@ export function FashionShowContent() {
                 />
               </div>
               <div className="fs-lineage-meta">
-                <span className="fs-lineage-tag mono">TOKYO &middot; NOV 2025</span>
-                <h3 className="fs-lineage-name display">
-                  Enhanced Fashion Meetup
-                </h3>
+                <span className="fs-lineage-tag mono">TOKYO · NOV 2025</span>
+                <h3 className="fs-lineage-name display">Enhanced Fashion Meetup</h3>
                 <p className="fs-lineage-desc">
-                  Shinjuku Higashiguchi. Frontier Humans Tokyo cohort,
-                  November 2025.
+                  Shinjuku Higashiguchi. Frontier Humans Tokyo cohort, November 2025.
                 </p>
-                <p className="fs-lineage-press mono">RECAP &middot; AVAILABLE ON REQUEST</p>
+                <p className="fs-lineage-press mono">RECAP · AVAILABLE ON REQUEST</p>
               </div>
             </article>
 
@@ -385,225 +335,59 @@ export function FashionShowContent() {
                 />
               </div>
               <div className="fs-lineage-meta">
-                <span className="fs-lineage-tag mono">CAMBRIDGE &middot; AUG 2025</span>
-                <h3 className="fs-lineage-name display">
-                  Human Augmentation Summit
-                </h3>
+                <span className="fs-lineage-tag mono">CAMBRIDGE · AUG 2025</span>
+                <h3 className="fs-lineage-name display">Human Augmentation Summit</h3>
                 <p className="fs-lineage-desc">
                   MIT Media Lab. Augmentation Lab x Frontier Humans.
                 </p>
-                <p className="fs-lineage-press mono">MIT MEDIA LAB &middot; PARTNER WRITE-UP</p>
+                <p className="fs-lineage-press mono">MIT MEDIA LAB · PARTNER WRITE-UP</p>
               </div>
             </article>
           </div>
         </section>
 
-        {/* ── INSPO BLOCK: ENHANCED FASHION callout ── */}
-        <section className="fs-callout fs-reveal" aria-label="Enhanced Fashion">
-          <div className="fs-callout-circuit" aria-hidden="true" />
-          <div className="fs-callout-inner">
-            <div className="fs-callout-eyebrow mono">[ THE CONCEPT ]</div>
-            <div className="fs-callout-bar">
-              <h2 className="fs-callout-title mono">ENHANCED FASHION</h2>
-            </div>
-            <p className="fs-callout-sub">
-              CES meets Tokyo Fashion Week. Everyone&apos;s wearing exoskeletons
-              and neural interfaces.
-            </p>
-          </div>
-        </section>
-
-        {/* ── WHAT IT IS ── */}
-        <section className="fs-what fs-reveal">
-          <div className="fs-what-image">
-            <Image
-              src="/images/fs/fashion.png"
-              alt="Frontier Human Fashion Show — four models showcasing futuristic couture and bionic enhancements"
-              fill
-              sizes="(max-width: 980px) 100vw, 50vw"
-              className="fs-what-img"
-            />
-            <div className="fs-what-img-grain" aria-hidden="true" />
-          </div>
-
-          <div className="fs-what-text">
-            <div className="section-label">What it is</div>
-            <h2 className="display fs-h2">
-              The runway <em>becomes</em> the demo day.
+        {/* ── SCENE 07: APPLY / ATTEND SPLIT ── */}
+        <section className="fs-split fs-reveal" aria-label="Get involved">
+          <a className="fs-split-card fs-split-card--apply" href="/apply">
+            <div className="fs-split-eyebrow mono">[ FOR BUILDERS ]</div>
+            <h2 className="fs-split-title display">
+              Apply to <em>Walk.</em>
             </h2>
-            <p>
-              Traditional demo days happen under fluorescent lights, in
-              conference rooms, with founders pitching to a room of folded arms.
-              We&apos;re doing the opposite. The Frontier Human Fashion Show
-              closes Mirai Tech PopUp City with a single live event &mdash; one
-              night where every Device resident cohort debuts their prototype
-              <strong> on a person, on a runway</strong>.
+            <p className="fs-split-sub">
+              Device cohorts only. One prototype, one slot, one runway.
+              Closes 60 days out.
             </p>
-            <p>
-              Models, athletes, dancers, and residents themselves walk wearing
-              exoskeletons, neural interfaces, smart prosthetics, biosensor
-              garments, and haptic suits. Each look is a working prototype
-              &mdash; not a render, not a mockup &mdash; staged with
-              choreography, lighting, and original sound design.
-            </p>
-          </div>
-        </section>
-
-        {/* ── §4.6 FORMAT (with sponsor touchpoints) ── */}
-        <section className="fs-format fs-reveal">
-          <div className="section-label">The format</div>
-          <h2 className="display fs-h2">A 90-minute live broadcast.</h2>
-
-          <div className="fs-format-grid">
-            <article className="fs-format-card">
-              <div className="fs-format-num mono">01</div>
-              <h3 className="fs-format-name display">The Walk</h3>
-              <p>
-                Each Device cohort gets a 6-minute slot. Their prototype walks
-                under stage lighting, soundtracked by a custom score. No slides,
-                no pitch deck &mdash; the device speaks for itself.
-              </p>
-              <p className="fs-format-touchpoint mono">
-                RUNWAY SPONSOR: FLOOR GRAPHIC · LIGHTING CUE · SOUNDTRACK CREDIT
-              </p>
-            </article>
-
-            <article className="fs-format-card">
-              <div className="fs-format-num mono">02</div>
-              <h3 className="fs-format-name display">The Live Demo</h3>
-              <p>
-                After the walk, the resident steps to the front of the runway
-                and demonstrates the device working in real time. Five minutes,
-                one camera, no edits.
-              </p>
-              <p className="fs-format-touchpoint mono">
-                CATEGORY SPONSOR: "POWERED BY [BRAND]" LOWER-THIRD
-              </p>
-            </article>
-
-            <article className="fs-format-card">
-              <div className="fs-format-num mono">03</div>
-              <h3 className="fs-format-name display">The Conversation</h3>
-              <p>
-                A short on-stage interview with the resident: what it does, who
-                it&apos;s for, where it goes from here. Streamed live to
-                investors, press, and operators worldwide.
-              </p>
-              <p className="fs-format-touchpoint mono">
-                TITLE SPONSOR: INTERVIEW SET · CHYRON · HOST INTRO
-              </p>
-            </article>
-          </div>
-        </section>
-
-        {/* ── §4.7 CATEGORIES ON STAGE (consolidated) ── */}
-        <section className="fs-categories fs-reveal" aria-labelledby="fs-cats-h">
-          <div className="section-label">Categories on stage</div>
-          <h2 id="fs-cats-h" className="display fs-h2">
-            Seeking category sponsors.
-          </h2>
-          <ul className="fs-cat-grid" role="list">
-            {CATEGORIES.map((c) => (
-              <li key={c.name} className="fs-cat-card">
-                <span className="fs-cat-tag mono">{c.tag}</span>
-                <h3 className="fs-cat-name">{c.name}</h3>
-                <p className="fs-cat-desc">{c.desc}</p>
-              </li>
-            ))}
-          </ul>
-        </section>
-
-        {/* ── §4.10 VENUE & LOGISTICS ── */}
-        <section className="fs-venue fs-reveal" aria-labelledby="fs-venue-h">
-          <div className="section-label">Venue &amp; logistics</div>
-          <h2 id="fs-venue-h" className="display fs-h2">
-            Kobe Port Island.
-          </h2>
-          <div className="fs-venue-grid">
-            <div className="fs-venue-block">
-              <div className="fs-venue-eyebrow mono">VENUE</div>
-              <p>
-                Kobe Biomedical Innovation Cluster (KBIC) &mdash; purpose-built
-                biomedical district on Port Island, home to the four-week
-                Mirai residency.
-              </p>
-            </div>
-            <div className="fs-venue-block">
-              <div className="fs-venue-eyebrow mono">ACCESS</div>
-              <p>
-                Kobe Airport is 8 minutes by monorail. Osaka (KIX) is 45
-                minutes. Tokyo via Shinkansen is under 3 hours. Hotel partner
-                block within walking distance.
-              </p>
-            </div>
-            <div className="fs-venue-block">
-              <div className="fs-venue-eyebrow mono">HOSPITALITY</div>
-              <p>
-                Title and Runway partners can host their own VIPs on-site with
-                a dedicated reception area. Brand lounges and demo pods
-                available as add-ons.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* ── §4.11 SPONSOR FAQ ── */}
-        <section className="fs-faq fs-reveal" aria-labelledby="fs-faq-h">
-          <div className="section-label">Sponsor FAQ</div>
-          <h2 id="fs-faq-h" className="display fs-h2">
-            Questions we get every week.
-          </h2>
-          <div className="fs-faq-list">
-            {SPONSOR_FAQ.map((item, i) => {
-              const open = openFaq === i;
-              return (
-                <div key={item.q} className={`fs-faq-item ${open ? 'open' : ''}`}>
-                  <button
-                    type="button"
-                    className="fs-faq-q"
-                    aria-expanded={open}
-                    onClick={() => setOpenFaq(open ? null : i)}
-                  >
-                    <span>{item.q}</span>
-                    <span className="fs-faq-plus mono" aria-hidden="true">
-                      {open ? '−' : '+'}
-                    </span>
-                  </button>
-                  {open && <p className="fs-faq-a">{item.a}</p>}
-                </div>
-              );
-            })}
-          </div>
-        </section>
-
-        {/* ── §4.12 FINAL CTA ── */}
-        <section className="fs-cta fs-reveal">
-          <div className="fs-cta-block">
-            <div className="section-label fs-cta-label">Book the call</div>
-            <h2 className="display fs-h2">
-              Sponsor the <em>show.</em>
+            <span className="fs-split-cta mono">APPLY NOW →</span>
+          </a>
+          <a
+            className="fs-split-card fs-split-card--attend"
+            href="mailto:pedro@frontierhumans.com?subject=Fashion%20Show%20-%20Get%20on%20the%20List"
+          >
+            <div className="fs-split-eyebrow mono">[ FOR EVERYONE ]</div>
+            <h2 className="fs-split-title display">
+              Get on the <em>List.</em>
             </h2>
-            <p className="fs-cta-sub">
-              One night in Kobe, 90 minutes on-broadcast, evergreen clips
-              after. The deck lands in your inbox the moment you ask.
+            <p className="fs-split-sub">
+              Seats are limited. Press, builders, friends of the residency.
+              We&apos;ll send the door code.
             </p>
-            <div className="fs-cta-buttons">
-              <a className="btn btn-primary fs-btn-solid" href={SPONSOR_MAILTO}>
-                Request the Sponsor Deck →
-              </a>
-              <a className="btn btn-outline" href={BOOK_CALL_MAILTO}>
-                Book a 20-min intro
-              </a>
-              <a className="btn btn-ghost" href="/apply">
-                Apply to Walk
-              </a>
-            </div>
-            <p className="fs-cta-contact mono">
-              PARTNERSHIPS · PEDRO ·{' '}
-              <a href="mailto:pedro@frontierhumans.com">pedro@frontierhumans.com</a>
-            </p>
-          </div>
+            <span className="fs-split-cta mono">REQUEST INVITE →</span>
+          </a>
+        </section>
 
+        {/* ── SCENE 08: SPONSOR BAND (DEMOTED) ── */}
+        <aside className="fs-sponsor-band fs-reveal" aria-label="Sponsor the show">
+          <span className="fs-sponsor-eyebrow mono">[ FOR BRANDS ]</span>
+          <span className="fs-sponsor-line">
+            Sponsor the broadcast — Title, Runway, Category, and Media tiers.
+          </span>
+          <a className="fs-sponsor-link mono" href={SPONSOR_MAILTO}>
+            REQUEST DECK →
+          </a>
+        </aside>
+
+        {/* ── FOOTER ── */}
+        <section className="fs-footer">
           <div className="fs-attribution">
             <span className="mono fs-attribution-text">An event by</span>
             <Image
