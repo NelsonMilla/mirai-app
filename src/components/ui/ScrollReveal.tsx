@@ -18,7 +18,7 @@ export function ScrollReveal({
   children,
   variant = 'default',
   className = '',
-  triggerOnce = true,
+  triggerOnce = false,
 }: ScrollRevealProps) {
   const { ref, isIntersecting } = useIntersection({
     threshold: 0.1,

@@ -1,7 +1,8 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTrack } from '@/components/tracks/TrackContext';
+import { useIntersection } from '@/hooks/useIntersection';
 import { Volt, Helix, Ember } from '@/sprites';
 
 const defaultSprites: Record<string, React.ComponentType<React.SVGProps<SVGSVGElement>>> = {
@@ -12,26 +13,11 @@ const defaultSprites: Record<string, React.ComponentType<React.SVGProps<SVGSVGEl
 
 export function PostCredits() {
   const { selectedTrack } = useTrack();
-  const sectionRef = useRef<HTMLElement>(null);
-  const [visible, setVisible] = useState(false);
+  const { ref: sectionRef, isIntersecting: visible } = useIntersection({
+    threshold: 0.15,
+    triggerOnce: false,
+  });
   const [countdown, setCountdown] = useState({ days: '---', hours: '--', mins: '--', secs: '--' });
-
-  // Intersection observer for fade-in
-  useEffect(() => {
-    const section = sectionRef.current;
-    if (!section) return;
-
-    const io = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) setVisible(true);
-        });
-      },
-      { threshold: 0.15 }
-    );
-    io.observe(section);
-    return () => io.disconnect();
-  }, []);
 
   // Countdown to Oct 1 2026 JST
   useEffect(() => {
@@ -85,7 +71,7 @@ export function PostCredits() {
 
   return (
     <section
-      ref={sectionRef}
+      ref={sectionRef as React.RefObject<HTMLElement>}
       className={`post-credits ${visible ? 'visible' : ''}`}
     >
       {/* Twinkling stars */}

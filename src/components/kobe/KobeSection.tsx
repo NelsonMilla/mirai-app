@@ -9,7 +9,7 @@ import IsometricMap from './IsometricMap';
 import { lifestyleCards, LifestyleCard as LifestyleCardType } from '@/lib/constants';
 
 export default function KobeSection() {
-  const { ref: sectionRef, isIntersecting } = useIntersection({ threshold: 0.05, triggerOnce: true });
+  const { ref: sectionRef, isIntersecting } = useIntersection({ threshold: 0.05, triggerOnce: false });
   const [selectedCard, setSelectedCard] = useState<LifestyleCardType | null>(null);
   const [isOverlayOpen, setIsOverlayOpen] = useState(false);
 
