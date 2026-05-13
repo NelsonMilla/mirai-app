@@ -6,7 +6,7 @@ import { useIntersection } from '@/hooks/useIntersection';
 
 export default function RunwaySection() {
   const blockRef = useRef<HTMLDivElement>(null);
-  const { ref: sectionRef, isIntersecting } = useIntersection({ threshold: 0.1, triggerOnce: true });
+  const { ref: sectionRef, isIntersecting } = useIntersection({ threshold: 0.1, triggerOnce: false });
 
   useEffect(() => {
     const handleScroll = () => {

@@ -11,16 +11,13 @@ export default function LoadingScreen() {
   const [visible, setVisible] = useState(true);
   const rafRef = useRef<number>(0);
   const startTimeRef = useRef<number>(0);
+  const dismissedRef = useRef(false);
 
-  // Non-linear counter easing
   const updateCounter = useCallback(() => {
     const elapsed = Date.now() - startTimeRef.current;
-    const duration = 1500; // 1.5s to count from 0→100
+    const duration = 1500;
     const t = Math.min(1, elapsed / duration);
-    // Fast start, slow around 80%, snap to 100
-    const eased = t < 0.8
-      ? t * 1.15
-      : 0.92 + (t - 0.8) * 0.4;
+    const eased = t < 0.8 ? t * 1.15 : 0.92 + (t - 0.8) * 0.4;
     const value = Math.min(100, Math.floor(eased * 100));
     setCounter(value);
     if (t < 1) {
@@ -29,26 +26,41 @@ export default function LoadingScreen() {
   }, []);
 
   useEffect(() => {
-    // SSR guard
     setMounted(true);
 
-    // Only show on root page
     if (pathname !== '/') {
       setVisible(false);
       return;
     }
 
-    // Reduced motion: skip entirely
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       setVisible(false);
       return;
     }
 
-    // Lock scroll
-    document.body.classList.add('loading');
+    // Mark html so CSS can suppress smooth-scroll during load
     document.documentElement.classList.add('loading');
 
-    // Phase sequence
+    const dismiss = () => {
+      if (dismissedRef.current) return;
+      dismissedRef.current = true;
+
+      cancelAnimationFrame(rafRef.current);
+      clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); clearTimeout(t4);
+
+      setCounter(100);
+      setPhase(4);
+
+      // Slats take ~940ms (8 × 55ms delay + 500ms duration)
+      setTimeout(() => {
+        document.documentElement.classList.remove('loading');
+        requestAnimationFrame(() =>
+          window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior })
+        );
+        setVisible(false);
+      }, 1000);
+    };
+
     const t1 = setTimeout(() => {
       setPhase(2);
       startTimeRef.current = Date.now();
@@ -61,30 +73,29 @@ export default function LoadingScreen() {
       cancelAnimationFrame(rafRef.current);
     }, 2000);
 
-    const t3 = setTimeout(() => {
-      setPhase(4);
-    }, 2600);
+    const t3 = setTimeout(() => setPhase(4), 2600);
 
     const t4 = setTimeout(() => {
-      document.body.classList.remove('loading');
       document.documentElement.classList.remove('loading');
-      // Force scroll to top after snap re-enables
-      requestAnimationFrame(() => {
-        window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior });
-      });
+      requestAnimationFrame(() =>
+        window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior })
+      );
       setVisible(false);
     }, 3600);
 
+    // Scroll or swipe skips the preloader
+    const onScroll = () => dismiss();
+    window.addEventListener('wheel', onScroll, { passive: true, once: true });
+    window.addEventListener('touchmove', onScroll, { passive: true, once: true });
+
     return () => {
-      clearTimeout(t1);
-      clearTimeout(t2);
-      clearTimeout(t3);
-      clearTimeout(t4);
+      clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); clearTimeout(t4);
       cancelAnimationFrame(rafRef.current);
-      document.body.classList.remove('loading');
       document.documentElement.classList.remove('loading');
+      window.removeEventListener('wheel', onScroll);
+      window.removeEventListener('touchmove', onScroll);
     };
-  }, [updateCounter]);
+  }, [updateCounter]); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (!mounted || !visible) return null;
 
@@ -92,27 +103,21 @@ export default function LoadingScreen() {
     <div className="loading-screen" data-phase={phase}>
       {phase < 4 ? (
         <div className={`loader-content ${phase === 3 ? 'loader-pulse' : ''}`}>
-          {/* CRT line — phase 1 */}
           {phase === 1 && <div className="loader-line" />}
 
-          {/* Boot content — phases 2 & 3 */}
           {phase >= 2 && (
             <>
               <div className="loader-title">MIRAI TECH</div>
-              <div className="loader-counter">
-                {String(counter).padStart(3, '0')}
-              </div>
+              <div className="loader-counter">{String(counter).padStart(3, '0')}</div>
               <div className={`loader-status ${phase === 3 ? 'loader-status-ready' : ''}`}>
                 {phase < 3 ? 'INITIALIZING SYSTEMS...' : 'SYSTEM READY'}
               </div>
             </>
           )}
 
-          {/* Ghost kanji — phases 2 & 3 */}
           {phase >= 2 && <div className="loader-kanji">未来</div>}
         </div>
       ) : (
-        /* Exit slats — phase 4 */
         <div className="loader-slats">
           {Array.from({ length: 8 }, (_, i) => (
             <div

@@ -81,7 +81,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable}`}>
+    <html lang="en" data-scroll-behavior="smooth" className={`${inter.variable} ${jetbrainsMono.variable}`}>
       <head>
         {/* Fraunces + Noto Serif JP loaded via Google Fonts link
             - Fraunces needs variable axes (SOFT, WONK, opsz) not supported by next/font

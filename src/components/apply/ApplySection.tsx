@@ -18,7 +18,7 @@ type WhitelistStatus = 'idle' | 'loading' | 'success' | 'not-found' | 'used' | '
 
 export function ApplySection() {
   const { selectedTrack, selectTrack } = useTrack();
-  const { ref: sectionRef, isIntersecting } = useIntersection({ threshold: 0.05, triggerOnce: true });
+  const { ref: sectionRef, isIntersecting } = useIntersection({ threshold: 0.05, triggerOnce: false });
   const router = useRouter();
 
   const [whitelistInput, setWhitelistInput] = useState('');
