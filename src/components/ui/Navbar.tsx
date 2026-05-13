@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { InviteCodeLink } from '@/components/ui/InviteCodeLink';
+import { LUMA_EVENT_URL } from '@/lib/constants';
 
 export function Navbar() {
   return (
@@ -15,7 +16,7 @@ export function Navbar() {
         <a href="/#month">Program</a>
         <a href="/#kobe">Kobe</a>
         <InviteCodeLink variant="nav" />
-        <a className="btn btn-primary" href="/apply">Apply Now</a>
+        <a className="btn btn-primary" href={LUMA_EVENT_URL} target="_blank" rel="noopener noreferrer">Apply Now</a>
       </div>
     </nav>
   );
