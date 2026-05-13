@@ -2,7 +2,7 @@
 
 import React, { useState, useCallback } from 'react';
 import Image from 'next/image';
-import { fighters, rosterPartners, rosterQuote } from '@/lib/constants';
+import { fighters, rosterPartners } from '@/data/fighters';
 import { useIntersection } from '@/hooks/useIntersection';
 
 export default function RosterSection() {
@@ -30,6 +30,7 @@ export default function RosterSection() {
     Devices: '#6DB5F5',
     Therapies: '#F5C542',
     Builder: '#FF6B92',
+    Speaker: '#B98BF5',
     Incoming: '#8585A8',
   };
 
@@ -138,7 +139,9 @@ export default function RosterSection() {
                 </div>
               )}
               {!selectedFighter.stats && (
-                <div className="fighter-bio">{selectedFighter.bio}</div>
+                <div className="fighter-bio">
+                  {selectedFighter.bio?.trim() || 'Bio coming soon...'}
+                </div>
               )}
             </div>
           </div>
