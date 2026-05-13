@@ -1,3 +1,5 @@
+export const LUMA_EVENT_URL = 'https://luma.com/an4zotn9?utm_parameter=landing';
+
 export interface Track {
   id: string;
   name: string;

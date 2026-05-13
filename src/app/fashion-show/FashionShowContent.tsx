@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
+import { LUMA_EVENT_URL } from '@/lib/constants';
 
 const SHOW_DATE = new Date('2026-10-31T19:00:00+09:00');
 
@@ -104,7 +105,7 @@ export function FashionShowContent() {
             <span className="fs-sticky-mark jp">未</span>
             <span>FRONTIER HUMAN FASHION SHOW · KOBE · OCT 2026</span>
           </a>
-          <a className="btn btn-primary fs-sticky-cta" href="/apply">
+          <a className="btn btn-primary fs-sticky-cta" href={LUMA_EVENT_URL} target="_blank" rel="noopener noreferrer">
             Apply to Walk
           </a>
         </div>
@@ -135,7 +136,7 @@ export function FashionShowContent() {
               <span className="fs-tagline-emph">One night. 90 minutes. Broadcast worldwide.</span>
             </p>
             <div className="fs-hero-ctas">
-              <a className="btn btn-primary fs-btn-solid" href="/apply">
+              <a className="btn btn-primary fs-btn-solid" href={LUMA_EVENT_URL} target="_blank" rel="noopener noreferrer">
                 Apply to Walk →
               </a>
               <a className="btn btn-outline" href="#lineup">
@@ -348,7 +349,7 @@ export function FashionShowContent() {
 
         {/* ── SCENE 07: APPLY / ATTEND SPLIT ── */}
         <section className="fs-split fs-reveal" aria-label="Get involved">
-          <a className="fs-split-card fs-split-card--apply" href="/apply">
+          <a className="fs-split-card fs-split-card--apply" href={LUMA_EVENT_URL} target="_blank" rel="noopener noreferrer">
             <div className="fs-split-eyebrow mono">[ FOR BUILDERS ]</div>
             <h2 className="fs-split-title display">
               Apply to <em>Walk.</em>

@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import posthog from 'posthog-js';
+import { LUMA_EVENT_URL } from '@/lib/constants';
 
 type Step = 'enter-code' | 'mini-form' | 'needs-email';
 type Status = 'idle' | 'loading' | 'success' | 'not-found' | 'used' | 'expired' | 'exhausted' | 'inactive' | 'error';
@@ -390,7 +391,7 @@ export default function InvitePage() {
 
           {status === 'not-found' && (
             <div className="whitelist-msg whitelist-notfound">
-              Not on the whitelist. <Link href="/apply">Apply here</Link> instead.
+              Not on the whitelist. <a href={LUMA_EVENT_URL} target="_blank" rel="noopener noreferrer">Apply here</a> instead.
             </div>
           )}
 
@@ -424,7 +425,7 @@ export default function InvitePage() {
         </div>
 
         <p className="invite-footer">
-          Don&rsquo;t have an invite? <Link href="/apply">Apply for Mirai</Link>
+          Don&rsquo;t have an invite? <a href={LUMA_EVENT_URL} target="_blank" rel="noopener noreferrer">Apply for Mirai</a>
         </p>
       </div>
     </main>

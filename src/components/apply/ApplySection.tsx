@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useTrack } from '@/components/tracks/TrackContext';
 import { useIntersection } from '@/hooks/useIntersection';
-import { tracks } from '@/lib/constants';
+import { tracks, LUMA_EVENT_URL } from '@/lib/constants';
 
 const headlines: Record<string, { em: string; sub: string }> = {
   devices:   { em: 'wearable.',      sub: 'From prototype to patient — in one month.' },
@@ -103,7 +103,7 @@ export function ApplySection() {
         </div>
 
         <div className="apply-btns">
-          <a className="btn btn-primary" style={{ fontSize: 'var(--fs-secondary)', padding: '1rem 2rem' }} href="/apply">Apply Now</a>
+          <a className="btn btn-primary" style={{ fontSize: 'var(--fs-secondary)', padding: '1rem 2rem' }} href={LUMA_EVENT_URL} target="_blank" rel="noopener noreferrer">Apply Now</a>
           <a className="btn btn-outline" style={{ fontSize: 'var(--fs-secondary)', padding: '1rem 2rem' }} href="#">Get the Info Pack</a>
         </div>
         <div className="apply-micro">5-min application · No commitment</div>
@@ -145,7 +145,7 @@ export function ApplySection() {
 
           {whitelistStatus === 'not-found' && (
             <div className="whitelist-msg whitelist-notfound">
-              Not found \u2014 <a href="/apply">apply here</a> instead.
+              Not found \u2014 <a href={LUMA_EVENT_URL} target="_blank" rel="noopener noreferrer">apply here</a> instead.
             </div>
           )}
 
