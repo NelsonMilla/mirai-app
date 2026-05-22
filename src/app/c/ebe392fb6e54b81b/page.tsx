@@ -83,7 +83,7 @@ const founders: Daihyo[] = [
     role: 'Co-Founder & CEO',
     roleJa: '共同創業者・CEO',
     affiliation:
-      'UN/ITU innovation expert deployed across 30+ countries · Built 17 Acceleration Centers · Designed and operated 15+ Dx Centers, national and regional.',
+      'UN/ITU innovation expert deployed across 30+ countries · Designed and operationalised 17 Acceleration Centers.',
     credentials:
       'Prior: COO, Vitalia City @ Próspera SEZ · Head of Operations, Viva City SF (with Peter Diamandis, Bryan Johnson, Naval Ravikant). Founder, Behaviour Hackers / Scale&Connect — clients: IBM, Oliver Wyman, Linklaters, Fujitsu.',
     photo: '/team/victoria-masso.png',
@@ -193,7 +193,7 @@ const products = [
     tag: 'In-Residence Program',
     name: 'Mirai Tech Residency',
     desc:
-      'A 7-week in-residence program for early-stage biotech and medical device companies, hosted at KBIC facilities with lab access and PMDA regulatory mentorship.',
+      'A 7-week in-residence program for early-stage biotech and medical device companies in Kobe, focused on lab access and PMDA regulatory mentorship.',
   },
   {
     tag: 'Multi-Stakeholder Output',
@@ -267,6 +267,34 @@ const trackRecord: TrackRecordEntry[] = [
     ],
     pressUrl: 'https://www.itu.int/itu-d/sites/innovation-alliance/network-of-itu-acceleration-centres/',
   },
+  {
+    name: 'Viva City',
+    location: 'Frontier Tower, San Francisco',
+    period: 'Jun–Aug 2025',
+    desc:
+      '6-week popup village in the 16-floor Frontier Tower in downtown San Francisco. Convened the AI · crypto · longevity communities. Backed by Peter Diamandis, Bryan Johnson, Naval Ravikant. Victoria led Operations.',
+    stats: [
+      { val: '6 wk', label: 'Duration' },
+      { val: '16', label: 'Floors' },
+      { val: 'SF', label: 'Location' },
+      { val: 'AI · Long.', label: 'Themes' },
+    ],
+    pressUrl: 'https://viva.city/',
+  },
+  {
+    name: 'Vitalist Bay',
+    location: 'Lighthaven, Berkeley, CA',
+    period: 'Apr–May 2025',
+    desc:
+      '8-week longevity-focused popup city organised by the Vitalism Foundation at the Lighthaven campus in Berkeley. 8 specialised conferences across longevity, biotech, AI, desci, policy, and wellness.',
+    stats: [
+      { val: '8 wk', label: 'Duration' },
+      { val: '8', label: 'Conferences' },
+      { val: '1000+', label: 'Attendees' },
+      { val: '70', label: 'Residents' },
+    ],
+    pressUrl: 'https://vitalistbay.com/',
+  },
 ];
 
 // PLACEHOLDER: confirm permissionState per partner before publishing.
@@ -276,34 +304,26 @@ const trackRecord: TrackRecordEntry[] = [
 //   'pending' → suppressed from page
 const partners: Teikei[] = [
   {
-    name: 'Kobe Biomedical Innovation Cluster (KBIC)',
-    nameJa: '神戸医療産業都市推進機構',
-    role: 'Host cluster; lab and facility access for residents.',
-    permissionState: 'verbal',
-    logo: null,
-  },
-  {
-    name: 'JETRO Kobe',
-    nameJa: 'ジェトロ神戸',
-    role: 'Japan market-entry soft-landing and bilingual coordination.',
-    permissionState: 'verbal',
-    logo: null,
-  },
-  {
     name: 'HekaBio',
     role: 'Commercial partner · Japan regulatory. Team with 50+ Japanese licence approvals. Delivered Japan’s first foreign new-category Shōnin approval ahead of US and Europe (Alpha DaRT, February 2026). SNK01 commercial partner under Japan’s Regenerative Medicine Act.',
-    permissionState: 'verbal',
+    permissionState: 'written',
     logo: null,
   },
   {
-    name: 'Founder’s Voyage',
-    role: 'Partner hacker house organisation during the popup (London).',
-    permissionState: 'verbal',
+    name: 'Viva City',
+    role: 'Sister popup-city partner · San Francisco · longevity ecosystem collaboration.',
+    permissionState: 'written',
     logo: null,
   },
   {
     name: 'AEVITAS',
     role: 'Partner hacker house organisation during the popup (San Francisco).',
+    permissionState: 'written',
+    logo: null,
+  },
+  {
+    name: 'Founder’s Voyage',
+    role: 'Partner hacker house organisation during the popup (London).',
     permissionState: 'verbal',
     logo: null,
   },
@@ -441,7 +461,7 @@ const mediaUndated = mediaCoverage.filter(m => m.date === '');
 // Sidebar facts (single source of truth — same values as §01 table)
 // ---------------------------------------------------------------------------
 const sidebarFacts: SidebarFact[] = [
-  { key: 'Trading name', value: 'Mirai Tech' },
+  { key: 'Trading name', value: 'Mirai Tech (JP) · Frontier Humans (US)' },
   { key: 'Legal entity', value: 'Unchain Bio, Inc. · Delaware C-Corp' },
   { key: 'Founded', value: ENTITY.foundedOn ?? <Placeholder variant="inline" note="month + year" /> },
   { key: 'Representative', value: 'Victoria Massó' },
@@ -493,8 +513,7 @@ export default function AboutPage() {
           <p className="about-lede">
             We are an international team that runs popup cities, biotech accelerators, and
             innovation programmes. The Mirai Tech Pop-Up City takes place on Port Island, Kobe,
-            from October&nbsp;1 to&nbsp;31, 2026, in partnership with the Kobe Biomedical Innovation
-            Cluster (KBIC) and JETRO Kobe.
+            from October&nbsp;1 to&nbsp;31, 2026, with the support of KBIC.
           </p>
         </header>
 
@@ -509,7 +528,7 @@ export default function AboutPage() {
                 deck="Facts third parties can verify independently. Items marked PLACEHOLDER are not yet final and will be confirmed before this page is shared with institutional partners."
               />
               <div className="kaisha-table">
-                <Row k="Trading name" kJa="商号">Mirai Tech</Row>
+                <Row k="Trading name" kJa="商号">Mirai Tech (Japan) · Frontier Humans (USA)</Row>
                 <Row k="Website" kJa="ウェブサイト">
                   <a href="https://miraitech.city" rel="noopener">miraitech.city</a>
                 </Row>

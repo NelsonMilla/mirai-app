@@ -33,8 +33,8 @@ export function TeikeiBlock({ p }: { p: Teikei }) {
   const stampState = p.permissionState === 'written' ? 'confirmed' : 'pending';
   const stampSource =
     p.permissionState === 'written'
-      ? 'written consent on file'
-      : 'verbal — awaiting written';
+      ? 'MoU on file'
+      : 'verbal — awaiting MoU';
 
   const showLogo = p.permissionState === 'written' && p.logo;
 
