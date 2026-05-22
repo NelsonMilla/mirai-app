@@ -1,0 +1,5 @@
+# Public landing pages are indexable.
+User-agent: *
+Allow: /
+# Private routes — shared by direct link only, must not be crawled or indexed.
+Disallow: /c/
