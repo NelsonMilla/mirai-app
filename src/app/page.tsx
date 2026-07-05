@@ -12,12 +12,14 @@ import { FaqSection } from "@/components/apply/FaqSection";
 import { PostCredits } from "@/components/apply/PostCredits";
 import { ScrollCompanion } from "@/components/apply/ScrollCompanion";
 import { Navbar } from "@/components/ui/Navbar";
+import { ProgressRail } from "@/components/ui/ProgressRail";
 import { QuickActions } from "@/components/ui/QuickActions";
 
 export default function Home() {
   return (
     <main className="w-full">
       <Navbar />
+      <ProgressRail />
       <HeroSection />
       <TracksSection />
       <MonthTimeline />

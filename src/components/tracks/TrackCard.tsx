@@ -75,6 +75,14 @@ export function TrackCard({ track }: TrackCardProps) {
             </div>
           ))}
         </div>
+        <a
+          href="#apply"
+          className="track-continue"
+          onClick={(e) => e.stopPropagation()}
+        >
+          Continue as {track.name}
+          <span aria-hidden="true"> →</span>
+        </a>
       </div>
     </div>
   );

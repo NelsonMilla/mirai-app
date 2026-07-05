@@ -7,7 +7,9 @@ import { LUMA_EVENT_URL } from '@/lib/constants';
 const NAV_ITEMS = [
   { id: 'tracks', label: 'Tracks' },
   { id: 'month', label: 'Program' },
+  { id: 'runway', label: 'Show' },
   { id: 'kobe', label: 'Kobe' },
+  { id: 'proof', label: 'Speakers' },
 ];
 
 export function Navbar() {

@@ -4,6 +4,7 @@ import React, { useState, useCallback } from 'react';
 import Image from 'next/image';
 import { fighters, rosterPartners } from '@/data/fighters';
 import { useIntersection } from '@/hooks/useIntersection';
+import { PixelAvatar } from './PixelAvatar';
 
 export default function RosterSection() {
   const { ref: sectionRef, isIntersecting } = useIntersection({ threshold: 0.05, triggerOnce: true });
@@ -40,6 +41,41 @@ export default function RosterSection() {
       className={`section reveal roster-section ${isIntersecting ? 'in' : ''}`}
       id="proof"
     >
+      {/* Scoped styles for the interim pixel-avatar treatment (photo-pending
+          confirmed fighters). Kept here to avoid touching globals.css. */}
+      <style>{`
+        .slot-avatar {
+          position: absolute; inset: 12%; width: 76%; height: 76%;
+          z-index: 1; opacity: 0.9;
+          filter: drop-shadow(0 2px 6px rgba(0,0,0,0.5)) saturate(0.8) brightness(0.85);
+          transition: filter 0.2s, opacity 0.2s;
+        }
+        .roster-slot:hover .slot-avatar,
+        .roster-slot.selected .slot-avatar {
+          opacity: 1; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.55)) saturate(1) brightness(1);
+        }
+        .fighter-avatar-wrap {
+          position: absolute; inset: 0; z-index: 1;
+          display: flex; flex-direction: column;
+          align-items: center; justify-content: center; gap: 0.9rem;
+          padding-bottom: 22%;
+        }
+        .fighter-avatar {
+          width: 42%; max-width: 220px; height: auto; aspect-ratio: 1;
+          filter: drop-shadow(0 6px 18px rgba(0,0,0,0.5));
+          animation: avatar-breathe 4s ease-in-out infinite;
+        }
+        @keyframes avatar-breathe {
+          0%, 100% { transform: translateY(0) scale(1); }
+          50% { transform: translateY(-3px) scale(1.02); }
+        }
+        .fighter-avatar-caption {
+          font-size: var(--fs-label); letter-spacing: 0.28em; text-transform: uppercase;
+          color: rgba(255,255,255,0.4); border: 1px solid rgba(255,255,255,0.12);
+          padding: 0.3rem 0.7rem; border-radius: 2px;
+          background: rgba(0,0,0,0.25);
+        }
+      `}</style>
       {/* Header */}
       <div className="roster-header">
         <div className="roster-title mono">Select Your Fighter</div>
@@ -73,8 +109,14 @@ export default function RosterSection() {
                       sizes="150px"
                       style={{ objectFit: 'cover', objectPosition: 'center 20%' }}
                     />
-                  ) : (
+                  ) : fighter.mystery ? (
                     <span className="slot-initial">?</span>
+                  ) : (
+                    <PixelAvatar
+                      seed={fighter.fullName}
+                      color={tagColor[fighter.tag] || '#8585A8'}
+                      className="slot-avatar"
+                    />
                   )}
                 </div>
                 <div className="slot-nameplate">
@@ -111,6 +153,16 @@ export default function RosterSection() {
                     priority
                   />
                 </>
+              )}
+              {!selectedFighter.photo && !selectedFighter.mystery && (
+                <div className="fighter-avatar-wrap">
+                  <PixelAvatar
+                    seed={selectedFighter.fullName}
+                    color={tagColor[selectedFighter.tag] || '#8585A8'}
+                    className="fighter-avatar"
+                  />
+                  <span className="fighter-avatar-caption mono">PORTRAIT INCOMING</span>
+                </div>
               )}
             </div>
             <div className="fighter-meta">
