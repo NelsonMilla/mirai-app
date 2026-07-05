@@ -1,7 +1,7 @@
 'use client';
 
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { chapters } from '@/lib/constants';
+import { chapters, weeklyPrograms } from '@/lib/constants';
 import { useIntersection } from '@/hooks/useIntersection';
 
 // Color map for the detail strip (which lives outside card divs)
@@ -103,6 +103,13 @@ export default function MonthTimeline() {
                   <div key={i} className="ch-detail-event">{evt}</div>
                 ))}
               </div>
+              {activeChapter.themes && (
+                <div className="ch-detail-themes">
+                  {activeChapter.themes.map((theme) => (
+                    <span key={theme} className="ch-theme-chip">{theme}</span>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         ) : (
@@ -123,6 +130,21 @@ export default function MonthTimeline() {
             className={`ch-dot ${activeIndex === idx ? 'dot-active' : ''}`}
           />
         ))}
+      </div>
+
+      {/* Recurring programming — the weekly rhythm between marquee moments */}
+      <div className="week-strip">
+        <div className="week-strip-intro mono">
+          Every week on Port Island — the daily rhythm between the marquee moments, running all month.
+        </div>
+        <div className="week-strip-grid">
+          {weeklyPrograms.map((program) => (
+            <div key={program.label} className="week-strip-item">
+              <div className="week-strip-label mono">{program.label}</div>
+              <div className="week-strip-detail">{program.detail}</div>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );

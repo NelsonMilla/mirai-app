@@ -7,8 +7,8 @@ import { useIntersection } from '@/hooks/useIntersection';
 import { tracks, LUMA_EVENT_URL } from '@/lib/constants';
 
 const headlines: Record<string, { em: string; sub: string }> = {
-  devices:   { em: 'wearable.',      sub: 'From prototype to patient — in one month.' },
-  therapies: { em: 'regenerative.',  sub: 'From Phase 1b to conditional approval — in record time.' },
+  devices:   { em: 'wearable.',      sub: 'From prototype onto the PMDA device pathway — in one month.' },
+  therapies: { em: 'regenerative.',  sub: 'From Phase 1b onto Japan’s accelerated pathways.' },
   builder:   { em: 'yours.',         sub: 'Full access. Zero barriers. One unforgettable month.' },
 };
 
@@ -76,7 +76,7 @@ export function ApplySection() {
       data-section="apply"
     >
       <div className="apply-block">
-        <div className="section-label">October 2026 · Only 200 curated residents</div>
+        <div className="section-label">October 2026 · 300 curated residents</div>
 
         <h2 className="apply-h2">The future is <em>{em}</em></h2>
         <p>{sub}</p>
@@ -107,6 +107,21 @@ export function ApplySection() {
           <a className="btn btn-outline" style={{ fontSize: 'var(--fs-secondary)', padding: '1rem 2rem' }} href="#">Get the Info Pack</a>
         </div>
         <div className="apply-micro">5-min application · No commitment</div>
+
+        {/* Quiet secondary paths — subordinate to the primary Apply CTA */}
+        <div className="apply-paths mono" style={{ marginTop: '1rem', fontSize: 'var(--fs-label)', color: 'var(--slate)', letterSpacing: '0.04em' }}>
+          <a href="#tracks" style={{ color: 'inherit', textDecoration: 'none' }}>Residency</a>
+          <span aria-hidden="true" style={{ opacity: 0.4, margin: '0 0.5rem' }}>·</span>
+          <a href={LUMA_EVENT_URL} target="_blank" rel="noopener noreferrer" style={{ color: 'inherit', textDecoration: 'none' }}>Builder</a>
+          <span aria-hidden="true" style={{ opacity: 0.4, margin: '0 0.5rem' }}>·</span>
+          <a href="mailto:team@miraitech.city?subject=Mirai%20Partnership" style={{ color: 'inherit', textDecoration: 'none' }}>Partner</a>
+        </div>
+        <div className="apply-paths-secondary" style={{ marginTop: '0.5rem', fontSize: 'var(--fs-label)' }}>
+          <a href="/showcase" style={{ color: 'var(--slate)', textDecoration: 'none' }}>Showcasing a company? →</a>
+          <span aria-hidden="true" style={{ opacity: 0.4, margin: '0 0.5rem', color: 'var(--slate)' }}>·</span>
+          {/* TODO: replace mailto with public sponsorship deck URL when available */}
+          <a href="mailto:team@miraitech.city?subject=Mirai%20Sponsorship%20Deck%20Request" style={{ color: 'var(--slate)', textDecoration: 'none' }}>Get the sponsorship deck →</a>
+        </div>
 
         {/* Whitelist bypass */}
         <div className="whitelist-section">

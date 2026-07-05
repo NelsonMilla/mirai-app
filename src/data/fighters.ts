@@ -24,8 +24,8 @@
  * Counts
  * ------
  * The "X / 24 Fighters confirmed" counter in RosterSection is computed as
- *   fighters.filter(f => !f.mystery).length + 2
- * Adjust there if the offset changes.
+ *   fighters.filter(f => !f.mystery).length
+ * Adjust there if an offset is needed.
  */
 
 export interface Fighter {
@@ -109,6 +109,149 @@ export const fighters: Fighter[] = [
       { label: 'FND', value: 95 },
       { label: 'SCI', value: 88 },
       { label: 'NET', value: 92 },
+    ],
+  },
+  {
+    name: 'Aubrey',
+    fullName: 'Aubrey de Grey',
+    title: 'LEV Foundation',
+    bio: '',
+    tag: 'Speaker',
+    special: 'Longevity Escape Velocity',
+    stats: [
+      { label: 'REG', value: 99 },
+      { label: 'SCI', value: 97 },
+      { label: 'VIS', value: 96 },
+    ],
+  },
+  {
+    name: 'Jose',
+    fullName: 'Jose Cordeiro',
+    title: 'Speaker · Announcement soon',
+    bio: '',
+    tag: 'Speaker',
+    special: 'The Death of Death',
+    stats: [
+      { label: 'VIS', value: 94 },
+      { label: 'SCI', value: 88 },
+      { label: 'NET', value: 90 },
+    ],
+  },
+  {
+    name: 'Cassox',
+    fullName: 'Cassox',
+    title: 'Symbiont Labs',
+    bio: '',
+    tag: 'Speaker',
+    special: 'Grinder Supreme',
+    stats: [
+      { label: 'HW', value: 90 },
+      { label: 'AUG', value: 92 },
+      { label: 'BIO', value: 86 },
+    ],
+  },
+  {
+    name: 'Devinder',
+    fullName: 'Devinder Sodhi',
+    title: 'Speaker · Announcement soon',
+    bio: '',
+    tag: 'Speaker',
+    special: 'Signal Booster',
+    stats: [
+      { label: 'STR', value: 85 },
+      { label: 'NET', value: 88 },
+      { label: 'VIS', value: 82 },
+    ],
+  },
+  {
+    name: 'Pedro',
+    fullName: 'Pedro Henrich',
+    title: 'Speaker · Announcement soon',
+    bio: '',
+    tag: 'Speaker',
+    special: 'Momentum Builder',
+    stats: [
+      { label: 'BLD', value: 87 },
+      { label: 'SPD', value: 84 },
+      { label: 'NET', value: 86 },
+    ],
+  },
+  {
+    name: 'Adam',
+    fullName: 'Adam Gries',
+    title: 'Speaker · Announcement soon',
+    bio: '',
+    tag: 'Speaker',
+    special: 'Full Send',
+    stats: [
+      { label: 'FND', value: 88 },
+      { label: 'BLD', value: 85 },
+      { label: 'SHP', value: 83 },
+    ],
+  },
+  {
+    name: 'Natalie',
+    fullName: 'Natalie Coles',
+    title: 'Speaker · Announcement soon',
+    bio: '',
+    tag: 'Speaker',
+    special: 'Sharp Focus',
+    stats: [
+      { label: 'SCI', value: 86 },
+      { label: 'STR', value: 84 },
+      { label: 'NET', value: 88 },
+    ],
+  },
+  {
+    name: 'Keita',
+    fullName: 'Keita Masui',
+    title: 'Asagi Labs Ventures',
+    bio: '',
+    tag: 'Speaker',
+    special: 'Deal Flow Master',
+    stats: [
+      { label: 'FND', value: 89 },
+      { label: 'NET', value: 91 },
+      { label: 'VIS', value: 85 },
+    ],
+  },
+  {
+    name: 'Sumit',
+    fullName: 'Sumit Jamuar',
+    title: 'Speaker · Announcement soon',
+    bio: '',
+    tag: 'Speaker',
+    special: 'Genome Pioneer',
+    stats: [
+      { label: 'BIO', value: 87 },
+      { label: 'FND', value: 85 },
+      { label: 'VIS', value: 88 },
+    ],
+  },
+  {
+    name: 'Cremeaux',
+    fullName: 'Cremeaux',
+    title: 'Speaker · Announcement soon',
+    bio: '',
+    tag: 'Speaker',
+    special: 'Wildcard Entry',
+    stats: [
+      { label: 'STR', value: 84 },
+      { label: 'SPD', value: 86 },
+      { label: 'NET', value: 82 },
+    ],
+  },
+  {
+    name: 'Nelson',
+    fullName: 'Nelson Milla',
+    title: 'Frontier Humans',
+    bio: '',
+    tag: 'Speaker',
+    special: 'Host With The Most',
+    stats: [
+      { label: 'FND', value: 90 },
+      { label: 'NET', value: 93 },
+      { label: 'VIS', value: 89 },
     ],
   },
   {

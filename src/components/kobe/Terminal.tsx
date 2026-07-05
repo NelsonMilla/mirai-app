@@ -26,14 +26,15 @@ const terminalLines: TerminalLine[] = [
   {
     html: (
       <>
-        <span className="term-dim">pathway</span> SAKIGAKE Conditional Approval
+        <span className="term-dim">scan</span> accelerated pathways found:{' '}
+        <span className="term-time">4</span> <span className="term-ok">✓</span>
       </>
     ),
   },
   {
     html: (
       <>
-        <span className="term-dim">filed</span> application submitted{' '}
+        <span className="term-dim">consult</span> PMDA on-site at KBIC{' '}
         <span className="term-progress">
           <span className="term-progress-fill term-progress-fill--ok"></span>
         </span>{' '}
@@ -44,16 +45,16 @@ const terminalLines: TerminalLine[] = [
   {
     html: (
       <>
-        <span className="term-dim">FIH trial</span> approved in{' '}
-        <span className="term-time">6 months</span> <span className="term-ok">✓</span>
+        <span className="term-dim">pathway</span> conditional approval — regenerative medicine{' '}
+        <span className="term-ok">✓</span>
       </>
     ),
   },
   {
     html: (
       <>
-        <span className="term-dim">approval</span> conditional granted at{' '}
-        <span className="term-time">14 months</span>{' '}
+        <span className="term-dim">approval</span> fastest cases in{' '}
+        <span className="term-time">under 1 year</span>{' '}
         <span className="term-ok">✓</span>
       </>
     ),
@@ -72,8 +73,8 @@ const terminalLines: TerminalLine[] = [
     html: (
       <>
         <span className="term-status-ok">■ DEPLOYED</span>{' '}
-        <span className="term-dim">total elapsed:</span>{' '}
-        <span className="term-time">5–18 months</span>
+        <span className="term-dim">real-world evidence:</span>{' '}
+        <span className="term-time">collecting</span>
       </>
     ),
   },
@@ -254,9 +255,9 @@ export default function Terminal() {
       <div className="term-sidebar">
         <div className="term-aside term-aside--jp">
           <span className="term-aside-flag">🇯🇵</span>
-          <span className="term-aside-big">5–18 mo</span>
+          <span className="term-aside-big">&lt; 1 yr</span>
           <span className="term-aside-sub">
-            Conditional approval pathway.
+            Fastest conditional approvals.
             <br />
             Patients get access <em>during</em> review.
           </span>

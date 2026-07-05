@@ -24,7 +24,7 @@ export const tracks: Track[] = [
     darkBg: '#0d1520',
     hint: 'Lab infrastructure for first-in-human prototypes.',
     description:
-      'Lab infrastructure ready on Port Island. Bring your exoskeletons, BCIs, prosthetics, biosensors, and wearables for first-in-human testing — and walk the Frontier Human Fashion Show runway.',
+      'Lab infrastructure ready on Port Island. Bring your exoskeletons, BCIs, prosthetics, biosensors, and wearables onto the PMDA device pathway — and walk the Frontier Human Fashion Show runway.',
     stats: [
       { label: 'Lab Access', value: 'Full', fill: '95%' },
       { label: 'PMDA Track', value: 'Device', fill: '80%' },
@@ -41,7 +41,7 @@ export const tracks: Track[] = [
     darkBg: '#1a1710',
     hint: 'Connect directly with PMDA for conditional approval.',
     description:
-      'Post Phase 1b biotech companies connecting directly with PMDA and Japanese consulting firms for conditional approval under Section 23-2-5. Culminates in a PMDA pre-submission and go-to-market roadmap.',
+      'Post Phase 1b biotech companies connecting directly with PMDA and Japanese consulting firms on Japan\'s accelerated pathways. Culminates in a PMDA pre-submission and go-to-market roadmap.',
     stats: [
       { label: 'Regulatory', value: 'PMDA', fill: '100%' },
       { label: 'Stage', value: '> Ph1b', fill: '70%' },
@@ -76,69 +76,87 @@ export interface Chapter {
   colorClass: string;
   imageSrc: string;
   events: string[];
+  themes?: string[];
 }
 
 export const chapters: Chapter[] = [
   {
     ep: 'EP.01',
     kanji: '壱',
-    title: 'Arrival & Onboarding',
-    dates: 'Oct 01 – 07',
-    synopsis: 'Arrivals, KBIC lab tours, JETRO soft-landing, community kickoff. Meet your cohort, claim your bench.',
+    title: 'Open Weeks',
+    dates: 'Oct 01 – 16',
+    synopsis: 'Co-building begins. Arrivals and tours, then Welcome Day on Oct 4, residency benches open, and two weeks to settle into Kobe and explore Japan alongside your cohort.',
     colorClass: 'ch-arrival',
     imageSrc: '/images/chapters/arrival.jpg',
     events: [
-      'KBIC lab tours & bench assignments',
-      'JETRO soft-landing orientation',
-      'Community welcome dinner',
-      'Port Island neighborhood walkthrough',
+      'KBIC lab tours & orientation',
+      'Welcome day & community kickoff (Oct 4)',
+      'Residency benches open',
+      'Port Island & Japan exploration',
     ],
   },
   {
     ep: 'EP.02',
     kanji: '弐',
-    title: 'Longevity Biotech',
-    dates: 'Oct 08 – 14',
-    synopsis: 'Senolytics, reprogramming, biomarkers, regenerative medicine protocols. The science of not dying.',
+    title: 'Summit I: The Science & Tech Augmenting Life',
+    dates: 'Oct 17 – 18',
+    synopsis: 'Part of the Longevity Biomedical Summit. The opportunities and the imperative of longevity biomedical innovation in Japan.',
     colorClass: 'ch-longevity',
     imageSrc: '/images/chapters/longevity.jpg',
     events: [
-      'Senolytic compound workshop',
-      'Biomarker panel deep-dive',
-      'Regenerative medicine protocols',
-      'Guest lecture: cellular reprogramming',
+      "Japan's Longevity Imperative — what Japan learned & what it needs from the world",
+      'KBIC as a global laboratory for longevity',
+      'Bioengineering, MedTech, biostasis, replacement & augmentation',
+      "Women's Health: the next trillion-dollar market",
+      'AI×Longevity Bio',
     ],
+    themes: ['Biomedical', 'Policy', 'Community', 'AI'],
   },
   {
     ep: 'EP.03',
     kanji: '参',
-    title: 'Human Enhancement',
-    dates: 'Oct 15 – 21',
-    synopsis: 'BCIs, exoskeletons, prosthetics, sensory augmentation. Upgrading the default human.',
+    title: 'Summit II: From East to West — Bridging the Longevity Gap',
+    dates: 'Oct 24 – 25',
+    synopsis: 'Bottlenecks and solutions to accelerate longevity biomedicine — and what the world looks like once we cure all diseases.',
     colorClass: 'ch-enhance',
     imageSrc: '/images/chapters/enhance.jpg',
     events: [
-      'BCI integration lab sessions',
-      'Exoskeleton fitting & calibration',
-      'Sensory augmentation demos',
-      'Performance medicine roundtable',
+      'Longevity trends, supercentenarians, impact & bottlenecks',
+      'The stakeholders: investment, R&D, entrepreneurship, regulation as an acceleration mechanism',
+      "Japan's model: conditional approval generating real-world evidence",
+      'Visions for the Future of Longevity',
     ],
+    themes: ['Biomedical', 'Policy', 'Community', 'AI'],
   },
   {
     ep: 'EP.04',
     kanji: '肆',
     title: 'Fashion Show & Close',
-    dates: 'Oct 22 – 31',
-    synopsis: 'Runway prep, rehearsals, press day. The Frontier Human Fashion Show — where devices become couture.',
+    dates: 'Oct 26 – 31',
+    synopsis: 'Runway prep, rehearsals, press day. The Frontier Human Fashion Show & Demo Day on Oct 26 — where devices become couture.',
     colorClass: 'ch-fashion',
     imageSrc: '/images/chapters/fashion.jpg',
     events: [
       'Prototype polish & final builds',
       'PMDA regulatory submissions',
       'Press day & media preview',
-      'The Frontier Human Fashion Show',
+      'The Frontier Human Fashion Show & Demo Day (Oct 26)',
     ],
   },
+];
+
+export interface WeeklyProgram {
+  label: string;
+  detail: string;
+}
+
+export const weeklyPrograms: WeeklyProgram[] = [
+  { label: 'Vibe Coding Nights', detail: 'Ship together after dark' },
+  { label: 'The Residency', detail: 'Benches, labs, deep work' },
+  { label: 'Learning Layer Labs', detail: 'Hands-on skill sessions' },
+  { label: 'Biohackers Workshops', detail: 'Self-experiments & protocols' },
+  { label: 'Socials', detail: 'Dinners, drinks, connection' },
+  { label: 'Me-Time by CHANGE', detail: 'Recovery & reset' },
 ];
 
 export interface LifestyleCard {
@@ -235,16 +253,16 @@ export const lifestyleCards: LifestyleCard[] = [
     id: 'explore',
     tag: 'Culture',
     title: 'Osaka · Kyoto · Nara',
-    description: 'Three ancient cities within an hour.',
+    description: 'Kansai\'s ancient capitals at your doorstep.',
     kanji: '遊',
     hudTitle: 'Osaka · Kyoto · Nara',
     hudSubtitle: 'Day Trips · Culture · History',
     hudText:
-      'Kobe sits at the heart of the Kansai region. Osaka\'s street food (30 min), Kyoto\'s temples (50 min), and Nara\'s deer park (60 min) are all day-trip distance.',
+      'Kobe sits at the heart of the Kansai region. Osaka\'s street food (~40 min), Kyoto\'s temples (~90 min), and Nara\'s deer park are all day-trip distance — and Tokyo is 3 hours by shinkansen.',
     stats: [
-      { value: '30m', label: 'Osaka' },
-      { value: '50m', label: 'Kyoto' },
-      { value: '60m', label: 'Nara' },
+      { value: '40m', label: 'Osaka' },
+      { value: '90m', label: 'Kyoto' },
+      { value: '3h', label: 'Tokyo' },
     ],
     hp: 140,
     abilities: [
@@ -291,7 +309,17 @@ export const faqItems: FaqItem[] = [
   {
     question: 'How do applications work?',
     answer:
-      'Apply through the site. We review applications on a rolling basis. Accepted applicants receive a payment link to secure their spot.',
+      'Builder passes are available directly through our ticketing page. Residency tracks are application-only — we review on a rolling basis, and accepted teams receive next steps by email.',
+  },
+  {
+    question: 'What is a popup city?',
+    answer:
+      'A temporary village where a curated community lives, works, and builds together in one place for one month. Housing, labs, programming, and social life share the same few blocks on Port Island, so the people you meet at breakfast are the ones you build with by night.',
+  },
+  {
+    question: 'Where do I stay?',
+    answer:
+      'Two options: our partner hotel, the Portopia, a short walk from KBIC, or one of the community hacker houses — The Sanctuary, Biopunk House, Aevitas, and ZuCity Japan. Housing details arrive with your acceptance.',
   },
 ];
 

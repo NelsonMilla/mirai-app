@@ -151,7 +151,7 @@ export default function RosterSection() {
       {/* Bottom row: count + partners */}
       <div className="roster-bottom">
         <div className="roster-count-inline">
-          <span className="roster-count-num display">{fighters.filter(f => !f.mystery).length + 2}</span>
+          <span className="roster-count-num display">{fighters.filter(f => !f.mystery).length}</span>
           <span className="roster-count-sep">/</span>
           <span className="roster-count-total">24</span>
           <span className="roster-count-label mono">Fighters confirmed</span>

@@ -3,7 +3,10 @@ import { TracksSection } from "@/components/tracks/TracksSection";
 import MonthTimeline from "@/components/month/MonthTimeline";
 import RunwaySection from "@/components/runway/RunwaySection";
 import KobeSection from "@/components/kobe/KobeSection";
+import PracticalSection from "@/components/practical/PracticalSection";
 import RosterSection from "@/components/roster/RosterSection";
+import CommunitiesSection from "@/components/proof/CommunitiesSection";
+import PastEventsSection from "@/components/proof/PastEventsSection";
 import { ApplySection } from "@/components/apply/ApplySection";
 import { FaqSection } from "@/components/apply/FaqSection";
 import { PostCredits } from "@/components/apply/PostCredits";
@@ -20,7 +23,10 @@ export default function Home() {
       <MonthTimeline />
       <RunwaySection />
       <KobeSection />
+      <PracticalSection />
       <RosterSection />
+      <CommunitiesSection />
+      <PastEventsSection />
       <ApplySection />
       <QuickActions source="home" />
       <FaqSection />

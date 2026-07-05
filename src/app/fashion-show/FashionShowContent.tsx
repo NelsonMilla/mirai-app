@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { LUMA_EVENT_URL } from '@/lib/constants';
 
-const SHOW_DATE = new Date('2026-10-31T19:00:00+09:00');
+const SHOW_DATE = new Date('2026-10-26T19:00:00+09:00');
 
 const CATEGORIES = [
   { tag: 'EXO',   kanji: '鎧', name: 'Exoskeletons',     desc: 'Worn robotics that augment strength, mobility, or endurance.' },
@@ -125,7 +125,7 @@ export function FashionShowContent() {
           </div>
           <div className="fs-hero-rim" aria-hidden="true" />
           <div className="fs-hero-text">
-            <div className="fs-eyebrow mono">[ KOBE · OCT 31 · 2026 ]</div>
+            <div className="fs-eyebrow mono">[ KOBE · OCT 26 · 2026 ]</div>
             <h1 className="fs-title display">
               <span>Frontier</span>
               <span>Human</span>
@@ -153,7 +153,7 @@ export function FashionShowContent() {
           <h2 id="fs-slate-h" className="fs-slate-date display">
             <span>10</span>
             <span className="fs-slate-slash">/</span>
-            <span>31</span>
+            <span>26</span>
             <span className="fs-slate-slash">/</span>
             <span>2026</span>
           </h2>
@@ -384,6 +384,9 @@ export function FashionShowContent() {
           </span>
           <a className="fs-sponsor-link mono" href={SPONSOR_MAILTO}>
             REQUEST DECK →
+          </a>
+          <a className="fs-sponsor-link mono" href="/showcase">
+            SHOWCASE YOUR COMPANY →
           </a>
         </aside>
 

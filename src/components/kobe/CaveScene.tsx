@@ -4,9 +4,9 @@ import { useEffect, useRef, useState, useCallback } from 'react';
 import { useIntersection } from '@/hooks/useIntersection';
 
 const STATS = [
-  { label: 'PATHWAY', value: 'SAKIGAKE Conditional Approval', ok: true },
-  { label: 'FIH TRIAL', value: '6 months', ok: true },
-  { label: 'APPROVAL', value: '14 months', ok: true },
+  { label: 'PATHWAYS', value: '4 accelerated', ok: true },
+  { label: 'PMDA', value: 'On-site consultation', ok: true },
+  { label: 'APPROVAL', value: '< 1 yr fastest cases', ok: true },
   { label: 'ACCESS', value: 'During review', ok: true },
 ];
 
