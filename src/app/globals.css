@@ -117,7 +117,9 @@ em {
 /* ============================================
    NAV
    ============================================ */
-nav {
+/* Scoped to the site navbar — a bare `nav` selector also captured
+   ProgressRail's and the console sidebar's <nav> elements. */
+nav.site-nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
   display: flex; justify-content: space-between; align-items: center;
   padding: 1.25rem 2rem;
@@ -168,6 +170,24 @@ nav {
   .nav-links a:not(.btn):not(.invite-code-link) { display: none; }
   .nav-links .invite-code-link--nav { display: inline-flex; }
   .nav-btn { display: none; }
+}
+
+/* Mid widths: 5 section links + invite link + CTA overflow the bar, wrapping
+   the logo and clipping the Apply button. Tighten and collapse the invite
+   link to its dot (same treatment as ≤640px). */
+@media (min-width: 641px) and (max-width: 900px) {
+  nav.site-nav { padding: 1rem 1.25rem; }
+  .nav-links { gap: 1.1rem; }
+  .nav-name { white-space: nowrap; }
+  .nav-links .btn { white-space: nowrap; }
+  .invite-code-link--nav .invite-code-text { display: none; }
+  .invite-code-link--nav { padding: 0.35rem; }
+}
+@media (min-width: 641px) and (max-width: 760px) {
+  nav.site-nav { padding: 1rem; }
+  .nav-links { gap: 0.8rem; }
+  .nav-links .btn { padding: 0.6rem 0.9rem; }
+  .invite-code-link--nav { display: none; }
 }
 
 /* Sound toggle button — main styles in SOUND TOGGLE STYLES section below */
@@ -465,16 +485,6 @@ html[data-track="builder"] .reveal-track.in {
   }
   100% {
     transform: translate(-10px, 12px) scale(0.85);
-  }
-}
-
-@keyframes term-blink {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0;
   }
 }
 
@@ -1476,6 +1486,10 @@ input, select, textarea, .scroll-companion {
 .fighter-detail {
   position: relative; z-index: 2;
   width: 100%; height: 100%;
+  /* Fill the panel via flex so the absolutely-positioned portrait gets a
+     real height even when the arena is height:auto (mobile/tablet). */
+  flex: 1;
+  min-height: 420px;
 }
 
 /* Large portrait */
@@ -1555,24 +1569,10 @@ input, select, textarea, .scroll-companion {
   text-shadow: 0 1px 6px rgba(0,0,0,0.6);
 }
 
-/* ── Below arena: quote, partners, count ── */
-.roster-quote {
-  max-width: 600px; margin: 3rem auto 0; text-align: center;
-  padding: 2rem 0; border-top: 1px solid rgba(255,255,255,0.04);
-  position: relative; z-index: 1;
-}
-.roster-quote blockquote {
-  font-family: var(--font-fraunces), serif; font-style: italic; font-weight: 300;
-  font-size: clamp(1rem, 1.8vw, 1.3rem); line-height: 1.6;
-  color: rgba(255,255,255,0.75); margin-bottom: 1rem;
-}
-.roster-quote cite {
-  font-family: var(--font-jetbrains), monospace; font-size: var(--fs-label); font-style: normal;
-  letter-spacing: 0.15em; text-transform: uppercase; color: var(--slate);
-}
+/* ── Below arena: partners, count ── */
 .roster-partners {
   display: flex; justify-content: center; gap: 2.5rem; flex-wrap: wrap;
-  margin-top: 2.5rem; position: relative; z-index: 1;
+  position: relative; z-index: 1;
 }
 .roster-partner {
   font-family: var(--font-jetbrains), monospace; font-size: var(--fs-label);
@@ -1580,9 +1580,6 @@ input, select, textarea, .scroll-companion {
   color: rgba(255,255,255,0.35); transition: color 0.3s; cursor: pointer;
 }
 .roster-partner:hover { color: var(--pink); }
-.roster-count {
-  text-align: center; margin-top: 2rem; position: relative; z-index: 1;
-}
 .roster-count-num {
   font-family: var(--font-fraunces), serif; font-weight: 700;
   font-size: clamp(2rem, 4vw, 3rem); color: var(--pink);
@@ -1682,6 +1679,8 @@ input, select, textarea, .scroll-companion {
 /* ── Bottom row (replaces separate count/quote/partners) ── */
 .roster-bottom {
   display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.5rem;
   justify-content: space-between;
   align-items: center;
   max-width: 1200px;
@@ -1748,7 +1747,17 @@ input, select, textarea, .scroll-companion {
 @media (min-width: 981px) {
   .roster-arena { grid-template-columns: 300px 1fr; height: 600px; }
   .roster-selector { border-right: 2px solid rgba(245,160,181,0.08); border-bottom: none; }
-  .roster-grid { grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(4, 1fr); }
+  /* Fixed row height + scroll: repeat(4, 1fr) template rows collapsed every
+     slot past the 8th to 0px once the roster grew beyond 8 fighters. A half
+     row peeks at the bottom to signal scrollability. */
+  .roster-grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: none;
+    grid-auto-rows: calc((100% - 6px) / 3.5);
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(245, 160, 181, 0.3) transparent;
+  }
   .roster-slot { aspect-ratio: unset; }
   .roster-partners { gap: 2.5rem; }
   .runway-block { padding: 5rem 4rem; }
@@ -2606,18 +2615,6 @@ html.loading .hero-ctas {
   color: rgba(255,255,255,0.6); max-width: 540px; margin: 0 auto 1.5rem;
   line-height: 1.65; font-size: 1.15rem;
 }
-.apply-steps {
-  display: flex; gap: 2rem; justify-content: center; margin-bottom: 2.5rem; flex-wrap: wrap;
-}
-.apply-step {
-  font-family: var(--font-jetbrains), monospace; font-size: var(--fs-label); letter-spacing: 0.1em;
-  text-transform: uppercase; color: var(--slate); display: flex; align-items: center; gap: 0.5rem;
-}
-.apply-step .num {
-  width: 24px; height: 24px; border-radius: 50%; border: 1px solid var(--pink);
-  display: flex; align-items: center; justify-content: center;
-  font-size: var(--fs-label); color: var(--pink); font-weight: 700;
-}
 .apply-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
 .apply-micro {
   font-family: var(--font-jetbrains), monospace;
@@ -3344,19 +3341,6 @@ html.loading .hero-ctas {
   box-shadow: 0 0 8px rgba(var(--pill-rgb), 0.5);
 }
 
-.apply-track-indicator {
-  display: none; align-items: center; justify-content: center; gap: 10px;
-  margin-bottom: 1.5rem;
-  font-family: var(--font-jetbrains), monospace; font-size: var(--fs-label); font-weight: 600;
-  letter-spacing: 0.15em; text-transform: uppercase;
-  padding: 0.6rem 1.25rem; border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.15); color: var(--white);
-}
-.apply-track-indicator.visible { display: inline-flex; }
-.apply-track-indicator .ati-dot {
-  width: 6px; height: 6px; border-radius: 50%;
-}
-
 /* ── EVOLUTION SHOWCASE ── */
 .evo-showcase {
   margin: 3rem auto; max-width: 800px;
@@ -3434,24 +3418,10 @@ html.loading .hero-ctas {
 }
 .evo-arrow.visible { opacity: 1; }
 
-/* Track label above each evolution line */
-.evo-track-label {
-  font-family: var(--font-jetbrains), monospace; font-size: var(--fs-label); font-weight: 700;
-  letter-spacing: 0.2em; text-transform: uppercase;
-  color: rgb(var(--evo-rgb)); opacity: 0.6;
-  padding: 0.25rem 0.6rem; border: 1px solid rgba(var(--evo-rgb), 0.2);
-  border-radius: 999px; margin-bottom: 1.25rem; display: inline-block;
-}
-
 /* Per-track color tokens */
 .evo-line.devices  { --evo-rgb: 109,181,245; }
 .evo-line.therapies{ --evo-rgb: 245,211,78; }
 .evo-line.builder  { --evo-rgb: 245,107,107; }
-
-.evo-showcase-divider {
-  width: 60px; height: 1px; margin: 0.5rem auto 0;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
-}
 
 /* ── FAQ SECTION (standalone) ── */
 .faq-section {
@@ -3480,7 +3450,6 @@ html.loading .hero-ctas {
 }
 
 /* FAQ items (shared) */
-.apply-faq { max-width: 640px; margin: 0 auto; border-top: 1px solid rgba(255,255,255,0.08); }
 .faq-item {
   border-bottom: 1px solid rgba(255,255,255,0.08);
   padding: 1.25rem 0; cursor: pointer; text-align: left;
@@ -3497,7 +3466,7 @@ html.loading .hero-ctas {
   font-size: var(--fs-secondary); color: rgba(255,255,255,0.55); line-height: 1.7; max-width: 620px;
   max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0.23,1,0.32,1), margin 0.3s;
 }
-.faq-item.open .faq-a { max-height: 200px; margin-top: 0.85rem; }
+.faq-item.open .faq-a { max-height: 320px; margin-top: 0.85rem; }
 .faq-item.open .arrow { transform: rotate(45deg); }
 
 /* Apply + Evo — mobile base */
@@ -6101,31 +6070,10 @@ html.loading .hero-ctas {
   z-index: 6;
 }
 
-.coast-glow {
-  animation: coast-dash 20s linear infinite;
-  filter: blur(1px);
-}
-
-@keyframes coast-dash {
-  0% {
-    stroke-dashoffset: 0;
-  }
-  100% {
-    stroke-dashoffset: -240;
-  }
-}
-
 /* ── RESPONSIVE ── */
-@media (max-width: 1200px) {
-  .term-layout {
-    grid-template-columns: 1fr;
-  }
-
-  .term-sidebar {
-    padding-top: 1rem;
-  }
-}
-
+/* Terminal (.term-*) responsive rules live in KobeSection's scoped style
+   block — legacy overrides here lost the cascade to it (body <style> comes
+   after this stylesheet) and were inert or misaligning. */
 @media (max-width: 768px) {
   .kobe-h2 {
     font-size: clamp(2rem, 4vw, 2.5rem);
@@ -6134,18 +6082,6 @@ html.loading .hero-ctas {
   .kobe-lead {
     font-size: 0.95rem;
     margin-bottom: 2rem;
-  }
-
-  .term-window {
-    font-size: var(--fs-caption);
-  }
-
-  .term-body {
-    padding: 1rem 1.25rem;
-  }
-
-  .term-line {
-    white-space: wrap;
   }
 
   .life-cards-grid {
@@ -6169,18 +6105,6 @@ html.loading .hero-ctas {
 }
 
 @media (max-width: 640px) {
-  .term-layout {
-    gap: 1.5rem;
-  }
-
-  .term-aside {
-    padding: 1rem 0;
-  }
-
-  .term-aside-big {
-    font-size: clamp(1.5rem, 2vw, 1.8rem);
-  }
-
   .life-cards-grid {
     grid-template-columns: 1fr;
   }
@@ -8481,7 +8405,6 @@ a.qa-card:hover::before { opacity: 1; }
    ============================================ */
 @media (max-width: 980px) {
   .fs-hero { padding: 5rem 1rem 4rem; min-height: 92vh; }
-  .fs-hero-helmet { left: 50%; top: 38%; width: clamp(280px, 80vw, 420px); opacity: 0.55; }
   .fs-hero-text { align-items: center; text-align: center; gap: 1.1rem; }
   .fs-tagline { margin-left: auto; margin-right: auto; }
   .fs-hero-ctas { justify-content: center; }
@@ -8775,3 +8698,39 @@ a.qa-card:hover::before { opacity: 1; }
   .site-footer-inner { flex-direction: column; text-align: center; }
 }
 
+
+/* ============================================
+   REDUCED MOTION — page-wide kill switch
+   Individual sections carry their own guards, but reveal wipes and
+   several infinite ambient animations (companion bob, arena glow,
+   kanji pulses) were unguarded. Collapse every animation/transition
+   to a single instant frame and force reveal states visible so no
+   section can be left hidden behind a paused wipe.
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal,
+  .reveal-track,
+  .reveal-scale,
+  .reveal-clip,
+  .reveal .stagger,
+  html[data-track] .reveal-track {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    clip-path: none !important;
+    -webkit-mask-image: none !important;
+    mask-image: none !important;
+  }
+  .chapter-card {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

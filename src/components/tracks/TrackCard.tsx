@@ -3,8 +3,7 @@
 import { Track } from '@/lib/constants';
 import { useTrack } from './TrackContext';
 import { useIntersection } from '@/hooks/useIntersection';
-import { useRef } from 'react';
-import { Volt, Voltaic, Helix, Helion, Ember, Kindling } from '@/sprites';
+import { Volt, Helix, Ember } from '@/sprites';
 import posthog from 'posthog-js';
 
 const spriteMapStage1 = {

@@ -36,9 +36,6 @@ export function HeroSection() {
           <span className="hero-eyebrow-tagline">
             Japan&rsquo;s Premier Longevity Biomedical Pop-up City
           </span>
-          <span className="hero-eyebrow-sep" aria-hidden="true">
-            ·
-          </span>
           <span className="hero-eyebrow-meta">Kobe Port Island · October 2026</span>
         </div>
         <h1 className="display">
@@ -81,18 +78,17 @@ export function HeroSection() {
       </div>
 
       <style>{`
+        /* Two stacked centered lines: the one-line layout sat right at the
+           800px .hero-inner cap and wrapped unpredictably, orphaning the
+           separator dot. */
         .hero-eyebrow--split {
           display: flex;
-          flex-wrap: wrap;
-          align-items: baseline;
-          justify-content: center;
-          gap: 0.35rem 0.6rem;
+          flex-direction: column;
+          align-items: center;
+          gap: 0.5rem;
         }
         .hero-eyebrow-tagline {
           color: var(--pink);
-        }
-        .hero-eyebrow-sep {
-          color: var(--slate);
         }
         .hero-eyebrow-meta {
           color: var(--slate);
@@ -151,14 +147,32 @@ export function HeroSection() {
             margin-bottom: 1.25rem;
           }
         }
+        /* Tighter tier for short desktops (e.g. 1280x720) where the 940px
+           tier still leaves the stat strip below the fold. */
+        @media (min-width: 641px) and (max-height: 780px) {
+          .hero {
+            padding-top: 4.5rem;
+            padding-bottom: 1.5rem;
+          }
+          .hero-eyebrow {
+            margin-bottom: 1rem;
+          }
+          .hero h1 {
+            font-size: clamp(2.75rem, 5.5vw, 4.5rem);
+            margin-bottom: 1rem;
+          }
+          .hero-sub {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+          }
+          .hero-stats {
+            margin-top: 1rem;
+          }
+          .hero-stat {
+            padding-top: 0.7rem;
+          }
+        }
         @media (max-width: 640px) {
-          .hero-eyebrow-sep {
-            display: none;
-          }
-          .hero-eyebrow--split {
-            flex-direction: column;
-            gap: 0.5rem;
-          }
           .hero-eyebrow-meta {
             font-size: calc(var(--fs-label) - 0.5px);
             letter-spacing: 0.18em;

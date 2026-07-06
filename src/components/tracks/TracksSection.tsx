@@ -3,7 +3,6 @@
 import { tracks } from '@/lib/constants';
 import { TrackCard } from './TrackCard';
 import { useTrack } from './TrackContext';
-import { useRef } from 'react';
 import { useIntersection } from '@/hooks/useIntersection';
 
 export function TracksSection() {

@@ -40,7 +40,7 @@ export function Navbar() {
   };
 
   return (
-    <nav>
+    <nav className="site-nav">
       <a className="nav-logo" href="/">
         <div className="nav-mark">未</div>
         <span className="nav-name">Mirai Tech</span>

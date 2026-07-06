@@ -332,18 +332,6 @@ export const runwayDevices = [
   'AR/VR Medical',
 ];
 
-export interface Partner {
-  name: string;
-  role: string;
-}
-
-export const partners: Partner[] = [
-  { name: 'Frontier Humans', role: 'Community & Programming' },
-  { name: 'Viva City', role: 'Residency Ops' },
-  { name: 'KBIC', role: 'Labs & Science' },
-  { name: 'JETRO', role: 'Japan Market Entry' },
-];
-
 export interface Evolution {
   name: string;
   stage: number;
