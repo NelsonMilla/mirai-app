@@ -1,0 +1,585 @@
+/* Dormant routes, intentionally kept: /invite, /console (+ whitelist
+   admin table), checkout spinner. See src/app/checkout/README.md. */
+
+/* ── INVITE PAGE ── */
+.invite-page {
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  cursor: auto !important;
+}
+
+.invite-page *,
+.invite-page *::before,
+.invite-page *::after {
+  cursor: auto !important;
+}
+
+.invite-page a,
+.invite-page button,
+.invite-page [role="button"] {
+  cursor: pointer !important;
+}
+
+.invite-page input[type="text"],
+.invite-page input[type="email"],
+.invite-page textarea {
+  cursor: text !important;
+}
+
+.invite-page {
+  justify-content: center;
+  background: var(--ink);
+  padding: 2rem;
+}
+
+.invite-container {
+  width: 100%;
+  max-width: 440px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.invite-back {
+  font-family: var(--font-jetbrains), monospace;
+  font-size: var(--fs-label);
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.4);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.invite-back:hover { color: var(--white); }
+
+.invite-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1rem;
+  padding: 2.5rem 2rem;
+}
+
+.invite-title {
+  font-family: var(--font-fraunces), serif;
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  color: var(--white);
+  margin-bottom: 0.5rem;
+}
+
+.invite-subtitle {
+  font-family: var(--font-inter), sans-serif;
+  font-size: var(--fs-secondary);
+  color: rgba(255, 255, 255, 0.5);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.invite-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.invite-input {
+  border-radius: 0.75rem !important;
+  padding: 0.9rem 1rem !important;
+}
+
+.invite-footer {
+  font-family: var(--font-inter), sans-serif;
+  font-size: var(--fs-caption);
+  color: rgba(255, 255, 255, 0.35);
+  text-align: center;
+}
+
+.invite-footer a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* ── EVENT CONSOLE ── */
+
+.console-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 3rem 1.5rem;
+  background: var(--ink);
+  position: relative;
+  z-index: 10;
+  cursor: auto !important;
+}
+
+.console-page *,
+.console-page *::before,
+.console-page *::after {
+  cursor: auto !important;
+}
+
+.console-page a,
+.console-page button,
+.console-page [role="button"],
+.console-page input,
+.console-page select,
+.console-page textarea,
+.console-page [onclick] {
+  cursor: pointer !important;
+}
+
+.console-page input[type="text"],
+.console-page input[type="email"],
+.console-page textarea {
+  cursor: text !important;
+}
+
+.console-container {
+  width: 100%;
+  max-width: 800px;
+}
+
+.console-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 0;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.console-email {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  color: var(--slate);
+  letter-spacing: 0.05em;
+}
+
+.console-logout-btn {
+  font-size: var(--fs-label) !important;
+  padding: 0.5rem 1rem !important;
+}
+
+.console-section {
+  margin-top: 2rem;
+}
+
+.console-section-title {
+  font-family: var(--font-fraunces);
+  font-size: clamp(1.25rem, 3vw, 1.5rem);
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: 1rem;
+}
+
+.console-muted {
+  color: var(--slate);
+  font-size: var(--fs-secondary);
+}
+
+/* Events grid */
+.console-events-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.console-event-card {
+  background: var(--ink-2);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+}
+
+.console-event-date {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--pink);
+  margin-bottom: 0.35rem;
+}
+
+.console-event-title {
+  font-family: var(--font-fraunces);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: 0.4rem;
+}
+
+.console-event-desc {
+  font-size: var(--fs-secondary);
+  color: var(--slate);
+  line-height: 1.5;
+  margin-bottom: 0.5rem;
+}
+
+.console-event-location {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  color: var(--slate);
+}
+
+.console-event-location a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.console-event-location a:hover {
+  text-decoration: underline;
+}
+
+/* Filter tabs */
+.console-filters {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.console-filter-btn {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 999px;
+  padding: 0.4rem 0.85rem;
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  letter-spacing: 0.05em;
+  color: var(--slate);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.console-filter-btn:hover {
+  border-color: rgba(255,255,255,0.2);
+  color: var(--white);
+}
+
+.console-filter-btn.active {
+  border-color: var(--pink);
+  color: var(--pink);
+  background: rgba(245,160,181,0.08);
+}
+
+.console-filter-count {
+  opacity: 0.6;
+  margin-left: 0.15rem;
+}
+
+/* Application rows */
+.console-apps-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.console-app-row {
+  background: var(--ink-2);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+}
+
+.console-app-name-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.console-app-name {
+  font-family: var(--font-fraunces);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--white);
+}
+
+.console-status-badge {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: 1px solid;
+  border-radius: 999px;
+  padding: 0.15rem 0.5rem;
+}
+
+.console-app-meta {
+  font-size: var(--fs-label);
+  color: var(--slate);
+  margin-bottom: 0.5rem;
+}
+
+.console-app-about {
+  font-size: var(--fs-secondary);
+  color: rgba(255,255,255,0.7);
+  line-height: 1.5;
+  margin-bottom: 0.5rem;
+}
+
+.console-app-goals {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-bottom: 0.5rem;
+}
+
+.console-goal-tag {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.05em;
+  background: var(--charcoal);
+  color: var(--slate);
+  border-radius: 4px;
+  padding: 0.2rem 0.5rem;
+}
+
+.console-app-link {
+  font-size: var(--fs-label);
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.console-app-link:hover {
+  text-decoration: underline;
+}
+
+.console-app-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.console-action-btn {
+  font-size: var(--fs-label) !important;
+  padding: 0.5rem 1.25rem !important;
+}
+
+.console-app-status-note {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  color: var(--slate);
+  margin-top: 0.5rem;
+}
+
+.console-app-feedback {
+  font-size: var(--fs-label);
+  color: var(--pink-bright);
+  margin-top: 0.5rem;
+}
+
+.console-link-btn {
+  background: none;
+  border: none;
+  color: var(--slate);
+  font-size: var(--fs-label);
+  cursor: pointer;
+  padding: 0.5rem 0;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.console-link-btn:hover {
+  color: var(--white);
+}
+
+/* Admin sidebar layout */
+.console-layout {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.console-sidebar {
+  width: 180px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding-right: 1.5rem;
+  border-right: 1px solid rgba(255,255,255,0.06);
+}
+
+.console-nav-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  padding: 0.6rem 0.75rem;
+  font-family: var(--font-inter);
+  font-size: var(--fs-secondary);
+  color: var(--slate);
+  cursor: pointer;
+  transition: all 0.15s;
+  text-align: left;
+  width: 100%;
+}
+
+.console-nav-item:hover {
+  color: var(--white);
+  background: rgba(255,255,255,0.04);
+}
+
+.console-nav-item.active {
+  color: var(--white);
+  background: rgba(245,160,181,0.1);
+}
+
+.console-nav-count {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  color: var(--slate);
+  background: rgba(255,255,255,0.06);
+  border-radius: 999px;
+  padding: 0.1rem 0.45rem;
+  min-width: 1.25rem;
+  text-align: center;
+}
+
+.console-nav-item.active .console-nav-count {
+  background: rgba(245,160,181,0.15);
+  color: var(--pink);
+}
+
+.console-content {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Whitelist table */
+.wl-add-form {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.25rem;
+}
+
+.wl-add-form input {
+  flex: 1;
+  min-width: 140px;
+}
+
+.wl-add-form .btn {
+  flex-shrink: 0;
+}
+
+.wl-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.wl-table th {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--slate);
+  text-align: left;
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.wl-table td {
+  font-size: var(--fs-secondary);
+  color: var(--white);
+  padding: 0.6rem 0.75rem;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+
+.wl-table tr:hover td {
+  background: rgba(255,255,255,0.02);
+}
+
+.wl-code {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  letter-spacing: 0.05em;
+  color: var(--pink);
+}
+
+.wl-used {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+}
+
+.wl-used-yes { color: #4ADE80; }
+.wl-used-no { color: var(--slate); }
+
+.wl-payment {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+}
+
+.wl-empty {
+  color: var(--slate);
+  font-size: var(--fs-secondary);
+  padding: 2rem 0;
+}
+
+.wl-feedback {
+  font-size: var(--fs-label);
+  margin-top: 0.5rem;
+}
+
+.wl-feedback-ok { color: #4ADE80; }
+.wl-feedback-err { color: var(--pink-bright); }
+
+/* Mobile: sidebar → horizontal tabs */
+@media (max-width: 768px) {
+  .console-layout {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .console-sidebar {
+    width: 100%;
+    flex-direction: row;
+    gap: 0.35rem;
+    padding-right: 0;
+    padding-bottom: 0.75rem;
+    border-right: none;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    overflow-x: auto;
+  }
+
+  .console-nav-item {
+    white-space: nowrap;
+    padding: 0.5rem 0.7rem;
+    font-size: var(--fs-label);
+  }
+
+  .wl-add-form {
+    flex-direction: column;
+  }
+
+  .wl-add-form input {
+    min-width: 100%;
+  }
+
+  .wl-table {
+    font-size: var(--fs-label);
+  }
+
+  .wl-table th,
+  .wl-table td {
+    padding: 0.4rem 0.5rem;
+  }
+}
+
+/* ── CHECKOUT SPINNER ── */
+.checkout-spinner {
+  width: 32px; height: 32px;
+  border: 3px solid var(--charcoal);
+  border-top-color: var(--pink-bright);
+  border-radius: 50%;
+  margin: 0 auto;
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+

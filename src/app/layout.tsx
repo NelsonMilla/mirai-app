@@ -1,6 +1,12 @@
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
-import "./globals.css";
+// Stylesheets are split by route but all load globally; import order is
+// load-bearing (base first, fashion-show last mirrors the old single file).
+import "../styles/base.css";
+import "../styles/landing.css";
+import "../styles/dormant.css";
+import "../styles/apply-page.css";
+import "../styles/fashion-show.css";
 import { ScrollProvider } from "@/hooks/useScrollState";
 import { TrackProvider } from "@/components/tracks/TrackContext";
 import { CustomCursor } from "@/components/ui/CustomCursor";
