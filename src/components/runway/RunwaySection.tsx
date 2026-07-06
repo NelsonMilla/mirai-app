@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import { runwayDevices } from '@/lib/constants';
-import { useIntersection } from '@/hooks/useIntersection';
+import { RevealSection } from '@/components/ui/RevealSection';
 
 // Device-category glyphs for the mystery-reveal slots (9 total, matching the
 // fashion-show lineup's "0 / 9 PRESENTERS REVEALED" counter). Borrowed look
@@ -11,7 +11,6 @@ const TEASER_SLOTS = ['鎧', '脳', '義', '感', '触', '機', '衣', '視', '�
 
 export default function RunwaySection() {
   const blockRef = useRef<HTMLDivElement>(null);
-  const { ref: sectionRef, isIntersecting } = useIntersection({ threshold: 0.1, triggerOnce: false });
 
   useEffect(() => {
     const handleScroll = () => {
@@ -28,7 +27,7 @@ export default function RunwaySection() {
   }, []);
 
   return (
-    <section ref={sectionRef as React.RefObject<HTMLElement>} className={`section reveal-track ${isIntersecting ? 'in' : ''}`} id="runway">
+    <RevealSection id="runway" variant="reveal-track">
       <div className="section-label">The Runway</div>
 
       <div className="runway-block" ref={blockRef}>
@@ -224,6 +223,6 @@ export default function RunwaySection() {
           }
         }
       `}</style>
-    </section>
+    </RevealSection>
   );
 }

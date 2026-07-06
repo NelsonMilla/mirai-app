@@ -1,5 +1,30 @@
 export const LUMA_EVENT_URL = 'https://luma.com/an4zotn9?utm_parameter=landing';
 
+/**
+ * The landing page's section registry — the single source of truth for
+ * section ids and labels. Navbar (navLabel subset), ProgressRail
+ * (railLabel), and scroll tracking all derive from this. Never hardcode
+ * a parallel list of section ids/labels in a component.
+ */
+export interface SectionDef {
+  id: string;
+  /** Shown in the top navbar; omit to keep the section out of the navbar. */
+  navLabel?: string;
+  /** Shown in the right-edge progress rail tooltip. */
+  railLabel: string;
+}
+
+export const SECTIONS: SectionDef[] = [
+  { id: 'tracks', navLabel: 'Tracks', railLabel: 'CHOOSE YOUR STARTER' },
+  { id: 'month', navLabel: 'Program', railLabel: 'THE MONTH' },
+  { id: 'runway', navLabel: 'Show', railLabel: 'THE SHOW' },
+  { id: 'kobe', navLabel: 'Kobe', railLabel: 'WHY KOBE' },
+  { id: 'practical', railLabel: 'ON THE GROUND' },
+  { id: 'proof', navLabel: 'Speakers', railLabel: 'FIGHTERS' },
+  { id: 'apply', railLabel: 'APPLY' },
+  { id: 'faq', railLabel: 'FAQ' },
+];
+
 export interface Track {
   id: string;
   name: string;

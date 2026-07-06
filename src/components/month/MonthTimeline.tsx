@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { chapters, weeklyPrograms } from '@/lib/constants';
-import { useIntersection } from '@/hooks/useIntersection';
+import { RevealSection } from '@/components/ui/RevealSection';
 
 // Color map for the detail strip (which lives outside card divs)
 const chColorMap: Record<string, { rgb: string; color: string }> = {
@@ -13,7 +13,6 @@ const chColorMap: Record<string, { rgb: string; color: string }> = {
 };
 
 export default function MonthTimeline() {
-  const { ref: sectionRef, isIntersecting } = useIntersection({ threshold: 0.1, triggerOnce: true });
   const gridRef = useRef<HTMLDivElement>(null);
   const [visibleCards, setVisibleCards] = useState<boolean[]>(new Array(chapters.length).fill(false));
   const [enteredCards, setEnteredCards] = useState<boolean[]>(new Array(chapters.length).fill(false));
@@ -63,11 +62,7 @@ export default function MonthTimeline() {
   const activeColors = activeChapter ? chColorMap[activeChapter.colorClass] : null;
 
   return (
-    <section
-      ref={sectionRef as React.RefObject<HTMLElement>}
-      className={`section reveal-track ${isIntersecting ? 'in' : ''}`}
-      id="month"
-    >
+    <RevealSection id="month" variant="reveal-track" once>
       <div className="section-label stagger">The month</div>
 
       <div className="chapter-grid" id="chapterGrid" ref={gridRef}>
@@ -146,7 +141,7 @@ export default function MonthTimeline() {
           ))}
         </div>
       </div>
-    </section>
+    </RevealSection>
   );
 }
 

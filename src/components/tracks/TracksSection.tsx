@@ -3,19 +3,13 @@
 import { tracks } from '@/lib/constants';
 import { TrackCard } from './TrackCard';
 import { useTrack } from './TrackContext';
-import { useIntersection } from '@/hooks/useIntersection';
+import { RevealSection } from '@/components/ui/RevealSection';
 
 export function TracksSection() {
   const { selectedTrack, selectedName, selectedColor } = useTrack();
-  const { ref, isIntersecting } = useIntersection({ threshold: 0.1, triggerOnce: false });
 
   return (
-    <section
-      ref={ref as React.RefObject<HTMLDivElement>}
-      className={`section reveal ${isIntersecting ? 'in' : ''}`}
-      id="tracks"
-      data-section="tracks"
-    >
+    <RevealSection id="tracks" dataSection="tracks">
       <div className="section-label">Choose Your Starter</div>
       <p className="starter-intro">Every great journey starts with a choice.</p>
 
@@ -34,6 +28,6 @@ export function TracksSection() {
           </div>
         </div>
       )}
-    </section>
+    </RevealSection>
   );
 }

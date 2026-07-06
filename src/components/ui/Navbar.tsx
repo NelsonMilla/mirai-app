@@ -1,39 +1,16 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { InviteCodeLink } from '@/components/ui/InviteCodeLink';
-import { LUMA_EVENT_URL } from '@/lib/constants';
+import { LUMA_EVENT_URL, SECTIONS } from '@/lib/constants';
+import { useActiveSection } from '@/hooks/useActiveSection';
 
-const NAV_ITEMS = [
-  { id: 'tracks', label: 'Tracks' },
-  { id: 'month', label: 'Program' },
-  { id: 'runway', label: 'Show' },
-  { id: 'kobe', label: 'Kobe' },
-  { id: 'proof', label: 'Speakers' },
-];
+const NAV_ITEMS = SECTIONS.filter(
+  (s): s is typeof s & { navLabel: string } => s.navLabel !== undefined,
+);
 
 export function Navbar() {
-  const [activeSection, setActiveSection] = useState<string | null>(null);
-
-  useEffect(() => {
-    const observers: IntersectionObserver[] = [];
-
-    NAV_ITEMS.forEach(({ id }) => {
-      const el = document.getElementById(id);
-      if (!el) return;
-
-      const observer = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) setActiveSection(id);
-        },
-        { rootMargin: '-40% 0px -40% 0px', threshold: 0 }
-      );
-      observer.observe(el);
-      observers.push(observer);
-    });
-
-    return () => observers.forEach(o => o.disconnect());
-  }, []);
+  const activeSection = useActiveSection(NAV_ITEMS.map((s) => s.id));
 
   const scrollTo = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
@@ -46,13 +23,13 @@ export function Navbar() {
         <span className="nav-name">Mirai Tech</span>
       </a>
       <div className="nav-links">
-        {NAV_ITEMS.map(({ id, label }) => (
+        {NAV_ITEMS.map(({ id, navLabel }) => (
           <button
             key={id}
             className={`nav-btn${activeSection === id ? ' active' : ''}`}
             onClick={() => scrollTo(id)}
           >
-            {label}
+            {navLabel}
           </button>
         ))}
         <InviteCodeLink variant="nav" />

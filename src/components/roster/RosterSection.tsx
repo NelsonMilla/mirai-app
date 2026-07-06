@@ -3,23 +3,14 @@
 import React, { useState, useCallback } from 'react';
 import Image from 'next/image';
 import { fighters, rosterPartners } from '@/data/fighters';
-import { useIntersection } from '@/hooks/useIntersection';
+import { RevealSection } from '@/components/ui/RevealSection';
 import { PixelAvatar } from './PixelAvatar';
 
 export default function RosterSection() {
-  const { ref: sectionRef, isIntersecting } = useIntersection({ threshold: 0.05, triggerOnce: true });
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [flash, setFlash] = useState(false);
-  const [slotsRevealed, setSlotsRevealed] = useState(false);
 
   const selectedFighter = fighters[selectedIndex];
-
-  // Stagger slot reveals when section enters view
-  React.useEffect(() => {
-    if (isIntersecting && !slotsRevealed) {
-      setSlotsRevealed(true);
-    }
-  }, [isIntersecting, slotsRevealed]);
 
   const selectFighter = useCallback((idx: number) => {
     setSelectedIndex(idx);
@@ -36,13 +27,11 @@ export default function RosterSection() {
   };
 
   return (
-    <section
-      ref={sectionRef as React.RefObject<HTMLElement>}
-      className={`section reveal roster-section ${isIntersecting ? 'in' : ''}`}
-      id="proof"
-    >
+    <RevealSection id="proof" className="roster-section" threshold={0.05} once>
+      {(inView) => (
+        <>
       {/* Scoped styles for the interim pixel-avatar treatment (photo-pending
-          confirmed fighters). Kept here to avoid touching globals.css. */}
+          confirmed fighters). Fold into landing.css when next touched. */}
       <style>{`
         .slot-avatar {
           position: absolute; inset: 12%; width: 76%; height: 76%;
@@ -95,7 +84,7 @@ export default function RosterSection() {
                   'roster-slot',
                   selectedIndex === idx ? 'selected' : '',
                   fighter.mystery ? 'mystery' : '',
-                  slotsRevealed ? 'slot-revealed' : '',
+                  inView ? 'slot-revealed' : '',
                 ].filter(Boolean).join(' ')}
                 style={{ '--slot-i': idx } as React.CSSProperties}
                 onClick={() => selectFighter(idx)}
@@ -214,6 +203,8 @@ export default function RosterSection() {
           ))}
         </div>
       </div>
-    </section>
+        </>
+      )}
+    </RevealSection>
   );
 }

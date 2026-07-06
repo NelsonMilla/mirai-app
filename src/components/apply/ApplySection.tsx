@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useTrack } from '@/components/tracks/TrackContext';
-import { useIntersection } from '@/hooks/useIntersection';
+import { RevealSection } from '@/components/ui/RevealSection';
 import { tracks, LUMA_EVENT_URL } from '@/lib/constants';
 
 const headlines: Record<string, { em: string; sub: string }> = {
@@ -18,7 +18,6 @@ type WhitelistStatus = 'idle' | 'loading' | 'success' | 'not-found' | 'used' | '
 
 export function ApplySection() {
   const { selectedTrack, selectTrack } = useTrack();
-  const { ref: sectionRef, isIntersecting } = useIntersection({ threshold: 0.05, triggerOnce: false });
   const router = useRouter();
 
   const [whitelistInput, setWhitelistInput] = useState('');
@@ -69,12 +68,7 @@ export function ApplySection() {
   }
 
   return (
-    <section
-      ref={sectionRef as React.RefObject<HTMLElement>}
-      className={`section reveal-track ${isIntersecting ? 'in' : ''}`}
-      id="apply"
-      data-section="apply"
-    >
+    <RevealSection id="apply" dataSection="apply" variant="reveal-track" threshold={0.05}>
       <div className="apply-block">
         <div className="section-label">October 2026 · 300 curated residents</div>
 
@@ -177,6 +171,6 @@ export function ApplySection() {
           )}
         </div>
       </div>
-    </section>
+    </RevealSection>
   );
 }

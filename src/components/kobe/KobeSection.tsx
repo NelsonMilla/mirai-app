@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { useIntersection } from '@/hooks/useIntersection';
+import { RevealSection } from '@/components/ui/RevealSection';
 import CaveScene from './CaveScene';
 import Terminal from './Terminal';
 import LifestyleCard from './LifestyleCard';
@@ -18,7 +18,6 @@ const marketReceipts = [
 ];
 
 export default function KobeSection() {
-  const { ref: sectionRef, isIntersecting } = useIntersection({ threshold: 0.05, triggerOnce: false });
   const [selectedCard, setSelectedCard] = useState<LifestyleCardType | null>(null);
   const [isOverlayOpen, setIsOverlayOpen] = useState(false);
   const [kobeView, setKobeView] = useState<'story' | 'terminal'>('story');
@@ -36,7 +35,7 @@ export default function KobeSection() {
 
   return (
     <>
-      <section ref={sectionRef as React.RefObject<HTMLElement>} className={`section reveal-track ${isIntersecting ? 'in' : ''}`} id="kobe" data-section="kobe">
+      <RevealSection id="kobe" dataSection="kobe" variant="reveal-track" threshold={0.05}>
         {/* BEAT 1: Regulatory argument + Terminal */}
         <div className="kobe-beat-1">
           <div className="section-label stagger">Why Kobe</div>
@@ -344,7 +343,7 @@ export default function KobeSection() {
             ))}
           </div>
         </div>
-      </section>
+      </RevealSection>
 
       {/* MOMENT 5B: Playground Map */}
       <IsometricMap />

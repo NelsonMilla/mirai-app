@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { useIntersection } from '@/hooks/useIntersection';
+import { RevealSection } from '@/components/ui/RevealSection';
 
 interface Location {
   id: string;
@@ -100,7 +100,6 @@ const connections: [string, string][] = [
 ];
 
 export default function IsometricMap() {
-  const { ref: sectionRef, isIntersecting } = useIntersection({ threshold: 0.05, triggerOnce: true });
   const [activeId, setActiveId] = useState<string | null>(null);
 
   const activeLocation = locations.find(l => l.id === activeId) || null;
@@ -111,12 +110,7 @@ export default function IsometricMap() {
   };
 
   return (
-    <section
-      ref={sectionRef as React.RefObject<HTMLElement>}
-      className={`section reveal ${isIntersecting ? 'in' : ''}`}
-      id="playground"
-      data-section="playground"
-    >
+    <RevealSection id="playground" dataSection="playground" threshold={0.05} once>
       <div className="section-label stagger">Port Island</div>
       <h2 className="kobe-h2 stagger" style={{ marginBottom: '1rem' }}>
         Meet the playground.
@@ -203,6 +197,6 @@ export default function IsometricMap() {
           )}
         </div>
       </div>
-    </section>
+    </RevealSection>
   );
 }

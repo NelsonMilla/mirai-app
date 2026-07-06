@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { useIntersection } from '@/hooks/useIntersection';
+import { RevealSection } from '@/components/ui/RevealSection';
 import {
   stayIntro,
   stayLinks,
@@ -9,18 +9,8 @@ import {
 } from '@/data/practical';
 
 export default function PracticalSection() {
-  const { ref: sectionRef, isIntersecting } = useIntersection({
-    threshold: 0.1,
-    triggerOnce: false,
-  });
-
   return (
-    <section
-      ref={sectionRef as React.RefObject<HTMLElement>}
-      className={`section reveal-track ${isIntersecting ? 'in' : ''}`}
-      id="practical"
-      data-section="practical"
-    >
+    <RevealSection id="practical" dataSection="practical" variant="reveal-track">
       <div className="section-label">On the Ground</div>
 
       <h2
@@ -180,6 +170,6 @@ export default function PracticalSection() {
           transform: translateY(-2px);
         }
       `}</style>
-    </section>
+    </RevealSection>
   );
 }

@@ -1,42 +1,11 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
-
-// One dot per major section, in page order.
-const RAIL_ITEMS = [
-  { id: 'tracks', label: 'CHOOSE YOUR STARTER' },
-  { id: 'month', label: 'THE MONTH' },
-  { id: 'runway', label: 'THE SHOW' },
-  { id: 'kobe', label: 'WHY KOBE' },
-  { id: 'practical', label: 'ON THE GROUND' },
-  { id: 'proof', label: 'FIGHTERS' },
-  { id: 'apply', label: 'APPLY' },
-  { id: 'faq', label: 'FAQ' },
-];
+import React from 'react';
+import { SECTIONS } from '@/lib/constants';
+import { useActiveSection } from '@/hooks/useActiveSection';
 
 export function ProgressRail() {
-  const [activeSection, setActiveSection] = useState<string | null>(null);
-
-  // Reuse the Navbar's IntersectionObserver approach for active tracking.
-  useEffect(() => {
-    const observers: IntersectionObserver[] = [];
-
-    RAIL_ITEMS.forEach(({ id }) => {
-      const el = document.getElementById(id);
-      if (!el) return;
-
-      const observer = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) setActiveSection(id);
-        },
-        { rootMargin: '-40% 0px -40% 0px', threshold: 0 }
-      );
-      observer.observe(el);
-      observers.push(observer);
-    });
-
-    return () => observers.forEach(o => o.disconnect());
-  }, []);
+  const activeSection = useActiveSection(SECTIONS.map((s) => s.id));
 
   // Same scroll approach the Navbar links use.
   const scrollTo = (id: string) => {
@@ -46,18 +15,18 @@ export function ProgressRail() {
   return (
     <nav className="progress-rail" aria-label="Section navigation">
       <ul className="progress-rail__list">
-        {RAIL_ITEMS.map(({ id, label }) => {
+        {SECTIONS.map(({ id, railLabel }) => {
           const isActive = activeSection === id;
           return (
             <li key={id} className="progress-rail__item">
               <button
                 type="button"
                 className={`progress-rail__dot${isActive ? ' is-active' : ''}`}
-                aria-label={`Go to ${label}`}
+                aria-label={`Go to ${railLabel}`}
                 aria-current={isActive ? 'true' : undefined}
                 onClick={() => scrollTo(id)}
               >
-                <span className="progress-rail__label" aria-hidden="true">{label}</span>
+                <span className="progress-rail__label" aria-hidden="true">{railLabel}</span>
               </button>
             </li>
           );
