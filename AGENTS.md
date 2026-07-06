@@ -16,8 +16,8 @@ viewport bugs. Follow them exactly; don't introduce a fifth idiom.
 - `src/styles/landing.css` — everything on the `/` landing page, in page
   order. Loaded globally (rule order inside this file is load-bearing).
 - `src/styles/apply-page.css`, `src/styles/fashion-show.css`,
-  `src/styles/console.css` — per-route styles, prefix-disciplined
-  (`apply-page`/`form-*`, `fs-*`, `console-*`).
+  `src/styles/dormant.css` — per-route styles, prefix-disciplined
+  (`apply-page`/`form-*`, `fs-*`, `console-*`/`invite-*`/`wl-*`).
 - New styles for an existing section go in that section's file, in place.
   Do NOT append to the end of a file "to be safe".
 

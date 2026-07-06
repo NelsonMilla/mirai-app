@@ -2,7 +2,7 @@
 
 import React, { useState, useCallback } from 'react';
 import Image from 'next/image';
-import { fighters, rosterPartners } from '@/data/fighters';
+import { fighters, rosterPartners, tagColors, ROSTER_TOTAL } from '@/data/fighters';
 import { RevealSection } from '@/components/ui/RevealSection';
 import { PixelAvatar } from './PixelAvatar';
 
@@ -17,14 +17,6 @@ export default function RosterSection() {
     setFlash(false);
     requestAnimationFrame(() => setFlash(true));
   }, []);
-
-  const tagColor: Record<string, string> = {
-    Devices: '#6DB5F5',
-    Therapies: '#F5C542',
-    Builder: '#FF6B92',
-    Speaker: '#B98BF5',
-    Incoming: '#8585A8',
-  };
 
   return (
     <RevealSection id="proof" className="roster-section" threshold={0.05} once>
@@ -103,14 +95,14 @@ export default function RosterSection() {
                   ) : (
                     <PixelAvatar
                       seed={fighter.fullName}
-                      color={tagColor[fighter.tag] || '#8585A8'}
+                      color={tagColors[fighter.tag]}
                       className="slot-avatar"
                     />
                   )}
                 </div>
                 <div className="slot-nameplate">
                   <span className="slot-name">{fighter.name}</span>
-                  <span className="slot-tag" style={{ color: tagColor[fighter.tag] || '#8585A8' }}>{fighter.tag}</span>
+                  <span className="slot-tag" style={{ color: tagColors[fighter.tag] }}>{fighter.tag}</span>
                 </div>
               </div>
             ))}
@@ -147,7 +139,7 @@ export default function RosterSection() {
                 <div className="fighter-avatar-wrap">
                   <PixelAvatar
                     seed={selectedFighter.fullName}
-                    color={tagColor[selectedFighter.tag] || '#8585A8'}
+                    color={tagColors[selectedFighter.tag]}
                     className="fighter-avatar"
                   />
                   <span className="fighter-avatar-caption mono">PORTRAIT INCOMING</span>
@@ -194,7 +186,7 @@ export default function RosterSection() {
         <div className="roster-count-inline">
           <span className="roster-count-num display">{fighters.filter(f => !f.mystery).length}</span>
           <span className="roster-count-sep">/</span>
-          <span className="roster-count-total">24</span>
+          <span className="roster-count-total">{ROSTER_TOTAL}</span>
           <span className="roster-count-label mono">Fighters confirmed</span>
         </div>
         <div className="roster-partners">

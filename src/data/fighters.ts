@@ -14,7 +14,7 @@
  *  photo     Path to portrait under /public (e.g. "/images/speakers/rodney.jpg").
  *            Omit for mystery fighters — a "?" placeholder renders instead.
  *  tag       One of: 'Devices' | 'Therapies' | 'Builder' | 'Speaker' | 'Incoming'.
- *            Drives the nameplate color via RosterSection.tagColor.
+ *            Drives the nameplate color via tagColors below.
  *            Use 'Speaker' for people speaking but not enrolled in a residency track.
  *  mystery   true => render as locked "Challenger Approaching" slot.
  *  special   Optional "SPECIAL: <name>" line shown above stats.
@@ -23,9 +23,8 @@
  *
  * Counts
  * ------
- * The "X / 24 Fighters confirmed" counter in RosterSection is computed as
- *   fighters.filter(f => !f.mystery).length
- * Adjust there if an offset is needed.
+ * The "X / N Fighters confirmed" counter in RosterSection is computed as
+ *   fighters.filter(f => !f.mystery).length  /  ROSTER_TOTAL (below)
  */
 
 export interface Fighter {
@@ -274,6 +273,18 @@ export const fighters: Fighter[] = [
 
 /** Partner logos shown under the roster grid. */
 export const rosterPartners = ['Frontier Humans', 'HekaBio', 'Viva City', 'KBIC'];
+
+/** Nameplate/accent color per tag — the roster selector and detail panel key off this. */
+export const tagColors: Record<Fighter['tag'], string> = {
+  Devices: '#6DB5F5',
+  Therapies: '#F5C542',
+  Builder: '#FF6B92',
+  Speaker: '#B98BF5',
+  Incoming: '#8585A8',
+};
+
+/** Roster capacity — the "X / N Fighters confirmed" denominator. */
+export const ROSTER_TOTAL = 24;
 
 /** Pull-quote rendered alongside the roster (currently unused by RosterSection but kept for future use). */
 export const rosterQuote = {

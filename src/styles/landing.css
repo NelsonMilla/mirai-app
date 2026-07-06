@@ -2109,87 +2109,6 @@ html.loading .hero-ctas {
   box-shadow: 0 0 8px rgba(var(--pill-rgb), 0.5);
 }
 
-/* ── EVOLUTION SHOWCASE ── */
-.evo-showcase {
-  margin: 3rem auto; max-width: 800px;
-  display: flex; flex-direction: column; gap: 3rem;
-}
-.evo-line {
-  display: none; align-items: center; gap: 0; justify-content: center;
-  position: relative;
-}
-.evo-line.active { display: flex; }
-
-.evo-empty {
-  text-align: center; padding: 2rem 0;
-  font-family: var(--font-jetbrains), monospace; font-size: var(--fs-label);
-  letter-spacing: 0.1em; color: rgba(255,255,255,0.25);
-}
-.evo-empty a { color: var(--pink); text-decoration: none; }
-.evo-empty a:hover { text-decoration: underline; }
-.evo-showcase.has-selection .evo-empty { display: none; }
-
-.evo-stage {
-  display: flex; flex-direction: column; align-items: center; text-align: center;
-  flex: 0 0 auto; width: 180px;
-  opacity: 0; transform: translateY(16px) scale(0.9);
-  transition: opacity 0.5s cubic-bezier(0.23,1,0.32,1),
-              transform 0.5s cubic-bezier(0.23,1,0.32,1);
-}
-.evo-stage.visible { opacity: 1; transform: translateY(0) scale(1); }
-
-.evo-sprite {
-  width: 80px; height: 80px; margin-bottom: 10px;
-  image-rendering: pixelated;
-  image-rendering: -moz-crisp-edges;
-  filter: drop-shadow(0 0 12px rgba(var(--evo-rgb), 0.4));
-  transition: filter 0.4s, transform 0.4s;
-}
-.evo-stage.visible .evo-sprite {
-  animation: evo-pop 0.5s cubic-bezier(0.23,1,0.32,1);
-}
-.evo-sprite svg {
-  width: 100%; height: 100%;
-  image-rendering: pixelated;
-  image-rendering: -moz-crisp-edges;
-  image-rendering: crisp-edges;
-}
-@keyframes evo-pop {
-  0% { transform: scale(0.3); opacity: 0; }
-  50% { transform: scale(1.15); }
-  100% { transform: scale(1); opacity: 1; }
-}
-
-.evo-title {
-  font-family: var(--font-fraunces), serif; font-weight: 300; font-style: italic;
-  font-size: 1.1rem; color: rgba(255,255,255,0.4);
-  text-align: center; margin-bottom: 2rem;
-  letter-spacing: -0.01em;
-}
-.evo-name {
-  font-family: var(--font-jetbrains), monospace; font-weight: 600; font-size: var(--fs-label);
-  letter-spacing: 0.15em; text-transform: uppercase;
-  color: rgb(var(--evo-rgb)); opacity: 0.6;
-  margin-bottom: 6px;
-}
-.evo-desc {
-  font-size: var(--fs-secondary); line-height: 1.6; color: rgba(255,255,255,0.55);
-  max-width: 170px; font-family: var(--font-inter), sans-serif;
-}
-
-/* Arrow between stages */
-.evo-arrow {
-  flex: 0 0 36px; text-align: center;
-  font-size: 18px; color: rgba(var(--evo-rgb), 0.3);
-  opacity: 0; transition: opacity 0.4s 0.2s;
-  font-family: var(--font-jetbrains), monospace;
-}
-.evo-arrow.visible { opacity: 1; }
-
-/* Per-track color tokens */
-.evo-line.devices  { --evo-rgb: 109,181,245; }
-.evo-line.therapies{ --evo-rgb: 245,211,78; }
-.evo-line.builder  { --evo-rgb: 245,107,107; }
 
 /* ── FAQ SECTION (standalone) ── */
 .faq-section {
@@ -2237,16 +2156,10 @@ html.loading .hero-ctas {
 .faq-item.open .faq-a { max-height: 320px; margin-top: 0.85rem; }
 .faq-item.open .arrow { transform: rotate(45deg); }
 
-/* Apply + Evo — mobile base */
+/* Apply — mobile base */
 .apply-block { padding: 2rem 1.5rem; }
 .apply-track-selector { gap: 0.35rem; }
 .apply-track-pill { font-size: var(--fs-label); padding: 0.4rem 0.7rem; }
-.evo-line { flex-wrap: wrap; gap: 0.5rem; }
-.evo-stage { width: 100px; }
-.evo-sprite { width: 56px; height: 56px; }
-.evo-arrow { flex: 0 0 20px; font-size: var(--fs-secondary); }
-.evo-name { font-size: 0.85rem; }
-.evo-desc { font-size: var(--fs-label); max-width: 100px; }
 
 /* ============================================
    SCROLL COMPANION STYLES

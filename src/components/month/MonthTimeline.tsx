@@ -4,14 +4,6 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { chapters, weeklyPrograms } from '@/lib/constants';
 import { RevealSection } from '@/components/ui/RevealSection';
 
-// Color map for the detail strip (which lives outside card divs)
-const chColorMap: Record<string, { rgb: string; color: string }> = {
-  'ch-arrival':   { rgb: '78, 205, 196',  color: '#4ECDC4' },
-  'ch-longevity': { rgb: '245, 197, 66',  color: '#F5C542' },
-  'ch-enhance':   { rgb: '91, 141, 239',  color: '#5B8DEF' },
-  'ch-fashion':   { rgb: '255, 107, 146', color: '#FF6B92' },
-};
-
 export default function MonthTimeline() {
   const gridRef = useRef<HTMLDivElement>(null);
   const [visibleCards, setVisibleCards] = useState<boolean[]>(new Array(chapters.length).fill(false));
@@ -59,7 +51,6 @@ export default function MonthTimeline() {
   }, []);
 
   const activeChapter = activeIndex !== null ? chapters[activeIndex] : null;
-  const activeColors = activeChapter ? chColorMap[activeChapter.colorClass] : null;
 
   return (
     <RevealSection id="month" variant="reveal-track" once>
@@ -82,9 +73,9 @@ export default function MonthTimeline() {
       {/* Detail strip — shows section title by default, swaps to chapter detail on selection */}
       <div
         className={`ch-detail-strip strip-open ${activeIndex !== null ? 'has-selection' : ''}`}
-        style={activeColors ? {
-          '--ch-rgb': activeColors.rgb,
-          '--ch-color': activeColors.color,
+        style={activeChapter ? {
+          '--ch-rgb': activeChapter.colorRgb,
+          '--ch-color': activeChapter.color,
         } as React.CSSProperties : undefined}
       >
         {activeChapter ? (

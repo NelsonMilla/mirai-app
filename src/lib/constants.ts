@@ -99,6 +99,10 @@ export interface Chapter {
   dates: string;
   synopsis: string;
   colorClass: string;
+  /** Accent as "r, g, b" — must match the colorClass theme in landing.css. */
+  colorRgb: string;
+  /** Accent as hex — must match the colorClass theme in landing.css. */
+  color: string;
   imageSrc: string;
   events: string[];
   themes?: string[];
@@ -112,6 +116,8 @@ export const chapters: Chapter[] = [
     dates: 'Oct 01 – 16',
     synopsis: 'Co-building begins. Arrivals and tours, then Welcome Day on Oct 4, residency benches open, and two weeks to settle into Kobe and explore Japan alongside your cohort.',
     colorClass: 'ch-arrival',
+    colorRgb: '78, 205, 196',
+    color: '#4ECDC4',
     imageSrc: '/images/chapters/arrival.jpg',
     events: [
       'KBIC lab tours & orientation',
@@ -127,6 +133,8 @@ export const chapters: Chapter[] = [
     dates: 'Oct 17 – 18',
     synopsis: 'Part of the Longevity Biomedical Summit. The opportunities and the imperative of longevity biomedical innovation in Japan.',
     colorClass: 'ch-longevity',
+    colorRgb: '245, 197, 66',
+    color: '#F5C542',
     imageSrc: '/images/chapters/longevity.jpg',
     events: [
       "Japan's Longevity Imperative — what Japan learned & what it needs from the world",
@@ -144,6 +152,8 @@ export const chapters: Chapter[] = [
     dates: 'Oct 24 – 25',
     synopsis: 'Bottlenecks and solutions to accelerate longevity biomedicine — and what the world looks like once we cure all diseases.',
     colorClass: 'ch-enhance',
+    colorRgb: '91, 141, 239',
+    color: '#5B8DEF',
     imageSrc: '/images/chapters/enhance.jpg',
     events: [
       'Longevity trends, supercentenarians, impact & bottlenecks',
@@ -160,6 +170,8 @@ export const chapters: Chapter[] = [
     dates: 'Oct 26 – 31',
     synopsis: 'Runway prep, rehearsals, press day. The Frontier Human Fashion Show & Demo Day on Oct 26 — where devices become couture.',
     colorClass: 'ch-fashion',
+    colorRgb: '255, 107, 146',
+    color: '#FF6B92',
     imageSrc: '/images/chapters/fashion.jpg',
     events: [
       'Prototype polish & final builds',
@@ -363,6 +375,11 @@ export interface Evolution {
   desc: string;
 }
 
+/**
+ * Evolution-line copy for the three mascots. Currently unreferenced —
+ * its consumer (EvolutionShowcase) was cut in the apply-section redesign
+ * — but intentionally kept with the sprites for a possible return.
+ */
 export const evolutions = {
   devices: [
     { name: 'Volt', stage: 1, desc: 'You arrive with a working prototype and a plan to test it on humans.' },
