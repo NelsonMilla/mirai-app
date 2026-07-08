@@ -5,11 +5,11 @@
    MONTH — ANIME CHAPTER SELECT
    ============================================ */
 
-/* ── Section header (lives inside detail strip) ── */
+/* ── Section header (lives inside the console's detail deck) ── */
 .month-kanji-header {
   font-family: var(--font-noto-serif-jp), serif;
   font-weight: 900;
-  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-size: clamp(2.25rem, 3.5vw, 3.25rem);
   line-height: 1;
   background: linear-gradient(135deg, var(--iri-1), var(--iri-2), var(--iri-3));
   -webkit-background-clip: text;
@@ -342,44 +342,162 @@
   opacity: 0.5;
 }
 
-/* ── Detail strip (expanded click state) ── */
-.ch-detail-strip {
-  margin-top: 1.5rem;
+/* ── Console shell — spine, detail deck, rhythm rail as one unit ── */
+.month-console {
   --ch-rgb: 255, 255, 255;
   --ch-color: rgba(255, 255, 255, 0.3);
+  position: relative;
+  margin-top: 2.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  background: linear-gradient(180deg, var(--ink-2), var(--charcoal));
+  transition: border-color 0.4s;
+}
+.month-console.has-selection {
+  border-color: rgba(var(--ch-rgb), 0.18);
+  background:
+    radial-gradient(ellipse 55% 45% at var(--dot-x, 50%) 0%, rgba(var(--ch-rgb), 0.07), transparent 60%),
+    linear-gradient(180deg, var(--ink-2), var(--charcoal));
+}
+
+/* ── Spine — the iridescent seam on the console's top edge ── */
+.console-spine {
+  position: absolute;
+  top: -1px;
+  left: 14px;
+  right: 14px;
+  height: 2px;
+  border-radius: 1px;
+  background: linear-gradient(90deg, var(--iri-1), var(--iri-2), var(--iri-3), var(--iri-1));
+  background-size: 200% 100%;
+  animation: ch-flow 4s linear infinite;
+  opacity: 0.35;
+  transition: opacity 0.4s;
+}
+.month-console.has-selection .console-spine { opacity: 0.6; }
+@keyframes ch-flow { to { background-position: -200% 0; } }
+
+/* Episode dots — clickable, each in its chapter's color */
+.ch-dot {
+  position: absolute;
+  top: 50%;
+  width: 9px;
+  height: 9px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: rgba(var(--dot-rgb, 255, 184, 204), 0.55);
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+}
+.ch-dot::after {
+  /* larger hit area */
+  content: '';
+  position: absolute;
+  inset: -8px;
+}
+.ch-dot:nth-child(1) { left: 12.5%; }
+.ch-dot:nth-child(2) { left: 37.5%; }
+.ch-dot:nth-child(3) { left: 62.5%; }
+.ch-dot:nth-child(4) { left: 87.5%; }
+.ch-dot:hover {
+  transform: translate(-50%, -50%) scale(1.3);
+  background: var(--dot-color, var(--iri-1));
+}
+.ch-dot:focus-visible {
+  outline: 1px solid rgba(var(--dot-rgb, 255, 184, 204), 0.7);
+  outline-offset: 3px;
+}
+.ch-dot.dot-active {
+  transform: translate(-50%, -50%) scale(1.6);
+  background: var(--dot-color, var(--pink-bright));
+  box-shadow: 0 0 16px rgba(var(--dot-rgb, 255, 107, 146), 0.6);
+}
+
+/* Stem — drops from the selected card down to its dot */
+.console-stem {
+  position: absolute;
+  left: var(--dot-x, 50%);
+  bottom: 100%;
+  width: 2px;
+  height: 2.5rem;
+  transform: translateX(-50%);
+  transform-origin: top;
+  background: linear-gradient(180deg, transparent, var(--ch-color));
+  box-shadow: 0 0 8px rgba(var(--ch-rgb), 0.3);
+  animation: stem-drop 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+@keyframes stem-drop { from { transform: translateX(-50%) scaleY(0); } }
+
+/* ── Detail deck (tier 1) ── */
+.console-detail {
+  padding: 1.9rem 2rem 1.6rem;
 }
 .ch-detail-inner {
   display: grid;
   grid-template-columns: auto 1fr;
   gap: 2rem;
   align-items: center;
-  padding: 1.5rem 2rem;
-  border: 1px solid rgba(var(--ch-rgb), 0.08);
-  border-radius: 14px;
-  background:
-    radial-gradient(ellipse 60% 80% at 0% 50%, rgba(var(--ch-rgb), 0.04) 0%, transparent 60%),
-    linear-gradient(180deg, var(--ink-2), var(--charcoal));
-  transition: border-color 0.4s, background 0.4s;
+  animation: console-swap 0.35s ease-out;
 }
-.ch-detail-strip.has-selection .ch-detail-inner {
-  border-color: rgba(var(--ch-rgb), 0.15);
+@keyframes console-swap {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
 }
 /* Header variant (no selection) */
 .ch-detail-header {
   align-items: center;
 }
+.ch-detail-header .ch-detail-title {
+  font-size: clamp(1.35rem, 2vw, 1.7rem);
+}
 .ch-detail-header .ch-detail-desc {
   margin-bottom: 0;
 }
-.ch-detail-number {
+.ch-detail-desc.ch-detail-prompt {
   font-family: var(--font-jetbrains), monospace;
-  font-size: clamp(2.5rem, 4vw, 3.5rem);
-  font-weight: 700;
-  color: var(--ch-color);
-  opacity: 0.3;
-  line-height: 1;
+  font-size: var(--fs-label);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.45);
+}
+.ch-detail-prompt::after {
+  content: '▌';
+  margin-left: 0.4rem;
+  color: var(--pink);
+  animation: caret-blink 1.2s steps(2) infinite;
+}
+@keyframes caret-blink { 50% { opacity: 0; } }
+
+/* Chapter figure — kanji echoes the card watermarks above */
+.ch-detail-figure {
   align-self: start;
-  letter-spacing: -0.02em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  min-width: 72px;
+}
+.ch-detail-kanji {
+  font-family: var(--font-noto-serif-jp), serif;
+  font-weight: 900;
+  font-size: clamp(3rem, 5vw, 4.5rem);
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(var(--ch-rgb), 0.4);
+  background: linear-gradient(180deg, rgba(var(--ch-rgb), 0.25), rgba(var(--ch-rgb), 0.06));
+  -webkit-background-clip: text;
+  background-clip: text;
+  user-select: none;
+}
+.ch-detail-ep {
+  font-size: var(--fs-label);
+  letter-spacing: 0.2em;
+  color: var(--ch-color);
 }
 .ch-detail-title {
   font-family: var(--font-fraunces), serif;
@@ -439,101 +557,127 @@
   background: rgba(var(--ch-rgb), 0.05);
 }
 
-/* ── Recurring weekly programming strip ── */
-.week-strip {
-  margin-top: 2.5rem;
+/* ── Rhythm rail (tier 2) — the always-running weekly track ── */
+.console-rhythm {
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 0 0 15px 15px;
+  background: rgba(20, 20, 32, 0.5);
+  padding: 1.1rem 2rem 1.3rem;
 }
-.week-strip-intro {
+.rhythm-intro {
   font-size: var(--fs-label);
   letter-spacing: 0.04em;
   color: rgba(255, 255, 255, 0.4);
   margin-bottom: 1rem;
 }
-.week-strip-grid {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 0.75rem;
-}
-.week-strip-item {
-  padding: 0.9rem 1rem;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 10px;
-  background: linear-gradient(180deg, var(--ink-2), var(--charcoal));
-}
-.week-strip-label {
-  font-size: var(--fs-label);
-  letter-spacing: 0.03em;
-  color: rgba(255, 255, 255, 0.75);
-  margin-bottom: 0.35rem;
-}
-.week-strip-detail {
-  font-size: var(--fs-label);
-  color: rgba(255, 255, 255, 0.4);
-  line-height: 1.4;
-}
-@media (max-width: 980px) {
-  .week-strip-grid { grid-template-columns: repeat(2, 1fr); }
-}
-@media (max-width: 640px) {
-  .week-strip-grid { grid-template-columns: 1fr; }
-}
-
-/* ── Connector line ── */
-.ch-connector {
-  position: relative;
-  height: 2px;
-  margin-top: 2.5rem;
-  background: linear-gradient(90deg, var(--iri-1), var(--iri-2), var(--iri-3));
-  border-radius: 1px;
-  opacity: 0.35;
-  overflow: visible;
-}
-.ch-connector::before {
+.rhythm-intro::before {
+  /* quotes the spine */
   content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, var(--iri-1), var(--iri-2), var(--iri-3), var(--iri-1));
-  background-size: 200% 100%;
-  animation: ch-flow 4s linear infinite;
-  border-radius: inherit;
+  display: inline-block;
+  width: 18px;
+  height: 2px;
+  margin-right: 0.6rem;
+  vertical-align: middle;
+  border-radius: 1px;
+  background: linear-gradient(90deg, var(--iri-1), var(--iri-2), var(--iri-3));
 }
-@keyframes ch-flow { to { background-position: -200% 0; } }
-
-.ch-dot {
+.rhythm-rail {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.1rem;
+}
+.rhythm-item {
+  --wk-rgb: 255, 255, 255;
+  --wk-color: #fff;
+  position: relative;
+  padding: 0.1rem 0 0.25rem;
+  overflow: hidden;
+}
+.rhythm-glyph {
   position: absolute;
-  top: 50%;
-  width: 8px;
-  height: 8px;
+  right: -0.2rem;
+  bottom: -0.7rem;
+  font-family: var(--font-noto-serif-jp), serif;
+  font-weight: 900;
+  font-size: 2.6rem;
+  line-height: 1;
+  color: rgba(var(--wk-rgb), 0.1);
+  pointer-events: none;
+  user-select: none;
+  transition: color 0.4s, transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.rhythm-label {
+  position: relative;
+  font-size: var(--fs-label);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 0.35rem;
+  transition: color 0.3s;
+}
+.rhythm-label::before {
+  /* slow travelling heartbeat across the rail */
+  content: '';
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  margin-right: 0.5rem;
   border-radius: 50%;
-  background: var(--iri-1);
-  transform: translate(-50%, -50%);
-  box-shadow: 0 0 8px rgba(255, 184, 204, 0.4);
-  transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+  vertical-align: 1px;
+  background: rgba(var(--wk-rgb), 0.9);
+  animation: rhythm-pulse 3s ease-in-out infinite alternate;
 }
-.ch-dot:nth-child(1) { left: 12.5%; }
-.ch-dot:nth-child(2) { left: 37.5%; }
-.ch-dot:nth-child(3) { left: 62.5%; }
-.ch-dot:nth-child(4) { left: 87.5%; }
-.ch-dot.dot-active {
-  transform: translate(-50%, -50%) scale(1.6);
-  background: var(--pink-bright);
-  box-shadow: 0 0 16px rgba(255, 107, 146, 0.6);
+.rhythm-item:nth-child(1) .rhythm-label::before { animation-delay: -0.5s; }
+.rhythm-item:nth-child(2) .rhythm-label::before { animation-delay: -1s; }
+.rhythm-item:nth-child(3) .rhythm-label::before { animation-delay: -1.5s; }
+.rhythm-item:nth-child(4) .rhythm-label::before { animation-delay: -2s; }
+.rhythm-item:nth-child(5) .rhythm-label::before { animation-delay: -2.5s; }
+.rhythm-item:nth-child(6) .rhythm-label::before { animation-delay: -3s; }
+@keyframes rhythm-pulse {
+  from { opacity: 0.3; }
+  to { opacity: 0.9; }
+}
+.rhythm-detail {
+  position: relative;
+  font-size: var(--fs-label);
+  color: rgba(255, 255, 255, 0.42);
+  line-height: 1.45;
+}
+@media (hover: hover) {
+  .rhythm-item:hover .rhythm-label { color: var(--wk-color); }
+  .rhythm-item:hover .rhythm-glyph {
+    color: rgba(var(--wk-rgb), 0.22);
+    transform: scale(1.1) rotate(-4deg);
+  }
 }
 
 /* ── Responsive ── */
 .chapter-card { aspect-ratio: 3/4; }
-.ch-connector { display: none; }
-.ch-detail-strip { display: none; }
+.console-spine { display: none; }
+.console-detail { display: none; }
+.console-rhythm { border-top: none; border-radius: 15px; }
 
 @media (min-width: 641px) {
   .ch-particles span { transform: scale(0.7); }
+  .rhythm-rail {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem 1.75rem;
+  }
 }
 
 @media (min-width: 981px) {
   .chapter-card { aspect-ratio: 2/3; }
-  .ch-connector { display: block; }
-  .ch-detail-strip { display: flex; }
+  .console-spine { display: block; }
+  .console-detail { display: block; }
+  .console-rhythm { border-top: 1px solid rgba(255, 255, 255, 0.07); border-radius: 0 0 15px 15px; }
   .ch-particles span { transform: none; }
+  .rhythm-rail {
+    display: flex;
+    gap: 0;
+  }
+  .rhythm-item { padding: 0.15rem 1.25rem 0.35rem; flex: 1; }
+  .rhythm-item:first-child { padding-left: 0; }
+  .rhythm-item + .rhythm-item { border-left: 1px solid rgba(255, 255, 255, 0.07); }
 }
 
 /* ============================================

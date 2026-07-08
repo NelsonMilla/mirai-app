@@ -185,15 +185,21 @@ export const chapters: Chapter[] = [
 export interface WeeklyProgram {
   label: string;
   detail: string;
+  /** Decorative kanji watermark for the rhythm rail. */
+  kanji: string;
+  /** Accent as "r, g, b" — drawn from the chapter/iridescent palette. */
+  colorRgb: string;
+  /** Accent as hex — must match colorRgb. */
+  color: string;
 }
 
 export const weeklyPrograms: WeeklyProgram[] = [
-  { label: 'Vibe Coding Nights', detail: 'Ship together after dark' },
-  { label: 'The Residency', detail: 'Benches, labs, deep work' },
-  { label: 'Learning Layer Labs', detail: 'Hands-on skill sessions' },
-  { label: 'Biohackers Workshops', detail: 'Self-experiments & protocols' },
-  { label: 'Socials', detail: 'Dinners, drinks, connection' },
-  { label: 'Me-Time by CHANGE', detail: 'Recovery & reset' },
+  { label: 'Vibe Coding Nights', detail: 'Ship together after dark', kanji: '夜', colorRgb: '91, 141, 239', color: '#5B8DEF' },
+  { label: 'The Residency', detail: 'Benches, labs, deep work', kanji: '研', colorRgb: '78, 205, 196', color: '#4ECDC4' },
+  { label: 'Learning Layer Labs', detail: 'Hands-on skill sessions', kanji: '学', colorRgb: '245, 197, 66', color: '#F5C542' },
+  { label: 'Biohackers Workshops', detail: 'Self-experiments & protocols', kanji: '実', colorRgb: '212, 184, 255', color: '#D4B8FF' },
+  { label: 'Socials', detail: 'Dinners, drinks, connection', kanji: '宴', colorRgb: '255, 107, 146', color: '#FF6B92' },
+  { label: 'Me-Time by CHANGE', detail: 'Recovery & reset', kanji: '休', colorRgb: '184, 227, 255', color: '#B8E3FF' },
 ];
 
 export interface LifestyleCard {
