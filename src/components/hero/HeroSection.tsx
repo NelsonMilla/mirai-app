@@ -129,11 +129,13 @@ export function HeroSection() {
           text-transform: uppercase;
           color: var(--slate);
         }
-        /* Reclaim vertical space so the hero + stat strip fits within a
-           short desktop viewport (e.g. 1440x900) without scrolling. */
-        @media (min-width: 641px) and (max-height: 940px) {
+        /* On viewports shorter than the full-size hero (~1132px tall) the
+           whole hero can't fit at full scale. Shrink the HEADLINE and inner
+           margins to reclaim space — but NEVER the top padding: it must keep
+           clearing the fixed ~85px navbar with a gap, or the eyebrow jams
+           against the nav. (Base desktop padding-top is 8rem = 128px.) */
+        @media (min-width: 641px) and (max-height: 1130px) {
           .hero {
-            padding-top: 5.5rem;
             padding-bottom: 2.5rem;
           }
           .hero-eyebrow {
@@ -147,11 +149,12 @@ export function HeroSection() {
             margin-bottom: 1.25rem;
           }
         }
-        /* Tighter tier for short desktops (e.g. 1280x720) where the 940px
-           tier still leaves the stat strip below the fold. */
-        @media (min-width: 641px) and (max-height: 780px) {
+        /* Laptop heights (16" MacBook ≈ 900px, down to ~745px): the 6rem
+           headline would push the stat strip below the fold, so drop to a
+           smaller headline. Top padding still inherits the 8rem nav clearance
+           above; content simply centers in the remaining space. */
+        @media (min-width: 641px) and (max-height: 940px) {
           .hero {
-            padding-top: 4.5rem;
             padding-bottom: 1.5rem;
           }
           .hero-eyebrow {

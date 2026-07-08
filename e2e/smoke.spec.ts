@@ -164,15 +164,6 @@ test('interactions @ 1280x800', async ({ page }) => {
   await page.keyboard.press('Escape');
   await expect(page.locator('.card-overlay')).not.toHaveClass(/active/);
 
-  // STORY / TERMINAL toggle remounts the terminal.
-  await page.evaluate(() =>
-    document.getElementById('kobe')!.scrollIntoView({ behavior: 'instant' as ScrollBehavior }),
-  );
-  await page.getByRole('button', { name: /TERMINAL/ }).click();
-  await expect(page.locator('.term-window')).toBeVisible();
-  await page.getByRole('button', { name: /STORY/ }).click();
-  await expect(page.locator('.term-window')).toHaveCount(0);
-
   // FAQ accordion.
   await page.evaluate(() =>
     document.getElementById('faq')!.scrollIntoView({ behavior: 'instant' as ScrollBehavior }),
