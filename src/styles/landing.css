@@ -3609,6 +3609,47 @@ html.loading .hero-ctas {
 }
 .dot-detail.open {
   border-color: rgba(var(--dot-rgb), 0.2);
+  justify-content: flex-start;
+}
+
+/* ── Location photo (Kobe Tourism Bureau library) ── */
+.dot-photo {
+  position: relative;
+  margin: -1.5rem -1.5rem 1.25rem;
+  aspect-ratio: 16 / 9;
+  border-radius: 13px 13px 0 0;
+  overflow: hidden;
+  animation: dot-photo-in 0.5s ease-out;
+}
+.dot-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.dot-photo::after {
+  /* blend the photo down into the panel + tint toward the location accent */
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to top, #0a0e14 0%, rgba(10, 14, 20, 0.25) 32%, transparent 60%),
+    linear-gradient(180deg, rgba(var(--dot-rgb), 0.08), transparent 45%);
+}
+@keyframes dot-photo-in {
+  from {
+    opacity: 0;
+    transform: scale(1.04);
+  }
+}
+.dot-photo-credit {
+  position: absolute;
+  right: 0.6rem;
+  bottom: 0.45rem;
+  z-index: 1;
+  font-size: var(--fs-micro);
+  letter-spacing: 0.06em;
+  color: rgba(255, 255, 255, 0.35);
 }
 .dot-detail-header {
   display: flex;

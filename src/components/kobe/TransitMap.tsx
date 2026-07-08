@@ -21,6 +21,8 @@ interface Location {
   rgb: string;
   /** Interchange stations render a larger double ring. */
   hub?: boolean;
+  /** Detail-panel photo — Kobe Tourism Bureau library (feel-photo.info), cleared for the event. */
+  imageSrc: string;
 }
 
 const locations: Location[] = [
@@ -33,6 +35,7 @@ const locations: Location[] = [
     stats: [{ value: '370+', label: 'Companies' }, { value: '#1', label: 'Cluster in JP' }, { value: '2 min', label: 'Walk to lab' }],
     vx: 610, vy: 460, labelPos: 'right',
     color: '#FF6B92', rgb: '255,107,146',
+    imageSrc: '/images/map/kbic.jpg',
     hub: true,
   },
   {
@@ -44,6 +47,7 @@ const locations: Location[] = [
     stats: [{ value: '5 min', label: 'To KBIC' }, { value: '746', label: 'Rooms' }, { value: 'Rooftop', label: 'Pool + Onsen' }],
     vx: 520, vy: 370, labelPos: 'right', mobileLabelPos: 'left',
     color: '#D4B8FF', rgb: '212,184,255',
+    imageSrc: '/images/map/portopia.jpg',
   },
   {
     id: 'sannomiya',
@@ -54,6 +58,7 @@ const locations: Location[] = [
     stats: [{ value: '18 min', label: 'Port Liner' }, { value: '20 min', label: 'To Osaka' }, { value: '50 min', label: 'To Kyoto' }],
     vx: 350, vy: 200, labelPos: 'top',
     color: '#B8E3FF', rgb: '184,227,255',
+    imageSrc: '/images/map/sannomiya.jpg',
     hub: true,
   },
   {
@@ -65,6 +70,7 @@ const locations: Location[] = [
     stats: [{ value: '18 min', label: 'To KBIC' }, { value: '65 min', label: 'From Tokyo' }, { value: 'Direct', label: 'Port Liner' }],
     vx: 610, vy: 570, labelPos: 'right',
     color: '#B8E3FF', rgb: '184,227,255',
+    imageSrc: '/images/map/airport.jpg',
   },
   {
     id: 'arima',
@@ -75,6 +81,7 @@ const locations: Location[] = [
     stats: [{ value: '1,300', label: 'Years old' }, { value: '30 min', label: 'From KBIC' }, { value: '2', label: 'Spring types' }],
     vx: 230, vy: 80, labelPos: 'top',
     color: '#E8C97D', rgb: '232,201,125',
+    imageSrc: '/images/map/arima.jpg',
   },
   {
     id: 'beef',
@@ -85,6 +92,7 @@ const locations: Location[] = [
     stats: [{ value: 'A5', label: 'Grade' }, { value: '¥8K+', label: 'Per course' }, { value: 'Since', label: '1868' }],
     vx: 190, vy: 200, labelPos: 'bottom',
     color: '#FF8C69', rgb: '255,140,105',
+    imageSrc: '/images/map/beef.jpg',
   },
   {
     id: 'rokko',
@@ -95,6 +103,7 @@ const locations: Location[] = [
     stats: [{ value: '5 km', label: 'Loop' }, { value: '931m', label: 'Summit' }, { value: '10 min', label: 'By liner' }],
     vx: 760, vy: 310, labelPos: 'bottom',
     color: '#82DCBE', rgb: '130,220,190',
+    imageSrc: '/images/map/rokko.jpg',
   },
 ];
 
@@ -231,6 +240,10 @@ export default function TransitMap() {
         >
           {activeLocation ? (
             <>
+              <div className="dot-photo" key={activeLocation.id}>
+                <img src={activeLocation.imageSrc} alt={activeLocation.title} loading="lazy" />
+                <span className="dot-photo-credit mono">© Kobe Tourism Bureau</span>
+              </div>
               <div className="dot-detail-header">
                 <div>
                   <div className="dot-detail-title">{activeLocation.title}</div>
