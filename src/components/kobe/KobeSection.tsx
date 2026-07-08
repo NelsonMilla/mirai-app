@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { RevealSection } from '@/components/ui/RevealSection';
 import LifestyleCard from './LifestyleCard';
 import CardOverlay from './CardOverlay';
-import IsometricMap from './IsometricMap';
+import TransitMap from './TransitMap';
 import { lifestyleCards, LifestyleCard as LifestyleCardType } from '@/lib/constants';
 
 const marketReceipts = [
@@ -126,7 +126,7 @@ export default function KobeSection() {
       </RevealSection>
 
       {/* MOMENT 5B: Playground Map */}
-      <IsometricMap />
+      <TransitMap />
 
       <CardOverlay
         card={selectedCard}
