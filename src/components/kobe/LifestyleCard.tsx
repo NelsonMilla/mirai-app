@@ -131,6 +131,14 @@ export default function LifestyleCard({ card, index, onOpenOverlay }: LifestyleC
         '--card-i': index,
       } as React.CSSProperties}
       onClick={handleClick}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          handleClick();
+        }
+      }}
     >
       <div
         className="life-card-inner"

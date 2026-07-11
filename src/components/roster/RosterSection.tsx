@@ -51,6 +51,15 @@ export default function RosterSection() {
                 ].filter(Boolean).join(' ')}
                 style={{ '--slot-i': idx } as React.CSSProperties}
                 onClick={() => selectFighter(idx)}
+                role="button"
+                tabIndex={0}
+                aria-pressed={selectedIndex === idx}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    selectFighter(idx);
+                  }
+                }}
               >
                 <div className="slot-portrait">
                   {fighter.photo ? (
