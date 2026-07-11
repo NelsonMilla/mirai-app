@@ -31,9 +31,11 @@ export interface QuickAction {
   primary?: boolean;
 }
 
-// TODO(Nelson): supply the real Luma calendar URL (falls back to the event
-// page) and the Discord invite — set NEXT_PUBLIC_LUMA_CALENDAR_URL /
-// NEXT_PUBLIC_DISCORD_INVITE_URL or replace the fallbacks here.
+// TODO(Nelson): the Luma link supplied so far is the ADMIN manage URL
+// (luma.com/calendar/manage/cal-s2HEMOx7ZZify5D) — visitors hit a sign-in
+// wall there. Grab the PUBLIC calendar page from Luma's Share dialog
+// (usually luma.com/<slug>) and set NEXT_PUBLIC_LUMA_CALENDAR_URL or
+// replace the event-page fallback below.
 export const quickActions: QuickAction[] = [
   {
     id: 'telegram',
@@ -60,7 +62,7 @@ export const quickActions: QuickAction[] = [
     title: 'Where the building happens',
     desc: 'Discord holds the track channels and project threads — the building starts before October does.',
     cta: 'Join the server →',
-    href: process.env.NEXT_PUBLIC_DISCORD_INVITE_URL || 'https://discord.gg/miraitech',
+    href: process.env.NEXT_PUBLIC_DISCORD_INVITE_URL || 'https://discord.gg/jv3Vpv2KT9',
     tone: '139, 157, 255',
   },
 ];
