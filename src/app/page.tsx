@@ -21,14 +21,14 @@ export default function Home() {
       <Navbar />
       <ProgressRail />
       <HeroSection />
+      <KobeSection />
       <TracksSection />
       <MonthTimeline />
       <RunwaySection />
-      <KobeSection />
-      <PracticalSection />
       <RosterSection />
       <CommunitiesSection />
       <PastEventsSection />
+      <PracticalSection />
       <ApplySection />
       <QuickActions source="home" />
       <FaqSection />

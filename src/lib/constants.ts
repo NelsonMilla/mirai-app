@@ -15,12 +15,12 @@ export interface SectionDef {
 }
 
 export const SECTIONS: SectionDef[] = [
+  { id: 'kobe', navLabel: 'Kobe', railLabel: 'WHY KOBE' },
   { id: 'tracks', navLabel: 'Tracks', railLabel: 'CHOOSE YOUR STARTER' },
   { id: 'month', navLabel: 'Program', railLabel: 'THE MONTH' },
   { id: 'runway', navLabel: 'Show', railLabel: 'THE SHOW' },
-  { id: 'kobe', navLabel: 'Kobe', railLabel: 'WHY KOBE' },
-  { id: 'practical', railLabel: 'ON THE GROUND' },
   { id: 'proof', navLabel: 'Speakers', railLabel: 'FIGHTERS' },
+  { id: 'practical', railLabel: 'ON THE GROUND' },
   { id: 'apply', railLabel: 'APPLY' },
   { id: 'faq', railLabel: 'FAQ' },
 ];

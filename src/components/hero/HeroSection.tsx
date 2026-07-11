@@ -63,7 +63,7 @@ export function HeroSection() {
           <a className="btn btn-primary" href="#apply">
             Apply Now
           </a>
-          <a className="btn btn-outline" href="#tracks">
+          <a className="btn btn-outline" href="#kobe">
             Learn More
           </a>
         </div>
