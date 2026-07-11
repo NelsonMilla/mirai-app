@@ -17,6 +17,10 @@
  *            Drives the nameplate color via tagColors below.
  *            Use 'Speaker' for people speaking but not enrolled in a residency track.
  *  mystery   true => render as locked "Challenger Approaching" slot.
+ *  headliner true => featured in the TOP BILLING main card (large slot +
+ *            detail panel). Everyone else renders in the supporting bill.
+ *  hook      One-line credibility strapline. Headliners only — shown on the
+ *            large billing slot under the name.
  *  special   Optional "SPECIAL: <name>" line shown above stats.
  *  stats     Up to 3 stat bars. Each value is 0–100 (percentage fill).
  *            If omitted, bio renders instead.
@@ -35,6 +39,8 @@ export interface Fighter {
   photo?: string;
   tag: 'Devices' | 'Therapies' | 'Builder' | 'Speaker' | 'Incoming';
   mystery?: boolean;
+  headliner?: boolean;
+  hook?: string;
   special?: string;
   stats?: { label: string; value: number }[];
 }
@@ -75,6 +81,8 @@ export const fighters: Fighter[] = [
     bio: "",
     photo: '/images/speakers/juliette.jpg',
     tag: 'Therapies',
+    headliner: true,
+    hook: 'Founder of MuseBio — blood into life',
     special: 'Blood into Life',
     stats: [
       { label: 'REG', value: 98 },
@@ -116,6 +124,8 @@ export const fighters: Fighter[] = [
     title: 'LEV Foundation',
     bio: '',
     tag: 'Speaker',
+    headliner: true,
+    hook: 'LEV Foundation — longevity escape velocity',
     special: 'Longevity Escape Velocity',
     stats: [
       { label: 'REG', value: 99 },
@@ -181,6 +191,8 @@ export const fighters: Fighter[] = [
     title: 'Speaker · Announcement soon',
     bio: '',
     tag: 'Speaker',
+    headliner: true,
+    hook: 'Headline speaker — full announcement soon',
     special: 'Full Send',
     stats: [
       { label: 'FND', value: 88 },
@@ -228,19 +240,6 @@ export const fighters: Fighter[] = [
     ],
   },
   {
-    name: 'Cremeaux',
-    fullName: 'Cremeaux',
-    title: 'Speaker · Announcement soon',
-    bio: '',
-    tag: 'Speaker',
-    special: 'Wildcard Entry',
-    stats: [
-      { label: 'STR', value: 84 },
-      { label: 'SPD', value: 86 },
-      { label: 'NET', value: 82 },
-    ],
-  },
-  {
     name: 'Nelson',
     fullName: 'Nelson Milla',
     title: 'Frontier Humans',
@@ -251,6 +250,22 @@ export const fighters: Fighter[] = [
       { label: 'FND', value: 90 },
       { label: 'NET', value: 93 },
       { label: 'VIS', value: 89 },
+    ],
+  },
+  {
+    // TODO(Nelson): supply real portrait for Yuki Hanyu and confirm exact title.
+    name: 'Yuki',
+    fullName: 'Yuki Hanyu',
+    title: 'Founder · IntegriCulture (cultured-meat / cellular agriculture, Japan)',
+    bio: '',
+    tag: 'Speaker',
+    headliner: true,
+    hook: 'Founder of IntegriCulture — cellular agriculture, Japan',
+    special: 'Cellular Agriculture',
+    stats: [
+      { label: 'BIO', value: 93 },
+      { label: 'BLD', value: 88 },
+      { label: 'VIS', value: 90 },
     ],
   },
   {

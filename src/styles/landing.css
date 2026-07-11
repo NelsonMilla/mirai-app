@@ -893,10 +893,6 @@
   0%, 100% { box-shadow: inset 0 0 20px rgba(245,160,181,0.1), 0 0 8px rgba(245,160,181,0.1); }
   50% { box-shadow: inset 0 0 25px rgba(245,160,181,0.18), 0 0 15px rgba(245,160,181,0.15); }
 }
-.roster-slot.mystery {
-  background: linear-gradient(180deg, rgba(16,14,22,0.98) 0%, rgba(8,6,12,1) 100%);
-}
-
 /* Slot portrait */
 .slot-portrait {
   width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;
@@ -910,11 +906,16 @@
 .roster-slot.selected .slot-portrait img {
   filter: saturate(1) brightness(1);
 }
-.slot-initial {
-  font-family: var(--font-noto-serif-jp), serif; font-size: 2.5rem;
-  font-weight: 700; color: rgba(255,255,255,0.06);
-  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-  z-index: 0;
+/* Pixel-avatar treatment for photo-pending confirmed fighters */
+.slot-avatar {
+  position: absolute; inset: 12%; width: 76%; height: 76%;
+  z-index: 1; opacity: 0.9;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.5)) saturate(0.8) brightness(0.85);
+  transition: filter 0.2s, opacity 0.2s;
+}
+.roster-slot:hover .slot-avatar,
+.roster-slot.selected .slot-avatar {
+  opacity: 1; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.55)) saturate(1) brightness(1);
 }
 /* CRT scanlines on slots */
 .slot-portrait::after {
@@ -946,21 +947,14 @@
   letter-spacing: 0.08em; text-transform: uppercase; color: var(--pink);
   opacity: 0.6;
 }
-
-/* Mystery slot */
-.mystery .slot-portrait img { opacity: 0; }
-.mystery .slot-initial { color: rgba(255,255,255,0.08); }
-.mystery .slot-name { color: rgba(255,255,255,0.2); letter-spacing: 0.25em; }
-.mystery .slot-nameplate {
-  background: linear-gradient(180deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.8) 100%);
+/* Headliner hook — one-line credibility under the name */
+.slot-hook {
+  font-family: var(--font-jetbrains), monospace; font-size: calc(var(--fs-label) * 0.9);
+  letter-spacing: 0.04em; color: rgba(255,255,255,0.45);
+  text-align: center; max-width: 100%; padding: 0 0.3rem;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+  overflow: hidden;
 }
-@keyframes glitch-flicker {
-  0%, 88%, 100% { opacity: 0.08; }
-  90% { opacity: 0.2; }
-  93% { opacity: 0.04; }
-  96% { opacity: 0.25; }
-}
-.mystery .slot-initial { animation: glitch-flicker 3.5s ease-in-out infinite; }
 
 /* ── RIGHT: Fighter detail panel ── */
 .fighter-panel {
@@ -1063,6 +1057,29 @@
   text-shadow: 0 1px 6px rgba(0,0,0,0.6);
 }
 
+/* ── Photo-pending detail panel: oversized avatar + caption ── */
+.fighter-avatar-wrap {
+  position: absolute; inset: 0; z-index: 1;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 0.9rem;
+  padding-bottom: 22%;
+}
+.fighter-avatar {
+  width: 42%; max-width: 220px; height: auto; aspect-ratio: 1;
+  filter: drop-shadow(0 6px 18px rgba(0,0,0,0.5));
+  animation: avatar-breathe 4s ease-in-out infinite;
+}
+@keyframes avatar-breathe {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-3px) scale(1.02); }
+}
+.fighter-avatar-caption {
+  font-size: var(--fs-label); letter-spacing: 0.28em; text-transform: uppercase;
+  color: rgba(255,255,255,0.4); border: 1px solid rgba(255,255,255,0.12);
+  padding: 0.3rem 0.7rem; border-radius: 2px;
+  background: rgba(0,0,0,0.25);
+}
+
 /* ── Below arena: partners, count ── */
 .roster-partners {
   display: flex; justify-content: center; gap: 2.5rem; flex-wrap: wrap;
@@ -1083,21 +1100,6 @@
   font-family: var(--font-jetbrains), monospace; font-size: var(--fs-label);
   letter-spacing: 0.15em; text-transform: uppercase; color: var(--slate);
   margin-top: 0.25rem;
-}
-
-/* ── Mystery slot glitch ── */
-.roster-slot.mystery .slot-initial {
-  animation: mystery-glitch 3s ease-in-out infinite;
-}
-@keyframes mystery-glitch {
-  0%, 90%, 100% { opacity: 0.4; text-shadow: 0 0 8px rgba(78,205,196,0.3); }
-  92% { opacity: 0.1; transform: translateX(-3px); text-shadow: 3px 0 rgba(255,107,146,0.5); }
-  94% { opacity: 0.6; transform: translateX(2px); text-shadow: -2px 0 rgba(78,205,196,0.5); }
-  96% { opacity: 0.2; transform: translateX(0); }
-  98% { opacity: 0.5; transform: translateX(-1px); text-shadow: 1px 0 rgba(245,160,181,0.4); }
-}
-.roster-slot.mystery:hover {
-  border-color: rgba(78,205,196,0.3) !important;
 }
 
 /* ── Fighter special move ── */
@@ -1170,6 +1172,60 @@
   width: 24px;
 }
 
+/* ── Supporting bill: poster lower-third of confirmed names ── */
+.roster-bill {
+  max-width: 1200px; margin: 1.5rem auto 0;
+  text-align: center; position: relative; z-index: 1;
+  min-width: 0;
+}
+.bill-label {
+  font-family: var(--font-jetbrains), monospace; font-size: var(--fs-label);
+  letter-spacing: 0.25em; text-transform: uppercase;
+  color: rgba(245,160,181,0.5);
+  margin-bottom: 0.8rem;
+}
+.bill-names {
+  display: flex; flex-wrap: wrap; justify-content: center;
+  column-gap: 1.5rem; row-gap: 0.55rem;
+  min-width: 0;
+}
+.bill-name {
+  display: inline-flex; align-items: center; gap: 0.45rem;
+  font-family: var(--font-jetbrains), monospace; font-size: var(--fs-label);
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: rgba(255,255,255,0.7); white-space: nowrap;
+}
+.bill-dot {
+  width: 5px; height: 5px; border-radius: 1px; flex-shrink: 0;
+  opacity: 0.8;
+}
+.bill-challengers {
+  font-family: var(--font-jetbrains), monospace; font-size: var(--fs-label);
+  letter-spacing: 0.18em; text-transform: uppercase;
+  margin-top: 1rem; opacity: 0.75;
+}
+
+/* ── CTA to the full TCG roster page ── */
+.roster-cta {
+  text-align: center; margin-top: 1.75rem;
+  position: relative; z-index: 1;
+}
+.roster-cta-link {
+  display: inline-block;
+  font-family: var(--font-jetbrains), monospace; font-size: var(--fs-label);
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--pink); text-decoration: none;
+  border: 1px solid rgba(245,160,181,0.35); border-radius: 3px;
+  padding: 0.75rem 1.75rem;
+  background: rgba(245,160,181,0.05);
+  transition: background 0.25s, border-color 0.25s, box-shadow 0.25s;
+}
+.roster-cta-link:hover {
+  background: rgba(245,160,181,0.12);
+  border-color: var(--pink);
+  box-shadow: 0 0 20px rgba(245,160,181,0.15);
+}
+
 /* ── Bottom row (replaces separate count/quote/partners) ── */
 .roster-bottom {
   display: flex;
@@ -1239,18 +1295,12 @@
 }
 
 @media (min-width: 981px) {
-  .roster-arena { grid-template-columns: 300px 1fr; height: 600px; }
+  .roster-arena { grid-template-columns: 380px 1fr; height: 600px; }
   .roster-selector { border-right: 2px solid rgba(245,160,181,0.08); border-bottom: none; }
-  /* Fixed row height + scroll: repeat(4, 1fr) template rows collapsed every
-     slot past the 8th to 0px once the roster grew beyond 8 fighters. A half
-     row peeks at the bottom to signal scrollability. */
+  /* Exactly 4 headliner slots — a fixed 2×2 fills the arena height. */
   .roster-grid {
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: none;
-    grid-auto-rows: calc((100% - 6px) / 3.5);
-    overflow-y: auto;
-    scrollbar-width: thin;
-    scrollbar-color: rgba(245, 160, 181, 0.3) transparent;
+    grid-template-rows: repeat(2, 1fr);
   }
   .roster-slot { aspect-ratio: unset; }
   .roster-partners { gap: 2.5rem; }
