@@ -107,6 +107,7 @@ export const fighters: Fighter[] = [
     fullName: 'Aubrey de Grey',
     title: 'LEV Foundation',
     bio: '',
+    photo: '/images/speakers/aubrey.jpg',
     tag: 'Speaker',
     headliner: true,
     hook: 'LEV Foundation',
@@ -174,6 +175,7 @@ export const fighters: Fighter[] = [
     fullName: 'Adam Gries',
     title: 'Speaker · Announcement soon',
     bio: '',
+    photo: '/images/speakers/adam.jpg',
     tag: 'Speaker',
     headliner: true,
     hook: 'Announcement soon',
@@ -237,12 +239,13 @@ export const fighters: Fighter[] = [
     ],
   },
   {
-    // TODO(Nelson): supply real portrait for Yuki Hanyu and confirm exact title.
+    // TODO(Nelson): confirm exact title for Yuki Hanyu.
     // Full descriptor: IntegriCulture — cultured-meat / cellular agriculture, Japan.
     name: 'Yuki',
     fullName: 'Yuki Hanyu',
     title: 'Founder · IntegriCulture',
     bio: '',
+    photo: '/images/speakers/yuki.jpg',
     tag: 'Speaker',
     headliner: true,
     hook: 'Cellular Agriculture',
