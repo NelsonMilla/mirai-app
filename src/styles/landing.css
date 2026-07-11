@@ -2537,6 +2537,23 @@ html.loading .hero-ctas {
    cold visitors. Sits between Hero and Kobe.
    ============================================ */
 
+.fmt-grid {
+  width: 100%;
+}
+/* Laptop and up: copy and wheel side by side, vertically centered */
+@media (min-width: 981px) {
+  .fmt-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: 3rem;
+    align-items: center;
+    flex: 1;
+  }
+  .fmt-diagram {
+    margin: 0;
+  }
+}
+
 .fmt-head {
   font-size: clamp(2rem, 4.6vw, 3.25rem);
   font-weight: 420;
@@ -2570,24 +2587,19 @@ html.loading .hero-ctas {
 }
 .fmt-diagram .fmt-t-time {
   font-family: var(--font-jetbrains), monospace;
-  font-size: 10.5px;
+  font-size: 12px;
   letter-spacing: 0.15em;
   fill: var(--slate);
 }
 .fmt-diagram .fmt-t-name {
   font-family: var(--font-jetbrains), monospace;
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 500;
   letter-spacing: 0.18em;
   fill: var(--white);
 }
 .fmt-diagram .fmt-t-name.fmt-hot {
   fill: var(--pink);
-}
-.fmt-diagram .fmt-t-sub {
-  font-family: var(--font-inter), sans-serif;
-  font-size: 11px;
-  fill: var(--slate);
 }
 .fmt-diagram .fmt-t-ring {
   font-family: var(--font-jetbrains), monospace;
@@ -2618,98 +2630,9 @@ html.loading .hero-ctas {
   fill: var(--pink);
 }
 
-.fmt-caption {
-  margin: 1.75rem auto 0;
-  text-align: center;
-  font-family: var(--font-fraunces), serif;
-  font-style: italic;
-  font-size: 1.2rem;
-  line-height: 1.5;
-  color: var(--white);
-  max-width: 480px;
-}
-.fmt-caption .fmt-dim {
-  color: var(--slate);
-}
-
-/* ── LIVE / BUILD / SHOW trio ── */
-.fmt-trio {
-  margin-top: 4.5rem;
-  display: grid;
-  grid-template-columns: 1fr auto 1fr auto 1fr;
-  gap: 0 20px;
-  align-items: stretch;
-}
-.fmt-trio-cell {
-  background: var(--ink-2);
-  border: 1px solid var(--charcoal);
-  border-radius: 14px;
-  padding: 24px 26px 22px;
-}
-.fmt-trio-tag {
-  font-size: var(--fs-label);
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  color: var(--pink);
-  margin-bottom: 12px;
-}
-.fmt-trio-title {
-  font-size: 1.3rem;
-  font-weight: 450;
-  line-height: 1.25;
-  margin-bottom: 8px;
-}
-.fmt-trio-sub {
-  font-size: 0.8125rem;
-  line-height: 1.55;
-  color: var(--slate);
-}
-.fmt-trio-arrow {
-  align-self: center;
-  font-size: 15px;
-  color: var(--pink);
-  opacity: 0.8;
-}
-.fmt-track-dots {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px 14px;
-  margin-top: 12px;
-}
-.fmt-track-dots span {
-  font-size: var(--fs-micro);
-  letter-spacing: 0.14em;
-  color: var(--slate);
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  white-space: nowrap;
-}
-.fmt-track-dots i {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  display: inline-block;
-}
-.fmt-dot--dev { background: #7EB8FF; }
-.fmt-dot--thr { background: #FFD966; }
-.fmt-dot--bld { background: #FF6B6B; }
-
 /* ── Mobile loop fallback (hidden by default) ── */
 .fmt-loop-list {
   display: none;
-}
-
-@media (max-width: 900px) {
-  .fmt-trio {
-    grid-template-columns: 1fr;
-    gap: 10px;
-  }
-  .fmt-trio-arrow {
-    justify-self: center;
-    transform: rotate(90deg);
-    padding: 2px 0;
-  }
 }
 
 @media (max-width: 600px) {
@@ -2729,7 +2652,7 @@ html.loading .hero-ctas {
   }
   .fmt-loop-item {
     position: relative;
-    padding: 0 0 26px;
+    padding: 0 0 20px;
   }
   .fmt-loop-item::before {
     content: "";
@@ -2755,25 +2678,16 @@ html.loading .hero-ctas {
     font-weight: 500;
     letter-spacing: 0.18em;
     color: var(--white);
-    margin: 3px 0;
+    margin: 3px 0 0;
   }
   .fmt-loop-item.fmt-hot .fmt-loop-name {
     color: var(--pink);
-  }
-  .fmt-loop-sub {
-    font-size: 0.75rem;
-    color: var(--slate);
-    line-height: 1.5;
   }
   .fmt-loop-repeat {
     font-size: var(--fs-label);
     letter-spacing: 0.2em;
     color: var(--pink);
     padding-top: 2px;
-  }
-  .fmt-caption {
-    font-size: 1.0625rem;
-    text-align: left;
   }
 }
 
