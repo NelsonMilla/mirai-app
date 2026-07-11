@@ -18,8 +18,6 @@
  *           Luma only: the landing funnel runs through Luma.
  */
 
-import { LUMA_EVENT_URL } from '@/lib/constants';
-
 export interface QuickAction {
   id: 'telegram' | 'luma' | 'discord';
   label: string;
@@ -31,11 +29,6 @@ export interface QuickAction {
   primary?: boolean;
 }
 
-// TODO(Nelson): the Luma link supplied so far is the ADMIN manage URL
-// (luma.com/calendar/manage/cal-s2HEMOx7ZZify5D) — visitors hit a sign-in
-// wall there. Grab the PUBLIC calendar page from Luma's Share dialog
-// (usually luma.com/<slug>) and set NEXT_PUBLIC_LUMA_CALENDAR_URL or
-// replace the event-page fallback below.
 export const quickActions: QuickAction[] = [
   {
     id: 'telegram',
@@ -52,7 +45,7 @@ export const quickActions: QuickAction[] = [
     title: 'Never miss a night',
     desc: 'Follow us on Luma and every demo night, dinner, and rooftop session lands on your calendar by itself.',
     cta: 'Follow on Luma →',
-    href: process.env.NEXT_PUBLIC_LUMA_CALENDAR_URL || LUMA_EVENT_URL,
+    href: process.env.NEXT_PUBLIC_LUMA_CALENDAR_URL || 'https://luma.com/mirai-tech-city',
     tone: '255, 142, 122',
     primary: true,
   },
