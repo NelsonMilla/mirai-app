@@ -1,4 +1,5 @@
 import { HeroSection } from "@/components/hero/HeroSection";
+import CitySection from "@/components/city/CitySection";
 import { TracksSection } from "@/components/tracks/TracksSection";
 import MonthTimeline from "@/components/month/MonthTimeline";
 import RunwaySection from "@/components/runway/RunwaySection";
@@ -21,6 +22,7 @@ export default function Home() {
       <Navbar />
       <ProgressRail />
       <HeroSection />
+      <CitySection />
       <KobeSection />
       <TracksSection />
       <MonthTimeline />

@@ -15,6 +15,7 @@ export interface SectionDef {
 }
 
 export const SECTIONS: SectionDef[] = [
+  { id: 'city', railLabel: 'THE FORMAT' },
   { id: 'kobe', navLabel: 'Kobe', railLabel: 'WHY KOBE' },
   { id: 'tracks', navLabel: 'Tracks', railLabel: 'CHOOSE YOUR STARTER' },
   { id: 'month', navLabel: 'Program', railLabel: 'THE MONTH' },
