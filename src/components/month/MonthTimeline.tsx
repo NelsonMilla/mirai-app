@@ -15,25 +15,26 @@ export default function MonthTimeline() {
     const grid = gridRef.current;
     if (!grid) return;
 
+    const timeouts: ReturnType<typeof setTimeout>[] = [];
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             chapters.forEach((_, i) => {
-              setTimeout(() => {
+              timeouts.push(setTimeout(() => {
                 setVisibleCards((prev) => {
                   const next = [...prev];
                   next[i] = true;
                   return next;
                 });
-                setTimeout(() => {
+                timeouts.push(setTimeout(() => {
                   setEnteredCards((prev) => {
                     const next = [...prev];
                     next[i] = true;
                     return next;
                   });
-                }, 900);
-              }, i * 200);
+                }, 900));
+              }, i * 200));
             });
             observer.unobserve(entry.target);
           }
@@ -43,7 +44,10 @@ export default function MonthTimeline() {
     );
 
     observer.observe(grid);
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      timeouts.forEach(clearTimeout);
+    };
   }, []);
 
   const handleClick = useCallback((idx: number) => {

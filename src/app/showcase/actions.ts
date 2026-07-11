@@ -131,7 +131,7 @@ export async function submitShowcase(
         has_link: !!data.link,
       },
     });
-    await posthog.shutdown();
+    await posthog.flush();
 
     return { success: true, message: 'Showcase application submitted!' };
   } catch (error) {
@@ -139,7 +139,7 @@ export async function submitShowcase(
     try {
       const posthog = getPostHogClient();
       posthog.capture({ distinctId: 'anonymous', event: 'showcase_submission_failed', properties: { reason: 'server_error' } });
-      await posthog.shutdown();
+      await posthog.flush();
     } catch { /* ignore posthog errors */ }
     return { success: false, message: 'Something went wrong. Please try again.' };
   }

@@ -79,6 +79,10 @@ export function ScrollProvider({ children }: { children: React.ReactNode }) {
 
     return () => {
       clearInterval(updateInterval);
+      if (rafId !== null) {
+        cancelAnimationFrame(rafId);
+        rafId = null;
+      }
     };
   }, []);
 

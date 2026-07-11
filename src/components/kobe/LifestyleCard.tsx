@@ -101,7 +101,7 @@ export default function LifestyleCard({ card, index, onOpenOverlay }: LifestyleC
     flipTimeoutRef.current = setTimeout(() => {
       onOpenOverlay(card);
       // Reset flip after overlay transition takes over
-      setTimeout(() => setIsFlipped(false), 400);
+      flipTimeoutRef.current = setTimeout(() => setIsFlipped(false), 400);
     }, 800);
   };
 
