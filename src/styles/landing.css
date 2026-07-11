@@ -1082,18 +1082,6 @@
   background: rgba(0,0,0,0.25);
 }
 
-/* ── Below arena: count ── */
-.roster-count-num {
-  font-family: var(--font-fraunces), serif; font-weight: 700;
-  font-size: clamp(2rem, 4vw, 3rem); color: var(--pink);
-  font-variant-numeric: tabular-nums;
-}
-.roster-count-label {
-  font-family: var(--font-jetbrains), monospace; font-size: var(--fs-label);
-  letter-spacing: 0.15em; text-transform: uppercase; color: var(--slate);
-  margin-top: 0.25rem;
-}
-
 /* ── Fighter special move ── */
 .fighter-special {
   display: flex;
@@ -1240,6 +1228,7 @@
   font-size: 1.8rem;
   font-weight: 700;
   color: var(--pink);
+  font-variant-numeric: tabular-nums;
 }
 .roster-count-inline .roster-count-sep {
   color: rgba(255,255,255,0.15);
@@ -1256,6 +1245,7 @@
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--slate);
+  margin-top: 0.25rem;
   margin-left: 8px;
 }
 

@@ -461,30 +461,6 @@
   transform: rotate(45deg);
 }
 
-/* ── SUBMIT ── */
-
-.form-submit-area {
-  text-align: center;
-  padding-top: 0.5rem;
-}
-
-.form-submit-btn {
-  font-size: var(--fs-secondary) !important;
-  padding: 1rem 2.5rem !important;
-  background: #F56B6B;
-  min-width: 220px;
-  justify-content: center;
-}
-
-.form-submit-btn:hover {
-  background: #F88A8A;
-}
-
-.form-submit-btn:disabled {
-  opacity: 0.6;
-  pointer-events: none;
-}
-
 /* ── STEP COUNTER ── */
 
 .step-counter {

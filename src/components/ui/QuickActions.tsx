@@ -1,7 +1,7 @@
 import React from 'react';
 import { quickActions } from '@/data/quickActions';
 
-type Variant = 'default' | 'compact' | 'stacked';
+type Variant = 'default' | 'stacked';
 
 interface QuickActionsProps {
   variant?: Variant;
