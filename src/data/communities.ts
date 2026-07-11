@@ -102,4 +102,16 @@ export const communities: Community[] = [
     logo: '/images/partners/hekabio.avif',
     treatment: 'plate',
   },
+  {
+    name: 'Augmentation Lab',
+    href: 'https://augmentationlab.org/',
+    logo: '/images/partners/augmentation-lab.png',
+    treatment: 'stamp',
+  },
+  {
+    name: 'Vitalist Bay',
+    href: 'https://vitalistbay.com/',
+    logo: '/images/partners/vitalist-bay.png',
+    treatment: 'plate',
+  },
 ];
