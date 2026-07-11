@@ -726,29 +726,34 @@ input, select, textarea, .scroll-companion {
   cursor: none;
 }
 
+/* Under-door light: a warm interior glow rises from the card's bottom edge
+   on hover — --qa-tone is set per card from src/data/quickActions.ts */
 .qa-card::before {
   content: '';
   position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse at top, rgba(var(--accent-rgb), 0.08), transparent 60%);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 55%;
+  background: linear-gradient(to top, rgba(var(--qa-tone), 0.2), transparent);
   opacity: 0;
-  transition: opacity 0.3s;
+  transform: translateY(12px);
+  transition: opacity 0.35s ease, transform 0.35s ease;
   pointer-events: none;
 }
 
 a.qa-card:hover,
-.qa-card--telegram:hover,
-.qa-card--login:hover {
-  transform: translateY(-3px);
-  border-color: rgba(var(--accent-rgb), 0.35);
-  box-shadow: 0 16px 40px rgba(0,0,0,0.25), 0 0 0 1px rgba(var(--accent-rgb), 0.1) inset;
+a.qa-card:focus-visible {
+  transform: translateY(-4px);
+  border-color: rgba(var(--qa-tone), 0.4);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.25), 0 0 0 1px rgba(var(--qa-tone), 0.1) inset;
 }
 
-a.qa-card:hover::before { opacity: 1; }
-
-.qa-card--telegram { --qa-tone: 38, 164, 223; }
-.qa-card--mailing  { --qa-tone: var(--accent-rgb); }
-.qa-card--login    { --qa-tone: 212, 184, 255; }
+a.qa-card:hover::before,
+a.qa-card:focus-visible::before {
+  opacity: 1;
+  transform: translateY(0);
+}
 
 .qa-icon {
   width: 40px;
@@ -791,73 +796,49 @@ a.qa-card:hover::before { opacity: 1; }
   letter-spacing: 0.1em;
   color: rgb(var(--qa-tone));
   opacity: 0.85;
+  transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.3s;
 }
 
-/* Mailing mini-form — stacked so the email has room to breathe */
-.qa-mailing-form {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  margin-top: 0.6rem;
+a.qa-card:hover .qa-card-cta,
+a.qa-card:focus-visible .qa-card-cta {
+  opacity: 1;
+  transform: translateX(3px);
 }
 
-.qa-mailing-input {
-  width: 100%;
-  padding: 0.7rem 0.85rem;
-  background: rgba(0,0,0,0.3);
-  border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 10px;
-  color: var(--white);
-  font-size: var(--fs-secondary);
-  font-family: inherit;
-  outline: none;
-  transition: border-color 0.2s, background 0.2s;
-  cursor: none;
-}
-
-.qa-mailing-input::placeholder { color: rgba(133,133,168,0.7); }
-
-.qa-mailing-input:focus {
-  border-color: rgba(var(--accent-rgb), 0.5);
-  background: rgba(0,0,0,0.4);
-}
-
-.qa-mailing-btn {
-  width: 100%;
-  padding: 0.7rem 1rem;
+/* Funnel emphasis (Luma): the one solid CTA in the row */
+.qa-card-cta--primary {
+  align-self: flex-start;
+  padding: 0.55rem 0.9rem;
   border-radius: 10px;
   background: var(--accent);
   color: var(--ink);
-  border: none;
-  font-family: var(--font-jetbrains), monospace;
-  font-size: var(--fs-label);
   font-weight: 700;
-  letter-spacing: 0.1em;
   text-transform: uppercase;
-  cursor: none;
-  transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+  white-space: nowrap;
+  opacity: 1;
 }
 
-.qa-mailing-btn:hover:not(:disabled) {
-  transform: translateY(-1px);
-  box-shadow: 0 8px 20px rgba(var(--accent-rgb), 0.25);
+a.qa-card:hover .qa-card-cta--primary {
   background: var(--accent-bright);
+  transform: translateX(0);
 }
 
-.qa-mailing-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+/* Compact variant (apply page): title-only cards */
+.quick-actions--compact .qa-card-desc { display: none; }
 
-.qa-card--mailing { min-width: 0; }
-
-.qa-mailing-success {
-  font-size: var(--fs-label);
-  color: #7FD97F;
-  margin-top: 0.5rem;
-}
-
-.qa-mailing-err {
-  font-size: var(--fs-label);
-  color: #F58A9B;
-  margin-top: 0.4rem;
+@media (prefers-reduced-motion: reduce) {
+  .qa-card,
+  .qa-card::before,
+  .qa-card-cta {
+    transition: none;
+  }
+  a.qa-card:hover,
+  a.qa-card:focus-visible {
+    transform: none;
+  }
+  a.qa-card:hover .qa-card-cta {
+    transform: none;
+  }
 }
 
 /* ============================================
