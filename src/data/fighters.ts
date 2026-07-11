@@ -82,7 +82,7 @@ export const fighters: Fighter[] = [
     photo: '/images/speakers/juliette.jpg',
     tag: 'Therapies',
     headliner: true,
-    hook: 'Founder of MuseBio — blood into life',
+    hook: 'Founder · MuseBio',
     special: 'Blood into Life',
     stats: [
       { label: 'REG', value: 98 },
@@ -125,7 +125,7 @@ export const fighters: Fighter[] = [
     bio: '',
     tag: 'Speaker',
     headliner: true,
-    hook: 'LEV Foundation — longevity escape velocity',
+    hook: 'LEV Foundation',
     special: 'Longevity Escape Velocity',
     stats: [
       { label: 'REG', value: 99 },
@@ -192,7 +192,7 @@ export const fighters: Fighter[] = [
     bio: '',
     tag: 'Speaker',
     headliner: true,
-    hook: 'Headline speaker — full announcement soon',
+    hook: 'Announcement soon',
     special: 'Full Send',
     stats: [
       { label: 'FND', value: 88 },
@@ -254,13 +254,14 @@ export const fighters: Fighter[] = [
   },
   {
     // TODO(Nelson): supply real portrait for Yuki Hanyu and confirm exact title.
+    // Full descriptor: IntegriCulture — cultured-meat / cellular agriculture, Japan.
     name: 'Yuki',
     fullName: 'Yuki Hanyu',
-    title: 'Founder · IntegriCulture (cultured-meat / cellular agriculture, Japan)',
+    title: 'Founder · IntegriCulture',
     bio: '',
     tag: 'Speaker',
     headliner: true,
-    hook: 'Founder of IntegriCulture — cellular agriculture, Japan',
+    hook: 'Cellular Agriculture',
     special: 'Cellular Agriculture',
     stats: [
       { label: 'BIO', value: 93 },

@@ -950,10 +950,10 @@
 /* Headliner hook — one-line credibility under the name */
 .slot-hook {
   font-family: var(--font-jetbrains), monospace; font-size: calc(var(--fs-label) * 0.9);
-  letter-spacing: 0.04em; color: rgba(255,255,255,0.45);
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
   text-align: center; max-width: 100%; padding: 0 0.3rem;
-  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
-  overflow: hidden;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 
 /* ── RIGHT: Fighter detail panel ── */

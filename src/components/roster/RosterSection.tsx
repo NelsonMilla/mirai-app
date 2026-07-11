@@ -153,7 +153,7 @@ export default function RosterSection() {
 
       {/* Supporting bill: every other confirmed speaker, poster lower-third style */}
       <div className="roster-bill">
-        <div className="bill-label mono">Also on the card</div>
+        <div className="bill-label mono">Also in the arena</div>
         <div className="bill-names">
           {supporting.map((fighter) => (
             <span key={fighter.fullName} className="bill-name mono">
@@ -164,7 +164,7 @@ export default function RosterSection() {
         </div>
         {challengers.length > 0 && (
           <div className="bill-challengers mono" style={{ color: tagColors.Incoming }}>
-            + {challengers.length} challengers approaching · announcement September 2026
+            + {challengers.length} challengers approaching · September 2026
           </div>
         )}
       </div>
