@@ -2,12 +2,12 @@
 
 import React, { useState, useCallback } from 'react';
 import Image from 'next/image';
-import { fighters, rosterPartners, tagColors, ROSTER_TOTAL } from '@/data/fighters';
+import { fighters, tagColors, ROSTER_TOTAL } from '@/data/fighters';
 import { RevealSection } from '@/components/ui/RevealSection';
 import { PixelAvatar } from './PixelAvatar';
 
-// TODO(Nelson): confirm the real URL of the TCG full-roster page. /roster is a placeholder.
-const FULL_ROSTER_URL = '/roster';
+// The full TCG roster lives in a separate project on its own subdomain.
+const FULL_ROSTER_URL = 'https://tcg.miraitech.city';
 
 export default function RosterSection() {
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -174,18 +174,13 @@ export default function RosterSection() {
         <a href={FULL_ROSTER_URL} className="roster-cta-link mono">View Full Roster →</a>
       </div>
 
-      {/* Bottom row: count + partners */}
+      {/* Bottom row: confirmed count */}
       <div className="roster-bottom">
         <div className="roster-count-inline">
           <span className="roster-count-num display">{fighters.filter(f => !f.mystery).length}</span>
           <span className="roster-count-sep">/</span>
           <span className="roster-count-total">{ROSTER_TOTAL}</span>
           <span className="roster-count-label mono">Fighters confirmed</span>
-        </div>
-        <div className="roster-partners">
-          {rosterPartners.map((partner) => (
-            <span key={partner} className="roster-partner mono">{partner}</span>
-          ))}
         </div>
       </div>
         </>

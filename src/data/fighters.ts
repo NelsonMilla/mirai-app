@@ -75,22 +75,6 @@ export const fighters: Fighter[] = [
     ],
   },
   {
-    name: 'Juliette',
-    fullName: 'Juliette Humer',
-    title: 'Founder · MuseBio',
-    bio: "",
-    photo: '/images/speakers/juliette.jpg',
-    tag: 'Therapies',
-    headliner: true,
-    hook: 'Founder · MuseBio',
-    special: 'Blood into Life',
-    stats: [
-      { label: 'REG', value: 98 },
-      { label: 'STR', value: 82 },
-      { label: 'NET', value: 90 },
-    ],
-  },
-  {
     name: 'Masa',
     fullName: 'Masa Nakatsu',
     title: 'Founder of Orb',
@@ -270,6 +254,22 @@ export const fighters: Fighter[] = [
     ],
   },
   {
+    name: 'Juliette',
+    fullName: 'Juliette Humer',
+    title: 'Founder · MuseBio',
+    bio: "",
+    photo: '/images/speakers/juliette.jpg',
+    tag: 'Therapies',
+    headliner: true,
+    hook: 'Founder · MuseBio',
+    special: 'Blood into Life',
+    stats: [
+      { label: 'REG', value: 98 },
+      { label: 'STR', value: 82 },
+      { label: 'NET', value: 90 },
+    ],
+  },
+  {
     name: '???',
     fullName: 'Challenger Approaching',
     title: 'Track TBA',
@@ -286,9 +286,6 @@ export const fighters: Fighter[] = [
     mystery: true,
   },
 ];
-
-/** Partner logos shown under the roster grid. */
-export const rosterPartners = ['Frontier Humans', 'HekaBio', 'Viva City', 'KBIC'];
 
 /** Nameplate/accent color per tag — the roster selector and detail panel key off this. */
 export const tagColors: Record<Fighter['tag'], string> = {
