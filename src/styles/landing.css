@@ -2578,6 +2578,137 @@ html.loading .hero-ctas {
   max-width: 520px;
 }
 
+/* ── PLACARD SPREAD: copy left, evidence ledger right ── */
+.kobe-placard {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 2.5rem;
+}
+@media (min-width: 1000px) {
+  .kobe-placard {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    gap: clamp(3rem, 5vw, 6rem);
+    align-items: start;
+  }
+}
+
+/* The ledger: ruled rows butting a vertical spine, kanji counterweight */
+.kobe-ledger {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  column-gap: clamp(1.25rem, 2vw, 2rem);
+  align-items: start;
+}
+@media (min-width: 1000px) {
+  .kobe-ledger {
+    grid-template-columns: minmax(0, 1fr) 1px max-content;
+  }
+}
+
+.kobe-ledger-rows {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-bottom: 1px solid rgba(133, 133, 168, 0.18);
+}
+.kobe-ledger-row {
+  display: grid;
+  grid-template-columns: 2.5ch minmax(0, 1fr);
+  grid-template-areas:
+    'idx value'
+    '.   label';
+  column-gap: 1rem;
+  row-gap: 0.4rem;
+  padding-block: 1.05rem;
+  border-top: 1px solid rgba(133, 133, 168, 0.18);
+  opacity: 0;
+}
+.in .kobe-ledger-row {
+  opacity: 1;
+  transition: opacity 0.5s ease;
+  transition-delay: calc(var(--row-i) * 120ms + 0.2s);
+}
+.kobe-ledger-index {
+  grid-area: idx;
+  font-size: var(--fs-label);
+  letter-spacing: 0.1em;
+  color: rgba(245, 160, 181, 0.5);
+  padding-top: 0.5em;
+}
+.kobe-ledger-value {
+  grid-area: value;
+  font-family: var(--font-fraunces), serif;
+  font-variation-settings: 'SOFT' 80, 'opsz' 40;
+  font-size: clamp(1.9rem, 2.6vw, 2.6rem);
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+  color: var(--white);
+  text-align: right;
+}
+.kobe-ledger-label {
+  grid-area: label;
+  font-size: var(--fs-label);
+  line-height: 1.35;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--slate);
+  text-align: right;
+}
+
+/* Spine: draws top-to-bottom on reveal, rows fade in behind it */
+.kobe-ledger-spine {
+  display: none;
+  width: 1px;
+  height: 100%;
+  background: rgba(133, 133, 168, 0.35);
+  transform: scaleY(0);
+  transform-origin: top;
+}
+.in .kobe-ledger-spine {
+  transform: scaleY(1);
+  transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+@media (min-width: 1000px) {
+  .kobe-ledger-spine { display: block; }
+}
+
+/* 先駆 counterweight — real vertical setting, not a watermark */
+.kobe-ledger-kanji {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  padding-top: 0.5rem;
+}
+@media (min-width: 1000px) {
+  .kobe-ledger-kanji { display: flex; }
+}
+.kobe-ledger-kanji-glyph {
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+  font-family: var(--font-noto-serif-jp), serif;
+  font-weight: 600;
+  font-size: clamp(3.5rem, 5vw, 5rem);
+  line-height: 1;
+  letter-spacing: 0.15em;
+  color: rgba(255, 255, 255, 0.07);
+}
+.kobe-ledger-kanji-caption {
+  font-size: calc(var(--fs-label) * 0.9);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(133, 133, 168, 0.55);
+  writing-mode: horizontal-tb;
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kobe-ledger-row { opacity: 1; transition: none; }
+  .kobe-ledger-spine { transform: scaleY(1); transition: none; }
+}
+
 /* ── LIFESTYLE CARDS GRID ── */
 .kobe-beat-2 {
   position: relative;

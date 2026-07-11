@@ -33,78 +33,44 @@ export default function KobeSection() {
   return (
     <>
       <RevealSection id="kobe" dataSection="kobe" variant="reveal-track" threshold={0.05}>
-        {/* BEAT 1: Regulatory argument */}
-        <div className="kobe-beat-1">
-          <div className="section-label stagger">Why Kobe</div>
+        {/* BEAT 1: Regulatory argument — placard spread: copy left, evidence ledger right */}
+        <div className="kobe-beat-1 kobe-placard">
+          <div className="kobe-argument">
+            <div className="section-label stagger">Why Kobe</div>
 
-          <h2 className="kobe-h2 display">
-            What takes <em>years</em> elsewhere<br />
-            takes <em>months</em> here.
-          </h2>
+            <h2 className="kobe-h2 display">
+              What takes <em>years</em> elsewhere<br />
+              takes <em>months</em> here.
+            </h2>
 
-          <p className="kobe-lead">
-            Japan's regulatory framework for regenerative medicine and medical devices is the fastest legal path from clinical evidence to patients — where it matters most, and where it's actually achievable.
-          </p>
-
-          <div className="kobe-receipts stagger">
-            {marketReceipts.map((stat) => (
-              <div key={stat.label} className="kobe-receipt">
-                <span className="kobe-receipt-value display">{stat.value}</span>
-                <span className="kobe-receipt-label mono">{stat.label}</span>
-              </div>
-            ))}
+            <p className="kobe-lead">
+              Japan's regulatory framework for regenerative medicine and medical devices is the fastest legal path from clinical evidence to patients — where it matters most, and where it's actually achievable.
+            </p>
           </div>
 
-          <style>{`
-            .kobe-receipts {
-              display: grid;
-              grid-template-columns: repeat(5, 1fr);
-              gap: 1px;
-              margin-bottom: 2.5rem;
-              max-width: 720px;
-              border: 1px solid rgba(133, 133, 168, 0.18);
-              background: rgba(133, 133, 168, 0.18);
-              border-radius: 0.5rem;
-              overflow: hidden;
-            }
-            .kobe-receipt {
-              display: flex;
-              flex-direction: column;
-              gap: 0.4rem;
-              padding: 1rem 1.1rem;
-              background: var(--ink-2);
-            }
-            .kobe-receipt-value {
-              font-family: var(--font-fraunces), serif;
-              font-variation-settings: 'SOFT' 80, 'opsz' 40;
-              font-size: clamp(1.5rem, 2.6vw, 2rem);
-              font-weight: 300;
-              line-height: 1;
-              letter-spacing: -0.02em;
-              color: var(--white);
-            }
-            .kobe-receipt-label {
-              font-family: var(--font-jetbrains), monospace;
-              font-size: var(--fs-label);
-              line-height: 1.35;
-              letter-spacing: 0.04em;
-              color: var(--slate);
-            }
-
-            @media (max-width: 900px) {
-              .kobe-receipts {
-                grid-template-columns: repeat(3, 1fr);
-              }
-              .kobe-receipt:last-child {
-                grid-column: span 2;
-              }
-            }
-            @media (max-width: 560px) {
-              .kobe-receipts {
-                grid-template-columns: repeat(2, 1fr);
-              }
-            }
-          `}</style>
+          <aside className="kobe-ledger" aria-label="Japan market indicators">
+            <ol className="kobe-ledger-rows">
+              {marketReceipts.map((stat, idx) => (
+                <li
+                  key={stat.label}
+                  className="kobe-ledger-row"
+                  style={{ '--row-i': idx } as React.CSSProperties}
+                >
+                  <span className="kobe-ledger-index mono">{String(idx + 1).padStart(2, '0')}</span>
+                  <span className="kobe-ledger-value display">{stat.value}</span>
+                  <span className="kobe-ledger-label mono">{stat.label}</span>
+                </li>
+              ))}
+            </ol>
+            <span className="kobe-ledger-spine" aria-hidden="true" />
+            {/* 先駆 = "forerunner", nodding to the SAKIGAKE (先駆け) PMDA fast-track
+                designation. TODO(Nelson): have a native speaker confirm 先駆 reads
+                naturally standing alone; fallback is 神戸 (Kobe). */}
+            <div className="kobe-ledger-kanji" aria-hidden="true">
+              <span className="kobe-ledger-kanji-glyph">先駆</span>
+              <span className="kobe-ledger-kanji-caption mono">Sakigake · 先駆け</span>
+            </div>
+          </aside>
         </div>
 
         {/* BEAT 2: Lifestyle cards */}
