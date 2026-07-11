@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Image from 'next/image';
-import { pastEvents } from '@/data/pastEvents';
+import { pastEvents, trackRecordNext } from '@/data/pastEvents';
 import { RevealSection } from '@/components/ui/RevealSection';
 
 export default function PastEventsSection() {
@@ -17,39 +17,49 @@ export default function PastEventsSection() {
           </h2>
 
           <p className="past-events-intro">
-            Bringing long-term value across the world&apos;s frontier communities.
+            Four times at scale, on three coasts.
           </p>
 
-          <div className="past-events-grid">
+          <div className="past-events-band">
             {pastEvents.map((event, idx) => (
               <article
                 key={event.name}
-                className={`past-event-card ${inView ? 'card-in' : ''}`}
+                className={`pe-trophy ${inView ? 'card-in' : ''}`}
                 style={{ '--card-i': idx } as React.CSSProperties}
               >
-                <div className="past-event-period mono">{event.period}</div>
-                <h3 className="past-event-name display">{event.name}</h3>
-                <p className="past-event-stat">{event.stat}</p>
-                <p className="past-event-detail">{event.detail}</p>
-
-                {/* Photo strip — rendered only when photos are provided (added later) */}
-                {event.photos && event.photos.length > 0 && (
-                  <div className="past-event-photos">
-                    {event.photos.map((photo) => (
-                      <div key={photo} className="past-event-photo">
-                        <Image
-                          src={photo}
-                          alt=""
-                          fill
-                          sizes="(max-width: 640px) 30vw, 120px"
-                          style={{ objectFit: 'cover' }}
-                        />
-                      </div>
-                    ))}
-                  </div>
-                )}
+                <div className="pe-figure display">
+                  {event.figure}
+                  {event.figureSuffix && (
+                    <span className="pe-suffix">{event.figureSuffix}</span>
+                  )}
+                  {/* Evidence stamp — renders once a photo is supplied */}
+                  {event.photos && event.photos.length > 0 && (
+                    <span className="pe-stamp">
+                      <Image
+                        src={event.photos[0]}
+                        alt=""
+                        fill
+                        sizes="72px"
+                        style={{ objectFit: 'cover' }}
+                      />
+                    </span>
+                  )}
+                </div>
+                <div className="pe-eyebrow mono">{event.period}</div>
+                <h3 className="pe-name display">{event.name}</h3>
+                <p className="pe-support">{event.support}</p>
               </article>
             ))}
+          </div>
+
+          {/* Coda: the record points forward */}
+          <div
+            className={`pe-coda mono ${inView ? 'card-in' : ''}`}
+            style={{ '--card-i': pastEvents.length } as React.CSSProperties}
+          >
+            <span className="pe-coda-pin" aria-hidden="true">◆</span>
+            {trackRecordNext}
+            <span className="pe-coda-here"> · You are here</span>
           </div>
         </>
       )}

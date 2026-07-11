@@ -1,50 +1,65 @@
 /**
  * Track record for the "Other events we have supported" section.
  *
- * Single source of truth for PastEventsSection.
+ * Single source of truth for PastEventsSection — rendered as four trophy
+ * figures (500+ · 400+ · 40M+ · MIT) with the event as attribution, and a
+ * "next stop" coda pointing at Kobe.
  *
  * Field guide
  * -----------
- *  period    Year/location mono eyebrow (e.g. "2025 · San Francisco").
- *  name      Event name, rendered in Fraunces serif.
- *  stat      Lead stat line (e.g. "400+ people, 6-week vertical village").
- *  detail    Second line of supporting description / notable names.
- *  photos    Optional photo-collage paths under /public. A photo strip is
- *            planned for later; when absent the slot renders nothing.
+ *  figure        The one unfakeable headline figure, set monumental
+ *                ("500", "40M", "MIT"). Chosen per event: reach beats
+ *                money (40M+ TV viewers over the $1M prize), institution
+ *                beats headcount (MIT over ~300).
+ *  figureSuffix  Optional pink suffix ("+"). Omit for word-figures.
+ *  period        Year/location mono eyebrow (e.g. "2025 · San Francisco").
+ *  name          Event name, rendered in Fraunces serif.
+ *  support       One attribution line under the name. Reads as a
+ *                continuation of the figure where possible ("40M+ … TV
+ *                viewers across two shows…"). Facts audited — keep true.
+ *  photos        Optional evidence-stamp paths under /public. photos[0]
+ *                renders as a small tilted stamp on the figure once
+ *                supplied; absent, the trophy is pure type (intentional).
  */
 
 export interface PastEvent {
+  figure: string;
+  figureSuffix?: string;
   period: string;
   name: string;
-  stat: string;
-  detail: string;
+  support: string;
   photos?: string[];
 }
 
 export const pastEvents: PastEvent[] = [
   {
+    figure: '500',
+    figureSuffix: '+',
     period: '2024–25 · Roatán',
     name: 'Vitalia City Pop-Ups',
-    stat: '500+ builders. Regulatory sandboxing.',
-    detail: 'Two popups, multiple conferences — converted into a permanent hub.',
+    support: 'Builders in a regulatory sandbox. Two popups converted into a permanent hub.',
   },
   {
+    figure: '400',
+    figureSuffix: '+',
     period: '2025 · San Francisco',
     name: 'Viva Frontier Tower Pop-Up',
-    stat: '400+ people, 6-week vertical village.',
-    detail:
-      'Biomarkers, daily programming, Demo Day. Peter Diamandis, Aubrey de Grey, Emmett Shear, Patri Friedman.',
+    support: 'A 6-week vertical village — biomarkers, daily programming, Demo Day. Peter Diamandis, Aubrey de Grey, Emmett Shear, Patri Friedman.',
   },
   {
+    figure: '40M',
+    figureSuffix: '+',
     period: '2025–26 · Roatán & SF',
     name: 'Meet the Drapers',
-    stat: 'Two shows with Tim & Adam Draper.',
-    detail: 'Thousands of applicants, 40M+ TV viewers. Muse.Bio won the $1M finale.',
+    support: 'TV viewers across two shows with Tim & Adam Draper. Thousands of applicants; Muse.Bio won the $1M finale.',
   },
   {
-    period: '2025 · MIT Media Lab',
+    figure: 'MIT',
+    period: '2025 · Media Lab',
     name: 'Human Augmentation Summit',
-    stat: '~300 people. BCIs, bioengineering.',
-    detail: 'Prof. Stephen Wolfram, Life Biosciences, MIT, Harvard.',
+    support: '~300 people on BCIs and bioengineering. Prof. Stephen Wolfram, Life Biosciences, MIT, Harvard.',
   },
 ];
+
+/** Coda line under the trophy band — the record points forward. */
+export const trackRecordNext = 'Next · 2026 · Kobe — Mirai Tech PopUp City';
