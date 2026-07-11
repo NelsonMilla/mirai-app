@@ -114,4 +114,10 @@ export const communities: Community[] = [
     logo: '/images/partners/vitalist-bay.png',
     treatment: 'plate',
   },
+  {
+    name: 'The Mu',
+    href: 'https://the-mu.xyz/',
+    logo: '/images/partners/the-mu.png',
+    treatment: 'stamp',
+  },
 ];
