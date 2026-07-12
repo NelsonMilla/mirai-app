@@ -4578,6 +4578,107 @@ html.loading .hero-stats {
   text-align: center;
 }
 
+/* ── Mobile route list — swaps in for the diagram ≤640px ── */
+.tm-list {
+  display: none;
+  background: #060810;
+  border: 1px solid rgba(245, 160, 181, 0.08);
+  border-radius: 14px;
+  overflow: hidden;
+}
+.tm-list-item {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+.tm-list-item:last-child {
+  border-bottom: none;
+}
+.tm-list-row {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 0.9rem 1rem;
+  min-height: 56px;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  position: relative;
+}
+/* Route rail running through the station dots, metro-strip style */
+.tm-list-row::before {
+  content: '';
+  position: absolute;
+  left: calc(1rem + 6px);
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: rgba(255, 255, 255, 0.07);
+}
+.tm-list-item:first-child .tm-list-row::before { top: 50%; }
+.tm-list-item:last-child .tm-list-row::before { bottom: 50%; }
+.tm-list-dot {
+  flex: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #060810;
+  border: 3px solid var(--dot-color);
+  box-shadow: 0 0 10px rgba(var(--dot-rgb), 0.35);
+  position: relative;
+  z-index: 1;
+  transition: background 0.3s, box-shadow 0.3s;
+}
+.tm-list-item.open .tm-list-dot {
+  background: var(--dot-color);
+  box-shadow: 0 0 16px rgba(var(--dot-rgb), 0.7);
+}
+.tm-list-titles {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+.tm-list-title {
+  font-family: var(--font-fraunces), serif;
+  font-weight: 500;
+  font-size: 1.05rem;
+  letter-spacing: -0.01em;
+  color: var(--white);
+}
+.tm-list-subtitle {
+  font-size: var(--fs-label);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.35);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.tm-list-cat {
+  flex: none;
+  font-size: var(--fs-label);
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--dot-color);
+  padding: 3px 8px;
+  border: 1px solid rgba(var(--dot-rgb), 0.3);
+  border-radius: 4px;
+  background: rgba(var(--dot-rgb), 0.08);
+}
+.tm-list-detail {
+  padding: 0 1rem 1.25rem;
+}
+.tm-list-detail .dot-photo {
+  margin: 0 0 1rem;
+  border-radius: 10px;
+}
+.tm-list-detail .dot-detail-text {
+  margin-bottom: 1rem;
+}
+
 /* ── Transit map responsive ── */
 @media (max-width: 980px) {
   .dot-map-layout {
@@ -4589,29 +4690,16 @@ html.loading .hero-stats {
 }
 /* NOTE: .tm-map keeps the 16/10 viewBox aspect at every width — the
    station buttons are %-positioned over the SVG, so letterboxing from a
-   mismatched container aspect would desync them from the drawn lines. */
+   mismatched container aspect would desync them from the drawn lines.
+   Below 640px the diagram is too cramped to read or tap, so the mobile
+   route list replaces it outright. */
 @media (max-width: 640px) {
-  .tm-seg-label,
-  .tm-ghost-text,
-  .tm-compass {
+  .tm-map,
+  .dot-detail {
     display: none;
   }
-  .tm-station-label {
-    font-size: var(--fs-micro);
-  }
-  .tm-ring {
-    width: 12px;
-    height: 12px;
-    border-width: 2.5px;
-  }
-  .tm-hub .tm-ring {
-    width: 15px;
-    height: 15px;
-  }
-  /* Flip crowded labels to the other side at phone widths */
-  .tm-mlabel-left .tm-station-label {
-    left: auto;
-    right: calc(100% + 10px);
+  .tm-list {
+    display: block;
   }
 }
 
@@ -5039,11 +5127,11 @@ html.loading .hero-stats {
   }
 }
 
-/* BUG-07: min-height: 100vh on sparse sections wastes space on mobile */
+/* BUG-07: min-height: 100vh on sparse sections wastes space on mobile.
+   Applies to every .section — content sets the height on phones. The hero
+   keeps its own 100svh rule (.hero, landing.css) and is unaffected. */
 @media (max-width: 640px) {
-  #runway,
-  #playground,
-  #apply {
+  .section {
     min-height: auto;
   }
 }

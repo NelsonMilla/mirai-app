@@ -15,8 +15,6 @@ interface Location {
   vy: number;
   /** Which side of the station the label sits on. */
   labelPos: 'top' | 'bottom' | 'left' | 'right';
-  /** Mobile override — flips the label side below 640px to dodge collisions. */
-  mobileLabelPos?: 'left';
   color: string;
   rgb: string;
   /** Interchange stations render a larger double ring. */
@@ -45,7 +43,7 @@ const locations: Location[] = [
     cat: 'Stay',
     text: 'Full-service hotel on Port Island. Rooftop pool, onsen bath, 5-minute walk to KBIC.',
     stats: [{ value: '5 min', label: 'To KBIC' }, { value: '746', label: 'Rooms' }, { value: 'Rooftop', label: 'Pool + Onsen' }],
-    vx: 520, vy: 370, labelPos: 'right', mobileLabelPos: 'left',
+    vx: 520, vy: 370, labelPos: 'right',
     color: '#D4B8FF', rgb: '212,184,255',
     imageSrc: '/images/map/portopia.jpg',
   },
@@ -212,7 +210,7 @@ export default function TransitMap() {
           {locations.map((loc, i) => (
             <button
               key={loc.id}
-              className={`tm-station tm-label-${loc.labelPos} ${loc.mobileLabelPos ? `tm-mlabel-${loc.mobileLabelPos}` : ''} ${loc.hub ? 'tm-hub' : ''} ${activeId === loc.id ? 'active' : ''}`}
+              className={`tm-station tm-label-${loc.labelPos} ${loc.hub ? 'tm-hub' : ''} ${activeId === loc.id ? 'active' : ''}`}
               style={{
                 left: `${(loc.vx / VB_W) * 100}%`,
                 top: `${(loc.vy / VB_H) * 100}%`,
@@ -228,6 +226,51 @@ export default function TransitMap() {
               <span className="tm-station-label mono">{loc.title}</span>
             </button>
           ))}
+        </div>
+
+        {/* Mobile route list — the 2D diagram swaps out ≤640px, where it's
+            too cramped to read or tap. Same data, accordion navigation. */}
+        <div className="tm-list">
+          {locations.map((loc) => {
+            const open = activeId === loc.id;
+            return (
+              <div
+                key={loc.id}
+                className={`tm-list-item ${open ? 'open' : ''}`}
+                style={{ '--dot-color': loc.color, '--dot-rgb': loc.rgb } as React.CSSProperties}
+              >
+                <button
+                  className="tm-list-row"
+                  onClick={() => setActiveId(open ? null : loc.id)}
+                  aria-expanded={open}
+                >
+                  <span className="tm-list-dot" />
+                  <span className="tm-list-titles">
+                    <span className="tm-list-title">{loc.title}</span>
+                    <span className="tm-list-subtitle mono">{loc.subtitle}</span>
+                  </span>
+                  <span className="tm-list-cat mono">{loc.cat}</span>
+                </button>
+                {open && (
+                  <div className="tm-list-detail">
+                    <div className="dot-photo">
+                      <img src={loc.imageSrc} alt={loc.title} loading="lazy" />
+                      <span className="dot-photo-credit mono">© Kobe Tourism Bureau</span>
+                    </div>
+                    <p className="dot-detail-text">{loc.text}</p>
+                    <div className="dot-detail-stats">
+                      {loc.stats.map((s, i) => (
+                        <div key={i} className="dot-detail-stat">
+                          <div className="dot-stat-value mono" style={{ color: loc.color }}>{s.value}</div>
+                          <div className="dot-stat-label mono">{s.label}</div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            );
+          })}
         </div>
 
         {/* Detail panel */}
