@@ -70,6 +70,15 @@
   transform: translateX(calc(75% * (4 - var(--ch-i, 0)))) rotateZ(-3deg) scale(0.92);
 }
 
+/* Single-column phones: the deal-from-right start state sits up to +300%
+   off-canvas — it widened the page to ~1300px (horizontal scroll on iOS).
+   Rise in place instead. */
+@media (max-width: 640px) {
+  .chapter-card {
+    transform: translateY(32px) rotateZ(-2deg) scale(0.92);
+  }
+}
+
 /* ── Per-card color themes ── */
 .ch-arrival   { --ch-rgb: 78, 205, 196;  --ch-color: #4ECDC4; }
 .ch-longevity { --ch-rgb: 245, 197, 66;  --ch-color: #F5C542; }
@@ -3877,6 +3886,15 @@ html.loading .hero-stats {
   transition:
     opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
     transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Single-column phones: the horizontal deal parks cards 3-4 fully outside
+   the viewport, so their IntersectionObserver can never fire and they stay
+   invisible. Rise in place instead. */
+@media (max-width: 640px) {
+  .life-card {
+    transform: translateY(32px) rotateZ(-2deg) scale(0.95);
+  }
 }
 
 .life-card.card-visible {

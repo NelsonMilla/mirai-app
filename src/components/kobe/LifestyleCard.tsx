@@ -67,24 +67,27 @@ export default function LifestyleCard({ card, index, onOpenOverlay }: LifestyleC
     };
   }, []);
 
-  // Intersection observer for entrance animation
+  // Intersection observer for entrance animation. Observe the grid, not the
+  // card: the deal-in start state parks later cards fully off-viewport
+  // (and section overflow clips them), so the card itself never intersects
+  // on narrow layouts. Same pattern as MonthTimeline's chapter grid.
   useEffect(() => {
+    const target = cardRef.current?.closest('.life-cards-grid') ?? cardRef.current;
+    if (!target) return;
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             setIsVisible(true);
-            observer.unobserve(entry.target);
+            observer.disconnect();
           }
         });
       },
       { threshold: 0.1, rootMargin: '0px 0px -80px 0px' }
     );
 
-    if (cardRef.current) {
-      observer.observe(cardRef.current);
-    }
-
+    observer.observe(target);
     return () => observer.disconnect();
   }, []);
 

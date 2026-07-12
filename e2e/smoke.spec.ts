@@ -72,6 +72,15 @@ for (const vp of VIEWPORTS) {
     await page.goto('/');
     await waitForLoaderGone(page);
 
+    // Off-canvas entrance states must not widen the page even before any
+    // reveal fires (regression: chapter cards parked at +300% translateX
+    // kept the document ~1300px wide — horizontal panning on iOS).
+    const preScroll = await page.evaluate(() => ({
+      scrollW: document.documentElement.scrollWidth,
+      vw: window.innerWidth,
+    }));
+    expect(preScroll.scrollW, 'no horizontal overflow on load').toBeLessThanOrEqual(preScroll.vw);
+
     const ids = await revealSectionIds(page);
     expect(ids.length, 'expected reveal-gated sections on the page').toBeGreaterThanOrEqual(8);
 
@@ -106,6 +115,20 @@ for (const vp of VIEWPORTS) {
       vw: window.innerWidth,
     }));
     expect(scrollW, 'no horizontal overflow after full scroll-through').toBeLessThanOrEqual(vw);
+
+    // Every lifestyle card must actually deal in (regression: on phones
+    // cards 3-4 started fully off-viewport, so their per-card observer
+    // never fired and they stayed invisible).
+    const cardOpacities = await page.evaluate(() =>
+      [...document.querySelectorAll('.life-card')].map(
+        (c) => +getComputedStyle(c).opacity,
+      ),
+    );
+    expect(cardOpacities.length).toBeGreaterThan(0);
+    expect(
+      Math.min(...cardOpacities),
+      'every lifestyle card must deal in',
+    ).toBeGreaterThan(0.5);
 
     // Roster: every fighter slot must have real height (regression: rows
     // past the 8th collapsed to 0px on desktop).
