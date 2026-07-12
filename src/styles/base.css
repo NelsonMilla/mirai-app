@@ -256,6 +256,11 @@ nav.site-nav {
   width: 100%;
   display: flex;
   flex-direction: column;
+  /* Entrance animations park cards off-canvas with translateX before they
+     reveal (chapter/life cards). Clip so those states can't widen the page
+     — html{overflow-x:hidden} hides it on desktop but iOS still pans.
+     clip (unlike hidden) doesn't create a scroll container. */
+  overflow-x: clip;
 }
 
 @media (min-width: 641px) {
