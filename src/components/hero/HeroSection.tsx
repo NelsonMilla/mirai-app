@@ -3,6 +3,13 @@
 import { useEffect, useRef } from 'react';
 import { useScrollState } from '@/hooks/useScrollState';
 
+const HERO_STATS = [
+  { value: '4', label: 'Weeks' },
+  { value: '300', label: 'Residents' },
+  { value: '30', label: 'Residency Companies' },
+  { value: '5', label: 'Summit Days' },
+] as const;
+
 export function HeroSection() {
   const heroKanjiRef = useRef<HTMLDivElement>(null);
   const { scroll } = useScrollState();
@@ -25,7 +32,12 @@ export function HeroSection() {
         未来
       </div>
       <div className="hero-inner">
-        <div className="hero-eyebrow">KOBE PORT ISLAND · OCTOBER 2026</div>
+        <div className="hero-eyebrow hero-eyebrow--split">
+          <span className="hero-eyebrow-tagline">
+            Japan&rsquo;s Premier Longevity Biomedical PopUp City
+          </span>
+          <span className="hero-eyebrow-meta">Kobe Port Island · October 2026</span>
+        </div>
         <h1 className="display">
           <span className="line">
             <span className="line-inner">Build the</span>
@@ -43,17 +55,26 @@ export function HeroSection() {
           </span>
         </h1>
         <p className="hero-sub">
-          Three tracks. One month. Kobe&rsquo;s Port Island. Biomedical devices, therapeutic pathways, and the
-          builder community — culminating in the Frontier Human Fashion Show.
+          One month of co-building at KBIC, Japan&rsquo;s largest biomedical cluster. Three tracks
+          that move you from &ldquo;working on it&rdquo; to &ldquo;in patients,&rdquo; culminating in
+          the Frontier Human Fashion Show.
         </p>
         <div className="hero-ctas">
           <a className="btn btn-primary" href="#apply">
             Apply Now
           </a>
-          <a className="btn btn-outline" href="#tracks">
+          <a className="btn btn-outline" href="#city">
             Learn More
           </a>
         </div>
+        <dl className="hero-stats">
+          {HERO_STATS.map((stat) => (
+            <div className="hero-stat" key={stat.label}>
+              <dt className="hero-stat-value display">{stat.value}</dt>
+              <dd className="hero-stat-label">{stat.label}</dd>
+            </div>
+          ))}
+        </dl>
       </div>
     </section>
   );

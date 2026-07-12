@@ -2,23 +2,22 @@
 
 import React, { useState, useCallback } from 'react';
 import Image from 'next/image';
-import { fighters, rosterPartners } from '@/data/fighters';
-import { useIntersection } from '@/hooks/useIntersection';
+import { fighters, tagColors, ROSTER_TOTAL } from '@/data/fighters';
+import { RevealSection } from '@/components/ui/RevealSection';
+import { PixelAvatar } from './PixelAvatar';
+
+// The full TCG roster lives in a separate project on its own subdomain.
+const FULL_ROSTER_URL = 'https://tcg.miraitech.city';
 
 export default function RosterSection() {
-  const { ref: sectionRef, isIntersecting } = useIntersection({ threshold: 0.05, triggerOnce: true });
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [flash, setFlash] = useState(false);
-  const [slotsRevealed, setSlotsRevealed] = useState(false);
 
-  const selectedFighter = fighters[selectedIndex];
+  const headliners = fighters.filter((f) => f.headliner);
+  const supporting = fighters.filter((f) => !f.headliner && !f.mystery);
+  const challengers = fighters.filter((f) => f.mystery);
 
-  // Stagger slot reveals when section enters view
-  React.useEffect(() => {
-    if (isIntersecting && !slotsRevealed) {
-      setSlotsRevealed(true);
-    }
-  }, [isIntersecting, slotsRevealed]);
+  const selectedFighter = headliners[selectedIndex];
 
   const selectFighter = useCallback((idx: number) => {
     setSelectedIndex(idx);
@@ -26,43 +25,41 @@ export default function RosterSection() {
     requestAnimationFrame(() => setFlash(true));
   }, []);
 
-  const tagColor: Record<string, string> = {
-    Devices: '#6DB5F5',
-    Therapies: '#F5C542',
-    Builder: '#FF6B92',
-    Speaker: '#B98BF5',
-    Incoming: '#8585A8',
-  };
-
   return (
-    <section
-      ref={sectionRef as React.RefObject<HTMLElement>}
-      className={`section reveal roster-section ${isIntersecting ? 'in' : ''}`}
-      id="proof"
-    >
+    <RevealSection id="proof" className="roster-section" threshold={0.05} once>
+      {(inView) => (
+        <>
       {/* Header */}
       <div className="roster-header">
         <div className="roster-title mono">Select Your Fighter</div>
         <div className="roster-subtitle display"><em>Speakers</em> &amp; Residents</div>
       </div>
 
-      {/* Arena: left selector + right detail */}
+      {/* Main card: headliner selector + detail panel */}
       <div className="roster-arena">
-        {/* LEFT: Character selector grid */}
+        {/* LEFT: Top-billing selector */}
         <div className="roster-selector">
-          <div className="selector-label mono">Choose a fighter</div>
+          <div className="selector-label mono">★ Top Billing ★</div>
           <div className="roster-grid">
-            {fighters.map((fighter, idx) => (
+            {headliners.map((fighter, idx) => (
               <div
-                key={idx}
+                key={fighter.fullName}
                 className={[
                   'roster-slot',
                   selectedIndex === idx ? 'selected' : '',
-                  fighter.mystery ? 'mystery' : '',
-                  slotsRevealed ? 'slot-revealed' : '',
+                  inView ? 'slot-revealed' : '',
                 ].filter(Boolean).join(' ')}
                 style={{ '--slot-i': idx } as React.CSSProperties}
                 onClick={() => selectFighter(idx)}
+                role="button"
+                tabIndex={0}
+                aria-pressed={selectedIndex === idx}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    selectFighter(idx);
+                  }
+                }}
               >
                 <div className="slot-portrait">
                   {fighter.photo ? (
@@ -70,16 +67,21 @@ export default function RosterSection() {
                       src={fighter.photo}
                       alt={fighter.name}
                       fill
-                      sizes="150px"
+                      sizes="200px"
                       style={{ objectFit: 'cover', objectPosition: 'center 20%' }}
                     />
                   ) : (
-                    <span className="slot-initial">?</span>
+                    <PixelAvatar
+                      seed={fighter.fullName}
+                      color={tagColors[fighter.tag]}
+                      className="slot-avatar"
+                    />
                   )}
                 </div>
                 <div className="slot-nameplate">
                   <span className="slot-name">{fighter.name}</span>
-                  <span className="slot-tag" style={{ color: tagColor[fighter.tag] || '#8585A8' }}>{fighter.tag}</span>
+                  <span className="slot-tag" style={{ color: tagColors[fighter.tag] }}>{fighter.tag}</span>
+                  {fighter.hook && <span className="slot-hook">{fighter.hook}</span>}
                 </div>
               </div>
             ))}
@@ -112,6 +114,16 @@ export default function RosterSection() {
                   />
                 </>
               )}
+              {!selectedFighter.photo && (
+                <div className="fighter-avatar-wrap">
+                  <PixelAvatar
+                    seed={selectedFighter.fullName}
+                    color={tagColors[selectedFighter.tag]}
+                    className="fighter-avatar"
+                  />
+                  <span className="fighter-avatar-caption mono">PORTRAIT INCOMING</span>
+                </div>
+              )}
             </div>
             <div className="fighter-meta">
               <div className="fighter-name display">{selectedFighter.fullName}</div>
@@ -130,7 +142,7 @@ export default function RosterSection() {
                       <div className="fighter-stat-bar">
                         <div
                           className="fighter-stat-fill"
-                          style={{ width: flash || !selectedFighter.mystery ? `${s.value}%` : '0%' }}
+                          style={{ width: `${s.value}%` }}
                         />
                       </div>
                       <span className="fighter-stat-val mono">{s.value}</span>
@@ -148,20 +160,40 @@ export default function RosterSection() {
         </div>
       </div>
 
-      {/* Bottom row: count + partners */}
-      <div className="roster-bottom">
-        <div className="roster-count-inline">
-          <span className="roster-count-num display">{fighters.filter(f => !f.mystery).length + 2}</span>
-          <span className="roster-count-sep">/</span>
-          <span className="roster-count-total">24</span>
-          <span className="roster-count-label mono">Fighters confirmed</span>
-        </div>
-        <div className="roster-partners">
-          {rosterPartners.map((partner) => (
-            <span key={partner} className="roster-partner mono">{partner}</span>
+      {/* Supporting bill: every other confirmed speaker, poster lower-third style */}
+      <div className="roster-bill">
+        <div className="bill-label mono">Also in the arena</div>
+        <div className="bill-names">
+          {supporting.map((fighter) => (
+            <span key={fighter.fullName} className="bill-name mono">
+              <span className="bill-dot" style={{ background: tagColors[fighter.tag] }} />
+              {fighter.fullName}
+            </span>
           ))}
         </div>
+        {challengers.length > 0 && (
+          <div className="bill-challengers mono" style={{ color: tagColors.Incoming }}>
+            + {challengers.length} challengers approaching · September 2026
+          </div>
+        )}
       </div>
-    </section>
+
+      {/* CTA to the full TCG roster page */}
+      <div className="roster-cta">
+        <a href={FULL_ROSTER_URL} className="roster-cta-link mono">View Full Roster →</a>
+      </div>
+
+      {/* Bottom row: confirmed count */}
+      <div className="roster-bottom">
+        <div className="roster-count-inline">
+          <span className="roster-count-num display">{fighters.filter(f => !f.mystery).length}</span>
+          <span className="roster-count-sep">/</span>
+          <span className="roster-count-total">{ROSTER_TOTAL}</span>
+          <span className="roster-count-label mono">Fighters confirmed</span>
+        </div>
+      </div>
+        </>
+      )}
+    </RevealSection>
   );
 }

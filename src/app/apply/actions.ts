@@ -32,7 +32,7 @@ export async function submitApplication(
   const data: ApplicationData = {
     profile: formData.get('profile') as string,
     name: formData.get('name') as string,
-    email: formData.get('email') as string,
+    email: (formData.get('email') as string)?.trim(),
     telegram: formData.get('telegram') as string,
     country: formData.get('country') as string,
     link: formData.get('link') as string,
@@ -159,7 +159,7 @@ export async function submitApplication(
         referral: data.referral || null,
       },
     });
-    await posthog.shutdown();
+    await posthog.flush();
 
     return { success: true, message: 'Application submitted! We\'ll be in touch soon.' };
   } catch (error) {
@@ -167,7 +167,7 @@ export async function submitApplication(
     try {
       const posthog = getPostHogClient();
       posthog.capture({ distinctId: 'anonymous', event: 'application_submission_failed', properties: { reason: 'server_error' } });
-      await posthog.shutdown();
+      await posthog.flush();
     } catch { /* ignore posthog errors */ }
     return { success: false, message: 'Something went wrong. Please try again.' };
   }
@@ -177,7 +177,7 @@ export async function joinMailingList(
   _prev: SubmitResult | null,
   formData: FormData
 ): Promise<SubmitResult> {
-  const email = formData.get('email') as string;
+  const email = (formData.get('email') as string)?.trim();
   const track = formData.get('track') as string || 'General';
 
   if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
@@ -227,7 +227,7 @@ export async function joinMailingList(
 
     const posthog = getPostHogClient();
     posthog.capture({ distinctId: email, event: 'mailing_list_joined', properties: { track_interest: track } });
-    await posthog.shutdown();
+    await posthog.flush();
 
     return { success: true, message: 'You\'re on the list! We\'ll notify you when applications open.' };
   } catch (error) {

@@ -1,6 +1,13 @@
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
-import "./globals.css";
+// Stylesheets are split by route but all load globally; import order is
+// load-bearing (base first, fashion-show last mirrors the old single file).
+import "../styles/base.css";
+import "../styles/landing.css";
+import "../styles/dormant.css";
+import "../styles/apply-page.css";
+import "../styles/fashion-show.css";
+import "../styles/about.css";
 import { ScrollProvider } from "@/hooks/useScrollState";
 import { TrackProvider } from "@/components/tracks/TrackContext";
 import { CustomCursor } from "@/components/ui/CustomCursor";
@@ -47,7 +54,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://mirai.tech",
+    url: "https://miraitech.city",
     siteName: "Mirai Tech PopUp City",
     title: "Mirai Tech PopUp City — Build the Future of Biotech in 4 Weeks",
     description:
@@ -72,7 +79,7 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
-  metadataBase: new URL("https://mirai.tech"),
+  metadataBase: new URL("https://miraitech.city"),
 };
 
 export default function RootLayout({

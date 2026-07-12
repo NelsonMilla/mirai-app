@@ -1,19 +1,10 @@
 'use client';
 
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { chapters } from '@/lib/constants';
-import { useIntersection } from '@/hooks/useIntersection';
-
-// Color map for the detail strip (which lives outside card divs)
-const chColorMap: Record<string, { rgb: string; color: string }> = {
-  'ch-arrival':   { rgb: '78, 205, 196',  color: '#4ECDC4' },
-  'ch-longevity': { rgb: '245, 197, 66',  color: '#F5C542' },
-  'ch-enhance':   { rgb: '91, 141, 239',  color: '#5B8DEF' },
-  'ch-fashion':   { rgb: '255, 107, 146', color: '#FF6B92' },
-};
+import { chapters, weeklyPrograms } from '@/lib/constants';
+import { RevealSection } from '@/components/ui/RevealSection';
 
 export default function MonthTimeline() {
-  const { ref: sectionRef, isIntersecting } = useIntersection({ threshold: 0.1, triggerOnce: true });
   const gridRef = useRef<HTMLDivElement>(null);
   const [visibleCards, setVisibleCards] = useState<boolean[]>(new Array(chapters.length).fill(false));
   const [enteredCards, setEnteredCards] = useState<boolean[]>(new Array(chapters.length).fill(false));
@@ -24,25 +15,26 @@ export default function MonthTimeline() {
     const grid = gridRef.current;
     if (!grid) return;
 
+    const timeouts: ReturnType<typeof setTimeout>[] = [];
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             chapters.forEach((_, i) => {
-              setTimeout(() => {
+              timeouts.push(setTimeout(() => {
                 setVisibleCards((prev) => {
                   const next = [...prev];
                   next[i] = true;
                   return next;
                 });
-                setTimeout(() => {
+                timeouts.push(setTimeout(() => {
                   setEnteredCards((prev) => {
                     const next = [...prev];
                     next[i] = true;
                     return next;
                   });
-                }, 900);
-              }, i * 200);
+                }, 900));
+              }, i * 200));
             });
             observer.unobserve(entry.target);
           }
@@ -52,7 +44,10 @@ export default function MonthTimeline() {
     );
 
     observer.observe(grid);
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      timeouts.forEach(clearTimeout);
+    };
   }, []);
 
   const handleClick = useCallback((idx: number) => {
@@ -60,14 +55,9 @@ export default function MonthTimeline() {
   }, []);
 
   const activeChapter = activeIndex !== null ? chapters[activeIndex] : null;
-  const activeColors = activeChapter ? chColorMap[activeChapter.colorClass] : null;
 
   return (
-    <section
-      ref={sectionRef as React.RefObject<HTMLElement>}
-      className={`section reveal-track ${isIntersecting ? 'in' : ''}`}
-      id="month"
-    >
+    <RevealSection id="month" variant="reveal-track" once>
       <div className="section-label stagger">The month</div>
 
       <div className="chapter-grid" id="chapterGrid" ref={gridRef}>
@@ -84,47 +74,95 @@ export default function MonthTimeline() {
         ))}
       </div>
 
-      {/* Detail strip — shows section title by default, swaps to chapter detail on selection */}
+      {/* Console — spine (episode dots), chapter detail deck, and weekly
+          rhythm rail fused into one unit. The spine sits on the console's
+          top border; a stem drops from the selected card to its dot. */}
       <div
-        className={`ch-detail-strip strip-open ${activeIndex !== null ? 'has-selection' : ''}`}
-        style={activeColors ? {
-          '--ch-rgb': activeColors.rgb,
-          '--ch-color': activeColors.color,
-        } as React.CSSProperties : undefined}
+        className={`month-console ${activeIndex !== null ? 'has-selection' : ''}`}
+        style={{
+          ...(activeChapter
+            ? { '--ch-rgb': activeChapter.colorRgb, '--ch-color': activeChapter.color }
+            : {}),
+          ...(activeIndex !== null
+            ? { '--dot-x': `calc(12.5% + ${activeIndex} * 25%)` }
+            : {}),
+        } as React.CSSProperties}
       >
-        {activeChapter ? (
-          <div className="ch-detail-inner" key={activeChapter.ep}>
-            <div className="ch-detail-number">{activeChapter.ep}</div>
-            <div className="ch-detail-content">
-              <div className="ch-detail-title">{activeChapter.title}</div>
-              <div className="ch-detail-desc">{activeChapter.synopsis}</div>
-              <div className="ch-detail-events">
-                {activeChapter.events.map((evt, i) => (
-                  <div key={i} className="ch-detail-event">{evt}</div>
-                ))}
+        <div className="console-spine">
+          {chapters.map((ch, idx) => (
+            <button
+              key={ch.ep}
+              type="button"
+              className={`ch-dot ${activeIndex === idx ? 'dot-active' : ''}`}
+              style={{ '--dot-rgb': ch.colorRgb, '--dot-color': ch.color } as React.CSSProperties}
+              aria-label={`${ch.ep} — ${ch.title}`}
+              onClick={() => handleClick(idx)}
+            />
+          ))}
+          {activeIndex !== null && <div className="console-stem" key={activeIndex} />}
+        </div>
+
+        <div className="console-detail">
+          {activeChapter ? (
+            <div className="ch-detail-inner" key={activeChapter.ep}>
+              <div className="ch-detail-figure">
+                <div className="ch-detail-kanji">{activeChapter.kanji}</div>
+                <div className="ch-detail-ep mono">{activeChapter.ep}</div>
+              </div>
+              <div className="ch-detail-content">
+                <div className="ch-detail-title">{activeChapter.title}</div>
+                <div className="ch-detail-desc">{activeChapter.synopsis}</div>
+                <div className="ch-detail-events">
+                  {activeChapter.events.map((evt, i) => (
+                    <div key={i} className="ch-detail-event">{evt}</div>
+                  ))}
+                </div>
+                {activeChapter.themes && (
+                  <div className="ch-detail-themes">
+                    {activeChapter.themes.map((theme) => (
+                      <span key={theme} className="ch-theme-chip">{theme}</span>
+                    ))}
+                  </div>
+                )}
               </div>
             </div>
-          </div>
-        ) : (
-          <div className="ch-detail-inner ch-detail-header">
-            <div className="month-kanji-header">全四章</div>
-            <div className="ch-detail-content">
-              <div className="ch-detail-title" style={{ fontSize: 'clamp(1.2rem, 2vw, 1.6rem)' }}>Four chapters.</div>
-              <div className="ch-detail-desc">Select a chapter to explore the arc.</div>
+          ) : (
+            <div className="ch-detail-inner ch-detail-header">
+              <div className="month-kanji-header">全四章</div>
+              <div className="ch-detail-content">
+                <div className="ch-detail-title">Four chapters.</div>
+                <div className="ch-detail-desc ch-detail-prompt">Select a chapter to explore the arc.</div>
+              </div>
             </div>
+          )}
+        </div>
+
+        {/* Recurring programming — the weekly rhythm between marquee moments */}
+        <div className="console-rhythm">
+          <div className="rhythm-intro mono">
+            The weekly rhythm between the marquee moments — running all month.
           </div>
-        )}
+          <div className="rhythm-rail">
+            {weeklyPrograms.map((program) => (
+              <div
+                key={program.label}
+                className="rhythm-item"
+                style={{ '--wk-rgb': program.colorRgb, '--wk-color': program.color } as React.CSSProperties}
+              >
+                <div className="rhythm-glyph">{program.kanji}</div>
+                <div className="rhythm-label mono">{program.label}</div>
+                <div className="rhythm-detail">{program.detail}</div>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
 
-      <div className="ch-connector">
-        {chapters.map((_, idx) => (
-          <div
-            key={idx}
-            className={`ch-dot ${activeIndex === idx ? 'dot-active' : ''}`}
-          />
-        ))}
+      {/* License-required attribution for the chapter stills (CC BY / CC BY-SA) */}
+      <div className="ch-stills-credit mono">
+        Stills: Hideyuki Kamon (CC BY-SA) · Art Comments (CC BY) · NIH NCATS
       </div>
-    </section>
+    </RevealSection>
   );
 }
 

@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { LUMA_EVENT_URL } from '@/lib/constants';
 
-const SHOW_DATE = new Date('2026-10-31T19:00:00+09:00');
+const SHOW_DATE = new Date('2026-10-26T19:00:00+09:00');
 
 const CATEGORIES = [
   { tag: 'EXO',   kanji: '鎧', name: 'Exoskeletons',     desc: 'Worn robotics that augment strength, mobility, or endurance.' },
@@ -15,7 +15,7 @@ const CATEGORIES = [
   { tag: 'BION',  kanji: '機', name: 'Bionics',          desc: 'Hybrid devices that blur the line between hardware and body.' },
   { tag: 'WEAR',  kanji: '衣', name: 'Smart Wearables',  desc: 'Adaptive clothing, on-skin UI, and ambient health tech.' },
   { tag: 'AR/VR', kanji: '視', name: 'Spatial Medical',  desc: 'Optics and spatial compute as medical-grade interfaces.' },
-  { tag: 'GEN',   kanji: '命', name: 'Genes & Cells',    desc: 'Therapeutic products visualized through wearable delivery.' },
+  { tag: 'GEN',   kanji: '命', name: 'Genes & Cells',    desc: 'Wearable delivery hardware for gene and cell therapies.' },
 ] as const;
 
 const SPONSOR_MAILTO =
@@ -115,7 +115,7 @@ export function FashionShowContent() {
       <div className="fs-page-inner">
         {/* ── SCENE 01: HERO ── */}
         <header className="fs-hero" ref={heroRef}>
-          <a href="/" className="fs-back mono">&larr; mirai.tech</a>
+          <a href="/" className="fs-back mono">&larr; miraitech.city</a>
           <div
             className="fs-hero-kanji jp"
             aria-hidden="true"
@@ -125,15 +125,15 @@ export function FashionShowContent() {
           </div>
           <div className="fs-hero-rim" aria-hidden="true" />
           <div className="fs-hero-text">
-            <div className="fs-eyebrow mono">[ KOBE · OCT 31 · 2026 ]</div>
+            <div className="fs-eyebrow mono">[ KOBE · OCT 26 · 2026 ]</div>
             <h1 className="fs-title display">
               <span>Frontier</span>
               <span>Human</span>
               <em>Fashion Show</em>
             </h1>
             <p className="fs-tagline">
-              First-in-human prototypes on a runway.<br />
-              <span className="fs-tagline-emph">One night. 90 minutes. Broadcast worldwide.</span>
+              Working prototypes on a runway.<br />
+              <span className="fs-tagline-emph">One night. 90 minutes. Streamed live.</span>
             </p>
             <div className="fs-hero-ctas">
               <a className="btn btn-primary fs-btn-solid" href={LUMA_EVENT_URL} target="_blank" rel="noopener noreferrer">
@@ -153,7 +153,7 @@ export function FashionShowContent() {
           <h2 id="fs-slate-h" className="fs-slate-date display">
             <span>10</span>
             <span className="fs-slate-slash">/</span>
-            <span>31</span>
+            <span>26</span>
             <span className="fs-slate-slash">/</span>
             <span>2026</span>
           </h2>
@@ -172,9 +172,10 @@ export function FashionShowContent() {
           <div className="fs-concept-eyebrow mono">[ THE CONCEPT ]</div>
           <h2 className="fs-concept-title mono">ENHANCED FASHION</h2>
           <p className="fs-concept-sub">
-            CES meets Tokyo Fashion Week. Every look on the runway is a working
-            prototype — exoskeleton, neural interface, smart prosthetic, biosensor
-            garment, haptic suit. <em>On a person. On a runway.</em>
+            CES meets Tokyo Fashion Week. Every look is a working prototype —
+            exoskeleton, neural interface, smart prosthetic, biosensor garment,
+            haptic suit. <em>Not a render. Not a booth demo. On a body, under
+            stage light.</em>
           </p>
         </section>
 
@@ -188,11 +189,12 @@ export function FashionShowContent() {
             <div className="fs-tri-body">
               <h3 className="fs-tri-name display">The Walk</h3>
               <p>
-                Each Device cohort gets a 6-minute slot. Their prototype walks
-                under stage lighting, soundtracked by a custom score.
+                Each Device cohort gets a ten-minute slot. It opens with the
+                walk: the prototype moves down the runway under stage light,
+                soundtracked by a custom score.
                 <em> No slides. No pitch. The device speaks.</em>
               </p>
-              <p className="fs-tri-cue mono">RUNTIME · 06:00 · CUSTOM SCORE</p>
+              <p className="fs-tri-cue mono">ACT 1 · THE WALK · CUSTOM SCORE</p>
             </div>
           </div>
 
@@ -201,11 +203,11 @@ export function FashionShowContent() {
             <div className="fs-tri-body">
               <h3 className="fs-tri-name display">The Live Demo</h3>
               <p>
-                The resident steps to the front of the runway and demonstrates
-                the device working in real time. Five minutes, one camera,
+                The resident steps to the front of the runway and runs the
+                device in real time. One camera,
                 <em> no edits</em>.
               </p>
-              <p className="fs-tri-cue mono">RUNTIME · 05:00 · ONE CAMERA</p>
+              <p className="fs-tri-cue mono">ACT 2 · LIVE · ONE CAMERA</p>
             </div>
           </div>
 
@@ -214,10 +216,11 @@ export function FashionShowContent() {
             <div className="fs-tri-body">
               <h3 className="fs-tri-name display">The Conversation</h3>
               <p>
-                A short on-stage interview: what it does, who it&apos;s for, where
-                it goes. Streamed live to investors, press, and operators worldwide.
+                A short on-stage interview: what it does, who it&apos;s for,
+                where it goes next — streamed live for investors, press, and
+                operators.
               </p>
-              <p className="fs-tri-cue mono">RUNTIME · 04:00 · LIVE BROADCAST</p>
+              <p className="fs-tri-cue mono">ACT 3 · BROADCAST Q&amp;A</p>
             </div>
           </div>
         </section>
@@ -234,7 +237,7 @@ export function FashionShowContent() {
               Nine slots. Nine reveals.
             </h2>
             <p className="fs-lineup-sub mono">
-              0 / 9 PRESENTERS REVEALED · ANNOUNCEMENTS BEGIN SUMMER 2026
+              0 / 9 REVEALED · FIRST NAMES DROP THIS SUMMER
             </p>
           </div>
           <ul className="fs-lineup-grid" role="list">
@@ -279,7 +282,7 @@ export function FashionShowContent() {
               Built on a community we&apos;ve been gathering for years.
             </h2>
             <p className="fs-lineage-sub mono">
-              TOKYO · CAMBRIDGE · COMMUNITY EVENTS · BACKED BY THE $1T ENHANCED-FASHION CATEGORY
+              TOKYO · CAMBRIDGE · KOBE — ONE EMERGING CATEGORY: ENHANCED FASHION
             </p>
           </div>
 
@@ -288,7 +291,7 @@ export function FashionShowContent() {
               <div className="fs-lineage-img-wrap">
                 <Image
                   src="/images/fs/luma.png"
-                  alt="Enhanced Fashion Show — Kobe, Japan · October 2026"
+                  alt="Frontier Human Fashion Show — Kobe, Japan · October 2026"
                   fill
                   sizes="(max-width: 980px) 100vw, 33vw"
                   className="fs-lineage-img"
@@ -296,7 +299,7 @@ export function FashionShowContent() {
               </div>
               <div className="fs-lineage-meta">
                 <span className="fs-lineage-tag mono">UPCOMING · JAPAN</span>
-                <h3 className="fs-lineage-name display">Enhanced Fashion Show</h3>
+                <h3 className="fs-lineage-name display">Frontier Human Fashion Show</h3>
                 <p className="fs-lineage-desc">
                   Kobe Port Island. The inaugural edition — closing Mirai Tech
                   PopUp City, October 2026.
@@ -356,7 +359,7 @@ export function FashionShowContent() {
             </h2>
             <p className="fs-split-sub">
               Device cohorts only. One prototype, one slot, one runway.
-              Closes 60 days out.
+              Applications close Aug 27 — 60 days out.
             </p>
             <span className="fs-split-cta mono">APPLY NOW →</span>
           </a>
@@ -384,6 +387,9 @@ export function FashionShowContent() {
           </span>
           <a className="fs-sponsor-link mono" href={SPONSOR_MAILTO}>
             REQUEST DECK →
+          </a>
+          <a className="fs-sponsor-link mono" href="/showcase">
+            SHOWCASE YOUR COMPANY →
           </a>
         </aside>
 

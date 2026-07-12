@@ -1,9 +1,37 @@
-export const LUMA_EVENT_URL = 'https://luma.com/an4zotn9?utm_parameter=landing';
+export const LUMA_EVENT_URL = 'https://luma.com/an4zotn9?utm_source=landing';
+
+/**
+ * The landing page's section registry — the single source of truth for
+ * section ids and labels. Navbar (navLabel subset), ProgressRail
+ * (railLabel), and scroll tracking all derive from this. Never hardcode
+ * a parallel list of section ids/labels in a component.
+ */
+export interface SectionDef {
+  id: string;
+  /** Shown in the top navbar; omit to keep the section out of the navbar. */
+  navLabel?: string;
+  /** Shown in the right-edge progress rail tooltip. */
+  railLabel: string;
+}
+
+export const SECTIONS: SectionDef[] = [
+  { id: 'city', railLabel: 'THE FORMAT' },
+  { id: 'kobe', navLabel: 'Kobe', railLabel: 'WHY KOBE' },
+  { id: 'tracks', navLabel: 'Tracks', railLabel: 'CHOOSE YOUR STARTER' },
+  { id: 'month', navLabel: 'Program', railLabel: 'THE MONTH' },
+  { id: 'runway', navLabel: 'Show', railLabel: 'THE SHOW' },
+  { id: 'proof', navLabel: 'Speakers', railLabel: 'FIGHTERS' },
+  { id: 'practical', railLabel: 'ON THE GROUND' },
+  { id: 'apply', railLabel: 'APPLY' },
+  { id: 'faq', railLabel: 'FAQ' },
+];
 
 export interface Track {
   id: string;
   name: string;
   type: string;
+  /** Offering kind shown in the face-up badge ("Residency" or "Pass"). */
+  kind: 'Residency' | 'Pass';
   color: string;
   colorBright: string;
   colorRgb: string;
@@ -18,13 +46,14 @@ export const tracks: Track[] = [
     id: 'devices',
     name: 'Devices Residency',
     type: 'Medical Devices',
+    kind: 'Residency',
     color: '#6DB5F5',
     colorBright: '#8DC8F8',
     colorRgb: '109,181,245',
     darkBg: '#0d1520',
     hint: 'Lab infrastructure for first-in-human prototypes.',
     description:
-      'Lab infrastructure ready on Port Island. Bring your exoskeletons, BCIs, prosthetics, biosensors, and wearables for first-in-human testing — and walk the Frontier Human Fashion Show runway.',
+      'Lab infrastructure ready on Port Island. Bring your exoskeletons, BCIs, prosthetics, biosensors, and wearables onto the PMDA device pathway — and walk the Frontier Human Fashion Show runway.',
     stats: [
       { label: 'Lab Access', value: 'Full', fill: '95%' },
       { label: 'PMDA Track', value: 'Device', fill: '80%' },
@@ -35,13 +64,14 @@ export const tracks: Track[] = [
     id: 'therapies',
     name: 'Therapies Residency',
     type: 'Therapeutics',
+    kind: 'Residency',
     color: '#F5D34E',
     colorBright: '#F8E06A',
     colorRgb: '245,211,78',
     darkBg: '#1a1710',
     hint: 'Connect directly with PMDA for conditional approval.',
     description:
-      'Post Phase 1b biotech companies connecting directly with PMDA and Japanese consulting firms for conditional approval under Section 23-2-5. Culminates in a PMDA pre-submission and go-to-market roadmap.',
+      'For therapeutics past Phase 1b: work directly with PMDA and regulatory specialists on Japan\'s accelerated pathways. Culminates in a PMDA pre-submission and go-to-market roadmap.',
     stats: [
       { label: 'Regulatory', value: 'PMDA', fill: '100%' },
       { label: 'Stage', value: '> Ph1b', fill: '70%' },
@@ -52,6 +82,7 @@ export const tracks: Track[] = [
     id: 'builder',
     name: 'Builder Pass',
     type: 'Community',
+    kind: 'Pass',
     color: '#F56B6B',
     colorBright: '#F88A8A',
     colorRgb: '245,107,107',
@@ -74,71 +105,107 @@ export interface Chapter {
   dates: string;
   synopsis: string;
   colorClass: string;
+  /** Accent as "r, g, b" — must match the colorClass theme in landing.css. */
+  colorRgb: string;
+  /** Accent as hex — must match the colorClass theme in landing.css. */
+  color: string;
   imageSrc: string;
   events: string[];
+  themes?: string[];
 }
 
 export const chapters: Chapter[] = [
   {
     ep: 'EP.01',
     kanji: '壱',
-    title: 'Arrival & Onboarding',
-    dates: 'Oct 01 – 07',
-    synopsis: 'Arrivals, KBIC lab tours, JETRO soft-landing, community kickoff. Meet your cohort, claim your bench.',
+    title: 'Open Weeks',
+    dates: 'Oct 01 – 16',
+    synopsis: 'Co-building begins. Arrivals and tours, then Welcome Day on Oct 4, residency benches open, and two weeks to settle into Kobe and explore Japan alongside your cohort.',
     colorClass: 'ch-arrival',
-    imageSrc: '/images/chapters/arrival.jpg',
+    colorRgb: '78, 205, 196',
+    color: '#4ECDC4',
+    imageSrc: '/images/chapters/portliner.jpg',
     events: [
-      'KBIC lab tours & bench assignments',
-      'JETRO soft-landing orientation',
-      'Community welcome dinner',
-      'Port Island neighborhood walkthrough',
+      'KBIC lab tours & orientation',
+      'Welcome day & community kickoff (Oct 4)',
+      'Residency benches open',
+      'Port Island & Japan exploration',
     ],
   },
   {
     ep: 'EP.02',
     kanji: '弐',
-    title: 'Longevity Biotech',
-    dates: 'Oct 08 – 14',
-    synopsis: 'Senolytics, reprogramming, biomarkers, regenerative medicine protocols. The science of not dying.',
+    title: 'Summit I: The Science & Tech Augmenting Life',
+    dates: 'Oct 17 – 18',
+    synopsis: 'Part of the Longevity Biomedical Summit: why longevity biomedicine\'s next decade runs through Japan.',
     colorClass: 'ch-longevity',
-    imageSrc: '/images/chapters/longevity.jpg',
+    colorRgb: '245, 197, 66',
+    color: '#F5C542',
+    imageSrc: '/images/chapters/lab.jpg',
     events: [
-      'Senolytic compound workshop',
-      'Biomarker panel deep-dive',
-      'Regenerative medicine protocols',
-      'Guest lecture: cellular reprogramming',
+      "Japan's Longevity Imperative — what Japan learned & what it needs from the world",
+      'KBIC as a global laboratory for longevity',
+      'Bioengineering, MedTech, biostasis, replacement & augmentation',
+      "Women's Health: the next trillion-dollar market",
+      'AI×Longevity Bio',
     ],
+    themes: ['Biomedical', 'Policy', 'Community', 'AI'],
   },
   {
     ep: 'EP.03',
     kanji: '参',
-    title: 'Human Enhancement',
-    dates: 'Oct 15 – 21',
-    synopsis: 'BCIs, exoskeletons, prosthetics, sensory augmentation. Upgrading the default human.',
+    title: 'Summit II: From East to West — Bridging the Longevity Gap',
+    dates: 'Oct 24 – 25',
+    synopsis: 'Bottlenecks and solutions to accelerate longevity biomedicine — and what the world looks like once we cure all diseases.',
     colorClass: 'ch-enhance',
-    imageSrc: '/images/chapters/enhance.jpg',
+    colorRgb: '91, 141, 239',
+    color: '#5B8DEF',
+    imageSrc: '/images/chapters/bridge.jpg',
     events: [
-      'BCI integration lab sessions',
-      'Exoskeleton fitting & calibration',
-      'Sensory augmentation demos',
-      'Performance medicine roundtable',
+      'Longevity trends, supercentenarians, impact & bottlenecks',
+      'The stakeholders: investment, R&D, entrepreneurship, regulation as an acceleration mechanism',
+      "Japan's model: conditional approval generating real-world evidence",
+      'Visions for the Future of Longevity',
     ],
+    themes: ['Biomedical', 'Policy', 'Community', 'AI'],
   },
   {
     ep: 'EP.04',
     kanji: '肆',
     title: 'Fashion Show & Close',
-    dates: 'Oct 22 – 31',
-    synopsis: 'Runway prep, rehearsals, press day. The Frontier Human Fashion Show — where devices become couture.',
+    dates: 'Oct 26 – 31',
+    synopsis: 'Runway prep, rehearsals, press day. The Frontier Human Fashion Show & Demo Day on Oct 26 — where devices become couture.',
     colorClass: 'ch-fashion',
-    imageSrc: '/images/chapters/fashion.jpg',
+    colorRgb: '255, 107, 146',
+    color: '#FF6B92',
+    imageSrc: '/images/chapters/runway.jpg',
     events: [
       'Prototype polish & final builds',
       'PMDA regulatory submissions',
       'Press day & media preview',
-      'The Frontier Human Fashion Show',
+      'The Frontier Human Fashion Show & Demo Day (Oct 26)',
     ],
   },
+];
+
+export interface WeeklyProgram {
+  label: string;
+  detail: string;
+  /** Decorative kanji watermark for the rhythm rail. */
+  kanji: string;
+  /** Accent as "r, g, b" — drawn from the chapter/iridescent palette. */
+  colorRgb: string;
+  /** Accent as hex — must match colorRgb. */
+  color: string;
+}
+
+export const weeklyPrograms: WeeklyProgram[] = [
+  { label: 'Vibe Coding Nights', detail: 'Ship together after dark', kanji: '夜', colorRgb: '91, 141, 239', color: '#5B8DEF' },
+  { label: 'The Residency', detail: 'Benches, labs, deep work', kanji: '研', colorRgb: '78, 205, 196', color: '#4ECDC4' },
+  { label: 'Learning Layer Labs', detail: 'Hands-on skill sessions', kanji: '学', colorRgb: '245, 197, 66', color: '#F5C542' },
+  { label: 'Biohackers Workshops', detail: 'Self-experiments & protocols', kanji: '実', colorRgb: '212, 184, 255', color: '#D4B8FF' },
+  { label: 'Socials', detail: 'Dinners, drinks, connection', kanji: '宴', colorRgb: '255, 107, 146', color: '#FF6B92' },
+  { label: 'Me-Time by CHANGE', detail: 'Recovery & reset', kanji: '休', colorRgb: '184, 227, 255', color: '#B8E3FF' },
 ];
 
 export interface LifestyleCard {
@@ -235,16 +302,16 @@ export const lifestyleCards: LifestyleCard[] = [
     id: 'explore',
     tag: 'Culture',
     title: 'Osaka · Kyoto · Nara',
-    description: 'Three ancient cities within an hour.',
+    description: 'Kansai\'s ancient capitals at your doorstep.',
     kanji: '遊',
     hudTitle: 'Osaka · Kyoto · Nara',
     hudSubtitle: 'Day Trips · Culture · History',
     hudText:
-      'Kobe sits at the heart of the Kansai region. Osaka\'s street food (30 min), Kyoto\'s temples (50 min), and Nara\'s deer park (60 min) are all day-trip distance.',
+      'Kobe sits at the heart of the Kansai region. Osaka\'s street food (~40 min), Kyoto\'s temples (~90 min), and Nara\'s deer park are all day-trip distance — and Tokyo is 3 hours by shinkansen.',
     stats: [
-      { value: '30m', label: 'Osaka' },
-      { value: '50m', label: 'Kyoto' },
-      { value: '60m', label: 'Nara' },
+      { value: '40m', label: 'Osaka' },
+      { value: '90m', label: 'Kyoto' },
+      { value: '3h', label: 'Tokyo' },
     ],
     hp: 140,
     abilities: [
@@ -263,6 +330,11 @@ export interface FaqItem {
 }
 
 export const faqItems: FaqItem[] = [
+  {
+    question: 'What is a popup city?',
+    answer:
+      'A temporary village where a curated community lives, works, and builds together in one place for one month. Housing, labs, programming, and social life share the same few blocks on Port Island, so the people you meet at breakfast are the ones you build with by night.',
+  },
   {
     question: 'Who is this for?',
     answer:
@@ -291,7 +363,12 @@ export const faqItems: FaqItem[] = [
   {
     question: 'How do applications work?',
     answer:
-      'Apply through the site. We review applications on a rolling basis. Accepted applicants receive a payment link to secure their spot.',
+      'Builder passes are available directly through our ticketing page. Residency tracks are application-only — we review on a rolling basis, and accepted teams receive next steps by email.',
+  },
+  {
+    question: 'Where do I stay?',
+    answer:
+      'Two options: our partner hotel, the Portopia, a short walk from KBIC, or one of the community hacker houses — The Sanctuary, Biopunk House, Aevitas, and ZuCity Japan. Housing details arrive with your acceptance.',
   },
 ];
 
@@ -304,24 +381,17 @@ export const runwayDevices = [
   'AR/VR Medical',
 ];
 
-export interface Partner {
-  name: string;
-  role: string;
-}
-
-export const partners: Partner[] = [
-  { name: 'Frontier Humans', role: 'Community & Programming' },
-  { name: 'Viva City', role: 'Residency Ops' },
-  { name: 'KBIC', role: 'Labs & Science' },
-  { name: 'JETRO', role: 'Japan Market Entry' },
-];
-
 export interface Evolution {
   name: string;
   stage: number;
   desc: string;
 }
 
+/**
+ * Evolution-line copy for the three mascots. Currently unreferenced —
+ * its consumer (EvolutionShowcase) was cut in the apply-section redesign
+ * — but intentionally kept with the sprites for a possible return.
+ */
 export const evolutions = {
   devices: [
     { name: 'Volt', stage: 1, desc: 'You arrive with a working prototype and a plan to test it on humans.' },

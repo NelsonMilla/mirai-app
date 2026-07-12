@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "smoke": "playwright test e2e/smoke.spec.ts"
   },
   "dependencies": {
     "dotenv": "^17.4.2",
@@ -19,6 +20,7 @@
     "stripe": "^22.0.1"
   },
   "devDependencies": {
+    "@playwright/test": "^1.61.1",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",

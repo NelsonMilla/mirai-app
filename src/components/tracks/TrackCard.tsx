@@ -3,8 +3,7 @@
 import { Track } from '@/lib/constants';
 import { useTrack } from './TrackContext';
 import { useIntersection } from '@/hooks/useIntersection';
-import { useRef } from 'react';
-import { Volt, Voltaic, Helix, Helion, Ember, Kindling } from '@/sprites';
+import { Volt, Helix, Ember } from '@/sprites';
 import posthog from 'posthog-js';
 
 const spriteMapStage1 = {
@@ -60,7 +59,7 @@ export function TrackCard({ track }: TrackCardProps) {
               return <SpriteComponent className="w-full h-full" />;
             })()}
           </div>
-          <div className="track-up-badge">{track.type} · Residency</div>
+          <div className="track-up-badge">{track.type} · {track.kind}</div>
         </div>
         <div className="track-up-title">{track.name}</div>
         <div className="track-up-desc">{track.description}</div>
@@ -75,6 +74,14 @@ export function TrackCard({ track }: TrackCardProps) {
             </div>
           ))}
         </div>
+        <a
+          href="#apply"
+          className="track-continue"
+          onClick={(e) => e.stopPropagation()}
+        >
+          Continue with {track.name}
+          <span aria-hidden="true"> →</span>
+        </a>
       </div>
     </div>
   );
