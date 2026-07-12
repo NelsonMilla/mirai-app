@@ -140,7 +140,7 @@ export default function MonthTimeline() {
         {/* Recurring programming — the weekly rhythm between marquee moments */}
         <div className="console-rhythm">
           <div className="rhythm-intro mono">
-            Every week on Port Island — the daily rhythm between the marquee moments, running all month.
+            The weekly rhythm between the marquee moments — running all month.
           </div>
           <div className="rhythm-rail">
             {weeklyPrograms.map((program) => (
@@ -156,6 +156,11 @@ export default function MonthTimeline() {
             ))}
           </div>
         </div>
+      </div>
+
+      {/* License-required attribution for the chapter stills (CC BY / CC BY-SA) */}
+      <div className="ch-stills-credit mono">
+        Stills: Hideyuki Kamon (CC BY-SA) · Art Comments (CC BY) · NIH NCATS
       </div>
     </RevealSection>
   );

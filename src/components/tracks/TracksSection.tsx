@@ -11,7 +11,7 @@ export function TracksSection() {
   return (
     <RevealSection id="tracks" dataSection="tracks">
       <div className="section-label">Choose Your Starter</div>
-      <p className="starter-intro">Every great journey starts with a choice.</p>
+      <p className="starter-intro">Three ways in — pick the one that matches where you are.</p>
 
       <div id="tracksGrid" className={`tracks-grid ${selectedTrack ? 'has-selection' : ''}`}>
         {tracks.map((track) => (

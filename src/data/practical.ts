@@ -33,7 +33,7 @@ export const stayLinks: StayLink[] = [
     name: 'Portopia Hotel',
     meta: 'Partner hotel · Mirai special discounts',
     // Corrected check-in date (source doc had 10/31); keep these exact dates.
-    href: 'https://www.portopia.co.jp/en/?tripla_booking_widget_open=search&adults1&hotel_plan_codes=19734219,10810796&checkin=2026/10/01&checkout=2026/11/01&mode=secret',
+    href: 'https://www.portopia.co.jp/en/?tripla_booking_widget_open=search&adults=1&hotel_plan_codes=19734219,10810796&checkin=2026/10/01&checkout=2026/11/01&mode=secret',
   },
   {
     name: 'The Sanctuary',

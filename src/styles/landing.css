@@ -282,6 +282,18 @@
   object-position: center center;
   transform: scale(1);
   transition: transform 3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  /* Real-photo stills are graded to grayscale here, then tinted into the
+     chapter color by .ch-art::after — one duotone system across all four */
+  filter: grayscale(1) contrast(1.06) brightness(0.82);
+}
+.ch-art::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: rgb(var(--ch-rgb));
+  mix-blend-mode: color;
+  opacity: 0.55;
 }
 .chapter-card:hover .ch-art > img,
 .chapter-card.ch-active .ch-art > img {
@@ -680,6 +692,15 @@
   .rhythm-item + .rhythm-item { border-left: 1px solid rgba(255, 255, 255, 0.07); }
 }
 
+.ch-stills-credit {
+  margin-top: 1.25rem;
+  font-size: var(--fs-micro);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--slate);
+  opacity: 0.55;
+}
+
 /* ============================================
    RUNWAY
    ============================================ */
@@ -752,6 +773,159 @@
 .rd:hover {
   background: rgba(245, 160, 181, 0.1);
   transform: translateY(-2px);
+}
+
+/* Date slate — sharp mono call-sheet stub above the title */
+.rw-slate {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  color: var(--pink);
+  padding: 0.4rem 0.85rem;
+  margin-bottom: 1.25rem;
+  border: 1px solid rgba(245, 160, 181, 0.35);
+  border-radius: 4px;
+  background: rgba(245, 160, 181, 0.05);
+}
+
+.rw-slate-slash {
+  color: rgba(245, 160, 181, 0.45);
+}
+
+.rw-slate-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--pink);
+  opacity: 0.6;
+  margin: 0 0.15rem;
+}
+
+/* Teaser row — a quiet catwalk of dark, ?-filled slots ending in a CTA */
+.rw-teaser {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem 1.5rem;
+  margin-top: 2rem;
+  padding-top: 1.75rem;
+  text-decoration: none;
+  /* Runway strip: thin gradient line of light the slots sit along */
+  border-top: 1px solid transparent;
+  border-image: linear-gradient(
+      90deg,
+      transparent,
+      rgba(245, 160, 181, 0.55),
+      transparent
+    )
+    1;
+  transition: opacity 0.25s ease;
+}
+
+.rw-teaser:hover {
+  opacity: 0.95;
+}
+
+.rw-teaser:focus-visible {
+  outline: 2px solid var(--pink);
+  outline-offset: 6px;
+  border-radius: 4px;
+}
+
+.rw-teaser-line {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.rw-teaser-count {
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  color: var(--slate);
+  white-space: nowrap;
+}
+
+.rw-slots {
+  display: flex;
+  gap: 0.4rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.rw-slot {
+  position: relative;
+  width: 26px;
+  height: 26px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(245, 160, 181, 0.22);
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.35);
+  color: var(--slate);
+  overflow: hidden;
+  transition: color 0.25s, border-color 0.25s;
+}
+
+.rw-slot-glyph {
+  font-size: 0.8rem;
+  opacity: 0.28;
+  transition: opacity 0.25s;
+}
+
+.rw-slot-q {
+  position: absolute;
+  font-size: 0.7rem;
+  font-weight: 700;
+  opacity: 0.55;
+  transition: opacity 0.25s;
+}
+
+.rw-teaser:hover .rw-slot {
+  border-color: rgba(245, 160, 181, 0.45);
+  color: var(--pink);
+}
+
+.rw-teaser:hover .rw-slot-glyph {
+  opacity: 0.5;
+}
+
+.rw-teaser:hover .rw-slot-q {
+  opacity: 0.15;
+}
+
+.rw-cta {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--pink);
+  white-space: nowrap;
+}
+
+.rw-cta span {
+  display: inline-block;
+  transition: transform 0.25s;
+}
+
+.rw-teaser:hover .rw-cta span,
+.rw-teaser:focus-visible .rw-cta span {
+  transform: translateX(4px);
+}
+
+@media (max-width: 640px) {
+  .rw-teaser {
+    gap: 0.85rem;
+  }
+  .rw-slot {
+    width: 22px;
+    height: 22px;
+  }
 }
 
 /* ============================================
@@ -1303,7 +1477,8 @@ html.loading { scroll-behavior: auto !important; }
 html.loading .hero-eyebrow,
 html.loading .hero h1 .line-inner,
 html.loading .hero-sub,
-html.loading .hero-ctas {
+html.loading .hero-ctas,
+html.loading .hero-stats {
   animation: none !important;
   opacity: 0 !important;
 }
@@ -1469,6 +1644,107 @@ html.loading .hero-ctas {
 }
 
 /* ============================================
+   PROGRESS RAIL — fixed right-edge section dots
+   ============================================ */
+
+.progress-rail {
+  position: fixed;
+  top: 50%;
+  right: 22px;
+  transform: translateY(-50%);
+  z-index: 40;
+  pointer-events: none;
+}
+
+.progress-rail__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 18px;
+}
+
+.progress-rail__item {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.progress-rail__dot {
+  pointer-events: auto;
+  position: relative;
+  display: block;
+  width: 10px;
+  height: 10px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  background: var(--slate);
+  opacity: 0.4;
+  transition: transform 0.3s ease, opacity 0.3s ease,
+    background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.progress-rail__dot:hover,
+.progress-rail__dot:focus-visible {
+  opacity: 0.85;
+  transform: scale(1.25);
+}
+
+.progress-rail__dot:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.progress-rail__dot.is-active {
+  background: var(--accent);
+  opacity: 1;
+  transform: scale(1.7);
+  box-shadow: 0 0 12px rgba(var(--accent-rgb), 0.9);
+}
+
+.progress-rail__label {
+  position: absolute;
+  top: 50%;
+  right: 22px;
+  transform: translateY(-50%) translateX(6px);
+  white-space: nowrap;
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--white);
+  background: rgba(10, 10, 18, 0.85);
+  border: 1px solid rgba(var(--accent-rgb), 0.35);
+  padding: 4px 9px;
+  border-radius: 4px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.progress-rail__dot:hover .progress-rail__label,
+.progress-rail__dot:focus-visible .progress-rail__label {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
+}
+
+@media (max-width: 900px) {
+  .progress-rail {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .progress-rail__dot,
+  .progress-rail__label {
+    transition: none;
+  }
+}
+
+/* ============================================
    HERO SECTION
    ============================================ */
 
@@ -1534,6 +1810,24 @@ html.loading .hero-ctas {
   margin-bottom: 2.5rem;
   opacity: 0;
   animation: rise 0.8s cubic-bezier(0.23, 1, 0.32, 1) 0.1s both;
+}
+
+/* Two stacked centered lines: the one-line layout sat right at the
+   800px .hero-inner cap and wrapped unpredictably, orphaning the
+   separator dot. */
+.hero-eyebrow--split {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.hero-eyebrow-tagline {
+  color: var(--pink);
+}
+
+.hero-eyebrow-meta {
+  color: var(--slate);
 }
 
 .hero h1 {
@@ -1605,6 +1899,117 @@ html.loading .hero-ctas {
 .hero-ctas .btn {
   font-size: var(--fs-secondary);
   padding: 0.95rem 1.75rem;
+}
+
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0;
+  max-width: 560px;
+  margin: 1.5rem auto 0;
+  border-top: 1px solid rgba(133, 133, 168, 0.22);
+  opacity: 0;
+  animation: rise 0.8s cubic-bezier(0.23, 1, 0.32, 1) 0.95s both;
+}
+
+.hero-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.95rem 0.5rem 0;
+  border-left: 1px solid rgba(133, 133, 168, 0.16);
+}
+
+.hero-stat:first-child {
+  border-left: none;
+}
+
+.hero-stat-value {
+  font-size: clamp(1.6rem, 3.5vw, 2.15rem);
+  font-weight: 300;
+  line-height: 1;
+  color: var(--white);
+}
+
+.hero-stat-label {
+  margin: 0;
+  font-family: var(--font-jetbrains), monospace;
+  font-size: var(--fs-label);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--slate);
+}
+
+/* On viewports shorter than the full-size hero (~1132px tall) the
+   whole hero can't fit at full scale. Shrink the HEADLINE and inner
+   margins to reclaim space — but NEVER the top padding: it must keep
+   clearing the fixed ~85px navbar with a gap, or the eyebrow jams
+   against the nav. (Base desktop padding-top is 8rem = 128px.) */
+@media (min-width: 641px) and (max-height: 1130px) {
+  .hero {
+    padding-bottom: 2.5rem;
+  }
+  .hero-eyebrow {
+    margin-bottom: 1.5rem;
+  }
+  .hero h1 {
+    font-size: clamp(3.5rem, 7vw, 6rem);
+    margin-bottom: 1.25rem;
+  }
+  .hero-sub {
+    margin-bottom: 1.25rem;
+  }
+}
+
+/* Laptop heights (16" MacBook ≈ 900px, down to ~745px): the 6rem
+   headline would push the stat strip below the fold, so drop to a
+   smaller headline. Top padding still inherits the 8rem nav clearance
+   above; content simply centers in the remaining space. */
+@media (min-width: 641px) and (max-height: 940px) {
+  .hero {
+    padding-bottom: 1.5rem;
+  }
+  .hero-eyebrow {
+    margin-bottom: 1rem;
+  }
+  .hero h1 {
+    font-size: clamp(2.75rem, 5.5vw, 4.5rem);
+    margin-bottom: 1rem;
+  }
+  .hero-sub {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+  .hero-stats {
+    margin-top: 1rem;
+  }
+  .hero-stat {
+    padding-top: 0.7rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero-eyebrow-meta {
+    font-size: calc(var(--fs-label) - 0.5px);
+    letter-spacing: 0.18em;
+  }
+  .hero-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    max-width: 340px;
+  }
+  .hero-stat {
+    padding: 1rem 0.5rem;
+    border-left: 1px solid rgba(133, 133, 168, 0.16);
+    border-top: 1px solid rgba(133, 133, 168, 0.16);
+  }
+  .hero-stat:nth-child(-n + 2) {
+    border-top: none;
+  }
+  .hero-stat:nth-child(odd) {
+    border-left: none;
+  }
 }
 
 /* ============================================
@@ -3711,6 +4116,137 @@ html.loading .hero-ctas {
   }
   100% {
     transform: translateY(100%);
+  }
+}
+
+/* ── ONE EVENING — real-photo postcard rack (KobeEveningBand) ──
+   Coda of Why Kobe: cream paper frames against the ink page. Not a
+   .section (base="jp-band") — it's a band, not a full-viewport moment. */
+.jp-band {
+  position: relative;
+  padding: 1rem 0 6rem;
+}
+
+.jp-band-head {
+  padding: 0 1rem 2rem;
+}
+
+.jp-band-title {
+  font-family: var(--font-fraunces), serif;
+  font-variation-settings: 'SOFT' 80, 'opsz' 72;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  margin-top: 0.75rem;
+}
+
+.jp-rack {
+  display: flex;
+  align-items: center;
+  gap: 1.75rem;
+  overflow-x: auto;
+  /* Vertical padding leaves room for rotation + hover lift + shadows */
+  padding: 1.75rem 1rem 2.25rem;
+  scroll-snap-type: x proximity;
+  scrollbar-width: none;
+}
+
+.jp-rack::-webkit-scrollbar {
+  display: none;
+}
+
+.jp-frame {
+  flex: 0 0 auto;
+  width: min(340px, 76vw);
+  scroll-snap-align: center;
+  background: #f4eee1;
+  padding: 10px 10px 8px;
+  border-radius: 2px;
+  box-shadow:
+    0 18px 40px rgba(0, 0, 0, 0.45),
+    0 4px 12px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  transform: translateY(28px) rotate(0deg);
+  transition:
+    transform 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.7s ease;
+  transition-delay: calc(var(--i, 0) * 110ms);
+}
+
+.jp-band.in .jp-frame {
+  opacity: 1;
+  transform: translateY(0) rotate(var(--rot, 0deg));
+}
+
+.jp-band.in .jp-frame:hover {
+  transform: translateY(-6px) rotate(calc(var(--rot, 0deg) * 0.35));
+  transition-duration: 0.35s, 0.35s;
+  transition-delay: 0s;
+}
+
+.jp-frame img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 1px;
+}
+
+.jp-frame-tall {
+  width: min(250px, 60vw);
+}
+
+.jp-stamp {
+  width: min(160px, 44vw);
+  padding: 7px 7px 6px;
+}
+
+.jp-caption {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.75rem;
+  padding: 7px 2px 2px;
+  font-size: var(--fs-micro);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #4a4150;
+}
+
+.jp-caption strong {
+  color: #201a28;
+  font-weight: 600;
+}
+
+.jp-caption-credit {
+  color: #97897a;
+  font-size: 0.5625rem;
+  white-space: nowrap;
+}
+
+.jp-stamp .jp-caption {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1px;
+}
+
+@media (min-width: 641px) {
+  .jp-band-head { padding: 0 1.5rem 2rem; }
+  .jp-rack { padding-inline: 1.5rem; }
+}
+
+@media (min-width: 981px) {
+  /* Mirrors the .section horizontal rhythm so the head lines up with
+     the Kobe copy above while the rack bleeds to the viewport edge */
+  .jp-band-head { padding: 0 calc(max(2rem, (100vw - 1200px) / 2)) 2.5rem; }
+  .jp-rack { padding-inline: max(2rem, (100vw - 1200px) / 2); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .jp-frame {
+    transition: none;
+    opacity: 1;
+    transform: rotate(var(--rot, 0deg));
   }
 }
 

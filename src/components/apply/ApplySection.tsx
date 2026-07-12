@@ -12,7 +12,7 @@ const headlines: Record<string, { em: string; sub: string }> = {
   builder:   { em: 'yours.',         sub: 'Full access. Zero barriers. One unforgettable month.' },
 };
 
-const defaultHeadline = { em: 'wearable.', sub: 'Pick your track. Apply. Join us on Port Island.' };
+const defaultHeadline = { em: 'built here.', sub: 'Pick your track. Apply. Join us on Port Island.' };
 
 type WhitelistStatus = 'idle' | 'loading' | 'success' | 'not-found' | 'used' | 'error';
 
@@ -98,7 +98,6 @@ export function ApplySection() {
 
         <div className="apply-btns">
           <a className="btn btn-primary" style={{ fontSize: 'var(--fs-secondary)', padding: '1rem 2rem' }} href={LUMA_EVENT_URL} target="_blank" rel="noopener noreferrer">Apply Now</a>
-          <a className="btn btn-outline" style={{ fontSize: 'var(--fs-secondary)', padding: '1rem 2rem' }} href="#">Get the Info Pack</a>
         </div>
         <div className="apply-micro">5-min application · No commitment</div>
 

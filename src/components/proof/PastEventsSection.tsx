@@ -13,7 +13,7 @@ export default function PastEventsSection() {
           <div className="section-label">Track Record</div>
 
           <h2 className="past-events-title display">
-            Other events we have <em>supported</em>
+            We&rsquo;ve done this <em>before</em>.
           </h2>
 
           <p className="past-events-intro">

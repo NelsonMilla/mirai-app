@@ -2,7 +2,6 @@ import { ApplyForm } from './ApplyForm';
 import { MailingListForm } from './MailingListForm';
 import { CursorGlow } from './CursorGlow';
 import { QuickActions } from '@/components/ui/QuickActions';
-import { InviteCodeLink } from '@/components/ui/InviteCodeLink';
 
 export const metadata = {
   title: 'Apply — Builder Pass · Mirai Tech PopUp City',
@@ -19,7 +18,7 @@ export default function ApplyPage() {
       <div className="apply-page-inner">
         {/* ── HEADER ── */}
         <header className="apply-page-header">
-          <a href="/" className="apply-back mono">&larr; mirai.tech</a>
+          <a href="/" className="apply-back mono">&larr; miraitech.city</a>
           <div className="apply-page-badge mono">Builder Pass &middot; Open Now</div>
           <h1 className="apply-page-title display">Apply as a Builder</h1>
           <p className="apply-page-sub">
@@ -29,7 +28,6 @@ export default function ApplyPage() {
           <p className="apply-page-upgrade mono">
             Applying as Builder? You can upgrade to Devices or Therapies track after acceptance.
           </p>
-          <InviteCodeLink variant="footer" />
         </header>
 
         {/* ── APPLICATION FORM ── */}

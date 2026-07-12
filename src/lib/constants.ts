@@ -1,4 +1,4 @@
-export const LUMA_EVENT_URL = 'https://luma.com/an4zotn9?utm_parameter=landing';
+export const LUMA_EVENT_URL = 'https://luma.com/an4zotn9?utm_source=landing';
 
 /**
  * The landing page's section registry — the single source of truth for
@@ -30,6 +30,8 @@ export interface Track {
   id: string;
   name: string;
   type: string;
+  /** Offering kind shown in the face-up badge ("Residency" or "Pass"). */
+  kind: 'Residency' | 'Pass';
   color: string;
   colorBright: string;
   colorRgb: string;
@@ -44,6 +46,7 @@ export const tracks: Track[] = [
     id: 'devices',
     name: 'Devices Residency',
     type: 'Medical Devices',
+    kind: 'Residency',
     color: '#6DB5F5',
     colorBright: '#8DC8F8',
     colorRgb: '109,181,245',
@@ -61,13 +64,14 @@ export const tracks: Track[] = [
     id: 'therapies',
     name: 'Therapies Residency',
     type: 'Therapeutics',
+    kind: 'Residency',
     color: '#F5D34E',
     colorBright: '#F8E06A',
     colorRgb: '245,211,78',
     darkBg: '#1a1710',
     hint: 'Connect directly with PMDA for conditional approval.',
     description:
-      'Post Phase 1b biotech companies connecting directly with PMDA and Japanese consulting firms on Japan\'s accelerated pathways. Culminates in a PMDA pre-submission and go-to-market roadmap.',
+      'For therapeutics past Phase 1b: work directly with PMDA and regulatory specialists on Japan\'s accelerated pathways. Culminates in a PMDA pre-submission and go-to-market roadmap.',
     stats: [
       { label: 'Regulatory', value: 'PMDA', fill: '100%' },
       { label: 'Stage', value: '> Ph1b', fill: '70%' },
@@ -78,6 +82,7 @@ export const tracks: Track[] = [
     id: 'builder',
     name: 'Builder Pass',
     type: 'Community',
+    kind: 'Pass',
     color: '#F56B6B',
     colorBright: '#F88A8A',
     colorRgb: '245,107,107',
@@ -119,7 +124,7 @@ export const chapters: Chapter[] = [
     colorClass: 'ch-arrival',
     colorRgb: '78, 205, 196',
     color: '#4ECDC4',
-    imageSrc: '/images/chapters/arrival.jpg',
+    imageSrc: '/images/chapters/portliner.jpg',
     events: [
       'KBIC lab tours & orientation',
       'Welcome day & community kickoff (Oct 4)',
@@ -132,11 +137,11 @@ export const chapters: Chapter[] = [
     kanji: '弐',
     title: 'Summit I: The Science & Tech Augmenting Life',
     dates: 'Oct 17 – 18',
-    synopsis: 'Part of the Longevity Biomedical Summit. The opportunities and the imperative of longevity biomedical innovation in Japan.',
+    synopsis: 'Part of the Longevity Biomedical Summit: why longevity biomedicine\'s next decade runs through Japan.',
     colorClass: 'ch-longevity',
     colorRgb: '245, 197, 66',
     color: '#F5C542',
-    imageSrc: '/images/chapters/longevity.jpg',
+    imageSrc: '/images/chapters/lab.jpg',
     events: [
       "Japan's Longevity Imperative — what Japan learned & what it needs from the world",
       'KBIC as a global laboratory for longevity',
@@ -155,7 +160,7 @@ export const chapters: Chapter[] = [
     colorClass: 'ch-enhance',
     colorRgb: '91, 141, 239',
     color: '#5B8DEF',
-    imageSrc: '/images/chapters/enhance.jpg',
+    imageSrc: '/images/chapters/bridge.jpg',
     events: [
       'Longevity trends, supercentenarians, impact & bottlenecks',
       'The stakeholders: investment, R&D, entrepreneurship, regulation as an acceleration mechanism',
@@ -173,7 +178,7 @@ export const chapters: Chapter[] = [
     colorClass: 'ch-fashion',
     colorRgb: '255, 107, 146',
     color: '#FF6B92',
-    imageSrc: '/images/chapters/fashion.jpg',
+    imageSrc: '/images/chapters/runway.jpg',
     events: [
       'Prototype polish & final builds',
       'PMDA regulatory submissions',
@@ -326,6 +331,11 @@ export interface FaqItem {
 
 export const faqItems: FaqItem[] = [
   {
+    question: 'What is a popup city?',
+    answer:
+      'A temporary village where a curated community lives, works, and builds together in one place for one month. Housing, labs, programming, and social life share the same few blocks on Port Island, so the people you meet at breakfast are the ones you build with by night.',
+  },
+  {
     question: 'Who is this for?',
     answer:
       'Biotech builders with working prototypes (Devices), post-Phase 1b therapeutic companies (Therapies), and entrepreneurs, operators, and investors who want to be part of the community (Builder).',
@@ -354,11 +364,6 @@ export const faqItems: FaqItem[] = [
     question: 'How do applications work?',
     answer:
       'Builder passes are available directly through our ticketing page. Residency tracks are application-only — we review on a rolling basis, and accepted teams receive next steps by email.',
-  },
-  {
-    question: 'What is a popup city?',
-    answer:
-      'A temporary village where a curated community lives, works, and builds together in one place for one month. Housing, labs, programming, and social life share the same few blocks on Port Island, so the people you meet at breakfast are the ones you build with by night.',
   },
   {
     question: 'Where do I stay?',

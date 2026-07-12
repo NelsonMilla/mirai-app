@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import { InviteCodeLink } from '@/components/ui/InviteCodeLink';
 import { LUMA_EVENT_URL, SECTIONS } from '@/lib/constants';
 import { useActiveSection } from '@/hooks/useActiveSection';
 
@@ -32,7 +31,6 @@ export function Navbar() {
             {navLabel}
           </button>
         ))}
-        <InviteCodeLink variant="nav" />
         <a className="btn btn-primary" href={LUMA_EVENT_URL} target="_blank" rel="noopener noreferrer">Apply Now</a>
       </div>
     </nav>

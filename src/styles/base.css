@@ -171,27 +171,22 @@ nav.site-nav {
 }
 
 @media (max-width: 640px) {
-  .nav-links a:not(.btn):not(.invite-code-link) { display: none; }
-  .nav-links .invite-code-link--nav { display: inline-flex; }
+  .nav-links a:not(.btn) { display: none; }
   .nav-btn { display: none; }
 }
 
-/* Mid widths: 5 section links + invite link + CTA overflow the bar, wrapping
-   the logo and clipping the Apply button. Tighten and collapse the invite
-   link to its dot (same treatment as ≤640px). */
+/* Mid widths: 5 section links + CTA overflow the bar, wrapping the logo
+   and clipping the Apply button. Tighten. */
 @media (min-width: 641px) and (max-width: 900px) {
   nav.site-nav { padding: 1rem 1.25rem; }
   .nav-links { gap: 1.1rem; }
   .nav-name { white-space: nowrap; }
   .nav-links .btn { white-space: nowrap; }
-  .invite-code-link--nav .invite-code-text { display: none; }
-  .invite-code-link--nav { padding: 0.35rem; }
 }
 @media (min-width: 641px) and (max-width: 760px) {
   nav.site-nav { padding: 1rem; }
   .nav-links { gap: 0.8rem; }
   .nav-links .btn { padding: 0.6rem 0.9rem; }
-  .invite-code-link--nav { display: none; }
 }
 
 /* Sound toggle button — main styles in SOUND TOGGLE STYLES section below */
@@ -742,56 +737,6 @@ a.qa-card:hover .qa-card-cta--primary {
   a.qa-card:hover .qa-card-cta {
     transform: none;
   }
-}
-
-/* ============================================
-   INVITE CODE LINK (discreet)
-   ============================================ */
-
-.invite-code-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  padding: 0.4rem 0.7rem;
-  border-radius: 999px;
-  color: rgba(255,255,255,0.45);
-  font-size: var(--fs-label);
-  letter-spacing: 0.08em;
-  text-decoration: none;
-  text-transform: uppercase;
-  transition: color 0.25s, background 0.25s, border-color 0.25s;
-  border: 1px solid transparent;
-  cursor: none;
-}
-
-.invite-code-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 999px;
-  background: rgba(var(--accent-rgb), 0.55);
-  box-shadow: 0 0 8px rgba(var(--accent-rgb), 0.5);
-  flex-shrink: 0;
-}
-
-.invite-code-link:hover {
-  color: var(--accent);
-  background: rgba(var(--accent-rgb), 0.06);
-  border-color: rgba(var(--accent-rgb), 0.2);
-}
-
-.invite-code-link--nav {
-  padding: 0.35rem 0.6rem;
-  font-size: var(--fs-label);
-}
-
-.invite-code-link--footer {
-  margin: 1.5rem auto 0;
-  display: flex;
-}
-
-@media (max-width: 640px) {
-  .invite-code-link--nav .invite-code-text { display: none; }
-  .invite-code-link--nav { padding: 0.35rem; }
 }
 
 /* ============================================

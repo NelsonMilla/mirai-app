@@ -42,7 +42,7 @@ const ICONS: Record<string, React.ReactNode> = {
 export function QuickActions({
   variant = 'default',
   heading = 'The city is already talking.',
-  subheading = 'Three hundred future residents, one calendar, zero forms. Pick a door.',
+  subheading = 'The first residents are already in — one group chat, one calendar, zero forms. Pick a door.',
   source = 'quick-actions',
 }: QuickActionsProps) {
   return (

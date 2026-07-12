@@ -5,6 +5,7 @@ import { RevealSection } from '@/components/ui/RevealSection';
 import LifestyleCard from './LifestyleCard';
 import CardOverlay from './CardOverlay';
 import TransitMap from './TransitMap';
+import KobeEveningBand from './KobeEveningBand';
 import { lifestyleCards, LifestyleCard as LifestyleCardType } from '@/lib/constants';
 
 const marketReceipts = [
@@ -44,7 +45,7 @@ export default function KobeSection() {
             </h2>
 
             <p className="kobe-lead">
-              Japan's regulatory framework for regenerative medicine and medical devices is the fastest legal path from clinical evidence to patients — where it matters most, and where it's actually achievable.
+              Japan's regulatory framework for regenerative medicine and medical devices is the fastest legal path from clinical evidence to patients. KBIC is its front door.
             </p>
           </div>
 
@@ -90,6 +91,9 @@ export default function KobeSection() {
           </div>
         </div>
       </RevealSection>
+
+      {/* BEAT 3: One evening — real-photo postcard rack */}
+      <KobeEveningBand />
 
       {/* MOMENT 5B: Playground Map */}
       <TransitMap />

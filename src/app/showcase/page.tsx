@@ -17,7 +17,7 @@ export default function ShowcasePage() {
       <div className="apply-page-inner">
         {/* ── HEADER ── */}
         <header className="apply-page-header">
-          <a href="/" className="apply-back mono">&larr; mirai.tech</a>
+          <a href="/" className="apply-back mono">&larr; miraitech.city</a>
           <div className="apply-page-badge mono">Fashion Show &amp; Demo Day &middot; Oct 26</div>
           <h1 className="apply-page-title display">Showcase your company</h1>
           <p className="apply-page-sub">

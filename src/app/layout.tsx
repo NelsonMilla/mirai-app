@@ -53,7 +53,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://mirai.tech",
+    url: "https://miraitech.city",
     siteName: "Mirai Tech PopUp City",
     title: "Mirai Tech PopUp City — Build the Future of Biotech in 4 Weeks",
     description:
@@ -78,7 +78,7 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
-  metadataBase: new URL("https://mirai.tech"),
+  metadataBase: new URL("https://miraitech.city"),
 };
 
 export default function RootLayout({

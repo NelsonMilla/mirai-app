@@ -59,7 +59,7 @@ export function TrackCard({ track }: TrackCardProps) {
               return <SpriteComponent className="w-full h-full" />;
             })()}
           </div>
-          <div className="track-up-badge">{track.type} · Residency</div>
+          <div className="track-up-badge">{track.type} · {track.kind}</div>
         </div>
         <div className="track-up-title">{track.name}</div>
         <div className="track-up-desc">{track.description}</div>
@@ -79,7 +79,7 @@ export function TrackCard({ track }: TrackCardProps) {
           className="track-continue"
           onClick={(e) => e.stopPropagation()}
         >
-          Continue as {track.name}
+          Continue with {track.name}
           <span aria-hidden="true"> →</span>
         </a>
       </div>
