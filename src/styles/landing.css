@@ -1480,7 +1480,9 @@
    ============================================ */
 
 /* ── Lock state ── */
-html.loading { scroll-behavior: auto !important; }
+/* Lock scrolling under the preloader — wheel/touch events still fire, so the
+   scroll-to-skip gesture keeps working, but the page can't move underneath */
+html.loading { scroll-behavior: auto !important; overflow: hidden; }
 
 /* ── Suppress hero animations while loader is active ── */
 html.loading .hero-eyebrow,

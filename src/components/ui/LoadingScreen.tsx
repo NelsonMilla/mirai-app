@@ -38,8 +38,12 @@ export default function LoadingScreen() {
       return;
     }
 
-    // Mark html so CSS can suppress smooth-scroll during load
+    // Mark html so CSS can suppress smooth-scroll and lock scrolling during
+    // load. Reset to top ONCE here, before the user can scroll — resetting at
+    // dismiss time yanked the page back after the user had started scrolling
+    // (scroll is also the skip gesture), which read as a glitch.
     document.documentElement.classList.add('loading');
+    window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior });
 
     const dismiss = () => {
       if (dismissedRef.current) return;
@@ -54,9 +58,6 @@ export default function LoadingScreen() {
       // Slats take ~940ms (8 × 55ms delay + 500ms duration)
       setTimeout(() => {
         document.documentElement.classList.remove('loading');
-        requestAnimationFrame(() =>
-          window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior })
-        );
         setVisible(false);
       }, 1000);
     };
@@ -77,9 +78,6 @@ export default function LoadingScreen() {
 
     const t4 = setTimeout(() => {
       document.documentElement.classList.remove('loading');
-      requestAnimationFrame(() =>
-        window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior })
-      );
       setVisible(false);
     }, 3600);
 
