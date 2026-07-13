@@ -6,15 +6,16 @@ import { LifestyleCard as LifestyleCardType } from '@/lib/constants';
 interface LifestyleCardProps {
   card: LifestyleCardType;
   index: number;
-  onOpenOverlay: (card: LifestyleCardType) => void;
 }
 
-export default function LifestyleCard({ card, index, onOpenOverlay }: LifestyleCardProps) {
+export default function LifestyleCard({ card, index }: LifestyleCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
   const shineRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
   const [isFlipped, setIsFlipped] = useState(false);
-  const flipTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [isPeeking, setIsPeeking] = useState(false);
+  const isFlippedRef = useRef(false);
+  isFlippedRef.current = isFlipped;
 
   // 3D tilt effect
   useEffect(() => {
@@ -22,8 +23,10 @@ export default function LifestyleCard({ card, index, onOpenOverlay }: LifestyleC
     if (!cardElement) return;
 
     const applyTilt = (x: number, y: number, rect: DOMRect) => {
-      const rotateX = ((y - rect.height / 2) / rect.height) * 15;
-      const rotateY = ((x - rect.width / 2) / rect.width) * -15;
+      // Dampen tilt on the fact-file back so the text stays readable
+      const range = isFlippedRef.current ? 6 : 15;
+      const rotateX = ((y - rect.height / 2) / rect.height) * range;
+      const rotateY = ((x - rect.width / 2) / rect.width) * -range;
 
       cardElement.style.transform = `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
 
@@ -91,21 +94,36 @@ export default function LifestyleCard({ card, index, onOpenOverlay }: LifestyleC
     return () => observer.disconnect();
   }, []);
 
-  // Cleanup flip timeout on unmount
+  // One-time peek tease: after the deal-in settles, card 1 tips open a few
+  // degrees to flash the photo behind it — the entire "these flip" tutorial.
   useEffect(() => {
-    return () => {
-      if (flipTimeoutRef.current) clearTimeout(flipTimeoutRef.current);
+    if (!isVisible || index !== 0) return;
+    const startTimer = setTimeout(() => {
+      if (isFlippedRef.current) return;
+      setIsPeeking(true);
+    }, 1400);
+    return () => clearTimeout(startTimer);
+  }, [isVisible, index]);
+
+  // Escape flips the card back
+  useEffect(() => {
+    if (!isFlipped) return;
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setIsFlipped(false);
     };
-  }, []);
+    document.addEventListener('keydown', handleEscape);
+    return () => document.removeEventListener('keydown', handleEscape);
+  }, [isFlipped]);
 
   const handleClick = () => {
-    if (isFlipped) return; // prevent double-click
-    setIsFlipped(true);
-    flipTimeoutRef.current = setTimeout(() => {
-      onOpenOverlay(card);
-      // Reset flip after overlay transition takes over
-      flipTimeoutRef.current = setTimeout(() => setIsFlipped(false), 400);
-    }, 800);
+    setIsPeeking(false);
+    const next = !isFlipped;
+    setIsFlipped(next);
+    if (next) {
+      window.dispatchEvent(
+        new CustomEvent('lifestyle-card-open', { detail: { cardId: card.id } })
+      );
+    }
   };
 
   const colorMap: Record<string, { rgb: string; accent: string }> = {
@@ -124,10 +142,16 @@ export default function LifestyleCard({ card, index, onOpenOverlay }: LifestyleC
     'ultra-rare': '★',
   };
 
+  const flipHint = (
+    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M9 1H3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-1 8H4" stroke="currentColor" strokeWidth="1" strokeLinecap="round" />
+    </svg>
+  );
+
   return (
     <div
       ref={cardRef}
-      className={`life-card ${card.id} ${isVisible ? 'card-visible' : ''}`}
+      className={`life-card ${card.id} ${isVisible ? 'card-visible' : ''} ${isFlipped ? 'flipped' : ''} ${isPeeking ? 'peek' : ''}`}
       style={{
         '--card-rgb': colors.rgb,
         '--card-accent': colors.accent,
@@ -136,6 +160,8 @@ export default function LifestyleCard({ card, index, onOpenOverlay }: LifestyleC
       onClick={handleClick}
       role="button"
       tabIndex={0}
+      aria-pressed={isFlipped}
+      aria-label={`${card.title} — flip card`}
       onKeyDown={(e) => {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
@@ -145,10 +171,10 @@ export default function LifestyleCard({ card, index, onOpenOverlay }: LifestyleC
     >
       <div
         className="life-card-inner"
-        style={isFlipped ? { transform: 'rotateY(180deg)' } : undefined}
+        onAnimationEnd={() => setIsPeeking(false)}
       >
         {/* FRONT FACE — TCG LAYOUT */}
-        <div className="life-front">
+        <div className="life-front" aria-hidden={isFlipped}>
           <div className="life-frame">
             {/* Type badge top-left */}
             <div className="life-type-badge mono">{card.tag}</div>
@@ -176,39 +202,45 @@ export default function LifestyleCard({ card, index, onOpenOverlay }: LifestyleC
               ))}
             </div>
 
-            {/* Flavor text */}
-            <p className="life-flavor display">{card.flavorText}</p>
+            {/* Stat strip — the real numbers, visible without flipping */}
+            <div className="life-stats-strip">
+              {card.stats.map((stat, i) => (
+                <div key={i} className="life-stat">
+                  <span className="life-stat-value mono">{stat.value}</span>
+                  <span className="life-stat-label mono">{stat.label}</span>
+                </div>
+              ))}
+            </div>
 
-            {/* Footer */}
+            {/* Footer — flip hint rides in flow between set code and rarity */}
             <div className="life-card-footer">
               <span className="life-set-code mono">{card.setCode}</span>
+              <span className="life-flip-hint mono">
+                Flip
+                {flipHint}
+              </span>
               <span className={`life-rarity life-rarity--${card.rarity}`}>
                 {raritySymbol[card.rarity]}
               </span>
             </div>
           </div>
-
-          {/* Flip hint */}
-          <div className="life-flip-hint mono">
-            Flip
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M9 1H3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-1 8H4" stroke="currentColor" strokeWidth="1" strokeLinecap="round" />
-            </svg>
-          </div>
         </div>
 
-        {/* BACK FACE */}
-        <div className="life-back">
+        {/* BACK FACE — FACT FILE */}
+        <div className="life-back" aria-hidden={!isFlipped}>
           <div className="life-back-art">
             <img src={`/images/lifestyle/${card.id}_card.jpg`} alt={card.title} />
           </div>
           <div className="life-back-frame" />
-          <div className="life-back-mandala" />
-          <div className="life-back-kanji jp">{card.kanji}</div>
-          <div className="life-back-particles">
-            <span />
-            <span />
-            <span />
+          <div className="life-back-content">
+            <div className="life-back-eyebrow mono">{card.hudSubtitle}</div>
+            <h4 className="life-back-title display">{card.hudTitle}</h4>
+            <p className="life-back-text">{card.hudText}</p>
+            <p className="life-back-flavor display">{card.flavorText}</p>
+          </div>
+          <div className="life-flip-hint life-flip-hint--back mono">
+            Flip
+            {flipHint}
           </div>
         </div>
       </div>

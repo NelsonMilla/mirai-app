@@ -176,16 +176,16 @@ test('interactions @ 1280x800', async ({ page }) => {
     );
   }
 
-  // Lifestyle card overlay opens and closes.
+  // Lifestyle card flips in place; Escape flips it back.
   await page.evaluate(() =>
     document
       .querySelector('.life-card')!
       .scrollIntoView({ behavior: 'instant' as ScrollBehavior, block: 'center' }),
   );
   await page.locator('.life-card').first().click();
-  await expect(page.locator('.card-overlay')).toHaveClass(/active/, { timeout: 10_000 });
+  await expect(page.locator('.life-card').first()).toHaveClass(/flipped/, { timeout: 10_000 });
   await page.keyboard.press('Escape');
-  await expect(page.locator('.card-overlay')).not.toHaveClass(/active/);
+  await expect(page.locator('.life-card').first()).not.toHaveClass(/flipped/);
 
   // FAQ accordion.
   await page.evaluate(() =>

@@ -1480,7 +1480,9 @@
    ============================================ */
 
 /* ── Lock state ── */
-html.loading { scroll-behavior: auto !important; }
+/* Lock scrolling under the preloader — wheel/touch events still fire, so the
+   scroll-to-skip gesture keeps working, but the page can't move underneath */
+html.loading { scroll-behavior: auto !important; overflow: hidden; }
 
 /* ── Suppress hero animations while loader is active ── */
 html.loading .hero-eyebrow,
@@ -3350,7 +3352,36 @@ html.loading .hero-stats {
   inset: 0;
   border-radius: inherit;
   transform-style: preserve-3d;
-  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  /* Slight overshoot so the flip lands like cardstock, not CSS */
+  transition: transform 0.48s cubic-bezier(0.34, 1.3, 0.64, 1);
+}
+
+.life-card.flipped .life-card-inner {
+  transform: rotateY(180deg);
+}
+
+/* Flipping card rides above its grid siblings while it overhangs the gutter */
+.life-card.flipped {
+  z-index: 5;
+}
+
+/* One-time peek tease on card 1: tip open far enough to flash the photo */
+.life-card.peek .life-card-inner {
+  animation: life-peek 0.7s ease-in-out;
+}
+
+@keyframes life-peek {
+  0%, 100% { transform: rotateY(0); }
+  50% { transform: rotateY(-24deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .life-card.peek .life-card-inner {
+    animation: none;
+  }
+  .life-card-inner {
+    transition-duration: 0.2s;
+  }
 }
 
 .life-front,
@@ -3368,7 +3399,7 @@ html.loading .hero-stats {
 
 .life-back {
   transform: rotateY(180deg);
-  justify-content: flex-start;
+  justify-content: flex-end;
 }
 
 .life-card.onsen .life-front {
@@ -3586,15 +3617,33 @@ html.loading .hero-stats {
   margin-top: 1px;
 }
 
-/* ── Flavor text ── */
-.life-flavor {
-  font-family: var(--font-fraunces), serif;
-  font-style: italic;
-  font-size: var(--fs-label);
-  line-height: 1.4;
-  color: rgba(255, 255, 255, 0.3);
-  padding: 4px 4px 2px;
+/* ── Stat strip (front) — the real numbers, visible without flipping ── */
+.life-stats-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+  padding: 5px 4px 3px;
   border-top: 1px solid rgba(var(--card-rgb), 0.08);
+}
+.life-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.life-stat-value {
+  font-family: var(--font-jetbrains), monospace;
+  font-size: clamp(0.7rem, 1.4vw, 0.8rem);
+  font-weight: 700;
+  color: var(--card-accent);
+  letter-spacing: -0.01em;
+}
+.life-stat-label {
+  font-family: var(--font-jetbrains), monospace;
+  font-size: var(--fs-label);
+  color: rgba(255, 255, 255, 0.35);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 /* ── Footer (set code + rarity) ── */
@@ -3642,6 +3691,12 @@ html.loading .hero-stats {
 }
 .life-card:hover .life-flip-hint { color: rgba(var(--card-rgb), 0.7); }
 .life-card:hover .life-flip-hint svg { opacity: 0.7; }
+
+/* Front hint rides in flow inside the footer row — the absolute bottom-right
+   spot now belongs to the stat strip's third column */
+.life-front .life-flip-hint {
+  position: static;
+}
 
 /* ── Card texture overlay ── */
 .life-front::after {
@@ -3726,106 +3781,67 @@ html.loading .hero-stats {
     linear-gradient(to top, rgba(11, 11, 20, 0.85) 0%, rgba(11, 11, 20, 0.3) 35%, transparent 60%);
 }
 
-.life-back-mandala {
-  position: absolute;
-  width: 180px;
-  height: 180px;
-  border-radius: 50%;
-  z-index: 3;
-  border: 1px solid rgba(var(--card-rgb), 0.15);
-  box-shadow: 0 0 40px rgba(var(--card-rgb), 0.1),
-    inset 0 0 40px rgba(var(--card-rgb), 0.05);
-  animation: mandala-spin 30s linear infinite;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.life-back-mandala::before {
-  content: '';
-  position: absolute;
-  inset: 12px;
-  border-radius: 50%;
-  border: 1px dashed rgba(var(--card-rgb), 0.12);
-}
-
-.life-back-mandala::after {
-  content: '';
-  position: absolute;
-  inset: 24px;
-  border-radius: 50%;
-  border: 1px solid rgba(var(--card-rgb), 0.08);
-}
-
-@keyframes mandala-spin {
-  to {
-    transform: translate(-50%, -50%) rotate(360deg);
-  }
-}
-
-.life-back-kanji {
-  font-family: var(--font-noto-serif-jp), serif;
-  font-weight: 900;
-  font-size: clamp(4.5rem, 10vw, 7rem);
-  line-height: 0.9;
+/* ── Fact-file content (back) — photo is the surface, facts sit on the scrim ── */
+.life-back-content {
   position: relative;
-  z-index: 4;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0 14px 16px;
+  padding: 12px 14px;
+  background: rgba(8, 8, 14, 0.68);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(var(--card-rgb), 0.18);
+  border-radius: 10px;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.24s ease, transform 0.24s ease;
+}
+
+/* Content rises in as the back face swings past facing the viewer */
+.life-card.flipped .life-back-content {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.26s;
+}
+
+.life-back-eyebrow {
+  font-family: var(--font-jetbrains), monospace;
+  font-size: var(--fs-label);
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
   color: var(--card-accent);
-  text-shadow: 0 0 60px rgba(var(--card-rgb), 0.5),
-    0 0 120px rgba(var(--card-rgb), 0.25);
 }
 
-.life-back-particles {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  overflow: hidden;
-  mix-blend-mode: soft-light;
+.life-back-title {
+  font-family: var(--font-fraunces), serif;
+  font-weight: 500;
+  font-size: clamp(1.05rem, 2.2vw, 1.3rem);
+  letter-spacing: -0.01em;
+  color: var(--white);
 }
 
-.life-back-particles span {
-  position: absolute;
-  border-radius: 50%;
-  background: rgba(var(--card-rgb), 0.4);
-  filter: blur(20px);
-  animation: float-particle 8s ease-in-out infinite alternate;
+.life-back-text {
+  font-size: var(--fs-label);
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.75);
 }
 
-.life-back-particles span:nth-child(1) {
-  width: 100px;
-  height: 100px;
-  top: 10%;
-  left: 15%;
-  animation-delay: 0s;
+.life-back-flavor {
+  font-family: var(--font-fraunces), serif;
+  font-style: italic;
+  font-size: var(--fs-label);
+  line-height: 1.4;
+  color: rgba(var(--card-rgb), 0.6);
+  padding-top: 4px;
+  border-top: 1px solid rgba(var(--card-rgb), 0.15);
 }
 
-.life-back-particles span:nth-child(2) {
-  width: 70px;
-  height: 70px;
-  bottom: 20%;
-  right: 15%;
-  animation-delay: -3s;
-}
-
-.life-back-particles span:nth-child(3) {
-  width: 50px;
-  height: 50px;
-  top: 50%;
-  left: 60%;
-  animation-delay: -5s;
-  opacity: 0.5;
-}
-
-@keyframes float-particle {
-  0% {
-    transform: translate(0, 0) scale(1);
-  }
-  50% {
-    transform: translate(15px, -20px) scale(1.2);
-  }
-  100% {
-    transform: translate(-10px, 12px) scale(0.85);
-  }
+.life-flip-hint--back {
+  color: rgba(255, 255, 255, 0.3);
 }
 
 .life-card.onsen .life-back {
@@ -3906,236 +3922,6 @@ html.loading .hero-stats {
 .life-card:nth-child(2) { transition-delay: 0.2s; }
 .life-card:nth-child(3) { transition-delay: 0.4s; }
 .life-card:nth-child(4) { transition-delay: 0.6s; }
-
-/* ── CARD OVERLAY ── */
-.card-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 9998;
-  background: rgba(5, 5, 12, 0);
-  backdrop-filter: blur(0px);
-  -webkit-backdrop-filter: blur(0px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 2.5rem;
-  pointer-events: none;
-  opacity: 0;
-  transition: background 0.5s, backdrop-filter 0.5s, opacity 0.5s;
-  cursor: none;
-}
-
-.card-overlay.active {
-  background: rgba(5, 5, 12, 0.85);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  pointer-events: all;
-  opacity: 1;
-}
-
-.card-overlay-card {
-  width: 340px;
-  aspect-ratio: 3 / 4;
-  border-radius: 18px;
-  position: relative;
-  perspective: 1200px;
-  flex-shrink: 0;
-  transform: scale(0.8) rotateY(-20deg);
-  opacity: 0;
-  transition: transform 0.7s cubic-bezier(0.23, 1, 0.32, 1),
-    opacity 0.5s;
-}
-
-.card-overlay.active .card-overlay-card {
-  transform: scale(1) rotateY(0);
-  opacity: 1;
-}
-
-/* ── HUD PANEL ── */
-.card-hud {
-  width: clamp(280px, 35vw, 420px);
-  max-height: 80vh;
-  overflow-y: auto;
-  scrollbar-width: none;
-}
-
-.card-hud::-webkit-scrollbar {
-  display: none;
-}
-
-.hud-shell {
-  position: relative;
-  background: linear-gradient(
-    135deg,
-    rgba(31, 35, 45, 0.8) 0%,
-    rgba(20, 22, 28, 0.9) 100%
-  );
-  border: 1px solid rgba(245, 160, 181, 0.15);
-  border-radius: 8px;
-  padding: 1.5rem;
-  backdrop-filter: blur(10px);
-}
-
-.hud-corner {
-  position: absolute;
-  width: 12px;
-  height: 12px;
-  border: 1px solid rgba(245, 160, 181, 0.3);
-}
-
-.hud-corner--tl {
-  top: 8px;
-  left: 8px;
-  border-right: none;
-  border-bottom: none;
-}
-
-.hud-corner--tr {
-  top: 8px;
-  right: 8px;
-  border-left: none;
-  border-bottom: none;
-}
-
-.hud-corner--bl {
-  bottom: 8px;
-  left: 8px;
-  border-right: none;
-  border-top: none;
-}
-
-.hud-corner--br {
-  bottom: 8px;
-  right: 8px;
-  border-left: none;
-  border-top: none;
-}
-
-.hud-header {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-bottom: 1.5rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid rgba(245, 160, 181, 0.1);
-}
-
-.hud-blink {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--card-accent);
-  animation: hud-pulse 2s ease-in-out infinite;
-}
-
-@keyframes hud-pulse {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.3;
-  }
-}
-
-.hud-label {
-  font-family: var(--font-jetbrains), monospace;
-  font-size: var(--fs-label);
-  color: rgba(255, 255, 255, 0.5);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  flex: 1;
-}
-
-.hud-close {
-  background: none;
-  border: none;
-  color: rgba(245, 160, 181, 0.5);
-  font-size: 1.5rem;
-  cursor: none;
-  transition: color 0.3s;
-}
-
-.hud-close:hover {
-  color: var(--card-accent);
-}
-
-.hud-title {
-  font-family: var(--font-fraunces), serif;
-  font-size: clamp(1.6rem, 3vw, 2.2rem);
-  font-weight: 500;
-  margin-bottom: 0.3rem;
-  color: var(--white);
-}
-
-.hud-subtitle {
-  font-family: var(--font-jetbrains), monospace;
-  font-size: var(--fs-label);
-  color: var(--card-accent);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  margin-bottom: 1rem;
-}
-
-.hud-text {
-  font-size: var(--fs-secondary);
-  line-height: 1.6;
-  color: rgba(255, 255, 255, 0.6);
-  margin-bottom: 1.5rem;
-}
-
-.hud-stats {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
-  padding-top: 1rem;
-  border-top: 1px solid rgba(245, 160, 181, 0.1);
-}
-
-.hud-stat {
-  text-align: center;
-}
-
-.hud-stat-value {
-  font-family: var(--font-jetbrains), monospace;
-  font-size: var(--fs-secondary);
-  font-weight: 700;
-  color: var(--card-accent);
-  display: block;
-  margin-bottom: 0.3rem;
-}
-
-.hud-stat-label {
-  font-family: var(--font-jetbrains), monospace;
-  font-size: var(--fs-label);
-  color: rgba(255, 255, 255, 0.4);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.hud-scan {
-  position: absolute;
-  inset: 0;
-  border-radius: 8px;
-  pointer-events: none;
-  background: repeating-linear-gradient(
-    0deg,
-    rgba(245, 160, 181, 0.05) 0px,
-    rgba(245, 160, 181, 0.05) 1px,
-    transparent 1px,
-    transparent 2px
-  );
-  animation: scan-line 8s linear infinite;
-}
-
-@keyframes scan-line {
-  0% {
-    transform: translateY(-100%);
-  }
-  100% {
-    transform: translateY(100%);
-  }
-}
 
 /* ── ONE EVENING — real-photo postcard rack (KobeEveningBand) ──
    Coda of Why Kobe: cream paper frames against the ink page. Not a
@@ -4736,35 +4522,11 @@ html.loading .hero-stats {
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     gap: 1.5rem;
   }
-
-  .card-hud {
-    width: clamp(240px, 90vw, 360px);
-  }
-
-  .hud-title {
-    font-size: clamp(1.3rem, 2.5vw, 1.8rem);
-  }
 }
 
 @media (max-width: 640px) {
   .life-cards-grid {
     grid-template-columns: 1fr;
-  }
-
-  .card-overlay {
-    gap: 1rem;
-    flex-direction: column;
-  }
-
-  .card-overlay-card {
-    width: 100%;
-    max-width: 300px;
-  }
-
-  .card-hud {
-    width: 100%;
-    max-width: 300px;
-    max-height: 60vh;
   }
 }
 
