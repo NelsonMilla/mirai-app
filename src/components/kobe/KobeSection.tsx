@@ -1,12 +1,11 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import { RevealSection } from '@/components/ui/RevealSection';
 import LifestyleCard from './LifestyleCard';
-import CardOverlay from './CardOverlay';
 import TransitMap from './TransitMap';
 import KobeEveningBand from './KobeEveningBand';
-import { lifestyleCards, LifestyleCard as LifestyleCardType } from '@/lib/constants';
+import { lifestyleCards } from '@/lib/constants';
 
 const marketReceipts = [
   { value: '$88B', label: '3rd-largest pharma market · ¥12.4T' },
@@ -17,20 +16,6 @@ const marketReceipts = [
 ];
 
 export default function KobeSection() {
-  const [selectedCard, setSelectedCard] = useState<LifestyleCardType | null>(null);
-  const [isOverlayOpen, setIsOverlayOpen] = useState(false);
-
-  const handleOpenOverlay = (card: LifestyleCardType) => {
-    setSelectedCard(card);
-    setIsOverlayOpen(true);
-    window.dispatchEvent(new CustomEvent('lifestyle-card-open', { detail: { cardId: card.id } }));
-  };
-
-  const handleCloseOverlay = () => {
-    setIsOverlayOpen(false);
-    setTimeout(() => setSelectedCard(null), 300);
-  };
-
   return (
     <>
       <RevealSection id="kobe" dataSection="kobe" variant="reveal-track" threshold={0.05}>
@@ -81,12 +66,7 @@ export default function KobeSection() {
           </h3>
           <div className="life-cards-grid">
             {lifestyleCards.map((card, idx) => (
-              <LifestyleCard
-                key={card.id}
-                card={card}
-                index={idx}
-                onOpenOverlay={handleOpenOverlay}
-              />
+              <LifestyleCard key={card.id} card={card} index={idx} />
             ))}
           </div>
         </div>
@@ -97,12 +77,6 @@ export default function KobeSection() {
 
       {/* MOMENT 5B: Playground Map */}
       <TransitMap />
-
-      <CardOverlay
-        card={selectedCard}
-        isOpen={isOverlayOpen}
-        onClose={handleCloseOverlay}
-      />
     </>
   );
 }
