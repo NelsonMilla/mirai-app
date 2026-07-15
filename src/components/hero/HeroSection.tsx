@@ -48,7 +48,7 @@ export function HeroSection() {
             </span>
           </span>
           <span className="line">
-            <span className="line-inner">of biotech —</span>
+            <span className="line-inner">of health —</span>
           </span>
           <span className="line">
             <span className="line-inner">in 4 weeks</span>
