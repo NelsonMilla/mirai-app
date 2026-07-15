@@ -51,7 +51,7 @@ export default function CommunitiesSection() {
 
           <div className="eco-monolith">
             <div className="eco-marquee mono">
-              <span>Licensed partners</span>
+              <span>Our supporters</span>
               <span>▸ credit <CreditCounter total={total} run={inView} /></span>
             </div>
 

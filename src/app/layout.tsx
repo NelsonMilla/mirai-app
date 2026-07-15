@@ -56,7 +56,7 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://miraitech.city",
     siteName: "Mirai Tech PopUp City",
-    title: "Mirai Tech PopUp City — Build the Future of Biotech in 4 Weeks",
+    title: "Mirai Tech PopUp City — Build the Future of Health in 4 Weeks",
     description:
       "Three tracks. One month. Kobe's Port Island. Biomedical devices, therapeutic pathways, and the builder community — culminating in the Frontier Human Fashion Show. October 2026.",
     images: [
