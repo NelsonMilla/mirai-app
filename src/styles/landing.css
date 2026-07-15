@@ -1461,11 +1461,14 @@
 @media (min-width: 981px) {
   .roster-arena { grid-template-columns: 380px 1fr; height: 600px; }
   .roster-selector { border-right: 2px solid rgba(245,160,181,0.08); border-bottom: none; }
-  /* Exactly 4 headliner slots — a fixed 2×2 fills the arena height. */
+  /* Headliner slots — 2-up, equal-height rows split the arena whatever the
+     count; an odd last slot spans full width so no cell sits empty. */
   .roster-grid {
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 1fr);
+    grid-template-rows: none; /* clear the base auto row — it collapses since slot content is absolutely positioned */
+    grid-auto-rows: 1fr;
   }
+  .roster-slot:last-child:nth-child(odd) { grid-column: 1 / -1; }
   .roster-slot { aspect-ratio: unset; }
   .runway-block { padding: 5rem 4rem; }
   .runway-title { font-size: clamp(2.5rem, 6vw, 5.5rem); }
