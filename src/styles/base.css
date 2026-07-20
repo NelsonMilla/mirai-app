@@ -154,6 +154,13 @@ nav.site-nav {
 }
 .nav-links a:hover { color: var(--accent); }
 
+/* Cascade guard: `.nav-links a` (0,1,1) outranks `.btn-primary` (0,1,0),
+   washing the Apply pill's ink text to 50% white. Repin it. */
+.nav-links a.btn-primary,
+.nav-links a.btn-primary:hover {
+  color: var(--ink);
+}
+
 .nav-btn {
   font-size: var(--fs-caption); font-weight: 500; letter-spacing: 0.06em;
   text-transform: uppercase; color: rgba(255,255,255,0.5);

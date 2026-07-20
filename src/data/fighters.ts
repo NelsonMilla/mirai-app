@@ -119,7 +119,7 @@ export const fighters: Fighter[] = [
     ],
   },
   {
-    name: 'Jose',
+    name: 'José',
     fullName: 'José Luis Cordeiro',
     title: 'Author · The Death of Death',
     bio: '',

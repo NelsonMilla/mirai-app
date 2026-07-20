@@ -15,9 +15,11 @@ export function ScrollProgress() {
         className="h-full"
         id="progressFill"
         style={{
-          width: `${progress * 100}%`,
+          width: '100%',
+          transform: `scaleX(${progress})`,
+          transformOrigin: 'left',
           background: 'linear-gradient(to right, var(--accent), var(--accent-bright))',
-          transition: 'width 0.1s ease-out, background 0.4s',
+          transition: 'transform 0.1s ease-out, background 0.4s',
         }}
         aria-hidden="true"
       />

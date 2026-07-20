@@ -2566,43 +2566,9 @@ html.loading .hero-stats {
   margin-top: 0.75rem;
 }
 
-/* ── WHITELIST BYPASS ── */
-.whitelist-section {
-  margin-top: 2.5rem;
-  max-width: 480px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.whitelist-divider {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 1.25rem;
-}
-
-.whitelist-divider::before,
-.whitelist-divider::after {
-  content: '';
-  flex: 1;
-  height: 1px;
-  background: rgba(255, 255, 255, 0.08);
-}
-
-.whitelist-divider span {
-  font-family: var(--font-jetbrains), monospace;
-  font-size: var(--fs-label);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.35);
-  white-space: nowrap;
-}
-
-.whitelist-form {
-  display: flex;
-  gap: 0.5rem;
-}
-
+/* ── WHITELIST UI ──
+   The landing "Already invited?" form was removed (Luma is the only door);
+   these remaining rules serve the dormant /invite and /console routes. */
 .whitelist-input {
   flex: 1;
   font-family: var(--font-inter), sans-serif;
@@ -2617,7 +2583,7 @@ html.loading .hero-stats {
 }
 
 .whitelist-input::placeholder {
-  color: rgba(255, 255, 255, 0.25);
+  color: rgba(255, 255, 255, 0.45);
 }
 
 .whitelist-input:focus {
@@ -2627,17 +2593,6 @@ html.loading .hero-stats {
 
 .whitelist-input:disabled {
   opacity: 0.5;
-}
-
-.whitelist-btn {
-  flex-shrink: 0;
-  font-size: var(--fs-caption) !important;
-  padding: 0.75rem 1.5rem !important;
-}
-
-.whitelist-btn:disabled {
-  opacity: 0.4;
-  pointer-events: none;
 }
 
 .whitelist-msg {
@@ -3224,6 +3179,8 @@ html.loading .hero-stats {
   text-transform: uppercase;
   color: var(--slate);
   text-align: right;
+  /* Even out two-line labels ("… matches 1:2 vs / VC" widow) */
+  text-wrap: balance;
 }
 
 /* Spine: draws top-to-bottom on reveal, rows fade in behind it */
