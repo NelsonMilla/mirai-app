@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-07-18T00:00:00Z",
+  "title": "Design System: Mirai Tech PopUp City",
+  "extensions": {
+    "colorMeta": {
+      "sakura-neon": { "role": "primary", "displayName": "Sakura Neon", "canonical": "#F5A0B5", "tonalRamp": ["#2A1218", "#45202B", "#63303F", "#834255", "#A55A6E", "#C77A8C", "#F5A0B5", "#FBD4DE"] },
+      "sakura-bright": { "role": "primary", "displayName": "Sakura Bright", "canonical": "#FF6B92", "tonalRamp": ["#2B0F17", "#4A1826", "#6E2338", "#96304C", "#C04463", "#E45579", "#FF6B92", "#FFB0C4"] },
+      "sakura-dusk": { "role": "primary", "displayName": "Sakura Dusk", "canonical": "#D4708A", "tonalRamp": ["#241016", "#3D1B25", "#5B2938", "#7C3A4D", "#9E4E64", "#BB5F77", "#D4708A", "#EBB0BF"] },
+      "harbor-ink": { "role": "neutral", "displayName": "Harbor Ink", "canonical": "#141420", "tonalRamp": ["#0A0A10", "#141420", "#1C1C2A", "#262638", "#3A3A52", "#565677", "#8585A8", "#C8C8DC"] },
+      "midnight-water": { "role": "neutral", "displayName": "Midnight Water", "canonical": "#1C1C2A", "tonalRamp": ["#0A0A10", "#141420", "#1C1C2A", "#262638", "#3A3A52", "#565677", "#8585A8", "#C8C8DC"] },
+      "pier-charcoal": { "role": "neutral", "displayName": "Pier Charcoal", "canonical": "#262638", "tonalRamp": ["#0A0A10", "#141420", "#1C1C2A", "#262638", "#3A3A52", "#565677", "#8585A8", "#C8C8DC"] },
+      "fog-slate": { "role": "neutral", "displayName": "Fog Slate", "canonical": "#8585A8", "tonalRamp": ["#16161F", "#26263A", "#3A3A55", "#505070", "#68688C", "#8585A8", "#A6A6C2", "#D2D2E3"] },
+      "signal-white": { "role": "neutral", "displayName": "Signal White", "canonical": "#FFFFFF", "tonalRamp": ["#26262E", "#45454F", "#646470", "#848492", "#A5A5B2", "#C7C7D1", "#E8E8EE", "#FFFFFF"] },
+      "lantern-pink": { "role": "tertiary", "displayName": "Lantern Pink", "canonical": "#FFB8CC", "tonalRamp": ["#2B171D", "#4C2733", "#713A4C", "#985068", "#C06A86", "#E38FA8", "#FFB8CC", "#FFDCE6"] },
+      "port-light-blue": { "role": "tertiary", "displayName": "Port-Light Blue", "canonical": "#B8E3FF", "tonalRamp": ["#0D1B26", "#16303F", "#224A61", "#316787", "#4E8BB1", "#7FB5D9", "#B8E3FF", "#DDF1FF"] },
+      "onsen-steam-violet": { "role": "tertiary", "displayName": "Onsen Steam Violet", "canonical": "#D4B8FF", "tonalRamp": ["#1A1226", "#2B1F42", "#413060", "#5C4685", "#7E63AD", "#A78DD6", "#D4B8FF", "#EADDFF"] },
+      "starter-blue": { "role": "secondary", "displayName": "Starter Blue (Devices)", "canonical": "#6DB5F5", "tonalRamp": ["#0D1520", "#132639", "#1C3D5C", "#2A5A85", "#4180B5", "#6DB5F5", "#8DC8F8", "#C4E3FB"] },
+      "starter-yellow": { "role": "secondary", "displayName": "Starter Yellow (Therapies)", "canonical": "#F5D34E", "tonalRamp": ["#1A1710", "#332B14", "#54471E", "#7A672A", "#A58B38", "#D0B043", "#F5D34E", "#F9E68F"] },
+      "starter-red": { "role": "secondary", "displayName": "Starter Red (Builder)", "canonical": "#F56B6B", "tonalRamp": ["#1A1012", "#361719", "#571F23", "#7C2C31", "#A53E42", "#CE5355", "#F56B6B", "#FAB0B0"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Hero and section headlines only — Fraunces with 'SOFT' 80, 'WONK' 1, 'opsz' 144. Never below title size." },
+      "body": { "displayName": "Body", "purpose": "Inter prose at 17px mobile / 18px desktop, line-height 1.65." },
+      "secondary": { "displayName": "Secondary", "purpose": "Descriptions and lesser text in Fog Slate, 15px/16px." },
+      "caption": { "displayName": "Caption", "purpose": "Nav links and buttons — 13px uppercase Inter, 0.06em tracking." },
+      "label": { "displayName": "Label", "purpose": "The mono kicker, badges, stat readouts — 11px/12px JetBrains Mono, 0.22em tracking, uppercase." },
+      "kanji": { "displayName": "Kanji", "purpose": "Noto Serif JP for 未来 watermarks, card kanji, and the nav mark glyph." }
+    },
+    "shadows": [
+      { "name": "accent-glow", "value": "0 10px 30px rgba(245,160,181,0.3)", "purpose": "Primary button hover — the button emits its own accent light (rgba uses --accent-rgb, shown here at the default pink)." },
+      { "name": "card-lift", "value": "0 16px 40px rgba(0,0,0,0.25), 0 0 0 1px rgba(245,160,181,0.1) inset", "purpose": "Hovered cards: the one sanctioned dark ambient, always paired with an accent-tinted inset ring." }
+    ],
+    "motion": [
+      { "name": "ease-reveal", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "Section reveals and staggered children, 0.7–1s." },
+      { "name": "ease-micro", "value": "cubic-bezier(0.23, 1, 0.32, 1)", "purpose": "Buttons, cards, cursor — micro-interactions at 0.2–0.4s." },
+      { "name": "stagger-step", "value": "0.07s", "purpose": "Delay increment between staggered reveal children." }
+    ],
+    "breakpoints": [
+      { "name": "mobile-nav", "value": "640px" },
+      { "name": "coarse-pointer", "value": "900px" },
+      { "name": "desktop", "value": "980px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The pill CTA — accent fill, ink text, lifts and glows on hover.",
+      "html": "<a class=\"ds-btn-primary\" href=\"#\">Get Your Pass</a>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; gap: 0.5rem; font-family: Inter, sans-serif; font-size: 0.8125rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; padding: 0.7rem 1.25rem; border-radius: 999px; background: var(--accent, #F5A0B5); color: var(--ink, #141420); border: none; transition: background 0.4s, transform 0.2s, box-shadow 0.2s; } .ds-btn-primary:hover, .ds-btn-primary:focus-visible { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(var(--accent-rgb, 245,160,181), 0.3); } .ds-btn-primary:active { transform: translateY(0); }"
+    },
+    {
+      "name": "Outline Button",
+      "kind": "button",
+      "refersTo": "button-outline",
+      "description": "Ghost pill for secondary actions — accent border and text, tint-fills on hover.",
+      "html": "<a class=\"ds-btn-outline\" href=\"#\">See The Program</a>",
+      "css": ".ds-btn-outline { display: inline-flex; align-items: center; gap: 0.5rem; font-family: Inter, sans-serif; font-size: 0.8125rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; padding: 0.7rem 1.25rem; border-radius: 999px; background: transparent; color: var(--accent, #F5A0B5); border: 1px solid rgba(var(--accent-rgb, 245,160,181), 0.4); transition: border-color 0.4s, color 0.4s, background 0.4s, transform 0.2s; } .ds-btn-outline:hover, .ds-btn-outline:focus-visible { background: rgba(var(--accent-rgb, 245,160,181), 0.08); transform: translateY(-2px); }"
+    },
+    {
+      "name": "Section Label",
+      "kind": "chip",
+      "refersTo": "section-label",
+      "description": "The mono kicker opening each landing section — the one sanctioned eyebrow.",
+      "html": "<div class=\"ds-section-label\">Choose Your Starter</div>",
+      "css": ".ds-section-label { font-family: 'JetBrains Mono', monospace; font-size: 0.6875rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--pink, #F5A0B5); }"
+    },
+    {
+      "name": "Quick Action Card",
+      "kind": "card",
+      "refersTo": "qa-card",
+      "description": "Hairline-bordered card with the under-door light hover — a warm glow rising from the bottom edge.",
+      "html": "<a class=\"ds-qa-card\" href=\"#\"><span class=\"ds-qa-label\">Tickets</span><span class=\"ds-qa-title\">Builder Pass</span><span class=\"ds-qa-desc\">Full access to theme weeks, meetups, the Fashion Show, and popup city life.</span><span class=\"ds-qa-cta\">Get it on Luma →</span></a>",
+      "css": ".ds-qa-card { display: flex; flex-direction: column; gap: 0.5rem; max-width: 320px; padding: 1.5rem 1.25rem 1.25rem; border-radius: 16px; background: linear-gradient(180deg, rgba(255,255,255,0.025), rgba(255,255,255,0.01)); border: 1px solid rgba(255,255,255,0.06); text-decoration: none; color: #FFFFFF; position: relative; overflow: hidden; transition: transform 0.3s cubic-bezier(0.23,1,0.32,1), border-color 0.3s, box-shadow 0.3s; } .ds-qa-card::before { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 55%; background: linear-gradient(to top, rgba(245,160,181,0.2), transparent); opacity: 0; transform: translateY(12px); transition: opacity 0.35s ease, transform 0.35s ease; pointer-events: none; } .ds-qa-card:hover, .ds-qa-card:focus-visible { transform: translateY(-4px); border-color: rgba(245,160,181,0.4); box-shadow: 0 16px 40px rgba(0,0,0,0.25), 0 0 0 1px rgba(245,160,181,0.1) inset; } .ds-qa-card:hover::before, .ds-qa-card:focus-visible::before { opacity: 1; transform: translateY(0); } .ds-qa-label { font-family: 'JetBrains Mono', monospace; font-size: 0.6875rem; letter-spacing: 0.12em; text-transform: uppercase; color: #8585A8; } .ds-qa-title { font-family: Fraunces, Georgia, serif; font-variation-settings: 'SOFT' 60, 'opsz' 144; font-size: 1.15rem; line-height: 1.2; } .ds-qa-desc { font-size: 0.9375rem; color: #8585A8; line-height: 1.5; } .ds-qa-cta { margin-top: 0.5rem; font-family: 'JetBrains Mono', monospace; font-size: 0.6875rem; letter-spacing: 0.1em; color: #F5A0B5; }"
+    },
+    {
+      "name": "Nav Link",
+      "kind": "nav",
+      "refersTo": "caption",
+      "description": "Uppercase caption link at 50% white, warming to the accent on hover; active state carries an accent underline bar.",
+      "html": "<nav class=\"ds-nav\"><a class=\"ds-nav-link\" href=\"#\">Kobe</a><a class=\"ds-nav-link ds-active\" href=\"#\">Tracks</a><a class=\"ds-nav-link\" href=\"#\">Program</a></nav>",
+      "css": ".ds-nav { display: flex; gap: 2rem; padding: 1.25rem 2rem; background: rgba(20,20,32,0.75); border-bottom: 1px solid rgba(255,255,255,0.06); } .ds-nav-link { position: relative; font-family: Inter, sans-serif; font-size: 0.8125rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(255,255,255,0.5); text-decoration: none; transition: color 0.2s; } .ds-nav-link:hover, .ds-nav-link:focus-visible { color: var(--accent, #F5A0B5); } .ds-nav-link.ds-active { color: #FFFFFF; } .ds-nav-link.ds-active::after { content: ''; position: absolute; left: 0; right: 0; bottom: -4px; height: 1.5px; border-radius: 1px; background: var(--accent, #F5A0B5); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Night Arcade Lab",
+    "overview": "A biotech lab at night, lit like a Japanese arcade. The surface is serious instrumentation — dark harbor-ink layers, hairline borders, monospace stat readouts — but every light source is playful: iridescent foil gradients, sakura-pink CTAs, pixel-art mascots, kanji watermarks glowing behind content. The system holds those two registers in tension on purpose: the game layer is executed with the precision of lab equipment, which is what keeps 'playful' from collapsing into 'cute'. The system explicitly rejects biotech corporate and the generic SaaS landing look. It is a night world: there is no light mode, and warmth comes from neon against ink, not from beige.",
+    "keyCharacteristics": [
+      "Dark-only tonal world: three ink layers, never a light surface",
+      "One neon accent (sakura pink) that the chosen track can re-tint site-wide via --accent",
+      "Serif display with personality (Fraunces SOFT/WONK) against utilitarian Inter body and JetBrains Mono readouts",
+      "Kanji as texture: Noto Serif JP watermarks and icon marks, never decorative clip-art",
+      "Game-piece tactility: cards tilt, lift, flip; buttons rise; the cursor itself is a playful dot"
+    ],
+    "rules": [
+      { "name": "The Accent Relay Rule", "body": "Interactive accents flow through --accent / --accent-rgb / --accent-bright, never the raw pink values. Choosing a starter track re-tints the whole page through these three variables; hardcoding pink breaks the relay.", "section": "colors" },
+      { "name": "The Foil Rule", "body": "The iridescent trio only appears as a moving or multi-stop gradient (logo mark, headline shimmer, em text). A flat lavender or baby-blue fill is a palette violation.", "section": "colors" },
+      { "name": "The Mono Kicker Rule", "body": "The uppercase tracked mono section-label in sakura is a deliberate, named brand system — the arcade cabinet's instruction strip. It is the one sanctioned eyebrow; do not invent second kicker styles or apply it outside section openings.", "section": "typography" },
+      { "name": "The Wonk Rule", "body": "Fraunces never appears without its variation settings, and never below title size. Body text in a serif is a violation.", "section": "typography" },
+      { "name": "The Glow, Not Shadow Rule", "body": "Depth comes from tonal layering, hairline 6%-white borders, and colored glows in the element's own accent — never neutral gray drop shadows. A surface at rest is flat; light appears as a response to interaction.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do route every interactive accent through --accent / --accent-rgb so track selection re-tints the page (The Accent Relay Rule).",
+      "Do put new styles in the owning route CSS file (landing.css in page order, base.css for shared system) — never append to file ends or add new component <style> blocks.",
+      "Do keep depth as tonal layers + colored glows; the only dark shadow is the sanctioned card-lift pair (The Glow, Not Shadow Rule).",
+      "Do guard every animation with the page-wide prefers-reduced-motion kill switch pattern, and keep reveals as enhancements of already-visible defaults.",
+      "Do keep per-item colors next to the data in src/data/ / src/lib/constants.ts, as \"r, g, b\" + hex pairs.",
+      "Do run npx tsc --noEmit, npm run build, and npm run smoke before finishing any visual change."
+    ],
+    "donts": [
+      "Don't ship anything that reads as biotech corporate — navy-and-white, stock lab photos, compliance-speak.",
+      "Don't ship anything that reads as a generic SaaS landing — hero-metric templates, feature grids, testimonial carousels, the AI-generated landing page look.",
+      "Don't use bare element selectors (nav, section, img) in shared CSS — a bare nav rule once restyled the ProgressRail and console sidebar.",
+      "Don't use the iridescent stops as flat fills, gray drop shadows as depth, or Fraunces without its variation settings.",
+      "Don't invent a second kicker/eyebrow style, a light mode, or beige warmth — warmth here is neon against ink.",
+      "Don't hardcode pink hexes in JSX or bypass --accent; and don't touch the frozen copy/numbers audited against the event deck."
+    ]
+  }
+}
