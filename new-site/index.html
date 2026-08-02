@@ -90,8 +90,8 @@
     font-size: clamp(40px, 9vw, 132px); line-height: .94; color: var(--ink);
     opacity: 0; transform: translateY(18px); transition: opacity .9s ease .45s, transform .9s ease .45s; }
   .slide.on h1 { opacity: 1; transform: none; }
-  .slide .lead { margin-top: 18px; font-weight: 400; font-size: clamp(16px, 1.5vw, 20px); color: rgba(244,243,240,.78);
-    max-width: 46ch; line-height: 1.6; letter-spacing: .01em;
+  .slide .lead { margin-top: 18px; font-weight: 400; font-size: clamp(10.5px, 1.6vw, 19px); color: rgba(244,243,240,.78);
+    white-space: nowrap; line-height: 1.6; letter-spacing: .01em;
     opacity: 0; transition: opacity .9s ease .95s; }
   .slide .lead em { font-style: normal; color: var(--accent); }
   .slide.on .lead { opacity: 1; }
@@ -124,8 +124,8 @@
   .dates .cell .when { font-weight: 800; text-transform: uppercase; font-size: clamp(26px, 3.4vw, 46px); letter-spacing: -.01em; line-height: 1; margin-top: 12px; }
   .dates .cell .what { font-family: var(--mono); font-size: 11px; letter-spacing: .22em; text-transform: uppercase; color: var(--accent); }
   .dates .cell .note { margin-top: 10px; color: var(--dim); font-size: 14px; }
-  .resline { display: inline-block; margin-top: 40px; font-weight: 600; font-size: clamp(20px, 2.6vw, 34px);
-    letter-spacing: -.005em; text-decoration: none; }
+  .resline { display: inline-block; margin-top: 40px; font-weight: 600; font-size: clamp(10.5px, 2.7vw, 34px);
+    letter-spacing: -.005em; text-decoration: none; white-space: nowrap; }
   .resline em { font-style: normal; color: var(--accent); }
   .resline:hover em { text-decoration: underline; text-underline-offset: 6px; }
   @media (max-width: 860px) { .dates .grid { grid-template-columns: 1fr; } .dates .cell { border-right: 0; border-bottom: 1px solid var(--line); } .dates .cell:last-child { border-bottom: 0; } }
