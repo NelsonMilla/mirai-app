@@ -1,39 +1,69 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Mirai — Tech PopUp City
 
-## Getting Started
+Landing site for **Mirai**, a 4-week longevity-biotech popup city on Kobe Port Island, Japan — October 1–31, 2026. Built with Next.js (App Router), React 19, and hand-rolled CSS.
 
-First, run the development server:
+**Live site:** the `/` landing page is the product. Apply/fashion-show pages are secondary routes; checkout/console/invite are dormant (see below).
+
+## Quick start
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000). **No environment variables are needed for landing-page work** — analytics and the dormant routes degrade gracefully without them. If you're touching those, copy `.env.example` to `.env.local` and fill in what you need.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Command | What it does |
+|---|---|
+| `npm run dev` | Dev server with hot reload |
+| `npm run build` | Production build (must pass before merging) |
+| `npm run lint` | ESLint |
+| `npm run smoke` | Playwright cross-viewport smoke test — first run needs `npx playwright install chromium` |
 
-## Learn More
+## Before you open a PR
 
-To learn more about Next.js, take a look at the following resources:
+All three must pass:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npx tsc --noEmit
+npm run build
+npm run smoke
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+The smoke test ([e2e/smoke.spec.ts](e2e/smoke.spec.ts)) scrolls the landing page at multiple viewports and asserts every section reveals, nothing overflows horizontally, and the console is clean. It exists because these exact bugs shipped before — please don't skip it.
 
-## Deploy on Vercel
+## Project layout
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```
+src/
+├── app/            # Routes. page.tsx is the landing page.
+│   ├── apply/      #   Application flow
+│   ├── fashion-show/
+│   └── checkout|console|invite/   # DORMANT — kept intentionally, don't refactor
+├── components/     # One folder per landing-page section (hero, tracks, kobe, …)
+├── data/           # Content data (speakers, cards) — colors live next to data
+├── styles/         # base.css (tokens/reset) + one CSS file per route
+├── lib/            # constants.ts (SECTIONS list, copy), integrations
+└── hooks/          # useActiveSection, scroll state
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Conventions (the short version)
+
+The full rules live in [AGENTS.md](AGENTS.md) — **read it before writing code**, whether you're a human or an agent. Highlights:
+
+- **Styles go in the route CSS files** (`src/styles/`), in page order, prefix-disciplined. No new component `<style>` blocks or styled-jsx; no bare element selectors in shared CSS.
+- **Design tokens** come from `:root` in [base.css](src/styles/base.css). Don't hardcode hex values in JSX.
+- **The section list lives in one place**: `SECTIONS` in [constants.ts](src/lib/constants.ts). Nav, progress rail, and scroll tracking all derive from it.
+- **Copy and numbers are frozen.** Figures in `src/lib/constants.ts` and `src/data/` were audited against the event deck. Don't "fix" them without an explicit request.
+- **Dormant code is intentional.** `checkout`, `console`, `invite`, and their supporting libs are kept on purpose (see [src/app/checkout/README.md](src/app/checkout/README.md)). Leave them out of cleanup passes.
+
+Design context, if you're proposing visual or copy changes: [PRODUCT.md](PRODUCT.md) (positioning, audience, brand personality) and [DESIGN.md](DESIGN.md) (palette, type, elevation doctrine).
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md). Short version: open an issue or small PR, run the three checks, keep diffs surgical.
 
 ## License
 
