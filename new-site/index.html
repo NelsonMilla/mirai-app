@@ -1,0 +1,780 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Mirai Tech City · Kobe · October 2026</title>
+<meta name="description" content="Japan's premier longevity biomedical popup city. Summit I Oct 17–18 · Summit II Oct 24–25 · Fashion Show Oct 26. Join us all of October for the Residency. Live the future now." />
+<meta property="og:title" content="Mirai Tech City · Kobe · October 2026" />
+<meta property="og:description" content="Japan's premier longevity biomedical popup city. Summits Oct 17–18 & 24–25 · Fashion Show Oct 26. Live the future now." />
+<meta property="og:image" content="https://mirai-tech-city.vercel.app/live_city_poster.jpg" />
+<meta property="og:url" content="https://mirai-tech-city.vercel.app" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="theme-color" content="#050506" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23050506'/%3E%3Ctext x='50' y='72' font-size='62' font-family='Georgia' font-weight='bold' fill='%239be8f0' text-anchor='middle'%3E未%3C/text%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="preconnect" href="https://api.fontshare.com" />
+<link rel="preconnect" href="https://cdn.fontshare.com" crossorigin />
+<link href="https://api.fontshare.com/v2/css?f[]=switzer@400,500,600,700,800,900&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #050506;
+    --ink: #f4f3f0;
+    --dim: rgba(244,243,240,.62);
+    --faint: rgba(244,243,240,.48);
+    --line: rgba(244,243,240,.14);
+    --accent: #9be8f0;
+    --font: 'Switzer', 'Inter', -apple-system, sans-serif;
+    --mono: 'IBM Plex Mono', monospace;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+  body { background: var(--bg); color: var(--ink); font-family: var(--font); }
+  ::selection { background: var(--accent); color: #000; }
+
+  .mono { font-family: var(--mono); font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--dim); }
+  .eyebrow { font-family: var(--mono); font-size: 11px; letter-spacing: .3em; text-transform: uppercase; color: var(--accent); }
+  section { position: relative; padding: 110px 6vw; max-width: 1440px; margin: 0 auto; }
+  h2.big { font-weight: 800; text-transform: uppercase; letter-spacing: -.01em;
+    font-size: clamp(34px, 5.2vw, 76px); line-height: .98; margin: 18px 0 10px; }
+  .rule { border: 0; border-top: 1px solid var(--line); max-width: calc(1440px - 12vw); margin: 0 auto; }
+  a { color: inherit; }
+
+  /* reveal-on-scroll */
+  .rv { opacity: 0; transform: translateY(22px); transition: opacity .8s ease, transform .8s ease; }
+  .rv.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) { .rv { opacity: 1; transform: none; transition: none; } }
+
+  /* ── nav ── */
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 4vw; background: linear-gradient(to bottom, rgba(5,5,6,.82), transparent);
+    backdrop-filter: blur(2px); }
+  nav .logo { font-weight: 800; letter-spacing: .06em; font-size: 15px; text-transform: uppercase; text-decoration: none; }
+  nav .logo span { color: var(--accent); }
+  nav .links { display: flex; gap: 26px; align-items: center; }
+  nav .links a { font-family: var(--mono); font-size: 11px; letter-spacing: .18em;
+    text-transform: uppercase; color: var(--dim); text-decoration: none; transition: color .2s; }
+  nav .links a:hover { color: var(--ink); }
+  .btn { display: inline-block; background: var(--ink); color: #0a0a0c !important; text-decoration: none;
+    padding: 12px 26px; border-radius: 3px; font-family: var(--mono); font-size: 11px;
+    letter-spacing: .2em; text-transform: uppercase; font-weight: 500;
+    transition: transform .2s, box-shadow .2s; }
+  .btn:hover { transform: translateY(-1px); box-shadow: 0 8px 32px rgba(244,243,240,.22); }
+  .btn.accent { background: var(--accent); }
+  .btn.ghost { background: transparent; color: var(--ink) !important; border: 1px solid rgba(244,243,240,.4); }
+  .btn.ghost:hover { border-color: var(--ink); }
+  @media (max-width: 760px) { nav .links a:not(.btn) { display: none; } }
+  .daruma { height: 24px; width: auto; vertical-align: middle; opacity: .55; transition: opacity .3s, transform .3s; cursor: help; }
+  .daruma:hover { opacity: 1; transform: translateY(-1px); }
+  .daruma.foot { height: 46px; opacity: .6; cursor: pointer; }
+  @keyframes okiagari { 0% { transform: rotate(0) } 22% { transform: rotate(-16deg) } 48% { transform: rotate(11deg) } 70% { transform: rotate(-6deg) } 88% { transform: rotate(2deg) } 100% { transform: rotate(0) } }
+  .daruma.wobble { animation: okiagari 1s ease-out; transform-origin: 50% 88%; }
+  @media (prefers-reduced-motion: reduce) { .daruma.wobble { animation: none; } }
+
+  /* ── hero sequence ── */
+  .hero { position: relative; height: 100svh; overflow: hidden; max-width: none; padding: 0; }
+  .slide { position: absolute; inset: 0; transform: translateX(100%); pointer-events: none;
+    transition: transform 1.15s cubic-bezier(.77, 0, .175, 1); }
+  .slide.on { transform: translateX(0); pointer-events: auto; }
+  .slide.out { transform: translateX(-100%); }
+  .slide:not(.on):not(.out) { transition: none; visibility: hidden; }
+  .slide video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 42%; }
+  .slide .veil { position: absolute; inset: 0; pointer-events: none;
+    background: linear-gradient(to top, rgba(5,5,6,.72), transparent 42%),
+                linear-gradient(105deg, rgba(5,5,6,.55) 0%, transparent 52%); }
+  .slide .content { position: absolute; left: 6vw; bottom: 13vh; max-width: 880px; }
+  .slide h1 { font-weight: 900; text-transform: uppercase; letter-spacing: -.015em;
+    font-size: clamp(40px, 9vw, 132px); line-height: .94; color: var(--ink);
+    opacity: 0; transform: translateY(18px); transition: opacity .9s ease .45s, transform .9s ease .45s; }
+  .slide.on h1 { opacity: 1; transform: none; }
+  .slide .lead { margin-top: 18px; font-weight: 400; font-size: clamp(16px, 1.5vw, 20px); color: rgba(244,243,240,.78);
+    max-width: 46ch; line-height: 1.6; letter-spacing: .01em;
+    opacity: 0; transition: opacity .9s ease .95s; }
+  .slide .lead em { font-style: normal; color: var(--accent); }
+  .slide.on .lead { opacity: 1; }
+  @keyframes popIn { from { opacity: 0; transform: scale(.82); } to { opacity: 1; transform: scale(1); } }
+  .slide.on .pop { animation: popIn .5s cubic-bezier(.34, 1.56, .64, 1) 1.35s both; }
+  @media (prefers-reduced-motion: reduce) { .slide.on .pop { animation: none; } }
+  .slide .sub { margin-top: 20px; display: flex; gap: 22px; align-items: center; flex-wrap: wrap;
+    opacity: 0; transition: opacity .9s ease 1.05s; }
+  .slide.on .sub { opacity: 1; }
+  .slide .kicker { margin-bottom: 22px; font-size: 12px; opacity: 0; transition: opacity .8s ease .25s; }
+  .slide.on .kicker { opacity: 1; }
+  .heroDots { position: absolute; right: 4vw; bottom: 5vh; display: flex; gap: 4px; z-index: 5; flex-wrap: wrap; max-width: 88vw; justify-content: flex-end; }
+  @media (max-width: 360px) { .heroDots button { padding: 8px 5px; letter-spacing: .1em; } }
+  .heroDots button { border: 0; background: none; cursor: pointer; padding: 10px 8px;
+    font-family: var(--mono); font-size: 10px; letter-spacing: .18em; text-transform: uppercase;
+    color: rgba(244,243,240,.6); transition: color .3s; }
+  .heroDots button.active, .heroDots button:hover { color: var(--ink); }
+  .heroDots button.active { text-decoration: underline; text-underline-offset: 5px; }
+  .scrollTag { position: absolute; left: 6vw; bottom: 4.5vh; font-family: var(--mono);
+    font-size: 10px; letter-spacing: .3em; color: var(--faint); text-transform: uppercase; z-index: 5; }
+  @media (max-width: 760px) { .heroDots { left: 6vw; right: auto; bottom: 8.5vh; } .scrollTag { display: none; } }
+
+  /* ── dates band ── */
+  .dates { padding-top: 90px; }
+  .dates .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border: 1px solid var(--line); margin-top: 34px; }
+  .dates .cell { padding: 34px 30px; border-right: 1px solid var(--line); }
+  .dates .cell:last-child { border-right: 0; }
+  a.cell { transition: background .25s; }
+  a.cell:hover { background: rgba(155,232,240,.05); }
+  .dates .cell .when { font-weight: 800; text-transform: uppercase; font-size: clamp(26px, 3.4vw, 46px); letter-spacing: -.01em; line-height: 1; margin-top: 12px; }
+  .dates .cell .what { font-family: var(--mono); font-size: 11px; letter-spacing: .22em; text-transform: uppercase; color: var(--accent); }
+  .dates .cell .note { margin-top: 10px; color: var(--dim); font-size: 14px; }
+  .resline { display: inline-block; margin-top: 40px; font-weight: 600; font-size: clamp(20px, 2.6vw, 34px);
+    letter-spacing: -.005em; text-decoration: none; }
+  .resline em { font-style: normal; color: var(--accent); }
+  .resline:hover em { text-decoration: underline; text-underline-offset: 6px; }
+  @media (max-width: 860px) { .dates .grid { grid-template-columns: 1fr; } .dates .cell { border-right: 0; border-bottom: 1px solid var(--line); } .dates .cell:last-child { border-bottom: 0; } }
+
+  /* ── summits ── */
+  .summit { display: grid; grid-template-columns: 1fr 1fr; gap: 44px; margin-top: 44px; }
+  .summit .card { border: 1px solid var(--line); padding: 40px 36px; display: flex; flex-direction: column; gap: 16px;
+    background: linear-gradient(160deg, rgba(155,232,240,.045), transparent 55%); }
+  .summit .num { font-family: var(--mono); color: var(--faint); font-size: 12px; letter-spacing: .3em; }
+  .summit h3 { font-weight: 700; font-size: clamp(22px, 2.4vw, 32px); line-height: 1.15; }
+  .summit .date { font-weight: 800; text-transform: uppercase; font-size: clamp(22px, 2.8vw, 38px); color: var(--accent); letter-spacing: -.01em; }
+  .summit p { color: var(--dim); font-size: 15px; line-height: 1.65; flex: 1; }
+  .summit .fine { font-family: var(--mono); font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--faint); }
+  .summit .topics { display: flex; flex-wrap: wrap; gap: 8px; }
+  .summit .topics span { font-family: var(--mono); font-size: 10px; letter-spacing: .16em; color: var(--accent);
+    border: 1px solid rgba(155,232,240,.3); padding: 6px 11px; border-radius: 2px; text-transform: uppercase; }
+  .summit .tiein { font-size: 14px; color: var(--ink); font-weight: 500; }
+  .summit .tiein a { color: var(--accent); text-decoration: none; }
+  .summit .tiein a:hover { text-decoration: underline; text-underline-offset: 4px; }
+  .voicesbar { display: flex; align-items: center; gap: 18px; margin-top: 38px; flex-wrap: wrap; }
+  .voicesbar .faces { display: flex; }
+  .voicesbar img { width: 46px; height: 46px; border-radius: 50%; object-fit: cover;
+    border: 2px solid var(--bg); outline: 1px solid var(--line); margin-left: -12px; }
+  .voicesbar img:first-child { margin-left: 0; }
+  .voicesbar .who { font-size: 14px; color: var(--dim); }
+  .voicesbar .who b { color: var(--ink); font-weight: 600; }
+  .voicesbar a.more { font-family: var(--mono); font-size: 10px; letter-spacing: .2em; text-transform: uppercase;
+    color: var(--accent); text-decoration: none; }
+  .voicesbar a.more:hover { text-decoration: underline; text-underline-offset: 4px; }
+  @media (max-width: 860px) { .summit { grid-template-columns: 1fr; } }
+
+  /* ── speakers ── */
+  .headliners { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; margin-top: 44px; }
+  .headliners .hcard { position: relative; border: 1px solid var(--line); overflow: hidden; }
+  .headliners .hcard img { width: 100%; aspect-ratio: 4/5; object-fit: cover; display: block;
+    filter: grayscale(28%) contrast(1.04); transition: filter .3s, transform .5s; }
+  .headliners .hcard:hover img { filter: grayscale(0%); transform: scale(1.025); }
+  .headliners .meta { position: absolute; left: 0; right: 0; bottom: 0; padding: 40px 18px 16px;
+    background: linear-gradient(to top, rgba(5,5,6,.92), transparent); }
+  .headliners .nm { font-weight: 800; text-transform: uppercase; font-size: clamp(15px, 1.6vw, 22px); letter-spacing: -.005em; line-height: 1.05; }
+  .headliners .og { font-family: var(--mono); font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--accent); margin-top: 6px; }
+  @media (max-width: 860px) { .headliners { grid-template-columns: 1fr 1fr; } }
+  .alsoline { margin-top: 34px; color: var(--dim); font-size: 15px; line-height: 1.8; max-width: 900px; }
+  .alsoline b { color: var(--ink); font-weight: 600; }
+  .followline { margin-top: 18px; font-family: var(--mono); font-size: 11px; letter-spacing: .18em;
+    text-transform: uppercase; }
+  .followline a { color: var(--accent); text-decoration: none; }
+  .followline a:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+  /* ── ecosystem ── */
+  .eco { display: flex; flex-wrap: wrap; gap: 12px 34px; margin-top: 34px; }
+  .eco span { font-family: var(--mono); font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--dim); }
+
+  /* ── fashion show ── */
+  .fashion { max-width: none; padding: 0; position: relative; overflow: hidden; }
+  .fashion video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
+  .fashion .veil { position: absolute; inset: 0;
+    background: linear-gradient(100deg, rgba(5,5,6,.88) 32%, rgba(5,5,6,.5) 68%, rgba(5,5,6,.3)); }
+  .fashion .content { position: relative; padding: 120px 6vw 110px; max-width: 1440px; margin: 0 auto; width: 100%; }
+  .fashion p { color: var(--dim); max-width: 56ch; font-size: 15px; line-height: 1.7; margin: 14px 0 22px; }
+  .tags { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 26px; }
+  .kanji span { cursor: pointer; }
+  .tags span { font-family: var(--mono); font-size: 10px; letter-spacing: .18em; color: var(--accent);
+    border: 1px solid rgba(155,232,240,.3); padding: 7px 13px; border-radius: 2px; text-transform: uppercase; }
+
+  /* ── japan strip ── */
+  .stripwrap { max-width: none; padding: 0; }
+  .stripwrap .cap { text-align: center; padding: 26px 6vw 18px; }
+  .strip { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; }
+  .strip figure { position: relative; overflow: hidden; }
+  .strip img { width: 100%; height: 100%; aspect-ratio: 4/5; object-fit: cover; display: block;
+    filter: contrast(1.02); transition: transform .6s ease; }
+  .strip figure:hover img { transform: scale(1.04); }
+  .strip figcaption { position: absolute; left: 12px; right: 12px; bottom: 10px; font-family: var(--mono);
+    font-size: 9px; letter-spacing: .16em; text-transform: uppercase; color: rgba(244,243,240,.8);
+    text-shadow: 0 1px 8px rgba(0,0,0,.8); }
+  @media (max-width: 860px) { .strip { grid-template-columns: repeat(2, 1fr); } .strip figure:nth-child(2) { display: none; } }
+
+  /* ── month/residency ── */
+  .month .ep { display: grid; grid-template-columns: 120px 1fr auto; gap: 26px; align-items: baseline;
+    padding: 26px 6px; border-bottom: 1px solid var(--line); }
+  .month .ep:first-of-type { border-top: 1px solid var(--line); margin-top: 40px; }
+  .month .ep .no { font-family: var(--mono); font-size: 12px; color: var(--faint); letter-spacing: .2em; }
+  .month .ep h4 { font-weight: 700; font-size: clamp(17px, 1.9vw, 24px); }
+  .month .ep .d { font-family: var(--mono); font-size: 11px; letter-spacing: .18em; color: var(--accent); text-transform: uppercase; white-space: nowrap; }
+  .month .ep p { grid-column: 2 / 4; color: var(--dim); font-size: 14px; line-height: 1.65; max-width: 74ch; }
+  .props { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 44px; }
+  .props .pr { border-left: 2px solid rgba(155,232,240,.45); padding: 4px 0 4px 20px; }
+  .props .pr .k { font-family: var(--mono); font-size: 10px; letter-spacing: .22em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+  .props .pr p { color: var(--dim); font-size: 14px; line-height: 1.6; }
+  @media (max-width: 860px) { .props { grid-template-columns: 1fr; } }
+  .rhythm { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 30px; }
+  .rhythm span { font-family: var(--mono); font-size: 11px; letter-spacing: .14em; color: var(--dim);
+    border: 1px solid var(--line); padding: 9px 15px; border-radius: 2px; }
+  .tracks { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px; }
+  .tracks a.t { display: block; border: 1px solid var(--line); padding: 30px 26px; text-decoration: none;
+    transition: border-color .25s, background .25s; }
+  .tracks a.t:hover { border-color: rgba(155,232,240,.5); background: rgba(155,232,240,.04); }
+  .tracks .t h4 { font-weight: 800; text-transform: uppercase; letter-spacing: .02em; font-size: 17px; margin: 10px 0 8px; }
+  .tracks .t p { color: var(--dim); font-size: 14px; line-height: 1.6; }
+  .tracks .t .go { margin-top: 14px; font-family: var(--mono); font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--accent); }
+  .monthCta { margin-top: 40px; }
+  @media (max-width: 860px) { .tracks { grid-template-columns: 1fr; } .month .ep { grid-template-columns: 70px 1fr; } .month .ep .d { grid-column: 2; } .month .ep p { grid-column: 1 / 3; } }
+
+  /* ── kobe stats ── */
+  .stats { display: grid; grid-template-columns: repeat(5, 1fr); border: 1px solid var(--line); margin-top: 44px; }
+  .stats .s { padding: 30px 22px; border-right: 1px solid var(--line); }
+  .stats .s:last-child { border-right: 0; }
+  .stats .v { font-weight: 800; font-size: clamp(26px, 3vw, 44px); letter-spacing: -.02em; }
+  .stats .k { font-family: var(--mono); font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--dim); margin-top: 8px; line-height: 1.5; }
+  @media (max-width: 1000px) {
+    .stats { grid-template-columns: 1fr 1fr; }
+    .stats .s { border-bottom: 1px solid var(--line); }
+    .stats .s:nth-child(even) { border-right: 0; }
+    .stats .s:last-child { grid-column: 1 / -1; border-right: 0; border-bottom: 0; }
+  }
+
+  /* ── track record ── */
+  .past .item { display: grid; grid-template-columns: 150px 1fr; gap: 30px; padding: 26px 6px; border-bottom: 1px solid var(--line); align-items: baseline; }
+  .past .item:first-of-type { border-top: 1px solid var(--line); margin-top: 40px; }
+  .past .n { font-weight: 800; font-size: clamp(24px, 3vw, 40px); letter-spacing: -.02em; color: var(--accent); }
+  .past h4 { font-weight: 700; font-size: 17px; margin-bottom: 6px; }
+  .past p { color: var(--dim); font-size: 14px; line-height: 1.6; max-width: 76ch; }
+  .past .here { display: inline-block; font-family: var(--mono); font-size: 12px; letter-spacing: .22em;
+    text-transform: uppercase; color: var(--ink); margin-top: 26px; text-decoration: none; }
+  .past .here b { color: var(--accent); }
+  .past .here:hover b { text-decoration: underline; text-underline-offset: 4px; }
+
+  /* ── apply ── */
+  .applywrap { max-width: none; padding: 0; position: relative; overflow: hidden; }
+  .applywrap .bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 62%; }
+  .applywrap .veil { position: absolute; inset: 0;
+    background: linear-gradient(to bottom, rgba(5,5,6,.92) 0%, rgba(5,5,6,.55) 45%, rgba(5,5,6,.88) 100%); }
+  .apply { position: relative; text-align: center; padding: 150px 6vw 150px; max-width: 1440px; margin: 0 auto; }
+  .apply h2 { font-weight: 900; text-transform: uppercase; font-size: clamp(40px, 7vw, 104px); letter-spacing: -.015em; line-height: .95; margin: 16px 0 18px;
+    text-shadow: 0 2px 50px rgba(0,0,0,.6); }
+  .apply p.sub { color: rgba(244,243,240,.78); font-size: 16px; margin-bottom: 40px; text-shadow: 0 1px 20px rgba(0,0,0,.7); }
+  .apply .row { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+  .apply .row .btn { min-width: 200px; text-align: center; }
+  .apply .fine { margin-top: 22px; font-family: var(--mono); font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: rgba(244,243,240,.6); }
+
+  /* ── footer ── */
+  footer { border-top: 1px solid var(--line); padding: 70px 6vw 60px; text-align: center; }
+  footer .see { font-weight: 800; text-transform: uppercase; font-size: clamp(22px, 3vw, 40px); letter-spacing: .02em; }
+  footer .date { font-family: var(--mono); color: var(--accent); letter-spacing: .4em; margin-top: 10px; font-size: 14px; }
+  #count { display: flex; gap: 34px; justify-content: center; margin-top: 30px; }
+  #count div { min-width: 64px; }
+  #count .v { font-weight: 800; font-size: clamp(26px, 4vw, 46px); letter-spacing: -.01em; font-variant-numeric: tabular-nums; }
+  #count .k { font-family: var(--mono); font-size: 10px; letter-spacing: .26em; color: var(--faint); text-transform: uppercase; margin-top: 4px; }
+  @media (max-width: 380px) { #count { gap: 18px; } #count div { min-width: 56px; } }
+  footer .cdlabel { margin-top: 26px; font-family: var(--mono); font-size: 10px; letter-spacing: .26em; text-transform: uppercase; color: var(--faint); }
+  footer .jst { margin-top: 30px; font-family: var(--mono); font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--dim); }
+  footer .jst b { color: var(--accent); font-weight: 500; }
+  footer .doors { display: flex; gap: 30px; justify-content: center; margin-top: 40px; flex-wrap: wrap; }
+  footer .doors a { font-family: var(--mono); font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--dim); text-decoration: none; display: inline-block; min-width: 150px; text-align: center; }
+  footer .doors a:hover { color: var(--ink); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .slide, .slide h1, .slide .lead, .slide .sub, .slide .kicker { transition: none; }
+  }
+</style>
+<noscript><style>.rv{opacity:1;transform:none}</style></noscript>
+</head>
+<body>
+
+<div role="status" aria-live="polite" id="srStatus" style="position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0)"></div>
+<nav>
+  <a class="logo" href="#top" style="display:flex; align-items:center; gap:10px">Mirai <span>Tech</span> <img class="daruma" src="img/daruma.png" alt="Daruma" title="One eye at the start. The other on October 1." /></a>
+  <div class="links">
+    <a href="#summits">Summits</a>
+    <a href="#speakers">Speakers</a>
+    <a href="#fashion">Fashion Show</a>
+    <a href="#residency">Residency</a>
+    <a href="#apply">Sponsors</a>
+    <a class="btn accent" href="#apply">Apply Now</a>
+  </div>
+</nav>
+
+<!-- ═══ HERO SEQUENCE ═══ -->
+<section class="hero" id="top">
+
+  <div class="slide on" data-dur="8000">
+    <video autoplay muted loop playsinline preload="auto" poster="live_city_poster.jpg" aria-hidden="true">
+      <source src="live_city.mp4" type="video/mp4" /></video>
+    <div class="veil"></div>
+    <div class="content">
+      <h1>Live.</h1>
+      <p class="lead">Join us all of October for the Residency. <em>Live the future now.</em></p>
+      <div class="sub">
+        <a class="btn accent" href="#summits">See the Summits</a>
+        <a class="btn ghost" href="#residency">The Residency →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide" data-dur="6200">
+    <video muted loop playsinline preload="metadata" poster="disease_poster.jpg" aria-hidden="true">
+      <source src="disease.mp4" type="video/mp4" /></video>
+    <div class="veil"></div>
+    <div class="content">
+      <div class="kicker eyebrow">Summit I · October 17–18</div>
+      <h1>Eradicate disease.</h1>
+      <div class="sub">
+        <a class="btn accent" href="https://luma.com/an4zotn9" target="_blank" rel="noopener">Get Tickets</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide" data-dur="6200">
+    <video muted loop playsinline preload="metadata" poster="healthspan_poster.jpg" aria-hidden="true">
+      <source src="healthspan.mp4" type="video/mp4" /></video>
+    <div class="veil"></div>
+    <div class="content">
+      <div class="kicker eyebrow">Summit II · October 24–25</div>
+      <h1>Extend the healthspan.</h1>
+      <div class="sub">
+        <a class="btn accent" href="https://luma.com/an4zotn9" target="_blank" rel="noopener">Get Tickets</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide" data-dur="6200">
+    <video muted loop playsinline preload="metadata" poster="augment_poster.jpg" aria-hidden="true">
+      <source src="augment.mp4" type="video/mp4" /></video>
+    <div class="veil"></div>
+    <div class="content">
+      <div class="kicker eyebrow">The Frontier Human Fashion Show · October 26</div>
+      <h1>Augment the human.</h1>
+      <div class="sub">
+        <a class="btn accent pop" href="#fashion">The Fashion Show →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="scrollTag">Scroll ↓</div>
+  <div class="heroDots" id="heroDots"></div>
+</section>
+
+<!-- ═══ DATES ═══ -->
+<section class="dates">
+  <div class="eyebrow rv">Japan's Premier Longevity Biomedical Popup City</div>
+  <h2 class="big rv">One month. Two summits.<br/>One runway.</h2>
+  <div class="grid rv">
+    <a class="cell" href="#summits" style="text-decoration:none; display:block">
+      <div class="what">Summit I</div>
+      <div class="when">Oct 17–18</div>
+      <div class="note">The Science &amp; Tech Augmenting Life</div>
+    </a>
+    <a class="cell" href="#summits" style="text-decoration:none; display:block">
+      <div class="what">Summit II</div>
+      <div class="when">Oct 24–25</div>
+      <div class="note">From East to West — Bridging the Longevity Gap</div>
+    </a>
+    <a class="cell" href="#fashion" style="text-decoration:none; display:block">
+      <div class="what">Fashion Show</div>
+      <div class="when">Oct 26</div>
+      <div class="note">The Frontier Human Fashion Show &amp; Demo Day</div>
+    </a>
+  </div>
+  <a class="resline rv" href="#residency">Join us all of October for the Residency. <em>Live the future now.</em></a>
+</section>
+
+<hr class="rule" />
+
+<!-- ═══ SUMMITS ═══ -->
+<section id="summits">
+  <div class="eyebrow rv">The Longevity Biomedical Summit</div>
+  <h2 class="big rv">Two summits,<br/>one week apart.</h2>
+  <div class="summit">
+    <div class="card rv">
+      <div class="num">SUMMIT — 01</div>
+      <div class="date">October 17–18</div>
+      <h3>The Science &amp; Tech Augmenting Life</h3>
+      <p>Why the next decade of longevity biomedicine runs through Japan: regenerative medicine, devices, and the regulatory path that takes prototypes to patients in months.</p>
+      <div class="topics"><span>Regenerative Medicine</span><span>Medical Devices</span><span>Accelerated Approval</span></div>
+      <div><a class="btn accent" href="https://luma.com/an4zotn9" target="_blank" rel="noopener">Get Tickets</a></div>
+      <div class="fine">Tickets on Luma · KBIC, Port Island</div>
+    </div>
+    <div class="card rv">
+      <div class="num">SUMMIT — 02</div>
+      <div class="date">October 24–25</div>
+      <h3>From East to West — Bridging the Longevity Gap</h3>
+      <p>The bottlenecks holding the field back, and what the world looks like once we cure disease.</p>
+      <div class="topics"><span>Capital</span><span>Regulation</span><span>East ↔ West</span></div>
+      <div class="tiein">Stay through Monday — <a href="#fashion">the Frontier Human Fashion Show closes the run</a>.</div>
+      <div><a class="btn accent" href="https://luma.com/an4zotn9" target="_blank" rel="noopener">Get Tickets</a></div>
+      <div class="fine">Tickets on Luma · KBIC, Port Island</div>
+    </div>
+  </div>
+  <div class="voicesbar rv">
+    <div class="faces">
+      <img src="img/aubrey.jpg" alt="Aubrey de Grey" /><img src="img/jose.jpg" alt="José Cordeiro" /><img src="img/yuki.jpg" alt="Yuki" /><img src="img/adam.jpg" alt="Adam" />
+    </div>
+    <div class="who">Across the two weekends: <b>Aubrey de Grey</b>, <b>José Cordeiro</b>, and 36 more.</div>
+    <a class="more" href="#speakers">Meet the speakers ↓</a>
+  </div>
+</section>
+
+<hr class="rule" />
+
+<!-- ═══ SPEAKERS ═══ -->
+<section id="speakers">
+  <div class="eyebrow rv">38 Confirmed Speakers</div>
+  <h2 class="big rv">Speakers &amp; Residents</h2>
+  <div class="headliners">
+    <div class="hcard rv"><img src="img/aubrey.jpg" alt="Aubrey de Grey" loading="lazy" />
+      <div class="meta"><div class="nm">Aubrey de Grey</div><div class="og">LEV Foundation</div></div></div>
+    <div class="hcard rv"><img src="img/jose.jpg" alt="José Cordeiro" loading="lazy" />
+      <div class="meta"><div class="nm">José Cordeiro</div><div class="og">The Death of Death</div></div></div>
+    <div class="hcard rv"><img src="img/yuki.jpg" alt="Yuki" loading="lazy" />
+      <div class="meta"><div class="nm">Yuki</div><div class="og">Cellular Agriculture</div></div></div>
+    <div class="hcard rv"><img src="img/adam.jpg" alt="Adam" loading="lazy" />
+      <div class="meta"><div class="nm">Adam</div><div class="og">Announcement Soon</div></div></div>
+  </div>
+  <p class="alsoline rv">Also in the arena: <b>Rodney Kelly</b>, <b>Rob Claar</b>, <b>Masa Nakatsu</b>, <b>Zoe</b>, <b>Cassox</b>, <b>Devinder Sodhi</b>, <b>Pedro Henrich</b>, <b>Natalie Coles</b>, <b>Keita Masui</b>, <b>Sumit Jamuar</b>, <b>Nelson Milla</b>.</p>
+  <div class="followline rv">15 / 38 revealed · the rest through September · <a href="#doors">Follow along ↓</a></div>
+</section>
+
+<hr class="rule" />
+
+<!-- ═══ FASHION SHOW ═══ -->
+<section class="fashion" id="fashion">
+  <video autoplay muted loop playsinline preload="metadata" poster="augment_poster.jpg" aria-hidden="true">
+    <source src="augment.mp4" type="video/mp4" /></video>
+  <div class="veil"></div>
+  <div class="content">
+    <div class="eyebrow">The Runway · October 26 · 19:00 JST</div>
+    <h2 class="big">The Frontier Human<br/>Fashion Show</h2>
+    <p>A live demo day, staged as a runway show. Device residents put their prototypes on models. CES meets Tokyo Fashion Week — and everyone's wearing exoskeletons.</p>
+    <div class="tags">
+      <span>Exoskeletons</span><span>Neural Interfaces</span><span>Smart Prosthetics</span>
+      <span>Biosensors</span><span>Haptic Suits</span><span>AR/VR Medical</span>
+    </div>
+    <div class="mono" style="margin-bottom:26px; color:var(--faint)">0 / 9 presenters revealed · <span class="kanji" role="group" aria-label="Presenter categories, tap to reveal"><span title="Armor — exoskeletons">鎧</span> <span title="Brain — neural interfaces">脳</span> <span title="Prosthetic">義</span> <span title="Sense — biosensors">感</span> <span title="Touch — haptics">触</span> <span title="Machine">機</span> <span title="Garment">衣</span> <span title="Vision">視</span> <span title="Life">命</span></span></div>
+    <div style="display:flex; gap:14px; flex-wrap:wrap">
+      <a class="btn accent" href="https://luma.com/an4zotn9" target="_blank" rel="noopener">Get Show Tickets</a>
+      <a class="btn ghost" href="#residency">Put your device on the runway</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ECOSYSTEM ═══ -->
+<section>
+  <div class="eyebrow rv">Ecosystem</div>
+  <h2 class="big rv">The communities behind it</h2>
+  <div class="eco rv">
+    <span>Viva City</span><span>KBIC</span><span>Learning Layer Labs</span><span>Biopunk</span>
+    <span>Aevitas</span><span>Broken Symmetry Capital</span><span>Vibe Coding Nights</span>
+    <span>LEV Foundation</span><span>Asagi Labs Ventures</span><span>ZuCity Japan</span>
+    <span>CHANGE</span><span>HekaBio</span><span>Augmentation Lab</span><span>Vitalist Bay</span><span>The MU</span>
+  </div>
+</section>
+
+<!-- ═══ JAPAN STRIP ═══ -->
+<section class="stripwrap" aria-label="One evening in Kobe">
+  <div class="cap mono rv">One evening in Kobe · 17:58 → 23:41</div>
+  <div class="strip">
+    <figure><img src="img/harbor-golden-hour.jpg" alt="Kobe harbor at golden hour" loading="lazy" /><figcaption>17:58 Kobe Harbor</figcaption></figure>
+    <figure><img src="img/izakaya-counter.jpg" alt="Izakaya counter seat" loading="lazy" /><figcaption>19:47 Dinner is a counter seat</figcaption></figure>
+    <figure><img src="img/lanterns.jpg" alt="Lantern night" loading="lazy" /><figcaption>21:15 Lantern night</figcaption></figure>
+    <figure><img src="img/port-tower-night.jpg" alt="Port Tower at night" loading="lazy" /><figcaption>22:30 One more street</figcaption></figure>
+    <figure><img src="img/rokko-night.jpg" alt="Mt. Rokko night view" loading="lazy" /><figcaption>23:41 Mt. Rokko — the ten-million-dollar view · <a href="#residency" style="color:var(--accent); text-decoration:none; font-size:12px; padding:6px 0; display:inline-block">Live here a month →</a></figcaption></figure>
+  </div>
+</section>
+
+<!-- ═══ RESIDENCY / THE MONTH ═══ -->
+<section class="month" id="residency">
+  <div class="eyebrow rv">The Residency · October 1–31</div>
+  <h2 class="big rv">Join us all of October<br/>for the Residency.</h2>
+  <div class="resline rv" style="margin-top:14px">Live the future now.</div>
+
+  <div class="props rv">
+    <div class="pr">
+      <div class="k">Build together</div>
+      <p>Longevity hackathons, Vibe Coding Nights, and benches shared with your cohort.</p>
+    </div>
+    <div class="pr">
+      <div class="k">Find your people</div>
+      <p>Partners, co-founders, co-builders — the people you meet at breakfast build with you by night.</p>
+    </div>
+    <div class="pr">
+      <div class="k">Partner with Japanese biotech</div>
+      <p>KBIC's 370 member organisations, direct PMDA connection, AMED subsidies.</p>
+    </div>
+  </div>
+
+  <div class="ep rv">
+    <div class="no">EP.01 壱</div>
+    <div><h4>Open Weeks</h4></div>
+    <div class="d">Oct 01–16</div>
+    <p>Arrivals, tours, Welcome Day on Oct 4. Benches open. Two weeks to settle into Kobe with your cohort.</p>
+  </div>
+  <div class="ep rv">
+    <div class="no">EP.02 弐</div>
+    <div><h4>Summit I</h4></div>
+    <div class="d">Oct 17–18</div>
+    <p>The field comes to Port Island. Your cohort hosts it.</p>
+  </div>
+  <div class="ep rv">
+    <div class="no">EP.03 参</div>
+    <div><h4>Summit II</h4></div>
+    <div class="d">Oct 24–25</div>
+    <p>Capital, regulation, and the bridge between ecosystems.</p>
+  </div>
+  <div class="ep rv">
+    <div class="no">EP.04 肆</div>
+    <div><h4>Fashion Show &amp; Close</h4></div>
+    <div class="d">Oct 26–31</div>
+    <p>The show on Oct 26 — devices become couture. Then press days and the close of the city.</p>
+  </div>
+
+  <div class="rhythm rv">
+    <span>夜 Vibe Coding Nights</span><span>研 The Residency</span><span>学 Learning Layer Labs</span>
+    <span>実 Biohackers Workshops</span><span>宴 Socials</span><span>休 Me-Time</span>
+  </div>
+
+  <div class="tracks">
+    <a class="t rv" href="https://luma.com/an4zotn9" target="_blank" rel="noopener"><div class="mono">Medical Devices</div><h4>Devices Residency</h4><p>Lab infrastructure for first-in-human prototypes.</p><div class="go">Apply →</div></a>
+    <a class="t rv" href="https://luma.com/an4zotn9" target="_blank" rel="noopener"><div class="mono">Therapeutics</div><h4>Therapies Residency</h4><p>Direct PMDA connection for conditional approval.</p><div class="go">Apply →</div></a>
+    <a class="t rv" href="https://luma.com/an4zotn9" target="_blank" rel="noopener"><div class="mono">Community</div><h4>Builder Pass</h4><p>Full access to everything. Build, connect, explore.</p><div class="go">Apply →</div></a>
+  </div>
+  <div class="monthCta rv"><a class="btn accent" href="https://luma.com/an4zotn9" target="_blank" rel="noopener">Apply for the Residency</a></div>
+</section>
+
+<hr class="rule" />
+
+<!-- ═══ WHY KOBE ═══ -->
+<section>
+  <div class="eyebrow rv">Why Kobe</div>
+  <h2 class="big rv">What takes years elsewhere<br/>takes months here.</h2>
+  <p class="rv" style="color:var(--dim); max-width:64ch; margin-top:8px; line-height:1.7; font-size:15px">
+    Japan's regulatory framework is the fastest legal path from clinical evidence to patients. KBIC is its front door.</p>
+  <div class="stats rv">
+    <div class="s"><div class="v">$88B</div><div class="k">3rd-largest pharma market · ¥12.4T</div></div>
+    <div class="s"><div class="v">4</div><div class="k">Accelerated regulatory pathways</div></div>
+    <div class="s"><div class="v">2/3</div><div class="k">AMED subsidy · matches 1:2 vs VC</div></div>
+    <div class="s"><div class="v">370</div><div class="k">KBIC member organisations</div></div>
+    <div class="s"><div class="v">32</div><div class="k">Nobel prizes · 4 biotech clusters</div></div>
+  </div>
+</section>
+
+<hr class="rule" />
+
+<!-- ═══ TRACK RECORD ═══ -->
+<section class="past">
+  <div class="eyebrow rv">Track Record</div>
+  <h2 class="big rv">Four times at scale,<br/>on three coasts.</h2>
+  <div class="item rv"><div class="n">500+</div><div><h4>Vitalia City Pop-Ups — Roatán · 2024–25</h4><p>Builders in a regulatory sandbox. Two popups became a permanent hub.</p></div></div>
+  <div class="item rv"><div class="n">400+</div><div><h4>Viva Frontier Tower Pop-Up — San Francisco · 2025</h4><p>Residents of a 6-week vertical village with biomarker testing, daily programming, and a Demo Day. Peter Diamandis, Aubrey de Grey, Emmett Shear, Patri Friedman.</p></div></div>
+  <div class="item rv"><div class="n">40M+</div><div><h4>Meet the Drapers — Roatán &amp; SF · 2025–26</h4><p>TV viewers across two shows with Tim &amp; Adam Draper. Muse.Bio won the $1M finale.</p></div></div>
+  <div class="item rv"><div class="n">MIT</div><div><h4>Human Augmentation Summit — Media Lab · 2025</h4><p>~300 people on BCIs and bioengineering, with Stephen Wolfram, Life Biosciences, and Harvard.</p></div></div>
+  <a class="here rv" href="#apply">◆ NEXT · 2026 · KOBE — MIRAI TECH POPUP CITY · <b>YOU ARE HERE</b></a>
+</section>
+
+<!-- ═══ APPLY ═══ -->
+<div class="applywrap" id="apply">
+  <img class="bg" src="img/future_city.jpg" alt="" aria-hidden="true" loading="lazy" />
+  <div class="veil"></div>
+  <section class="apply">
+    <div class="eyebrow rv">October 2026 · 300 Curated Residents</div>
+    <h2 class="rv">The future is<br/>built here.</h2>
+    <p class="sub rv">Tickets for the Summits &amp; Fashion Show. Applications for the Residency.</p>
+    <div class="row rv">
+      <a class="btn accent" href="https://luma.com/an4zotn9" target="_blank" rel="noopener">Get Tickets</a>
+      <a class="btn" href="https://luma.com/an4zotn9" target="_blank" rel="noopener">Apply for the Residency</a>
+      <a class="btn ghost" href="#">Sponsor the City</a>
+    </div>
+    <div class="fine rv">Tickets &amp; residency on Luma · Applications reviewed on a rolling basis</div>
+    <div class="fine rv" style="margin-top:10px">Sponsors reach 300 residents, 38 speakers, and a 40M+ media audience</div>
+  </section>
+</div>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="see">See you on Port Island</div>
+  <div class="date">10 · 01 · 2026</div>
+  <div id="count">
+    <div><div class="v" id="cd">—</div><div class="k">Days</div></div>
+    <div><div class="v" id="ch">—</div><div class="k">Hours</div></div>
+    <div><div class="v" id="cm">—</div><div class="k">Min</div></div>
+    <div><div class="v" id="cs">—</div><div class="k">Sec</div></div>
+  </div>
+  <div class="cdlabel"><span id="cdtext">Until the city opens</span> · <a href="mirai_oct1.ics" style="color:var(--accent); text-decoration:none">Add to calendar</a></div>
+  <div class="jst">Kobe right now — <b id="jst">—</b> JST</div>
+  <div class="doors" id="doors">
+    <a href="#">The Group Chat →</a>
+    <a href="https://luma.com/an4zotn9" target="_blank" rel="noopener">Follow on Luma →</a>
+    <a href="#">The Build Server →</a>
+    <a href="#">Sponsor the City →</a>
+  </div>
+  <div style="margin-top:36px">
+    <img class="daruma foot" id="darumaFoot" src="img/daruma.png" alt="Daruma" title="One eye at the start. The other on October 1." />
+  </div>
+  <div class="mono" style="margin-top:18px; font-size:9px; letter-spacing:.14em; color:var(--faint)">
+    Stills: Kobe Tourism Bureau · Hideyuki Kamon (CC BY-SA) · art comments (CC BY)</div>
+</footer>
+
+<script>
+  const noMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // hero sequence
+  const slides = [...document.querySelectorAll('.hero .slide')];
+  const WORDS = ['Live', 'Eradicate', 'Extend', 'Augment'];
+  const dotsWrap = document.getElementById('heroDots');
+  slides.forEach((s, i) => {
+    if (i !== 0) s.setAttribute('inert', '');
+    const b = document.createElement('button');
+    b.textContent = WORDS[i];
+    b.setAttribute('aria-label', 'Slide ' + (i + 1) + ': ' + WORDS[i]);
+    if (i === 0) { b.classList.add('active'); b.setAttribute('aria-current', 'true'); }
+    b.addEventListener('click', () => { clearTimeout(timer); go(i); });
+    dotsWrap.appendChild(b);
+  });
+  const pauseBtn = document.createElement('button');
+  pauseBtn.textContent = '⏸';
+  pauseBtn.setAttribute('aria-label', 'Pause slideshow');
+  dotsWrap.appendChild(pauseBtn);
+  const dotEls = [...dotsWrap.children].slice(0, slides.length);
+  let cur = 0, timer = null, heroPaused = false;
+  pauseBtn.addEventListener('click', () => {
+    heroPaused = !heroPaused;
+    pauseBtn.textContent = heroPaused ? '▶' : '⏸';
+    pauseBtn.setAttribute('aria-label', heroPaused ? 'Play slideshow' : 'Pause slideshow');
+    const v = slides[cur].querySelector('video');
+    if (heroPaused) { clearTimeout(timer); if (v) v.pause(); }
+    else { if (v) v.play().catch(() => {}); schedule(); }
+  });
+
+  function go(n) {
+    if (n !== cur) {
+      const old = cur;
+      cur = (n + slides.length) % slides.length;
+      const os = slides[old], ns = slides[cur];
+      if (ns._reset) { clearTimeout(ns._reset); ns._reset = null; }
+      ns.classList.remove('out');
+      void ns.offsetWidth;
+      os.classList.remove('on');
+      os.classList.add('out');
+      os.setAttribute('inert', '');
+      dotEls[old].classList.remove('active');
+      dotEls[old].removeAttribute('aria-current');
+      ns.classList.add('on');
+      ns.removeAttribute('inert');
+      dotEls[cur].classList.add('active');
+      dotEls[cur].setAttribute('aria-current', 'true');
+      const v = ns.querySelector('video');
+      if (v && v.paused && !heroPaused) v.play().catch(() => {});
+      os._reset = setTimeout(() => {
+        os._reset = null;
+        os.classList.remove('out');
+        const ov = os.querySelector('video');
+        if (ov && !os.classList.contains('on')) ov.pause();
+      }, 1250);
+    }
+    if (!heroPaused) schedule();
+  }
+  function schedule() {
+    clearTimeout(timer);
+    timer = setTimeout(() => go(cur + 1), +slides[cur].dataset.dur || 6000);
+  }
+  slides[0].querySelector('video').play().catch(() => {});
+  schedule();
+  // low-power-mode insurance: first gesture retries playback
+  const kick = () => {
+    const v = slides[cur].querySelector('video');
+    if (v && v.paused && !heroPaused) v.play().catch(() => {});
+    document.removeEventListener('touchstart', kick);
+    document.removeEventListener('click', kick);
+  };
+  document.addEventListener('touchstart', kick, { once: true });
+  document.addEventListener('click', kick, { once: true });
+
+  // hero sleeps off-screen (battery)
+  const hero = document.querySelector('.hero');
+  new IntersectionObserver(es => es.forEach(e => {
+    const v = slides[cur].querySelector('video');
+    if (e.isIntersecting) {
+      if (v && !heroPaused) v.play().catch(() => {});
+      if (!heroPaused) schedule();
+    } else {
+      clearTimeout(timer);
+      if (v) v.pause();
+    }
+  }), { threshold: .05 }).observe(hero);
+
+  // fashion-show video: play on scroll into view
+  const fv = document.querySelector('.fashion video');
+  new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting) { fv.play().catch(() => {}); } else { fv.pause(); }
+  }), { threshold: .2 }).observe(fv);
+
+  // reveal-on-scroll
+  const ro = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('in'); ro.unobserve(e.target); }
+  }), { threshold: .12 });
+  document.querySelectorAll('.rv').forEach(el => ro.observe(el));
+
+  // kanji tap-to-reveal (touch has no title tooltips)
+  document.querySelectorAll('.kanji span').forEach(k => {
+    k.setAttribute('tabindex', '0');
+    k.setAttribute('role', 'button');
+    k.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); k.click(); } });
+    k.addEventListener('click', () => {
+      if (k._orig) return;
+      k._orig = k.textContent;
+      k.textContent = k.getAttribute('title').split(' — ')[0];
+      setTimeout(() => { k.textContent = k._orig; k._orig = null; }, 1500);
+    });
+  });
+
+  // placeholder links: never navigate, flash an honest note
+  document.querySelectorAll('a[href="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      if (a._flash) return;
+      a._flash = a.textContent;
+      a.textContent = 'Opening soon';
+      const sr = document.getElementById('srStatus');
+      sr.textContent = '';
+      requestAnimationFrame(() => { sr.textContent = 'Opening soon'; });
+      setTimeout(() => { a.textContent = a._flash; a._flash = null; }, 1400);
+    });
+  });
+
+  // daruma: knock him over, he rights himself
+  const df = document.getElementById('darumaFoot');
+  df.addEventListener('click', () => {
+    df.classList.remove('wobble');
+    void df.offsetWidth;
+    df.classList.add('wobble');
+  });
+
+  // countdown to Oct 1 2026 JST + live JST clock
+  const t0 = new Date('2026-10-01T00:00:00+09:00').getTime();
+  const JST_FMT = new Intl.DateTimeFormat('en-GB', {
+    timeZone: 'Asia/Tokyo', weekday: 'short', hour: '2-digit', minute: '2-digit' });
+  const pad = n => String(n).padStart(2, '0');
+  function tick() {
+    let d = Math.max(0, t0 - Date.now());
+    if (d === 0) document.getElementById('cdtext').textContent = 'The city is open';
+    const day = Math.floor(d / 864e5); d -= day * 864e5;
+    const hr = Math.floor(d / 36e5); d -= hr * 36e5;
+    const mn = Math.floor(d / 6e4); d -= mn * 6e4;
+    const sc = Math.floor(d / 1e3);
+    cd.textContent = day; ch.textContent = pad(hr); cm.textContent = pad(mn); cs.textContent = pad(sc);
+    jst.textContent = JST_FMT.format(new Date());
+  }
+  tick(); setInterval(tick, 1000);
+</script>
+
+</body>
+</html>
