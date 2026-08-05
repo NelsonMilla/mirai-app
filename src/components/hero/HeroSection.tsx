@@ -14,41 +14,39 @@ export function HeroSection() {
   const heroKanjiRef = useRef<HTMLDivElement>(null);
   const { scroll } = useScrollState();
 
-  // Parallax effect on hero kanji
+  // Parallax drift on the neon sign
   useEffect(() => {
     const kanji = heroKanjiRef.current;
     if (!kanji) return;
 
     // Only update within first 1.5 viewport heights for performance
     if (scroll < window.innerHeight * 1.5) {
-      kanji.style.transform = `translate(-50%, calc(-55% + ${scroll * 0.2}px))`;
+      kanji.style.setProperty('--drift', `${scroll * 0.15}px`);
     }
   }, [scroll]);
 
   return (
     <section className="hero" data-section="hero">
       <div className="hero-bg"></div>
-      <div className="hero-kanji" id="heroKanji" ref={heroKanjiRef}>
-        未来
+      <div className="hero-kanji" id="heroKanji" ref={heroKanjiRef} aria-hidden="true">
+        <div className="hero-kanji-glyphs">
+          <span className="hero-kanji-glyph">未</span>
+          <span className="hero-kanji-glyph">来</span>
+        </div>
+        <span className="hero-kanji-plaque">Mirai — The Future</span>
       </div>
       <div className="hero-inner">
-        <div className="hero-eyebrow hero-eyebrow--split">
-          <span className="hero-eyebrow-tagline">
-            Japan&rsquo;s Premier Longevity Biomedical PopUp City
-          </span>
-          <span className="hero-eyebrow-meta">Kobe Port Island · October 2026</span>
-        </div>
+        <p className="hero-eyebrow">
+          Japan&rsquo;s Premier Longevity Biomedical PopUp City
+        </p>
         <h1 className="display">
           <span className="line">
             <span className="line-inner">Build the</span>
           </span>
           <span className="line">
             <span className="line-inner">
-              <em>future</em>
+              <em>future</em>{' '}of health&thinsp;&mdash;
             </span>
-          </span>
-          <span className="line">
-            <span className="line-inner">of health —</span>
           </span>
           <span className="line">
             <span className="line-inner">in 4 weeks</span>
@@ -67,14 +65,18 @@ export function HeroSection() {
             Learn More
           </a>
         </div>
-        <dl className="hero-stats">
+      </div>
+      <div className="hero-readout">
+        <span className="hero-readout-loc">
+          Kobe Port Island &middot; October 1&ndash;31, 2026
+        </span>
+        <span className="hero-readout-stats">
           {HERO_STATS.map((stat) => (
-            <div className="hero-stat" key={stat.label}>
-              <dt className="hero-stat-value display">{stat.value}</dt>
-              <dd className="hero-stat-label">{stat.label}</dd>
-            </div>
+            <span className="hero-readout-stat" key={stat.label}>
+              <b>{stat.value}</b> {stat.label}
+            </span>
           ))}
-        </dl>
+        </span>
       </div>
     </section>
   );
