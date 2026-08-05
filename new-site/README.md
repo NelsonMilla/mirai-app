@@ -14,4 +14,5 @@ Single static `index.html` — no framework, no build step. Deploys anywhere
   from this repo's `public/images` (comic-style avatars intentionally not used).
 - Passed a 3-critic review panel (copy 97 · UX 96 · code/design 98, bar 95).
 - Open TODOs: Telegram/Discord/sponsor URLs (buttons flash "Opening soon"),
-  hero image A/B at /live-candidates.html, daruma gets his second eye Oct 1.
+  daruma gets his second eye Oct 1. (Hero A/B page live-candidates.html
+  retired from the deploy; recover from git history if needed.)

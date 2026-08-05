@@ -26,6 +26,7 @@
     --faint: rgba(244,243,240,.48);
     --line: rgba(244,243,240,.14);
     --accent: #9be8f0;
+    --accent-rgb: 155, 232, 240;
     --font: 'Switzer', 'Inter', -apple-system, sans-serif;
     --mono: 'IBM Plex Mono', monospace;
   }
@@ -33,6 +34,12 @@
   @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
   body { background: var(--bg); color: var(--ink); font-family: var(--font); }
   ::selection { background: var(--accent); color: #000; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  .skip { position: fixed; top: 12px; left: 4vw; z-index: 70; background: var(--bg); color: var(--accent);
+    font-family: var(--mono); font-size: 11px; letter-spacing: .2em; text-transform: uppercase;
+    text-decoration: none; border: 1px solid rgba(var(--accent-rgb),.3); border-radius: 3px; padding: 12px 16px;
+    transform: translateY(-200%); }
+  .skip:focus { transform: none; }
 
   .mono { font-family: var(--mono); font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--dim); }
   .eyebrow { font-family: var(--mono); font-size: 11px; letter-spacing: .3em; text-transform: uppercase; color: var(--accent); }
@@ -130,11 +137,11 @@
   @media (max-width: 360px) { .heroDots button { padding: 8px 5px; letter-spacing: .1em; } }
   .heroDots button { border: 0; background: none; cursor: pointer; padding: 10px 8px;
     font-family: var(--mono); font-size: 10px; letter-spacing: .18em; text-transform: uppercase;
-    color: rgba(244,243,240,.6); transition: color .3s; }
+    color: rgba(244,243,240,.75); text-shadow: 0 1px 8px rgba(0,0,0,.8); transition: color .3s; }
   .heroDots button.active, .heroDots button:hover { color: var(--ink); }
   .heroDots button.active { text-decoration: underline; text-underline-offset: 5px; }
   .scrollTag { position: absolute; left: 6vw; bottom: 4.5vh; font-family: var(--mono);
-    font-size: 10px; letter-spacing: .3em; color: var(--faint); text-transform: uppercase; z-index: 5; }
+    font-size: 10px; letter-spacing: .3em; color: rgba(244,243,240,.7); text-shadow: 0 1px 8px rgba(0,0,0,.8); text-transform: uppercase; z-index: 5; }
   @media (max-width: 760px) {
     .heroDots { left: 6vw; right: 6vw; bottom: max(14px, env(safe-area-inset-bottom)); justify-content: flex-start; }
     .scrollTag { display: none; }
@@ -148,7 +155,7 @@
   .dates .cell { padding: 34px 30px; border-right: 1px solid var(--line); }
   .dates .cell:last-child { border-right: 0; }
   a.cell { transition: background .25s; }
-  a.cell:hover { background: rgba(155,232,240,.05); }
+  a.cell:hover { background: rgba(var(--accent-rgb),.05); }
   .dates .cell .when { font-weight: 800; text-transform: uppercase; font-size: clamp(26px, 3.4vw, 46px); letter-spacing: -.01em; line-height: 1; margin-top: 12px; }
   .dates .cell .what { font-family: var(--mono); font-size: 11px; letter-spacing: .22em; text-transform: uppercase; color: var(--accent); }
   .dates .cell .note { margin-top: 10px; color: var(--dim); font-size: 14px; }
@@ -166,7 +173,7 @@
   /* ── summits ── */
   .summit { display: grid; grid-template-columns: 1fr 1fr; gap: 44px; margin-top: 44px; }
   .summit .card { border: 1px solid var(--line); padding: 40px 36px; display: flex; flex-direction: column; gap: 16px;
-    background: linear-gradient(160deg, rgba(155,232,240,.045), transparent 55%); }
+    background: linear-gradient(160deg, rgba(var(--accent-rgb),.045), transparent 55%); }
   .summit .num { font-family: var(--mono); color: var(--faint); font-size: 12px; letter-spacing: .3em; }
   .summit h3 { font-weight: 700; font-size: clamp(22px, 2.4vw, 32px); line-height: 1.15; }
   .summit .date { font-weight: 800; text-transform: uppercase; font-size: clamp(22px, 2.8vw, 38px); color: var(--accent); letter-spacing: -.01em; }
@@ -174,7 +181,7 @@
   .summit .fine { font-family: var(--mono); font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--faint); }
   .summit .topics { display: flex; flex-wrap: wrap; gap: 8px; }
   .summit .topics span { font-family: var(--mono); font-size: 10px; letter-spacing: .16em; color: var(--accent);
-    border: 1px solid rgba(155,232,240,.3); padding: 6px 11px; border-radius: 2px; text-transform: uppercase; }
+    border: 1px solid rgba(var(--accent-rgb),.3); padding: 6px 11px; border-radius: 2px; text-transform: uppercase; }
   .summit .priceRow { border-top: 1px solid var(--line); padding-top: 18px; margin-top: 4px;
     display: flex; align-items: baseline; gap: 14px; }
   .summit .priceVal { font-weight: 800; font-size: 32px; letter-spacing: -.01em; line-height: 1;
@@ -184,8 +191,8 @@
   .summit .tiein { font-size: 14px; color: var(--ink); font-weight: 500; }
   .summit .tiein a { color: var(--accent); text-decoration: none; }
   .summit .tiein a:hover { text-decoration: underline; text-underline-offset: 4px; }
-  .runBand { border: 1px solid rgba(155,232,240,.35); margin-top: 44px; padding: 26px 30px;
-    background: linear-gradient(160deg, rgba(155,232,240,.07), transparent 55%);
+  .runBand { border: 1px solid rgba(var(--accent-rgb),.35); margin-top: 44px; padding: 26px 30px;
+    background: linear-gradient(160deg, rgba(var(--accent-rgb),.07), transparent 55%);
     display: flex; align-items: center; gap: 26px; flex-wrap: wrap; }
   .runBand .runKey { font-family: var(--mono); font-size: 11px; letter-spacing: .22em;
     text-transform: uppercase; color: var(--accent); white-space: nowrap; }
@@ -198,6 +205,12 @@
     color: var(--accent); font-variant-numeric: tabular-nums; }
   .runBand .ebPrice s { font-weight: 400; font-size: .55em; color: var(--faint);
     text-decoration: line-through; margin-left: 10px; }
+  .runBand .ebClock .k { display: block; font-family: var(--mono); font-size: 10px; letter-spacing: .22em;
+    text-transform: uppercase; color: var(--accent); }
+  .runBand .ebClock .v { display: block; margin-top: 6px; font-family: var(--mono); font-size: 15px;
+    letter-spacing: .08em; color: var(--ink); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .ebOver .runBand { border-color: var(--line); background: linear-gradient(160deg, rgba(var(--accent-rgb),.045), transparent 55%); }
+  .ebOver .runBand .ebPrice { color: var(--ink); }
   .voicesbar { display: flex; align-items: center; gap: 18px; margin-top: 38px; flex-wrap: wrap; }
   .voicesbar .faces { display: flex; }
   .voicesbar img { width: 46px; height: 46px; border-radius: 50%; object-fit: cover;
@@ -225,6 +238,7 @@
   .alsoline b { color: var(--ink); font-weight: 600; }
   .followline { margin-top: 18px; font-family: var(--mono); font-size: 11px; letter-spacing: .18em;
     text-transform: uppercase; }
+  .followline a, .voicesbar a.more, footer .cdlabel a { display: inline-block; padding: 8px 2px; }
   .followline a { color: var(--accent); text-decoration: none; }
   .followline a:hover { text-decoration: underline; text-underline-offset: 4px; }
 
@@ -240,9 +254,12 @@
   .fashion .content { position: relative; padding: 120px 6vw 110px; max-width: 1440px; margin: 0 auto; width: 100%; }
   .fashion p { color: var(--dim); max-width: 56ch; font-size: 15px; line-height: 1.7; margin: 14px 0 22px; }
   .tags { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 26px; }
-  .kanji span { cursor: pointer; }
+  .kanji { display: inline-flex; flex-wrap: wrap; gap: 8px; vertical-align: middle; }
+  .kanji span { cursor: pointer; display: inline-block; border: 1px solid rgba(var(--accent-rgb),.3);
+    border-radius: 2px; padding: 7px 11px; color: var(--accent); font-size: 13px; line-height: 1;
+    min-width: 31px; text-align: center; }
   .tags span { font-family: var(--mono); font-size: 10px; letter-spacing: .18em; color: var(--accent);
-    border: 1px solid rgba(155,232,240,.3); padding: 7px 13px; border-radius: 2px; text-transform: uppercase; }
+    border: 1px solid rgba(var(--accent-rgb),.3); padding: 7px 13px; border-radius: 2px; text-transform: uppercase; }
 
   /* ── japan strip ── */
   .stripwrap { max-width: none; padding: 0; }
@@ -262,11 +279,11 @@
     padding: 26px 6px; border-bottom: 1px solid var(--line); }
   .month .ep:first-of-type { border-top: 1px solid var(--line); margin-top: 40px; }
   .month .ep .no { font-family: var(--mono); font-size: 12px; color: var(--faint); letter-spacing: .2em; }
-  .month .ep h4 { font-weight: 700; font-size: clamp(17px, 1.9vw, 24px); }
+  .month .ep h3 { font-weight: 700; font-size: clamp(17px, 1.9vw, 24px); }
   .month .ep .d { font-family: var(--mono); font-size: 11px; letter-spacing: .18em; color: var(--accent); text-transform: uppercase; white-space: nowrap; }
   .month .ep p { grid-column: 2 / 4; color: var(--dim); font-size: 14px; line-height: 1.65; max-width: 74ch; }
   .props { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 44px; }
-  .props .pr { border-left: 2px solid rgba(155,232,240,.45); padding: 4px 0 4px 20px; }
+  .props .pr { border-left: 2px solid rgba(var(--accent-rgb),.45); padding: 4px 0 4px 20px; }
   .props .pr .k { font-family: var(--mono); font-size: 10px; letter-spacing: .22em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
   .props .pr p { color: var(--dim); font-size: 14px; line-height: 1.6; }
   @media (max-width: 860px) { .props { grid-template-columns: 1fr; } }
@@ -279,8 +296,8 @@
   .tracks { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px; }
   .tracks a.t { display: block; border: 1px solid var(--line); padding: 30px 26px; text-decoration: none;
     transition: border-color .25s, background .25s; }
-  .tracks a.t:hover { border-color: rgba(155,232,240,.5); background: rgba(155,232,240,.04); }
-  .tracks .t h4 { font-weight: 800; text-transform: uppercase; letter-spacing: .02em; font-size: 17px; margin: 10px 0 8px; }
+  .tracks a.t:hover { border-color: rgba(var(--accent-rgb),.5); background: rgba(var(--accent-rgb),.04); }
+  .tracks .t h3 { font-weight: 800; text-transform: uppercase; letter-spacing: .02em; font-size: 17px; margin: 10px 0 8px; }
   .tracks .t p { color: var(--dim); font-size: 14px; line-height: 1.6; }
   .tracks .t .ebTag { font-family: var(--mono); font-size: 10px; letter-spacing: .22em;
     text-transform: uppercase; color: var(--accent); margin-top: 14px; }
@@ -290,6 +307,9 @@
     text-decoration: line-through; margin-left: 8px; }
   .tracks .t .left { font-family: var(--mono); font-size: 10px; letter-spacing: .18em;
     text-transform: uppercase; color: var(--dim); margin-top: 8px; }
+  .tracks .t .ebClock--line { font-family: var(--mono); font-size: 10px; letter-spacing: .18em;
+    text-transform: uppercase; color: var(--accent); margin-top: 8px; }
+  .tracks .t .ebClock--line .ebc { color: var(--ink); letter-spacing: .08em; font-variant-numeric: tabular-nums; }
   .tracks .t .go { margin-top: 14px; font-family: var(--mono); font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--accent); }
   .monthCta { margin-top: 40px; }
   @media (max-width: 860px) { .tracks { grid-template-columns: 1fr; } .month .ep { grid-template-columns: 70px 1fr; } .month .ep .d { grid-column: 2; } .month .ep p { grid-column: 1 / 3; } }
@@ -311,7 +331,7 @@
   .past .item { display: grid; grid-template-columns: 150px 1fr; gap: 30px; padding: 26px 6px; border-bottom: 1px solid var(--line); align-items: baseline; }
   .past .item:first-of-type { border-top: 1px solid var(--line); margin-top: 40px; }
   .past .n { font-weight: 800; font-size: clamp(24px, 3vw, 40px); letter-spacing: -.02em; color: var(--accent); }
-  .past h4 { font-weight: 700; font-size: 17px; margin-bottom: 6px; }
+  .past h3 { font-weight: 700; font-size: 17px; margin-bottom: 6px; }
   .past p { color: var(--dim); font-size: 14px; line-height: 1.6; max-width: 76ch; }
   .past .here { display: inline-block; font-family: var(--mono); font-size: 12px; letter-spacing: .22em;
     text-transform: uppercase; color: var(--ink); margin-top: 26px; text-decoration: none; }
@@ -344,7 +364,7 @@
   footer .jst { margin-top: 30px; font-family: var(--mono); font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--dim); }
   footer .jst b { color: var(--accent); font-weight: 500; }
   footer .doors { display: flex; gap: 30px; justify-content: center; margin-top: 40px; flex-wrap: wrap; }
-  footer .doors a { font-family: var(--mono); font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--dim); text-decoration: none; display: inline-block; min-width: 150px; text-align: center; }
+  footer .doors a { font-family: var(--mono); font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--dim); text-decoration: none; display: inline-block; min-width: 150px; text-align: center; padding: 12px 8px; }
   footer .doors a:hover { color: var(--ink); }
 
   @media (prefers-reduced-motion: reduce) {
@@ -354,6 +374,8 @@
 <noscript><style>.rv{opacity:1;transform:none}</style></noscript>
 </head>
 <body>
+
+<a class="skip" href="#main">Skip to content</a>
 
 <div role="status" aria-live="polite" id="srStatus" style="position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0)"></div>
 <nav>
@@ -440,7 +462,7 @@
 </section>
 
 <!-- ═══ DATES ═══ -->
-<section class="dates">
+<section class="dates" id="main">
   <div class="eyebrow rv">Japan's Premier Longevity Biomedical Popup City</div>
   <h2 class="big rv">One month. Two summits.<br/>One runway.</h2>
   <div class="grid rv">
@@ -486,15 +508,16 @@
       <h3>From East to West — Bridging the Longevity Gap</h3>
       <p>The bottlenecks holding the field back, and what the world looks like once we cure disease.</p>
       <div class="topics"><span>Capital</span><span>Regulation</span><span>East ↔ West</span></div>
-      <div class="tiein">Stay through Monday — <a href="#fashion">the Frontier Human Fashion Show closes the run</a>.</div>
+      <div class="tiein">Stay through Monday: <a href="#fashion">the Frontier Human Fashion Show closes the run</a>.</div>
       <div><a class="btn accent" href="https://luma.com/an4zotn9" target="_blank" rel="noopener">Get Tickets</a></div>
       <div class="fine">Tickets on Luma · KBIC, Port Island</div>
     </div>
   </div>
   <div class="runBand rv">
     <div class="runKey">The Full Run<b>Oct 17–26</b></div>
-    <div class="runCopy">Both summits, the Frontier Human Fashion Show, and the build week between — one pass.</div>
+    <div class="runCopy">Both summits, the Frontier Human Fashion Show, and the build week between, on one pass.</div>
     <div class="priceCell"><span class="ebTag">Early Bird · Until Aug 15</span><span class="ebPrice">$399 <s>$1200</s></span></div>
+    <div class="ebClock"><span class="k">Early Bird Ends</span><span class="v ebc">&#8212;</span></div>
     <a class="btn accent" href="https://luma.com/an4zotn9" target="_blank" rel="noopener">Get the Full Run</a>
   </div>
   <div class="voicesbar rv">
@@ -520,7 +543,7 @@
     <div class="hcard rv"><img src="img/yuki.jpg" alt="Yuki" loading="lazy" />
       <div class="meta"><div class="nm">Yuki</div><div class="og">Cellular Agriculture</div></div></div>
     <div class="hcard rv"><img src="img/adam.jpg" alt="Adam" loading="lazy" />
-      <div class="meta"><div class="nm">Adam</div><div class="og">Announcement Soon</div></div></div>
+      <div class="meta"><div class="nm">Adam</div><div class="og">Vitalist Bay</div></div></div>
   </div>
   <p class="alsoline rv">Also in the arena: <b>Rodney Kelly</b>, <b>Rob Claar</b>, <b>Masa Nakatsu</b>, <b>Zoe</b>, <b>Cassox</b>, <b>Devinder Sodhi</b>, <b>Pedro Henrich</b>, <b>Natalie Coles</b>, <b>Keita Masui</b>, <b>Sumit Jamuar</b>, <b>Nelson Milla</b>.</p>
   <div class="followline rv">15 / 38 revealed · the rest through September · <a href="#doors">Follow along ↓</a></div>
@@ -536,7 +559,7 @@
   <div class="content">
     <div class="eyebrow">The Runway · October 26 · 19:00 JST</div>
     <h2 class="big">The Frontier Human<br/>Fashion Show</h2>
-    <p>A live demo day, staged as a runway show. Device residents put their prototypes on models. CES meets Tokyo Fashion Week — and everyone's wearing exoskeletons.</p>
+    <p>A live demo day, staged as a runway show. Device residents put their prototypes on models. CES meets Tokyo Fashion Week, and everyone's wearing exoskeletons.</p>
     <div class="tags">
       <span>Exoskeletons</span><span>Neural Interfaces</span><span>Smart Prosthetics</span>
       <span>Biosensors</span><span>Haptic Suits</span><span>AR/VR Medical</span>
@@ -569,7 +592,7 @@
     <figure><img src="img/izakaya-counter.jpg" alt="Izakaya counter seat" loading="lazy" /><figcaption>19:47 Dinner is a counter seat</figcaption></figure>
     <figure><img src="img/lanterns.jpg" alt="Lantern night" loading="lazy" /><figcaption>21:15 Lantern night</figcaption></figure>
     <figure><img src="img/port-tower-night.jpg" alt="Port Tower at night" loading="lazy" /><figcaption>22:30 One more street</figcaption></figure>
-    <figure><img src="img/rokko-night.jpg" alt="Mt. Rokko night view" loading="lazy" /><figcaption>23:41 Mt. Rokko — the ten-million-dollar view · <a href="#residency" style="color:var(--accent); text-decoration:none; font-size:12px; padding:6px 0; display:inline-block">Live here a month →</a></figcaption></figure>
+    <figure><img src="img/rokko-night.jpg" alt="Mt. Rokko night view" loading="lazy" /><figcaption>23:41 Mt. Rokko, the ten-million-dollar view · <a href="#residency" style="color:var(--accent); text-decoration:none; font-size:12px; padding:6px 0; display:inline-block">Live here a month →</a></figcaption></figure>
   </div>
 </section>
 
@@ -586,7 +609,7 @@
     </div>
     <div class="pr">
       <div class="k">Find your people</div>
-      <p>Partners, co-founders, co-builders — the people you meet at breakfast build with you by night.</p>
+      <p>Partners, co-founders, co-builders: the people you meet at breakfast build with you by night.</p>
     </div>
     <div class="pr">
       <div class="k">Partner with Japanese biotech</div>
@@ -596,27 +619,27 @@
 
   <div class="ep rv">
     <div class="no">EP.01 壱</div>
-    <div><h4>Open Weeks</h4></div>
+    <div><h3>Open Weeks</h3></div>
     <div class="d">Oct 01–16</div>
     <p>Arrivals, tours, Welcome Day on Oct 4. Benches open. Two weeks to settle into Kobe with your cohort.</p>
   </div>
   <div class="ep rv">
     <div class="no">EP.02 弐</div>
-    <div><h4>Summit I</h4></div>
+    <div><h3>Summit I</h3></div>
     <div class="d">Oct 17–18</div>
     <p>The field comes to Port Island. Your cohort hosts it.</p>
   </div>
   <div class="ep rv">
     <div class="no">EP.03 参</div>
-    <div><h4>Summit II</h4></div>
+    <div><h3>Summit II</h3></div>
     <div class="d">Oct 24–25</div>
     <p>Capital, regulation, and the bridge between ecosystems.</p>
   </div>
   <div class="ep rv">
     <div class="no">EP.04 肆</div>
-    <div><h4>Fashion Show &amp; Close</h4></div>
+    <div><h3>Fashion Show &amp; Close</h3></div>
     <div class="d">Oct 26–31</div>
-    <p>The show on Oct 26 — devices become couture. Then press days and the close of the city.</p>
+    <p>The show on Oct 26: devices become couture. Then press days and the close of the city.</p>
   </div>
 
   <div class="rhyt rv">
@@ -629,9 +652,9 @@
   </div>
 
   <div class="tracks">
-    <a class="t rv" href="https://luma.com/an4zotn9" target="_blank" rel="noopener"><div class="mono">Medical Devices</div><h4>Devices Residency</h4><p>Lab infrastructure for first-in-human prototypes.</p><div class="go">Apply →</div></a>
-    <a class="t rv" href="https://luma.com/an4zotn9" target="_blank" rel="noopener"><div class="mono">Therapeutics</div><h4>Therapies Residency</h4><p>Direct PMDA connection for conditional approval.</p><div class="go">Apply →</div></a>
-    <a class="t rv" href="https://luma.com/an4zotn9" target="_blank" rel="noopener"><div class="mono">Community</div><h4>Builder Pass</h4><p>Full access to everything. Build, connect, explore.</p><div class="ebTag">Early Bird</div><div class="price">$399 <s>$1500</s></div><div class="left">140 passes remaining</div><div class="go">Apply →</div></a>
+    <a class="t rv" href="https://luma.com/an4zotn9" target="_blank" rel="noopener"><div class="mono">Medical Devices</div><h3>Devices Residency</h3><p>Lab infrastructure for first-in-human prototypes.</p><div class="go">Apply →</div></a>
+    <a class="t rv" href="https://luma.com/an4zotn9" target="_blank" rel="noopener"><div class="mono">Therapeutics</div><h3>Therapies Residency</h3><p>Direct PMDA connection for conditional approval.</p><div class="go">Apply →</div></a>
+    <a class="t rv" href="https://luma.com/an4zotn9" target="_blank" rel="noopener"><div class="mono">Community</div><h3>Builder Pass</h3><p>Full access to everything. Build, connect, explore.</p><div class="ebTag">Early Bird</div><div class="price">$399 <s>$1500</s></div><div class="left">140 passes remaining</div><div class="ebClock ebClock--line">Ends in <span class="ebc">&#8212;</span></div><div class="go">Apply →</div></a>
   </div>
   <div class="monthCta rv"><a class="btn accent" href="https://luma.com/an4zotn9" target="_blank" rel="noopener">Apply for the Residency</a></div>
 </section>
@@ -659,10 +682,10 @@
 <section class="past">
   <div class="eyebrow rv">Track Record</div>
   <h2 class="big rv">Four times at scale,<br/>on three coasts.</h2>
-  <div class="item rv"><div class="n">500+</div><div><h4>Vitalia City Pop-Ups — Roatán · 2024–25</h4><p>Builders in a regulatory sandbox. Two popups became a permanent hub.</p></div></div>
-  <div class="item rv"><div class="n">400+</div><div><h4>Viva Frontier Tower Pop-Up — San Francisco · 2025</h4><p>Residents of a 6-week vertical village with biomarker testing, daily programming, and a Demo Day. Peter Diamandis, Aubrey de Grey, Emmett Shear, Patri Friedman.</p></div></div>
-  <div class="item rv"><div class="n">40M+</div><div><h4>Meet the Drapers — Roatán &amp; SF · 2025–26</h4><p>TV viewers across two shows with Tim &amp; Adam Draper. Muse.Bio won the $1M finale.</p></div></div>
-  <div class="item rv"><div class="n">MIT</div><div><h4>Human Augmentation Summit — Media Lab · 2025</h4><p>~300 people on BCIs and bioengineering, with Stephen Wolfram, Life Biosciences, and Harvard.</p></div></div>
+  <div class="item rv"><div class="n">500+</div><div><h3>Vitalia City Pop-Ups · Roatán · 2024–25</h3><p>Builders in a regulatory sandbox. Two popups became a permanent hub.</p></div></div>
+  <div class="item rv"><div class="n">400+</div><div><h3>Viva Frontier Tower Pop-Up · San Francisco · 2025</h3><p>Residents of a 6-week vertical village with biomarker testing, daily programming, and a Demo Day. Peter Diamandis, Aubrey de Grey, Emmett Shear, Patri Friedman.</p></div></div>
+  <div class="item rv"><div class="n">40M+</div><div><h3>Meet the Drapers · Roatán &amp; SF · 2025–26</h3><p>TV viewers across two shows with Tim &amp; Adam Draper. Muse.Bio won the $1M finale.</p></div></div>
+  <div class="item rv"><div class="n">MIT</div><div><h3>Human Augmentation Summit · Media Lab · 2025</h3><p>~300 people on BCIs and bioengineering, with Stephen Wolfram, Life Biosciences, and Harvard.</p></div></div>
   <a class="here rv" href="#apply">◆ NEXT · 2026 · KOBE — MIRAI TECH POPUP CITY · <b>YOU ARE HERE</b></a>
 </section>
 
@@ -695,7 +718,7 @@
     <div><div class="v" id="cs">—</div><div class="k">Sec</div></div>
   </div>
   <div class="cdlabel"><span id="cdtext">Until the city opens</span> · <a href="mirai_oct1.ics" style="color:var(--accent); text-decoration:none">Add to calendar</a></div>
-  <div class="jst">Kobe right now — <b id="jst">—</b> JST</div>
+  <div class="jst">Kobe right now · <b id="jst">—</b> JST</div>
   <div class="doors" id="doors">
     <a href="#">The Group Chat →</a>
     <a href="https://luma.com/an4zotn9" target="_blank" rel="noopener">Follow on Luma →</a>
@@ -728,6 +751,17 @@
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape' && menu.classList.contains('open')) setMenu(false);
   });
+
+  // early-bird window closes Aug 15 (JST): page self-heals to standard pricing
+  const EB_END = new Date('2026-08-16T00:00:00+09:00').getTime();
+  if (Date.now() >= EB_END) {
+    document.documentElement.classList.add('ebOver');
+    document.querySelectorAll('.ebTag, .left, .ebClock').forEach(el => el.remove());
+    document.querySelectorAll('.ebPrice, .tracks .t .price').forEach(el => {
+      const s = el.querySelector('s');
+      if (s) el.textContent = s.textContent;
+    });
+  }
 
   // hero sequence
   const slides = [...document.querySelectorAll('.hero .slide')];
@@ -866,7 +900,15 @@
   const JST_FMT = new Intl.DateTimeFormat('en-GB', {
     timeZone: 'Asia/Tokyo', weekday: 'short', hour: '2-digit', minute: '2-digit' });
   const pad = n => String(n).padStart(2, '0');
+  const ebClocks = [...document.querySelectorAll('.ebc')];
   function tick() {
+    if (ebClocks.length) {
+      let e = Math.max(0, EB_END - Date.now());
+      const ed = Math.floor(e / 864e5), eh = Math.floor(e % 864e5 / 36e5),
+            em = Math.floor(e % 36e5 / 6e4), es = Math.floor(e % 6e4 / 1e3);
+      const t = pad(ed) + 'D · ' + pad(eh) + 'H · ' + pad(em) + 'M · ' + pad(es) + 'S';
+      ebClocks.forEach(el => { el.textContent = t; });
+    }
     let d = Math.max(0, t0 - Date.now());
     if (d === 0) document.getElementById('cdtext').textContent = 'The city is open';
     const day = Math.floor(d / 864e5); d -= day * 864e5;
