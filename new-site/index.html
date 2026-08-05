@@ -60,13 +60,36 @@
   nav .links a:hover { color: var(--ink); }
   .btn { display: inline-block; background: var(--ink); color: #0a0a0c !important; text-decoration: none;
     padding: 12px 26px; border-radius: 3px; font-family: var(--mono); font-size: 11px;
-    letter-spacing: .2em; text-transform: uppercase; font-weight: 500;
+    letter-spacing: .2em; text-transform: uppercase; font-weight: 500; white-space: nowrap;
     transition: transform .2s, box-shadow .2s; }
   .btn:hover { transform: translateY(-1px); box-shadow: 0 8px 32px rgba(244,243,240,.22); }
   .btn.accent { background: var(--accent); }
   .btn.ghost { background: transparent; color: var(--ink) !important; border: 1px solid rgba(244,243,240,.4); }
   .btn.ghost:hover { border-color: var(--ink); }
-  @media (max-width: 760px) { nav .links a:not(.btn) { display: none; } }
+  .menuBtn { display: none; border: 1px solid rgba(244,243,240,.4); background: none; color: var(--ink); cursor: pointer;
+    font-family: var(--mono); font-size: 11px; letter-spacing: .2em; text-transform: uppercase;
+    padding: 11px 14px; border-radius: 3px; transition: border-color .2s; }
+  .menuBtn:hover { border-color: var(--ink); }
+  @media (max-width: 760px) {
+    nav .links a:not(.btn) { display: none; }
+    .menuBtn { display: inline-block; }
+    nav .links { gap: 10px; }
+    nav .links .btn { padding: 11px 16px; }
+  }
+  @media (max-width: 360px) { nav .daruma { display: none; } }
+  .menu { position: fixed; inset: 0; z-index: 60; background: rgba(5,5,6,.96); backdrop-filter: blur(14px);
+    display: flex; flex-direction: column; justify-content: center; gap: 18px; padding: 0 8vw;
+    opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .3s ease, visibility 0s linear .3s; }
+  .menu.open { opacity: 1; visibility: visible; pointer-events: auto; transition: opacity .3s ease; }
+  .menu .mlink { font-weight: 800; text-transform: uppercase; letter-spacing: -.01em; text-decoration: none;
+    font-size: clamp(28px, 8vw, 40px); line-height: 1.25; color: var(--ink); }
+  .menu .mlink span { font-family: var(--mono); font-weight: 400; font-size: 11px; letter-spacing: .2em;
+    color: var(--accent); margin-left: 14px; vertical-align: middle; white-space: nowrap; }
+  .menu .mdate { margin-top: 26px; font-family: var(--mono); font-size: 11px; letter-spacing: .3em;
+    text-transform: uppercase; color: var(--faint); }
+  .menuClose { position: absolute; top: 12px; right: 4vw; width: 46px; height: 46px; border: 1px solid rgba(244,243,240,.4);
+    background: none; color: var(--ink); border-radius: 3px; font-size: 16px; cursor: pointer; }
+  @media (prefers-reduced-motion: reduce) { .menu, .menu.open { transition: none; } }
   .daruma { height: 24px; width: auto; vertical-align: middle; opacity: .55; transition: opacity .3s, transform .3s; cursor: help; }
   .daruma:hover { opacity: 1; transform: translateY(-1px); }
   .daruma.foot { height: 46px; opacity: .6; cursor: pointer; }
@@ -112,7 +135,12 @@
   .heroDots button.active { text-decoration: underline; text-underline-offset: 5px; }
   .scrollTag { position: absolute; left: 6vw; bottom: 4.5vh; font-family: var(--mono);
     font-size: 10px; letter-spacing: .3em; color: var(--faint); text-transform: uppercase; z-index: 5; }
-  @media (max-width: 760px) { .heroDots { left: 6vw; right: auto; bottom: 8.5vh; } .scrollTag { display: none; } }
+  @media (max-width: 760px) {
+    .heroDots { left: 6vw; right: 6vw; bottom: max(14px, env(safe-area-inset-bottom)); justify-content: flex-start; }
+    .scrollTag { display: none; }
+    .slide .content { left: 6vw; right: 6vw; bottom: 112px; max-width: none; }
+    .slide .lead { white-space: normal; font-size: 15px; line-height: 1.55; max-width: 32ch; }
+  }
 
   /* ── dates band ── */
   .dates { padding-top: 90px; }
@@ -128,7 +156,12 @@
     letter-spacing: -.005em; text-decoration: none; white-space: nowrap; }
   .resline em { font-style: normal; color: var(--accent); }
   .resline:hover em { text-decoration: underline; text-underline-offset: 6px; }
-  @media (max-width: 860px) { .dates .grid { grid-template-columns: 1fr; } .dates .cell { border-right: 0; border-bottom: 1px solid var(--line); } .dates .cell:last-child { border-bottom: 0; } }
+  @media (max-width: 860px) {
+    .dates .grid { grid-template-columns: 1fr; }
+    .dates .cell { border-right: 0; border-bottom: 1px solid var(--line); }
+    .dates .cell:last-child { border-bottom: 0; }
+    .resline { white-space: normal; font-size: clamp(19px, 3.4vw, 30px); line-height: 1.4; }
+  }
 
   /* ── summits ── */
   .summit { display: grid; grid-template-columns: 1fr 1fr; gap: 44px; margin-top: 44px; }
@@ -142,9 +175,29 @@
   .summit .topics { display: flex; flex-wrap: wrap; gap: 8px; }
   .summit .topics span { font-family: var(--mono); font-size: 10px; letter-spacing: .16em; color: var(--accent);
     border: 1px solid rgba(155,232,240,.3); padding: 6px 11px; border-radius: 2px; text-transform: uppercase; }
+  .summit .priceRow { border-top: 1px solid var(--line); padding-top: 18px; margin-top: 4px;
+    display: flex; align-items: baseline; gap: 14px; }
+  .summit .priceVal { font-weight: 800; font-size: 32px; letter-spacing: -.01em; line-height: 1;
+    font-variant-numeric: tabular-nums; }
+  .summit .priceKey { font-family: var(--mono); font-size: 10px; letter-spacing: .22em;
+    text-transform: uppercase; color: var(--dim); }
   .summit .tiein { font-size: 14px; color: var(--ink); font-weight: 500; }
   .summit .tiein a { color: var(--accent); text-decoration: none; }
   .summit .tiein a:hover { text-decoration: underline; text-underline-offset: 4px; }
+  .runBand { border: 1px solid rgba(155,232,240,.35); margin-top: 44px; padding: 26px 30px;
+    background: linear-gradient(160deg, rgba(155,232,240,.07), transparent 55%);
+    display: flex; align-items: center; gap: 26px; flex-wrap: wrap; }
+  .runBand .runKey { font-family: var(--mono); font-size: 11px; letter-spacing: .22em;
+    text-transform: uppercase; color: var(--accent); white-space: nowrap; }
+  .runBand .runKey b { display: block; font-weight: 400; color: var(--faint); margin-top: 5px; letter-spacing: .18em; }
+  .runBand .runCopy { color: var(--dim); font-size: 15px; line-height: 1.5; flex: 1; min-width: 260px; }
+  .runBand .priceCell { display: flex; flex-direction: column; gap: 6px; align-items: flex-start; }
+  .runBand .ebTag { font-family: var(--mono); font-size: 10px; letter-spacing: .22em;
+    text-transform: uppercase; color: var(--ink); white-space: nowrap; }
+  .runBand .ebPrice { font-weight: 800; font-size: 32px; letter-spacing: -.01em; line-height: 1;
+    color: var(--accent); font-variant-numeric: tabular-nums; }
+  .runBand .ebPrice s { font-weight: 400; font-size: .55em; color: var(--faint);
+    text-decoration: line-through; margin-left: 10px; }
   .voicesbar { display: flex; align-items: center; gap: 18px; margin-top: 38px; flex-wrap: wrap; }
   .voicesbar .faces { display: flex; }
   .voicesbar img { width: 46px; height: 46px; border-radius: 50%; object-fit: cover;
@@ -217,15 +270,26 @@
   .props .pr .k { font-family: var(--mono); font-size: 10px; letter-spacing: .22em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
   .props .pr p { color: var(--dim); font-size: 14px; line-height: 1.6; }
   @media (max-width: 860px) { .props { grid-template-columns: 1fr; } }
-  .rhythm { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 30px; }
-  .rhythm span { font-family: var(--mono); font-size: 11px; letter-spacing: .14em; color: var(--dim);
-    border: 1px solid var(--line); padding: 9px 15px; border-radius: 2px; }
+  .rhyt { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; margin-top: 30px; }
+  .rhyt .tile { border: 1px solid var(--line); padding: 18px 16px; }
+  .rhyt .h { font-family: var(--mono); font-size: 11px; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--ink); }
+  .rhyt .h b { font-weight: 400; color: var(--accent); margin-right: 6px; }
+  .rhyt p { color: var(--faint); font-size: 12.5px; line-height: 1.5; margin-top: 6px; }
   .tracks { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px; }
   .tracks a.t { display: block; border: 1px solid var(--line); padding: 30px 26px; text-decoration: none;
     transition: border-color .25s, background .25s; }
   .tracks a.t:hover { border-color: rgba(155,232,240,.5); background: rgba(155,232,240,.04); }
   .tracks .t h4 { font-weight: 800; text-transform: uppercase; letter-spacing: .02em; font-size: 17px; margin: 10px 0 8px; }
   .tracks .t p { color: var(--dim); font-size: 14px; line-height: 1.6; }
+  .tracks .t .ebTag { font-family: var(--mono); font-size: 10px; letter-spacing: .22em;
+    text-transform: uppercase; color: var(--accent); margin-top: 14px; }
+  .tracks .t .price { font-weight: 800; font-size: 26px; letter-spacing: -.01em; line-height: 1;
+    margin-top: 6px; font-variant-numeric: tabular-nums; }
+  .tracks .t .price s { font-weight: 400; font-size: .58em; color: var(--faint);
+    text-decoration: line-through; margin-left: 8px; }
+  .tracks .t .left { font-family: var(--mono); font-size: 10px; letter-spacing: .18em;
+    text-transform: uppercase; color: var(--dim); margin-top: 8px; }
   .tracks .t .go { margin-top: 14px; font-family: var(--mono); font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--accent); }
   .monthCta { margin-top: 40px; }
   @media (max-width: 860px) { .tracks { grid-template-columns: 1fr; } .month .ep { grid-template-columns: 70px 1fr; } .month .ep .d { grid-column: 2; } .month .ep p { grid-column: 1 / 3; } }
@@ -301,8 +365,19 @@
     <a href="#residency">Residency</a>
     <a href="#apply">Sponsors</a>
     <a class="btn accent" href="#apply">Apply Now</a>
+    <button class="menuBtn" id="menuBtn" aria-expanded="false" aria-controls="menu">Menu</button>
   </div>
 </nav>
+
+<div class="menu" id="menu" role="dialog" aria-modal="true" aria-label="Site menu">
+  <button class="menuClose" id="menuClose" aria-label="Close menu">✕</button>
+  <a class="mlink" href="#summits">Summits <span>Oct 17–25</span></a>
+  <a class="mlink" href="#speakers">Speakers <span>38 Confirmed</span></a>
+  <a class="mlink" href="#fashion">Fashion Show <span>Oct 26</span></a>
+  <a class="mlink" href="#residency">Residency <span>Oct 01–31</span></a>
+  <a class="mlink" href="#apply">Sponsors</a>
+  <div class="mdate">10 · 01 · 2026 · Port Island, Kobe</div>
+</div>
 
 <!-- ═══ HERO SEQUENCE ═══ -->
 <section class="hero" id="top">
@@ -401,6 +476,7 @@
       <h3>The Science &amp; Tech Augmenting Life</h3>
       <p>Why the next decade of longevity biomedicine runs through Japan: regenerative medicine, devices, and the regulatory path that takes prototypes to patients in months.</p>
       <div class="topics"><span>Regenerative Medicine</span><span>Medical Devices</span><span>Accelerated Approval</span></div>
+      <div class="priceRow"><span class="priceVal">$900</span><span class="priceKey">Summit Pass · Oct 17–18</span></div>
       <div><a class="btn accent" href="https://luma.com/an4zotn9" target="_blank" rel="noopener">Get Tickets</a></div>
       <div class="fine">Tickets on Luma · KBIC, Port Island</div>
     </div>
@@ -414,6 +490,12 @@
       <div><a class="btn accent" href="https://luma.com/an4zotn9" target="_blank" rel="noopener">Get Tickets</a></div>
       <div class="fine">Tickets on Luma · KBIC, Port Island</div>
     </div>
+  </div>
+  <div class="runBand rv">
+    <div class="runKey">The Full Run<b>Oct 17–26</b></div>
+    <div class="runCopy">Both summits, the Frontier Human Fashion Show, and the build week between — one pass.</div>
+    <div class="priceCell"><span class="ebTag">Early Bird · Until Aug 15</span><span class="ebPrice">$399 <s>$1200</s></span></div>
+    <a class="btn accent" href="https://luma.com/an4zotn9" target="_blank" rel="noopener">Get the Full Run</a>
   </div>
   <div class="voicesbar rv">
     <div class="faces">
@@ -537,15 +619,19 @@
     <p>The show on Oct 26 — devices become couture. Then press days and the close of the city.</p>
   </div>
 
-  <div class="rhythm rv">
-    <span>夜 Vibe Coding Nights</span><span>研 The Residency</span><span>学 Learning Layer Labs</span>
-    <span>実 Biohackers Workshops</span><span>宴 Socials</span><span>休 Me-Time</span>
+  <div class="rhyt rv">
+    <div class="tile"><div class="h"><b>夜</b>Vibe Coding Nights</div><p>Ship beside future cofounders.</p></div>
+    <div class="tile"><div class="h"><b>研</b>The Residency</div><p>A bench in Japan's biomedical cluster.</p></div>
+    <div class="tile"><div class="h"><b>学</b>Learning Layer Labs</div><p>New skills, taught weekly.</p></div>
+    <div class="tile"><div class="h"><b>実</b>Biohackers Workshops</div><p>Hands-on frontier techniques.</p></div>
+    <div class="tile"><div class="h"><b>宴</b>Socials</div><p>Dinners where partnerships start.</p></div>
+    <div class="tile"><div class="h"><b>休</b>Me-Time</div><p>Onsen, harbor, headspace.</p></div>
   </div>
 
   <div class="tracks">
     <a class="t rv" href="https://luma.com/an4zotn9" target="_blank" rel="noopener"><div class="mono">Medical Devices</div><h4>Devices Residency</h4><p>Lab infrastructure for first-in-human prototypes.</p><div class="go">Apply →</div></a>
     <a class="t rv" href="https://luma.com/an4zotn9" target="_blank" rel="noopener"><div class="mono">Therapeutics</div><h4>Therapies Residency</h4><p>Direct PMDA connection for conditional approval.</p><div class="go">Apply →</div></a>
-    <a class="t rv" href="https://luma.com/an4zotn9" target="_blank" rel="noopener"><div class="mono">Community</div><h4>Builder Pass</h4><p>Full access to everything. Build, connect, explore.</p><div class="go">Apply →</div></a>
+    <a class="t rv" href="https://luma.com/an4zotn9" target="_blank" rel="noopener"><div class="mono">Community</div><h4>Builder Pass</h4><p>Full access to everything. Build, connect, explore.</p><div class="ebTag">Early Bird</div><div class="price">$399 <s>$1500</s></div><div class="left">140 passes remaining</div><div class="go">Apply →</div></a>
   </div>
   <div class="monthCta rv"><a class="btn accent" href="https://luma.com/an4zotn9" target="_blank" rel="noopener">Apply for the Residency</a></div>
 </section>
@@ -625,6 +711,23 @@
 
 <script>
   const noMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // mobile menu
+  const menu = document.getElementById('menu'),
+        menuBtn = document.getElementById('menuBtn'),
+        menuClose = document.getElementById('menuClose');
+  function setMenu(open) {
+    menu.classList.toggle('open', open);
+    menuBtn.setAttribute('aria-expanded', String(open));
+    document.documentElement.style.overflow = open ? 'hidden' : '';
+    (open ? menu.querySelector('.mlink') : menuBtn).focus();
+  }
+  menuBtn.addEventListener('click', () => setMenu(true));
+  menuClose.addEventListener('click', () => setMenu(false));
+  menu.querySelectorAll('.mlink').forEach(a => a.addEventListener('click', () => setMenu(false)));
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && menu.classList.contains('open')) setMenu(false);
+  });
 
   // hero sequence
   const slides = [...document.querySelectorAll('.hero .slide')];
