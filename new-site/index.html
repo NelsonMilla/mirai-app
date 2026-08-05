@@ -245,8 +245,32 @@
   .followline a:hover { text-decoration: underline; text-underline-offset: 4px; }
 
   /* ── ecosystem ── */
-  .eco { display: flex; flex-wrap: wrap; gap: 12px 34px; margin-top: 34px; }
-  .eco span { font-family: var(--mono); font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--dim); }
+  .ecoWall { position: relative; overflow: hidden; margin-top: 34px; background: var(--bg);
+    border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .ecoWall::before, .ecoWall::after { content: ''; position: absolute; top: 0; bottom: 0; width: 90px; z-index: 2; pointer-events: none; }
+  .ecoWall::before { left: 0; background: linear-gradient(90deg, var(--bg), transparent); }
+  .ecoWall::after { right: 0; background: linear-gradient(270deg, var(--bg), transparent); }
+  .ecoTrack { display: flex; width: max-content; animation: ecoScroll 48s linear infinite; }
+  .ecoWall:hover .ecoTrack, .ecoWall:focus-within .ecoTrack { animation-play-state: paused; }
+  @keyframes ecoScroll { to { transform: translateX(-50%); } }
+  .ecoSeq { display: flex; align-items: center; gap: 70px; padding: 28px 35px; }
+  .ecoCell { display: flex; align-items: center; height: 40px; text-decoration: none; }
+  .ecoCell img { height: 32px; width: auto; max-width: 150px; object-fit: contain; display: block; }
+  .ecoCell.plate img { filter: grayscale(1) invert(1) brightness(1.05) contrast(1.3); mix-blend-mode: screen; transition: filter .3s; }
+  .ecoCell.stamp img { filter: brightness(0) invert(1); opacity: .82; transition: opacity .3s; }
+  .ecoCell.luma img { filter: grayscale(1) contrast(1.7) brightness(1.6); mix-blend-mode: screen; transition: filter .3s; }
+  .ecoCell.plate:hover img { filter: grayscale(1) invert(1) brightness(1.2) contrast(1.35); }
+  .ecoCell.stamp:hover img { opacity: 1; }
+  .ecoCell.luma:hover img { filter: grayscale(1) contrast(1.7) brightness(1.9); }
+  .ecoWord { font-weight: 700; font-size: 17px; letter-spacing: .02em; color: rgba(244,243,240,.85); white-space: nowrap; }
+  .ecoCell:hover .ecoWord { color: var(--ink); }
+  @media (max-width: 760px) { .ecoSeq { gap: 44px; padding: 22px; } .ecoCell img { height: 26px; } }
+  @media (prefers-reduced-motion: reduce) {
+    .ecoWall::before, .ecoWall::after { display: none; }
+    .ecoTrack { animation: none; width: auto; }
+    .ecoSeq { flex-wrap: wrap; justify-content: center; }
+    .ecoSeq[aria-hidden="true"] { display: none; }
+  }
 
   /* ── fashion show ── */
   .fashion { max-width: none; padding: 0; position: relative; overflow: hidden; }
@@ -511,6 +535,7 @@
       <p>The bottlenecks holding the field back, and what the world looks like once we cure disease.</p>
       <div class="topics"><span>Capital</span><span>Regulation</span><span>East ↔ West</span></div>
       <div class="tiein">Stay through Monday: <a href="#fashion">the Frontier Human Fashion Show closes the run</a>.</div>
+      <div class="priceRow"><span class="priceVal">$900</span><span class="priceKey">Summit Pass · Oct 24–25</span></div>
       <div><a class="btn accent" href="https://luma.com/an4zotn9" target="_blank" rel="noopener">Get Tickets</a></div>
       <div class="fine">Tickets on Luma · KBIC, Port Island</div>
     </div>
@@ -524,9 +549,9 @@
   </div>
   <div class="voicesbar rv">
     <div class="faces">
-      <img src="img/aubrey.jpg" alt="Aubrey de Grey" /><img src="img/jose.jpg" alt="José Cordeiro" /><img src="img/yuki.jpg" alt="Yuki" /><img src="img/adam.jpg" alt="Adam" />
+      <img src="img/aubrey.jpg" alt="Aubrey de Grey" /><img src="img/jose.jpg" alt="José Cordeiro" /><img src="img/yuki.jpg" alt="Yuki Hanyu" /><img src="img/adam.jpg" alt="Adam Gries" />
     </div>
-    <div class="who">Across the two weekends: <b>Aubrey de Grey</b>, <b>José Cordeiro</b>, and 36 more.</div>
+    <div class="who">Across the two weekends: <b>Aubrey de Grey</b>, <b>José Cordeiro</b>, and 41 more.</div>
     <a class="more" href="#speakers">Meet the speakers ↓</a>
   </div>
 </section>
@@ -535,20 +560,20 @@
 
 <!-- ═══ SPEAKERS ═══ -->
 <section id="speakers">
-  <div class="eyebrow rv">38 Confirmed Speakers</div>
+  <div class="eyebrow rv">43 Confirmed Speakers</div>
   <h2 class="big rv">Speakers &amp; Residents</h2>
   <div class="headliners">
     <div class="hcard rv"><img src="img/aubrey.jpg" alt="Aubrey de Grey" loading="lazy" />
       <div class="meta"><div class="nm">Aubrey de Grey</div><div class="og">LEV Foundation</div></div></div>
     <div class="hcard rv"><img src="img/jose.jpg" alt="José Cordeiro" loading="lazy" />
       <div class="meta"><div class="nm">José Cordeiro</div><div class="og">The Death of Death</div></div></div>
-    <div class="hcard rv"><img src="img/yuki.jpg" alt="Yuki" loading="lazy" />
-      <div class="meta"><div class="nm">Yuki</div><div class="og">Cellular Agriculture</div></div></div>
-    <div class="hcard rv"><img src="img/adam.jpg" alt="Adam" loading="lazy" />
-      <div class="meta"><div class="nm">Adam</div><div class="og">Vitalist Bay</div></div></div>
+    <div class="hcard rv"><img src="img/yuki.jpg" alt="Yuki Hanyu" loading="lazy" />
+      <div class="meta"><div class="nm">Yuki Hanyu</div><div class="og">Cellular Agriculture</div></div></div>
+    <div class="hcard rv"><img src="img/adam.jpg" alt="Adam Gries" loading="lazy" />
+      <div class="meta"><div class="nm">Adam Gries</div><div class="og">Vitalist Bay</div></div></div>
   </div>
-  <p class="alsoline rv">Also in the arena: <b>Rodney Kelly</b>, <b>Rob Claar</b>, <b>Masa Nakatsu</b>, <b>Zoe</b>, <b>Cassox</b>, <b>Devinder Sodhi</b>, <b>Pedro Henrich</b>, <b>Natalie Coles</b>, <b>Keita Masui</b>, <b>Sumit Jamuar</b>, <b>Nelson Milla</b>.</p>
-  <div class="followline rv">15 / 38 revealed · the rest through September · <a href="#doors">Follow along ↓</a></div>
+  <p class="alsoline rv">Also in the arena: <b>Todd Porter</b>, <b>Josh Mann</b>, <b>Patri Friedman</b>, <b>Prof. Motoshi Hayano</b>, <b>Ian Huyett</b>, <b>Sandeep Casi</b>, <b>Sebastian Brunemeier</b>, <b>Brian Kennedy</b>, <b>Rob Claar</b>, <b>Natalie Coles</b>, <b>Devinder Sodhi</b>, <b>Sumit Jamuar</b>, <b>Keita Masui</b>, <b>Muneaki Goto</b>, <b>Prof. Takahiro Yasuda</b>, <b>Yuri Deigin</b>, <b>Laurence Ion</b>, <b>Rodney Kelly</b>, <b>Eleanor Sheekey</b>, <b>Prof. Stuart Reid</b>, <b>Mac Davis</b>, <b>Daniel Burger</b>, <b>Juliette Humer</b>, <b>Jeffrey Tibbetts</b>, <b>Ada Cyborg</b>, <b>Elen Capri</b>, <b>Cremieux</b>, <b>Nathan Cheng</b>, <b>Keiko Kobayashi</b>, <b>Felix OENS</b>, <b>Brandon Possin</b>, <b>Bilal Kharouni</b>, <b>Alice Gilman</b>, <b>Julie Ying Baron</b>, <b>Irit Rappley, PhD</b>, <b>Walter Patterson</b>, <b>Czar Gonzalez</b>, <b>Pedro Henrich</b>, <b>Nelson Milla</b>.</p>
+  <div class="followline rv">43 confirmed · more announced through September · <a href="#doors">Follow along ↓</a></div>
 </section>
 
 <hr class="rule" />
@@ -577,12 +602,44 @@
 <!-- ═══ ECOSYSTEM ═══ -->
 <section>
   <div class="eyebrow rv">Ecosystem</div>
-  <h2 class="big rv">The communities behind it</h2>
-  <div class="eco rv">
-    <span>Viva City</span><span>KBIC</span><span>Learning Layer Labs</span><span>Biopunk</span>
-    <span>Aevitas</span><span>Broken Symmetry Capital</span><span>Vibe Coding Nights</span>
-    <span>LEV Foundation</span><span>Asagi Labs Ventures</span><span>ZuCity Japan</span>
-    <span>CHANGE</span><span>HekaBio</span><span>Augmentation Lab</span><span>Vitalist Bay</span><span>The MU</span>
+  <h2 class="big rv">Supporting organizations</h2>
+  <div class="ecoWall rv" aria-label="Supporting organizations">
+    <div class="ecoTrack">
+      <div class="ecoSeq">
+      <a class="ecoCell plate" href="https://viva.city/" target="_blank" rel="noopener" title="Viva City"><img src="img/partners/viva-city.avif" alt="Viva City" /></a>
+      <a class="ecoCell stamp" href="https://www.fbri-kobe.org/kbic/english/" target="_blank" rel="noopener" title="KBIC"><img src="img/partners/kbic.svg" alt="KBIC" /></a>
+      <a class="ecoCell plate" href="https://www.learninglayer.ai/" target="_blank" rel="noopener" title="Learning Layer Labs"><img src="img/partners/learning-layer-labs.jpg" alt="Learning Layer Labs" /></a>
+      <a class="ecoCell plate" href="https://haus.fund/" target="_blank" rel="noopener" title="Biopunk"><img src="img/partners/biopunk.png" alt="Biopunk" /></a>
+      <a class="ecoCell luma" href="https://aevitashouse.bio/" target="_blank" rel="noopener" title="Aevitas"><img src="img/partners/aevitas.png" alt="Aevitas" /></a>
+      <a class="ecoCell luma" href="https://brokensymmetry.capital/" target="_blank" rel="noopener" title="Broken Symmetry Capital"><img src="img/partners/broken-symmetry.jpg" alt="Broken Symmetry Capital" /></a>
+      <a class="ecoCell plate" href="https://vibecodingnights.com/" target="_blank" rel="noopener" title="Vibe Coding Nights"><img src="img/partners/vibe-coding-nights.png" alt="Vibe Coding Nights" /></a>
+      <a class="ecoCell" href="https://www.levf.org/" target="_blank" rel="noopener" title="LEV Foundation"><span class="ecoWord">LEV Foundation</span></a>
+      <a class="ecoCell plate" href="https://alv.vc/" target="_blank" rel="noopener" title="Asagi Labs Ventures"><img src="img/partners/asagi-labs.jpg" alt="Asagi Labs Ventures" /></a>
+      <a class="ecoCell plate" href="https://zucity.org/en/market-homes" target="_blank" rel="noopener" title="ZuCity Japan"><img src="img/partners/zucity.svg" alt="ZuCity Japan" /></a>
+      <a class="ecoCell" href="https://ch-ange.de/" target="_blank" rel="noopener" title="CHANGE"><span class="ecoWord">CHANGE</span></a>
+      <a class="ecoCell plate" href="https://www.heka.bio/" target="_blank" rel="noopener" title="HekaBio"><img src="img/partners/hekabio.avif" alt="HekaBio" /></a>
+      <a class="ecoCell stamp" href="https://augmentationlab.org/" target="_blank" rel="noopener" title="Augmentation Lab"><img src="img/partners/augmentation-lab.png" alt="Augmentation Lab" /></a>
+      <a class="ecoCell plate" href="https://vitalistbay.com/" target="_blank" rel="noopener" title="Vitalist Bay"><img src="img/partners/vitalist-bay.png" alt="Vitalist Bay" /></a>
+      <a class="ecoCell stamp" href="https://the-mu.xyz/" target="_blank" rel="noopener" title="The MU"><img src="img/partners/the-mu.png" alt="The MU" /></a>
+      </div>
+      <div class="ecoSeq" aria-hidden="true">
+      <a class="ecoCell plate" href="https://viva.city/" target="_blank" rel="noopener" title="Viva City" tabindex="-1"><img src="img/partners/viva-city.avif" alt="Viva City" /></a>
+      <a class="ecoCell stamp" href="https://www.fbri-kobe.org/kbic/english/" target="_blank" rel="noopener" title="KBIC" tabindex="-1"><img src="img/partners/kbic.svg" alt="KBIC" /></a>
+      <a class="ecoCell plate" href="https://www.learninglayer.ai/" target="_blank" rel="noopener" title="Learning Layer Labs" tabindex="-1"><img src="img/partners/learning-layer-labs.jpg" alt="Learning Layer Labs" /></a>
+      <a class="ecoCell plate" href="https://haus.fund/" target="_blank" rel="noopener" title="Biopunk" tabindex="-1"><img src="img/partners/biopunk.png" alt="Biopunk" /></a>
+      <a class="ecoCell luma" href="https://aevitashouse.bio/" target="_blank" rel="noopener" title="Aevitas" tabindex="-1"><img src="img/partners/aevitas.png" alt="Aevitas" /></a>
+      <a class="ecoCell luma" href="https://brokensymmetry.capital/" target="_blank" rel="noopener" title="Broken Symmetry Capital" tabindex="-1"><img src="img/partners/broken-symmetry.jpg" alt="Broken Symmetry Capital" /></a>
+      <a class="ecoCell plate" href="https://vibecodingnights.com/" target="_blank" rel="noopener" title="Vibe Coding Nights" tabindex="-1"><img src="img/partners/vibe-coding-nights.png" alt="Vibe Coding Nights" /></a>
+      <a class="ecoCell" href="https://www.levf.org/" target="_blank" rel="noopener" title="LEV Foundation" tabindex="-1"><span class="ecoWord">LEV Foundation</span></a>
+      <a class="ecoCell plate" href="https://alv.vc/" target="_blank" rel="noopener" title="Asagi Labs Ventures" tabindex="-1"><img src="img/partners/asagi-labs.jpg" alt="Asagi Labs Ventures" /></a>
+      <a class="ecoCell plate" href="https://zucity.org/en/market-homes" target="_blank" rel="noopener" title="ZuCity Japan" tabindex="-1"><img src="img/partners/zucity.svg" alt="ZuCity Japan" /></a>
+      <a class="ecoCell" href="https://ch-ange.de/" target="_blank" rel="noopener" title="CHANGE" tabindex="-1"><span class="ecoWord">CHANGE</span></a>
+      <a class="ecoCell plate" href="https://www.heka.bio/" target="_blank" rel="noopener" title="HekaBio" tabindex="-1"><img src="img/partners/hekabio.avif" alt="HekaBio" /></a>
+      <a class="ecoCell stamp" href="https://augmentationlab.org/" target="_blank" rel="noopener" title="Augmentation Lab" tabindex="-1"><img src="img/partners/augmentation-lab.png" alt="Augmentation Lab" /></a>
+      <a class="ecoCell plate" href="https://vitalistbay.com/" target="_blank" rel="noopener" title="Vitalist Bay" tabindex="-1"><img src="img/partners/vitalist-bay.png" alt="Vitalist Bay" /></a>
+      <a class="ecoCell stamp" href="https://the-mu.xyz/" target="_blank" rel="noopener" title="The MU" tabindex="-1"><img src="img/partners/the-mu.png" alt="The MU" /></a>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -705,7 +762,7 @@
       <a class="btn ghost" href="#">Sponsor the City</a>
     </div>
     <div class="fine rv">Tickets &amp; residency on Luma · Applications reviewed on a rolling basis</div>
-    <div class="fine rv" style="margin-top:10px">Sponsors reach 300 residents, 38 speakers, and a 40M+ media audience</div>
+    <div class="fine rv" style="margin-top:10px">Sponsors reach 300 residents, 43 speakers, and a 40M+ media audience</div>
   </section>
 </div>
 
