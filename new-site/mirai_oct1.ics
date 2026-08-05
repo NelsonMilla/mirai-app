@@ -1,0 +1,15 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Mirai Tech City//EN
+BEGIN:VEVENT
+UID:mirai-tech-city-opens-20261001@miraitech.city
+DTSTAMP:20260802T000000Z
+DTSTART;VALUE=DATE:20261001
+DTEND;VALUE=DATE:20261101
+SUMMARY:Mirai Tech City — Port Island\, Kobe
+DESCRIPTION:Japan's longevity biomedical popup city. Summit I Oct 17–18 ·
+  Summit II Oct 24–25 · Frontier Human Fashion Show Oct 26. Live the futur
+ e now.
+LOCATION:KBIC\, Port Island\, Kobe\, Japan
+END:VEVENT
+END:VCALENDAR

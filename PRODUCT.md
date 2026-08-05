@@ -10,43 +10,44 @@ web
 
 ## Users
 
-Primary: participants — biotech builders, founders, and operators deciding whether to buy a Builder Pass or apply for a Devices/Therapies residency. When a design decision forces a trade-off, their reaction wins. Sponsors and speakers are the secondary lenses; they are convinced by seeing a page that excites participants.
+Primary: participants — biotech builders, founders, operators, and longevity-curious professionals deciding whether to buy Summit or Fashion Show tickets, or to apply for a Devices/Therapies residency or Builder Pass. When a design decision forces a trade-off, their reaction wins. Sponsors and speakers are the secondary lenses; they are convinced by seeing a page that excites participants.
 
-The site is presented as a community-run event, not a company product. "Frontier Humans" (the operating company) is de-emphasized everywhere except the Fashion Show's name; the "who's behind this?" question is answered with community proof — residents, partner communities, volunteers, track record — never org-brand attribution blocks.
+The site is presented as a community-run event, not a company product. The "who's behind this?" question is answered with community proof — the ecosystem wall, speakers, residents, track record — never org-brand attribution blocks. "Frontier Humans" appears only in the Fashion Show's name.
 
 ## Product Purpose
 
-The landing page for Mirai Tech PopUp City: a 4-week biotech popup city on Kobe's Port Island, October 1–31, 2026. Success is a visitor clicking through to Luma to buy a Builder Pass or apply for a residency. Every content change is evaluated against three OKRs: get participants excited, get sponsors excited, get speakers excited.
+The landing site for Mirai Tech City: a month-long longevity biomedical popup city on Kobe's Port Island, October 1–31 2026, anchored by two summits (Oct 17–18, Oct 24–25) and the Frontier Human Fashion Show (Oct 26). The site is a single static `new-site/index.html` — no framework, no build step, deployed on Vercel. Success is a visitor clicking through to Luma to buy tickets or apply for the residency. Every content change is evaluated against three OKRs: get participants excited, get sponsors excited, get speakers excited.
 
 ## Positioning
 
-A month living and building inside KBIC, Japan's biomedical cluster — labs, housing, and community on the same few blocks. The live-in biotech cluster is the claim every section reinforces.
+Japan's premier longevity biomedical popup city. Summit-first: the two summit weekends and the Fashion Show are the marquee events a visitor anchors on; the month-long residency wraps around them as the deeper commitment. The Kobe advantage grounds it all — "what takes years elsewhere takes months here" (PMDA pathways, AMED subsidies, KBIC's 370 member organisations).
 
-The line a visitor remembers after 10 seconds: **spend October 2026 building the future of health in Kobe, Japan.**
+The line a visitor remembers after 10 seconds: **Join us all of October for the Residency. Live the future now.**
 
 ## Conversion & proof
 
-- Primary CTA: the Luma event link (`LUMA_EVENT_URL` in `src/lib/constants.ts`). Secondary CTA: none, on purpose — Luma is the only door; everything funnels there, no consolation actions.
-- Belief ladder: **wow → real → for me.** 1) This is unlike anything I've seen. 2) And it's actually real — labs, regulators, dates, place. 3) And there's a track that fits me specifically.
-- Proof on hand: roster headliners (featured on the landing page, full roster at tcg.miraitech.city), the partner-community logo wall (set is growing), and past-event track record (some image assets still owed — see `public/images/fs/`).
+- Primary CTA: Get Tickets (Summits and Fashion Show) → the Luma event (`https://luma.com/an4zotn9`). Secondary: Apply for the Residency — same Luma destination, applications reviewed rolling. Tertiary: Sponsor the City (URL pending; placeholder links honestly flash "Opening soon"). One platform, three doors — everything still funnels to Luma.
+- Belief ladder: **wow → real → for me.** 1) The cinematic hero — this is unlike anything I've seen. 2) It's real — hard dates, named speakers, KBIC/PMDA/AMED numbers, four past events at scale. 3) There's a door that fits me — a ticket, a residency track, a sponsorship.
+- Proof on hand: 38 confirmed speakers (15 revealed, headliners Aubrey de Grey and José Cordeiro; photos in `new-site/img/`), the 15-community ecosystem wall, and the track record ladder — 500+ builders at Vitalia (Roatán), 400+ residents at Viva Frontier Tower (SF), 40M+ Meet the Drapers viewers, the MIT Human Augmentation Summit.
 
 ## Brand Personality
 
-Playful, precise, alive. Game mechanics done with craft — the TCG/Pokémon layer (starter tracks, lifestyle cards, mascots) is executed seriously; everything moves, nothing is sloppy. A visitor should feel playful wonder, FOMO/urgency, credibility, and belonging — the wonder pulls them in, the credibility makes it safe to commit, the belonging makes it theirs.
+Cinematic, kinetic, precise. A film-trailer register: enormous quiet type over moving photography, one verb per fold (Live. Eradicate. Extend. Augment.), a countdown running to opening day. Playfulness survives but is restrained and Japanese — the one-eyed daruma waiting for October 1, kanji tap-reveals, episode numbering (壱 弐 参 肆) — small touches, not game mechanics. A visitor should feel awe, urgency, credibility, and belonging, in that order.
 
 ## Anti-references
 
 - Biotech corporate: Genentech/pharma-style sites — navy and white, stock lab photos, compliance-speak.
 - Generic SaaS landing: hero-metric templates, feature grids, testimonial carousels — the AI-generated landing page look.
+- The site's own previous register: the arcade/TCG layer (starter cards, pixel mascots, evolution lines) is retired. Play now lives in small cultural touches, never in game mechanics.
 
 ## Design Principles
 
-1. **Wow before why.** The belief ladder starts at spectacle; every section earns attention before it explains.
-2. **Play with craft.** Playfulness never at the expense of polish — the game layer is a precision instrument, not decoration.
-3. **Ground the wonder.** Real dates, real labs, real regulators (PMDA, KBIC) anchor every fantastical element.
-4. **Community is the face.** Proof is people — residents, partners, volunteers — never the operating company.
-5. **One door.** Everything funnels to Luma; no competing CTAs, and compact UI beats added copy (text bloat is a standing risk).
+1. **Wow before why.** The belief ladder starts at spectacle; the moving-photo hero earns attention before anything explains.
+2. **One verb per fold.** Every major section leads with a single short claim in display type; supporting detail stays subordinate.
+3. **Ground the wonder.** Real dates, real speakers, real regulators (PMDA, AMED, KBIC) anchor every cinematic move.
+4. **Community is the face.** Proof is people and communities — never the operating company.
+5. **Honest doors.** Everything funnels to Luma; unfinished links say "Opening soon" instead of navigating nowhere, and reveal counts are stated plainly (15/38 speakers, 0/9 presenters).
 
 ## Accessibility & Inclusion
 
-Pragmatic baseline, no formal WCAG target: reduced-motion support, readable contrast, keyboard-usable nav and FAQ. The Playwright smoke test (`npm run smoke`) guards section reveal, horizontal overflow, and console cleanliness across viewports.
+Pragmatic baseline, no formal WCAG target: `prefers-reduced-motion` collapses the hero carousel, reveals, and daruma wobble; off-screen slides are `inert`; an `aria-live` status region announces placeholder-link flashes; kanji reveals are keyboard-operable; imagery carries alt text. Videos are `muted`/`playsinline` with poster fallbacks and pause off-screen.
