@@ -10,6 +10,16 @@ Single static `index.html` — no framework, no build step. Deploys anywhere
   ffmpeg palindrome/crossfade loops), auto-swiping carousel, pause control.
 - Summit I Oct 17–18 · Summit II Oct 24–25 · Fashion Show Oct 26 (Monday).
 - All ticket/residency CTAs → https://luma.com/an4zotn9
+- `/summit-bundle/` is the dedicated $2,500 Summit Weekends + Hotel offer page,
+  increasing to $4,000 after August 20.
+- The public landing-page placement is controlled by
+  `window.MIRAI_FLAGS.showSummitPackage` near the top of `index.html`. It is
+  intentionally `false` until the hotel agreement is confirmed; the dedicated
+  `/summit-bundle/` route remains available for internal review.
+  The landing page carries a compact version after the dates section. Both use
+  a full-size Luma checkout in a new tab with the hotel ticket preselected
+  (`ttype-0BjQv0xV4yY5P0l`) and access coupon `SFSH`. The site moves to standard
+  pricing after Aug 20 JST.
 - Fonts: Switzer (Fontshare) + IBM Plex Mono. Speaker photos + Kobe stills
   from this repo's `public/images` (comic-style avatars intentionally not used).
 - Passed a 3-critic review panel (copy 97 · UX 96 · code/design 98, bar 95).
