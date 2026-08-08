@@ -20,6 +20,11 @@
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
 <script defer src="/_vercel/insights/script.js"></script>
+<script>
+  // Launch control: change to true when the Summit + Hotel package is ready for the public landing page.
+  window.MIRAI_FLAGS = Object.freeze({ showSummitPackage: false });
+  if (!window.MIRAI_FLAGS.showSummitPackage) document.documentElement.classList.add('package-promo-hidden');
+</script>
 <style>
   :root {
     --bg: #050506;
@@ -34,7 +39,10 @@
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
-  body { background: var(--bg); color: var(--ink); font-family: var(--font); }
+  body { background: var(--bg); color: var(--ink); font-family: var(--font); overflow-x: hidden; }
+  .package-promo-fallback { display: none !important; }
+  html.package-promo-hidden [data-package-promo] { display: none !important; }
+  html.package-promo-hidden .package-promo-fallback { display: inline-block !important; }
   ::selection { background: var(--accent); color: #000; }
   :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
   .skip { position: fixed; top: 12px; left: 4vw; z-index: 70; background: var(--bg); color: var(--accent);
@@ -79,6 +87,7 @@
     font-family: var(--mono); font-size: 11px; letter-spacing: .2em; text-transform: uppercase;
     padding: 11px 14px; border-radius: 3px; transition: border-color .2s; }
   .menuBtn:hover { border-color: var(--ink); }
+  .promo-short { display: none; }
   @media (max-width: 760px) {
     nav .links a:not(.btn) { display: none; }
     .menuBtn { display: inline-block; }
@@ -86,6 +95,14 @@
     nav .links .btn { padding: 11px 16px; }
   }
   @media (max-width: 360px) { nav .daruma { display: none; } }
+  @media (max-width: 380px) {
+    nav { padding: 14px 3vw; }
+    nav .logo { font-size: 13px; }
+    nav .links { gap: 6px; }
+    nav .links .btn { padding: 11px 10px; }
+    .promo-full { display: none; }
+    .promo-short { display: inline; }
+  }
   .menu { position: fixed; inset: 0; z-index: 60; background: rgba(5,5,6,.96); backdrop-filter: blur(14px);
     display: flex; flex-direction: column; justify-content: center; gap: 18px; padding: 0 8vw;
     opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .3s ease, visibility 0s linear .3s; }
@@ -136,7 +153,10 @@
   .slide .kicker { margin-bottom: 22px; font-size: 12px; opacity: 0; transition: opacity .8s ease .25s; }
   .slide.on .kicker { opacity: 1; }
   .heroDots { position: absolute; right: 4vw; bottom: 5vh; display: flex; gap: 4px; z-index: 5; flex-wrap: wrap; max-width: 88vw; justify-content: flex-end; }
-  @media (max-width: 360px) { .heroDots button { padding: 8px 5px; letter-spacing: .1em; } }
+  @media (max-width: 360px) {
+    .heroDots button { padding: 8px 5px; letter-spacing: .1em; }
+    .slide .sub .btn { max-width: 100%; padding: 12px 14px; white-space: normal; text-align: center; }
+  }
   .heroDots button { border: 0; background: none; cursor: pointer; padding: 10px 8px;
     font-family: var(--mono); font-size: 10px; letter-spacing: .18em; text-transform: uppercase;
     color: rgba(244,243,240,.75); text-shadow: 0 1px 8px rgba(0,0,0,.8); transition: color .3s; }
@@ -172,6 +192,64 @@
     .resline { white-space: normal; font-size: clamp(19px, 3.4vw, 30px); line-height: 1.4; }
   }
 
+  /* ── summit + hotel package ── */
+  .bundle-feature { max-width: 1440px; padding-top: 88px; padding-bottom: 88px; }
+  .bundle-feature__shell { display: grid; grid-template-columns: minmax(0, .78fr) minmax(0, 1.22fr);
+    border: 1px solid rgba(var(--accent-rgb),.38); background: rgba(var(--accent-rgb),.025); }
+  .bundle-feature__media { position: relative; min-height: 580px; overflow: hidden; border-right: 1px solid var(--line); }
+  .bundle-feature__media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .bundle-feature__media::after { content: ''; position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(5,5,6,.88), transparent 58%),
+                linear-gradient(110deg, rgba(5,5,6,.18), transparent 62%); }
+  .bundle-feature__caption { position: absolute; left: 24px; right: 24px; bottom: 22px; z-index: 1;
+    font-family: var(--mono); font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: rgba(244,243,240,.78); }
+  .bundle-feature__offer { padding: clamp(34px, 5vw, 72px); display: flex; flex-direction: column; justify-content: center; }
+  .bundle-feature__offer h2 { max-width: 11ch; margin: 18px 0 16px; font-weight: 900; text-transform: uppercase;
+    font-size: clamp(38px, 5.4vw, 76px); line-height: .94; letter-spacing: -.015em; }
+  .bundle-feature__name { margin-top: 14px; color: var(--ink); font-family: var(--mono); font-size: 10px;
+    letter-spacing: .17em; line-height: 1.5; text-transform: uppercase; }
+  .bundle-feature__promise { max-width: 58ch; color: var(--dim); font-size: 16px; line-height: 1.65; }
+  .bundle-feature__promise strong { color: var(--ink); font-weight: 650; }
+  .bundle-feature__facts { list-style: none; margin-top: 30px; border-top: 1px solid var(--line); }
+  .bundle-feature__facts li { display: grid; grid-template-columns: 116px 1fr; gap: 18px; padding: 13px 0;
+    border-bottom: 1px solid var(--line); font-size: 14px; line-height: 1.45; color: var(--dim); }
+  .bundle-feature__facts b { font-family: var(--mono); font-size: 10px; font-weight: 400; letter-spacing: .18em;
+    text-transform: uppercase; color: var(--accent); }
+  .bundle-feature__buy { display: flex; align-items: center; gap: 24px; margin-top: 32px; flex-wrap: wrap; }
+  .bundle-feature__price { font-size: clamp(38px, 4.5vw, 58px); line-height: .9; font-weight: 850; letter-spacing: -.025em;
+    font-variant-numeric: tabular-nums; }
+  .bundle-feature__price span { display: block; margin-top: 10px; font-family: var(--mono); font-size: 9px; font-weight: 400;
+    letter-spacing: .18em; text-transform: uppercase; color: var(--faint); }
+  .bundle-feature__checkout { min-width: 250px; min-height: 50px; display: inline-flex; align-items: center; justify-content: center; text-align: center; }
+  .bundle-feature__friction { margin-top: 16px; font-family: var(--mono); font-size: 10px; line-height: 1.6;
+    letter-spacing: .13em; text-transform: uppercase; color: var(--faint); }
+  .bundle-feature__links { display: flex; gap: 22px; margin-top: 16px; align-items: center; flex-wrap: wrap; }
+  .bundle-feature__details { font-family: var(--mono); font-size: 10px; letter-spacing: .18em; text-transform: uppercase;
+    color: var(--accent); text-underline-offset: 4px; }
+  @media (max-width: 900px) {
+    .bundle-feature__shell { grid-template-columns: 1fr; }
+    .bundle-feature__offer { order: 1; }
+    .bundle-feature__media { order: 2; min-height: 330px; border-top: 1px solid var(--line); border-right: 0; }
+    .bundle-feature__offer > .eyebrow { order: 1; }
+    .bundle-feature__name { order: 2; }
+    .bundle-feature__offer > h2 { order: 3; }
+    .bundle-feature__promise { order: 4; }
+    .bundle-feature__buy { order: 5; }
+    .bundle-feature__facts { order: 6; }
+    .bundle-feature__friction { order: 7; }
+    .bundle-feature__links { order: 8; }
+  }
+  @media (max-width: 520px) {
+    .bundle-feature { padding-top: 64px; padding-bottom: 64px; }
+    .bundle-feature__media { min-height: 250px; }
+    .bundle-feature__offer { padding: 28px 22px 30px; }
+    .bundle-feature__offer h2 { max-width: none; font-size: clamp(34px, 10.8vw, 48px); }
+    .bundle-feature__promise { font-size: 15px; }
+    .bundle-feature__facts li { grid-template-columns: 92px 1fr; gap: 12px; }
+    .bundle-feature__buy { align-items: stretch; gap: 18px; }
+    .bundle-feature__checkout { width: 100%; min-height: 52px; padding: 17px 16px; }
+  }
+
   /* ── summits ── */
   .summit { display: grid; grid-template-columns: 1fr 1fr; gap: 44px; margin-top: 44px; }
   .summit .card { border: 1px solid var(--line); padding: 40px 36px; display: flex; flex-direction: column; gap: 16px;
@@ -193,26 +271,6 @@
   .summit .tiein { font-size: 14px; color: var(--ink); font-weight: 500; }
   .summit .tiein a { color: var(--accent); text-decoration: none; }
   .summit .tiein a:hover { text-decoration: underline; text-underline-offset: 4px; }
-  .runBand { border: 1px solid rgba(var(--accent-rgb),.35); margin-top: 44px; padding: 26px 30px;
-    background: linear-gradient(160deg, rgba(var(--accent-rgb),.07), transparent 55%);
-    display: flex; align-items: center; gap: 26px; flex-wrap: wrap; }
-  .runBand .runKey { font-family: var(--mono); font-size: 11px; letter-spacing: .22em;
-    text-transform: uppercase; color: var(--accent); white-space: nowrap; }
-  .runBand .runKey b { display: block; font-weight: 400; color: var(--faint); margin-top: 5px; letter-spacing: .18em; }
-  .runBand .runCopy { color: var(--dim); font-size: 15px; line-height: 1.5; flex: 1; min-width: 260px; }
-  .runBand .priceCell { display: flex; flex-direction: column; gap: 6px; align-items: flex-start; }
-  .runBand .ebTag { font-family: var(--mono); font-size: 10px; letter-spacing: .22em;
-    text-transform: uppercase; color: var(--ink); white-space: nowrap; }
-  .runBand .ebPrice { font-weight: 800; font-size: 32px; letter-spacing: -.01em; line-height: 1;
-    color: var(--accent); font-variant-numeric: tabular-nums; }
-  .runBand .ebPrice s { font-weight: 400; font-size: .55em; color: var(--faint);
-    text-decoration: line-through; margin-left: 10px; }
-  .runBand .ebClock .k { display: block; font-family: var(--mono); font-size: 10px; letter-spacing: .22em;
-    text-transform: uppercase; color: var(--accent); }
-  .runBand .ebClock .v { display: block; margin-top: 6px; font-family: var(--mono); font-size: 15px;
-    letter-spacing: .08em; color: var(--ink); font-variant-numeric: tabular-nums; white-space: nowrap; }
-  .ebOver .runBand { border-color: var(--line); background: linear-gradient(160deg, rgba(var(--accent-rgb),.045), transparent 55%); }
-  .ebOver .runBand .ebPrice { color: var(--ink); }
   .voicesbar { display: flex; align-items: center; gap: 18px; margin-top: 38px; flex-wrap: wrap; }
   .voicesbar .faces { display: flex; }
   .voicesbar img { width: 46px; height: 46px; border-radius: 50%; object-fit: cover;
@@ -412,7 +470,8 @@
     <a href="#fashion">Fashion Show</a>
     <a href="#residency">Residency</a>
     <a href="#apply">Sponsors</a>
-    <a class="btn accent" href="#apply">Apply Now</a>
+    <a class="btn accent" href="#summit-package" data-package-promo><span class="promo-full">Summit + Hotel</span><span class="promo-short">Hotel Pass</span></a>
+    <a class="btn accent package-promo-fallback" href="#apply">Apply Now</a>
     <button class="menuBtn" id="menuBtn" aria-expanded="false" aria-controls="menu">Menu</button>
   </div>
 </nav>
@@ -423,7 +482,8 @@
   <a class="mlink" href="#speakers">Speakers <span>38 Confirmed</span></a>
   <a class="mlink" href="#fashion">Fashion Show <span>Oct 26</span></a>
   <a class="mlink" href="#residency">Residency <span>Oct 01–31</span></a>
-  <a class="mlink" href="#apply">Sponsors</a>
+  <a class="mlink" href="#summit-package" data-package-promo>Summit + Hotel <span>10 Only · Aug 20</span></a>
+  <a class="mlink package-promo-fallback" href="#apply">Sponsors</a>
   <div class="mdate">10 · 01 · 2026 · Port Island, Kobe</div>
 </div>
 
@@ -438,7 +498,8 @@
       <h1>Live.</h1>
       <p class="lead">Join us all of October for the Residency. <em>Live the future now.</em></p>
       <div class="sub">
-        <a class="btn accent" href="#summits">See the Summits</a>
+        <a class="btn accent" href="#summit-package" data-package-promo>Summit + Hotel Package</a>
+        <a class="btn accent package-promo-fallback" href="#summits">See the Summits</a>
         <a class="btn ghost" href="#residency">The Residency →</a>
       </div>
     </div>
@@ -452,7 +513,8 @@
       <div class="kicker eyebrow">Summit I · October 17–18</div>
       <h1>Eradicate disease.</h1>
       <div class="sub">
-        <a class="btn accent" href="https://luma.com/an4zotn9" target="_blank" rel="noopener">Get Tickets</a>
+        <a class="btn ghost" href="#summit-package" data-package-promo>Summit + Hotel Package</a>
+        <a class="btn accent package-promo-fallback" href="https://luma.com/an4zotn9" target="_blank" rel="noopener">Get Tickets</a>
       </div>
     </div>
   </div>
@@ -465,7 +527,8 @@
       <div class="kicker eyebrow">Summit II · October 24–25</div>
       <h1>Extend the healthspan.</h1>
       <div class="sub">
-        <a class="btn accent" href="https://luma.com/an4zotn9" target="_blank" rel="noopener">Get Tickets</a>
+        <a class="btn ghost" href="#summit-package" data-package-promo>Summit + Hotel Package</a>
+        <a class="btn accent package-promo-fallback" href="https://luma.com/an4zotn9" target="_blank" rel="noopener">Get Tickets</a>
       </div>
     </div>
   </div>
@@ -511,6 +574,34 @@
   <a class="resline rv" href="#residency">Join us all of October for the Residency. <em>Live the future now.</em></a>
 </section>
 
+<!-- ═══ SUMMIT + HOTEL PACKAGE ═══ -->
+<section class="bundle-feature" id="summit-package" data-package-promo>
+  <div class="bundle-feature__shell rv">
+    <div class="bundle-feature__media">
+      <img src="img/harbor-golden-hour.jpg" alt="Kobe harbor at golden hour" loading="lazy" />
+      <div class="bundle-feature__caption">Kobe, Japan · October 2026</div>
+    </div>
+    <div class="bundle-feature__offer">
+      <div class="eyebrow">10 launch-price packages · Ends August 20</div>
+      <div class="bundle-feature__name">The Summit Weekends - Including Hotel</div>
+      <h2>Do both weekends.<br/>Stay for the full run.</h2>
+      <p class="bundle-feature__promise">Get Summit I, Summit II, the week between, and the Frontier Human Fashion Show &amp; Demo Day—plus a <strong>single-occupancy Sannomiya room from October 16–28.</strong></p>
+      <ul class="bundle-feature__facts">
+        <li><b>Summit I</b><span>October 17–18</span></li>
+        <li><b>Summit II</b><span>October 24–25</span></li>
+        <li><b>Hotel</b><span>October 16–28 · Sannomiya · 12 nights · Single occupancy</span></li>
+        <li><b>Finale</b><span>Frontier Human Fashion Show &amp; Demo Day · October 26</span></li>
+      </ul>
+      <div class="bundle-feature__buy">
+        <div class="bundle-feature__price">$2,500<span>Launch price through Aug 20 · $4,000 after</span></div>
+        <a class="btn accent bundle-feature__checkout bundle-checkout" href="https://luma.com/an4zotn9?coupon=SFSH&amp;tt=ttype-0BjQv0xV4yY5P0l&amp;utm_source=mirai-site&amp;utm_campaign=summit-hotel-package" target="_blank" rel="noopener">Get My Package — $2,500</a>
+      </div>
+      <p class="bundle-feature__friction">First 10 packages or through Aug 20 · Then $4,000 · Single occupancy · Breakfast excluded</p>
+      <div class="bundle-feature__links"><a class="bundle-feature__details" href="/summit-bundle/">See everything included →</a></div>
+    </div>
+  </div>
+</section>
+
 <hr class="rule" />
 
 <!-- ═══ SUMMITS ═══ -->
@@ -525,7 +616,7 @@
       <p>Why the next decade of longevity biomedicine runs through Japan: regenerative medicine, devices, and the regulatory path that takes prototypes to patients in months.</p>
       <div class="topics"><span>Regenerative Medicine</span><span>Medical Devices</span><span>Accelerated Approval</span></div>
       <div class="priceRow"><span class="priceVal">$900</span><span class="priceKey">Summit Pass · Oct 17–18</span></div>
-      <div><a class="btn accent" href="https://luma.com/an4zotn9" target="_blank" rel="noopener">Get Tickets</a></div>
+      <div><a class="btn ghost" href="https://luma.com/an4zotn9" target="_blank" rel="noopener">Standard Tickets</a></div>
       <div class="fine">Tickets on Luma · KBIC, Port Island</div>
     </div>
     <div class="card rv">
@@ -536,16 +627,9 @@
       <div class="topics"><span>Capital</span><span>Regulation</span><span>East ↔ West</span></div>
       <div class="tiein">Stay through Monday: <a href="#fashion">the Frontier Human Fashion Show closes the run</a>.</div>
       <div class="priceRow"><span class="priceVal">$900</span><span class="priceKey">Summit Pass · Oct 24–25</span></div>
-      <div><a class="btn accent" href="https://luma.com/an4zotn9" target="_blank" rel="noopener">Get Tickets</a></div>
+      <div><a class="btn ghost" href="https://luma.com/an4zotn9" target="_blank" rel="noopener">Standard Tickets</a></div>
       <div class="fine">Tickets on Luma · KBIC, Port Island</div>
     </div>
-  </div>
-  <div class="runBand rv">
-    <div class="runKey">The Full Run<b>Oct 17–26</b></div>
-    <div class="runCopy">Both summits, the Frontier Human Fashion Show, and the build week between, on one pass.</div>
-    <div class="priceCell"><span class="ebTag">Early Bird · Until Aug 15</span><span class="ebPrice">$399 <s>$1200</s></span></div>
-    <div class="ebClock"><span class="k">Early Bird Ends</span><span class="v ebc">&#8212;</span></div>
-    <a class="btn accent" href="https://luma.com/an4zotn9" target="_blank" rel="noopener">Get the Full Run</a>
   </div>
   <div class="voicesbar rv">
     <div class="faces">
@@ -793,6 +877,19 @@
 
 <script>
   const noMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // summit + hotel package moves from launch pricing to standard pricing after August 20 JST
+  const PACKAGE_END = new Date('2026-08-21T00:00:00+09:00').getTime();
+  if (Date.now() >= PACKAGE_END) {
+    const offerLabel = document.querySelector('.bundle-feature .eyebrow');
+    const offerPrice = document.querySelector('.bundle-feature__price');
+    if (offerLabel) offerLabel.textContent = 'Standard package price · $4,000';
+    if (offerPrice) offerPrice.innerHTML = '$4,000<span>Launch pricing has ended</span>';
+    document.querySelectorAll('.bundle-checkout').forEach(a => {
+      a.textContent = 'Get My Package — $4,000';
+      a.href = 'https://luma.com/an4zotn9?coupon=SFSH&tt=ttype-0BjQv0xV4yY5P0l&utm_source=mirai-site&utm_campaign=post-hotel-package';
+    });
+  }
 
   // mobile menu
   const menu = document.getElementById('menu'),
