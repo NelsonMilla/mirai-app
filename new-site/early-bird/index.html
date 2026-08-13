@@ -68,10 +68,10 @@
     padding: calc(126px + env(safe-area-inset-top)) 6vw 56px; border-bottom: 1px solid var(--line); overflow: hidden; }
   .early-page__hero-media { position: absolute; z-index: -2; inset: 0; margin: 0; }
   .early-page__hero-media img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 58% center;
-    filter: saturate(.64) contrast(1.08) brightness(.58); }
+    filter: saturate(.68) contrast(1.07) brightness(.63); }
   .early-page__hero::after { position: absolute; z-index: -1; inset: 0; content: ''; pointer-events: none;
-    background: linear-gradient(90deg, rgba(5,5,6,.97) 0%, rgba(5,5,6,.88) 39%, rgba(5,5,6,.5) 70%, rgba(5,5,6,.36) 100%),
-      linear-gradient(0deg, rgba(5,5,6,.88) 0%, transparent 60%, rgba(5,5,6,.28) 100%); }
+    background: linear-gradient(90deg, rgba(5,5,6,.96) 0%, rgba(5,5,6,.84) 39%, rgba(5,5,6,.46) 70%, rgba(5,5,6,.3) 100%),
+      linear-gradient(0deg, rgba(5,5,6,.86) 0%, transparent 60%, rgba(5,5,6,.25) 100%); }
   .early-page__hero-inner { display: grid; width: 100%; max-width: 1440px; margin: 0 auto;
     grid-template-columns: minmax(0, 1.12fr) minmax(360px, .62fr); gap: clamp(56px, 9vw, 144px); align-items: end; }
   .early-page__hero h1 { max-width: 7.7ch; margin: 22px 0 24px; font-size: clamp(68px, 9.4vw, 138px); font-weight: 900;
@@ -147,6 +147,13 @@
     font-size: clamp(37px, 4.8vw, 66px); font-weight: 850; font-variant-numeric: tabular-nums; letter-spacing: -.045em; line-height: .9; white-space: nowrap; }
   .early-page__access-window time { font: inherit; }
   .early-page__access-window strong > span { color: var(--faint); font-family: var(--mono); font-size: .4em; font-weight: 400; }
+  .early-page__access-photo { position: relative; margin: 46px 0 0; overflow: hidden; border: 1px solid var(--line); background: var(--bg); }
+  .early-page__access-photo img { display: block; width: 100%; height: 220px; object-fit: cover; object-position: 50% 78%;
+    filter: saturate(.68) contrast(1.08) brightness(.72); }
+  .early-page__access-photo figcaption { display: flex; justify-content: space-between; gap: 18px; padding: 12px 14px;
+    color: var(--faint); font-family: var(--mono); font-size: 9px; letter-spacing: .1em; line-height: 1.5; text-transform: uppercase; }
+  .early-page__access-photo figcaption > span:first-child { color: var(--accent); }
+  .early-page__access-photo figcaption a { text-underline-offset: 3px; }
   .early-page__access-program { min-width: 0; padding: 74px clamp(30px, 5vw, 76px); }
   .early-page__access-program-head { display: grid; grid-template-columns: 1fr auto; gap: 24px; padding-bottom: 14px;
     border-bottom: 1px solid rgba(var(--accent-rgb),.45); color: var(--accent); font-family: var(--mono); font-size: 9px;
@@ -164,6 +171,18 @@
   .early-page__access-list-month { background: linear-gradient(90deg, rgba(var(--accent-rgb),.045), transparent 72%); }
   .early-page__access-footnote { padding-top: 20px; color: var(--faint); font-family: var(--mono); font-size: 9px;
     letter-spacing: .11em; line-height: 1.6; text-transform: uppercase; }
+
+  .early-page__month-visual { position: relative; isolation: isolate; height: clamp(390px,43vw,620px); margin: 0; overflow: hidden;
+    border-bottom: 1px solid var(--line); background: var(--bg); }
+  .early-page__month-visual img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% center;
+    filter: saturate(.68) contrast(1.06) brightness(.76); }
+  .early-page__month-visual::after { position: absolute; inset: 0; content: ''; pointer-events: none;
+    background: linear-gradient(0deg, rgba(5,5,6,.9) 0%, transparent 48%, rgba(5,5,6,.12) 100%),
+      linear-gradient(90deg, rgba(5,5,6,.28), transparent 24%, transparent 76%, rgba(5,5,6,.28)); }
+  .early-page__month-visual figcaption { position: absolute; z-index: 1; right: 6vw; bottom: 28px; left: 6vw;
+    display: flex; justify-content: space-between; gap: 24px; color: var(--ink); font-family: var(--mono); font-size: 10px;
+    letter-spacing: .15em; line-height: 1.5; text-transform: uppercase; }
+  .early-page__month-visual figcaption span:last-child { color: var(--accent); text-align: right; }
 
   .early-page__reason { display: grid; grid-template-columns: minmax(0,1.12fr) minmax(360px,.88fr); max-width: 1440px;
     margin: 0 auto; border-bottom: 1px solid var(--line); }
@@ -211,10 +230,19 @@
   .early-page__close-purchase .early-page__btn { width: 100%; max-width: 440px; touch-action: manipulation; }
   .early-page__close-fine { max-width: 440px; margin-top: 13px; color: var(--faint); font-family: var(--mono); font-size: 9px;
     letter-spacing: .1em; line-height: 1.6; text-align: center; text-transform: uppercase; }
-  .early-page__close-hotel { display: flex; min-width: 0; flex-direction: column; justify-content: space-between; gap: 56px;
-    padding: clamp(54px,6vw,88px) clamp(32px,4vw,58px); border-left: 1px solid var(--line); }
+  .early-page__close-hotel { position: relative; isolation: isolate; display: flex; min-width: 0; min-height: 500px; flex-direction: column;
+    justify-content: space-between; gap: 56px; overflow: hidden; padding: clamp(54px,6vw,88px) clamp(32px,4vw,58px); border-left: 1px solid var(--line); }
+  .early-page__close-hotel::after { position: absolute; z-index: -1; inset: 0; content: ''; pointer-events: none;
+    background: linear-gradient(0deg, rgba(5,5,6,.98) 0%, rgba(5,5,6,.79) 48%, rgba(5,5,6,.42) 100%); }
+  .early-page__close-hotel-media { position: absolute; z-index: -2; inset: 0; margin: 0; }
+  .early-page__close-hotel-media img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 52%;
+    filter: saturate(.62) contrast(1.08) brightness(.68); }
   .early-page__close-hotel h3 { max-width: 10ch; margin: 18px 0 16px; font-size: clamp(28px,3vw,42px); letter-spacing: -.02em; line-height: 1; }
   .early-page__close-hotel p { max-width: 34ch; color: var(--dim); font-size: 15px; line-height: 1.65; }
+  .early-page__close-hotel-actions { display: grid; gap: 12px; justify-items: start; }
+  .early-page__asset-credit { color: var(--faint); font-family: var(--mono); font-size: 9px; letter-spacing: .08em;
+    line-height: 1.5; text-transform: uppercase; }
+  .early-page__asset-credit a { text-underline-offset: 3px; }
   .early-page__close-link { display: inline-flex; min-height: 44px; align-items: center; align-self: flex-start; gap: 12px;
     border-bottom: 1px solid rgba(var(--accent-rgb),.45); color: var(--accent); font-family: var(--mono); font-size: 10px;
     letter-spacing: .13em; line-height: 1.4; text-decoration: none; text-transform: uppercase; touch-action: manipulation;
@@ -230,7 +258,7 @@
 
   @media (max-width: 1000px) {
     .early-page__close-grid { grid-template-columns: 1fr; }
-    .early-page__close-hotel { min-height: 0; flex-direction: row; align-items: end; border-top: 1px solid var(--line); border-left: 0; }
+    .early-page__close-hotel { min-height: 480px; flex-direction: row; align-items: end; border-top: 1px solid var(--line); border-left: 0; }
   }
   @media (max-width: 900px) {
     .early-page__hero { min-height: 0; padding-top: calc(142px + env(safe-area-inset-top)); }
@@ -247,6 +275,7 @@
     .early-page__access-copy .early-page__eyebrow, .early-page__access-copy h2, .early-page__access-copy .early-page__section-lead { grid-column: 1; }
     .early-page__access-copy h2 { margin-bottom: 0; }
     .early-page__access-window { grid-column: 2; grid-row: 1 / 4; align-self: end; margin-top: 0; padding-top: 0; }
+    .early-page__access-photo { grid-column: 1 / -1; margin-top: 18px; }
     .early-page__reason { grid-template-columns: 1fr; }
     .early-page__reason-story, .early-page__reason-promise { padding: 88px 6vw; }
     .early-page__reason-promise { border-top: 1px solid var(--line); border-left: 0; }
@@ -260,7 +289,7 @@
     .early-page__close-meta span:last-child { text-align: left; }
     .early-page__close-price { font-size: clamp(86px,27vw,112px); }
     .early-page__close-purchase .early-page__btn, .early-page__close-fine { max-width: none; }
-    .early-page__close-hotel { align-items: flex-start; flex-direction: column; gap: 38px; padding: 56px 5vw; }
+    .early-page__close-hotel { min-height: 440px; align-items: flex-start; flex-direction: column; gap: 38px; padding: 56px 5vw; }
     .early-page__close-hotel p { font-size: 16px; }
     .early-page__footer, .early-page__footer-brand { align-items: flex-start; flex-direction: column; }
     .early-page__footer { gap: 20px; padding-inline: 5vw; }
@@ -303,6 +332,9 @@
     .early-page__access-copy h2 { font-size: clamp(44px,14vw,62px); }
     .early-page__access-window { margin-top: 38px; padding-top: 22px; border-top: 1px solid var(--line); }
     .early-page__access-window strong { font-size: clamp(36px,12vw,52px); }
+    .early-page__access-photo { margin-top: 34px; }
+    .early-page__access-photo img { height: 280px; object-position: 50% 77%; }
+    .early-page__access-photo figcaption { align-items: flex-start; flex-direction: column; gap: 4px; }
     .early-page__access-program { padding: 46px 5vw 54px; }
     .early-page__access-program-head { padding-bottom: 12px; }
     .early-page__access-list li { grid-template-columns: 25px minmax(0,1fr); gap: 7px 14px; min-height: 0; padding: 23px 0 25px; }
@@ -312,6 +344,10 @@
     .early-page__access-detail b { font-size: clamp(22px,7vw,28px); }
     .early-page__access-detail span { margin-top: 7px; font-size: 16px; }
     .early-page__access-footnote { padding-left: 39px; }
+    .early-page__month-visual { height: min(120vw,520px); }
+    .early-page__month-visual img { object-position: 49% center; }
+    .early-page__month-visual figcaption { right: 5vw; bottom: 22px; left: 5vw; align-items: flex-start; flex-direction: column; gap: 7px; }
+    .early-page__month-visual figcaption span:last-child { text-align: left; }
     .early-page__reason-story, .early-page__reason-promise { padding: 72px 5vw; }
     .early-page__reason-story h2 { font-size: clamp(44px,14vw,62px); }
     .early-page__reason-copy p, .early-page__reason-promise > p { font-size: 16px; }
@@ -417,6 +453,10 @@
         <div class="early-page__access-window" aria-label="Access from October 1 through October 31">
           <span>One continuous access window</span><strong><time datetime="2026-10-01">Oct 01</time><span aria-hidden="true">→</span><time datetime="2026-10-31">31</time></strong>
         </div>
+        <figure class="early-page__access-photo">
+          <img src="/img/early-bird-portliner.jpg" width="851" height="1277" alt="Port Liner train approaching Sannomiya Station in Kobe" loading="lazy" decoding="async" />
+          <figcaption><span>Moving through Kobe</span><span><a href="https://commons.wikimedia.org/wiki/File:Port_Liner_at_Sannomiya_Station.jpg" rel="external">Hideyuki Kamon</a> · <a href="https://creativecommons.org/licenses/by-sa/2.0/" rel="license external">CC BY-SA 2.0</a></span></figcaption>
+        </figure>
       </header>
       <div class="early-page__access-program">
         <div class="early-page__access-program-head" aria-hidden="true"><span>Included program</span><span>October 2026</span></div>
@@ -430,6 +470,11 @@
       </div>
     </div>
   </section>
+
+  <figure class="early-page__month-visual">
+    <img src="/img/early-bird-month.jpg" width="1879" height="837" alt="Concept visualization of an October community workshop, shared dinner, and biomedical fashion prototype in Kobe" loading="lazy" decoding="async" />
+    <figcaption><span>October, imagined · Concept visual</span><span>Build · Gather · Augment</span></figcaption>
+  </figure>
 
   <section class="early-page__reason" aria-labelledby="reason-title">
     <div class="early-page__reason-story">
@@ -460,8 +505,12 @@
         </div>
       </div>
       <aside class="early-page__close-hotel" aria-labelledby="hotel-option-title">
+        <figure class="early-page__close-hotel-media" aria-hidden="true"><img src="/img/early-bird-bridge.jpg" width="821" height="1232" alt="" loading="lazy" decoding="async" /></figure>
         <div><div class="early-page__choice-label">Prefer an all-in trip?</div><h3 id="hotel-option-title">Need a room in Kobe?</h3><p>Both summit weekends, the Fashion Show, the week between, and 12 hotel nights in Sannomiya.</p></div>
-        <a class="early-page__close-link" href="/summit-bundle/">View Summit + Hotel package <span aria-hidden="true">→</span></a>
+        <div class="early-page__close-hotel-actions">
+          <a class="early-page__close-link" href="/summit-bundle/">View Summit + Hotel package <span aria-hidden="true">→</span></a>
+          <small class="early-page__asset-credit"><a href="https://commons.wikimedia.org/wiki/File:Akashi-Kaikyo_Bridge.jpg" rel="external">Akashi Kaikyō Bridge · Hideyuki Kamon</a> · <a href="https://creativecommons.org/licenses/by-sa/2.0/" rel="license external">CC BY-SA 2.0</a></small>
+        </div>
       </aside>
     </div>
   </section>
