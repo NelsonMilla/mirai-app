@@ -585,18 +585,18 @@
       <div class="eyebrow">10 launch-price packages · Ends August 20</div>
       <div class="bundle-feature__name">The Summit Weekends - Including Hotel</div>
       <h2>Do both weekends.<br/>Stay for the full run.</h2>
-      <p class="bundle-feature__promise">Get Summit I, Summit II, the week between, and the Frontier Human Fashion Show &amp; Demo Day—plus a <strong>single-occupancy Sannomiya room from October 16–28.</strong></p>
+      <p class="bundle-feature__promise">Get Summit I, Summit II, the week between, and the Frontier Human Fashion Show &amp; Demo Day—plus a <strong>Sannomiya room from October 16–28.</strong></p>
       <ul class="bundle-feature__facts">
         <li><b>Summit I</b><span>October 17–18</span></li>
         <li><b>Summit II</b><span>October 24–25</span></li>
-        <li><b>Hotel</b><span>October 16–28 · Sannomiya · 12 nights · Single occupancy</span></li>
+        <li><b>Hotel</b><span>October 16–28 · Sannomiya · 12 nights</span></li>
         <li><b>Finale</b><span>Frontier Human Fashion Show &amp; Demo Day · October 26</span></li>
       </ul>
       <div class="bundle-feature__buy">
         <div class="bundle-feature__price">$2,500<span>Launch price through Aug 20 · $4,000 after</span></div>
-        <a class="btn accent bundle-feature__checkout bundle-checkout" href="https://luma.com/an4zotn9?coupon=SFSH&amp;tt=ttype-0BjQv0xV4yY5P0l&amp;utm_source=mirai-site&amp;utm_campaign=summit-hotel-package" target="_blank" rel="noopener">Get My Package — $2,500</a>
+        <a class="btn accent bundle-feature__checkout bundle-checkout" href="https://luma.com/an4zotn9?coupon=SFSH&amp;utm_source=mirai-site&amp;utm_campaign=summit-hotel-package" data-luma-action="checkout" data-luma-event-id="evt-OUCqVyqoZI5Jeg4" data-luma-ticket-type="ttype-0BjQv0xV4yY5P0l" data-luma-coupon="SFSH" data-luma-utm-source="mirai-site">Get My Package — $2,500</a>
       </div>
-      <p class="bundle-feature__friction">First 10 packages or through Aug 20 · Then $4,000 · Single occupancy · Breakfast excluded</p>
+      <p class="bundle-feature__friction">First 10 packages or through Aug 20 · Then $4,000 · Breakfast excluded</p>
       <div class="bundle-feature__links"><a class="bundle-feature__details" href="/summit-bundle/">See everything included →</a></div>
     </div>
   </div>
@@ -875,6 +875,7 @@
     Stills: Kobe Tourism Bureau · Hideyuki Kamon (CC BY-SA) · art comments (CC BY)</div>
 </footer>
 
+<script id="luma-checkout" src="https://embed.lu.ma/checkout-button.js"></script>
 <script>
   const noMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -887,7 +888,8 @@
     if (offerPrice) offerPrice.innerHTML = '$4,000<span>Launch pricing has ended</span>';
     document.querySelectorAll('.bundle-checkout').forEach(a => {
       a.textContent = 'Get My Package — $4,000';
-      a.href = 'https://luma.com/an4zotn9?coupon=SFSH&tt=ttype-0BjQv0xV4yY5P0l&utm_source=mirai-site&utm_campaign=post-hotel-package';
+      a.href = 'https://luma.com/an4zotn9?coupon=SFSH&utm_source=post-hotel-package&utm_campaign=post-hotel-package';
+      a.dataset.lumaUtmSource = 'post-hotel-package';
     });
   }
 

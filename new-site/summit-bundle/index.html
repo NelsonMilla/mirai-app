@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>The Summit Weekends - Including Hotel · Mirai Tech City</title>
-<meta name="description" content="Both Mirai summit weekends, the week between, the Frontier Human Fashion Show, and 12 hotel nights in Sannomiya. Launch price $2,500 through August 20; then $4,000." />
-<meta property="og:title" content="The Summit Weekends - Including Hotel" />
-<meta property="og:description" content="Both summit weekends, the week between, and 12 hotel nights in Kobe. Ten packages only." />
+<title>Two Summit Weekends, Hotel Included · Mirai Tech City</title>
+<meta name="description" content="Book both Mirai summit weekends, the Frontier Human Fashion Show, and 12 hotel nights in Sannomiya. The launch price is $2,500 through August 20, then $4,000." />
+<meta property="og:title" content="Two Summit Weekends, Hotel Included" />
+<meta property="og:description" content="Both summit weekends and 12 hotel nights in Kobe in one package. Only ten packages are available." />
 <meta property="og:image" content="https://mirai-tech-city.vercel.app/summit-bundle/og.png" />
 <meta property="og:url" content="https://mirai-tech-city.vercel.app/summit-bundle/" />
 <meta name="twitter:card" content="summary_large_image" />
@@ -57,22 +57,32 @@
     letter-spacing: .18em; text-transform: uppercase; }
   .bundle-page__nav .bundle-page__btn { min-height: 42px; padding: 11px 18px; }
 
-  .bundle-page__hero { position: relative; display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(390px, .8fr);
-    height: min(900px, 100svh); min-height: 0; border-bottom: 1px solid var(--line); }
+  .bundle-page__hero { position: relative; isolation: isolate; display: grid; grid-template-columns: minmax(0, 1.18fr) minmax(390px, .82fr);
+    min-height: 720px; height: min(920px, 100svh); overflow: hidden; border-bottom: 1px solid var(--line); }
+  .bundle-page__hero-media { position: absolute; inset: 0; z-index: -2; margin: 0; }
+  .bundle-page__hero-media img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 52% 52%;
+    filter: saturate(.76) contrast(1.08) brightness(.82); }
+  .bundle-page__hero::after { position: absolute; inset: 0; z-index: -1; content: ''; pointer-events: none;
+    background: linear-gradient(90deg, rgba(5,5,6,.94) 0%, rgba(5,5,6,.79) 43%, rgba(5,5,6,.28) 69%, rgba(5,5,6,.56) 100%),
+      linear-gradient(0deg, rgba(5,5,6,.78) 0%, transparent 38%, rgba(5,5,6,.3) 100%); }
   .bundle-page__hero-copy { position: relative; z-index: 2; display: flex; flex-direction: column; justify-content: center;
-    padding: 138px 6vw 90px; }
-  .bundle-page__hero h1 { max-width: 11ch; margin: 22px 0 22px; font-size: clamp(46px, 7.2vw, 108px); font-weight: 900;
+    padding: 138px 5.5vw 90px; }
+  .bundle-page__hero h1 { max-width: 10ch; margin: 22px 0 22px; font-size: clamp(46px, 7.2vw, 108px); font-weight: 900;
     letter-spacing: -.025em; line-height: .9; text-transform: uppercase; }
+  .bundle-page__hero h1 span { color: var(--accent); }
   .bundle-page__lead { max-width: 46ch; color: rgba(244,243,240,.75); font-size: clamp(17px, 1.5vw, 21px); line-height: 1.55; }
   .bundle-page__lead strong { color: var(--ink); font-weight: 650; }
   .bundle-page__promise { margin-top: 20px; color: var(--ink); font-size: 17px; font-weight: 700; }
   .bundle-page__hero-mobile-buy { display: none; }
   .bundle-page__hero-panel { position: relative; display: flex; align-items: center; padding: 118px 4vw 70px;
-    border-left: 1px solid var(--line); overflow: hidden; }
-  .bundle-page__hero-panel::before { content: ''; position: absolute; inset: 0; opacity: .27;
-    background: linear-gradient(to top, rgba(5,5,6,.94), rgba(5,5,6,.28)), url('/img/harbor-golden-hour.jpg') center/cover no-repeat; }
+    border-left: 1px solid rgba(244,243,240,.2); }
   .bundle-page__purchase { position: relative; z-index: 1; width: 100%; padding: clamp(26px, 3.2vw, 44px);
-    border: 1px solid rgba(var(--accent-rgb),.36); background: rgba(5,5,6,.88); }
+    border: 1px solid rgba(var(--accent-rgb),.46); background: rgba(5,5,6,.93); }
+  .bundle-page__purchase::before { position: absolute; top: -1px; left: -1px; right: -1px; height: 3px; content: '';
+    background: var(--accent); }
+  .bundle-page__purchase-top { display: flex; align-items: center; justify-content: space-between; gap: 18px; }
+  .bundle-page__purchase-tag { padding: 7px 9px; border: 1px solid var(--line); color: var(--ink); font-family: var(--mono);
+    font-size: 8px; letter-spacing: .14em; white-space: nowrap; text-transform: uppercase; }
   .bundle-page__purchase-kicker { color: var(--accent); font-family: var(--mono); font-size: 10px; letter-spacing: .22em; text-transform: uppercase; }
   .bundle-page__price { margin-top: 18px; font-size: clamp(56px, 7vw, 84px); font-weight: 850; letter-spacing: -.04em; line-height: .9;
     font-variant-numeric: tabular-nums; }
@@ -94,73 +104,218 @@
   .bundle-page__time span { display: block; margin-top: 3px; color: var(--faint); font-family: var(--mono); font-size: 8px;
     letter-spacing: .14em; text-transform: uppercase; }
 
+  .bundle-page__hero-credit { position: absolute; left: 5.5vw; bottom: 22px; z-index: 3; color: rgba(244,243,240,.48);
+    font-family: var(--mono); font-size: 9px; letter-spacing: .1em; text-transform: uppercase; }
+  .bundle-page__hero-credit a { display: inline-block; padding: 4px 0; color: inherit; text-underline-offset: 3px; }
+
   .bundle-page__section { max-width: 1280px; margin: 0 auto; padding: 100px 6vw; }
   .bundle-page__section h2 { max-width: 13ch; margin: 18px 0 44px; font-size: clamp(38px, 5vw, 72px); font-weight: 850;
     letter-spacing: -.02em; line-height: .95; text-transform: uppercase; }
-  .bundle-page__stack { border-top: 1px solid var(--line); }
-  .bundle-page__stack-item { display: grid; grid-template-columns: 72px minmax(180px, .8fr) minmax(0, 1.2fr); gap: 28px;
-    align-items: baseline; padding: 25px 4px; border-bottom: 1px solid var(--line); }
-  .bundle-page__stack-no { color: var(--accent); font-family: var(--mono); font-size: 11px; letter-spacing: .2em; }
-  .bundle-page__stack-item h3 { font-size: clamp(18px, 2vw, 25px); line-height: 1.15; }
-  .bundle-page__stack-item p { color: var(--dim); font-size: 15px; line-height: 1.65; }
-  .bundle-page__clarifier { margin-top: 26px; padding-left: 18px; border-left: 2px solid rgba(var(--accent-rgb),.5);
-    color: var(--dim); font-size: 14px; line-height: 1.65; }
-  .bundle-page__clarifier strong { color: var(--ink); }
+  .bundle-page__contents { max-width: 1400px; }
+  .bundle-page__manifest { display: grid; grid-template-columns: minmax(340px, .92fr) minmax(0, 1.08fr);
+    grid-template-rows: repeat(4, minmax(126px, auto)); min-height: 590px; list-style: none; border-top: 1px solid var(--line); }
+  .bundle-page__manifest-stay { position: relative; grid-row: 1 / 5; min-height: 590px; overflow: hidden; border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line); }
+  .bundle-page__manifest-stay img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 39% center;
+    filter: saturate(.78) contrast(1.08); }
+  .bundle-page__manifest-stay::after { position: absolute; inset: 26% 0 0; content: '';
+    background: linear-gradient(to top, rgba(5,5,6,.97), rgba(5,5,6,.08)); }
+  .bundle-page__stay-meta { position: absolute; top: 22px; left: 24px; z-index: 1; color: rgba(244,243,240,.7);
+    font-family: var(--mono); font-size: 9px; letter-spacing: .14em; text-transform: uppercase; }
+  .bundle-page__stay-copy { position: absolute; left: 0; right: 0; bottom: 0; z-index: 1; padding: clamp(26px, 3.5vw, 46px); }
+  .bundle-page__stay-copy h3 { max-width: 7ch; margin: 10px 0 14px; font-size: clamp(46px, 5.5vw, 78px); font-weight: 880;
+    letter-spacing: -.035em; line-height: .86; text-transform: uppercase; }
+  .bundle-page__stay-copy p { max-width: 38ch; color: rgba(244,243,240,.76); font-size: 15px; line-height: 1.6; }
+  .bundle-page__manifest-item { display: grid; grid-template-columns: 54px minmax(170px, .72fr) minmax(0, 1.28fr); gap: 22px;
+    align-items: center; padding: 24px 26px; border-bottom: 1px solid var(--line); }
+  .bundle-page__manifest-no { color: var(--accent); font-family: var(--mono); font-size: 10px; letter-spacing: .18em; }
+  .bundle-page__manifest-item h3 { font-size: clamp(18px, 1.8vw, 24px); line-height: 1.15; }
+  .bundle-page__manifest-item p { color: var(--dim); font-size: 15px; line-height: 1.58; }
+  .bundle-page__stay-note { display: grid; grid-template-columns: minmax(150px, .92fr) minmax(0, 1.08fr); border-bottom: 1px solid var(--line); }
+  .bundle-page__stay-note b { padding: 22px 24px; border-right: 1px solid var(--line); color: var(--accent); font-family: var(--mono);
+    font-size: 10px; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; }
+  .bundle-page__stay-note p { padding: 20px 26px; color: var(--dim); font-size: 14px; line-height: 1.65; }
+  .bundle-page__stay-note strong { color: var(--ink); }
 
-  .bundle-page__weekends { max-width: none; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .bundle-page__weekends { max-width: none; overflow: clip; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
   .bundle-page__weekends-inner { max-width: 1280px; margin: 0 auto; padding: 100px 6vw; }
-  .bundle-page__weekends h2 { margin: 18px 0 42px; font-size: clamp(38px, 5vw, 72px); font-weight: 850; letter-spacing: -.02em;
-    line-height: .95; text-transform: uppercase; }
-  .bundle-page__timeline { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--line); }
-  .bundle-page__weekend { min-height: 300px; padding: 36px; }
-  .bundle-page__weekend + .bundle-page__weekend { border-left: 1px solid var(--line); background: rgba(var(--accent-rgb),.035); }
-  .bundle-page__date { color: var(--accent); font-size: clamp(28px, 3vw, 42px); font-weight: 800; letter-spacing: -.015em; text-transform: uppercase; }
-  .bundle-page__weekend h3 { margin-top: 18px; font-size: clamp(23px, 2.5vw, 34px); line-height: 1.1; }
-  .bundle-page__weekend p { max-width: 48ch; margin-top: 14px; color: var(--dim); font-size: 15px; line-height: 1.65; }
-  .bundle-page__hotel-band { display: grid; grid-template-columns: 170px 1fr auto; gap: 24px; align-items: center; margin-top: 18px;
-    padding: 24px 28px; border: 1px solid rgba(var(--accent-rgb),.35); }
+  .bundle-page__weekends-head { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(280px, .75fr); gap: 48px;
+    align-items: end; margin-bottom: 46px; }
+  .bundle-page__weekends h2 { max-width: 11ch; margin: 18px 0 0; font-size: clamp(38px, 5vw, 72px); font-weight: 850;
+    letter-spacing: -.02em; line-height: .95; text-transform: uppercase; }
+  .bundle-page__weekends-summary { max-width: 46ch; padding: 20px 0 3px; border-top: 1px solid var(--line); color: var(--dim);
+    font-size: 16px; line-height: 1.65; }
+  .bundle-page__timeline { border-top: 1px solid var(--line); background: var(--bg); }
+  .bundle-page__weekend { display: grid; grid-template-columns: minmax(190px, .42fr) minmax(280px, .88fr) minmax(340px, 1fr);
+    min-height: 310px; border-bottom: 1px solid var(--line); }
+  .bundle-page__weekend-meta { display: flex; flex-direction: column; justify-content: space-between; padding: 28px 28px 30px 0; }
+  .bundle-page__edition { color: var(--faint); font-family: var(--mono); font-size: 10px; letter-spacing: .2em; text-transform: uppercase; }
+  .bundle-page__date { display: block; color: var(--accent); font-size: clamp(30px, 3vw, 44px); font-weight: 850;
+    font-variant-numeric: tabular-nums; letter-spacing: -.035em; line-height: .9; text-transform: uppercase; }
+  .bundle-page__date span { display: block; }
+  .bundle-page__weekend-copy { display: flex; flex-direction: column; justify-content: center; padding: 36px clamp(30px, 4vw, 58px);
+    border-left: 1px solid var(--line); }
+  .bundle-page__weekend h3 { max-width: 16ch; font-size: clamp(25px, 2.4vw, 35px); letter-spacing: -.015em; line-height: 1.02; }
+  .bundle-page__weekend p { max-width: 42ch; margin-top: 18px; color: var(--dim); font-size: 15px; line-height: 1.65; }
+  .bundle-page__weekend-media { position: relative; min-width: 0; min-height: 310px; margin: 0; overflow: hidden; border-left: 1px solid var(--line); }
+  .bundle-page__weekend-media img { display: block; width: 100%; height: 100%; object-fit: cover; filter: saturate(.74) contrast(1.06); }
+  .bundle-page__weekend--science .bundle-page__weekend-media img { object-position: 48% 42%; filter: saturate(.68) contrast(1.08); }
+  .bundle-page__weekend--fashion .bundle-page__weekend-media img { object-position: 50% 28%; filter: saturate(.78) contrast(1.1); }
+  .bundle-page__weekend-media::after { position: absolute; inset: 0; content: ''; pointer-events: none;
+    background: linear-gradient(90deg, rgba(5,5,6,.28), transparent 48%); }
+  .bundle-page__weekend-caption { position: absolute; left: 18px; bottom: 16px; color: rgba(244,243,240,.72); font-family: var(--mono);
+    font-size: 9px; letter-spacing: .14em; text-transform: uppercase; }
+  .bundle-page__hotel-band { display: grid; grid-template-columns: 190px 1fr auto; gap: 24px; align-items: center; margin-top: -1px;
+    padding: 24px 28px 24px 0; border-top: 2px solid var(--accent); border-bottom: 1px solid rgba(var(--accent-rgb),.35); background: rgba(var(--accent-rgb),.035); }
   .bundle-page__hotel-band b { color: var(--accent); font-family: var(--mono); font-size: 11px; font-weight: 400; letter-spacing: .18em;
     text-transform: uppercase; }
   .bundle-page__hotel-band p { color: var(--dim); font-size: 14px; line-height: 1.55; }
   .bundle-page__hotel-band span { color: var(--ink); font-family: var(--mono); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; }
+  .bundle-page__weekend-credits { max-width: 100%; margin-top: 13px; color: var(--faint); font-family: var(--mono); font-size: 9px;
+    letter-spacing: .08em; line-height: 1.7; text-transform: uppercase; }
+  .bundle-page__weekend-credits a { display: inline-block; padding: 4px 0; color: inherit; text-underline-offset: 3px; }
 
-  .bundle-page__proof-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 54px; align-items: center; }
-  .bundle-page__faces { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--line); }
-  .bundle-page__face { position: relative; overflow: hidden; }
-  .bundle-page__face:nth-child(odd) { border-right: 1px solid var(--line); }
-  .bundle-page__face img { width: 100%; aspect-ratio: 4/5; object-fit: cover; display: block; filter: grayscale(28%) contrast(1.04); }
-  .bundle-page__face-name { position: absolute; left: 0; right: 0; bottom: 0; padding: 45px 14px 14px;
-    background: linear-gradient(to top, rgba(5,5,6,.94), transparent); font-size: 15px; font-weight: 800; text-transform: uppercase; }
+  .bundle-page__between { border-bottom: 1px solid var(--line); background: linear-gradient(180deg, rgba(var(--accent-rgb),.035), transparent 36%); }
+  .bundle-page__between-inner { max-width: 1440px; margin: 0 auto; padding: 112px 6vw; }
+  .bundle-page__between-head { display: grid; grid-template-columns: repeat(12, 1fr); gap: 24px; align-items: end; margin-bottom: 48px; }
+  .bundle-page__between-head > div:first-child { grid-column: 1 / 7; }
+  .bundle-page__between h2 { max-width: 9ch; margin-top: 18px; font-size: clamp(42px, 6vw, 88px); font-weight: 900;
+    letter-spacing: -.025em; line-height: .92; text-transform: uppercase; }
+  .bundle-page__between-intro { grid-column: 8 / 13; }
+  .bundle-page__between-intro > p { max-width: 54ch; color: var(--dim); font-size: 17px; line-height: 1.7; }
+  .bundle-page__between-ledger { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: 30px;
+    border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .bundle-page__between-ledger > div { padding: 14px 16px 14px 0; }
+  .bundle-page__between-ledger > div + div { padding-left: 16px; border-left: 1px solid var(--line); }
+  .bundle-page__between-ledger dt { color: var(--faint); font-family: var(--mono); font-size: 9px; letter-spacing: .16em; text-transform: uppercase; }
+  .bundle-page__between-ledger dd { margin-top: 6px; color: var(--ink); font-size: 14px; font-weight: 650; }
+  .bundle-page__trips { display: grid; grid-template-columns: repeat(12, 1fr); grid-template-rows: repeat(2, minmax(270px, 330px));
+    gap: 1px; padding: 1px; background: var(--line); }
+  .bundle-page__trip { display: grid; min-width: 0; overflow: hidden; grid-template-rows: minmax(0, 1fr) auto; background: var(--bg); }
+  .bundle-page__trip--kyoto { grid-column: 1 / 8; grid-row: 1; }
+  .bundle-page__trip--nara { grid-column: 1 / 8; grid-row: 2; }
+  .bundle-page__trip--osaka { grid-column: 8 / 13; grid-row: 1 / 3; }
+  .bundle-page__trip-media, .bundle-page__trip-media picture { display: block; min-height: 0; height: 100%; overflow: hidden; }
+  .bundle-page__trip img { display: block; width: 100%; height: 100%; object-fit: cover; filter: saturate(.88) contrast(1.04); }
+  .bundle-page__trip--kyoto img { object-position: center 53%; }
+  .bundle-page__trip--nara img { object-position: center 57%; }
+  .bundle-page__trip--osaka img { object-position: center 52%; }
+  .bundle-page__trip figcaption { display: flex; min-height: 78px; align-items: end; justify-content: space-between; gap: 22px;
+    padding: 15px 18px 17px; background: var(--bg); }
+  .bundle-page__trip-city { display: block; font-size: clamp(24px, 2.3vw, 36px); font-weight: 850; letter-spacing: -.015em;
+    line-height: 1; text-transform: uppercase; }
+  .bundle-page__trip-note { display: block; margin-top: 6px; color: var(--dim); font-size: 13px; line-height: 1.35; }
+  .bundle-page__photo-credit { flex: 0 1 30ch; color: var(--faint); font-family: var(--mono); font-size: 9px;
+    letter-spacing: .045em; line-height: 1.45; text-align: right; text-transform: uppercase; }
+  .bundle-page__photo-credit a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+  @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    .bundle-page__trip img { transition: transform .55s ease, filter .55s ease; }
+    .bundle-page__trip:hover img { transform: scale(1.018); filter: saturate(.96) contrast(1.04); }
+  }
+
+  .bundle-page__proof { overflow: hidden; }
+  .bundle-page__proof-head { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(320px, .85fr);
+    gap: clamp(48px, 8vw, 120px); align-items: end; margin-bottom: clamp(42px, 6vw, 76px); }
   .bundle-page__proof-copy h2 { max-width: 12ch; margin: 18px 0 22px; }
-  .bundle-page__proof-copy p { max-width: 55ch; color: var(--dim); font-size: 16px; line-height: 1.7; }
-  .bundle-page__proof-line { margin-top: 28px; padding-top: 22px; border-top: 1px solid var(--line); color: var(--ink) !important; font-weight: 600; }
+  .bundle-page__proof-copy > p { max-width: 58ch; color: var(--dim); font-size: 16px; line-height: 1.7; }
+  .bundle-page__speaker-count { display: grid; grid-template-columns: 1fr auto 1fr; gap: clamp(16px, 2.5vw, 34px);
+    align-items: end; padding: 22px 0 20px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .bundle-page__speaker-count > div { display: grid; gap: 7px; }
+  .bundle-page__speaker-count strong { color: var(--accent); font-size: clamp(62px, 7.8vw, 108px); font-weight: 850;
+    font-variant-numeric: tabular-nums; letter-spacing: -.055em; line-height: .78; }
+  .bundle-page__speaker-count span { color: var(--faint); font-family: var(--mono); font-size: 9px; letter-spacing: .2em;
+    text-transform: uppercase; }
+  .bundle-page__speaker-count i { align-self: center; color: var(--line); font-family: var(--mono); font-size: clamp(30px, 4vw, 54px);
+    font-style: normal; font-weight: 300; }
+  .bundle-page__faces { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border: 1px solid var(--line); }
+  .bundle-page__face { position: relative; min-width: 0; aspect-ratio: 3 / 4; overflow: hidden; background: rgba(244,243,240,.035); }
+  .bundle-page__face + .bundle-page__face { border-left: 1px solid var(--line); }
+  .bundle-page__face img { display: block; width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.06); }
+  .bundle-page__face:nth-child(1) img { object-position: 50% 42%; }
+  .bundle-page__face:nth-child(2) img { object-position: 53% 50%; }
+  .bundle-page__face:nth-child(3) img { object-position: 62% 50%; }
+  .bundle-page__face:nth-child(4) img { object-position: 50% 24%; }
+  .bundle-page__face figcaption { position: absolute; inset: auto 0 0; display: grid; grid-template-columns: auto 1fr; gap: 13px;
+    align-items: end; min-height: 38%; padding: 60px 16px 17px; background: linear-gradient(to top, rgba(5,5,6,.97), rgba(5,5,6,.72) 48%, transparent); }
+  .bundle-page__face-index { padding-bottom: 2px; color: var(--accent); font-family: var(--mono); font-size: 9px; letter-spacing: .14em; }
+  .bundle-page__face figcaption > span:last-child { display: grid; gap: 5px; min-width: 0; }
+  .bundle-page__face figcaption b { font-size: clamp(14px, 1.25vw, 18px); font-weight: 800; line-height: 1.05; text-transform: uppercase; }
+  .bundle-page__face figcaption span span { color: rgba(244,243,240,.66); font-family: var(--mono); font-size: 9px;
+    letter-spacing: .08em; line-height: 1.35; text-transform: uppercase; }
+  .bundle-page__proof-line { display: grid; grid-template-columns: minmax(90px, .28fr) 1fr; gap: 28px; max-width: none; margin: 0;
+    padding: 22px 0; border-bottom: 1px solid var(--line); color: var(--ink); font-size: 15px; font-weight: 600; line-height: 1.55; }
+  .bundle-page__proof-line::before { content: 'Across the room'; color: var(--faint); font-family: var(--mono); font-size: 9px;
+    font-weight: 400; letter-spacing: .16em; text-transform: uppercase; }
 
-  .bundle-page__faq { max-width: 980px; }
-  .bundle-page__faq h2 { max-width: none; }
+  .bundle-page__faq { max-width: none; padding: 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .bundle-page__faq-shell { display: grid; grid-template-columns: minmax(320px, .82fr) minmax(0, 1.18fr); max-width: 1440px;
+    min-height: 680px; margin: 0 auto; }
+  .bundle-page__faq-visual { position: relative; min-width: 0; min-height: 680px; overflow: hidden; border-right: 1px solid var(--line);
+    background: rgba(244,243,240,.04); }
+  .bundle-page__faq-visual img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 54% center;
+    filter: saturate(.72) contrast(1.08) brightness(.78); }
+  .bundle-page__faq-visual::after { position: absolute; inset: 20% 0 0; content: ''; pointer-events: none;
+    background: linear-gradient(to top, rgba(5,5,6,.96), rgba(5,5,6,.08)); }
+  .bundle-page__faq-visual figcaption { position: absolute; right: 0; bottom: 0; left: 0; z-index: 1; display: grid;
+    grid-template-columns: auto 1fr; gap: 18px; align-items: end; padding: 30px; }
+  .bundle-page__faq-visual-index { color: var(--accent); font-family: var(--mono); font-size: 11px; letter-spacing: .18em; }
+  .bundle-page__faq-visual figcaption b { display: block; font-size: clamp(22px, 2.4vw, 34px); line-height: 1; text-transform: uppercase; }
+  .bundle-page__faq-visual figcaption span span { display: block; margin-top: 8px; color: rgba(244,243,240,.68); font-size: 14px; }
+  .bundle-page__faq-content { padding: 100px clamp(34px, 6vw, 88px); }
+  .bundle-page__faq-content h2 { max-width: 10ch; margin: 18px 0 44px; }
+  .bundle-page__faq-list { border-bottom: 1px solid var(--line); }
   .bundle-page__faq details { border-top: 1px solid var(--line); }
-  .bundle-page__faq details:last-of-type { border-bottom: 1px solid var(--line); }
-  .bundle-page__faq summary { display: flex; min-height: 68px; align-items: center; justify-content: space-between; gap: 24px;
-    cursor: pointer; font-size: 17px; font-weight: 650; list-style: none; }
+  .bundle-page__faq summary { display: grid; grid-template-columns: 36px minmax(0, 1fr) 32px; gap: 18px; align-items: center;
+    min-height: 80px; padding: 19px 0; color: var(--ink); cursor: pointer; font-size: 17px; font-weight: 650; line-height: 1.4; list-style: none; }
   .bundle-page__faq summary::-webkit-details-marker { display: none; }
-  .bundle-page__faq summary::after { content: '+'; color: var(--accent); font-family: var(--mono); font-size: 20px; font-weight: 400; }
-  .bundle-page__faq details[open] summary::after { content: '−'; }
-  .bundle-page__faq details p { max-width: 68ch; padding: 0 48px 24px 0; color: var(--dim); font-size: 15px; line-height: 1.7; }
+  .bundle-page__faq summary::after { display: grid; width: 30px; height: 30px; place-items: center;
+    border: 1px solid rgba(var(--accent-rgb),.42); color: var(--accent); content: '+'; font-family: var(--mono); font-size: 18px; font-weight: 400; line-height: 1; }
+  .bundle-page__faq details[open] summary::after { content: '−'; background: var(--accent); color: #050506; }
+  .bundle-page__faq summary:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+  .bundle-page__faq-number { color: var(--accent); font-family: var(--mono); font-size: 9px; font-weight: 400; letter-spacing: .16em; }
+  .bundle-page__faq details p { max-width: 64ch; margin-left: 54px; padding: 0 58px 28px 0; color: var(--dim); font-size: 16px; line-height: 1.72; }
+  @media (hover: hover) { .bundle-page__faq summary:hover { color: var(--accent); } }
 
-  .bundle-page__close { padding: 110px 6vw 120px; border-top: 1px solid var(--line); text-align: center; }
-  .bundle-page__close h2 { max-width: 10ch; margin: 18px auto 20px; font-size: clamp(42px, 6.5vw, 92px); font-weight: 900;
-    letter-spacing: -.025em; line-height: .93; text-transform: uppercase; }
-  .bundle-page__close p { max-width: 46ch; margin: 0 auto; color: var(--dim); font-size: 16px; line-height: 1.65; }
-  .bundle-page__close-price { margin: 30px 0 22px; font-size: 48px; font-weight: 850; letter-spacing: -.03em; }
-  .bundle-page__close-next { margin: -12px 0 22px; color: var(--accent); font-family: var(--mono); font-size: 10px;
-    letter-spacing: .16em; text-transform: uppercase; }
-  .bundle-page__close .bundle-page__secure { max-width: 60ch; margin: 14px auto 0; }
-  .bundle-page__footer { padding: 38px 6vw; border-top: 1px solid var(--line); color: var(--faint); font-family: var(--mono);
-    font-size: 9px; letter-spacing: .14em; line-height: 1.7; text-align: center; text-transform: uppercase; }
+  .bundle-page__close { position: relative; isolation: isolate; min-height: clamp(640px, 78svh, 820px); overflow: hidden;
+    border-top: 1px solid var(--line); text-align: left; }
+  .bundle-page__close-media { position: absolute; inset: 0; z-index: -2; margin: 0; }
+  .bundle-page__close-media img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 58%;
+    filter: saturate(.7) contrast(1.1) brightness(.72); }
+  .bundle-page__close::after { position: absolute; inset: 0; z-index: -1; content: ''; pointer-events: none;
+    background: linear-gradient(90deg, rgba(5,5,6,.96), rgba(5,5,6,.88) 38%, rgba(5,5,6,.34) 72%, rgba(5,5,6,.56)),
+      linear-gradient(0deg, rgba(5,5,6,.94), transparent 62%, rgba(5,5,6,.3)); }
+  .bundle-page__close-inner { display: grid; grid-template-columns: minmax(0, 1.18fr) minmax(340px, .82fr); gap: clamp(64px, 8vw, 132px);
+    align-items: end; width: min(100%, 1280px); min-height: inherit; margin: 0 auto; padding: 116px 6vw 88px; }
+  .bundle-page__close-copy { align-self: center; max-width: 720px; }
+  .bundle-page__close h2 { max-width: 9ch; margin: 20px 0 24px; font-size: clamp(48px, 6.7vw, 96px); font-weight: 900;
+    letter-spacing: -.035em; line-height: .9; text-transform: uppercase; }
+  .bundle-page__close-copy > p { max-width: 43ch; color: rgba(244,243,240,.74); font-size: clamp(16px, 1.4vw, 19px); line-height: 1.65; }
+  .bundle-page__close-offer { width: 100%; max-width: 440px; margin-left: auto; padding: 25px 0 0;
+    border-top: 1px solid rgba(var(--accent-rgb),.6); border-bottom: 1px solid rgba(244,243,240,.22); }
+  .bundle-page__close-status { display: flex; justify-content: space-between; gap: 20px; color: var(--accent); font-family: var(--mono);
+    font-size: 9px; letter-spacing: .14em; line-height: 1.5; text-transform: uppercase; }
+  .bundle-page__close-status span:last-child { color: rgba(244,243,240,.66); text-align: right; }
+  .bundle-page__close-price { margin: 32px 0 5px; font-size: clamp(62px, 7vw, 92px); font-weight: 850;
+    font-variant-numeric: tabular-nums; letter-spacing: -.05em; line-height: .9; }
+  .bundle-page__close-next { margin: 0 0 25px; color: var(--accent); font-family: var(--mono); font-size: 10px;
+    letter-spacing: .16em; line-height: 1.5; text-transform: uppercase; }
+  .bundle-page__close-offer .bundle-page__btn { width: 100%; }
+  .bundle-page__close .bundle-page__secure { max-width: none; margin: 14px 0 20px; color: rgba(244,243,240,.58);
+    font-size: 10px; line-height: 1.65; text-align: left; }
+  .bundle-page__footer { display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: end; padding: 30px 6vw 34px;
+    border-top: 1px solid var(--line); background: var(--bg); color: var(--faint); font-family: var(--mono);
+    font-size: 10px; letter-spacing: .13em; line-height: 1.7; text-align: left; text-transform: uppercase; }
+  .bundle-page__footer > div { display: grid; gap: 4px; }
+  .bundle-page__footer > div:last-child { justify-items: end; }
+  .bundle-page__footer strong { color: var(--ink); font-weight: 500; }
   .bundle-page__footer a { color: var(--accent); text-underline-offset: 4px; }
   .bundle-page__mobile-buy { display: none; }
 
   @media (max-width: 900px) {
-    .bundle-page__hero { display: block; height: 100svh; min-height: 0; }
+    .bundle-page__hero { display: block; min-height: 760px; height: 100svh; }
+    .bundle-page__hero-media img { object-position: 58% center; filter: saturate(.7) contrast(1.08) brightness(.68); }
+    .bundle-page__hero::after { background: linear-gradient(0deg, rgba(5,5,6,.94) 0%, rgba(5,5,6,.66) 54%, rgba(5,5,6,.36) 100%),
+      linear-gradient(90deg, rgba(5,5,6,.55), rgba(5,5,6,.08)); }
     .bundle-page__hero-copy { height: 100%; min-height: 0; padding: 112px 6vw 44px; }
     .bundle-page__hero-panel { display: none; }
     .bundle-page__hero-mobile-buy { display: grid; grid-template-columns: auto 1fr; gap: 14px 18px; align-items: center;
@@ -169,31 +324,108 @@
     .bundle-page__hero-mobile-buy .bundle-page__btn { min-height: 52px; padding: 13px 12px; }
     .bundle-page__hero-mobile-buy p { grid-column: 1 / -1; color: var(--faint); font-family: var(--mono); font-size: 8px;
       letter-spacing: .11em; line-height: 1.5; text-transform: uppercase; }
-    .bundle-page__stack-item { grid-template-columns: 52px 1fr; }
-    .bundle-page__stack-item p { grid-column: 2; }
-    .bundle-page__proof-grid { grid-template-columns: 1fr; }
-    .bundle-page__faces { max-width: 560px; }
+    .bundle-page__manifest { grid-template-columns: 1fr; grid-template-rows: none; min-height: 0; }
+    .bundle-page__manifest-stay { grid-row: auto; min-height: 540px; border-right: 0; }
+    .bundle-page__manifest-item { grid-template-columns: 46px minmax(170px, .65fr) minmax(0, 1.35fr); }
+    .bundle-page__stay-note { grid-template-columns: 1fr; }
+    .bundle-page__stay-note b { padding-bottom: 0; border-right: 0; }
+    .bundle-page__weekends-head { grid-template-columns: 1fr; gap: 26px; }
+    .bundle-page__weekends-summary { max-width: 58ch; }
+    .bundle-page__weekend { grid-template-columns: 150px minmax(0, 1fr); }
+    .bundle-page__weekend-meta { padding-right: 22px; }
+    .bundle-page__weekend-copy { padding: 34px 30px; }
+    .bundle-page__weekend-media { grid-column: 1 / -1; min-height: 280px; border-top: 1px solid var(--line); border-left: 0; }
+    .bundle-page__proof-head { grid-template-columns: 1fr; gap: 38px; }
+    .bundle-page__speaker-count { max-width: 560px; }
+    .bundle-page__faces { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .bundle-page__face + .bundle-page__face { border-left: 0; }
+    .bundle-page__face:nth-child(even) { border-left: 1px solid var(--line); }
+    .bundle-page__face:nth-child(n + 3) { border-top: 1px solid var(--line); }
     .bundle-page__hotel-band { grid-template-columns: 1fr; gap: 8px; }
+    .bundle-page__close-inner { grid-template-columns: 1fr; gap: 58px; padding-top: 96px; }
+    .bundle-page__close-copy { align-self: auto; }
+    .bundle-page__close-offer { max-width: 560px; margin-left: 0; }
+    .bundle-page__faq-shell { grid-template-columns: 1fr; min-height: 0; }
+    .bundle-page__faq-visual { min-height: 340px; border-right: 0; border-bottom: 1px solid var(--line); }
+    .bundle-page__faq-visual img { object-position: center 55%; }
+    .bundle-page__faq-content { padding: 76px 6vw; }
+    .bundle-page__between-head > div:first-child { grid-column: 1 / 6; }
+    .bundle-page__between-intro { grid-column: 6 / 13; }
+    .bundle-page__trips { grid-template-rows: repeat(2, 270px); }
+    .bundle-page__trip figcaption { align-items: start; flex-direction: column; gap: 10px; }
+    .bundle-page__photo-credit { flex-basis: auto; max-width: 48ch; text-align: left; }
   }
   @media (max-width: 680px) {
-    body { padding-bottom: calc(76px + env(safe-area-inset-bottom)); }
+    body { padding-bottom: 0; }
     .bundle-page__nav { padding-top: 16px; }
     .bundle-page__nav-meta, .bundle-page__nav .bundle-page__btn { display: none; }
-    .bundle-page__hero-copy { min-height: 0; padding: 96px 6vw 34px; }
+    .bundle-page__hero-copy { min-height: 0; padding: 96px 6vw 52px; }
     .bundle-page__hero h1 { max-width: none; font-size: clamp(42px, 14vw, 68px); line-height: .91; }
     .bundle-page__lead { font-size: 16px; }
     .bundle-page__hero-panel { padding: 30px 4vw 56px; }
     .bundle-page__purchase { padding: 26px 20px; }
     .bundle-page__section, .bundle-page__weekends-inner { padding-top: 76px; padding-bottom: 76px; }
     .bundle-page__section h2, .bundle-page__weekends h2 { margin-bottom: 34px; }
-    .bundle-page__stack-item { grid-template-columns: 34px 1fr; gap: 16px; padding: 20px 0; }
-    .bundle-page__timeline { grid-template-columns: 1fr; }
-    .bundle-page__weekend { min-height: 0; padding: 28px 22px; }
-    .bundle-page__weekend + .bundle-page__weekend { border-top: 1px solid var(--line); border-left: 0; }
-    .bundle-page__hotel-band { padding: 22px; }
-    .bundle-page__proof-grid { gap: 36px; }
-    .bundle-page__faq summary { font-size: 16px; line-height: 1.35; }
-    .bundle-page__close { padding-top: 84px; padding-bottom: 90px; }
+    .bundle-page__hero-credit { left: 6vw; bottom: 20px; max-width: 80vw; line-height: 1.5; }
+    .bundle-page__manifest-stay { min-height: 470px; }
+    .bundle-page__stay-copy h3 { font-size: clamp(48px, 16vw, 68px); }
+    .bundle-page__manifest-item { grid-template-columns: 34px 1fr; gap: 14px; padding: 22px 0; }
+    .bundle-page__manifest-item p { grid-column: 2; padding-right: 4px; font-size: 16px; }
+    .bundle-page__stay-note b, .bundle-page__stay-note p { padding-left: 0; padding-right: 0; }
+    .bundle-page__weekends-head { margin-bottom: 34px; }
+    .bundle-page__weekends-summary { padding-top: 16px; font-size: 16px; }
+    .bundle-page__weekend { grid-template-columns: 1fr; min-height: 0; }
+    .bundle-page__weekend-meta { display: block; padding: 22px 0 18px; }
+    .bundle-page__edition { margin-bottom: 13px; }
+    .bundle-page__date { font-size: clamp(34px, 11vw, 42px); text-align: left; }
+    .bundle-page__date span { display: block; }
+    .bundle-page__weekend-copy { padding: 26px 0 30px; border-top: 1px solid var(--line); border-left: 0; }
+    .bundle-page__weekend h3 { max-width: 17ch; font-size: clamp(25px, 8vw, 31px); }
+    .bundle-page__weekend p { font-size: 16px; }
+    .bundle-page__weekend-media { grid-column: auto; min-height: 0; aspect-ratio: 4 / 3; }
+    .bundle-page__hotel-band { grid-template-columns: 1fr; gap: 8px; padding: 22px 0; }
+    .bundle-page__between-inner { padding-top: 76px; padding-bottom: 76px; }
+    .bundle-page__between-head { display: block; margin-bottom: 34px; }
+    .bundle-page__between-intro { margin-top: 24px; }
+    .bundle-page__between-intro > p { font-size: 16px; }
+    .bundle-page__between-ledger { margin-top: 24px; }
+    .bundle-page__between-ledger > div { padding-right: 10px; }
+    .bundle-page__between-ledger > div + div { padding-left: 10px; }
+    .bundle-page__between-ledger dd { font-size: 12px; }
+    .bundle-page__trips { grid-template-columns: 1fr; grid-template-rows: none; gap: 3px; }
+    .bundle-page__trip--osaka, .bundle-page__trip--kyoto, .bundle-page__trip--nara { grid-column: 1; grid-row: auto; }
+    .bundle-page__trip-media { height: auto; aspect-ratio: 4 / 3; }
+    .bundle-page__trip--osaka .bundle-page__trip-media { aspect-ratio: 4 / 5; }
+    .bundle-page__trip figcaption { min-height: 0; padding: 15px 16px 18px; }
+    .bundle-page__photo-credit { font-size: 9px; }
+    .bundle-page__proof-head { margin-bottom: 34px; }
+    .bundle-page__proof-copy > p { font-size: 16px; line-height: 1.65; }
+    .bundle-page__speaker-count { gap: 14px; padding: 18px 0; }
+    .bundle-page__speaker-count strong { font-size: clamp(58px, 20vw, 76px); }
+    .bundle-page__face { aspect-ratio: 4 / 5; }
+    .bundle-page__face figcaption { grid-template-columns: 1fr; gap: 6px; padding: 48px 12px 13px; }
+    .bundle-page__face-index { display: none; }
+    .bundle-page__face figcaption b { font-size: 14px; }
+    .bundle-page__face figcaption span span { font-size: 9px; }
+    .bundle-page__proof-line { grid-template-columns: 1fr; gap: 10px; font-size: 16px; }
+    .bundle-page__faq-visual { min-height: 270px; }
+    .bundle-page__faq-visual figcaption { gap: 12px; padding: 22px 6vw; }
+    .bundle-page__faq-content h2 { margin-bottom: 34px; }
+    .bundle-page__faq summary { grid-template-columns: 26px minmax(0, 1fr) 30px; gap: 12px; min-height: 76px;
+      padding: 17px 0; font-size: 16px; }
+    .bundle-page__faq details p { margin-left: 38px; padding: 0 0 26px; font-size: 16px; line-height: 1.68; }
+    .bundle-page__close { min-height: 0; }
+    .bundle-page__close-media img { object-position: 62% center; filter: saturate(.64) contrast(1.1) brightness(.62); }
+    .bundle-page__close::after { background: linear-gradient(0deg, rgba(5,5,6,.97), rgba(5,5,6,.88) 56%, rgba(5,5,6,.52)); }
+    .bundle-page__close-inner { gap: 54px; padding: 88px 6vw 72px; }
+    .bundle-page__close h2 { max-width: 10ch; font-size: clamp(44px, 14vw, 64px); }
+    .bundle-page__close-copy > p { font-size: 16px; }
+    .bundle-page__close-status { display: grid; gap: 5px; font-size: 9px; }
+    .bundle-page__close-status span:last-child { text-align: left; }
+    .bundle-page__close-price { font-size: clamp(62px, 20vw, 78px); }
+    .bundle-page__close .bundle-page__secure { font-size: 11px; }
+    .bundle-page__footer { grid-template-columns: 1fr; gap: 20px; padding-bottom: calc(34px + env(safe-area-inset-bottom)); }
+    .bundle-page__footer > div:last-child { justify-items: start; }
     .bundle-page__mobile-buy { position: fixed; left: 0; right: 0; bottom: 0; z-index: 60; display: flex; align-items: center;
       justify-content: space-between; gap: 14px; padding: 11px 4vw calc(11px + env(safe-area-inset-bottom)); border-top: 1px solid rgba(var(--accent-rgb),.38);
       background: rgba(5,5,6,.95); backdrop-filter: blur(12px); transition: transform .25s ease; }
@@ -228,7 +460,7 @@
     .bundle-page__time b { font-size: 18px; }
   }
   @media (prefers-reduced-motion: reduce) {
-    .bundle-page__btn, .bundle-page__mobile-buy { transition: none; }
+    .bundle-page__btn, .bundle-page__mobile-buy, .bundle-page__trip img { transition: none; }
   }
 </style>
 </head>
@@ -237,126 +469,200 @@
 
 <header class="bundle-page__nav">
   <a class="bundle-page__logo" href="/">Mirai <span>Tech</span></a>
-  <div class="bundle-page__nav-meta">October 17–26 · Kobe, Japan</div>
-  <a class="bundle-page__btn bundle-checkout" href="https://luma.com/an4zotn9?coupon=SFSH&amp;tt=ttype-0BjQv0xV4yY5P0l&amp;utm_source=summit-bundle&amp;utm_campaign=summit-hotel-package" target="_blank" rel="noopener">Get the Package</a>
+  <div class="bundle-page__nav-meta">October 17 to 26 · Kobe, Japan</div>
+  <a class="bundle-page__btn bundle-checkout" href="https://luma.com/an4zotn9?coupon=SFSH&amp;utm_source=summit-bundle&amp;utm_campaign=summit-hotel-package" data-luma-action="checkout" data-luma-event-id="evt-OUCqVyqoZI5Jeg4" data-luma-ticket-type="ttype-0BjQv0xV4yY5P0l" data-luma-coupon="SFSH" data-luma-utm-source="summit-bundle">Book the Package</a>
 </header>
 
 <main>
   <section class="bundle-page__hero" id="offer">
+    <figure class="bundle-page__hero-media">
+      <img src="/img/harbor-golden-hour.webp" width="1024" height="683" alt="Kobe Harbor and Port Tower at golden hour" loading="eager" decoding="async" fetchpriority="high" />
+    </figure>
     <div class="bundle-page__hero-copy">
-      <div class="bundle-page__eyebrow package-status">10 launch-price packages · Ends August 20</div>
-      <h1>The Summit Weekends - Including Hotel</h1>
-      <p class="bundle-page__lead">One pass for both summit weekends, the week between, and the Frontier Human Fashion Show &amp; Demo Day—plus a <strong>single-occupancy room in Sannomiya from October 16–28.</strong></p>
-      <p class="bundle-page__promise">Mirai community programming throughout October is included.</p>
+      <div class="bundle-page__eyebrow package-status">10 packages at launch price · Ends August 20</div>
+      <h1>Two summit weekends, <span>hotel included</span></h1>
+      <p class="bundle-page__lead">Your pass covers both summit weekends, the week between them, and the Frontier Human Fashion Show &amp; Demo Day. It also includes a <strong>room in Sannomiya from October 16 to 28.</strong></p>
+      <p class="bundle-page__promise">You can also join Mirai community programming throughout October.</p>
       <div class="bundle-page__hero-mobile-buy" id="hero-mobile-purchase">
         <strong>$2,500</strong>
-        <a class="bundle-page__btn bundle-checkout" href="https://luma.com/an4zotn9?coupon=SFSH&amp;tt=ttype-0BjQv0xV4yY5P0l&amp;utm_source=summit-bundle-hero-mobile&amp;utm_campaign=summit-hotel-package" target="_blank" rel="noopener">Get My Package</a>
-        <p>Event pass + 12 hotel nights · Check-in Oct 16 · Check-out Oct 28</p>
+        <a class="bundle-page__btn bundle-checkout" href="https://luma.com/an4zotn9?coupon=SFSH&amp;utm_source=summit-bundle-hero-mobile&amp;utm_campaign=summit-hotel-package" data-luma-action="checkout" data-luma-event-id="evt-OUCqVyqoZI5Jeg4" data-luma-ticket-type="ttype-0BjQv0xV4yY5P0l" data-luma-coupon="SFSH" data-luma-utm-source="summit-bundle-hero-mobile">Book My Package</a>
+        <p>Event pass and 12 hotel nights · Check in Oct 16 · Check out Oct 28</p>
       </div>
     </div>
     <div class="bundle-page__hero-panel">
       <div class="bundle-page__purchase" id="primary-purchase">
-        <div class="bundle-page__purchase-kicker">One attendee · One package</div>
+        <div class="bundle-page__purchase-top">
+          <div class="bundle-page__purchase-kicker">Package for one attendee</div>
+          <div class="bundle-page__purchase-tag">12 hotel nights</div>
+        </div>
         <div class="bundle-page__price">$2,500</div>
-        <div class="bundle-page__price-note">Launch price · Event access + 12 hotel nights</div>
+        <div class="bundle-page__price-note">Launch price includes event access and 12 hotel nights</div>
         <div class="bundle-page__next-price">Increases to $4,000 after August 20</div>
         <ul class="bundle-page__quick">
-          <li><b>Summit I</b><span>October 17–18</span></li>
-          <li><b>Summit II</b><span>October 24–25</span></li>
-          <li><b>Hotel</b><span>October 16–28</span></li>
+          <li><b>Summit I</b><span>October 17 to 18</span></li>
+          <li><b>Summit II</b><span>October 24 to 25</span></li>
+          <li><b>Hotel</b><span>October 16 to 28</span></li>
           <li><b>Fashion Show</b><span>October 26</span></li>
         </ul>
-        <a class="bundle-page__btn bundle-checkout" href="https://luma.com/an4zotn9?coupon=SFSH&amp;tt=ttype-0BjQv0xV4yY5P0l&amp;utm_source=summit-bundle&amp;utm_campaign=summit-hotel-package" target="_blank" rel="noopener">Get My Package — $2,500</a>
-        <p class="bundle-page__secure">Secure checkout on Luma · Payment processed by Stripe</p>
+        <a class="bundle-page__btn bundle-checkout" href="https://luma.com/an4zotn9?coupon=SFSH&amp;utm_source=summit-bundle&amp;utm_campaign=summit-hotel-package" data-luma-action="checkout" data-luma-event-id="evt-OUCqVyqoZI5Jeg4" data-luma-ticket-type="ttype-0BjQv0xV4yY5P0l" data-luma-coupon="SFSH" data-luma-utm-source="summit-bundle">Book My Package for $2,500</a>
+        <p class="bundle-page__secure">Checkout on Luma · Stripe processes your payment</p>
         <div class="bundle-page__timer" aria-label="Time remaining until the launch price ends">
-          <div class="bundle-page__time"><b id="timer-days">—</b><span>Days</span></div>
-          <div class="bundle-page__time"><b id="timer-hours">—</b><span>Hours</span></div>
-          <div class="bundle-page__time"><b id="timer-minutes">—</b><span>Min</span></div>
-          <div class="bundle-page__time"><b id="timer-seconds">—</b><span>Sec</span></div>
+          <div class="bundle-page__time"><b id="timer-days">00</b><span>Days</span></div>
+          <div class="bundle-page__time"><b id="timer-hours">00</b><span>Hours</span></div>
+          <div class="bundle-page__time"><b id="timer-minutes">00</b><span>Min</span></div>
+          <div class="bundle-page__time"><b id="timer-seconds">00</b><span>Sec</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="bundle-page__hero-credit">Kobe Harbor · Photo: <a href="https://www.flickr.com/photos/61246882@N07/" target="_blank" rel="noopener">JohnnyLCY</a> · CC BY 2.0</div>
+  </section>
+
+  <section class="bundle-page__section bundle-page__contents" aria-labelledby="contents-title">
+    <div class="bundle-page__eyebrow">One pass for the full stay</div>
+    <h2 id="contents-title">What your package includes</h2>
+    <ol class="bundle-page__manifest">
+      <li class="bundle-page__manifest-stay">
+        <img src="/img/port-tower-night.webp" width="1023" height="681" alt="Kobe Port Tower glowing above the waterfront at night" loading="lazy" decoding="async" />
+        <div class="bundle-page__stay-meta">01 / Kobe waterfront at night</div>
+        <div class="bundle-page__stay-copy"><div class="bundle-page__eyebrow">Your included stay</div><h3>12 hotel nights</h3><p>Your room in Sannomiya is booked from October 16 check-in through October 28 check-out.</p></div>
+      </li>
+      <li class="bundle-page__manifest-item"><div class="bundle-page__manifest-no">02</div><h3>Mirai event access</h3><p>Your pass includes Mirai community programming from October 1 to 31.</p></li>
+      <li class="bundle-page__manifest-item"><div class="bundle-page__manifest-no">03</div><h3>Summit I · Oct 17 to 18</h3><p>The Science &amp; Tech Augmenting Life covers regenerative medicine, medical devices, and Japan's path from prototype to patient.</p></li>
+      <li class="bundle-page__manifest-item"><div class="bundle-page__manifest-no">04</div><h3>Summit II · Oct 24 to 25</h3><p>From East to West covers capital, regulation, and connections between longevity communities.</p></li>
+      <li class="bundle-page__manifest-item"><div class="bundle-page__manifest-no">05</div><h3>Fashion Show · Oct 26</h3><p>The show presents biomedical devices as couture in a live demo day.</p></li>
+    </ol>
+    <aside class="bundle-page__stay-note"><b>Stay note</b><p><strong>The hotel booking is continuous.</strong> It covers both summit weekends and every night between them. Check-in is October 16, check-out is October 28, and breakfast is not included.</p></aside>
+  </section>
+
+  <section class="bundle-page__weekends" aria-labelledby="weekends-title">
+    <div class="bundle-page__weekends-inner">
+      <header class="bundle-page__weekends-head">
+        <div><div class="bundle-page__eyebrow">Four summit days, followed by the Fashion Show</div><h2 id="weekends-title">Two weekends in Kobe</h2></div>
+        <p class="bundle-page__weekends-summary">Science first. East meets West the following weekend, with the Frontier Human Fashion Show as the finale.</p>
+      </header>
+      <div class="bundle-page__timeline">
+        <article class="bundle-page__weekend bundle-page__weekend--science" aria-labelledby="summit-one-title">
+          <div class="bundle-page__weekend-meta"><div class="bundle-page__edition">Summit — 01</div><time class="bundle-page__date" datetime="2026-10-17">October 17 <span>to 18</span></time></div>
+          <div class="bundle-page__weekend-copy"><h3 id="summit-one-title">The Science &amp; Tech Augmenting Life</h3><p>Sessions cover regenerative medicine in Japan, medical devices, and the regulatory path for moving therapies to patients faster.</p></div>
+          <figure class="bundle-page__weekend-media"><img src="/img/summit-lab.webp" width="900" height="1350" alt="Researcher pipetting a sample inside a biosafety cabinet" loading="lazy" decoding="async" /><figcaption class="bundle-page__weekend-caption">Biomedical research · In practice</figcaption></figure>
+        </article>
+        <article class="bundle-page__weekend bundle-page__weekend--fashion" aria-labelledby="summit-two-title">
+          <div class="bundle-page__weekend-meta"><div class="bundle-page__edition">Summit — 02 · Finale — 03</div><time class="bundle-page__date" datetime="2026-10-24">October 24 <span>to 26</span></time></div>
+          <div class="bundle-page__weekend-copy"><h3 id="summit-two-title">Summit II + The Fashion Show</h3><p>The second summit focuses on connections between longevity communities in East and West. The Frontier Human Fashion Show &amp; Demo Day follows on Monday.</p></div>
+          <figure class="bundle-page__weekend-media"><img src="/img/summit-runway-exoskeleton.webp" width="1023" height="1537" alt="Model presenting a lightweight articulated exoskeleton integrated into a black runway dress" loading="lazy" decoding="async" /><figcaption class="bundle-page__weekend-caption">Wearable systems · On the runway</figcaption></figure>
+        </article>
+      </div>
+      <div class="bundle-page__hotel-band">
+        <b>Your included stay</b>
+        <p>Sannomiya · 12 nights · Room included · Check in October 16 · Check out October 28</p>
+        <span>Full run</span>
+      </div>
+      <p class="bundle-page__weekend-credits">Editorial stills, resized and cropped for web: <a href="https://commons.wikimedia.org/wiki/File:Pipetting_a_sample_University_of_Pennsylvania.jpg" target="_blank" rel="noopener">NIH NCATS, public domain</a> · <a href="https://www.flickr.com/photos/artcomments/379713604" target="_blank" rel="noopener">Art Comments, CC BY 2.0</a> · AI-assisted adaptation</p>
+    </div>
+  </section>
+
+  <section class="bundle-page__between" aria-labelledby="between-title">
+    <div class="bundle-page__between-inner">
+      <header class="bundle-page__between-head">
+        <div>
+          <div class="bundle-page__eyebrow">October 19 to 23 · Across Kansai</div>
+          <h2 id="between-title">The week in between</h2>
+        </div>
+        <div class="bundle-page__between-intro">
+          <p>The summit weekends bookend five days across Kansai. We will arrange trips to Osaka, Nara, and Kyoto during the week between them.</p>
+          <dl class="bundle-page__between-ledger" aria-label="Week details">
+            <div><dt>Window</dt><dd>Oct 19–23</dd></div><div><dt>Region</dt><dd>Kansai</dd></div><div><dt>Places</dt><dd>03</dd></div>
+          </dl>
+        </div>
+      </header>
+      <div class="bundle-page__trips" aria-label="Kansai trip destinations">
+        <figure class="bundle-page__trip bundle-page__trip--kyoto">
+          <div class="bundle-page__trip-media"><picture><source type="image/webp" srcset="/img/kansai-kyoto-autumn-640.webp 640w, /img/kansai-kyoto-autumn-1280.webp 1280w" sizes="(max-width: 680px) 100vw, 58vw" /><img src="/img/kansai-kyoto-autumn.jpg" width="1920" height="1272" alt="Autumn foliage reflected in a garden pond in Kyoto" loading="lazy" decoding="async" /></picture></div>
+          <figcaption>
+            <span><b class="bundle-page__trip-city">Kyoto</b><span class="bundle-page__trip-note">Still water and autumn color</span></span>
+            <span class="bundle-page__photo-credit">Photo: <a href="https://commons.wikimedia.org/wiki/File:KyotoAutumn.jpg" target="_blank" rel="noopener">Fg2</a> · Public domain</span>
+          </figcaption>
+        </figure>
+        <figure class="bundle-page__trip bundle-page__trip--nara">
+          <div class="bundle-page__trip-media"><picture><source type="image/webp" srcset="/img/kansai-nara-autumn-640.webp 640w, /img/kansai-nara-autumn-1280.webp 1280w" sizes="(max-width: 680px) 100vw, 58vw" /><img src="/img/kansai-nara-autumn.jpg" width="1920" height="1280" alt="Deer drinking beneath autumn leaves in Nara Park" loading="lazy" decoding="async" /></picture></div>
+          <figcaption>
+            <span><b class="bundle-page__trip-city">Nara</b><span class="bundle-page__trip-note">Deer beneath the maples</span></span>
+            <span class="bundle-page__photo-credit">Photo: <a href="https://commons.wikimedia.org/wiki/File:003_Nara_deer_in_Japan_-_deer_of_Nara_Park_under_autumn_leaves.jpg" target="_blank" rel="noopener">Marek Ślusarczyk</a> · <a href="https://creativecommons.org/licenses/by/3.0/" target="_blank" rel="noopener">CC BY 3.0</a></span>
+          </figcaption>
+        </figure>
+        <figure class="bundle-page__trip bundle-page__trip--osaka">
+          <div class="bundle-page__trip-media"><picture><source type="image/webp" srcset="/img/kansai-osaka-night-640.webp 640w, /img/kansai-osaka-night-1280.webp 1280w" sizes="(max-width: 680px) 100vw, 42vw" /><img src="/img/kansai-osaka-night.jpg" width="1920" height="2880" alt="Dotonbori canal and neon lights at night in Osaka" loading="lazy" decoding="async" /></picture></div>
+          <figcaption>
+            <span><b class="bundle-page__trip-city">Osaka</b><span class="bundle-page__trip-note">After dark in Dotonbori</span></span>
+            <span class="bundle-page__photo-credit">Photo: <a href="https://commons.wikimedia.org/wiki/File:Dotonbori,_Osaka,_Japan_(Unsplash).jpg" target="_blank" rel="noopener">Redd Angelo</a> · CC0</span>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="bundle-page__section bundle-page__proof" aria-labelledby="bundle-proof-title">
+    <header class="bundle-page__proof-head">
+      <div class="bundle-page__proof-copy">
+        <div class="bundle-page__eyebrow">Who you will meet</div>
+        <h2 id="bundle-proof-title">Meet people working across longevity</h2>
+        <p>Mirai brings builders, founders, researchers, operators, and investors together in person. You can compare notes and see what others are working on. You can also meet collaborators without spending a year in video calls.</p>
+      </div>
+      <div class="bundle-page__speaker-count" aria-label="15 speakers revealed out of 38 confirmed">
+        <div aria-hidden="true"><strong>15</strong><span>Revealed</span></div><i aria-hidden="true">/</i><div aria-hidden="true"><strong>38</strong><span>Confirmed</span></div>
+      </div>
+    </header>
+    <div class="bundle-page__faces" role="list" aria-label="Featured Mirai speakers">
+      <figure class="bundle-page__face" role="listitem"><img src="/img/aubrey.webp" width="768" height="710" alt="" loading="lazy" decoding="async" /><figcaption><span class="bundle-page__face-index" aria-hidden="true">01</span><span><b>Aubrey de Grey</b><span>LEV Foundation</span></span></figcaption></figure>
+      <figure class="bundle-page__face" role="listitem"><img src="/img/jose.webp" width="500" height="500" alt="" loading="lazy" decoding="async" /><figcaption><span class="bundle-page__face-index" aria-hidden="true">02</span><span><b>José Cordeiro</b><span>The Death of Death</span></span></figcaption></figure>
+      <figure class="bundle-page__face" role="listitem"><img src="/img/yuki.webp" width="480" height="480" alt="" loading="lazy" decoding="async" /><figcaption><span class="bundle-page__face-index" aria-hidden="true">03</span><span><b>Yuki Hanyu</b><span>Cellular Agriculture</span></span></figcaption></figure>
+      <figure class="bundle-page__face" role="listitem"><img src="/img/adam.webp" width="800" height="1118" alt="" loading="lazy" decoding="async" /><figcaption><span class="bundle-page__face-index" aria-hidden="true">04</span><span><b>Adam Gries</b><span>Vitalist Bay</span></span></figcaption></figure>
+    </div>
+    <p class="bundle-page__proof-line">Speakers include Aubrey de Grey and José Cordeiro, alongside leaders in longevity science, capital, regulation, and human augmentation.</p>
+  </section>
+
+  <section class="bundle-page__faq" aria-labelledby="bundle-faq-title">
+    <div class="bundle-page__faq-shell">
+      <figure class="bundle-page__faq-visual">
+        <img src="/img/lanterns.webp" width="1024" height="683" alt="Warm lanterns glowing over a Japanese street at night" loading="lazy" decoding="async" />
+        <figcaption><span class="bundle-page__faq-visual-index" aria-hidden="true">05</span><span><b>Before you arrive</b><span>One booking. One continuous stay.</span></span></figcaption>
+      </figure>
+      <div class="bundle-page__faq-content">
+        <div class="bundle-page__eyebrow">Before you book</div>
+        <h2 id="bundle-faq-title">Questions about the package</h2>
+        <div class="bundle-page__faq-list">
+          <details><summary><span class="bundle-page__faq-number" aria-hidden="true">01</span><span>Does the hotel cover both summit weekends?</span></summary><p>Yes. Check in on October 16 for Summit I and stay through Summit II and the Fashion Show. Check-out is October 28.</p></details>
+          <details><summary><span class="bundle-page__faq-number" aria-hidden="true">02</span><span>What kind of room is included?</span></summary><p>A room in Sannomiya, Kobe, for 12 nights. Check-in is October 16, check-out is October 28, and breakfast is not included.</p></details>
+          <details><summary><span class="bundle-page__faq-number" aria-hidden="true">03</span><span>Can my spouse or partner come too?</span></summary><p>Send us a note after you book. We may be able to include your spouse or partner in the hotel stay and events as a courtesy. We handle this case by case, so it is not part of the package.</p></details>
+          <details><summary><span class="bundle-page__faq-number" aria-hidden="true">04</span><span>What event access is included?</span></summary><p>Summit I, Summit II, the Frontier Human Fashion Show &amp; Demo Day, and Mirai community programming throughout October.</p></details>
+          <details><summary><span class="bundle-page__faq-number" aria-hidden="true">05</span><span>What do I arrange separately?</span></summary><p>Travel to Kobe and any accommodation outside October 16 to 28.</p></details>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="bundle-page__section">
-    <div class="bundle-page__eyebrow">One pass · One continuous stay</div>
-    <h2>Everything in the $2,500 package.</h2>
-    <div class="bundle-page__stack">
-      <article class="bundle-page__stack-item"><div class="bundle-page__stack-no">01</div><h3>Mirai event access</h3><p>Join included Mirai community programming across October 1–31.</p></article>
-      <article class="bundle-page__stack-item"><div class="bundle-page__stack-no">02</div><h3>Summit I · Oct 17–18</h3><p>The Science &amp; Tech Augmenting Life: regenerative medicine, medical devices, and Japan's path from prototype to patient.</p></article>
-      <article class="bundle-page__stack-item"><div class="bundle-page__stack-no">03</div><h3>Summit II · Oct 24–25</h3><p>From East to West: capital, regulation, and the bridge between longevity ecosystems.</p></article>
-      <article class="bundle-page__stack-item"><div class="bundle-page__stack-no">04</div><h3>Fashion Show · Oct 26</h3><p>A live biomedical demo day staged as a runway show—where devices become couture.</p></article>
-      <article class="bundle-page__stack-item"><div class="bundle-page__stack-no">05</div><h3>12 hotel nights</h3><p>A continuous single-occupancy stay in Sannomiya from October 16 check-in through October 28 check-out.</p></article>
-    </div>
-    <p class="bundle-page__clarifier"><strong>Know exactly what you are booking:</strong> the included hotel stay runs continuously across both summit weekends and every night between them. Check-in is October 16, check-out is October 28, and breakfast is not included.</p>
-  </section>
-
-  <section class="bundle-page__weekends">
-    <div class="bundle-page__weekends-inner">
-      <div class="bundle-page__eyebrow">Four summit days · One live finale</div>
-      <h2>Your two weekends in Kobe.</h2>
-      <div class="bundle-page__timeline">
-        <article class="bundle-page__weekend">
-          <div class="bundle-page__date">October 17–18</div>
-          <h3>The Science &amp; Tech Augmenting Life</h3>
-          <p>Japan's regenerative-medicine edge, medical devices, and the regulatory path that can move therapies to patients faster.</p>
-        </article>
-        <article class="bundle-page__weekend">
-          <div class="bundle-page__date">October 24–26</div>
-          <h3>Summit II + The Fashion Show</h3>
-          <p>Two days on longevity's East–West bridge, followed Monday by the Frontier Human Fashion Show &amp; Demo Day.</p>
-        </article>
-      </div>
-      <div class="bundle-page__hotel-band">
-        <b>Your included stay</b>
-        <p>Sannomiya · 12 nights · Single occupancy · October 16 check-in → October 28 check-out</p>
-        <span>Full run</span>
+  <section class="bundle-page__close" id="final-purchase" aria-labelledby="final-purchase-title">
+    <figure class="bundle-page__close-media"><img src="/img/rokko-night.webp" width="1024" height="683" alt="City lights across Kobe seen from Mount Rokko at night" loading="lazy" decoding="async" /></figure>
+    <div class="bundle-page__close-inner">
+      <div class="bundle-page__close-copy"><div class="bundle-page__eyebrow">One continuous stay in Kobe</div><h2 id="final-purchase-title">Only 10 packages are available</h2><p>Both summit weekends, every night between them, and the Frontier Human Fashion Show. One continuous hotel booking in Sannomiya.</p></div>
+      <div class="bundle-page__close-offer">
+        <div class="bundle-page__close-status"><span class="package-status">10 packages at launch price · Ends August 20</span><span>12 hotel nights included</span></div>
+        <div class="bundle-page__close-price">$2,500</div><div class="bundle-page__close-next">$4,000 after August 20</div>
+        <a class="bundle-page__btn bundle-checkout" href="https://luma.com/an4zotn9?coupon=SFSH&amp;utm_source=summit-bundle&amp;utm_campaign=summit-hotel-package" data-luma-action="checkout" data-luma-event-id="evt-OUCqVyqoZI5Jeg4" data-luma-ticket-type="ttype-0BjQv0xV4yY5P0l" data-luma-coupon="SFSH" data-luma-utm-source="summit-bundle">Book My Package for $2,500</a>
+        <p class="bundle-page__secure">The $2,500 launch price applies to the first 10 packages or through August 20, whichever comes first. Luma handles checkout and Stripe processes payment.</p>
       </div>
     </div>
-  </section>
-
-  <section class="bundle-page__section">
-    <div class="bundle-page__proof-grid">
-      <div class="bundle-page__faces" aria-label="Featured Mirai speakers">
-        <figure class="bundle-page__face"><img src="/img/aubrey.jpg" alt="Aubrey de Grey" loading="lazy" /><figcaption class="bundle-page__face-name">Aubrey de Grey</figcaption></figure>
-        <figure class="bundle-page__face"><img src="/img/jose.jpg" alt="José Cordeiro" loading="lazy" /><figcaption class="bundle-page__face-name">José Cordeiro</figcaption></figure>
-      </div>
-      <div class="bundle-page__proof-copy">
-        <div class="bundle-page__eyebrow">Come for the field. Leave with people.</div>
-        <h2>Meet the ecosystem in one place.</h2>
-        <p>Builders, founders, researchers, operators, and investors come to Mirai to do in days what screens stretch across a year: compare notes, meet collaborators, and see what is actually moving.</p>
-        <p class="bundle-page__proof-line">Aubrey de Grey, José Cordeiro, and leaders across longevity science, capital, regulation, and human augmentation.</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="bundle-page__section bundle-page__faq">
-    <div class="bundle-page__eyebrow">Before you book</div>
-    <h2>Clear answers. No fine-print maze.</h2>
-    <details><summary>Does the hotel cover both summit weekends?</summary><p>Yes. The stay is continuous: check in October 16, attend Summit I, stay through the week between, attend Summit II and the Fashion Show, then check out October 28.</p></details>
-    <details><summary>What kind of room is included?</summary><p>A single-occupancy room in Sannomiya, Kobe, for 12 nights. Check-in is October 16, check-out is October 28, and breakfast is not included.</p></details>
-    <details><summary>What event access is included?</summary><p>Summit I, Summit II, the Frontier Human Fashion Show &amp; Demo Day, and Mirai community programming throughout October.</p></details>
-    <details><summary>What do I arrange separately?</summary><p>Travel to Kobe and any accommodation outside October 16–28.</p></details>
-  </section>
-
-  <section class="bundle-page__close" id="final-purchase">
-    <div class="bundle-page__eyebrow package-status">10 launch-price packages · Ends August 20</div>
-    <h2>Only 10 packages.</h2>
-    <p>Do both summit weekends, stay through the week between, and remain in Kobe through the Fashion Show—all without a second hotel booking.</p>
-    <div class="bundle-page__close-price">$2,500</div>
-    <div class="bundle-page__close-next">$4,000 after August 20</div>
-    <a class="bundle-page__btn bundle-checkout" href="https://luma.com/an4zotn9?coupon=SFSH&amp;tt=ttype-0BjQv0xV4yY5P0l&amp;utm_source=summit-bundle&amp;utm_campaign=summit-hotel-package" target="_blank" rel="noopener">Get My Package — $2,500</a>
-    <p class="bundle-page__secure">$2,500 for the first 10 packages or through August 20 · Then $4,000 · Secure Luma checkout · Stripe payment</p>
   </section>
 </main>
 
-<footer class="bundle-page__footer">Mirai Tech City · Kobe, Japan · October 2026 · <a href="/">Explore the full city</a></footer>
+<footer class="bundle-page__footer" id="site-footer"><div><strong>Mirai Tech City</strong><span>Kobe, Japan · October 2026</span></div><div><span>Mt. Rokko · After dark</span><a href="/">Explore the full city →</a></div></footer>
 
 <div class="bundle-page__mobile-buy is-hidden" id="mobile-buy">
   <div class="bundle-page__mobile-price">$2,500<span>$4,000 after Aug 20</span></div>
-  <a class="bundle-page__btn bundle-checkout" href="https://luma.com/an4zotn9?coupon=SFSH&amp;tt=ttype-0BjQv0xV4yY5P0l&amp;utm_source=summit-bundle-mobile&amp;utm_campaign=summit-hotel-package" target="_blank" rel="noopener">Get the Package</a>
+  <a class="bundle-page__btn bundle-checkout" href="https://luma.com/an4zotn9?coupon=SFSH&amp;utm_source=summit-bundle-mobile&amp;utm_campaign=summit-hotel-package" data-luma-action="checkout" data-luma-event-id="evt-OUCqVyqoZI5Jeg4" data-luma-ticket-type="ttype-0BjQv0xV4yY5P0l" data-luma-coupon="SFSH" data-luma-utm-source="summit-bundle-mobile">Book the Package</a>
 </div>
 
+<script id="luma-checkout" src="https://embed.lu.ma/checkout-button.js"></script>
 <script>
   const PACKAGE_END = new Date('2026-08-21T00:00:00+09:00').getTime();
   const pad = n => String(n).padStart(2, '0');
@@ -369,8 +675,9 @@
     if (mobilePrice) mobilePrice.innerHTML = '$4,000<span>Standard package price</span>';
     document.querySelectorAll('.bundle-page__next-price, .bundle-page__close-next').forEach(el => { el.textContent = 'Launch pricing has ended'; });
     document.querySelectorAll('.bundle-checkout').forEach(a => {
-      a.textContent = 'Get My Package — $4,000';
-      a.href = 'https://luma.com/an4zotn9?coupon=SFSH&tt=ttype-0BjQv0xV4yY5P0l&utm_source=summit-bundle&utm_campaign=post-hotel-package';
+      a.textContent = 'Book My Package for $4,000';
+      a.href = 'https://luma.com/an4zotn9?coupon=SFSH&utm_source=post-hotel-package&utm_campaign=post-hotel-package';
+      a.dataset.lumaUtmSource = 'post-hotel-package';
     });
     if (timer) timer.hidden = true;
   }
@@ -394,12 +701,13 @@
   const primaryPurchase = document.getElementById('primary-purchase');
   const finalPurchase = document.getElementById('final-purchase');
   const heroMobilePurchase = document.getElementById('hero-mobile-purchase');
+  const siteFooter = document.getElementById('site-footer');
   const visiblePurchases = new Set();
   const purchaseObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => entry.isIntersecting ? visiblePurchases.add(entry.target) : visiblePurchases.delete(entry.target));
     mobileBuy.classList.toggle('is-hidden', visiblePurchases.size > 0);
   }, { threshold: .12 });
-  [heroMobilePurchase, primaryPurchase, finalPurchase].forEach(el => purchaseObserver.observe(el));
+  [heroMobilePurchase, primaryPurchase, finalPurchase, siteFooter].filter(Boolean).forEach(el => purchaseObserver.observe(el));
 </script>
 </body>
 </html>
