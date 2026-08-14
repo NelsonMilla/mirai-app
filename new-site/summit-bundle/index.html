@@ -11,6 +11,34 @@
 <meta property="og:url" content="https://mirai-tech-city.vercel.app/summit-bundle/" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="theme-color" content="#050506" />
+<script>
+  (() => {
+    const key = 'summit_hero_framing_v1';
+    const cookieName = 'mirai_summit_hero_framing_v1';
+    const variants = ['control', 'founder_value'];
+    const forcedVariant = new URLSearchParams(location.search).get('summit_hero');
+    const forced = variants.includes(forcedVariant);
+    const savedVariant = document.cookie.split('; ').find(row => row.startsWith(`${cookieName}=`))?.split('=')[1];
+    let variant = forced ? forcedVariant : savedVariant;
+
+    if (!variants.includes(variant)) {
+      const random = globalThis.crypto?.getRandomValues
+        ? globalThis.crypto.getRandomValues(new Uint32Array(1))[0] / 4294967296
+        : Math.random();
+      variant = random < .5 ? variants[0] : variants[1];
+      const secure = location.protocol === 'https:' ? '; Secure' : '';
+      document.cookie = `${cookieName}=${variant}; Max-Age=7776000; Path=/; SameSite=Lax${secure}`;
+    }
+
+    document.documentElement.dataset.summitHeroVariant = variant;
+    const assignment = { key, variant, forced };
+    window.MIRAI_ACTIVE_EXPERIMENT = assignment;
+    window.MIRAI_EXPERIMENTS = {
+      ...(window.MIRAI_EXPERIMENTS || {}),
+      summitHeroFraming: assignment
+    };
+  })();
+</script>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23050506'/%3E%3Ctext x='50' y='72' font-size='62' font-family='Georgia' font-weight='bold' fill='%239be8f0' text-anchor='middle'%3E未%3C/text%3E%3C/svg%3E" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -20,6 +48,7 @@
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
 <script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/analytics.js"></script>
 <style>
   :root {
     --bg: #050506;
@@ -72,6 +101,9 @@
       linear-gradient(0deg, rgba(5,5,6,.78) 0%, transparent 38%, rgba(5,5,6,.3) 100%); }
   .bundle-page__hero-copy { position: relative; z-index: 2; display: flex; flex-direction: column; justify-content: center;
     padding: 138px 5.5vw 90px; }
+  .bundle-page__hero-message--founder-value { display: none; }
+  html[data-summit-hero-variant="founder_value"] .bundle-page__hero-message--control { display: none; }
+  html[data-summit-hero-variant="founder_value"] .bundle-page__hero-message--founder-value { display: block; }
   .bundle-page__hero h1 { max-width: 10ch; margin: 22px 0 22px; font-size: clamp(46px, 7.2vw, 108px); font-weight: 900;
     letter-spacing: -.025em; line-height: .9; text-transform: uppercase; }
   .bundle-page__hero h1 span { color: var(--accent); }
@@ -470,28 +502,36 @@
   }
 </style>
 </head>
-<body>
+<body data-analytics-offer="summit_hotel_2500">
 <a class="bundle-page__skip" href="#primary-purchase">Skip to purchase</a>
 
 <header class="bundle-page__nav">
-  <a class="bundle-page__logo" href="/">Mirai <span>Tech</span></a>
+  <a class="bundle-page__logo" href="/" data-analytics-action="site_navigation" data-analytics-target="full_city" data-analytics-location="nav">Mirai <span>Tech</span></a>
   <div class="bundle-page__nav-meta">October 17 to 26 · Kobe, Japan</div>
-  <a class="bundle-page__btn bundle-checkout" href="https://luma.com/an4zotn9?coupon=SFSH&amp;utm_source=summit-bundle&amp;utm_campaign=summit-hotel-package" data-luma-action="checkout" data-luma-event-id="evt-OUCqVyqoZI5Jeg4" data-luma-ticket-type="ttype-0BjQv0xV4yY5P0l" data-luma-coupon="SFSH" data-luma-utm-source="summit-bundle">Book the Package</a>
+  <a class="bundle-page__btn bundle-checkout" href="https://luma.com/an4zotn9?coupon=SFSH&amp;utm_source=summit-bundle&amp;utm_campaign=summit-hotel-package" data-luma-action="checkout" data-luma-event-id="evt-OUCqVyqoZI5Jeg4" data-luma-ticket-type="ttype-0BjQv0xV4yY5P0l" data-luma-coupon="SFSH" data-luma-utm-source="summit-bundle" data-analytics-action="checkout" data-analytics-location="nav">Book the Package</a>
 </header>
 
 <main>
-  <section class="bundle-page__hero" id="offer">
+  <section class="bundle-page__hero" id="offer" data-track-section="offer" data-track-position="1">
     <figure class="bundle-page__hero-media">
       <img src="/img/harbor-golden-hour.webp" width="1024" height="683" alt="Kobe Harbor and Port Tower at golden hour" loading="eager" decoding="async" fetchpriority="high" />
     </figure>
     <div class="bundle-page__hero-copy">
-      <div class="bundle-page__eyebrow package-status">10 packages at launch price · Ends August 20</div>
-      <h1>Two summit weekends, <span>hotel included</span></h1>
-      <p class="bundle-page__lead">Your pass covers both summit weekends, the week between them, and the Frontier Human Fashion Show &amp; Demo Day. It also includes a <strong>room in Sannomiya from October 16 to 28.</strong></p>
-      <p class="bundle-page__promise">You can also join Mirai community programming throughout October.</p>
+      <div class="bundle-page__hero-message bundle-page__hero-message--control">
+        <div class="bundle-page__eyebrow package-status">10 packages at launch price · Ends August 20</div>
+        <h1>Two summit weekends, <span>hotel included</span></h1>
+        <p class="bundle-page__lead">Your pass covers both summit weekends, the week between them, and the Frontier Human Fashion Show &amp; Demo Day. It also includes a <strong>room in Sannomiya from October 16 to 28.</strong></p>
+        <p class="bundle-page__promise">You can also join Mirai community programming throughout October.</p>
+      </div>
+      <div class="bundle-page__hero-message bundle-page__hero-message--founder-value">
+        <div class="bundle-page__eyebrow package-status">Founder package · Save $1,500 through August 20</div>
+        <h1>One booking. <span>The full Kobe run.</span></h1>
+        <p class="bundle-page__lead"><strong>$2,500 covers 12 hotel nights in Sannomiya, both summit weekends, and the Fashion Show.</strong> Arrive once. Stay through the full run.</p>
+        <p class="bundle-page__promise">A concentrated Kobe trip for founders, investors, and operators who value access and continuity over piecing together logistics.</p>
+      </div>
       <div class="bundle-page__hero-mobile-buy" id="hero-mobile-purchase">
         <strong>$2,500</strong>
-        <a class="bundle-page__btn bundle-checkout" href="https://luma.com/an4zotn9?coupon=SFSH&amp;utm_source=summit-bundle-hero-mobile&amp;utm_campaign=summit-hotel-package" data-luma-action="checkout" data-luma-event-id="evt-OUCqVyqoZI5Jeg4" data-luma-ticket-type="ttype-0BjQv0xV4yY5P0l" data-luma-coupon="SFSH" data-luma-utm-source="summit-bundle-hero-mobile">Book My Package</a>
+        <a class="bundle-page__btn bundle-checkout" href="https://luma.com/an4zotn9?coupon=SFSH&amp;utm_source=summit-bundle-hero-mobile&amp;utm_campaign=summit-hotel-package" data-luma-action="checkout" data-luma-event-id="evt-OUCqVyqoZI5Jeg4" data-luma-ticket-type="ttype-0BjQv0xV4yY5P0l" data-luma-coupon="SFSH" data-luma-utm-source="summit-bundle-hero-mobile" data-analytics-action="checkout" data-analytics-location="hero_mobile">Book My Package</a>
         <p>Event pass and 12 hotel nights · Check in Oct 16 · Check out Oct 28</p>
       </div>
     </div>
@@ -510,7 +550,7 @@
           <li><b>Hotel</b><span>October 16 to 28</span></li>
           <li><b>Fashion Show</b><span>October 26</span></li>
         </ul>
-        <a class="bundle-page__btn bundle-checkout" href="https://luma.com/an4zotn9?coupon=SFSH&amp;utm_source=summit-bundle&amp;utm_campaign=summit-hotel-package" data-luma-action="checkout" data-luma-event-id="evt-OUCqVyqoZI5Jeg4" data-luma-ticket-type="ttype-0BjQv0xV4yY5P0l" data-luma-coupon="SFSH" data-luma-utm-source="summit-bundle">Book My Package for $2,500</a>
+        <a class="bundle-page__btn bundle-checkout" href="https://luma.com/an4zotn9?coupon=SFSH&amp;utm_source=summit-bundle&amp;utm_campaign=summit-hotel-package" data-luma-action="checkout" data-luma-event-id="evt-OUCqVyqoZI5Jeg4" data-luma-ticket-type="ttype-0BjQv0xV4yY5P0l" data-luma-coupon="SFSH" data-luma-utm-source="summit-bundle" data-analytics-action="checkout" data-analytics-location="hero">Book My Package for $2,500</a>
         <p class="bundle-page__secure">Checkout on Luma · Stripe processes your payment</p>
         <div class="bundle-page__timer" aria-label="Time remaining until the launch price ends">
           <div class="bundle-page__time"><b id="timer-days">00</b><span>Days</span></div>
@@ -523,7 +563,7 @@
     <div class="bundle-page__hero-credit">Kobe Harbor · Photo: <a href="https://www.flickr.com/photos/61246882@N07/" target="_blank" rel="noopener">JohnnyLCY</a> · CC BY 2.0</div>
   </section>
 
-  <section class="bundle-page__section bundle-page__contents" aria-labelledby="contents-title">
+  <section class="bundle-page__section bundle-page__contents" aria-labelledby="contents-title" data-track-section="package_contents" data-track-position="2">
     <div class="bundle-page__eyebrow">One pass for the full stay</div>
     <h2 id="contents-title">What your package includes</h2>
     <ol class="bundle-page__manifest">
@@ -540,7 +580,7 @@
     <aside class="bundle-page__stay-note"><b>Stay note</b><p><strong>The hotel booking is continuous.</strong> It covers both summit weekends and every night between them. Check-in is October 16, check-out is October 28, and breakfast is not included.</p></aside>
   </section>
 
-  <section class="bundle-page__weekends" aria-labelledby="weekends-title">
+  <section class="bundle-page__weekends" aria-labelledby="weekends-title" data-track-section="summit_weekends" data-track-position="3">
     <div class="bundle-page__weekends-inner">
       <header class="bundle-page__weekends-head">
         <div><div class="bundle-page__eyebrow">Four summit days, followed by the Fashion Show</div><h2 id="weekends-title">Two weekends in Kobe</h2></div>
@@ -567,7 +607,7 @@
     </div>
   </section>
 
-  <section class="bundle-page__between" aria-labelledby="between-title">
+  <section class="bundle-page__between" aria-labelledby="between-title" data-track-section="between_week" data-track-position="4">
     <div class="bundle-page__between-inner">
       <header class="bundle-page__between-head">
         <div>
@@ -607,7 +647,7 @@
     </div>
   </section>
 
-  <section class="bundle-page__section bundle-page__proof" aria-labelledby="bundle-proof-title">
+  <section class="bundle-page__section bundle-page__proof" aria-labelledby="bundle-proof-title" data-track-section="social_proof" data-track-position="5">
     <header class="bundle-page__proof-head">
       <div class="bundle-page__proof-copy">
         <div class="bundle-page__eyebrow">Who you will meet</div>
@@ -627,7 +667,7 @@
     <p class="bundle-page__proof-line">Speakers include Aubrey de Grey and José Cordeiro, alongside leaders in longevity science, capital, regulation, and human augmentation.</p>
   </section>
 
-  <section class="bundle-page__faq" aria-labelledby="bundle-faq-title">
+  <section class="bundle-page__faq" aria-labelledby="bundle-faq-title" data-track-section="faq" data-track-position="6">
     <div class="bundle-page__faq-shell">
       <figure class="bundle-page__faq-visual">
         <img src="/img/lanterns.webp" width="1024" height="683" alt="Warm lanterns glowing over a Japanese street at night" loading="lazy" decoding="async" />
@@ -637,35 +677,35 @@
         <div class="bundle-page__eyebrow">Before you book</div>
         <h2 id="bundle-faq-title">Questions about the package</h2>
         <div class="bundle-page__faq-list">
-          <details><summary><span class="bundle-page__faq-number" aria-hidden="true">01</span><span>Does the hotel cover both summit weekends?</span></summary><p>Yes. Check in on October 16 for Summit I and stay through Summit II and the Fashion Show. Check-out is October 28.</p></details>
-          <details><summary><span class="bundle-page__faq-number" aria-hidden="true">02</span><span>What kind of room is included?</span></summary><p>A room in Sannomiya, Kobe, for 12 nights. Check-in is October 16, check-out is October 28, and breakfast is not included.</p></details>
-          <details><summary><span class="bundle-page__faq-number" aria-hidden="true">03</span><span>Can my spouse or partner come too?</span></summary><p>Send us a note after you book. We may be able to include your spouse or partner in the hotel stay and events as a courtesy. We handle this case by case, so it is not part of the package.</p></details>
-          <details><summary><span class="bundle-page__faq-number" aria-hidden="true">04</span><span>What event access is included?</span></summary><p>Summit I, Summit II, the Frontier Human Fashion Show &amp; Demo Day, and Mirai community programming throughout October.</p></details>
-          <details><summary><span class="bundle-page__faq-number" aria-hidden="true">05</span><span>What do I arrange separately?</span></summary><p>Travel to Kobe and any accommodation outside October 16 to 28.</p></details>
+          <details data-track-faq="hotel_coverage" data-track-position="1"><summary><span class="bundle-page__faq-number" aria-hidden="true">01</span><span>Does the hotel cover both summit weekends?</span></summary><p>Yes. Check in on October 16 for Summit I and stay through Summit II and the Fashion Show. Check-out is October 28.</p></details>
+          <details data-track-faq="room_type" data-track-position="2"><summary><span class="bundle-page__faq-number" aria-hidden="true">02</span><span>What kind of room is included?</span></summary><p>A room in Sannomiya, Kobe, for 12 nights. Check-in is October 16, check-out is October 28, and breakfast is not included.</p></details>
+          <details data-track-faq="partner_attendance" data-track-position="3"><summary><span class="bundle-page__faq-number" aria-hidden="true">03</span><span>Can my spouse or partner come too?</span></summary><p>Send us a note after you book. We may be able to include your spouse or partner in the hotel stay and events as a courtesy. We handle this case by case, so it is not part of the package.</p></details>
+          <details data-track-faq="event_access" data-track-position="4"><summary><span class="bundle-page__faq-number" aria-hidden="true">04</span><span>What event access is included?</span></summary><p>Summit I, Summit II, the Frontier Human Fashion Show &amp; Demo Day, and Mirai community programming throughout October.</p></details>
+          <details data-track-faq="separate_arrangements" data-track-position="5"><summary><span class="bundle-page__faq-number" aria-hidden="true">05</span><span>What do I arrange separately?</span></summary><p>Travel to Kobe and any accommodation outside October 16 to 28.</p></details>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="bundle-page__close" id="final-purchase" aria-labelledby="final-purchase-title">
+  <section class="bundle-page__close" id="final-purchase" aria-labelledby="final-purchase-title" data-track-section="final_offer" data-track-position="7">
     <figure class="bundle-page__close-media"><img src="/img/rokko-night.webp" width="1024" height="683" alt="City lights across Kobe seen from Mount Rokko at night" loading="lazy" decoding="async" /></figure>
     <div class="bundle-page__close-inner">
       <div class="bundle-page__close-copy"><div class="bundle-page__eyebrow">One continuous stay in Kobe</div><h2 id="final-purchase-title">Only 10 packages are available</h2><p>Both summit weekends, every night between them, and the Frontier Human Fashion Show. One continuous hotel booking in Sannomiya.</p></div>
       <div class="bundle-page__close-offer">
         <div class="bundle-page__close-status"><span class="package-status">10 packages at launch price · Ends August 20</span><span>12 hotel nights included</span></div>
         <div class="bundle-page__close-price">$2,500</div><div class="bundle-page__close-next">$4,000 after August 20</div>
-        <a class="bundle-page__btn bundle-checkout" href="https://luma.com/an4zotn9?coupon=SFSH&amp;utm_source=summit-bundle&amp;utm_campaign=summit-hotel-package" data-luma-action="checkout" data-luma-event-id="evt-OUCqVyqoZI5Jeg4" data-luma-ticket-type="ttype-0BjQv0xV4yY5P0l" data-luma-coupon="SFSH" data-luma-utm-source="summit-bundle">Book My Package for $2,500</a>
+        <a class="bundle-page__btn bundle-checkout" href="https://luma.com/an4zotn9?coupon=SFSH&amp;utm_source=summit-bundle&amp;utm_campaign=summit-hotel-package" data-luma-action="checkout" data-luma-event-id="evt-OUCqVyqoZI5Jeg4" data-luma-ticket-type="ttype-0BjQv0xV4yY5P0l" data-luma-coupon="SFSH" data-luma-utm-source="summit-bundle" data-analytics-action="checkout" data-analytics-location="final_offer">Book My Package for $2,500</a>
         <p class="bundle-page__secure">The $2,500 launch price applies to the first 10 packages or through August 20, whichever comes first. Luma handles checkout and Stripe processes payment.</p>
       </div>
     </div>
   </section>
 </main>
 
-<footer class="bundle-page__footer" id="site-footer"><div><strong>Mirai Tech City</strong><span>Kobe, Japan · October 2026</span></div><div><span>Mt. Rokko · After dark</span><a href="/">Explore the full city →</a></div></footer>
+<footer class="bundle-page__footer" id="site-footer"><div><strong>Mirai Tech City</strong><span>Kobe, Japan · October 2026</span></div><div><span>Mt. Rokko · After dark</span><a href="/" data-analytics-action="site_navigation" data-analytics-target="full_city" data-analytics-location="footer">Explore the full city →</a></div></footer>
 
 <div class="bundle-page__mobile-buy is-hidden" id="mobile-buy">
   <div class="bundle-page__mobile-price">$2,500<span>$4,000 after Aug 20</span></div>
-  <a class="bundle-page__btn bundle-checkout" href="https://luma.com/an4zotn9?coupon=SFSH&amp;utm_source=summit-bundle-mobile&amp;utm_campaign=summit-hotel-package" data-luma-action="checkout" data-luma-event-id="evt-OUCqVyqoZI5Jeg4" data-luma-ticket-type="ttype-0BjQv0xV4yY5P0l" data-luma-coupon="SFSH" data-luma-utm-source="summit-bundle-mobile">Book the Package</a>
+  <a class="bundle-page__btn bundle-checkout" href="https://luma.com/an4zotn9?coupon=SFSH&amp;utm_source=summit-bundle-mobile&amp;utm_campaign=summit-hotel-package" data-luma-action="checkout" data-luma-event-id="evt-OUCqVyqoZI5Jeg4" data-luma-ticket-type="ttype-0BjQv0xV4yY5P0l" data-luma-coupon="SFSH" data-luma-utm-source="summit-bundle-mobile" data-analytics-action="checkout" data-analytics-location="sticky_mobile">Book the Package</a>
 </div>
 
 <script id="luma-checkout" src="https://embed.lu.ma/checkout-button.js"></script>
@@ -675,6 +715,7 @@
   const timer = document.querySelector('.bundle-page__timer');
 
   function expirePackage() {
+    document.body.dataset.analyticsOffer = 'summit_hotel_4000';
     document.querySelectorAll('.package-status').forEach(el => { el.textContent = 'Standard package price · $4,000'; });
     document.querySelectorAll('.bundle-page__price, .bundle-page__hero-mobile-buy strong, .bundle-page__close-price').forEach(el => { el.textContent = '$4,000'; });
     const mobilePrice = document.querySelector('.bundle-page__mobile-price');
