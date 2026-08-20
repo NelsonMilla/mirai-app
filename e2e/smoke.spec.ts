@@ -34,8 +34,14 @@ function collectConsoleFailures(page: Page): string[] {
 }
 
 async function waitForLoaderGone(page: Page) {
+  // On a warm dev server the first check can run before React mounts the
+  // loader. Waiting briefly for that mount prevents a later loader effect
+  // from resetting an interaction test's programmatic scroll back to zero.
+  await page.locator('.loading-screen').waitFor({ state: 'attached', timeout: 5_000 }).catch(() => {});
   await page.waitForFunction(
-    () => !document.documentElement.classList.contains('loading'),
+    () =>
+      !document.documentElement.classList.contains('loading') &&
+      !document.querySelector('.loading-screen'),
     undefined,
     { timeout: 15_000 },
   );
