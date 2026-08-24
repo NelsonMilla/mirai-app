@@ -3,7 +3,6 @@
 
 User-agent: *
 Allow: /
-Disallow: /c/
 
 # XML Sitemap
 Sitemap: https://mirai-tech-city.vercel.app/sitemap.xml
