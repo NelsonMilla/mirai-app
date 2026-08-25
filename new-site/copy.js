@@ -12,7 +12,6 @@ window.MIRAI_COPY = {
 
   /* ─── MENU + SKIP LINK ─────────────────────────── */
   menu: {
-    title: `Mirai Tech City · Kobe · October 2026`,
     skipLink: `Skip to content`,
     ebStripe: `<span class="ebs-label-full">Early Bird ticket sale ending in</span><span class="ebs-label-short">Early Bird ends in</span> <span class="ebc">&#8212;</span> <span class="ebs-sep">·</span> <span class="ebs-price"><s>$1500</s><b>$399</b></span> <span class="ebs-sep">·</span> <span class="ebs-cta">Get Tickets →</span>`,
     closeButton: `✕`,
