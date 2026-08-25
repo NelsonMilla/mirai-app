@@ -9,6 +9,15 @@
    ============================================ */
 
 :root {
+  /* Canonical cinematic palette from DESIGN.md. Legacy aliases below remain
+     in place for the existing routes until their planned migration. */
+  --void: #050506;
+  --bone: #f4f3f0;
+  --signal-cyan: #9be8f0;
+  --dim: rgba(244, 243, 240, 0.62);
+  --faint: rgba(244, 243, 240, 0.48);
+  --hairline: rgba(244, 243, 240, 0.14);
+
   /* PRIMARY COLORS */
   --pink: #F5A0B5;
   --pink-bright: #FF6B92;
@@ -153,6 +162,7 @@ nav.site-nav {
   text-decoration: none; transition: color 0.2s;
 }
 .nav-links a:hover { color: var(--accent); }
+.nav-experience-short { display: none; }
 
 /* Cascade guard: `.nav-links a` (0,1,1) outranks `.btn-primary` (0,1,0),
    washing the Apply pill's ink text to 50% white. Repin it. */
@@ -179,6 +189,9 @@ nav.site-nav {
 
 @media (max-width: 640px) {
   .nav-links a:not(.btn) { display: none; }
+  .nav-links a.nav-experience { display: inline-flex; }
+  .nav-experience-long { display: none; }
+  .nav-experience-short { display: inline; }
   .nav-btn { display: none; }
 }
 
@@ -187,6 +200,7 @@ nav.site-nav {
 @media (min-width: 641px) and (max-width: 900px) {
   nav.site-nav { padding: 1rem 1.25rem; }
   .nav-links { gap: 1.1rem; }
+  .nav-btn { display: none; }
   .nav-name { white-space: nowrap; }
   .nav-links .btn { white-space: nowrap; }
 }
@@ -194,6 +208,12 @@ nav.site-nav {
   nav.site-nav { padding: 1rem; }
   .nav-links { gap: 0.8rem; }
   .nav-links .btn { padding: 0.6rem 0.9rem; }
+}
+
+@media (max-width: 420px) {
+  .site-nav .nav-name { display: none; }
+  .site-nav .nav-links { gap: 0.8rem; }
+  .site-nav .nav-links .btn { padding-inline: 0.9rem; }
 }
 
 /* Sound toggle button — main styles in SOUND TOGGLE STYLES section below */

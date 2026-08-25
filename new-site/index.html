@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Mirai Tech City · Kobe · October 2026</title>
-<meta name="description" content="Japan's premier longevity biomedical popup city. Summit I Oct 17–18 · Summit II Oct 24–25 · Fashion Show Oct 26. Join us all of October for the Residency. Live the future now." />
+<meta name="description" content="Japan's premier longevity biomedical popup city. Summit I Oct 17–18 · Summit II Oct 24–25 · Fashion Show Oct 26. Join us this October to change the future of longevity. Live the future now." />
 <meta property="og:title" content="Mirai Tech City · Kobe · October 2026" />
 <meta property="og:description" content="Japan's premier longevity biomedical popup city. Summits Oct 17–18 & 24–25 · Fashion Show Oct 26. Live the future now." />
 <meta property="og:image" content="https://mirai-tech-city.vercel.app/live_city_poster.jpg" />
@@ -20,6 +20,8 @@
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
 <script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/posthog.js"></script>
+<script defer src="/analytics.js"></script>
 <script>
   // Launch control: change to true when the Summit + Hotel package is ready for the public landing page.
   window.MIRAI_FLAGS = Object.freeze({ showSummitPackage: false });
@@ -93,6 +95,10 @@
     .menuBtn { display: inline-block; }
     nav .links { gap: 10px; }
     nav .links .btn { padding: 11px 16px; }
+  }
+  @media (min-width: 761px) and (max-width: 1050px) {
+    nav .links a:not(.btn) { display: none; }
+    .menuBtn { display: inline-block; }
   }
   @media (max-width: 360px) { nav .daruma { display: none; } }
   @media (max-width: 380px) {
@@ -457,7 +463,7 @@
 </style>
 <noscript><style>.rv{opacity:1;transform:none}</style></noscript>
 </head>
-<body>
+<body data-analytics-offer="mirai_city">
 
 <a class="skip" href="#main">Skip to content</a>
 
@@ -469,6 +475,7 @@
     <a href="#speakers">Speakers</a>
     <a href="#fashion">Fashion Show</a>
     <a href="#residency">Residency</a>
+    <a href="/experience/" data-analytics-action="site_navigation" data-analytics-location="nav" data-analytics-target="experience_guide">The Experience</a>
     <a href="#apply">Sponsors</a>
     <a class="btn accent" href="#summit-package" data-package-promo><span class="promo-full">Summit + Hotel</span><span class="promo-short">Hotel Pass</span></a>
     <a class="btn accent package-promo-fallback" href="#apply">Apply Now</a>
@@ -482,31 +489,17 @@
   <a class="mlink" href="#speakers">Speakers <span>38 Confirmed</span></a>
   <a class="mlink" href="#fashion">Fashion Show <span>Oct 26</span></a>
   <a class="mlink" href="#residency">Residency <span>Oct 01–31</span></a>
+  <a class="mlink" href="/experience/" data-analytics-action="site_navigation" data-analytics-location="menu" data-analytics-target="experience_guide">The Experience <span>Kobe + Kansai</span></a>
   <a class="mlink" href="#summit-package" data-package-promo>Summit + Hotel <span>10 Only · Aug 20</span></a>
   <a class="mlink package-promo-fallback" href="#apply">Sponsors</a>
   <div class="mdate">10 · 01 · 2026 · Port Island, Kobe</div>
 </div>
 
 <!-- ═══ HERO SEQUENCE ═══ -->
-<section class="hero" id="top">
+<section class="hero" id="top" data-track-section="hero" data-track-position="1">
 
-  <div class="slide on" data-dur="8000" style="background:url(live_city_poster.jpg) center 42%/cover no-repeat">
-    <video autoplay muted loop playsinline preload="auto" poster="live_city_poster.jpg" aria-hidden="true">
-      <source src="live_city.mp4" type="video/mp4" /></video>
-    <div class="veil"></div>
-    <div class="content">
-      <h1>Live.</h1>
-      <p class="lead">Join us all of October for the Residency. <em>Live the future now.</em></p>
-      <div class="sub">
-        <a class="btn accent" href="#summit-package" data-package-promo>Summit + Hotel Package</a>
-        <a class="btn accent package-promo-fallback" href="#summits">See the Summits</a>
-        <a class="btn ghost" href="#residency">The Residency →</a>
-      </div>
-    </div>
-  </div>
-
-  <div class="slide" data-dur="6200" style="background:url(disease_poster.jpg) center 42%/cover no-repeat">
-    <video muted loop playsinline preload="none" poster="disease_poster.jpg" aria-hidden="true">
+  <div class="slide on" data-dur="6200" style="background:url(disease_poster.jpg) center 42%/cover no-repeat">
+    <video autoplay muted loop playsinline preload="auto" poster="disease_poster.jpg" aria-hidden="true">
       <source src="disease.mp4" type="video/mp4" /></video>
     <div class="veil"></div>
     <div class="content">
@@ -514,7 +507,7 @@
       <h1>Eradicate disease.</h1>
       <div class="sub">
         <a class="btn ghost" href="#summit-package" data-package-promo>Summit + Hotel Package</a>
-        <a class="btn accent package-promo-fallback" href="https://luma.com/an4zotn9" target="_blank" rel="noopener">Get Tickets</a>
+        <a class="btn accent package-promo-fallback" href="https://luma.com/an4zotn9" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="hero_disease" data-analytics-target="tickets">Get Tickets</a>
       </div>
     </div>
   </div>
@@ -528,7 +521,7 @@
       <h1>Extend the healthspan.</h1>
       <div class="sub">
         <a class="btn ghost" href="#summit-package" data-package-promo>Summit + Hotel Package</a>
-        <a class="btn accent package-promo-fallback" href="https://luma.com/an4zotn9" target="_blank" rel="noopener">Get Tickets</a>
+        <a class="btn accent package-promo-fallback" href="https://luma.com/an4zotn9" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="hero_healthspan" data-analytics-target="tickets">Get Tickets</a>
       </div>
     </div>
   </div>
@@ -546,12 +539,27 @@
     </div>
   </div>
 
+  <div class="slide" data-dur="8000" style="background:url(live_city_poster.jpg) center 42%/cover no-repeat">
+    <video muted loop playsinline preload="none" poster="live_city_poster.jpg" aria-hidden="true">
+      <source src="live_city.mp4" type="video/mp4" /></video>
+    <div class="veil"></div>
+    <div class="content">
+      <h1>Live.</h1>
+      <p class="lead">Join us this October to change the future of longevity. <em>Live the future now.</em></p>
+      <div class="sub">
+        <a class="btn accent" href="#summit-package" data-package-promo>Summit + Hotel Package</a>
+        <a class="btn accent package-promo-fallback" href="#summits">See the Summits</a>
+        <a class="btn ghost" href="#residency">The Residency →</a>
+      </div>
+    </div>
+  </div>
+
   <div class="scrollTag">Scroll ↓</div>
   <div class="heroDots" id="heroDots"></div>
 </section>
 
 <!-- ═══ DATES ═══ -->
-<section class="dates" id="main">
+<section class="dates" id="main" data-track-section="dates" data-track-position="2">
   <div class="eyebrow rv">Japan's Premier Longevity Biomedical Popup City</div>
   <h2 class="big rv">One month. Two summits.<br/>One runway.</h2>
   <div class="grid rv">
@@ -571,11 +579,11 @@
       <div class="note">The Frontier Human Fashion Show &amp; Demo Day</div>
     </a>
   </div>
-  <a class="resline rv" href="#residency">Join us all of October for the Residency. <em>Live the future now.</em></a>
+  <a class="resline rv" href="#residency">Join us this October to change the future of longevity. <em>Live the future now.</em></a>
 </section>
 
 <!-- ═══ SUMMIT + HOTEL PACKAGE ═══ -->
-<section class="bundle-feature" id="summit-package" data-package-promo>
+<section class="bundle-feature" id="summit-package" data-package-promo data-track-section="summit_package" data-track-position="3">
   <div class="bundle-feature__shell rv">
     <div class="bundle-feature__media">
       <img src="img/harbor-golden-hour.jpg" alt="Kobe harbor at golden hour" loading="lazy" />
@@ -594,10 +602,10 @@
       </ul>
       <div class="bundle-feature__buy">
         <div class="bundle-feature__price">$2,500<span>Launch price through Aug 20 · $4,000 after</span></div>
-        <a class="btn accent bundle-feature__checkout bundle-checkout" href="https://luma.com/an4zotn9?coupon=SFSH&amp;utm_source=mirai-site&amp;utm_campaign=summit-hotel-package" data-luma-action="checkout" data-luma-event-id="evt-OUCqVyqoZI5Jeg4" data-luma-ticket-type="ttype-0BjQv0xV4yY5P0l" data-luma-coupon="SFSH" data-luma-utm-source="mirai-site">Get My Package — $2,500</a>
+        <a class="btn accent bundle-feature__checkout bundle-checkout" href="https://luma.com/an4zotn9?coupon=SFSH&amp;utm_source=mirai-site&amp;utm_campaign=summit-hotel-package" data-luma-action="checkout" data-luma-event-id="evt-OUCqVyqoZI5Jeg4" data-luma-ticket-type="ttype-0BjQv0xV4yY5P0l" data-luma-coupon="SFSH" data-luma-utm-source="mirai-site" data-analytics-action="checkout" data-analytics-location="summit_package" data-analytics-target="summit_hotel">Get My Package — $2,500</a>
       </div>
       <p class="bundle-feature__friction">First 10 packages or through Aug 20 · Then $4,000 · Breakfast excluded</p>
-      <div class="bundle-feature__links"><a class="bundle-feature__details" href="/summit-bundle/">See everything included →</a></div>
+      <div class="bundle-feature__links"><a class="bundle-feature__details" href="/summit-bundle/" data-analytics-action="alternative_offer" data-analytics-location="summit_package" data-analytics-target="summit_hotel">See everything included →</a></div>
     </div>
   </div>
 </section>
@@ -605,7 +613,7 @@
 <hr class="rule" />
 
 <!-- ═══ SUMMITS ═══ -->
-<section id="summits">
+<section id="summits" data-track-section="summits" data-track-position="4">
   <div class="eyebrow rv">The Longevity Biomedical Summit</div>
   <h2 class="big rv">Two summits,<br/>one week apart.</h2>
   <div class="summit">
@@ -616,7 +624,7 @@
       <p>Why the next decade of longevity biomedicine runs through Japan: regenerative medicine, devices, and the regulatory path that takes prototypes to patients in months.</p>
       <div class="topics"><span>Regenerative Medicine</span><span>Medical Devices</span><span>Accelerated Approval</span></div>
       <div class="priceRow"><span class="priceVal">$900</span><span class="priceKey">Summit Pass · Oct 17–18</span></div>
-      <div><a class="btn ghost" href="https://luma.com/an4zotn9" target="_blank" rel="noopener">Standard Tickets</a></div>
+      <div><a class="btn ghost" href="https://luma.com/an4zotn9" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="summit_1" data-analytics-target="summit_pass">Standard Tickets</a></div>
       <div class="fine">Tickets on Luma · KBIC, Port Island</div>
     </div>
     <div class="card rv">
@@ -627,7 +635,7 @@
       <div class="topics"><span>Capital</span><span>Regulation</span><span>East ↔ West</span></div>
       <div class="tiein">Stay through Monday: <a href="#fashion">the Frontier Human Fashion Show closes the run</a>.</div>
       <div class="priceRow"><span class="priceVal">$900</span><span class="priceKey">Summit Pass · Oct 24–25</span></div>
-      <div><a class="btn ghost" href="https://luma.com/an4zotn9" target="_blank" rel="noopener">Standard Tickets</a></div>
+      <div><a class="btn ghost" href="https://luma.com/an4zotn9" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="summit_2" data-analytics-target="summit_pass">Standard Tickets</a></div>
       <div class="fine">Tickets on Luma · KBIC, Port Island</div>
     </div>
   </div>
@@ -643,7 +651,7 @@
 <hr class="rule" />
 
 <!-- ═══ SPEAKERS ═══ -->
-<section id="speakers">
+<section id="speakers" data-track-section="speakers" data-track-position="5">
   <div class="eyebrow rv">43 Confirmed Speakers</div>
   <h2 class="big rv">Speakers &amp; Residents</h2>
   <div class="headliners">
@@ -663,7 +671,7 @@
 <hr class="rule" />
 
 <!-- ═══ FASHION SHOW ═══ -->
-<section class="fashion" id="fashion">
+<section class="fashion" id="fashion" data-track-section="fashion" data-track-position="6">
   <video autoplay muted loop playsinline preload="metadata" poster="augment_poster.jpg" aria-hidden="true">
     <source src="augment.mp4" type="video/mp4" /></video>
   <div class="veil"></div>
@@ -677,14 +685,14 @@
     </div>
     <div class="mono" style="margin-bottom:26px; color:var(--faint)">0 / 9 presenters revealed · <span class="kanji" role="group" aria-label="Presenter categories, tap to reveal"><span title="Armor — exoskeletons">鎧</span> <span title="Brain — neural interfaces">脳</span> <span title="Prosthetic">義</span> <span title="Sense — biosensors">感</span> <span title="Touch — haptics">触</span> <span title="Machine">機</span> <span title="Garment">衣</span> <span title="Vision">視</span> <span title="Life">命</span></span></div>
     <div style="display:flex; gap:14px; flex-wrap:wrap">
-      <a class="btn accent" href="https://luma.com/an4zotn9" target="_blank" rel="noopener">Get Show Tickets</a>
+      <a class="btn accent" href="https://luma.com/an4zotn9" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="fashion" data-analytics-target="fashion_show">Get Show Tickets</a>
       <a class="btn ghost" href="#residency">Put your device on the runway</a>
     </div>
   </div>
 </section>
 
 <!-- ═══ ECOSYSTEM ═══ -->
-<section>
+<section data-track-section="ecosystem" data-track-position="7">
   <div class="eyebrow rv">Ecosystem</div>
   <h2 class="big rv">Supporting organizations</h2>
   <div class="ecoWall rv" aria-label="Supporting organizations">
@@ -728,21 +736,21 @@
 </section>
 
 <!-- ═══ JAPAN STRIP ═══ -->
-<section class="stripwrap" aria-label="One evening in Kobe">
+<section class="stripwrap" aria-label="One evening in Kobe" data-track-section="kobe_evening" data-track-position="8">
   <div class="cap mono rv">One evening in Kobe · 17:58 → 23:41</div>
   <div class="strip">
     <figure><img src="img/harbor-golden-hour.jpg" alt="Kobe harbor at golden hour" loading="lazy" /><figcaption>17:58 Kobe Harbor</figcaption></figure>
     <figure><img src="img/izakaya-counter.jpg" alt="Izakaya counter seat" loading="lazy" /><figcaption>19:47 Dinner is a counter seat</figcaption></figure>
     <figure><img src="img/lanterns.jpg" alt="Lantern night" loading="lazy" /><figcaption>21:15 Lantern night</figcaption></figure>
     <figure><img src="img/port-tower-night.jpg" alt="Port Tower at night" loading="lazy" /><figcaption>22:30 One more street</figcaption></figure>
-    <figure><img src="img/rokko-night.jpg" alt="Mt. Rokko night view" loading="lazy" /><figcaption>23:41 Mt. Rokko, the ten-million-dollar view · <a href="#residency" style="color:var(--accent); text-decoration:none; font-size:12px; padding:6px 0; display:inline-block">Live here a month →</a></figcaption></figure>
+    <figure><img src="img/rokko-night.jpg" alt="Mt. Rokko night view" loading="lazy" /><figcaption>23:41 Mt. Rokko, the ten-million-dollar view · <a href="/experience/" style="color:var(--accent); text-decoration:none; font-size:12px; padding:6px 0; display:inline-block" data-analytics-action="site_navigation" data-analytics-location="kobe_evening" data-analytics-target="experience_guide">Explore Kobe + Kansai →</a></figcaption></figure>
   </div>
 </section>
 
 <!-- ═══ RESIDENCY / THE MONTH ═══ -->
-<section class="month" id="residency">
+<section class="month" id="residency" data-track-section="residency" data-track-position="9">
   <div class="eyebrow rv">The Residency · October 1–31</div>
-  <h2 class="big rv">Join us all of October<br/>for the Residency.</h2>
+  <h2 class="big rv">Join us this October<br/>to change the future of longevity.</h2>
   <div class="resline rv" style="margin-top:14px">Live the future now.</div>
 
   <div class="props rv">
@@ -795,17 +803,17 @@
   </div>
 
   <div class="tracks">
-    <a class="t rv" href="https://luma.com/an4zotn9" target="_blank" rel="noopener"><div class="mono">Medical Devices</div><h3>Devices Residency</h3><p>Lab infrastructure for first-in-human prototypes.</p><div class="go">Apply →</div></a>
-    <a class="t rv" href="https://luma.com/an4zotn9" target="_blank" rel="noopener"><div class="mono">Therapeutics</div><h3>Therapies Residency</h3><p>Direct PMDA connection for conditional approval.</p><div class="go">Apply →</div></a>
-    <a class="t rv" href="https://luma.com/an4zotn9" target="_blank" rel="noopener"><div class="mono">Community</div><h3>Builder Pass</h3><p>Full access to everything. Build, connect, explore.</p><div class="ebTag">Early Bird</div><div class="price">$399 <s>$1500</s></div><div class="left">140 passes remaining</div><div class="ebClock ebClock--line">Ends in <span class="ebc">&#8212;</span></div><div class="go">Apply →</div></a>
+    <a class="t rv" href="https://luma.com/an4zotn9" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="residency_devices" data-analytics-target="residency"><div class="mono">Medical Devices</div><h3>Devices Residency</h3><p>Lab infrastructure for first-in-human prototypes.</p><div class="go">Apply →</div></a>
+    <a class="t rv" href="https://luma.com/an4zotn9" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="residency_therapies" data-analytics-target="residency"><div class="mono">Therapeutics</div><h3>Therapies Residency</h3><p>Direct PMDA connection for conditional approval.</p><div class="go">Apply →</div></a>
+    <a class="t rv" href="https://luma.com/an4zotn9" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="residency_builder" data-analytics-target="residency"><div class="mono">Community</div><h3>Builder Pass</h3><p>Full access to everything. Build, connect, explore.</p><div class="ebTag">Early Bird</div><div class="price">$399 <s>$1500</s></div><div class="left">140 passes remaining</div><div class="ebClock ebClock--line">Ends in <span class="ebc">&#8212;</span></div><div class="go">Apply →</div></a>
   </div>
-  <div class="monthCta rv"><a class="btn accent" href="https://luma.com/an4zotn9" target="_blank" rel="noopener">Apply for the Residency</a></div>
+  <div class="monthCta rv"><a class="btn accent" href="https://luma.com/an4zotn9" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="residency_cta" data-analytics-target="residency">Apply for the Residency</a></div>
 </section>
 
 <hr class="rule" />
 
 <!-- ═══ WHY KOBE ═══ -->
-<section>
+<section data-track-section="why_kobe" data-track-position="10">
   <div class="eyebrow rv">Why Kobe</div>
   <h2 class="big rv">What takes years elsewhere<br/>takes months here.</h2>
   <p class="rv" style="color:var(--dim); max-width:64ch; margin-top:8px; line-height:1.7; font-size:15px">
@@ -822,7 +830,7 @@
 <hr class="rule" />
 
 <!-- ═══ TRACK RECORD ═══ -->
-<section class="past">
+<section class="past" data-track-section="track_record" data-track-position="11">
   <div class="eyebrow rv">Track Record</div>
   <h2 class="big rv">Four times at scale,<br/>on three coasts.</h2>
   <div class="item rv"><div class="n">500+</div><div><h3>Vitalia City Pop-Ups · Roatán · 2024–25</h3><p>Builders in a regulatory sandbox. Two popups became a permanent hub.</p></div></div>
@@ -833,7 +841,7 @@
 </section>
 
 <!-- ═══ APPLY ═══ -->
-<div class="applywrap" id="apply">
+<div class="applywrap" id="apply" data-track-section="apply" data-track-position="12">
   <img class="bg" src="img/future_city.jpg" alt="" aria-hidden="true" loading="lazy" />
   <div class="veil"></div>
   <section class="apply">
@@ -841,8 +849,8 @@
     <h2 class="rv">The future is<br/>built here.</h2>
     <p class="sub rv">Tickets for the Summits &amp; Fashion Show. Applications for the Residency.</p>
     <div class="row rv">
-      <a class="btn accent" href="https://luma.com/an4zotn9" target="_blank" rel="noopener">Get Tickets</a>
-      <a class="btn" href="https://luma.com/an4zotn9" target="_blank" rel="noopener">Apply for the Residency</a>
+      <a class="btn accent" href="https://luma.com/an4zotn9" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="apply" data-analytics-target="tickets">Get Tickets</a>
+      <a class="btn" href="https://luma.com/an4zotn9" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="apply" data-analytics-target="residency">Apply for the Residency</a>
       <a class="btn ghost" href="#">Sponsor the City</a>
     </div>
     <div class="fine rv">Tickets &amp; residency on Luma · Applications reviewed on a rolling basis</div>
@@ -864,7 +872,7 @@
   <div class="jst">Kobe right now · <b id="jst">—</b> JST</div>
   <div class="doors" id="doors">
     <a href="#">The Group Chat →</a>
-    <a href="https://luma.com/an4zotn9" target="_blank" rel="noopener">Follow on Luma →</a>
+    <a href="https://luma.com/an4zotn9" target="_blank" rel="noopener" data-analytics-action="site_navigation" data-analytics-location="footer" data-analytics-target="luma_listing">Follow on Luma →</a>
     <a href="#">The Build Server →</a>
     <a href="#">Sponsor the City →</a>
   </div>
@@ -910,8 +918,8 @@
     if (e.key === 'Escape' && menu.classList.contains('open')) setMenu(false);
   });
 
-  // early-bird window closes Aug 15 (JST): page self-heals to standard pricing
-  const EB_END = new Date('2026-08-16T00:00:00+09:00').getTime();
+  // early-bird window closes Aug 31 (JST): page self-heals to standard pricing
+  const EB_END = new Date('2026-09-01T00:00:00+09:00').getTime();
   if (Date.now() >= EB_END) {
     document.documentElement.classList.add('ebOver');
     document.querySelectorAll('.ebTag, .left, .ebClock').forEach(el => el.remove());
@@ -923,7 +931,7 @@
 
   // hero sequence
   const slides = [...document.querySelectorAll('.hero .slide')];
-  const WORDS = ['Live', 'Eradicate', 'Extend', 'Augment'];
+  const WORDS = ['Eradicate', 'Extend', 'Augment', 'Live'];
   const dotsWrap = document.getElementById('heroDots');
   slides.forEach((s, i) => {
     if (i !== 0) s.setAttribute('inert', '');

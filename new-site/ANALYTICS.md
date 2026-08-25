@@ -1,8 +1,18 @@
 # Landing-page measurement plan
 
-This plan covers `/early-bird/` and `/summit-bundle/` in the standalone
-`new-site` deployment. Both pages load Vercel Web Analytics and the shared
-`/analytics.js` instrumentation.
+This plan covers the standalone `new-site` deployment. Every page loads two
+analytics sinks and the shared `/analytics.js` instrumentation, which dispatches
+one event taxonomy to both:
+
+- **Vercel Web Analytics** — page views, referrer, device, geography, plus the
+  custom events below at two properties each. This is the aggregate view.
+- **PostHog** (`/posthog.js`) — the same custom events with
+  full property payloads, plus autocapture, heatmaps, session replay, and
+  funnel/trend analysis. This is the diagnostic view.
+
+The conversion funnel below applies to `/`, `/early-bird/`, `/summit-bundle/`,
+and `/experience/`. `/jp/` shares the taxonomy but sells no ticket directly; its
+outcome is an email enquiry, not a checkout.
 
 ## Deployment checklist
 
@@ -14,6 +24,10 @@ This plan covers `/early-bird/` and `/summit-bundle/` in the standalone
   opening one checkout. Ad/privacy blockers can suppress either request.
 - Complete one test Luma purchase and confirm both `Checkout Opened` and
   `Purchase Completed` in Analytics before relying on the funnel.
+- Add `localhost` to PostHog's internal/test-account filter so setup traffic is
+  excluded from the funnel.
+- Confirm in DevTools that a request reaches `us.i.posthog.com/e/`. PostHog is
+  the sink that survives Vercel's Hobby-plan limits, so verify it independently.
 
 ## Outcome and funnel
 
@@ -21,9 +35,10 @@ The primary outcome is a completed paid checkout. Read each page as this
 ordered funnel:
 
 1. Page view / visitor (automatic Vercel Web Analytics)
-2. `Section Viewed` from `offer` through the final offer
-3. `Checkout Opened`
-4. `Purchase Completed`
+2. `5-Second Visit` after five cumulative seconds with the page visible
+3. `Section Viewed` from `offer` through the final offer
+4. `Checkout Opened`
+5. `Purchase Completed`
 
 `Section Viewed` requires the section to remain in the central 60% of the
 viewport for 800 ms. This avoids counting fast scroll-throughs and works for
@@ -33,9 +48,10 @@ comparable with page views.
 
 ## Event taxonomy
 
-| Event | Properties (maximum two) | Question answered |
+| Event | Vercel properties (maximum two) | Question answered |
 |---|---|---|
 | Page view | Automatic path, referrer, device, geography | Who reaches each offer and from where? |
+| `5-Second Visit` | None | How many visitors remain for at least five visible seconds? |
 | `Experiment Assigned` | `experiment`, `variant` | How many eligible Summit Bundle visits entered each test group? |
 | `Section Viewed` | `section`, `position` or `variant` | Where does meaningful page reach fall off, including by Summit Bundle variant? |
 | `Checkout Opened` | `offer`, `location` | Which CTA first creates purchase intent? |
@@ -60,6 +76,103 @@ For durable financial reporting, reconcile it against Luma/Stripe and add a
 server-side event from an official checkout webhook if that becomes available;
 the browser event should not be the accounting source of truth.
 
+## What PostHog adds
+
+`/posthog.js` initialises PostHog before `/analytics.js` and exposes a small
+`window.MiraiPostHog.capture` bridge that queues events until the library
+finishes loading, so nothing fired early is lost. It is the only file that
+touches `window.posthog`.
+
+new-site reports to its own PostHog project, whose token is the `PROJECT_TOKEN`
+constant in `posthog.js`. This is deliberately *not* the project the Next.js app
+uses (`NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN` in `.env.local`): the two surfaces have
+separate event histories and separate dashboards. The cost is that a visitor who
+goes from a landing page into the apply flow cannot be followed across the two in
+a single funnel. If that cross-surface funnel becomes the question worth
+answering, move both surfaces onto one project and accept the history split.
+
+Session replay, heatmaps, dead clicks, and exception autocapture are all governed
+by that project's server-side settings. `posthog.js` asks for them; the project
+decides. If replay stops appearing, check the project toggle before the code — a
+disabled project returns `"sessionRecording": false` from
+`https://us.i.posthog.com/array/<token>/config` and the client will correctly
+refuse to record.
+
+**Automatic, no markup required**
+
+- `$pageview` and `$pageleave`, which together give time on page and the maximum
+  scroll percentage per view (`$prev_pageview_max_scroll_percentage`).
+- `$autocapture` on every click, so any CTA added later is measurable before
+  anyone remembers to tag it — and heatmaps and click maps come from the same
+  data.
+- Session replay, with all inputs masked.
+- `$exception` capture, so a JavaScript error that silently breaks a CTA shows
+  up as a cause of lost conversion rather than as unexplained drop-off.
+
+**Every custom event additionally carries**
+
+| Property | Meaning |
+|---|---|
+| `offer` | The page's offer key, without the variant suffix |
+| `experiment`, `variant` | The assignment, when the page runs a test |
+| `qa` | `true` for forced-variant views (see below) |
+| `seconds_on_page` | Seconds since navigation start |
+| `sections_viewed` | How many sections had been read by this point |
+| `deepest_section`, `deepest_section_position` | How far down the page the visitor had reached |
+
+That context is the difference between knowing that checkout intent fell and
+knowing that it fell among visitors who never reached the price. Two events also
+carry their own extras: `Checkout Opened` adds `checkout_target` (tickets,
+residency, summit_hotel, fashion_show) and `is_first_checkout`, and
+`Section Viewed` adds `seconds_to_view`.
+
+Vercel counts only the first `Checkout Opened` per page load, so its funnel stays
+comparable with page views. PostHog records every click, which is what makes
+repeat attempts and returns-after-abandon visible.
+
+**Funnels to build**
+
+1. Paid conversion — `$pageview` → `Section Viewed` (`offer`) → `Checkout Opened`
+   → `Purchase Completed`, broken down by `offer`.
+2. Page reach — `Section Viewed` as a trend by `deepest_section_position`. The
+   largest adjacent decline is the content boundary that loses attention.
+3. CTA placement — `Checkout Opened` by `location`, filtered to
+   `is_first_checkout = true`.
+4. Experiment readout — `Purchase Completed` / `Experiment Assigned` split by
+   `variant`, with `qa = true` excluded.
+
+**Privacy**
+
+No page on this site collects a name, an email address, or a payment; checkout
+happens on Luma. PostHog runs with `person_profiles: 'identified_only'` and the
+site never calls `identify`, so every event stays anonymous and no person
+profiles are created. Session replay masks all inputs. Add PostHog's cookies to
+the site's cookie disclosure alongside the two experiment cookies.
+
+**Forced variants**
+
+`?early_bird_hero=…` and `?summit_hero=…` suppress every custom event in both
+sinks, exactly as before. PostHog still receives the automatic `$pageview` and
+autocapture for those views, tagged `qa: true` — filter on that property rather
+than assuming QA traffic is absent.
+
+**Ad blockers**
+
+Events currently go directly to `us.i.posthog.com`, which some blockers stop.
+Routing them through the site's own origin recovers most of that loss; it needs
+a `new-site/vercel.json` and a one-line change to `API_HOST` in `posthog.js`:
+
+```json
+{ "rewrites": [
+  { "source": "/ingest/static/:path*", "destination": "https://us-assets.i.posthog.com/static/:path*" },
+  { "source": "/ingest/:path*", "destination": "https://us.i.posthog.com/:path*" }
+] }
+```
+
+This is deliberately not shipped yet: it is unverifiable until it is deployed,
+and a rewrite that fails silently takes all analytics with it. Deploy it to a
+preview, confirm `/ingest/decide` responds, then switch `API_HOST`.
+
 ## Dashboard and bottleneck review
 
 Review by page, device, referrer, and week. Use the Web Analytics dashboard for
@@ -67,6 +180,10 @@ ad hoc checks and the Web Analytics API for a repeatable weekly table.
 
 Track these rates/trends:
 
+- Five-second engagement = `5-Second Visit` / page views. Use this as the
+  landing-page quality signal when single-page visits make bounce rate
+  misleading. The timer pauses while the tab is hidden and fires once per page
+  view.
 - Section reach = `Section Viewed` at a position / page views. The largest
   adjacent decline identifies the content boundary where attention is lost.
 - Checkout intent = `Checkout Opened` / page views. Break down by `location` to
@@ -79,8 +196,8 @@ Track these rates/trends:
   objection to answer earlier or more clearly; it is hypothesis evidence, not
   proof that the answer causes conversion.
 - Automatic bounce rate by route/referrer/device. Vercel does not count custom
-  events as additional page views, so use bounce as a separate acquisition and
-  landing-quality signal.
+  events as additional page views; treat bounce as secondary to five-second
+  engagement for these landing pages.
 
 Avoid reacting to raw totals alone. Compare rates with absolute denominators,
 look for the same pattern across at least two meaningful time periods, and
@@ -179,6 +296,10 @@ That would centralize allocation and annotate Vercel Web Analytics automatically
 
 ## References
 
+- [PostHog JavaScript Web SDK](https://posthog.com/docs/libraries/js)
+- [PostHog funnels](https://posthog.com/docs/product-analytics/funnels)
+- [PostHog session replay privacy controls](https://posthog.com/docs/session-replay/privacy)
+- [PostHog reverse proxy](https://posthog.com/docs/advanced/proxy)
 - [Vercel custom events](https://vercel.com/docs/analytics/custom-events)
 - [Vercel Web Analytics privacy](https://vercel.com/docs/analytics/privacy-policy)
 - [Vercel Web Analytics limits and pricing](https://vercel.com/docs/analytics/limits-and-pricing)
