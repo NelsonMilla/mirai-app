@@ -190,10 +190,10 @@
   @media (prefers-reduced-motion: reduce) { .rv { opacity: 1; transform: none; transition: none; } }
 
   /* ── nav ── */
-  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 50;
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 18px 4vw; background: linear-gradient(to bottom, rgba(5,5,6,.82), transparent);
-    backdrop-filter: blur(2px); }
+  .topbar { position: fixed; top: 0; left: 0; right: 0; z-index: 50; }
+  nav { display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 4vw; background: rgba(5,5,6,.94);
+    backdrop-filter: blur(14px); }
   nav .logo { font-weight: 800; letter-spacing: .06em; font-size: 15px; text-transform: uppercase; text-decoration: none; }
   nav .logo span { color: var(--accent); }
   nav .links { display: flex; gap: 26px; align-items: center; }
@@ -232,6 +232,35 @@
     .promo-full { display: none; }
     .promo-short { display: inline; }
   }
+  /* ── early-bird stripe (parks directly under the fixed nav) ── */
+  .ebStripe { display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap;
+    padding: 9px 4vw; text-decoration: none;
+    background: linear-gradient(180deg, #8c202a, #71161f);
+    border-top: 1px solid rgba(255,255,255,.10);
+    border-bottom: 1px solid rgba(0,0,0,.45);
+    font-family: var(--mono); font-size: 11px; letter-spacing: .18em; text-transform: uppercase;
+    color: #fbeceb; transition: background .25s; }
+  .ebStripe:hover { background: linear-gradient(180deg, #9c2531, #7d1a24); }
+  .ebStripe .ebc { color: #fff; letter-spacing: .08em; font-variant-numeric: tabular-nums; font-weight: 500; }
+  .ebStripe .ebs-sep { color: rgba(255,255,255,.3); }
+  .ebStripe .ebs-price { letter-spacing: .08em; white-space: nowrap; }
+  .ebStripe .ebs-price s { color: rgba(251,236,235,.55); text-decoration-thickness: 1px; margin-right: 8px; }
+  .ebStripe .ebs-price b { color: #fff; font-weight: 700; font-size: 13px; }
+  .ebStripe .ebs-cta { color: #fff; }
+  @media (max-width: 980px) {
+    .ebStripe { gap: 12px; font-size: 10px; letter-spacing: .12em; }
+    .ebStripe .ebs-sep { display: none; }
+  }
+  @media (max-width: 760px) {
+    .ebStripe { gap: 9px; padding: 8px 3vw; letter-spacing: .1em; }
+    .ebStripe .ebs-cta { display: none; }
+  }
+  .ebStripe .ebs-label-short { display: none; }
+  @media (max-width: 460px) {
+    .ebStripe .ebs-label-full { display: none; }
+    .ebStripe .ebs-label-short { display: inline; }
+  }
+
   .menu { position: fixed; inset: 0; z-index: 60; background: rgba(5,5,6,.96); backdrop-filter: blur(14px);
     display: flex; flex-direction: column; justify-content: center; gap: 18px; padding: 0 8vw;
     opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .3s ease, visibility 0s linear .3s; }
@@ -591,6 +620,7 @@
 <a class="skip" href="#main">Skip to content</a>
 
 <div role="status" aria-live="polite" id="srStatus" style="position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0)"></div>
+<div class="topbar">
 <nav>
   <a class="logo" href="#top" style="display:flex; align-items:center; gap:10px">Mirai <span>Tech</span> <img class="daruma" src="img/daruma.png" alt="Daruma" title="One eye at the start. The other on October 1." /></a>
   <div class="links">
@@ -605,6 +635,16 @@
     <button class="menuBtn" id="menuBtn" aria-expanded="false" aria-controls="menu">Menu</button>
   </div>
 </nav>
+
+<a class="ebStripe" id="ebStripe" href="https://luma.com/an4zotn9" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="early_bird_stripe" data-analytics-target="tickets">
+  <span class="ebs-label-full">Early Bird ticket sale ending in</span><span class="ebs-label-short">Early Bird ends in</span>
+  <span class="ebc">&#8212;</span>
+  <span class="ebs-sep">·</span>
+  <span class="ebs-price"><s>$1500</s><b>$399</b></span>
+  <span class="ebs-sep">·</span>
+  <span class="ebs-cta">Get Tickets →</span>
+</a>
+</div>
 
 <div class="menu" id="menu" role="dialog" aria-modal="true" aria-label="Site menu">
   <button class="menuClose" id="menuClose" aria-label="Close menu">✕</button>
@@ -1045,7 +1085,7 @@
   const EB_END = new Date('2026-09-01T00:00:00+09:00').getTime();
   if (Date.now() >= EB_END) {
     document.documentElement.classList.add('ebOver');
-    document.querySelectorAll('.ebTag, .left, .ebClock').forEach(el => el.remove());
+    document.querySelectorAll('.ebTag, .left, .ebClock, .ebStripe').forEach(el => el.remove());
     document.querySelectorAll('.ebPrice, .tracks .t .price').forEach(el => {
       const s = el.querySelector('s');
       if (s) el.textContent = s.textContent;
