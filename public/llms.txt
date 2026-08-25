@@ -1,0 +1,33 @@
+# Mirai Tech City — Japan's Premier Longevity Biomedical Popup City
+
+> Mirai Tech City is a month-long longevity biomedical popup city and conference series taking place in Kobe, Japan throughout October 2026.
+
+## Overview & Location
+- **Location**: Port Island, Kobe Biomedical Innovation Cluster (KBIC), Kobe, Hyogo, Japan.
+- **Dates**: October 1–31, 2026 (Residency)
+- **Timezone**: Asia/Tokyo (JST)
+- **Canonical Website**: https://mirai-tech-city.vercel.app
+
+## Key Events
+- **Summit I: Eradicate Disease** (Oct 17–18, 2026): Focused on therapeutics, rejuvenation biotechnology, disease eradication, and gene therapies.
+- **Summit II: Extend the Healthspan** (Oct 24–25, 2026): Focused on translational aging science, biomarkers, epigenetic reprogramming, and bridging East & West longevity advances.
+- **The Frontier Human Fashion Show & Demo Day** (Oct 26, 2026): A live runway demo day for exoskeletons, neural interfaces, smart prosthetics, haptic suits, biosensors, and AR/VR medical tech.
+- **The Residency** (Oct 01–31, 2026): A month-long co-living and building residency for 300 biomedical researchers, engineers, founders, and longevity pioneers.
+
+## Featured Prominent Experts & Speakers
+- **Aubrey de Grey, PhD**: Biogerontologist, Founder & President of LEV Foundation (Longevity Escape Velocity).
+- **Prof. Brian Kennedy**: Distinguished Professor of Biochemistry & Physiology, Director of Centre for Healthy Longevity at NUS.
+- **Prof. Motoshi Hayano**: Associate Professor at Keio University School of Medicine (Epigenetic Reprogramming & Ocular Therapeutics).
+- **José Cordeiro**: Transhumanist Scholar, Vice-Chair of Humanity+, Author of *The Death of Death*.
+- **Sebastian Brunemeier**: Managing Partner at Healthspan Capital (Longevity Biotech Venture Capital).
+- **Irit Rappley, PhD**: Biomedical Scientist and VP of Research.
+- **Yuri Deigin**: CEO & Founder of YouthBio Therapeutics (Epigenetic Rejuvenation).
+- **Yuki Hanyu**: Founder of Shojinmeat Project & Cellular Agriculture Institute Japan.
+- **Prof. Stuart Reid**: Professor of Medical Physics & Bio-Engineering.
+- **Prof. Takahiro Yasuda**: Academic & Biomedical Researcher.
+
+## Navigation & Links
+- [Main Landing Page](https://mirai-tech-city.vercel.app/): Main event overview and schedule.
+- [Summit + Hotel Package](https://mirai-tech-city.vercel.app/summit-bundle/): Combined Summit Weekends + Hotel package.
+- [Japanese Landing Page](https://mirai-tech-city.vercel.app/jp/): Japanese language overview.
+- [Ticket Registration](https://luma.com/an4zotn9): Official Luma registration link for Summits and Residency.
