@@ -114,7 +114,9 @@ test('the early bird funnel reports section reach and checkout intent', async ({
   // `early_bird_hero_framing_v1` A/B that the CXL redesign retired, and the
   // redesigned hero has a single arm. Do not re-add one unless a real test is
   // wired up — summit-bundle is the page that still assigns a variant.
-  for (const section of ['proof', 'pricing', 'program']) {
+  // `offer` is first so the loop waits for its Section Viewed event rather than
+  // racing the scroll away from it — under load it was registering only sometimes.
+  for (const section of ['offer', 'proof', 'program']) {
     await page.locator(`[data-track-section="${section}"]`).scrollIntoViewIfNeeded();
     await expect.poll(async () => (await posthogEvents(page))
       .some(([name, properties]) => name === 'Section Viewed' && properties.section === section))
@@ -126,15 +128,16 @@ test('the early bird funnel reports section reach and checkout intent', async ({
 
   const checkout = (await posthogEvents(page)).find(([name]) => name === 'Checkout Opened');
   expect(checkout).toBeDefined();
-  // Section positions follow the CXL redesign: offer/1, program/2, proof/3,
-  // pricing/4, close/5. The loop above visits three of them, and the deepest
-  // by position is `pricing` — `program` sits at 2 now, not 4.
+  // Section positions after the CXL redesign: offer/1, program/2, proof/3,
+  // close/5. There is no pricing section and nothing sits at position 4.
+  // The loop visits three, and `proof` at 3 is the deepest. `close` is not
+  // counted: Checkout Opened fires before the click's scroll registers it.
   expect(checkout?.[1]).toMatchObject({
     location: 'close',
     is_first_checkout: true,
     sections_viewed: 3,
-    deepest_section: 'pricing',
-    deepest_section_position: 4,
+    deepest_section: 'proof',
+    deepest_section_position: 3,
   });
   // No variant suffix: this page no longer runs an A/B, so `offer()` returns
   // the bare offer id. summit-bundle is where a variant still gets appended.

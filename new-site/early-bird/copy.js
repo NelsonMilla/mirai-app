@@ -49,9 +49,9 @@ window.MIRAI_COPY = {
 
     /* The $399 span is hidden automatically after Aug 31, so the
        headline still reads correctly on its own. Keep it last. */
-    headline: `<span class="early-page__hero-line">All Access.</span><span class="early-page__hero-price">$399.</span>`,
+    headline: `<span class="early-page__hero-line">A Month in Japan for</span><span class="early-page__hero-price"> Biotech Leaders.</span>`,
 
-    lead: `A full month of biotech and longevity in Japan. Covers both summit weekends, the Fashion Show, and everything in between.`,
+    lead: `A full month of biotech and longevity in Japan. Early bird pricing available until August 31.`,
 
     /* The four-cell fact ledger under the lead. */
     factLabel1: `When`,
