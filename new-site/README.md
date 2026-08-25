@@ -20,8 +20,17 @@ Single static `index.html` — no framework, no build step. Deploys anywhere
   a full-size Luma checkout in a new tab with the hotel ticket preselected
   (`ttype-0BjQv0xV4yY5P0l`) and access coupon `SFSH`. The site moves to standard
   pricing after Aug 20 JST.
+- `/experience/` is the attendee-facing Kobe + Kansai field guide. Like the
+  summit bundle, it is deployment-ready static code: `experience/index.html`
+  owns the presentation and filtering, while `experience/experience.js` is the
+  canonical content registry. No build step is required after guide edits.
 - Fonts: Switzer (Fontshare) + IBM Plex Mono. Speaker photos + Kobe stills
   from this repo's `public/images` (comic-style avatars intentionally not used).
+- Analytics: every page loads `/posthog.js` (PostHog: autocapture, heatmaps,
+  session replay, funnels) then `/analytics.js` (the shared event taxonomy,
+  dispatched to both PostHog and Vercel Web Analytics). Section reach and
+  checkout CTAs are marked up with `data-track-section` / `data-analytics-*`
+  attributes; see `ANALYTICS.md`.
 - Passed a 3-critic review panel (copy 97 · UX 96 · code/design 98, bar 95).
 - Open TODOs: Telegram/Discord/sponsor URLs (buttons flash "Opening soon"),
   daruma gets his second eye Oct 1. (Hero A/B page live-candidates.html

@@ -4,10 +4,27 @@
     {
       "name": "next-dev",
       "runtimeExecutable": "/opt/homebrew/bin/npm",
-      "runtimeArgs": ["run", "dev"],
-      "env": { "PATH": "/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin" },
+      "runtimeArgs": [
+        "run",
+        "dev"
+      ],
+      "env": {
+        "PATH": "/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin"
+      },
       "port": 3000,
       "autoPort": true
+    },
+    {
+      "name": "new-site",
+      "runtimeExecutable": "/opt/homebrew/bin/python3",
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "4321",
+        "-d",
+        "new-site"
+      ],
+      "port": 4321
     }
   ]
 }

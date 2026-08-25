@@ -21,6 +21,7 @@
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet" />
 <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
 <script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/posthog.js"></script>
 <script defer src="/analytics.js"></script>
 <style>
   :root {
@@ -316,6 +317,14 @@
     font-weight: 700; }
   .jp-page__ticket-current .jp-page__general-inclusions { margin-top: 6px; color: var(--dim); }
   .jp-page__source-phrase { color: var(--ink); font-weight: 650; overflow-wrap: normal; word-break: keep-all; }
+  .jp-page__price-compare { display: grid; margin-top: 14px; border-top: 1px solid var(--line); }
+  .jp-page__price-compare > div { display: flex; align-items: baseline; justify-content: space-between; gap: 16px;
+    padding: 9px 0; border-bottom: 1px solid var(--line); }
+  .jp-page__price-compare dt { color: var(--dim); font-size: 14px; line-height: 1.5; }
+  .jp-page__price-compare dd { color: rgba(244,243,240,.82); font-family: var(--mono); font-size: 15px; white-space: nowrap; }
+  .jp-page__price-compare-highlight dt { color: var(--ink); font-weight: 700; }
+  .jp-page__price-compare-highlight dd { color: var(--accent); font-size: 18px; font-weight: 700; }
+  .jp-page__price-note { margin-top: 12px; color: var(--dim); font-size: 14px; line-height: 1.6; }
   .jp-page__ticket-contact { display: inline-flex; min-height: 44px; align-items: center; justify-content: center; padding: 10px 16px;
     border: 1px solid rgba(244,243,240,.34); border-radius: 3px; color: var(--ink); font-family: var(--mono); font-size: 10px;
     letter-spacing: .12em; line-height: 1.4; text-align: center; text-decoration: none; text-transform: uppercase; transition: border-color .2s ease, background-color .2s ease; }
@@ -547,7 +556,7 @@
         <h2 id="hero-ticket-title">2つのサミット。神戸で過ごす1か月。</h2>
         <p>2週末のサミット、フロンティア・ヒューマン ファッションショー＆デモデイ、そして10月を通じたMiraiコミュニティプログラムをご紹介します。</p>
         <a class="jp-page__btn" href="#ticket" data-analytics-action="site_navigation" data-analytics-target="japan_resident_access_status" data-analytics-location="hero">日本居住者向け参加枠を見る</a>
-        <p class="jp-page__ticket-note">最新の申込方法と公開状況を以下に掲載</p>
+        <p class="jp-page__ticket-note">料金と含まれる内容は以下に掲載</p>
       </aside>
     </div>
     <div class="jp-page__hero-credit">神戸港｜Miraiは2026年10月1日開幕</div>
@@ -649,29 +658,34 @@
   <section class="jp-page__ticket" id="ticket" aria-labelledby="ticket-title" data-track-section="ticket" data-track-position="6">
     <div class="jp-page__ticket-inner">
       <div class="jp-page__ticket-copy">
-        <div class="jp-page__ticket-status"><div class="jp-page__eyebrow">日本居住者向け参加枠｜最新状況</div><time datetime="2026-08-19">2026年8月19日確認</time></div>
+        <div class="jp-page__ticket-status"><div class="jp-page__eyebrow">日本居住者向け参加枠｜料金と内容</div><time datetime="2026-08-24">2026年8月24日確認</time></div>
         <h2 id="ticket-title">日本居住者向け参加枠。</h2>
-        <p>現在のイベント情報には、日本居住者向け参加枠と、条件を満たすKBICおよび神戸大学チーム向けの無料参加枠が記載されています。</p>
+        <p>日本にお住まいの方は、割引価格でMiraiのすべてにご参加いただけます。2つのサミット、フロンティア・ヒューマン ファッションショー、デモデイ、そして10月のプログラム全体が含まれます。</p>
         <dl class="jp-page__eligibility">
-          <div><dt>日本居住者</dt><dd>イベント詳細に、日本居住者向け参加枠が記載されています。</dd></div>
-          <div><dt>KBICチーム</dt><dd>条件を満たす神戸医療産業都市（KBIC）のチームには、無料参加枠があると記載されています。</dd></div>
-          <div><dt>神戸大学</dt><dd>条件を満たす神戸大学のチームには、無料参加枠があると記載されています。</dd></div>
+          <div><dt>日本居住者</dt><dd>割引価格 <span class="jp-page__source-phrase" lang="en">US$199</span>。一般チケットと同じ内容にすべてご参加いただけます。</dd></div>
+          <div><dt>KBICチーム</dt><dd>条件を満たす神戸医療産業都市（KBIC）のチームには、無料参加枠があります。</dd></div>
+          <div><dt>神戸大学</dt><dd>条件を満たす神戸大学のチームには、無料参加枠があります。</dd></div>
         </dl>
       </div>
       <aside class="jp-page__purchase" aria-labelledby="purchase-title">
         <div class="jp-page__purchase-card">
-          <div class="jp-page__eyebrow">確認済みの問い合わせ先</div>
-          <h3 id="purchase-title">日本居住者向け参加枠の詳細を問い合わせる。</h3>
-          <p>日本居住者、KBIC、神戸大学向けの最新情報は、Miraiチームへお問い合わせください。</p>
+          <div class="jp-page__eyebrow">参加費</div>
+          <h3 id="purchase-title">日本居住者向け参加枠でお申し込みください。</h3>
+          <p>お申し込み方法、KBIC・神戸大学向けの無料参加枠の対象条件は、Miraiチームへお問い合わせください。</p>
           <div class="jp-page__ticket-primary">
             <a class="jp-page__btn" href="mailto:team@miraitech.city?subject=%E6%97%A5%E6%9C%AC%E5%B1%85%E4%BD%8F%E8%80%85%E5%90%91%E3%81%91%E5%8F%82%E5%8A%A0%E6%9E%A0%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6" data-analytics-action="alternative_offer" data-analytics-target="japan_resident_access_email" data-analytics-location="ticket">Miraiチームにメールする <span aria-hidden="true">→</span></a>
             <p class="jp-page__ticket-email">メール：<a href="mailto:team@miraitech.city?subject=%E6%97%A5%E6%9C%AC%E5%B1%85%E4%BD%8F%E8%80%85%E5%90%91%E3%81%91%E5%8F%82%E5%8A%A0%E6%9E%A0%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6">team@miraitech.city</a></p>
           </div>
           <div class="jp-page__ticket-current" role="note" aria-labelledby="ticket-current-title">
-            <h4 id="ticket-current-title">現在の公開状況</h4>
-            <p>英語版Lumaのチケット選択画面には、日本居住者向け参加枠が表示されていません。原文には <span class="jp-page__source-phrase" lang="en">US$199 “pay-what-you-can”</span> と記載されていますが、金額の扱いや日本居住者向けの利用手続きは説明されていません。参加枠に含まれる内容も未確定です。</p>
-            <p class="jp-page__general-label">一般チケットに現在含まれるもの</p>
-            <p class="jp-page__general-inclusions">すべてのサミット、コミュニティ企画、コワーキング、コミュニティスペース。</p>
+            <h4 id="ticket-current-title">料金の比較</h4>
+            <dl class="jp-page__price-compare">
+              <div><dt>一般チケット（1か月）</dt><dd lang="en">US$799</dd></div>
+              <div><dt>同・早割（期間限定）</dt><dd lang="en">US$399</dd></div>
+              <div class="jp-page__price-compare-highlight"><dt>日本居住者向け参加枠</dt><dd lang="en">US$199</dd></div>
+            </dl>
+            <p class="jp-page__price-note">日本居住者向け参加枠は <span lang="en">pay-what-you-can</span> 枠です。お支払いが難しい場合はご相談ください。</p>
+            <p class="jp-page__general-label">参加枠に含まれるもの</p>
+            <p class="jp-page__general-inclusions">2つのサミット、フロンティア・ヒューマン ファッションショー、デモデイ、1か月間のフルアクセス、コワーキング、ツアーおよびサイドイベント。一般チケットと同じ内容です。</p>
           </div>
           <a class="jp-page__ticket-contact jp-page__ticket-evidence" href="https://luma.com/an4zotn9?utm_source=japan-page-ticket&amp;utm_campaign=japan-resident-ticket" target="_blank" rel="noopener" hreflang="en" aria-label="Lumaの現在の掲載内容を新しいタブで見る" data-analytics-action="site_navigation" data-analytics-target="current_luma_listing" data-analytics-location="ticket">Lumaの現在の掲載内容を見る <span aria-hidden="true">↗</span></a>
         </div>
@@ -679,6 +693,7 @@
     </div>
   </section>
 
+  <!-- FAQ hidden until the answers are finalised. To restore, delete this comment wrapper.
   <section class="jp-page__section jp-page__faq" aria-labelledby="faq-title" data-track-section="faq" data-track-position="7">
     <header>
       <div class="jp-page__eyebrow">お申し込みの前に</div>
@@ -692,6 +707,7 @@
       <details data-track-faq="venue_and_travel" data-track-position="5"><summary><span class="jp-page__faq-marker" aria-hidden="true"><span class="jp-page__faq-marker-closed">+</span><span class="jp-page__faq-marker-open">−</span></span><span>会場と、事前に手配すべきものを教えてください。</span></summary><p>正確な会場、および交通・宿泊サポートの有無は未公開です。予約前に必ずご確認ください。Mirai Tech Cityは、神戸医療産業都市があり、神戸中心部からポートライナーで結ばれるポートアイランドでの開催を予定しています。</p></details>
     </div>
   </section>
+  -->
 
   <section class="jp-page__close" aria-labelledby="close-title" data-track-section="final_offer" data-track-position="8">
     <figure class="jp-page__close-media" aria-hidden="true"><img src="/img/rokko-night.webp" width="1024" height="683" alt="" loading="lazy" decoding="async" /></figure>
@@ -702,7 +718,7 @@
         <p>この10月、日本のバイオテックを担う研究者、起業家、プロダクトチーム、事業者が、ポートアイランドで展開する1か月のプログラムを通じて世界の参加者と出会います。</p>
       </div>
       <div class="jp-page__close-action">
-        <p class="jp-page__close-status"><strong>現在の参加枠。</strong>日本居住者向け参加枠は掲載されていますが、Lumaの選択画面からは選べません。詳細はメールでお問い合わせください。</p>
+        <p class="jp-page__close-status"><strong>日本居住者向け参加枠。</strong><span lang="en">US$199</span> で、2つのサミット、ファッションショー、デモデイを含む1か月のプログラム全体にご参加いただけます。お申し込みはメールでお問い合わせください。</p>
         <a class="jp-page__btn" href="mailto:team@miraitech.city?subject=%E6%97%A5%E6%9C%AC%E5%B1%85%E4%BD%8F%E8%80%85%E5%90%91%E3%81%91%E5%8F%82%E5%8A%A0%E6%9E%A0%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6" aria-label="日本居住者向け参加枠についてMiraiチームへメールで問い合わせる" data-analytics-action="alternative_offer" data-analytics-target="japan_resident_access_email" data-analytics-location="final_offer">参加枠をメールで問い合わせる <span aria-hidden="true">→</span></a>
         <a class="jp-page__close-evidence" href="https://luma.com/an4zotn9?utm_source=japan-page-close&amp;utm_campaign=japan-resident-access" target="_blank" rel="noopener" hreflang="en" aria-label="Lumaの現在の掲載内容を新しいタブで見る" data-analytics-action="site_navigation" data-analytics-target="current_luma_listing" data-analytics-location="final_offer">Lumaの現在の掲載内容を見る <span aria-hidden="true">↗</span></a>
       </div>

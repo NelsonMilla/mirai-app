@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
 import { LUMA_EVENT_URL, SECTIONS } from '@/lib/constants';
 import { useActiveSection } from '@/hooks/useActiveSection';
 
@@ -31,6 +32,10 @@ export function Navbar() {
             {navLabel}
           </button>
         ))}
+        <Link className="nav-experience" href="/experience">
+          <span className="nav-experience-long">The Experience</span>
+          <span className="nav-experience-short">Guide</span>
+        </Link>
         <a className="btn btn-primary" href={LUMA_EVENT_URL} target="_blank" rel="noopener noreferrer">Apply Now</a>
       </div>
     </nav>

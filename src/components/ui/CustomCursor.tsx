@@ -42,6 +42,7 @@ export function CustomCursor() {
       'input',
       'select',
       'textarea',
+      'summary',
     ].join(',');
 
     const handleMouseMove = (e: MouseEvent) => {

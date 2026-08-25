@@ -8,6 +8,7 @@ import "../styles/dormant.css";
 import "../styles/apply-page.css";
 import "../styles/fashion-show.css";
 import "../styles/about.css";
+import "../styles/experience-page.css";
 import { ScrollProvider } from "@/hooks/useScrollState";
 import { TrackProvider } from "@/components/tracks/TrackContext";
 import { CustomCursor } from "@/components/ui/CustomCursor";

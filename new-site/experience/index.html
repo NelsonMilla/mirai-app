@@ -1,0 +1,496 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>The Experience · Kobe &amp; Kansai · Mirai Tech City</title>
+<meta name="description" content="The navigation-first Kobe and Kansai field guide for Mirai Tech City attendees: arrival, stays, food, onsen, work, nightlife, Osaka, Kyoto, Nara, and day trips." />
+<meta property="og:title" content="The Experience · Live Kobe. Explore Kansai." />
+<meta property="og:description" content="Every route starts from Port Island. Plan your month at Mirai Tech City and discover the region around it." />
+<meta property="og:image" content="https://mirai-tech-city.vercel.app/img/harbor-golden-hour.jpg" />
+<meta property="og:url" content="https://mirai-tech-city.vercel.app/experience/" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="theme-color" content="#050506" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23050506'/%3E%3Ctext x='50' y='72' font-size='62' font-family='Georgia' font-weight='bold' fill='%239be8f0' text-anchor='middle'%3E未%3C/text%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="preconnect" href="https://api.fontshare.com" />
+<link rel="preconnect" href="https://cdn.fontshare.com" crossorigin />
+<link href="https://api.fontshare.com/v2/css?f[]=switzer@400,500,600,700,800,900&amp;display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet" />
+<script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/posthog.js"></script>
+<script defer src="/analytics.js"></script>
+<style>
+  :root {
+    --bg: #050506;
+    --ink: #f4f3f0;
+    --dim: rgba(244,243,240,.62);
+    --faint: rgba(244,243,240,.48);
+    --line: rgba(244,243,240,.14);
+    --accent: #9be8f0;
+    --accent-rgb: 155,232,240;
+    --font: 'Switzer', 'Inter', -apple-system, sans-serif;
+    --mono: 'IBM Plex Mono', monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+  body { min-width: 320px; overflow-x: hidden; background: var(--bg); color: var(--ink); font-family: var(--font); }
+  ::selection { background: var(--accent); color: #000; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  .experience-skip { position: fixed; top: 12px; left: 4vw; z-index: 90; padding: 12px 16px;
+    border: 1px solid rgba(var(--accent-rgb),.4); border-radius: 3px; background: var(--bg); color: var(--accent);
+    font-family: var(--mono); font-size: 10px; letter-spacing: .18em; text-decoration: none; text-transform: uppercase;
+    transform: translateY(-200%); }
+  .experience-skip:focus { transform: none; }
+  .experience-eyebrow { color: var(--accent); font-family: var(--mono); font-size: 11px; letter-spacing: .28em; text-transform: uppercase; }
+
+  /* ── route nav ── */
+  .experience-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 70; display: flex; min-height: 68px;
+    align-items: center; justify-content: space-between; gap: 24px; padding: 0 4vw; border-bottom: 1px solid var(--line);
+    background: rgba(5,5,6,.84); backdrop-filter: blur(18px) saturate(120%); }
+  .experience-logo { color: var(--ink); font-size: 15px; font-weight: 800; letter-spacing: .06em; text-decoration: none; text-transform: uppercase; }
+  .experience-logo span { color: var(--accent); }
+  .experience-navlinks { display: flex; align-items: center; gap: 24px; }
+  .experience-navlinks a { color: var(--dim); font-family: var(--mono); font-size: 10px; letter-spacing: .18em;
+    text-decoration: none; text-transform: uppercase; transition: color .2s; }
+  .experience-navlinks a:hover { color: var(--ink); }
+  .experience-navlinks .experience-apply { padding: 11px 18px; border-radius: 3px; background: var(--accent); color: #0a0a0c; font-weight: 500; }
+
+  /* ── hero ── */
+  .experience-hero { position: relative; display: flex; min-height: 92svh; align-items: flex-end; overflow: hidden;
+    padding: clamp(130px, 17vh, 190px) 6vw 8vh; }
+  .experience-hero-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 52%;
+    filter: grayscale(.42) contrast(1.08); }
+  .experience-hero::after { position: absolute; inset: 0; content: '';
+    background: linear-gradient(90deg, rgba(5,5,6,.96), rgba(5,5,6,.65) 48%, rgba(5,5,6,.18)),
+                linear-gradient(to top, rgba(5,5,6,.92), transparent 45%); }
+  .experience-hero-copy { position: relative; z-index: 2; width: min(1080px, 100%); }
+  .experience-hero h1 { max-width: 10ch; margin: 22px 0; font-size: clamp(64px, 11.5vw, 164px); font-weight: 900;
+    letter-spacing: -.045em; line-height: .82; text-transform: uppercase; }
+  .experience-hero-lede { max-width: 61ch; color: rgba(244,243,240,.82); font-size: clamp(17px, 1.55vw, 22px); line-height: 1.55; }
+  .experience-hero-meta { display: flex; flex-wrap: wrap; gap: 10px 30px; margin-top: 28px; color: var(--accent);
+    font-family: var(--mono); font-size: 10px; letter-spacing: .18em; text-transform: uppercase; }
+  .experience-credit { position: absolute; right: 20px; bottom: 12px; z-index: 2; color: var(--faint); font-family: var(--mono);
+    font-size: 9px; letter-spacing: .08em; }
+
+  /* ── quick start + radius ── */
+  .experience-start, .experience-radius { display: grid; grid-template-columns: minmax(240px,.72fr) minmax(0,1.6fr);
+    gap: 6vw; max-width: 1440px; margin: 0 auto; padding: 100px 6vw; }
+  .experience-start h2, .experience-radius h2, .experience-finale h2 { margin-top: 16px; font-size: clamp(38px,5vw,76px);
+    font-weight: 850; letter-spacing: -.025em; line-height: .96; text-transform: uppercase; }
+  .experience-quick { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
+  .experience-quick a { position: relative; display: grid; min-height: 155px; align-content: end; padding: 24px;
+    border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); color: var(--ink); text-decoration: none;
+    transition: background .2s, border-color .2s; }
+  .experience-quick a:hover { border-color: rgba(var(--accent-rgb),.5); background: rgba(var(--accent-rgb),.045); }
+  .experience-quick-no { position: absolute; top: 16px; left: 20px; color: var(--accent); font-family: var(--mono); font-size: 10px; }
+  .experience-quick strong { font-size: clamp(18px,2vw,25px); letter-spacing: -.01em; }
+  .experience-quick small { margin-top: 6px; color: var(--dim); font-size: 13px; }
+  .experience-quick-arrow { position: absolute; top: 16px; right: 20px; color: var(--faint); }
+  .experience-radius { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .experience-radius-copy p:last-child { max-width: 54ch; margin-top: 22px; color: var(--dim); font-size: 15px; line-height: 1.7; }
+  .experience-radius-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
+  .experience-radius-cell { min-height: 165px; padding: 22px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .experience-radius-place { color: var(--dim); font-family: var(--mono); font-size: 10px; letter-spacing: .18em; text-transform: uppercase; }
+  .experience-radius-time { margin: 22px 0 6px; font-size: clamp(30px,3.5vw,54px); font-weight: 850; letter-spacing: -.035em; line-height: .95; }
+  .experience-radius-detail { color: var(--faint); font-size: 12px; }
+
+  /* ── guide chrome ── */
+  .experience-guide { display: grid; grid-template-columns: 250px minmax(0,1fr); gap: clamp(32px,5vw,76px);
+    max-width: 1440px; margin: 0 auto; padding: 110px 6vw; }
+  .experience-directory { position: sticky; top: 104px; align-self: start; padding-right: 20px; border-right: 1px solid var(--line); }
+  .experience-directory-label { margin-bottom: 16px; color: var(--faint); font-family: var(--mono); font-size: 10px;
+    letter-spacing: .18em; text-transform: uppercase; }
+  .experience-directory-nav { display: grid; }
+  .experience-directory-nav a, .experience-mobile-links a { display: grid; grid-template-columns: 34px 1fr; min-height: 46px;
+    align-items: center; border-top: 1px solid var(--line); color: var(--dim); font-size: 13px; font-weight: 650;
+    text-decoration: none; transition: color .2s, padding .2s; }
+  .experience-directory-nav a:last-child, .experience-mobile-links a:last-child { border-bottom: 1px solid var(--line); }
+  .experience-directory-nav a span, .experience-mobile-links a span { color: var(--faint); font-family: var(--mono); font-size: 9px; }
+  .experience-directory-nav a:hover, .experience-directory-nav a[aria-current="location"],
+  .experience-mobile-links a[aria-current="location"] { padding-left: 6px; color: var(--accent); }
+  .experience-midnight { display: grid; margin-top: 36px; padding: 16px; border: 1px solid rgba(var(--accent-rgb),.3); }
+  .experience-midnight span { color: var(--dim); font-family: var(--mono); font-size: 9px; letter-spacing: .14em; text-transform: uppercase; }
+  .experience-midnight strong { margin: 8px 0; color: var(--accent); font-size: 38px; font-variant-numeric: tabular-nums; }
+  .experience-midnight a { color: var(--ink); font-size: 12px; text-underline-offset: 4px; }
+  .experience-mobile-directory { display: none; }
+  .experience-guide-content { min-width: 0; }
+
+  /* ── search ── */
+  .experience-search { padding: 24px; border: 1px solid var(--line); background: rgba(244,243,240,.018); }
+  .experience-search label { display: block; margin-bottom: 12px; color: var(--accent); font-family: var(--mono); font-size: 10px;
+    letter-spacing: .18em; text-transform: uppercase; }
+  .experience-search-row { display: flex; gap: 12px; }
+  .experience-search input { width: 100%; min-height: 50px; padding: 0 16px; border: 1px solid rgba(244,243,240,.25);
+    border-radius: 2px; background: transparent; color: var(--ink); font: inherit; }
+  .experience-search input::placeholder { color: var(--faint); }
+  .experience-search input:focus { border-color: var(--accent); }
+  .experience-clear, .experience-empty button { min-height: 44px; padding: 0 16px; border: 1px solid var(--line); border-radius: 2px;
+    background: transparent; color: var(--ink); cursor: pointer; font-family: var(--mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; }
+  .experience-filters { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+  .experience-filter { min-height: 44px; padding: 8px 12px; border: 1px solid var(--line); border-radius: 2px; background: transparent;
+    color: var(--dim); cursor: pointer; font-family: var(--mono); font-size: 9px; letter-spacing: .1em; text-transform: uppercase; }
+  .experience-filter:hover, .experience-filter.active { border-color: rgba(var(--accent-rgb),.55); background: rgba(var(--accent-rgb),.055); color: var(--accent); }
+  .experience-result-count { margin-top: 15px; color: var(--faint); font-family: var(--mono); font-size: 9px; letter-spacing: .1em; text-transform: uppercase; }
+
+  /* ── guide content ── */
+  .experience-guide-section { scroll-margin-top: 130px; padding-top: 125px; }
+  .experience-section-head { display: grid; grid-template-columns: minmax(0,1.15fr) minmax(250px,.85fr); gap: 24px 60px;
+    padding-bottom: 50px; border-bottom: 1px solid var(--line); }
+  .experience-section-kicker { grid-column: 1/-1; color: var(--accent); font-family: var(--mono); font-size: 10px; letter-spacing: .24em; text-transform: uppercase; }
+  .experience-section-head h2 { font-size: clamp(42px,6vw,92px); font-weight: 880; letter-spacing: -.04em; line-height: .9; text-transform: uppercase; }
+  .experience-section-intro { align-self: end; color: var(--dim); font-size: 15px; line-height: 1.7; }
+  .experience-group { scroll-margin-top: 130px; padding-top: 72px; }
+  .experience-group-head { display: grid; grid-template-columns: minmax(220px,.7fr) minmax(0,1.3fr); gap: 12px 46px; margin-bottom: 28px; }
+  .experience-group-source { grid-column: 1/-1; color: var(--faint); font-family: var(--mono); font-size: 9px; letter-spacing: .14em; text-transform: uppercase; }
+  .experience-group-head h3 { font-size: clamp(27px,3.2vw,46px); font-weight: 800; letter-spacing: -.025em; line-height: 1; text-transform: uppercase; }
+  .experience-group-intro { color: var(--dim); font-size: 14px; line-height: 1.65; }
+  .experience-entry-list { border-top: 1px solid var(--line); }
+  .experience-entry { scroll-margin-top: 130px; display: grid; grid-template-columns: 44px minmax(0,1.08fr) minmax(280px,.92fr);
+    gap: 20px; padding: 30px 0; border-bottom: 1px solid var(--line); }
+  .experience-entry-index { padding-top: 3px; color: var(--accent); font-family: var(--mono); font-size: 10px; }
+  .experience-entry h4 { font-size: clamp(21px,2vw,28px); font-weight: 740; letter-spacing: -.015em; line-height: 1.1; }
+  .experience-entry-dek { margin-top: 8px; color: var(--accent); font-size: 14px; font-style: italic; line-height: 1.5; }
+  .experience-entry-summary { max-width: 68ch; margin-top: 15px; color: var(--dim); font-size: 14px; line-height: 1.7; }
+  .experience-tags { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 16px; list-style: none; }
+  .experience-tags li { padding: 4px 7px; border: 1px solid rgba(var(--accent-rgb),.25); border-radius: 2px; color: var(--accent);
+    font-family: var(--mono); font-size: 8px; letter-spacing: .1em; text-transform: uppercase; }
+  .experience-facts { padding: 18px; border-left: 1px solid rgba(var(--accent-rgb),.34); background: rgba(var(--accent-rgb),.025); }
+  .experience-facts-title { color: var(--accent); font-family: var(--mono); font-size: 9px; letter-spacing: .16em; text-transform: uppercase; }
+  .experience-facts ul { display: grid; gap: 8px; margin-top: 13px; list-style: none; }
+  .experience-facts li { position: relative; padding-left: 14px; color: rgba(244,243,240,.76); font-size: 12px; line-height: 1.55; }
+  .experience-facts li::before { position: absolute; top: .65em; left: 0; width: 3px; height: 3px; background: var(--accent); content: ''; }
+  .experience-note { margin-top: 14px; padding-top: 13px; border-top: 1px solid var(--line); color: var(--dim); font-size: 11px; line-height: 1.55; }
+  .experience-source-date { display: block; margin-top: 15px; color: var(--faint); font-family: var(--mono); font-size: 8px; letter-spacing: .1em; text-transform: uppercase; }
+  .experience-empty { display: grid; min-height: 360px; place-content: center; justify-items: center; gap: 20px; color: var(--dim); text-align: center; }
+
+  /* ── close ── */
+  .experience-finale { max-width: 1180px; margin: 20px auto 0; padding: 110px 6vw 125px; border-top: 1px solid var(--line); }
+  .experience-finale > p:not(.experience-eyebrow) { max-width: 58ch; margin-top: 22px; color: var(--dim); font-size: 16px; line-height: 1.7; }
+  .experience-finale-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 24px; margin-top: 30px; }
+  .experience-finale-actions a { color: var(--ink); font-family: var(--mono); font-size: 10px; letter-spacing: .15em; text-decoration: none; text-transform: uppercase; }
+  .experience-finale-actions .experience-cta { padding: 14px 22px; border-radius: 3px; background: var(--accent); color: #0a0a0c; font-weight: 500; }
+  .experience-finale small { display: block; max-width: 72ch; margin-top: 54px; color: var(--faint); font-size: 11px; line-height: 1.6; }
+  .experience-footer { padding: 38px 6vw; border-top: 1px solid var(--line); color: var(--faint); font-family: var(--mono);
+    font-size: 9px; letter-spacing: .14em; line-height: 1.7; text-align: center; text-transform: uppercase; }
+  .experience-footer a { color: var(--accent); text-underline-offset: 4px; }
+
+  @media (max-width: 1000px) {
+    .experience-start, .experience-radius { grid-template-columns: 1fr; }
+    .experience-guide { display: block; padding-top: 0; }
+    .experience-directory { display: none; }
+    .experience-mobile-directory { position: sticky; top: 68px; z-index: 60; display: block; margin: 0 -6vw 24px;
+      border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: rgba(5,5,6,.96); backdrop-filter: blur(16px); }
+    .experience-mobile-directory summary { display: flex; min-height: 56px; align-items: center; justify-content: space-between; padding: 0 6vw;
+      color: var(--dim); cursor: pointer; font-family: var(--mono); font-size: 9px; letter-spacing: .14em; list-style: none; text-transform: uppercase; }
+    .experience-mobile-directory summary::-webkit-details-marker { display: none; }
+    .experience-mobile-directory summary::after { margin-left: 12px; color: var(--accent); content: '+'; font-size: 16px; }
+    .experience-mobile-directory[open] summary::after { content: '−'; }
+    .experience-mobile-current { margin-left: auto; color: var(--accent); }
+    .experience-mobile-links { display: grid; padding: 0 6vw 16px; }
+    .experience-section-head, .experience-group-head { grid-template-columns: 1fr; }
+    .experience-section-kicker, .experience-group-source { grid-column: auto; }
+  }
+  @media (max-width: 720px) {
+    .experience-nav { padding: 0 16px; }
+    .experience-navlinks { gap: 14px; }
+    .experience-navlinks a:first-child, .experience-navlinks a:nth-child(2) { display: none; }
+    .experience-hero { min-height: 82svh; padding: 135px 20px 70px; }
+    .experience-hero-bg { object-position: 64% 50%; }
+    .experience-hero::after { background: linear-gradient(90deg, rgba(5,5,6,.9), rgba(5,5,6,.28)),
+      linear-gradient(to top, rgba(5,5,6,.96), transparent 58%); }
+    .experience-hero h1 { font-size: clamp(54px,18vw,86px); }
+    .experience-start, .experience-radius, .experience-guide { padding-left: 20px; padding-right: 20px; }
+    .experience-start, .experience-radius { padding-top: 76px; padding-bottom: 76px; }
+    .experience-quick, .experience-radius-grid { grid-template-columns: 1fr; }
+    .experience-quick a { min-height: 132px; }
+    .experience-radius-cell { min-height: 135px; }
+    .experience-mobile-directory { margin-left: -20px; margin-right: -20px; }
+    .experience-mobile-directory summary, .experience-mobile-links { padding-left: 20px; padding-right: 20px; }
+    .experience-search { padding: 16px; }
+    .experience-guide-section { padding-top: 90px; }
+    .experience-section-head { padding-bottom: 36px; }
+    .experience-group { padding-top: 60px; }
+    .experience-entry { grid-template-columns: 32px minmax(0,1fr); gap: 14px; padding: 24px 0; }
+    .experience-facts { grid-column: 2; }
+    .experience-finale { margin-left: 20px; margin-right: 20px; padding-left: 0; padding-right: 0; }
+  }
+  @media (max-width: 440px) {
+    .experience-logo .experience-logo-word { display: none; }
+    .experience-search-row { flex-direction: column; }
+    .experience-clear { align-self: flex-start; }
+    .experience-entry { grid-template-columns: 1fr; }
+    .experience-facts { grid-column: auto; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+  }
+</style>
+</head>
+<body data-analytics-offer="experience_guide">
+<a class="experience-skip" href="#guide">Skip to the guide</a>
+
+<nav class="experience-nav" aria-label="Experience page">
+  <a class="experience-logo" href="/" aria-label="Mirai Tech home"><span class="experience-logo-word">Mirai </span><span>Tech</span></a>
+  <div class="experience-navlinks">
+    <a href="/">Event</a>
+    <a href="#guide">Guide</a>
+    <a class="experience-apply" href="https://luma.com/an4zotn9" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="nav" data-analytics-target="tickets">Apply</a>
+  </div>
+</nav>
+
+<header class="experience-hero" data-track-section="hero" data-track-position="1">
+  <img class="experience-hero-bg" src="/img/harbor-golden-hour.jpg" alt="Kobe harbor and Port Tower seen across the water at golden hour" />
+  <div class="experience-hero-copy">
+    <div class="experience-eyebrow">The experience · Kobe / Kansai</div>
+    <h1>Live the region.</h1>
+    <p class="experience-hero-lede">A month based here is a month based in a region. Every route in this guide starts from Port Island, because that is where you will be standing.</p>
+    <div class="experience-hero-meta"><span>October 1–31, 2026</span><span>Port Island · Kobe</span></div>
+  </div>
+  <div class="experience-credit">Photo: JohnnyLCY · CC BY 2.0</div>
+</header>
+
+<main>
+  <section class="experience-start" aria-labelledby="startTitle" data-track-section="quick_paths" data-track-position="2">
+    <div><div class="experience-eyebrow">Choose your next move</div><h2 id="startTitle">What do you need right now?</h2></div>
+    <div class="experience-quick" id="quickPaths"></div>
+  </section>
+
+  <section class="experience-radius" aria-labelledby="radiusTitle" data-track-section="kansai_radius" data-track-position="3">
+    <div class="experience-radius-copy">
+      <div class="experience-eyebrow">Your radius</div>
+      <h2 id="radiusTitle">Kansai is your neighbourhood.</h2>
+      <p>Port Island is the origin, not the edge. These figures name the station they start from so the route never promises a train time as a door-to-door time.</p>
+    </div>
+    <div class="experience-radius-grid" id="routeFacts"></div>
+  </section>
+
+  <div class="experience-guide" id="guide" data-track-section="guide" data-track-position="4">
+    <details class="experience-mobile-directory" id="mobileDirectory">
+      <summary><span>Explore guide</span><strong class="experience-mobile-current" id="mobileCurrent">Start here</strong></summary>
+      <div class="experience-mobile-links" id="mobileNav" role="navigation" aria-label="Experience guide sections"></div>
+    </details>
+
+    <aside class="experience-directory" aria-label="Experience guide directory">
+      <div class="experience-directory-label">Explore the guide</div>
+      <nav class="experience-directory-nav" id="desktopNav" aria-label="Experience guide sections"></nav>
+      <div class="experience-midnight" id="midnightUtility">
+        <span>Last southern-branch train</span><strong>00:00</strong><a href="#midnight-mechanic">Understand the cutoff</a>
+      </div>
+    </aside>
+
+    <article class="experience-guide-content">
+      <div class="experience-search" role="search">
+        <label for="guideSearch">Find a place, need, or moment</label>
+        <div class="experience-search-row">
+          <input id="guideSearch" type="search" placeholder="Try “rainy day”, “Kyoto”, or “last train”" autocomplete="off" />
+          <button class="experience-clear" id="clearSearch" type="button" hidden>Clear</button>
+        </div>
+        <div class="experience-filters" id="filters" role="group" aria-label="Filter the guide"></div>
+        <div class="experience-result-count" id="resultCount" aria-live="polite"></div>
+      </div>
+      <div id="guideSections"></div>
+    </article>
+  </div>
+
+  <section class="experience-finale" aria-labelledby="finaleTitle" data-track-section="finale" data-track-position="5">
+    <div class="experience-eyebrow">October 2026</div>
+    <h2 id="finaleTitle">Live the future now.</h2>
+    <p>Arrive before opening day. Learn the last train. Book one table before you know who will fill it. Then let the month get larger than the event.</p>
+    <div class="experience-finale-actions">
+      <a class="experience-cta" href="https://luma.com/an4zotn9" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="finale" data-analytics-target="tickets">Join Mirai Tech City</a>
+      <a href="/">Back to the event</a>
+    </div>
+    <small>Source guide dated August 2026. Fares, timetables, entry rules, and seasonal closures can change; confirm practical details with the operator.</small>
+  </section>
+</main>
+
+<footer class="experience-footer">Mirai Tech City · October 1–31, 2026 · <a href="/">Port Island, Kobe</a></footer>
+
+<noscript><div style="padding:40px 6vw;border-top:1px solid rgba(244,243,240,.14);color:rgba(244,243,240,.72);font:15px/1.7 sans-serif">This searchable field guide needs JavaScript. The event page and application remain available at <a href="/" style="color:#9be8f0">Mirai Tech City</a>.</div></noscript>
+
+<script src="./experience.js"></script>
+<script>
+  const FILTERS = [
+    ['All', 'all'], ['Essentials', 'essential'], ['Food', 'food'], ['Day trips', 'full day'],
+    ['After hours', 'nightlife'], ['With a partner', 'partner'], ['Work', 'work']
+  ];
+
+  const els = {
+    quick: document.getElementById('quickPaths'),
+    radius: document.getElementById('routeFacts'),
+    desktopNav: document.getElementById('desktopNav'),
+    mobileNav: document.getElementById('mobileNav'),
+    mobileDirectory: document.getElementById('mobileDirectory'),
+    mobileCurrent: document.getElementById('mobileCurrent'),
+    search: document.getElementById('guideSearch'),
+    clear: document.getElementById('clearSearch'),
+    filters: document.getElementById('filters'),
+    count: document.getElementById('resultCount'),
+    sections: document.getElementById('guideSections'),
+    midnight: document.getElementById('midnightUtility')
+  };
+
+  let activeFilter = 'all';
+  let sectionObserver;
+
+  function esc(value) {
+    return String(value)
+      .replaceAll('&', '&amp;')
+      .replaceAll('<', '&lt;')
+      .replaceAll('>', '&gt;')
+      .replaceAll('"', '&quot;')
+      .replaceAll("'", '&#039;');
+  }
+
+  els.quick.innerHTML = EXPERIENCE_QUICK_PATHS.map((path, index) => `
+    <a href="${esc(path.href)}">
+      <span class="experience-quick-no">${String(index + 1).padStart(2, '0')}</span>
+      <strong>${esc(path.label)}</strong><small>${esc(path.detail)}</small>
+      <span class="experience-quick-arrow" aria-hidden="true">↘</span>
+    </a>`).join('');
+
+  els.radius.innerHTML = EXPERIENCE_ROUTE_FACTS.map(fact => `
+    <div class="experience-radius-cell">
+      <div class="experience-radius-place">${esc(fact.place)}</div>
+      <div class="experience-radius-time">${esc(fact.time)}</div>
+      <div class="experience-radius-detail">${esc(fact.detail)}</div>
+    </div>`).join('');
+
+  els.filters.innerHTML = FILTERS.map(([label, value]) => `
+    <button class="experience-filter${value === 'all' ? ' active' : ''}" type="button" data-filter="${esc(value)}" aria-pressed="${value === 'all'}">${esc(label)}</button>`).join('');
+
+  function entryMatches(entry, query, context) {
+    if (activeFilter !== 'all' && !entry.tags.includes(activeFilter)) return false;
+    if (!query) return true;
+    return [entry.title, entry.dek, entry.summary, ...entry.facts, ...entry.tags, context]
+      .join(' ').toLocaleLowerCase().includes(query);
+  }
+
+  function filteredSections() {
+    const query = els.search.value.trim().toLocaleLowerCase();
+    return EXPERIENCE_SECTIONS.map(section => ({
+      ...section,
+      groups: section.groups.map(group => ({
+        ...group,
+        entries: group.entries.filter(entry => entryMatches(
+          entry, query, [section.title, section.navLabel, group.title, group.sourceTitle].join(' ')
+        ))
+      })).filter(group => group.entries.length)
+    })).filter(section => section.groups.length);
+  }
+
+  function renderNav(sections) {
+    const links = sections.map(section => `
+      <a href="#${esc(section.id)}"><span>${esc(section.eyebrow.split(' / ')[0])}</span>${esc(section.navLabel)}</a>`).join('');
+    els.desktopNav.innerHTML = links;
+    els.mobileNav.innerHTML = links;
+    els.mobileNav.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+      els.mobileDirectory.open = false;
+    }));
+    observeSections();
+  }
+
+  function renderEntry(entry, index) {
+    return `<article class="experience-entry" id="${esc(entry.id)}">
+      <div class="experience-entry-index" aria-hidden="true">${String(index + 1).padStart(2, '0')}</div>
+      <div>
+        <h4>${esc(entry.title)}</h4>
+        <p class="experience-entry-dek">${esc(entry.dek)}</p>
+        <p class="experience-entry-summary">${esc(entry.summary)}</p>
+        <ul class="experience-tags" aria-label="Topics">${entry.tags.slice(0, 3).map(tag => `<li>${esc(tag)}</li>`).join('')}</ul>
+      </div>
+      <div class="experience-facts">
+        <div class="experience-facts-title">Know before you go</div>
+        <ul>${entry.facts.map(fact => `<li>${esc(fact)}</li>`).join('')}</ul>
+        ${entry.note ? `<div class="experience-note">${esc(entry.note)}</div>` : ''}
+        <span class="experience-source-date">Source guide dated ${esc(EXPERIENCE_LAST_CHECKED)}</span>
+      </div>
+    </article>`;
+  }
+
+  function renderGuide() {
+    const sections = filteredSections();
+    const resultCount = sections.reduce((total, section) => total + section.groups.reduce((n, group) => n + group.entries.length, 0), 0);
+    renderNav(sections);
+    els.count.textContent = `${resultCount} ${resultCount === 1 ? 'guide entry' : 'guide entries'}`;
+    els.clear.hidden = !els.search.value && activeFilter === 'all';
+    els.midnight.hidden = Boolean(els.search.value.trim()) || activeFilter !== 'all';
+
+    if (!sections.length) {
+      els.sections.innerHTML = `<div class="experience-empty"><p>No guide entries match that search.</p><button type="button" id="showAll">Show the whole guide</button></div>`;
+      document.getElementById('showAll').addEventListener('click', clearAll);
+      return;
+    }
+
+    els.sections.innerHTML = sections.map(section => `
+      <section class="experience-guide-section" id="${esc(section.id)}">
+        <header class="experience-section-head">
+          <div class="experience-section-kicker">${esc(section.eyebrow)}</div>
+          <h2>${esc(section.title)}</h2>
+          <p class="experience-section-intro">${esc(section.intro)}</p>
+        </header>
+        ${section.groups.map(group => `
+          <div class="experience-group" id="${esc(group.id)}">
+            <header class="experience-group-head">
+              <div class="experience-group-source">From the source guide · ${esc(group.sourceTitle)}</div>
+              <h3>${esc(group.title)}</h3>
+              <p class="experience-group-intro">${esc(group.intro)}</p>
+            </header>
+            <div class="experience-entry-list">${group.entries.map(renderEntry).join('')}</div>
+          </div>`).join('')}
+      </section>`).join('');
+
+    observeSections();
+  }
+
+  function observeSections() {
+    if (sectionObserver) sectionObserver.disconnect();
+    sectionObserver = new IntersectionObserver(entries => entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      document.querySelectorAll('.experience-directory-nav a, .experience-mobile-links a').forEach(link => {
+        const current = link.getAttribute('href') === `#${entry.target.id}`;
+        if (current) link.setAttribute('aria-current', 'location');
+        else link.removeAttribute('aria-current');
+      });
+      const section = EXPERIENCE_SECTIONS.find(item => item.id === entry.target.id);
+      if (section) els.mobileCurrent.textContent = section.navLabel;
+    }), { rootMargin: '-40% 0px -40% 0px', threshold: 0 });
+    document.querySelectorAll('.experience-guide-section').forEach(section => sectionObserver.observe(section));
+  }
+
+  function clearAll() {
+    els.search.value = '';
+    activeFilter = 'all';
+    els.filters.querySelectorAll('button').forEach(button => {
+      const active = button.dataset.filter === 'all';
+      button.classList.toggle('active', active);
+      button.setAttribute('aria-pressed', String(active));
+    });
+    renderGuide();
+  }
+
+  els.filters.addEventListener('click', event => {
+    const button = event.target.closest('button[data-filter]');
+    if (!button) return;
+    activeFilter = button.dataset.filter;
+    els.filters.querySelectorAll('button').forEach(item => {
+      const active = item === button;
+      item.classList.toggle('active', active);
+      item.setAttribute('aria-pressed', String(active));
+    });
+    renderGuide();
+  });
+  els.search.addEventListener('input', renderGuide);
+  els.clear.addEventListener('click', clearAll);
+
+  renderGuide();
+
+  if (location.hash) requestAnimationFrame(() => requestAnimationFrame(() => {
+    document.getElementById(location.hash.slice(1))?.scrollIntoView();
+  }));
+</script>
+</body>
+</html>

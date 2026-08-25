@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Early Bird — All of October for $399 · Mirai Tech City</title>
-<meta name="description" content="Lock in the full Mirai Tech City program for $399 through August 20. Attend however much of October you can. Refundable through September 30." />
+<meta name="description" content="Lock in the full Mirai Tech City program for $399 through August 31. Attend however much of October you can. Refundable through September 30." />
 <meta property="og:title" content="All of October. $399. Decide the rest later." />
 <meta property="og:description" content="The Mirai Early Bird covers the full October program and is refundable through September 30." />
 <meta property="og:image" content="https://mirai-tech-city.vercel.app/img/future_city.jpg" />
@@ -48,6 +48,7 @@
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
 <script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/posthog.js"></script>
 <script defer src="/analytics.js"></script>
 <style>
   :root {
@@ -87,8 +88,18 @@
   .early-page__nav { position: fixed; inset: 0 0 auto; z-index: 70; display: flex; min-height: 70px; align-items: center;
     gap: 24px; padding: calc(13px + env(safe-area-inset-top)) 4vw 13px; border-bottom: 1px solid var(--line);
     background: rgba(5,5,6,.96); }
-  .early-page__logo { display: inline-flex; min-height: 44px; align-items: center; font-size: 15px; font-weight: 800; letter-spacing: .06em; text-decoration: none; text-transform: uppercase; }
+  .early-page__logo { display: inline-flex; min-height: 44px; align-items: center; gap: 5px; font-size: 15px; font-weight: 800; letter-spacing: .06em; text-decoration: none; text-transform: uppercase; }
   .early-page__logo span { color: var(--accent); }
+  .early-page__daruma { width: 22px; height: 22px; margin-left: 4px; }
+  .early-page__daruma--lg { width: 38px; height: 38px; margin-left: 6px; }
+  @media (prefers-reduced-motion: no-preference) {
+    .early-page__logo:hover .early-page__daruma, .early-page__footer-mark:hover .early-page__daruma {
+      animation: early-page-okiagari .9s ease; }
+  }
+  @keyframes early-page-okiagari {
+    0% { transform: rotate(0deg); } 22% { transform: rotate(15deg); } 46% { transform: rotate(-11deg); }
+    68% { transform: rotate(6deg); } 86% { transform: rotate(-3deg); } 100% { transform: rotate(0deg); }
+  }
   .early-page__nav-meta { margin-left: auto; color: var(--faint); font-family: var(--mono); font-size: 10px;
     letter-spacing: .15em; text-transform: uppercase; }
   .early-page__nav .early-page__btn { min-height: 44px; padding: 11px 17px; }
@@ -113,6 +124,12 @@
   html[data-early-bird-hero-variant="program_value"] .early-page__experiment-copy--program-value { display: contents; }
   .early-page__hero-lead { max-width: 47ch; color: rgba(244,243,240,.78); font-size: clamp(18px, 1.55vw, 22px); line-height: 1.58; }
   .early-page__hero-lead strong { color: var(--ink); font-weight: 700; }
+  .early-page__countdown { display: flex; align-items: baseline; flex-wrap: wrap; gap: 10px; margin-top: 14px;
+    font-family: var(--mono); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; }
+  .early-page__countdown-label { color: var(--faint); }
+  .early-page__countdown .ebc { color: var(--ink); font-size: 13px; letter-spacing: .08em;
+    font-variant-numeric: tabular-nums; }
+  html.eb-over .early-page__countdown { display: none; }
   .early-page__offer { padding-top: 25px; border-top: 3px solid var(--accent); }
   .early-page__offer-points { display: grid; gap: 0; list-style: none; }
   .early-page__offer-points li { display: grid; grid-template-columns: 32px 1fr; gap: 14px; padding: 18px 0;
@@ -127,15 +144,28 @@
     line-height: 1.55; text-align: center; }
   .early-page__checkout-note strong { color: var(--accent); font-weight: 500; }
 
-  .early-page__proof { display: grid; grid-template-columns: repeat(4, 1fr); border-bottom: 1px solid var(--line); }
-  .early-page__proof > div { min-width: 0; padding: 25px 3vw 27px; }
-  .early-page__proof > div + div { border-left: 1px solid var(--line); }
-  .early-page__proof strong { display: block; color: var(--accent); font-size: clamp(32px, 4vw, 52px); font-weight: 850;
-    font-variant-numeric: tabular-nums; letter-spacing: -.035em; line-height: .9; }
-  .early-page__proof span { display: block; max-width: 23ch; margin-top: 9px; color: var(--dim); font-family: var(--mono);
-    font-size: 9px; letter-spacing: .14em; line-height: 1.5; text-transform: uppercase; }
-  .early-page__proof small { display: block; max-width: 29ch; margin-top: 8px; color: var(--ink); font-family: var(--mono);
-    font-size: 9px; letter-spacing: .04em; line-height: 1.5; }
+  .early-page__proof { display: grid; max-width: 1440px; margin: 0 auto; padding: 44px 6vw 48px;
+    grid-template-columns: minmax(0, 1fr) minmax(300px, .58fr); gap: clamp(40px, 6vw, 96px); align-items: center;
+    border-bottom: 1px solid var(--line); }
+  .early-page__proof-faces { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
+    background: var(--line); border: 1px solid var(--line); }
+  .early-page__face { position: relative; min-width: 0; margin: 0; background: var(--bg); }
+  .early-page__face img { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover;
+    filter: grayscale(1) contrast(1.04) brightness(.86); transition: filter .3s ease; }
+  .early-page__face figcaption { position: absolute; inset: auto 0 0; padding: 26px 10px 9px;
+    background: linear-gradient(0deg, rgba(5,5,6,.94) 34%, transparent); }
+  .early-page__face figcaption strong { display: block; font-size: 12px; font-weight: 700; line-height: 1.25; }
+  .early-page__face figcaption span { display: block; margin-top: 3px; color: var(--faint); font-family: var(--mono);
+    font-size: 10px; letter-spacing: .1em; line-height: 1.35; }
+  .early-page__proof:hover .early-page__face img { filter: grayscale(1) contrast(1.04) brightness(.64); }
+  .early-page__face:hover img { filter: none; }
+  .early-page__proof-copy h2 { margin: 14px 0 12px; font-size: clamp(31px, 3.3vw, 50px); font-weight: 800;
+    letter-spacing: -.02em; line-height: .98; text-transform: uppercase; }
+  .early-page__proof-copy p { max-width: 42ch; color: var(--dim); font-size: 15px; line-height: 1.6; }
+  .early-page__proof-link { display: inline-block; min-height: 44px; margin-top: 14px; padding-top: 13px;
+    color: var(--accent); font-family: var(--mono); font-size: 11px; letter-spacing: .16em;
+    text-transform: uppercase; text-decoration: none; border-bottom: 1px solid rgba(var(--accent-rgb),.4); }
+  .early-page__proof-link:hover { border-bottom-color: var(--accent); }
 
   .early-page__section { max-width: 1320px; margin: 0 auto; padding: 104px 6vw; }
   .early-page__section h2 { max-width: 9ch; margin: 18px 0 28px; font-size: clamp(46px, 6vw, 86px); font-weight: 880;
@@ -300,7 +330,7 @@
   .early-page__footer { display: flex; align-items: center; gap: 32px;
     padding: 30px 6vw calc(32px + env(safe-area-inset-bottom)); color: var(--faint); }
   .early-page__footer-brand { display: flex; align-items: baseline; gap: 20px; }
-  .early-page__footer-mark { display: inline-flex; min-height: 44px; align-items: center; color: var(--ink); font-size: 14px; font-weight: 800; letter-spacing: .06em; text-decoration: none; text-transform: uppercase; }
+  .early-page__footer-mark { display: inline-flex; min-height: 44px; align-items: center; gap: 5px; color: var(--ink); font-size: 14px; font-weight: 800; letter-spacing: .06em; text-decoration: none; text-transform: uppercase; }
   .early-page__footer-mark span { color: var(--accent); }
   .early-page__footer-meta { font-family: var(--mono); font-size: 9px; letter-spacing: .14em; line-height: 1.65; text-transform: uppercase; }
 
@@ -356,10 +386,12 @@
     .early-page__hero h1 { max-width: 7.4ch; margin-top: 18px; font-size: clamp(54px,18vw,74px); }
     .early-page__hero-lead { font-size: 17px; }
     .early-page__offer-points li { grid-template-columns: 28px 1fr; padding: 16px 0; }
-    .early-page__proof { grid-template-columns: 1fr 1fr; }
-    .early-page__proof > div { padding: 22px 5vw; }
-    .early-page__proof > div:nth-child(3) { border-left: 0; border-top: 1px solid var(--line); }
-    .early-page__proof > div:nth-child(4) { border-top: 1px solid var(--line); }
+    .early-page__proof { grid-template-columns: 1fr; gap: 28px; padding: 36px 5vw 40px; }
+    .early-page__proof-faces { grid-template-columns: 1fr 1fr; }
+    .early-page__proof-copy h2 { font-size: clamp(30px, 9vw, 40px); }
+    .early-page__face figcaption { padding: 20px 7px 8px; }
+    .early-page__face figcaption strong { font-size: 11px; }
+    .early-page__face figcaption span { font-size: 9px; letter-spacing: .06em; }
     .early-page__section { padding: 76px 5vw; }
     .early-page__section h2 { font-size: clamp(44px, 14vw, 62px); }
     .early-page__current-price { padding: 19px 0 24px; }
@@ -432,7 +464,7 @@
 <a class="early-page__skip" href="#offer">Skip to the offer</a>
 
 <header class="early-page__nav">
-  <span class="early-page__logo">Mirai <span>Tech City</span></span>
+  <a class="early-page__logo" href="/">Mirai <span>Tech City</span><img class="early-page__daruma" src="/img/daruma.png" alt="Daruma" title="One eye at the start. The other on October 1." width="24" height="24" decoding="async" /></a>
   <p class="early-page__nav-meta">Early Bird · Kobe · October 1–31</p>
   <a class="early-page__btn early-bird-checkout" href="https://luma.com/an4zotn9?utm_source=early-bird-page&amp;utm_campaign=early-bird-399" data-luma-action="checkout" data-luma-event-id="evt-OUCqVyqoZI5Jeg4" data-luma-ticket-type="ttype-0BjQv0xV4yY5P0l" data-analytics-action="checkout" data-analytics-location="nav">
     <span class="early-page__cta-long">Lock in full October · $399</span><span class="early-page__cta-short">$399 Early Bird</span>
@@ -449,9 +481,10 @@
     </figure>
     <div class="early-page__hero-inner">
       <div class="early-page__hero-copy">
-        <div class="early-page__eyebrow offer-status"><span class="early-page__experiment-copy--control">Early supporters’ rate · Through August 20</span><span class="early-page__experiment-copy--program-value">One pass for every public event</span></div>
+        <div class="early-page__eyebrow offer-status"><span class="early-page__experiment-copy--control">Early supporters’ rate · Through August 31</span><span class="early-page__experiment-copy--program-value">One pass for every public event</span></div>
+        <p class="early-page__countdown"><span class="early-page__countdown-label">Early Bird closes in</span><span class="ebc" aria-hidden="true">—</span><span class="early-page__sr-only">The Early Bird closes on 31 August 2026.</span></p>
         <h1 id="early-title"><span class="early-page__experiment-copy--control">All of October. <span class="early-page__hero-price">$399.</span></span><span class="early-page__experiment-copy--program-value">The full October program. <span class="early-page__hero-price">$399.</span></span></h1>
-        <p class="early-page__hero-lead"><span class="early-page__experiment-copy--control">Come for one week, both summit weekends, or the full month. <strong>Lock the price now. Decide your dates later.</strong></span><span class="early-page__experiment-copy--program-value">Your pass covers both summit weekends, the Fashion Show &amp; Demo Day, workshops, partner and community programming, and wellness activities. <strong>More than 40 speakers are confirmed.</strong></span></p>
+        <p class="early-page__hero-lead"><span class="early-page__experiment-copy--control">Come for one week, both summit weekends, or the full month. <strong>Lock the price now. Decide your dates later.</strong></span><span class="early-page__experiment-copy--program-value">Your pass covers both summit weekends, the Fashion Show &amp; Demo Day, workshops, partner and community programming, and wellness activities. <strong>43 speakers are confirmed.</strong></span></p>
       </div>
       <aside class="early-page__offer" aria-label="What the Early Bird includes">
         <ol class="early-page__offer-points">
@@ -461,16 +494,36 @@
         </ol>
         <a class="early-page__btn early-bird-checkout" href="https://luma.com/an4zotn9?utm_source=early-bird-page-hero&amp;utm_campaign=early-bird-399" data-luma-action="checkout" data-luma-event-id="evt-OUCqVyqoZI5Jeg4" data-luma-ticket-type="ttype-0BjQv0xV4yY5P0l" data-analytics-action="checkout" data-analytics-location="hero">Lock in full October — $399</a>
         <p class="early-page__checkout-note">Opens the Early Bird checkout on Luma · <strong>$399 · Refundable through September 30</strong></p>
-        <p class="early-page__fine">Price changes August 20 · Travel and accommodation not included</p>
+        <p class="early-page__fine">Price changes August 31 · Travel and accommodation not included</p>
       </aside>
     </div>
   </section>
 
-  <section class="early-page__proof" aria-label="Mirai at a glance" data-track-section="proof" data-track-position="2">
-    <div><strong>40+</strong><span>World-class speakers confirmed</span><small>Including Aubrey de Grey + José Cordeiro</small></div>
-    <div><strong>02</strong><span>Summit weekends</span></div>
-    <div><strong>31</strong><span>Days of program access</span></div>
-    <div><strong>01</strong><span>Frontier Human Fashion Show</span></div>
+  <section class="early-page__proof" aria-labelledby="proof-title" data-track-section="proof" data-track-position="2">
+    <div class="early-page__proof-faces">
+      <figure class="early-page__face">
+        <picture><source type="image/webp" srcset="/img/aubrey.webp" /><img src="/img/aubrey.jpg" alt="Aubrey de Grey" width="320" height="400" loading="lazy" decoding="async" /></picture>
+        <figcaption><strong>Aubrey de Grey</strong><span>LEV Foundation</span></figcaption>
+      </figure>
+      <figure class="early-page__face">
+        <picture><source type="image/webp" srcset="/img/jose.webp" /><img src="/img/jose.jpg" alt="José Cordeiro" width="320" height="400" loading="lazy" decoding="async" /></picture>
+        <figcaption><strong>José Cordeiro</strong><span>The Death of Death</span></figcaption>
+      </figure>
+      <figure class="early-page__face">
+        <picture><source type="image/webp" srcset="/img/yuki.webp" /><img src="/img/yuki.jpg" alt="Yuki Hanyu" width="320" height="400" loading="lazy" decoding="async" /></picture>
+        <figcaption><strong>Yuki Hanyu</strong><span>Cellular Agriculture</span></figcaption>
+      </figure>
+      <figure class="early-page__face">
+        <picture><source type="image/webp" srcset="/img/adam.webp" /><img src="/img/adam.jpg" alt="Adam Gries" width="320" height="400" loading="lazy" decoding="async" /></picture>
+        <figcaption><strong>Adam Gries</strong><span>Vitalist Bay</span></figcaption>
+      </figure>
+    </div>
+    <div class="early-page__proof-copy">
+      <div class="early-page__eyebrow">Who you will be in the room with</div>
+      <h2 id="proof-title">43 speakers confirmed.</h2>
+      <p>Aubrey de Grey, José Cordeiro, Yuki Hanyu, Adam Gries and 39 more, across both summit weekends and the Fashion Show.</p>
+      <a class="early-page__proof-link" href="/#speakers">See the full roster &#8594;</a>
+    </div>
   </section>
 
   <section class="early-page__section early-page__decision" aria-labelledby="decision-title" data-track-section="pricing" data-track-position="3">
@@ -480,15 +533,15 @@
       <p class="early-page__section-lead">Maybe you can stay for the month. Maybe you can only make one summit weekend. You do not need to know today. The same $399 pass covers whatever portion of Mirai you ultimately attend.</p>
     </div>
     <div class="early-page__price-comparison" aria-label="Early Bird and later ticket prices">
-      <div class="early-page__current-price" aria-label="Early Bird, full October access, 399 dollars, ends August 20">
-        <div class="early-page__current-meta">Early Bird · Ends August 20</div>
+      <div class="early-page__current-price" aria-label="Early Bird, full October access, 399 dollars, ends August 31">
+        <div class="early-page__current-meta">Early Bird · Ends August 31</div>
         <div class="early-page__current-main">
           <div class="early-page__current-copy"><strong>Full October access</strong><span>One week, both summit weekends, or all 31 days</span></div>
           <strong class="early-page__current-amount">$399</strong>
         </div>
       </div>
       <table class="early-page__future-prices">
-        <caption>After August 20</caption>
+        <caption>After August 31</caption>
         <colgroup><col class="early-page__future-option" /><col class="early-page__future-includes" /><col class="early-page__future-amount" /></colgroup>
         <thead class="early-page__sr-only"><tr><th scope="col">Pass</th><th scope="col">Includes</th><th scope="col">Price</th></tr></thead>
         <tbody>
@@ -497,7 +550,7 @@
           <tr><th scope="row">Full Month</th><td>Opening price, then increasing weekly</td><td class="early-page__future-price">$1,500</td></tr>
         </tbody>
       </table>
-      <p class="early-page__price-proof"><strong>$501 less</strong> than a one-week pass after August 20 <span aria-hidden="true">—</span> while still covering the whole month.</p>
+      <p class="early-page__price-proof"><strong>$501 less</strong> than a one-week pass after August 31 <span aria-hidden="true">—</span> while still covering the whole month.</p>
     </div>
   </section>
 
@@ -541,16 +594,16 @@
 
   <section class="early-page__reason" aria-labelledby="reason-title" data-track-section="refund" data-track-position="5">
     <div class="early-page__reason-story">
-      <div class="early-page__eyebrow">A thank-you, kept in the price</div>
-      <h2 id="reason-title">You helped make this real.</h2>
-      <div class="early-page__reason-copy"><p>When Mirai was still a dream, you backed it. Since then, that dream has become two summits, more than 40 confirmed speakers, labs, community spaces, workshops, wellness programming, and a runway.</p></div>
-      <p class="early-page__reason-return">The <strong>$399 Early Bird</strong> is our way of making sure the people who believed first are in the room—on better terms than anyone who arrives later.</p>
+      <div class="early-page__eyebrow">Why $399</div>
+      <h2 id="reason-title">Early is the discount.</h2>
+      <div class="early-page__reason-copy"><p>Mirai opens for the first time this October: two summit weekends, 43 confirmed speakers, labs and community spaces, workshops, wellness programming, and a runway. All of it is booked. None of it has happened yet.</p></div>
+      <p class="early-page__reason-return">The <strong>$399 Early Bird</strong> is what it costs to commit before the reviews exist. Everyone who arrives after August 31 pays more.</p>
     </div>
     <aside class="early-page__reason-promise" aria-labelledby="refund-title">
       <div class="early-page__eyebrow">The promise</div>
       <h3 id="refund-title">You do not have to be certain yet.</h3>
       <div class="early-page__refund"><span>Refundable through</span><time datetime="2026-09-30" aria-label="September 30, 2026"><span aria-hidden="true">Sep</span><strong aria-hidden="true">30</strong></time></div>
-      <p>Lock in the $399 rate now and watch the schedule take shape. If October falls apart, request your refund by September 30—the day before Mirai opens.</p>
+      <p>Lock in the $399 rate now and watch the schedule take shape. If October falls apart, request your refund by September 30, the day before Mirai opens.</p>
       <p class="early-page__promise-note">Lock the price now · Decide October later</p>
     </aside>
   </section>
@@ -573,7 +626,7 @@
       <div class="early-page__close-primary">
         <div class="early-page__close-copy"><div class="early-page__eyebrow">The early supporters’ offer</div><h2 id="close-title">Keep your place.</h2><p>One decision now. The shape of your October can wait.</p></div>
         <div class="early-page__close-purchase">
-          <div class="early-page__close-meta"><span>Full October program access</span><span class="offer-status">Ends August 20</span></div>
+          <div class="early-page__close-meta"><span>Full October program access</span><span class="offer-status">Ends August 31</span></div>
           <div class="early-page__close-price" aria-label="399 US dollars">$399</div>
           <ul class="early-page__close-facts"><li>Attend any part of October</li><li>Refundable through September 30</li></ul>
           <a class="early-page__btn early-bird-checkout" href="https://luma.com/an4zotn9?utm_source=early-bird-page-close&amp;utm_campaign=early-bird-399" data-luma-action="checkout" data-luma-event-id="evt-OUCqVyqoZI5Jeg4" data-luma-ticket-type="ttype-0BjQv0xV4yY5P0l" data-analytics-action="checkout" data-analytics-location="close">Lock In My Early Bird — $399</a>
@@ -594,16 +647,33 @@
 </main>
 
 <footer class="early-page__footer">
-  <div class="early-page__footer-brand"><span class="early-page__footer-mark">Mirai <span>Tech</span></span><span class="early-page__footer-meta">Kobe, Japan · October 1–31, 2026</span></div>
+  <div class="early-page__footer-brand"><a class="early-page__footer-mark" href="/">Mirai <span>Tech</span><img class="early-page__daruma early-page__daruma--lg" src="/img/daruma.png" alt="Daruma" title="One eye at the start. The other on October 1." width="40" height="40" loading="lazy" decoding="async" /></a><span class="early-page__footer-meta">Kobe, Japan · October 1–31, 2026</span></div>
 </footer>
 
 <script id="luma-checkout" src="https://embed.lu.ma/checkout-button.js"></script>
 <script>
-  const EARLY_BIRD_END = new Date('2026-08-21T00:00:00+09:00').getTime();
+  const EARLY_BIRD_END = new Date('2026-09-01T00:00:00+09:00').getTime();
   if (Date.now() >= EARLY_BIRD_END) {
+    document.documentElement.classList.add('eb-over');
     document.body.dataset.analyticsOffer = 'early_bird_ended';
     document.querySelectorAll('.offer-status').forEach(el => { el.textContent = 'Early Bird pricing has ended'; });
     document.querySelectorAll('.early-bird-checkout').forEach(link => { link.textContent = 'View Current Passes'; });
+  } else {
+    // live countdown to the Early Bird close, mirroring the .ebc clocks on the landing page
+    const clocks = [...document.querySelectorAll('.ebc')];
+    if (clocks.length) {
+      const pad = n => String(n).padStart(2, '0');
+      const tick = () => {
+        const left = EARLY_BIRD_END - Date.now();
+        if (left <= 0) { clocks.forEach(el => { el.textContent = 'Closed'; }); return clearInterval(timer); }
+        const d = Math.floor(left / 864e5), h = Math.floor(left % 864e5 / 36e5),
+              m = Math.floor(left % 36e5 / 6e4), sec = Math.floor(left % 6e4 / 1e3);
+        const text = pad(d) + 'D \u00b7 ' + pad(h) + 'H \u00b7 ' + pad(m) + 'M \u00b7 ' + pad(sec) + 'S';
+        clocks.forEach(el => { el.textContent = text; });
+      };
+      tick();
+      const timer = setInterval(tick, 1000);
+    }
   }
 </script>
 </body>
