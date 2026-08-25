@@ -110,9 +110,10 @@ test('the early bird funnel reports section reach and checkout intent', async ({
   await page.setViewportSize({ width: 1280, height: 800 });
   await page.goto('http://localhost:4321/early-bird/');
 
-  await expect.poll(async () => (await posthogEvents(page)).map(([name]) => name))
-    .toContain('Experiment Assigned');
-
+  // No experiment assertion here on purpose: the early bird page ran an
+  // `early_bird_hero_framing_v1` A/B that the CXL redesign retired, and the
+  // redesigned hero has a single arm. Do not re-add one unless a real test is
+  // wired up — summit-bundle is the page that still assigns a variant.
   for (const section of ['proof', 'pricing', 'program']) {
     await page.locator(`[data-track-section="${section}"]`).scrollIntoViewIfNeeded();
     await expect.poll(async () => (await posthogEvents(page))
@@ -125,15 +126,19 @@ test('the early bird funnel reports section reach and checkout intent', async ({
 
   const checkout = (await posthogEvents(page)).find(([name]) => name === 'Checkout Opened');
   expect(checkout).toBeDefined();
+  // Section positions follow the CXL redesign: offer/1, program/2, proof/3,
+  // pricing/4, close/5. The loop above visits three of them, and the deepest
+  // by position is `pricing` — `program` sits at 2 now, not 4.
   expect(checkout?.[1]).toMatchObject({
     location: 'close',
     is_first_checkout: true,
-    sections_viewed: 4,
-    deepest_section: 'program',
+    sections_viewed: 3,
+    deepest_section: 'pricing',
     deepest_section_position: 4,
   });
-  // The offer carries the assigned variant, so the A/B test stays readable.
-  expect(String(checkout?.[1].offer)).toMatch(/^early_bird_399__(control|program_value)$/);
+  // No variant suffix: this page no longer runs an A/B, so `offer()` returns
+  // the bare offer id. summit-bundle is where a variant still gets appended.
+  expect(checkout?.[1].offer).toBe('early_bird_399');
 });
 
 test('the landing page reports section reach across the whole page', async ({ page }) => {
