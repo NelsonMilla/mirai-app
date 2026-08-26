@@ -47,10 +47,9 @@ window.MIRAI_COPY = {
     clockLabel: `Closes in`,
     clockSrOnly: `The Early Bird price closes on 31 August 2026.`,
 
-    /* Both lines are permanent. The price is deliberately not in the
-       headline — it is carried by the CTAs and the pricing section, so
-       nothing here needs to disappear after Aug 31. */
-    headline: `<span class="early-page__hero-line">A Month in Japan for</span><span class="early-page__hero-accent">Biotech Leaders.</span>`,
+    /* The $399 span is hidden automatically after Aug 31, so the
+       headline still reads correctly on its own. Keep it last. */
+    headline: `<span class="early-page__hero-line">One pass.</span><span class="early-page__hero-line">All of October in Kobe.</span><span class="early-page__hero-price">$399.</span>`,
 
     lead: `A month of biotech and longevity in Japan. Your pass covers both summit weekends, the Fashion Show, and everything in between.`,
 

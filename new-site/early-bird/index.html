@@ -132,10 +132,6 @@
   .early-page__hero-line { display: block; max-width: 15ch; }
   .early-page__hero-price { display: block; color: var(--accent); font-variant-numeric: tabular-nums; }
   html.eb-over .early-page__hero-price { display: none; }
-  /* Accent hero line that is permanent — unlike __hero-price, which is
-     removed once the early-bird window closes. No max-width, so a short
-     phrase keeps to one line. */
-  .early-page__hero-accent { display: block; color: var(--accent); }
   .early-page__hero-lead { max-width: 54ch; color: rgba(244,243,240,.84); font-size: clamp(17px, 1.45vw, 21px); line-height: 1.55; }
 
   .early-page__hero-facts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); max-width: 900px;
@@ -887,6 +883,7 @@
       <p data-copy="proof.ctaCopy">That is the room. <strong>$399 holds your place in it</strong> until August 31.</p>
       <a class="early-page__btn early-bird-checkout" href="https://luma.com/an4zotn9?utm_source=early-bird-page-proof&amp;utm_campaign=early-bird-399" data-luma-action="checkout" data-luma-event-id="evt-OUCqVyqoZI5Jeg4" data-luma-ticket-type="ttype-0BjQv0xV4yY5P0l" data-analytics-action="checkout" data-analytics-location="proof" data-copy="proof.cta">Get My Pass — $399</a>
     </div>
+  </section>
 
   <!-- ══ 4 · PRICE & RISK REVERSAL ══ -->
   <section class="early-page__section early-page__price" id="price" aria-labelledby="price-title" data-track-section="pricing" data-track-position="4">
@@ -953,22 +950,6 @@
           <p class="early-page__date-body" data-copy="price.refundBody">Ask for a refund any time before September 30 and we send back all $399. You do not need a reason. That is a month after the price goes up, so booking early costs you nothing to try.</p>
         </div>
       </div>
-      <ul class="early-page__around-list" data-copy="included.aroundList">
-        <li>Workshops</li>
-        <li>Lab and community spaces</li>
-        <li>Longevity hackathons</li>
-        <li>Vibe Coding Nights</li>
-        <li>Partner programming</li>
-        <li>Wellness activities</li>
-        <li>Arrivals and tours early in the month</li>
-        <li>Welcome Day, <time datetime="2026-10-04">Oct 4</time></li>
-      </ul>
-      <p class="early-page__around-note" data-copy="included.aroundNote">Programming is still being added. More is announced through September.</p>
-    </div>
-
-    <div class="early-page__cta-band">
-      <p data-copy="included.ctaCopy">Come for one day, one weekend, or all 31. Same pass, same <strong>$399</strong>.</p>
-      <a class="early-page__btn early-bird-checkout" href="https://luma.com/an4zotn9?utm_source=early-bird-page-program&amp;utm_campaign=early-bird-399" data-luma-action="checkout" data-luma-event-id="evt-OUCqVyqoZI5Jeg4" data-luma-ticket-type="ttype-0BjQv0xV4yY5P0l" data-analytics-action="checkout" data-analytics-location="program" data-copy="included.cta">Get My Pass — $399</a>
     </div>
 
     <div class="early-page__cta-band">
