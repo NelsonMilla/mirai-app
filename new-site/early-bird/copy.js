@@ -35,7 +35,7 @@ window.MIRAI_COPY = {
   nav: {
     skipLink: `Skip to the offer`,
     logo: `Mirai <span>Tech City</span>`,
-    meta: `Kobe · October 1–31`,
+    meta: `Early Bird · Kobe · October 1–31`,
     cta: `Get My Pass — $399`,
   },
 
@@ -49,38 +49,38 @@ window.MIRAI_COPY = {
 
     /* The $399 span is hidden automatically after Aug 31, so the
        headline still reads correctly on its own. Keep it last. */
-    headline: `<span class="early-page__hero-line">A Month in Japan for</span><span class="early-page__hero-price"> Biotech Leaders.</span>`,
+    headline: `<span class="early-page__hero-line">One pass.</span><span class="early-page__hero-line">All of October in Kobe.</span><span class="early-page__hero-price">$399.</span>`,
 
-    lead: `A full month of biotech and longevity in Japan. Early bird pricing available until August 31.`,
+    lead: `A month of biotech and longevity in Japan. Your pass covers both summit weekends, the Fashion Show, and everything in between.`,
 
     /* The four-cell fact ledger under the lead. */
     factLabel1: `When`,
     factValue1: `<time datetime="2026-10-01">Oct 1</time>–<time datetime="2026-10-31">31</time>, 2026`,
     factLabel2: `Where`,
     factValue2: `Kobe, Japan`,
-    factLabel3: `Arrive`,
-    factValue3: `Whenever you want`,
+    factLabel3: `Your dates`,
+    factValue3: `Pick them later`,
     factLabel4: `Speakers`,
     factValue4: `43 confirmed`,
 
     cta: `Get My Pass — $399`,
-    anchor: `After August 31 price raises to <b>$1,500</b>.`,
-    trust: `<span>Full refund until September 30</span><span>Travel and hotel not included</span>`,
+    anchor: `After August 31, the same month costs <b>$1,500</b>.`,
+    trust: `<span>Full refund until September 30</span><span>Checkout opens on Luma</span><span>Travel and hotel not included</span>`,
   },
 
   /* ─── 2 · WHAT YOU GET ─────────────────────────── */
   included: {
-    eyebrow: `For Pioneers`,
-    headline: `Get the full experience.`,
+    eyebrow: `What the pass covers`,
+    headline: `Two summits, one runway, 31 days.`,
     lead: `Your pass covers every public event in October. There is no schedule to lock in and nothing to add on. Come for the days you want and skip the rest.`,
 
     monthLabel: `Your pass is good for`,
     monthRange: `<time datetime="2026-10-01">Oct 01</time><span aria-hidden="true">→</span><time datetime="2026-10-31">Oct 31</time>`,
-    monthNote: `One pass · Every event organized by the MTC team`,
+    monthNote: `One pass · Every public event · No dates to pick now`,
     /* Deliberately makes NO claim about what happens on any given
        day — the October schedule is still being built. Say what the
        pass COVERS, not how full the calendar is. */
-    monthKey: `Your pass covers all 31 days. Come for one day or all of them.`,
+    monthKey: `Your pass covers all 31 days. Come for one of them or all of them — the price is the same either way.`,
 
     /* The three anchor events. Dates are also in the datetime
        attributes in index.html — keep them in sync. */
@@ -98,30 +98,36 @@ window.MIRAI_COPY = {
     anchorName3: `Fashion Show &amp; Demo Day`,
     anchorCopy3: `Medical devices worn down a runway, like couture. Device builders put their prototypes on models.`,
     anchorTags: [
+      `Exoskeletons`,
+      `Neural interfaces`,
+      `Smart prosthetics`,
+      `Biosensors`,
+      `Haptic suits`,
+      `AR/VR medical`,
     ],
     anchorMeta3: `One day`,
 
     aroundCaption: `Concept visual. Mirai runs for the first time in October 2026.`,
     aroundLabel: `Oct 01 — 31`,
-    aroundHeadline: `Everything else happening:`,
+    aroundHeadline: `The month is the point.`,
     /* "Peaks" framing, without asserting the rest of the calendar is
        packed — we do not know that yet. */
     aroundCopy: `The two summit weekends and the runway are the peaks. This is what runs in between them, and it is the reason people stay for weeks instead of days.`,
-    aroundNote: `*:Some Partner programming is external and could incur a separate fee.`,
+    aroundNote: `Programming is still being added. More is announced through September.`,
     aroundList: [
       `Workshops`,
       `Lab and community spaces`,
-      `Longevity hackathons*`,
+      `Longevity hackathons`,
       `Vibe Coding Nights`,
-      `Partner programming*`,
-      `Wellness activities*`,
+      `Partner programming`,
+      `Wellness activities`,
       `Arrivals and tours early in the month`,
-      `Community hangouts and dinners*`,
+      `Welcome Day, <time datetime="2026-10-04">Oct 4</time>`,
     ],
 
     /* Each of the three CTA bands argues something different.
        This one argues SCOPE. Keep them distinct. */
-    ctaCopy: `One day, one weekend, or all 31. Same pass, same <strong>$399</strong>.`,
+    ctaCopy: `Come for one day, one weekend, or all 31. Same pass, same <strong>$399</strong>.`,
     cta: `Get My Pass — $399`,
   },
 
@@ -129,7 +135,7 @@ window.MIRAI_COPY = {
   proof: {
     eyebrow: `Who is already booked`,
     headline: `Here are all <span class="early-page__proof-count">43</span> speakers.`,
-    lead: `More names are added through September.`,
+    lead: `This is not a sample. Every speaker we have confirmed is named below. They speak across both summit weekends and the Fashion Show. More names are added through September.`,
 
     facts: `<li><b>300</b><span>Residents expected</span></li><li><b>2</b><span>Summit weekends</span></li><li><b>1</b><span>Fashion show</span></li>`,
 
@@ -188,7 +194,7 @@ window.MIRAI_COPY = {
       `Pedro Henrich`,
       `Nelson Milla`,
     ],
-    rosterNote: `Listed in no order · more added through September`,
+    rosterNote: `Count them. Listed in no order · more added through September`,
 
     partnersTitle: `Supported by`,
     partner1: `KBIC`,
@@ -197,26 +203,66 @@ window.MIRAI_COPY = {
     partner4: `HekaBio`,
     partner5: `ZuCity Japan`,
     partner6: `Augmentation Lab`,
-    partnerNote: `KBIC is the Kobe Biomedical Innovation Cluster. It has <strong>370 member organisations</strong>, and it is based on the island where MTC runs.`,
+    partnerNote: `KBIC is the Kobe Biomedical Innovation Cluster. It has <strong>370 member organisations</strong>, and it is based on the island where the city runs.`,
 
     /* This CTA band argues SOCIAL PROOF. */
-    ctaCopy: `Offer valid until August 31st.`,
+    ctaCopy: `That is the room. <strong>$399 holds your place in it</strong> until August 31.`,
+    cta: `Get My Pass — $399`,
+  },
+
+  /* ─── 4 · PRICE & RISK REVERSAL ─────────────────────────── */
+  price: {
+    eyebrow: `Why it costs $399`,
+    headline: `The price only goes up.`,
+    lead: `Mirai runs for the first time this October. Everything is booked. Two summit weekends, 43 confirmed speakers, labs, workshops, wellness programming, and a runway. None of it has happened yet, so there are no reviews to read. <strong>$399 is what it costs to say yes before anyone has been.</strong> Everyone who books after August 31 pays more.`,
+
+    ladderTitle: `What a pass costs`,
+
+    /* The live tier. Its bar width is set in index.html as
+       --w:26.6% — that is 399/1500, so if a price changes the
+       bar widths need recalculating too. */
+    tierWhen: `Right now · through August 31`,
+    tierName: `The whole month<span>Every public event in October. Come for one day or all 31.</span>`,
+    tierAmount: `$399`,
+
+    gateDate: `August 31`,
+    gateNote: `The Early Bird ends. After this date, the same October costs this:`,
+    gateClockLabel: `Closes in`,
+
+    /* Prices after Aug 31. Bar widths: 60% / 80% / 100%. */
+    laterName1: `One week<span>Pick the week that works for you</span>`,
+    laterAmount1: `$900`,
+    laterName2: `Two-Summit Pass<span>Both summits plus the Fashion Show</span>`,
+    laterAmount2: `$1,200`,
+    laterName3: `Full Month<span>This is the starting price. It climbs every week after.</span>`,
+    laterAmount3: `$1,500`,
+
+    savingAmount: `$501`,
+    savingCopy: `The Early Bird is <strong>$501 less than one week</strong> costs after August 31. And it covers the whole month, not one week.`,
+
+    refundKicker: `The safety net`,
+    refundDate: `Sep 30`,
+    refundHead: `Buy now. You can still change your mind.`,
+    refundBody: `Ask for a refund any time before September 30 and we send back all $399. You do not need a reason. That is a month after the price goes up, so booking early costs you nothing to try.`,
+
+    /* This CTA band argues RISK. */
+    ctaCopy: `Pay <strong>$399</strong> today. Decide for real by <strong>September 30</strong>.`,
     cta: `Get My Pass — $399`,
   },
 
   /* ─── 5 · CLOSE + FAQ ─────────────────────────── */
   close: {
-    eyebrow: `FAQ`,
+    eyebrow: `The last few questions`,
     headline: `Nothing left in the way.`,
     /* If you add or remove an FAQ item, change this number word. */
-    lead: `You can email us any questions at <a href="mailto:info@mirai.tech">info@mirai.tech</a>.`,
+    lead: `Four straight answers. Then the button.`,
 
     faqQ1: `What do I get for $399?`,
-    faqA1: `Every public event in October. Both summits, the Fashion Show and Demo Day, workshops, some partner events, community time, and wellness activities.`,
+    faqA1: `Every public event in October. Both summits, the Fashion Show and Demo Day, workshops, partner events, community time, and wellness activities.`,
     faqQ2: `Do I have to pick my dates now?`,
     faqA2: `No. Your pass works on any day in October. Come for one weekend, come for a week, or stay all 31 days. The price is the same.`,
     faqQ3: `Are flights and a hotel included?`,
-    faqA3: `No. The pass pays for the program only. You book your own flight and your own room in Kobe. We can help you find a hotel or an Airbnb, and we will have a few partner hotels with special rates.`,
+    faqA3: `No. The pass pays for the program only. You book your own flight and your own room in Kobe.`,
     faqQ4: `Do I need to be a scientist?`,
     faqA4: `No. You do not need a science degree. Founders, builders, doctors, investors, students, and curious people are all welcome.`,
 
@@ -224,7 +270,7 @@ window.MIRAI_COPY = {
     finalClockLabel: `Closes in`,
     finalClockSrOnly: `The Early Bird closes on 31 August 2026.`,
     finalTitle: `Everything is booked but you.`,
-    finalLore: ``,
+    finalLore: `A daruma gets one eye when you set a goal, and the second one when you reach it. Ours has had one eye since we picked the date. We paint the other on October 1.`,
 
     /* The receipt is hidden automatically after Aug 31, because
        it asserts a price that is no longer true. */
@@ -236,7 +282,7 @@ window.MIRAI_COPY = {
     receiptValue3: `Until Sep 30`,
 
     cta: `Get My Pass — $399`,
-    checkoutNote: `Offer valid until August 31st.`,
+    checkoutNote: `Checkout opens on Luma`,
     fine: `Travel and hotel not included`,
   },
 
