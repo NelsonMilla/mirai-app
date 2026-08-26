@@ -42,7 +42,7 @@ Cinematic, kinetic, precise. A film-trailer register: enormous quiet type over m
 
 ## Design Principles
 
-1. **Wow before why.** The belief ladder starts at spectacle; the moving-photo hero earns attention before anything explains.
+1. **Wow with immediate context.** The cinematic hero earns attention while its first viewport establishes Kobe, October, the event format, and the two participant doors.
 2. **One verb per fold.** Every major section leads with a single short claim in display type; supporting detail stays subordinate.
 3. **Ground the wonder.** Real dates, real speakers, real regulators (PMDA, AMED, KBIC) anchor every cinematic move.
 4. **Community is the face.** Proof is people and communities — never the operating company.
@@ -50,4 +50,4 @@ Cinematic, kinetic, precise. A film-trailer register: enormous quiet type over m
 
 ## Accessibility & Inclusion
 
-Pragmatic baseline, no formal WCAG target: `prefers-reduced-motion` collapses the hero carousel, reveals, and daruma wobble; off-screen slides are `inert`; an `aria-live` status region announces placeholder-link flashes; kanji reveals are keyboard-operable; imagery carries alt text. Videos are `muted`/`playsinline` with poster fallbacks and pause off-screen.
+Pragmatic baseline, no formal WCAG target: `prefers-reduced-motion` keeps the hero on its poster and collapses reveals and the daruma wobble; an `aria-live` status region announces placeholder-link flashes; kanji reveals are keyboard-operable; imagery carries alt text. Videos are `muted`/`playsinline`, load only when appropriate, and pause off-screen.

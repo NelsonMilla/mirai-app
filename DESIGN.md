@@ -149,10 +149,10 @@ Cards are hairline-bordered boxes, flat at rest; hover responds with a faint cya
 The structural signature: bordered cells sharing hairline internal rules, collapsing to stacked rows on mobile. Used for the dates band (3-up), Kobe stats (5-up), and summit cards (2-up with a faint cyan wash). Episode and track-record lists are baseline-aligned grid rows between horizontal rules.
 
 ### Media sections
-Full-bleed sections (`max-width: none; padding: 0`) with a positioned video/image, a veil, and a re-centered 1440px content block. Hero slides push laterally (`translateX`, 1.15s `cubic-bezier(.77,0,.175,1)`); content inside staggers in with delayed fades.
+Full-bleed sections (`max-width: none; padding: 0`) with a positioned video/image, a veil, and a re-centered 1440px content block. The hero is one stable offer over a high-priority poster; its desktop video progressively replaces the poster only after the poster renders and the main thread is idle.
 
 ### Signature components
-- **Hero word-nav:** Slide dots are the verbs themselves (LIVE / ERADICATE / EXTEND / AUGMENT) in mono, with a pause control; active word underlined.
+- **Hero proof line:** Aubrey de Grey, KBIC/Port Island, and the 300-resident scale sit below the two conversion doors as quiet mono proof.
 - **Daruma:** 24px in the nav, 46px in the footer; click triggers the `okiagari` self-righting wobble. He has one eye until October 1.
 - **Kanji tap-reveals:** Cyan-bordered kanji chips that swap to their English meaning for 1.5s on tap/Enter; keyboard-operable.
 - **Tag chips:** Mono 10px uppercase, cyan text, 30%-alpha cyan border, 2px radius — topics, tech categories, weekly rhythm.
@@ -167,10 +167,10 @@ Dead links (`href="#"`) never navigate: they flash "Opening soon" for 1.4s and a
 
 Kinetic but scheduled — motion is the trailer's editing, not ambient decoration.
 
-- **Hero carousel:** Auto-advancing lateral pushes (6.2–8s per slide, 1.15s ease `cubic-bezier(.77,0,.175,1)`); inner content (kicker → h1 → lead → CTAs) staggers on delays up to 1.35s. The Fashion Show CTA pops in with a deliberate overshoot (`cubic-bezier(.34,1.56,.64,1)`) — the one sanctioned bounce, used as a punchline, nowhere else.
+- **Hero media:** The poster is the only eager hero media. Desktop may fade in one muted loop after the poster renders and the browser is idle; mobile, reduced-motion, data-saver, and 2G-class connections remain poster-only.
 - **Scroll reveals:** `.rv` elements rise 22px over 0.8s via IntersectionObserver; content is visible-by-default under `<noscript>` and reduced motion.
-- **Performance etiquette:** Videos pause off-screen (IntersectionObserver), later slides `preload="none"` with poster backgrounds, a first-gesture retry covers low-power autoplay blocks.
-- **Reduced motion:** `prefers-reduced-motion` disables smooth scroll, slide/stagger transitions, the pop, and the daruma wobble. Every animation added must carry its reduce guard.
+- **Performance etiquette:** Videos have no eager source beyond the hero poster; sources attach only when the media is eligible to play, and playback pauses off-screen.
+- **Reduced motion:** `prefers-reduced-motion` keeps the hero poster static and disables smooth scroll, reveals, and the daruma wobble. Every animation added must carry its reduce guard.
 
 ## 7. Do's and Don'ts
 

@@ -169,3 +169,67 @@ test('the landing page reports section reach across the whole page', async ({ pa
   });
   expect(Number(checkout?.[1].sections_viewed)).toBeGreaterThan(0);
 });
+
+test('the mobile landing hero stays static, direct, and scrollable', async ({ page }) => {
+  await page.route('**://*.i.posthog.com/**', (route) => route.abort());
+  await page.setViewportSize({ width: 320, height: 568 });
+  await page.goto('http://localhost:4321/');
+
+  await expect(page.locator('nav .logo')).toHaveText('MiraiTech');
+  await expect(page.locator('nav .logoTech')).toHaveText('Tech');
+  await expect(page.locator('nav .navCta')).toHaveText('Get Ticket');
+  await expect(page.locator('nav .navCta')).toHaveAttribute('href', 'https://luma.com/an4zotn9');
+  await expect(page.locator('nav a')).toHaveCount(2);
+  await expect(page.locator('nav img, nav button')).toHaveCount(0);
+  await expect(page.locator('.ebStripe')).toHaveCount(0);
+  await expect(page.locator('.hero .eyebrow')).toHaveText('Mirai Tech City 2026 · Kobe, Japan · October 1–31');
+  await expect(page.locator('.hero h1')).toHaveText('Live the future of health.');
+  await expect(page.locator('.heroLead')).toContainText("Japan's month-long longevity biomedical popup city");
+  await expect(page.locator('.heroProgram li')).toHaveCount(3);
+  await expect(page.locator('.heroProgram')).toContainText('2 summit weekends');
+  await expect(page.locator('.heroProgram')).toContainText('Citizenship all October');
+  await expect(page.locator('.heroActions a')).toHaveCount(1);
+  await expect(page.locator('[data-analytics-location="hero_primary"]'))
+    .toHaveAttribute('href', 'https://luma.com/an4zotn9');
+  await expect(page.locator('.heroProof')).toContainText('43 confirmed speakers · Aubrey de Grey + José Cordeiro');
+  await expect(page.locator('.heroProof')).toContainText('300-person popup city');
+  await expect(page.locator('.heroProof')).toContainText("KBIC · Japan's largest biomedical cluster · 370 member organizations");
+
+  const mobileState = await page.evaluate(() => ({
+    heroVideoSource: (document.querySelector('.heroVideo') as HTMLVideoElement).currentSrc,
+    horizontalOverflow: document.documentElement.scrollWidth > window.innerWidth,
+    actionHeights: [...document.querySelectorAll('.heroActions a')]
+      .map((link) => link.getBoundingClientRect().height),
+    heroContentTop: document.querySelector('.heroContent')!.getBoundingClientRect().top,
+    heroContentBottom: document.querySelector('.heroContent')!.getBoundingClientRect().bottom,
+    heroBottom: document.querySelector('.hero')!.getBoundingClientRect().bottom,
+  }));
+  expect(mobileState.heroVideoSource).toBe('');
+  expect(mobileState.horizontalOverflow).toBe(false);
+  expect(Math.min(...mobileState.actionHeights)).toBeGreaterThanOrEqual(44);
+  expect(mobileState.heroContentTop).toBeGreaterThanOrEqual(72);
+  expect(mobileState.heroContentBottom).toBeLessThan(mobileState.heroBottom);
+
+  await page.setViewportSize({ width: 375, height: 812 });
+  await expect(page.locator('.heroContent')).toBeVisible();
+
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.setViewportSize({ width: 844, height: 390 });
+  const landscapeState = await page.evaluate(() => ({
+    contentTop: document.querySelector('.heroContent')!.getBoundingClientRect().top,
+    contentBottom: document.querySelector('.heroContent')!.getBoundingClientRect().bottom,
+    heroBottom: document.querySelector('.hero')!.getBoundingClientRect().bottom,
+    continueAnimation: getComputedStyle(document.querySelector('.heroContinue')!).animationName,
+  }));
+  expect(landscapeState.contentTop).toBeGreaterThanOrEqual(72);
+  expect(landscapeState.contentBottom).toBeLessThan(landscapeState.heroBottom);
+  expect(landscapeState.continueAnimation).toBe('none');
+
+  await page.setViewportSize({ width: 375, height: 812 });
+
+  await page.locator('.heroContinue').click();
+  await expect(page).toHaveURL(/#main$/);
+  await expect.poll(() => page.evaluate(() => Math.round(
+    document.getElementById('main')!.getBoundingClientRect().top,
+  ))).toBe(0);
+});

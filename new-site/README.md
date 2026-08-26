@@ -6,8 +6,9 @@ Hero-only prototype (frozen): https://mirai-live-lyart.vercel.app
 Single static `index.html` — no framework, no build step. Deploys anywhere
 (currently Vercel; `vercel deploy --prod` from this folder reproduces it).
 
-- Hero: 4 moving-photo slides (Grok stills → Kling i2v → Real-ESRGAN 1080p →
-  ffmpeg palindrome/crossfade loops), auto-swiping carousel, pause control.
+- Hero: one stable conversion offer over a high-priority poster. Desktop adds a
+  muted loop only after the poster renders and the browser is idle; mobile,
+  reduced-motion, data-saver, and slow connections stay poster-only.
 - Summit I Oct 17–18 · Summit II Oct 24–25 · Fashion Show Oct 26 (Monday).
 - All ticket/residency CTAs → https://luma.com/an4zotn9
 - `/summit-bundle/` is the dedicated $2,500 Summit Weekends + Hotel offer page,

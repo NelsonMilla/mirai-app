@@ -36,6 +36,10 @@
     },
   };
 
+  // Keep the bridge available to local analytics tests and instrumentation,
+  // but never load the production SDK or send development traffic off-device.
+  if (['localhost', '127.0.0.1', '::1'].includes(window.location.hostname)) return;
+
   const start = () => {
     window.posthog.init(PROJECT_TOKEN, {
       api_host: API_HOST,
@@ -58,10 +62,23 @@
     queued.splice(0).forEach(([name, properties]) => window.posthog.capture(name, properties));
   };
 
-  const script = document.createElement('script');
-  script.src = `${ASSET_HOST}/static/array.js`;
-  script.async = true;
-  script.crossOrigin = 'anonymous';
-  script.addEventListener('load', start, { once: true });
-  document.head.appendChild(script);
+  const loadLibrary = () => {
+    const script = document.createElement('script');
+    script.src = `${ASSET_HOST}/static/array.js`;
+    script.async = true;
+    script.crossOrigin = 'anonymous';
+    script.addEventListener('load', start, { once: true });
+    document.head.appendChild(script);
+  };
+
+  const scheduleLibrary = () => {
+    if ('requestIdleCallback' in window) {
+      window.requestIdleCallback(loadLibrary, { timeout: 3000 });
+    } else {
+      window.setTimeout(loadLibrary, 1000);
+    }
+  };
+
+  if (document.readyState === 'complete') scheduleLibrary();
+  else window.addEventListener('load', scheduleLibrary, { once: true });
 })();
