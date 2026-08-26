@@ -132,6 +132,10 @@
   .early-page__hero-line { display: block; max-width: 15ch; }
   .early-page__hero-price { display: block; color: var(--accent); font-variant-numeric: tabular-nums; }
   html.eb-over .early-page__hero-price { display: none; }
+  /* Permanent accent line. Unlike __hero-price it is NOT removed when the
+     early-bird window closes, so a headline whose subject lives here does
+     not lose it on Aug 31. No max-width, so a short phrase stays on one line. */
+  .early-page__hero-accent { display: block; color: var(--accent); }
   .early-page__hero-lead { max-width: 54ch; color: rgba(244,243,240,.84); font-size: clamp(17px, 1.45vw, 21px); line-height: 1.55; }
 
   .early-page__hero-facts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); max-width: 900px;
@@ -882,94 +886,6 @@
     <div class="early-page__cta-band">
       <p data-copy="proof.ctaCopy">That is the room. <strong>$399 holds your place in it</strong> until August 31.</p>
       <a class="early-page__btn early-bird-checkout" href="https://luma.com/an4zotn9?utm_source=early-bird-page-proof&amp;utm_campaign=early-bird-399" data-luma-action="checkout" data-luma-event-id="evt-OUCqVyqoZI5Jeg4" data-luma-ticket-type="ttype-0BjQv0xV4yY5P0l" data-analytics-action="checkout" data-analytics-location="proof" data-copy="proof.cta">Get My Pass — $399</a>
-    </div>
-
-  <!-- ══ 4 · PRICE & RISK REVERSAL ══ -->
-  <section class="early-page__section early-page__price" id="price" aria-labelledby="price-title" data-track-section="pricing" data-track-position="4">
-    <div class="early-page__price-head">
-      <div class="early-page__eyebrow" data-copy="price.eyebrow">Why it costs $399</div>
-      <h2 id="price-title" data-copy="price.headline">The price only goes up.</h2>
-      <p class="early-page__section-lead" data-copy="price.lead">Mirai runs for the first time this October. Everything is booked. Two summit weekends, 43 confirmed speakers, labs, workshops, wellness programming, and a runway. None of it has happened yet, so there are no reviews to read. <strong>$399 is what it costs to say yes before anyone has been.</strong> Everyone who books after August 31 pays more.</p>
-    </div>
-
-    <!-- The ladder: one shared scale, $1,500 = full width -->
-    <div class="early-page__ladder">
-      <h3 class="early-page__ladder-title" data-copy="price.ladderTitle">What a pass costs</h3>
-
-      <ol class="early-page__tiers">
-        <li class="early-page__tier early-page__tier--now">
-          <p class="early-page__tier-when offer-status" data-copy="price.tierWhen">Right now · through August 31</p>
-          <p class="early-page__tier-name" data-copy="price.tierName">The whole month<span>Every public event in October. Come for one day or all 31.</span></p>
-          <div class="early-page__tier-bar" style="--w:26.6%" aria-hidden="true"><span></span></div>
-          <p class="early-page__tier-amount" data-copy="price.tierAmount">$399</p>
-        </li>
-      </ol>
-
-      <p class="early-page__gate">
-        <time class="early-page__gate-date" datetime="2026-08-31" data-copy="price.gateDate">August 31</time>
-        <span class="early-page__gate-note" data-copy="price.gateNote">The Early Bird ends. After this date, the same October costs this:</span>
-        <span class="early-page__gate-clock" aria-hidden="true"><span data-copy="price.gateClockLabel">Closes in</span> <span class="ebc">—</span></span>
-      </p>
-
-      <ol class="early-page__tiers early-page__tiers--later">
-        <li class="early-page__tier">
-          <p class="early-page__tier-name" data-copy="price.laterName1">One week<span>Pick the week that works for you</span></p>
-          <div class="early-page__tier-bar" style="--w:60%" aria-hidden="true"><span></span></div>
-          <p class="early-page__tier-amount" data-copy="price.laterAmount1">$900</p>
-        </li>
-        <li class="early-page__tier">
-          <p class="early-page__tier-name" data-copy="price.laterName2">Two-Summit Pass<span>Both summits plus the Fashion Show</span></p>
-          <div class="early-page__tier-bar" style="--w:80%" aria-hidden="true"><span></span></div>
-          <p class="early-page__tier-amount" data-copy="price.laterAmount2">$1,200</p>
-        </li>
-        <li class="early-page__tier">
-          <p class="early-page__tier-name" data-copy="price.laterName3">Full Month<span>This is the starting price. It climbs every week after.</span></p>
-          <div class="early-page__tier-bar" style="--w:100%" aria-hidden="true"><span></span></div>
-          <p class="early-page__tier-amount" data-copy="price.laterAmount3">$1,500</p>
-        </li>
-      </ol>
-    </div>
-
-    <!-- The one fact that matters most -->
-    <div class="early-page__saving">
-      <p class="early-page__saving-amount" aria-hidden="true" data-copy="price.savingAmount">$501</p>
-      <p class="early-page__saving-copy" data-copy="price.savingCopy">The Early Bird is <strong>$501 less than one week</strong> costs after August 31. And it covers the whole month, not one week.</p>
-    </div>
-
-    <!-- The risk reversal: one card, full width. The Aug 31 deadline is
-         already carried by the gate rule above; only Sep 30 is new here. -->
-    <div class="early-page__dates">
-      <div class="early-page__date-card early-page__date-card--refund">
-        <div class="early-page__date-mark">
-          <p class="early-page__date-kicker" data-copy="price.refundKicker">The safety net</p>
-          <p class="early-page__date-big"><time datetime="2026-09-30" aria-label="September 30, 2026" data-copy="price.refundDate">Sep 30</time></p>
-        </div>
-        <div class="early-page__date-copy">
-          <p class="early-page__date-head" data-copy="price.refundHead">Buy now. You can still change your mind.</p>
-          <p class="early-page__date-body" data-copy="price.refundBody">Ask for a refund any time before September 30 and we send back all $399. You do not need a reason. That is a month after the price goes up, so booking early costs you nothing to try.</p>
-        </div>
-      </div>
-      <ul class="early-page__around-list" data-copy="included.aroundList">
-        <li>Workshops</li>
-        <li>Lab and community spaces</li>
-        <li>Longevity hackathons</li>
-        <li>Vibe Coding Nights</li>
-        <li>Partner programming</li>
-        <li>Wellness activities</li>
-        <li>Arrivals and tours early in the month</li>
-        <li>Welcome Day, <time datetime="2026-10-04">Oct 4</time></li>
-      </ul>
-      <p class="early-page__around-note" data-copy="included.aroundNote">Programming is still being added. More is announced through September.</p>
-    </div>
-
-    <div class="early-page__cta-band">
-      <p data-copy="included.ctaCopy">Come for one day, one weekend, or all 31. Same pass, same <strong>$399</strong>.</p>
-      <a class="early-page__btn early-bird-checkout" href="https://luma.com/an4zotn9?utm_source=early-bird-page-program&amp;utm_campaign=early-bird-399" data-luma-action="checkout" data-luma-event-id="evt-OUCqVyqoZI5Jeg4" data-luma-ticket-type="ttype-0BjQv0xV4yY5P0l" data-analytics-action="checkout" data-analytics-location="program" data-copy="included.cta">Get My Pass — $399</a>
-    </div>
-
-    <div class="early-page__cta-band">
-      <p data-copy="price.ctaCopy">Pay <strong>$399</strong> today. Decide for real by <strong>September 30</strong>.</p>
-      <a class="early-page__btn early-bird-checkout" href="https://luma.com/an4zotn9?utm_source=early-bird-page-pricing&amp;utm_campaign=early-bird-399" data-luma-action="checkout" data-luma-event-id="evt-OUCqVyqoZI5Jeg4" data-luma-ticket-type="ttype-0BjQv0xV4yY5P0l" data-analytics-action="checkout" data-analytics-location="pricing" data-copy="price.cta">Get My Pass — $399</a>
     </div>
   </section>
 
