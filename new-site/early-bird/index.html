@@ -132,6 +132,10 @@
   .early-page__hero-line { display: block; max-width: 15ch; }
   .early-page__hero-price { display: block; color: var(--accent); font-variant-numeric: tabular-nums; }
   html.eb-over .early-page__hero-price { display: none; }
+  /* Accent hero line that is permanent — unlike __hero-price, which is
+     removed once the early-bird window closes. No max-width, so a short
+     phrase keeps to one line. */
+  .early-page__hero-accent { display: block; color: var(--accent); }
   .early-page__hero-lead { max-width: 54ch; color: rgba(244,243,240,.84); font-size: clamp(17px, 1.45vw, 21px); line-height: 1.55; }
 
   .early-page__hero-facts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); max-width: 900px;
