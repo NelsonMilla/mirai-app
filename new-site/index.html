@@ -22,11 +22,12 @@
 <meta name="twitter:image" content="https://mirai-tech-city.vercel.app/live_city_poster.jpg" />
 <meta name="theme-color" content="#050506" />
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23050506'/%3E%3Ctext x='50' y='72' font-size='62' font-family='Georgia' font-weight='bold' fill='%239be8f0' text-anchor='middle'%3E未%3C/text%3E%3C/svg%3E" />
+<link rel="preload" href="disease_poster.jpg" as="image" fetchpriority="high" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link rel="preconnect" href="https://api.fontshare.com" />
 <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin />
-<link href="https://api.fontshare.com/v2/css?f[]=switzer@400,500,600,700,800,900&display=swap" rel="stylesheet" />
+<link href="https://api.fontshare.com/v2/css?f[]=switzer@400,700,800,900&display=swap" rel="stylesheet" />
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
 <script defer src="/_vercel/insights/script.js"></script>
@@ -196,12 +197,10 @@
     padding: 18px 4vw; background: rgba(5,5,6,.94);
     backdrop-filter: blur(14px); }
   nav .logo { font-weight: 800; letter-spacing: .06em; font-size: 15px; text-transform: uppercase; text-decoration: none; }
-  nav .logo span { color: var(--accent); }
-  nav .links { display: flex; gap: 26px; align-items: center; }
-  nav .links a { font-family: var(--mono); font-size: 11px; letter-spacing: .18em;
-    text-transform: uppercase; color: var(--dim); text-decoration: none; transition: color .2s; }
-  nav .links a:hover { color: var(--ink); }
-  .btn { display: inline-block; background: var(--ink); color: #0a0a0c !important; text-decoration: none;
+  nav .logoTech { color: var(--accent); }
+  nav .navCta { flex: 0 0 auto; }
+  .btn { display: inline-flex; align-items: center; justify-content: center; min-height: 44px;
+    background: var(--ink); color: #0a0a0c !important; text-decoration: none;
     padding: 12px 26px; border-radius: 3px; font-family: var(--mono); font-size: 11px;
     letter-spacing: .2em; text-transform: uppercase; font-weight: 500; white-space: nowrap;
     transition: transform .2s, box-shadow .2s; }
@@ -209,72 +208,10 @@
   .btn.accent { background: var(--accent); }
   .btn.ghost { background: transparent; color: var(--ink) !important; border: 1px solid rgba(244,243,240,.4); }
   .btn.ghost:hover { border-color: var(--ink); }
-  .menuBtn { display: none; border: 1px solid rgba(244,243,240,.4); background: none; color: var(--ink); cursor: pointer;
-    font-family: var(--mono); font-size: 11px; letter-spacing: .2em; text-transform: uppercase;
-    padding: 11px 14px; border-radius: 3px; transition: border-color .2s; }
-  .menuBtn:hover { border-color: var(--ink); }
-  .promo-short { display: none; }
   @media (max-width: 760px) {
-    nav .links a:not(.btn) { display: none; }
-    .menuBtn { display: inline-block; }
-    nav .links { gap: 10px; }
-    nav .links .btn { padding: 11px 16px; }
+    nav { padding: 14px 4vw; }
+    nav .navCta { padding: 11px 16px; }
   }
-  @media (min-width: 761px) and (max-width: 1050px) {
-    nav .links a:not(.btn) { display: none; }
-    .menuBtn { display: inline-block; }
-  }
-  @media (max-width: 360px) { nav .daruma { display: none; } }
-  @media (max-width: 380px) {
-    nav { padding: 14px 3vw; }
-    nav .logo { font-size: 13px; }
-    nav .links { gap: 6px; }
-    nav .links .btn { padding: 11px 10px; }
-    .promo-full { display: none; }
-    .promo-short { display: inline; }
-  }
-  /* ── early-bird stripe (parks directly under the fixed nav) ── */
-  .ebStripe { display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap;
-    padding: 9px 4vw; text-decoration: none;
-    background: linear-gradient(180deg, #8c202a, #71161f);
-    border-top: 1px solid rgba(255,255,255,.10);
-    border-bottom: 1px solid rgba(0,0,0,.45);
-    font-family: var(--mono); font-size: 11px; letter-spacing: .18em; text-transform: uppercase;
-    color: #fbeceb; transition: background .25s; }
-  .ebStripe:hover { background: linear-gradient(180deg, #9c2531, #7d1a24); }
-  .ebStripe .ebc { color: #fff; letter-spacing: .08em; font-variant-numeric: tabular-nums; font-weight: 500; }
-  .ebStripe .ebs-sep { color: rgba(255,255,255,.3); }
-  .ebStripe .ebs-price { letter-spacing: .08em; white-space: nowrap; }
-  .ebStripe .ebs-price s { color: rgba(251,236,235,.55); text-decoration-thickness: 1px; margin-right: 8px; }
-  .ebStripe .ebs-price b { color: #fff; font-weight: 700; font-size: 13px; }
-  .ebStripe .ebs-cta { color: #fff; }
-  @media (max-width: 980px) {
-    .ebStripe { gap: 12px; font-size: 10px; letter-spacing: .12em; }
-    .ebStripe .ebs-sep { display: none; }
-  }
-  @media (max-width: 760px) {
-    .ebStripe { gap: 9px; padding: 8px 3vw; letter-spacing: .1em; }
-    .ebStripe .ebs-cta { display: none; }
-  }
-  .ebStripe .ebs-label-short { display: none; }
-  @media (max-width: 460px) {
-    .ebStripe .ebs-label-full { display: none; }
-    .ebStripe .ebs-label-short { display: inline; }
-  }
-
-  .menu { position: fixed; inset: 0; z-index: 60; background: rgba(5,5,6,.96); backdrop-filter: blur(14px);
-    display: flex; flex-direction: column; justify-content: center; gap: 18px; padding: 0 8vw;
-    opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .3s ease, visibility 0s linear .3s; }
-  .menu.open { opacity: 1; visibility: visible; pointer-events: auto; transition: opacity .3s ease; }
-  .menu .mlink { font-weight: 800; text-transform: uppercase; letter-spacing: -.01em; text-decoration: none;
-    font-size: clamp(28px, 8vw, 40px); line-height: 1.25; color: var(--ink); }
-  .menu .mlink span { font-family: var(--mono); font-weight: 400; font-size: 11px; letter-spacing: .2em;
-    color: var(--accent); margin-left: 14px; vertical-align: middle; white-space: nowrap; }
-  .menu .mdate { margin-top: 26px; font-family: var(--mono); font-size: 11px; letter-spacing: .3em;
-    text-transform: uppercase; color: var(--faint); }
-  .menuClose { position: absolute; top: 12px; right: 4vw; width: 46px; height: 46px; border: 1px solid rgba(244,243,240,.4);
-    background: none; color: var(--ink); border-radius: 3px; font-size: 16px; cursor: pointer; }
-  @media (prefers-reduced-motion: reduce) { .menu, .menu.open { transition: none; } }
   .daruma { height: 24px; width: auto; vertical-align: middle; opacity: .55; transition: opacity .3s, transform .3s; cursor: help; }
   .daruma:hover { opacity: 1; transform: translateY(-1px); }
   .daruma.foot { height: 46px; opacity: .6; cursor: pointer; }
@@ -282,52 +219,92 @@
   .daruma.wobble { animation: okiagari 1s ease-out; transform-origin: 50% 88%; }
   @media (prefers-reduced-motion: reduce) { .daruma.wobble { animation: none; } }
 
-  /* ── hero sequence ── */
-  .hero { position: relative; height: 100svh; overflow: hidden; max-width: none; padding: 0; }
-  .slide { position: absolute; inset: 0; transform: translateX(100%); pointer-events: none;
-    transition: transform 1.15s cubic-bezier(.77, 0, .175, 1); }
-  .slide.on { transform: translateX(0); pointer-events: auto; }
-  .slide.out { transform: translateX(-100%); }
-  .slide:not(.on):not(.out) { transition: none; visibility: hidden; }
-  .slide video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 42%; }
-  .slide .veil { position: absolute; inset: 0; pointer-events: none;
-    background: linear-gradient(to top, rgba(5,5,6,.72), transparent 42%),
-                linear-gradient(105deg, rgba(5,5,6,.55) 0%, transparent 52%); }
-  .slide .content { position: absolute; left: 6vw; bottom: 13vh; max-width: 880px; }
-  .slide h1 { font-weight: 900; text-transform: uppercase; letter-spacing: -.015em;
-    font-size: clamp(40px, 9vw, 132px); line-height: .94; color: var(--ink);
-    opacity: 0; transform: translateY(18px); transition: opacity .9s ease .45s, transform .9s ease .45s; }
-  .slide.on h1 { opacity: 1; transform: none; }
-  .slide .lead { margin-top: 18px; font-weight: 400; font-size: clamp(10.5px, 1.6vw, 19px); color: rgba(244,243,240,.78);
-    white-space: nowrap; line-height: 1.6; letter-spacing: .01em;
-    opacity: 0; transition: opacity .9s ease .95s; }
-  .slide .lead em { font-style: normal; color: var(--accent); }
-  .slide.on .lead { opacity: 1; }
-  @keyframes popIn { from { opacity: 0; transform: scale(.82); } to { opacity: 1; transform: scale(1); } }
-  .slide.on .pop { animation: popIn .5s cubic-bezier(.34, 1.56, .64, 1) 1.35s both; }
-  @media (prefers-reduced-motion: reduce) { .slide.on .pop { animation: none; } }
-  .slide .sub { margin-top: 20px; display: flex; gap: 22px; align-items: center; flex-wrap: wrap;
-    opacity: 0; transition: opacity .9s ease 1.05s; }
-  .slide.on .sub { opacity: 1; }
-  .slide .kicker { margin-bottom: 22px; font-size: 12px; opacity: 0; transition: opacity .8s ease .25s; }
-  .slide.on .kicker { opacity: 1; }
-  .heroDots { position: absolute; right: 4vw; bottom: 5vh; display: flex; gap: 4px; z-index: 5; flex-wrap: wrap; max-width: 88vw; justify-content: flex-end; }
-  @media (max-width: 360px) {
-    .heroDots button { padding: 8px 5px; letter-spacing: .1em; }
-    .slide .sub .btn { max-width: 100%; padding: 12px 14px; white-space: normal; text-align: center; }
+  /* ── hero offer ── */
+  .hero { position: relative; height: calc(100svh - 48px); min-height: 620px; overflow: hidden; max-width: none; padding: 0; }
+  .heroMedia, .heroPoster, .heroVideo { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .heroPoster, .heroVideo { object-fit: cover; object-position: center 42%; }
+  .heroVideo { opacity: 0; transition: opacity .45s ease; }
+  .heroVideo.playing { opacity: 1; }
+  .heroVeil { position: absolute; inset: 0; pointer-events: none;
+    background: linear-gradient(rgba(5,5,6,.24), rgba(5,5,6,.24)),
+                linear-gradient(to top, rgba(5,5,6,.88), rgba(5,5,6,.12) 62%),
+                linear-gradient(105deg, rgba(5,5,6,.68) 0%, transparent 58%); }
+  .heroContent { position: absolute; left: 6vw; right: 6vw; bottom: clamp(76px, 9vh, 96px); z-index: 2; max-width: 1120px; }
+  .heroContent .eyebrow { margin-bottom: 14px; font-size: 12px; letter-spacing: .22em; }
+  .heroContent h1 { font-weight: 900; text-transform: uppercase; letter-spacing: -.015em;
+    font-size: clamp(58px, 8.2vw, 118px); line-height: .88; color: var(--ink); max-width: none; }
+  .heroContent h1 span { display: block; }
+  .heroLead { max-width: 68ch; margin-top: 16px; color: rgba(244,243,240,.9);
+    font-size: clamp(16px, 1.45vw, 19px); line-height: 1.5; text-shadow: 0 1px 18px rgba(0,0,0,.7); }
+  .heroProgram { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 0; max-width: 980px;
+    margin-top: 16px; list-style: none; font-family: var(--mono); font-size: 12px; line-height: 1.4;
+    letter-spacing: .08em; text-transform: uppercase; color: rgba(244,243,240,.82); }
+  .heroProgram li { display: flex; align-items: baseline; gap: 5px; white-space: nowrap; }
+  .heroProgram li + li::before { content: '/'; margin: 0 12px; color: var(--accent); opacity: .76; }
+  .heroProgram b { color: var(--accent); font-weight: 500; }
+  .heroActions { display: flex; align-items: flex-start; margin-top: 18px; }
+  .heroActions .btn { min-width: 190px; text-align: center; }
+  .heroProof { display: flex; flex-wrap: wrap; gap: 6px 20px; margin-top: 10px;
+    font-family: var(--mono); font-size: 11px; line-height: 1.5; letter-spacing: .08em;
+    text-transform: uppercase; color: rgba(244,243,240,.78); }
+  .heroProof b { color: var(--accent); font-weight: 500; }
+  .heroProof span { position: relative; }
+  .heroProof span + span::before { content: ''; position: absolute; left: -11px; top: .45em;
+    width: 3px; height: 3px; border-radius: 50%; background: var(--accent); }
+  .heroContinue { position: absolute; left: 50%; bottom: max(8px, env(safe-area-inset-bottom)); z-index: 3;
+    min-height: 44px; display: inline-flex; align-items: center; transform: translateX(-50%);
+    font-family: var(--mono); font-size: 11px; letter-spacing: .16em; text-transform: uppercase;
+    color: rgba(244,243,240,.82); text-decoration: none; text-shadow: 0 1px 8px rgba(0,0,0,.8);
+    animation: heroContinueBob 2.4s ease-in-out 3; }
+  .heroContinue:hover { color: var(--accent); }
+  @keyframes heroContinueBob {
+    0%, 100% { transform: translate(-50%, 0); }
+    50% { transform: translate(-50%, 4px); }
   }
-  .heroDots button { border: 0; background: none; cursor: pointer; padding: 10px 8px;
-    font-family: var(--mono); font-size: 10px; letter-spacing: .18em; text-transform: uppercase;
-    color: rgba(244,243,240,.75); text-shadow: 0 1px 8px rgba(0,0,0,.8); transition: color .3s; }
-  .heroDots button.active, .heroDots button:hover { color: var(--ink); }
-  .heroDots button.active { text-decoration: underline; text-underline-offset: 5px; }
-  .scrollTag { position: absolute; left: 6vw; bottom: 4.5vh; font-family: var(--mono);
-    font-size: 10px; letter-spacing: .3em; color: rgba(244,243,240,.7); text-shadow: 0 1px 8px rgba(0,0,0,.8); text-transform: uppercase; z-index: 5; }
+  @media (prefers-reduced-motion: reduce) { .heroContinue { animation: none; } }
   @media (max-width: 760px) {
-    .heroDots { left: 6vw; right: 6vw; bottom: max(14px, env(safe-area-inset-bottom)); justify-content: flex-start; }
-    .scrollTag { display: none; }
-    .slide .content { left: 6vw; right: 6vw; bottom: 112px; max-width: none; }
-    .slide .lead { white-space: normal; font-size: 15px; line-height: 1.55; max-width: 32ch; }
+    .hero { min-height: 560px; }
+    .heroContent { bottom: 62px; }
+    .heroContent .eyebrow { margin-bottom: 12px; font-size: 10px; letter-spacing: .16em; }
+    .heroContent h1 { font-size: clamp(34px, 10.5vw, 60px); letter-spacing: -.025em; }
+    .heroLead { max-width: 39ch; margin-top: 12px; font-size: 15px; line-height: 1.42; }
+    .heroProgram { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 16px;
+      max-width: 520px; margin-top: 12px; font-size: 11px; letter-spacing: .04em; }
+    .heroProgram li { display: grid; grid-template-columns: auto 1fr; align-items: baseline; gap: 5px; white-space: normal; }
+    .heroProgram li + li::before { display: none; }
+    .heroActions { margin-top: 14px; }
+    .heroActions .btn { min-width: 0; padding: 12px 16px; }
+    .heroProof { margin-top: 8px; gap: 4px 16px; font-size: 11px; letter-spacing: .04em; }
+    .heroProof span + span::before { left: -9px; }
+  }
+  @media (max-width: 420px) {
+    .heroContent { left: 5vw; right: 5vw; }
+    .heroActions .btn { width: 100%; }
+    .heroProof span { flex-basis: 100%; }
+    .heroProof span + span::before { display: none; }
+  }
+  @media (max-width: 380px) and (max-height: 640px) {
+    .hero { height: 568px; min-height: 568px; }
+    .heroContent { top: 80px; bottom: auto; }
+    .heroContent .eyebrow { margin-bottom: 8px; font-size: 9px; line-height: 1.45; letter-spacing: .1em; }
+    .heroContent h1 { font-size: 34px; line-height: .86; }
+    .heroLead { margin-top: 8px; font-size: 13px; line-height: 1.34; }
+    .heroProgram { margin-top: 8px; gap: 5px 10px; font-size: 10px; line-height: 1.3; }
+    .heroActions { margin-top: 10px; }
+    .heroProof { margin-top: 6px; gap: 2px; font-size: 10px; line-height: 1.35; }
+    .heroContinue { font-size: 9px; }
+  }
+  @media (max-height: 540px) and (min-width: 560px) {
+    .hero { height: 100svh; min-height: 375px; }
+    .heroContent { top: 92px; bottom: auto; }
+    .heroContent .eyebrow { margin-bottom: 8px; font-size: 9px; }
+    .heroContent h1 { max-width: none; font-size: clamp(42px, 6.4vw, 58px); line-height: .86; white-space: nowrap; }
+    .heroLead { max-width: 78ch; margin-top: 8px; font-size: 12px; line-height: 1.35; }
+    .heroProgram { margin-top: 8px; gap: 4px 0; font-size: 10px; }
+    .heroProgram li + li::before { margin: 0 8px; }
+    .heroActions { margin-top: 10px; }
+    .heroProof { margin-top: 8px; }
+    .heroContinue { display: none; }
   }
 
   /* ── dates band ── */
@@ -611,9 +588,7 @@
   footer .doors a { font-family: var(--mono); font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--dim); text-decoration: none; display: inline-block; min-width: 150px; text-align: center; padding: 12px 8px; }
   footer .doors a:hover { color: var(--ink); }
 
-  @media (prefers-reduced-motion: reduce) {
-    .slide, .slide h1, .slide .lead, .slide .sub, .slide .kicker { transition: none; }
-  }
+  @media (prefers-reduced-motion: reduce) { .heroVideo { display: none; transition: none; } }
 </style>
 <noscript><style>.rv{opacity:1;transform:none}</style></noscript>
 </head>
@@ -624,91 +599,29 @@
 <div role="status" aria-live="polite" id="srStatus" style="position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0)"></div>
 <div class="topbar">
 <nav>
-  <a class="logo" href="#top" style="display:flex; align-items:center; gap:10px">Mirai <span data-copy="nav.label"></span> <img class="daruma" src="img/daruma.png" alt="Daruma" title="One eye at the start. The other on October 1." /></a>
-  <div class="links">
-    <a href="#summits" data-copy="nav.link"></a>
-    <a href="#speakers" data-copy="nav.link2"></a>
-    <a href="#fashion" data-copy="nav.link3"></a>
-    <a href="#residency" data-copy="nav.link4"></a>
-    <a href="/experience/" data-analytics-action="site_navigation" data-analytics-location="nav" data-analytics-target="experience_guide" data-copy="nav.link5"></a>
-    <a href="#apply" data-copy="nav.link6"></a>
-    <a class="btn accent" href="#summit-package" data-package-promo data-copy="nav.button"></a>
-    <a class="btn accent package-promo-fallback" href="#apply" data-copy="nav.button2"></a>
-    <button class="menuBtn" id="menuBtn" aria-expanded="false" aria-controls="menu" data-copy="nav.menuButton"></button>
-  </div>
+  <a class="logo" href="#top" data-copy="nav.logo"></a>
+  <a class="btn accent navCta" href="https://luma.com/an4zotn9" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="nav" data-analytics-target="tickets" data-copy="nav.button"></a>
 </nav>
-
-<a class="ebStripe" id="ebStripe" href="https://luma.com/an4zotn9" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="early_bird_stripe" data-analytics-target="tickets">
-  <span class="ebs-label-full">Early Bird ticket sale ending in</span><span class="ebs-label-short">Early Bird ends in</span>
-  <span class="ebc">&#8212;</span>
-  <span class="ebs-sep">·</span>
-  <span class="ebs-price"><s>$1500</s><b>$399</b></span>
-  <span class="ebs-sep">·</span>
-  <span class="ebs-cta">Get Tickets →</span>
-</a>
 </div>
 
-<div class="menu" id="menu" role="dialog" aria-modal="true" aria-label="Site menu">
-  <button class="menuClose" id="menuClose" aria-label="Close menu" data-copy="menu.closeButton"></button>
-  <a class="mlink" href="#summits" data-copy="menu.item"></a>
-  <a class="mlink" href="#speakers" data-copy="menu.item2"></a>
-  <a class="mlink" href="#fashion" data-copy="menu.item3"></a>
-  <a class="mlink" href="#residency" data-copy="menu.item4"></a>
-  <a class="mlink" href="/experience/" data-analytics-action="site_navigation" data-analytics-location="menu" data-analytics-target="experience_guide" data-copy="menu.item5"></a>
-  <a class="mlink" href="#summit-package" data-package-promo data-copy="menu.item6"></a>
-  <a class="mlink package-promo-fallback" href="#apply" data-copy="menu.item7"></a>
-  <div class="mdate" data-copy="menu.footer"></div>
-</div>
-
-<!-- ═══ HERO SEQUENCE ═══ -->
+<!-- ═══ HERO OFFER ═══ -->
 <section class="hero" id="top" data-track-section="hero" data-track-position="1">
-
-  <div class="slide on" data-dur="6200" style="background:url(disease_poster.jpg) center 42%/cover no-repeat">
-    <video autoplay muted loop playsinline preload="auto" poster="disease_poster.jpg" aria-hidden="true">
-      <source src="disease.mp4" type="video/mp4" /></video>
-    <div class="veil"></div>
-    <div class="content">
-      <div class="kicker eyebrow" data-copy="hero.eyebrow"></div>
-      <h1 data-copy="hero.headline"></h1>
-      <div class="sub" data-copy="hero.buttons"></div>
-    </div>
+  <div class="heroMedia">
+    <img class="heroPoster" src="disease_poster.jpg" alt="" fetchpriority="high" decoding="async" />
+    <video class="heroVideo" muted loop playsinline preload="none" aria-hidden="true">
+      <source data-src="disease.mp4" type="video/mp4" />
+    </video>
+    <div class="heroVeil"></div>
   </div>
-
-  <div class="slide" data-dur="6200" style="background:url(healthspan_poster.jpg) center 42%/cover no-repeat">
-    <video muted loop playsinline preload="none" poster="healthspan_poster.jpg" aria-hidden="true">
-      <source src="healthspan.mp4" type="video/mp4" /></video>
-    <div class="veil"></div>
-    <div class="content">
-      <div class="kicker eyebrow" data-copy="hero.eyebrow2"></div>
-      <h1 data-copy="hero.headline2"></h1>
-      <div class="sub" data-copy="hero.buttons2"></div>
-    </div>
+  <div class="heroContent">
+    <div class="eyebrow" data-copy="hero.eyebrow"></div>
+    <h1 data-copy="hero.headline"></h1>
+    <p class="heroLead" data-copy="hero.lead"></p>
+    <ul class="heroProgram" aria-label="Program at a glance" data-copy="hero.program"></ul>
+    <div class="heroActions" data-copy="hero.buttons"></div>
+    <div class="heroProof" aria-label="Featured people and venue" data-copy="hero.proof"></div>
   </div>
-
-  <div class="slide" data-dur="6200" style="background:url(augment_poster.jpg) center 42%/cover no-repeat">
-    <video muted loop playsinline preload="none" poster="augment_poster.jpg" aria-hidden="true">
-      <source src="augment.mp4" type="video/mp4" /></video>
-    <div class="veil"></div>
-    <div class="content">
-      <div class="kicker eyebrow" data-copy="hero.eyebrow3"></div>
-      <h1 data-copy="hero.headline3"></h1>
-      <div class="sub" data-copy="hero.buttons3"></div>
-    </div>
-  </div>
-
-  <div class="slide" data-dur="8000" style="background:url(live_city_poster.jpg) center 42%/cover no-repeat">
-    <video muted loop playsinline preload="none" poster="live_city_poster.jpg" aria-hidden="true">
-      <source src="live_city.mp4" type="video/mp4" /></video>
-    <div class="veil"></div>
-    <div class="content">
-      <h1 data-copy="hero.headline4"></h1>
-      <p class="lead" data-copy="hero.lead"></p>
-      <div class="sub" data-copy="hero.buttons4"></div>
-    </div>
-  </div>
-
-  <div class="scrollTag" data-copy="hero.scrollHint"></div>
-  <div class="heroDots" id="heroDots"></div>
+  <a class="heroContinue" href="#main" data-copy="hero.scrollHint"></a>
 </section>
 
 <!-- ═══ DATES ═══ -->
@@ -794,7 +707,7 @@
   </div>
   <div class="voicesbar rv">
     <div class="faces">
-      <img src="img/aubrey.jpg" alt="Aubrey de Grey" /><img src="img/jose.jpg" alt="José Cordeiro" /><img src="img/yuki.jpg" alt="Yuki Hanyu" /><img src="img/adam.jpg" alt="Adam Gries" />
+      <img src="img/aubrey.jpg" alt="Aubrey de Grey" loading="lazy" decoding="async" /><img src="img/jose.jpg" alt="José Cordeiro" loading="lazy" decoding="async" /><img src="img/yuki.jpg" alt="Yuki Hanyu" loading="lazy" decoding="async" /><img src="img/adam.jpg" alt="Adam Gries" loading="lazy" decoding="async" />
     </div>
     <div class="who" data-copy="summits.line"></div>
     <a class="more" href="#speakers" data-copy="summits.link"></a>
@@ -806,13 +719,13 @@
   <div class="eyebrow rv" data-copy="speakers.eyebrow"></div>
   <h2 class="big rv" data-copy="speakers.headline"></h2>
   <div class="headliners">
-    <div class="hcard rv"><img src="img/aubrey.jpg" alt="Aubrey de Grey" loading="lazy" />
+    <div class="hcard rv"><img src="img/aubrey.jpg" alt="Aubrey de Grey" loading="lazy" decoding="async" />
       <div class="meta"><div class="nm" data-copy="speakers.name"></div><div class="og" data-copy="speakers.org"></div></div></div>
-    <div class="hcard rv"><img src="img/jose.jpg" alt="José Cordeiro" loading="lazy" />
+    <div class="hcard rv"><img src="img/jose.jpg" alt="José Cordeiro" loading="lazy" decoding="async" />
       <div class="meta"><div class="nm" data-copy="speakers.name2"></div><div class="og" data-copy="speakers.org2"></div></div></div>
-    <div class="hcard rv"><img src="img/yuki.jpg" alt="Yuki Hanyu" loading="lazy" />
+    <div class="hcard rv"><img src="img/yuki.jpg" alt="Yuki Hanyu" loading="lazy" decoding="async" />
       <div class="meta"><div class="nm" data-copy="speakers.name3"></div><div class="og" data-copy="speakers.org3"></div></div></div>
-    <div class="hcard rv"><img src="img/adam.jpg" alt="Adam Gries" loading="lazy" />
+    <div class="hcard rv"><img src="img/adam.jpg" alt="Adam Gries" loading="lazy" decoding="async" />
       <div class="meta"><div class="nm" data-copy="speakers.name4"></div><div class="og" data-copy="speakers.org4"></div></div></div>
   </div>
   <p class="alsoline rv" data-copy="speakers.alsoLine"></p>
@@ -823,8 +736,8 @@
 
 <!-- ═══ FASHION SHOW ═══ -->
 <section class="fashion" id="fashion" data-track-section="fashion" data-track-position="6">
-  <video autoplay muted loop playsinline preload="metadata" poster="augment_poster.jpg" aria-hidden="true">
-    <source src="augment.mp4" type="video/mp4" /></video>
+  <video muted loop playsinline preload="none" loading="lazy" poster="augment_poster.jpg" aria-hidden="true">
+    <source data-src="augment.mp4" type="video/mp4" /></video>
   <div class="veil"></div>
   <div class="content">
     <div class="eyebrow" data-copy="fashion.eyebrow"></div>
@@ -843,38 +756,38 @@
   <div class="ecoWall rv" aria-label="Supporting organizations">
     <div class="ecoTrack">
       <div class="ecoSeq">
-      <a class="ecoCell plate" href="https://viva.city/" target="_blank" rel="noopener" title="Viva City"><img src="img/partners/viva-city.avif" alt="Viva City" /></a>
-      <a class="ecoCell stamp" href="https://www.fbri-kobe.org/kbic/english/" target="_blank" rel="noopener" title="KBIC"><img src="img/partners/kbic.svg" alt="KBIC" /></a>
-      <a class="ecoCell plate" href="https://www.learninglayer.ai/" target="_blank" rel="noopener" title="Learning Layer Labs"><img src="img/partners/learning-layer-labs.jpg" alt="Learning Layer Labs" /></a>
-      <a class="ecoCell plate" href="https://haus.fund/" target="_blank" rel="noopener" title="Biopunk"><img src="img/partners/biopunk.png" alt="Biopunk" /></a>
-      <a class="ecoCell luma" href="https://aevitashouse.bio/" target="_blank" rel="noopener" title="Aevitas"><img src="img/partners/aevitas.png" alt="Aevitas" /></a>
-      <a class="ecoCell luma" href="https://brokensymmetry.capital/" target="_blank" rel="noopener" title="Broken Symmetry Capital"><img src="img/partners/broken-symmetry.jpg" alt="Broken Symmetry Capital" /></a>
-      <a class="ecoCell plate" href="https://vibecodingnights.com/" target="_blank" rel="noopener" title="Vibe Coding Nights"><img src="img/partners/vibe-coding-nights.png" alt="Vibe Coding Nights" /></a>
+      <a class="ecoCell plate" href="https://viva.city/" target="_blank" rel="noopener" title="Viva City"><img src="img/partners/viva-city.avif" alt="Viva City" loading="lazy" decoding="async" /></a>
+      <a class="ecoCell stamp" href="https://www.fbri-kobe.org/kbic/english/" target="_blank" rel="noopener" title="KBIC"><img src="img/partners/kbic.svg" alt="KBIC" loading="lazy" decoding="async" /></a>
+      <a class="ecoCell plate" href="https://www.learninglayer.ai/" target="_blank" rel="noopener" title="Learning Layer Labs"><img src="img/partners/learning-layer-labs.jpg" alt="Learning Layer Labs" loading="lazy" decoding="async" /></a>
+      <a class="ecoCell plate" href="https://haus.fund/" target="_blank" rel="noopener" title="Biopunk"><img src="img/partners/biopunk.png" alt="Biopunk" loading="lazy" decoding="async" /></a>
+      <a class="ecoCell luma" href="https://aevitashouse.bio/" target="_blank" rel="noopener" title="Aevitas"><img src="img/partners/aevitas.png" alt="Aevitas" loading="lazy" decoding="async" /></a>
+      <a class="ecoCell luma" href="https://brokensymmetry.capital/" target="_blank" rel="noopener" title="Broken Symmetry Capital"><img src="img/partners/broken-symmetry.jpg" alt="Broken Symmetry Capital" loading="lazy" decoding="async" /></a>
+      <a class="ecoCell plate" href="https://vibecodingnights.com/" target="_blank" rel="noopener" title="Vibe Coding Nights"><img src="img/partners/vibe-coding-nights.png" alt="Vibe Coding Nights" loading="lazy" decoding="async" /></a>
       <a class="ecoCell" href="https://www.levf.org/" target="_blank" rel="noopener" title="LEV Foundation"><span class="ecoWord">LEV Foundation</span></a>
-      <a class="ecoCell plate" href="https://alv.vc/" target="_blank" rel="noopener" title="Asagi Labs Ventures"><img src="img/partners/asagi-labs.jpg" alt="Asagi Labs Ventures" /></a>
-      <a class="ecoCell plate" href="https://zucity.org/en/market-homes" target="_blank" rel="noopener" title="ZuCity Japan"><img src="img/partners/zucity.svg" alt="ZuCity Japan" /></a>
+      <a class="ecoCell plate" href="https://alv.vc/" target="_blank" rel="noopener" title="Asagi Labs Ventures"><img src="img/partners/asagi-labs.jpg" alt="Asagi Labs Ventures" loading="lazy" decoding="async" /></a>
+      <a class="ecoCell plate" href="https://zucity.org/en/market-homes" target="_blank" rel="noopener" title="ZuCity Japan"><img src="img/partners/zucity.svg" alt="ZuCity Japan" loading="lazy" decoding="async" /></a>
       <a class="ecoCell" href="https://ch-ange.de/" target="_blank" rel="noopener" title="CHANGE"><span class="ecoWord">CHANGE</span></a>
-      <a class="ecoCell plate" href="https://www.heka.bio/" target="_blank" rel="noopener" title="HekaBio"><img src="img/partners/hekabio.avif" alt="HekaBio" /></a>
-      <a class="ecoCell stamp" href="https://augmentationlab.org/" target="_blank" rel="noopener" title="Augmentation Lab"><img src="img/partners/augmentation-lab.png" alt="Augmentation Lab" /></a>
-      <a class="ecoCell plate" href="https://vitalistbay.com/" target="_blank" rel="noopener" title="Vitalist Bay"><img src="img/partners/vitalist-bay.png" alt="Vitalist Bay" /></a>
-      <a class="ecoCell stamp" href="https://the-mu.xyz/" target="_blank" rel="noopener" title="The MU"><img src="img/partners/the-mu.png" alt="The MU" /></a>
+      <a class="ecoCell plate" href="https://www.heka.bio/" target="_blank" rel="noopener" title="HekaBio"><img src="img/partners/hekabio.avif" alt="HekaBio" loading="lazy" decoding="async" /></a>
+      <a class="ecoCell stamp" href="https://augmentationlab.org/" target="_blank" rel="noopener" title="Augmentation Lab"><img src="img/partners/augmentation-lab.png" alt="Augmentation Lab" loading="lazy" decoding="async" /></a>
+      <a class="ecoCell plate" href="https://vitalistbay.com/" target="_blank" rel="noopener" title="Vitalist Bay"><img src="img/partners/vitalist-bay.png" alt="Vitalist Bay" loading="lazy" decoding="async" /></a>
+      <a class="ecoCell stamp" href="https://the-mu.xyz/" target="_blank" rel="noopener" title="The MU"><img src="img/partners/the-mu.png" alt="The MU" loading="lazy" decoding="async" /></a>
       </div>
       <div class="ecoSeq" aria-hidden="true">
-      <a class="ecoCell plate" href="https://viva.city/" target="_blank" rel="noopener" title="Viva City" tabindex="-1"><img src="img/partners/viva-city.avif" alt="Viva City" /></a>
-      <a class="ecoCell stamp" href="https://www.fbri-kobe.org/kbic/english/" target="_blank" rel="noopener" title="KBIC" tabindex="-1"><img src="img/partners/kbic.svg" alt="KBIC" /></a>
-      <a class="ecoCell plate" href="https://www.learninglayer.ai/" target="_blank" rel="noopener" title="Learning Layer Labs" tabindex="-1"><img src="img/partners/learning-layer-labs.jpg" alt="Learning Layer Labs" /></a>
-      <a class="ecoCell plate" href="https://haus.fund/" target="_blank" rel="noopener" title="Biopunk" tabindex="-1"><img src="img/partners/biopunk.png" alt="Biopunk" /></a>
-      <a class="ecoCell luma" href="https://aevitashouse.bio/" target="_blank" rel="noopener" title="Aevitas" tabindex="-1"><img src="img/partners/aevitas.png" alt="Aevitas" /></a>
-      <a class="ecoCell luma" href="https://brokensymmetry.capital/" target="_blank" rel="noopener" title="Broken Symmetry Capital" tabindex="-1"><img src="img/partners/broken-symmetry.jpg" alt="Broken Symmetry Capital" /></a>
-      <a class="ecoCell plate" href="https://vibecodingnights.com/" target="_blank" rel="noopener" title="Vibe Coding Nights" tabindex="-1"><img src="img/partners/vibe-coding-nights.png" alt="Vibe Coding Nights" /></a>
+      <a class="ecoCell plate" href="https://viva.city/" target="_blank" rel="noopener" title="Viva City" tabindex="-1"><img src="img/partners/viva-city.avif" alt="Viva City" loading="lazy" decoding="async" /></a>
+      <a class="ecoCell stamp" href="https://www.fbri-kobe.org/kbic/english/" target="_blank" rel="noopener" title="KBIC" tabindex="-1"><img src="img/partners/kbic.svg" alt="KBIC" loading="lazy" decoding="async" /></a>
+      <a class="ecoCell plate" href="https://www.learninglayer.ai/" target="_blank" rel="noopener" title="Learning Layer Labs" tabindex="-1"><img src="img/partners/learning-layer-labs.jpg" alt="Learning Layer Labs" loading="lazy" decoding="async" /></a>
+      <a class="ecoCell plate" href="https://haus.fund/" target="_blank" rel="noopener" title="Biopunk" tabindex="-1"><img src="img/partners/biopunk.png" alt="Biopunk" loading="lazy" decoding="async" /></a>
+      <a class="ecoCell luma" href="https://aevitashouse.bio/" target="_blank" rel="noopener" title="Aevitas" tabindex="-1"><img src="img/partners/aevitas.png" alt="Aevitas" loading="lazy" decoding="async" /></a>
+      <a class="ecoCell luma" href="https://brokensymmetry.capital/" target="_blank" rel="noopener" title="Broken Symmetry Capital" tabindex="-1"><img src="img/partners/broken-symmetry.jpg" alt="Broken Symmetry Capital" loading="lazy" decoding="async" /></a>
+      <a class="ecoCell plate" href="https://vibecodingnights.com/" target="_blank" rel="noopener" title="Vibe Coding Nights" tabindex="-1"><img src="img/partners/vibe-coding-nights.png" alt="Vibe Coding Nights" loading="lazy" decoding="async" /></a>
       <a class="ecoCell" href="https://www.levf.org/" target="_blank" rel="noopener" title="LEV Foundation" tabindex="-1"><span class="ecoWord">LEV Foundation</span></a>
-      <a class="ecoCell plate" href="https://alv.vc/" target="_blank" rel="noopener" title="Asagi Labs Ventures" tabindex="-1"><img src="img/partners/asagi-labs.jpg" alt="Asagi Labs Ventures" /></a>
-      <a class="ecoCell plate" href="https://zucity.org/en/market-homes" target="_blank" rel="noopener" title="ZuCity Japan" tabindex="-1"><img src="img/partners/zucity.svg" alt="ZuCity Japan" /></a>
+      <a class="ecoCell plate" href="https://alv.vc/" target="_blank" rel="noopener" title="Asagi Labs Ventures" tabindex="-1"><img src="img/partners/asagi-labs.jpg" alt="Asagi Labs Ventures" loading="lazy" decoding="async" /></a>
+      <a class="ecoCell plate" href="https://zucity.org/en/market-homes" target="_blank" rel="noopener" title="ZuCity Japan" tabindex="-1"><img src="img/partners/zucity.svg" alt="ZuCity Japan" loading="lazy" decoding="async" /></a>
       <a class="ecoCell" href="https://ch-ange.de/" target="_blank" rel="noopener" title="CHANGE" tabindex="-1"><span class="ecoWord">CHANGE</span></a>
-      <a class="ecoCell plate" href="https://www.heka.bio/" target="_blank" rel="noopener" title="HekaBio" tabindex="-1"><img src="img/partners/hekabio.avif" alt="HekaBio" /></a>
-      <a class="ecoCell stamp" href="https://augmentationlab.org/" target="_blank" rel="noopener" title="Augmentation Lab" tabindex="-1"><img src="img/partners/augmentation-lab.png" alt="Augmentation Lab" /></a>
-      <a class="ecoCell plate" href="https://vitalistbay.com/" target="_blank" rel="noopener" title="Vitalist Bay" tabindex="-1"><img src="img/partners/vitalist-bay.png" alt="Vitalist Bay" /></a>
-      <a class="ecoCell stamp" href="https://the-mu.xyz/" target="_blank" rel="noopener" title="The MU" tabindex="-1"><img src="img/partners/the-mu.png" alt="The MU" /></a>
+      <a class="ecoCell plate" href="https://www.heka.bio/" target="_blank" rel="noopener" title="HekaBio" tabindex="-1"><img src="img/partners/hekabio.avif" alt="HekaBio" loading="lazy" decoding="async" /></a>
+      <a class="ecoCell stamp" href="https://augmentationlab.org/" target="_blank" rel="noopener" title="Augmentation Lab" tabindex="-1"><img src="img/partners/augmentation-lab.png" alt="Augmentation Lab" loading="lazy" decoding="async" /></a>
+      <a class="ecoCell plate" href="https://vitalistbay.com/" target="_blank" rel="noopener" title="Vitalist Bay" tabindex="-1"><img src="img/partners/vitalist-bay.png" alt="Vitalist Bay" loading="lazy" decoding="async" /></a>
+      <a class="ecoCell stamp" href="https://the-mu.xyz/" target="_blank" rel="noopener" title="The MU" tabindex="-1"><img src="img/partners/the-mu.png" alt="The MU" loading="lazy" decoding="async" /></a>
       </div>
     </div>
   </div>
@@ -1019,9 +932,32 @@
 
 <script>applyCopy();</script>
 
-<script id="luma-checkout" src="https://embed.lu.ma/checkout-button.js"></script>
+<script id="luma-checkout"></script>
 <script>
   const noMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // The package keeps a normal Luma href as its resilient fallback. Load the
+  // enhanced overlay only when the package is near view or a pointer/focus
+  // indicates intent, so its script and stylesheet do not compete with LCP.
+  const lumaScript = document.getElementById('luma-checkout');
+  function loadLumaCheckout() {
+    if (lumaScript.src) return;
+    lumaScript.src = 'https://embed.lu.ma/checkout-button.js';
+    lumaScript.async = true;
+  }
+  document.querySelectorAll('[data-luma-action="checkout"]').forEach(link => {
+    link.addEventListener('pointerenter', loadLumaCheckout, { once: true });
+    link.addEventListener('focus', loadLumaCheckout, { once: true });
+  });
+  const packageSection = document.getElementById('summit-package');
+  if (packageSection) {
+    const lumaObserver = new IntersectionObserver(entries => {
+      if (!entries.some(entry => entry.isIntersecting)) return;
+      loadLumaCheckout();
+      lumaObserver.disconnect();
+    }, { rootMargin: '600px 0px' });
+    lumaObserver.observe(packageSection);
+  }
 
   // summit + hotel package is capped by spots, not by a date: set
   // MIRAI_COPY.js.packageSpotsLeft in copy.js. At 0 it falls back to standard pricing.
@@ -1039,124 +975,64 @@
     });
   }
 
-  // mobile menu
-  const menu = document.getElementById('menu'),
-        menuBtn = document.getElementById('menuBtn'),
-        menuClose = document.getElementById('menuClose');
-  function setMenu(open) {
-    menu.classList.toggle('open', open);
-    menuBtn.setAttribute('aria-expanded', String(open));
-    document.documentElement.style.overflow = open ? 'hidden' : '';
-    (open ? menu.querySelector('.mlink') : menuBtn).focus();
-  }
-  menuBtn.addEventListener('click', () => setMenu(true));
-  menuClose.addEventListener('click', () => setMenu(false));
-  menu.querySelectorAll('.mlink').forEach(a => a.addEventListener('click', () => setMenu(false)));
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape' && menu.classList.contains('open')) setMenu(false);
-  });
-
   // early-bird window closes Aug 31 (JST): page self-heals to standard pricing
   const EB_END = new Date('2026-09-01T00:00:00+09:00').getTime();
   if (Date.now() >= EB_END) {
     document.documentElement.classList.add('ebOver');
-    document.querySelectorAll('.ebTag, .left, .ebClock, .ebStripe').forEach(el => el.remove());
+    document.querySelectorAll('.ebTag, .left, .ebClock').forEach(el => el.remove());
     document.querySelectorAll('.ebPrice, .tracks .t .price').forEach(el => {
       const s = el.querySelector('s');
       if (s) el.textContent = s.textContent;
     });
   }
 
-  // hero sequence
-  const slides = [...document.querySelectorAll('.hero .slide')];
-  const WORDS = MIRAI_COPY.js.heroDotWords;
-  const dotsWrap = document.getElementById('heroDots');
-  slides.forEach((s, i) => {
-    if (i !== 0) s.setAttribute('inert', '');
-    const b = document.createElement('button');
-    b.textContent = WORDS[i];
-    b.setAttribute('aria-label', 'Slide ' + (i + 1) + ': ' + WORDS[i]);
-    if (i === 0) { b.classList.add('active'); b.setAttribute('aria-current', 'true'); }
-    b.addEventListener('click', () => { clearTimeout(timer); go(i); });
-    dotsWrap.appendChild(b);
-  });
-  const pauseBtn = document.createElement('button');
-  pauseBtn.textContent = '⏸';
-  pauseBtn.setAttribute('aria-label', 'Pause slideshow');
-  dotsWrap.appendChild(pauseBtn);
-  const dotEls = [...dotsWrap.children].slice(0, slides.length);
-  let cur = 0, timer = null, heroPaused = false;
-  pauseBtn.addEventListener('click', () => {
-    heroPaused = !heroPaused;
-    pauseBtn.textContent = heroPaused ? '▶' : '⏸';
-    pauseBtn.setAttribute('aria-label', heroPaused ? 'Play slideshow' : 'Pause slideshow');
-    const v = slides[cur].querySelector('video');
-    if (heroPaused) { clearTimeout(timer); if (v) v.pause(); }
-    else { if (v) v.play().catch(() => {}); schedule(); }
-  });
-
-  function go(n) {
-    if (n !== cur) {
-      const old = cur;
-      cur = (n + slides.length) % slides.length;
-      const os = slides[old], ns = slides[cur];
-      if (ns._reset) { clearTimeout(ns._reset); ns._reset = null; }
-      ns.classList.remove('out');
-      void ns.offsetWidth;
-      os.classList.remove('on');
-      os.classList.add('out');
-      os.setAttribute('inert', '');
-      dotEls[old].classList.remove('active');
-      dotEls[old].removeAttribute('aria-current');
-      ns.classList.add('on');
-      ns.removeAttribute('inert');
-      dotEls[cur].classList.add('active');
-      dotEls[cur].setAttribute('aria-current', 'true');
-      const v = ns.querySelector('video');
-      if (v && v.paused && !heroPaused) v.play().catch(() => {});
-      os._reset = setTimeout(() => {
-        os._reset = null;
-        os.classList.remove('out');
-        const ov = os.querySelector('video');
-        if (ov && !os.classList.contains('on')) ov.pause();
-      }, 1250);
-    }
-    if (!heroPaused) schedule();
-  }
-  function schedule() {
-    clearTimeout(timer);
-    timer = setTimeout(() => go(cur + 1), +slides[cur].dataset.dur || 6000);
-  }
-  slides[0].querySelector('video').play().catch(() => {});
-  schedule();
-  // low-power-mode insurance: first gesture retries playback
-  const kick = () => {
-    const v = slides[cur].querySelector('video');
-    if (v && v.paused && !heroPaused) v.play().catch(() => {});
-    document.removeEventListener('touchstart', kick);
-    document.removeEventListener('click', kick);
-  };
-  document.addEventListener('touchstart', kick, { once: true });
-  document.addEventListener('click', kick, { once: true });
-
-  // hero sleeps off-screen (battery)
+  // The poster is the only eager hero asset. Desktop video starts after the
+  // poster has rendered and the main thread is idle; mobile/data-saver stays static.
   const hero = document.querySelector('.hero');
+  const heroPoster = hero.querySelector('.heroPoster');
+  const heroVideo = hero.querySelector('.heroVideo');
+  const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+  const slowConnection = connection && /(^|-)2g$/.test(connection.effectiveType || '');
+  const canPlayHeroVideo = !noMotion && matchMedia('(min-width: 761px)').matches &&
+    !connection?.saveData && !slowConnection;
+
+  function loadHeroVideo() {
+    const source = heroVideo.querySelector('source[data-src]');
+    if (!source || source.src) return;
+    source.src = source.dataset.src;
+    heroVideo.load();
+    heroVideo.play().then(() => heroVideo.classList.add('playing')).catch(() => {});
+  }
+
+  function scheduleHeroVideo() {
+    const start = () => loadHeroVideo();
+    if ('requestIdleCallback' in window) requestIdleCallback(start, { timeout: 2500 });
+    else setTimeout(start, 1200);
+  }
+
+  if (canPlayHeroVideo) {
+    if (heroPoster.complete) scheduleHeroVideo();
+    else heroPoster.addEventListener('load', scheduleHeroVideo, { once: true });
+  }
+
   new IntersectionObserver(es => es.forEach(e => {
-    const v = slides[cur].querySelector('video');
-    if (e.isIntersecting) {
-      if (v && !heroPaused) v.play().catch(() => {});
-      if (!heroPaused) schedule();
-    } else {
-      clearTimeout(timer);
-      if (v) v.pause();
-    }
+    if (!heroVideo.currentSrc) return;
+    if (e.isIntersecting) heroVideo.play().catch(() => {});
+    else heroVideo.pause();
   }), { threshold: .05 }).observe(hero);
 
-  // fashion-show video: play on scroll into view
+  // Fashion-show video gets a source only when its section approaches view.
   const fv = document.querySelector('.fashion video');
   new IntersectionObserver(es => es.forEach(e => {
-    if (e.isIntersecting) { fv.play().catch(() => {}); } else { fv.pause(); }
-  }), { threshold: .2 }).observe(fv);
+    if (e.isIntersecting) {
+      const source = fv.querySelector('source[data-src]');
+      if (source && !source.src) {
+        source.src = source.dataset.src;
+        fv.load();
+      }
+      if (!noMotion && !connection?.saveData) fv.play().catch(() => {});
+    } else fv.pause();
+  }), { rootMargin: '200px 0px', threshold: .01 }).observe(fv);
 
   // reveal-on-scroll
   const ro = new IntersectionObserver(es => es.forEach(e => {

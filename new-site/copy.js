@@ -10,49 +10,26 @@
    ============================================================ */
 window.MIRAI_COPY = {
 
-  /* ─── MENU + SKIP LINK ─────────────────────────── */
+  /* ─── SKIP LINK ─────────────────────────── */
   menu: {
     skipLink: `Skip to content`,
-    closeButton: `✕`,
-    item: `Summits <span>Oct 17–25</span>`,
-    item2: `Speakers <span>38 Confirmed</span>`,
-    item3: `Fashion Show <span>Oct 26</span>`,
-    item4: `Residency <span>Oct 01–31</span>`,
-    item5: `The Experience <span>Kobe + Kansai</span>`,
-    item6: `Summit + Hotel <span>{spots} Spots Left</span>`,
-    item7: `Sponsors`,
-    footer: `10 · 01 · 2026 · Port Island, Kobe`,
   },
 
   /* ─── NAV ─────────────────────────── */
   nav: {
-    label: `Tech`,
-    link: `Summits`,
-    link2: `Speakers`,
-    link3: `Fashion Show`,
-    link4: `Residency`,
-    link5: `The Experience`,
-    link6: `Sponsors`,
-    button: `<span class="promo-full">Summit + Hotel</span><span class="promo-short">Hotel Pass</span>`,
-    button2: `Apply Now`,
-    menuButton: `Menu`,
+    logo: `Mirai<span class="logoTech">Tech</span>`,
+    button: `Get Ticket`,
   },
 
-  /* ─── HERO SLIDES ─────────────────────────── */
+  /* ─── HERO OFFER ─────────────────────────── */
   hero: {
-    eyebrow: `Summit I · October 17–18`,
-    headline: `Eradicate disease.`,
-    buttons: `<a class="btn ghost" href="#summit-package" data-package-promo>Summit + Hotel Package</a> <a class="btn accent package-promo-fallback" href="https://luma.com/an4zotn9" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="hero_disease" data-analytics-target="tickets">Get Tickets</a>`,
-    eyebrow2: `Summit II · October 24–25`,
-    headline2: `Extend the healthspan.`,
-    buttons2: `<a class="btn ghost" href="#summit-package" data-package-promo>Summit + Hotel Package</a> <a class="btn accent package-promo-fallback" href="https://luma.com/an4zotn9" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="hero_healthspan" data-analytics-target="tickets">Get Tickets</a>`,
-    eyebrow3: `The Frontier Human Fashion Show · October 26`,
-    headline3: `Augment the human.`,
-    buttons3: `<a class="btn accent pop" href="#fashion">The Fashion Show →</a>`,
-    headline4: `Live.`,
-    lead: `Join us this October to change the future of longevity. <em>Live the future now.</em>`,
-    buttons4: `<a class="btn accent" href="#summit-package" data-package-promo>Summit + Hotel Package</a> <a class="btn accent package-promo-fallback" href="#summits">See the Summits</a> <a class="btn ghost" href="#residency">The Residency →</a>`,
-    scrollHint: `Scroll ↓`,
+    eyebrow: `Mirai Tech City 2026 · Kobe, Japan · October 1–31`,
+    headline: `<span>Live the future</span> <span>of health.</span>`,
+    lead: `Japan's month-long longevity biomedical popup city, where scientists, founders, and operators meet collaborators, learn from field leaders, and experience frontier health in real life.`,
+    program: `<li><b>2</b> <span>summit weekends</span></li><li><span>Fashion Show</span> <b>Oct 26</b></li><li><span>Citizenship</span> <b>all October</b></li>`,
+    buttons: `<a class="btn accent" href="https://luma.com/an4zotn9" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="hero_primary" data-analytics-target="tickets">Get Tickets</a>`,
+    proof: `<span><b>43</b> confirmed speakers · Aubrey de Grey + José Cordeiro</span><span><b>300-person</b> popup city</span><span>KBIC · Japan's largest biomedical cluster · <b>370</b> member organizations</span>`,
+    scrollHint: `See what October looks like ↓`,
   },
 
   /* ─── DATES STRIP ─────────────────────────── */
@@ -275,8 +252,6 @@ window.MIRAI_COPY = {
 
   /* ─── STRINGS THE PAGE SCRIPT USES ───────────────────── */
   js: {
-    heroDotWords:      ['Eradicate', 'Extend', 'Augment', 'Live'],
-
     /* Summit + Hotel package is limited by SPOTS, not by a date.
        Update packageSpotsLeft as they sell. {spots} and {spotsTotal}
        in any string above are replaced with these numbers.
