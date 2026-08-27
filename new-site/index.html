@@ -471,9 +471,15 @@
 
   /* ── ecosystem ── */
   .ecoHead { margin-top: 96px; }
-  .majorPartners { display: flex; align-items: center; gap: 64px; flex-wrap: wrap; margin-top: 30px; }
-  .majorPartners a { display: block; transition: filter .25s; }
-  .majorPartners a:hover { filter: drop-shadow(0 0 22px rgba(var(--accent-rgb),.25)); }
+  .majorPartners { display: flex; align-items: center; justify-content: center; gap: 64px; flex-wrap: wrap; margin-top: 30px; }
+  /* Hover glow sits BEHIND each logo (radial pseudo-element) so it reads the
+     same for the alpha-transparent Kobe mark and the screen-blended MIC box —
+     a drop-shadow would trace the MIC file's rectangular canvas instead. */
+  .majorPartners a { display: block; position: relative; }
+  .majorPartners a::before { content: ""; position: absolute; inset: -28px;
+    background: radial-gradient(closest-side, rgba(var(--accent-rgb),.16), transparent 70%);
+    opacity: 0; transition: opacity .3s ease; pointer-events: none; }
+  .majorPartners a:hover::before { opacity: 1; }
   .majorPartners img { height: 118px; width: auto; display: block; }
   /* The MIC PNG ships white-on-solid-black; screen-blending melts its black
      canvas into the page without altering the file (approval terms). */
