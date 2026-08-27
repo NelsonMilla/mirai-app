@@ -574,18 +574,72 @@
     .ag-cta { flex-direction: column; align-items: flex-start; gap: 1.4rem; }
   }
 
-  /* ── faq ── */
-  .faqList { margin-top: 44px; border-top: 1px solid var(--line); max-width: 900px; }
-  .faqItem { border-bottom: 1px solid var(--line); }
-  .faqItem summary { display: flex; align-items: baseline; justify-content: space-between; gap: 24px;
-    padding: 22px 6px; cursor: pointer; list-style: none; font-weight: 700;
-    font-size: clamp(16px, 1.8vw, 21px); letter-spacing: -.005em; }
+  /* ── faq · ticket stubs ── */
+  @supports (interpolate-size: allow-keywords) {
+    :root { interpolate-size: allow-keywords; }
+    .faqItem::details-content { height: 0; overflow: clip;
+      transition: height .32s cubic-bezier(.4,0,.2,1), content-visibility .32s allow-discrete; }
+    .faqItem[open]::details-content { height: auto; }
+  }
+  .fq-grid { display: grid; grid-template-columns: minmax(300px, 420px) minmax(0, 1fr);
+    gap: 64px 88px; align-items: start; }
+  .fq-head { position: sticky; top: 48px; }
+  .fq-head .big { margin-bottom: 36px; }
+  .fq-tick { color: var(--accent); }
+  .fq-meta { border-top: 1px solid var(--line); padding-top: 20px; font-size: 10px;
+    letter-spacing: .2em; text-transform: uppercase; color: var(--faint); line-height: 2.2; }
+  .fq-meta strong { color: var(--dim); font-weight: 500; }
+  .fq-stubs { display: flex; flex-direction: column; gap: 12px; }
+  .faqItem { position: relative; border: 1px solid var(--line);
+    background: linear-gradient(180deg, rgba(244,243,240,.015), rgba(244,243,240,0));
+    transition: border-color .25s ease, box-shadow .25s ease; }
+  .faqItem::before { content: attr(data-index); position: absolute; top: 0; bottom: 0; left: 0;
+    width: 56px; border-right: 1px dashed var(--line); display: grid; place-items: center;
+    writing-mode: vertical-rl; font-family: var(--mono); font-size: 10px; font-weight: 500;
+    letter-spacing: .28em; text-transform: uppercase; color: var(--faint);
+    transition: color .25s ease, background .25s ease, border-color .25s ease; }
+  .faqItem:hover { border-color: rgba(var(--accent-rgb),.38);
+    box-shadow: 0 0 34px -10px rgba(var(--accent-rgb),.28), inset 0 0 24px -18px rgba(var(--accent-rgb),.35); }
+  .faqItem:hover::before { color: rgba(var(--accent-rgb),.85); }
+  .faqItem[open] { border-left-color: rgba(var(--accent-rgb),.6); }
+  .faqItem[open]::before { color: var(--accent); background: rgba(var(--accent-rgb),.05);
+    border-right-color: rgba(var(--accent-rgb),.3); }
+  .faqItem summary { list-style: none; cursor: pointer; display: flex; align-items: center;
+    gap: 24px; min-height: 64px; padding: 14px 24px 14px 84px; user-select: none; }
   .faqItem summary::-webkit-details-marker { display: none; }
-  .faqItem summary:hover { color: var(--accent); }
-  .faqItem .faqMark { font-family: var(--mono); font-size: 16px; color: var(--accent); flex: none;
-    transition: transform .25s; }
-  .faqItem[open] .faqMark { transform: rotate(45deg); }
-  .faqItem p { color: var(--dim); font-size: 15px; line-height: 1.7; max-width: 74ch; padding: 0 6px 24px; }
+  .faqItem summary:focus-visible { outline: 1px solid var(--accent); outline-offset: 2px; }
+  .fq-q { flex: 1; font-weight: 700; font-size: 18px; line-height: 1.25; letter-spacing: -.005em; }
+  .fq-barcode { flex: 0 0 44px; height: 20px; opacity: .45; transition: opacity .25s ease;
+    background: repeating-linear-gradient(90deg, var(--faint) 0 1px, transparent 1px 3px,
+      var(--faint) 3px 5px, transparent 5px 7px, var(--faint) 7px 8px, transparent 8px 11px); }
+  .faqItem:hover .fq-barcode { opacity: .7; }
+  .faqItem[open] .fq-barcode { opacity: .8;
+    background: repeating-linear-gradient(90deg, rgba(var(--accent-rgb),.7) 0 1px, transparent 1px 3px,
+      rgba(var(--accent-rgb),.7) 3px 5px, transparent 5px 7px, rgba(var(--accent-rgb),.7) 7px 8px, transparent 8px 11px); }
+  .fq-toggle { flex: 0 0 auto; font-size: 13px; color: var(--faint); width: 24px;
+    text-align: center; transition: color .2s ease; }
+  .fq-toggle::before { content: "[+]"; }
+  .faqItem[open] .fq-toggle::before { content: "[–]"; }
+  .faqItem[open] .fq-toggle, .faqItem:hover .fq-toggle { color: var(--accent); }
+  .fq-body { padding: 2px 96px 26px 84px; }
+  .fq-body p { max-width: 62ch; font-size: 15px; line-height: 1.65; color: var(--dim);
+    border-top: 1px solid var(--line); padding-top: 18px; }
+  .fq-foot { margin-top: 22px; font-size: 10px; letter-spacing: .2em; text-transform: uppercase;
+    color: var(--faint); display: flex; align-items: center; gap: 14px; }
+  .fq-foot::before { content: ""; flex: 0 0 24px; height: 1px; background: rgba(var(--accent-rgb),.4); }
+  @media (max-width: 1100px) {
+    .fq-grid { grid-template-columns: 1fr; gap: 56px; }
+    .fq-head { position: static; }
+  }
+  @media (max-width: 860px) {
+    .faqItem::before { writing-mode: horizontal-tb; top: 0; left: 0; right: 0; bottom: auto;
+      width: auto; height: 28px; border-right: none; border-bottom: 1px dashed var(--line);
+      place-items: center start; padding-left: 20px; }
+    .faqItem[open]::before { border-bottom-color: rgba(var(--accent-rgb),.3); border-right-color: var(--line); }
+    .faqItem summary { min-height: 0; padding: 44px 20px 16px 20px; gap: 16px; }
+    .fq-barcode { display: none; }
+    .fq-body { padding: 0 20px 22px 20px; }
+  }
 
   /* ── apply ── */
   .applywrap { max-width: none; padding: 0; position: relative; overflow: hidden; }
@@ -661,7 +715,7 @@
   <div class="headliners">
     <div class="hcard rv"><img src="img/aubrey.jpg" alt="Aubrey de Grey" loading="lazy" decoding="async" />
       <div class="meta"><div class="nm" data-copy="speakers.name"></div><div class="og" data-copy="speakers.org"></div></div></div>
-    <div class="hcard rv"><img src="img/jose.jpg" alt="José Cordeiro" loading="lazy" decoding="async" />
+    <div class="hcard rv"><img src="img/hayano.jpg" alt="Prof. Motoshi Hayano" loading="lazy" decoding="async" />
       <div class="meta"><div class="nm" data-copy="speakers.name2"></div><div class="og" data-copy="speakers.org2"></div></div></div>
     <div class="hcard rv"><img src="img/yuki.jpg" alt="Yuki Hanyu" loading="lazy" decoding="async" />
       <div class="meta"><div class="nm" data-copy="speakers.name3"></div><div class="og" data-copy="speakers.org3"></div></div></div>
@@ -781,7 +835,7 @@
   </a>
   <div class="voicesbar rv">
     <div class="faces">
-      <img src="img/aubrey.jpg" alt="Aubrey de Grey" loading="lazy" decoding="async" /><img src="img/jose.jpg" alt="José Cordeiro" loading="lazy" decoding="async" /><img src="img/yuki.jpg" alt="Yuki Hanyu" loading="lazy" decoding="async" /><img src="img/adam.jpg" alt="Adam Gries" loading="lazy" decoding="async" />
+      <img src="img/aubrey.jpg" alt="Aubrey de Grey" loading="lazy" decoding="async" /><img src="img/hayano.jpg" alt="Prof. Motoshi Hayano" loading="lazy" decoding="async" /><img src="img/yuki.jpg" alt="Yuki Hanyu" loading="lazy" decoding="async" /><img src="img/adam.jpg" alt="Adam Gries" loading="lazy" decoding="async" />
     </div>
     <div class="who" data-copy="summits.line"></div>
     <a class="more" href="#speakers" data-copy="summits.link"></a>
@@ -865,35 +919,43 @@
 </section>
 
 
-<!-- ═══ FAQ ═══ -->
+<!-- ═══ FAQ · TICKET STUBS ═══ -->
 <section id="faq" data-track-section="faq" data-track-position="8">
-  <div class="eyebrow rv" data-copy="faq.eyebrow"></div>
-  <h2 class="big rv" data-copy="faq.headline"></h2>
-  <div class="faqList rv">
-    <details class="faqItem" data-track-faq="What is a popup city?" data-track-position="1">
-      <summary><span data-copy="faq.q1"></span><span class="faqMark" aria-hidden="true">+</span></summary>
-      <p data-copy="faq.a1"></p>
-    </details>
-    <details class="faqItem" data-track-faq="Where exactly in Kobe?" data-track-position="2">
-      <summary><span data-copy="faq.q2"></span><span class="faqMark" aria-hidden="true">+</span></summary>
-      <p data-copy="faq.a2"></p>
-    </details>
-    <details class="faqItem" data-track-faq="Do I have to stay the whole month?" data-track-position="3">
-      <summary><span data-copy="faq.q3"></span><span class="faqMark" aria-hidden="true">+</span></summary>
-      <p data-copy="faq.a3"></p>
-    </details>
-    <details class="faqItem" data-track-faq="Where do I stay?" data-track-position="4">
-      <summary><span data-copy="faq.q4"></span><span class="faqMark" aria-hidden="true">+</span></summary>
-      <p data-copy="faq.a4"></p>
-    </details>
-    <details class="faqItem" data-fashion data-track-faq="What is the Frontier Human Fashion Show?" data-track-position="5">
-      <summary><span data-copy="faq.q5"></span><span class="faqMark" aria-hidden="true">+</span></summary>
-      <p data-copy="faq.a5"></p>
-    </details>
-    <details class="faqItem" data-track-faq="How do tickets and applications work?" data-track-position="6">
-      <summary><span data-copy="faq.q6"></span><span class="faqMark" aria-hidden="true">+</span></summary>
-      <p data-copy="faq.a6"></p>
-    </details>
+  <div class="fq-grid">
+    <header class="fq-head rv">
+      <div class="eyebrow" data-copy="faq.eyebrow"></div>
+      <h2 class="big" data-copy="faq.headline"></h2>
+      <div class="fq-meta mono" data-copy="faq.meta"></div>
+    </header>
+
+    <div class="fq-stubs rv">
+      <details class="faqItem" data-index="Q·01" data-track-faq="What is a popup city?" data-track-position="1" open>
+        <summary><span class="fq-q" data-copy="faq.q1"></span><span class="fq-barcode" aria-hidden="true"></span><span class="fq-toggle mono" aria-hidden="true"></span></summary>
+        <div class="fq-body"><p data-copy="faq.a1"></p></div>
+      </details>
+      <details class="faqItem" data-index="Q·02" data-track-faq="Where exactly in Kobe?" data-track-position="2">
+        <summary><span class="fq-q" data-copy="faq.q2"></span><span class="fq-barcode" aria-hidden="true"></span><span class="fq-toggle mono" aria-hidden="true"></span></summary>
+        <div class="fq-body"><p data-copy="faq.a2"></p></div>
+      </details>
+      <details class="faqItem" data-index="Q·03" data-track-faq="Do I have to stay the whole month?" data-track-position="3">
+        <summary><span class="fq-q" data-copy="faq.q3"></span><span class="fq-barcode" aria-hidden="true"></span><span class="fq-toggle mono" aria-hidden="true"></span></summary>
+        <div class="fq-body"><p data-copy="faq.a3"></p></div>
+      </details>
+      <details class="faqItem" data-index="Q·04" data-track-faq="Where do I stay?" data-track-position="4">
+        <summary><span class="fq-q" data-copy="faq.q4"></span><span class="fq-barcode" aria-hidden="true"></span><span class="fq-toggle mono" aria-hidden="true"></span></summary>
+        <div class="fq-body"><p data-copy="faq.a4"></p></div>
+      </details>
+      <details class="faqItem" data-index="Q·05" data-track-faq="How do tickets and applications work?" data-track-position="5">
+        <summary><span class="fq-q" data-copy="faq.q6"></span><span class="fq-barcode" aria-hidden="true"></span><span class="fq-toggle mono" aria-hidden="true"></span></summary>
+        <div class="fq-body"><p data-copy="faq.a6"></p></div>
+      </details>
+      <!-- Hidden while showFashionShow is off; numbered last so Q·01–05 stay contiguous -->
+      <details class="faqItem" data-index="Q·06" data-fashion data-track-faq="What is the Frontier Human Fashion Show?" data-track-position="6">
+        <summary><span class="fq-q" data-copy="faq.q5"></span><span class="fq-barcode" aria-hidden="true"></span><span class="fq-toggle mono" aria-hidden="true"></span></summary>
+        <div class="fq-body"><p data-copy="faq.a5"></p></div>
+      </details>
+      <p class="fq-foot mono" data-copy="faq.foot"></p>
+    </div>
   </div>
 </section>
 
