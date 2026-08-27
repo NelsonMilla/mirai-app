@@ -23,7 +23,7 @@ window.MIRAI_COPY = {
   /* ─── NAV ─────────────────────────── */
   nav: {
     logo: `Mirai<span class="logoTech">Tech</span>`,
-    button: `Get Ticket`,
+    button: `Get Tickets`,
   },
 
   /* ─── HERO OFFER ─────────────────────────── */
@@ -84,7 +84,7 @@ window.MIRAI_COPY = {
     ebText: `<b>$399</b> — covers whatever dates you're coming.`,
     ebClock: `Available until Aug 31 · <span class="ebc">&#8212;</span>`,
     ebCta: `Get Early Bird →`,
-    line: `Across the two weekends: <b>Aubrey de Grey</b>, <b>José Cordeiro</b>, and 41 more.`,
+    line: `Across the two weekends: <b>Aubrey de Grey</b>, <b>Motoshi Hayano</b>, and 41 more.`,
     link: `Meet the speakers ↑`,
   },
 
@@ -94,13 +94,13 @@ window.MIRAI_COPY = {
     headline: `Speakers &amp; Residents`,
     name: `Aubrey de Grey`,
     org: `LEV Foundation`,
-    name2: `José Cordeiro`,
-    org2: `The Death of Death`,
+    name2: `Motoshi Hayano`,
+    org2: `Asagi Labs`,
     name3: `Yuki Hanyu`,
     org3: `Cellular Agriculture`,
     name4: `Adam Gries`,
     org4: `Vitalist Bay`,
-    alsoLine: `Also in the arena: <b>Todd Porter</b>, <b>Josh Mann</b>, <b>Patri Friedman</b>, <b>Prof. Motoshi Hayano</b>, <b>Ian Huyett</b>, <b>Sandeep Casi</b>, <b>Sebastian Brunemeier</b>, <b>Brian Kennedy</b>, <b>Rob Claar</b>, <b>Natalie Coles</b>, <b>Devinder Sodhi</b>, <b>Sumit Jamuar</b>, <b>Keita Masui</b>, <b>Muneaki Goto</b>, <b>Prof. Takahiro Yasuda</b>, <b>Yuri Deigin</b>, <b>Laurence Ion</b>, <b>Rodney Kelly</b>, <b>Eleanor Sheekey</b>, <b>Prof. Stuart Reid</b>, <b>Mac Davis</b>, <b>Daniel Burger</b>, <b>Juliette Humer</b>, <b>Jeffrey Tibbetts</b>, <b>Ada Cyborg</b>, <b>Elen Capri</b>, <b>Cremieux</b>, <b>Nathan Cheng</b>, <b>Keiko Kobayashi</b>, <b>Felix OENS</b>, <b>Brandon Possin</b>, <b>Bilal Kharouni</b>, <b>Alice Gilman</b>, <b>Julie Ying Baron</b>, <b>Irit Rappley, PhD</b>, <b>Walter Patterson</b>, <b>Czar Gonzalez</b>, <b>Pedro Henrich</b>, <b>Nelson Milla</b>.`,
+    alsoLine: `Also in the arena: <b>José Cordeiro</b>, <b>Todd Porter</b>, <b>Josh Mann</b>, <b>Patri Friedman</b>, <b>Ian Huyett</b>, <b>Sandeep Casi</b>, <b>Sebastian Brunemeier</b>, <b>Brian Kennedy</b>, <b>Rob Claar</b>, <b>Natalie Coles</b>, <b>Devinder Sodhi</b>, <b>Sumit Jamuar</b>, <b>Keita Masui</b>, <b>Muneaki Goto</b>, <b>Takahiro Yasuda</b>, <b>Yuri Deigin</b>, <b>Laurence Ion</b>, <b>Rodney Kelly</b>, <b>Eleanor Sheekey</b>, <b>Stuart Reid</b>, <b>Mac Davis</b>, <b>Daniel Burger</b>, <b>Juliette Humer</b>, <b>Jeffrey Tibbetts</b>, <b>Ada Cyborg</b>, <b>Elen Capri</b>, <b>Cremieux</b>, <b>Nathan Cheng</b>, <b>Keiko Kobayashi</b>, <b>Felix OENS</b>, <b>Brandon Possin</b>, <b>Bilal Kharouni</b>, <b>Alice Gilman</b>, <b>Julie Ying Baron</b>, <b>Irit Rappley, PhD</b>, <b>Walter Patterson</b>, <b>Czar Gonzalez</b>, <b>Pedro Henrich</b>, <b>Nelson Milla</b>.`,
     followLine: `43 confirmed · more announced through September · <a href="#doors">Follow along ↓</a>`,
   },
 
@@ -116,7 +116,8 @@ window.MIRAI_COPY = {
 
   /* ─── ECOSYSTEM (inside the proof section) ─────────────── */
   ecosystem: {
-    headline: `Supporting organizations`,
+    majorLabel: `Thanks to the support of:`,
+    headline: `Other supporting organizations`,
   },
 
   /* ─── ONE EVENING IN KOBE ─────────────────────────── */
@@ -137,51 +138,44 @@ window.MIRAI_COPY = {
   agenda: {
     eyebrow: `The Agenda · Oct 17–26`,
     headline: `Nine sessions<br/>and a runway.`,
-    no1: `S1 · 01`,
+    stn1: `<span class="ag-code">STN·01</span>Oct 17–18`,
+    tag1: `Summit I`,
+    summit1: `The Science &amp; Tech Augmenting&nbsp;Life`,
     t1: `Japan's Longevity Imperative`,
-    d1: `Summit I · Oct 17–18`,
     p1: `What Japan learned — and what it needs from the world.`,
-    no2: `S1 · 02`,
     t2: `KBIC as a Global Laboratory for Longevity`,
-    d2: `Summit I · Oct 17–18`,
-    no3: `S1 · 03`,
     t3: `Bioengineering, MedTech, Biostasis, Replacement &amp; Augmentation`,
-    d3: `Summit I · Oct 17–18`,
-    no4: `S1 · 04`,
     t4: `Women's Health`,
-    d4: `Summit I · Oct 17–18`,
     p4: `The next trillion-dollar market.`,
-    no5: `S1 · 05`,
     t5: `AI &times; Longevity Bio`,
-    d5: `Summit I · Oct 17–18`,
-    no6: `S2 · 01`,
+    stn2: `<span class="ag-code">STN·02</span>Oct 24–25`,
+    tag2: `Summit II`,
+    summit2: `From East to West: Bridging the Longevity&nbsp;Gap`,
     t6: `Longevity Trends &amp; Supercentenarians`,
-    d6: `Summit II · Oct 24–25`,
     p6: `Impact, and the bottlenecks holding the field back.`,
-    no7: `S2 · 02`,
     t7: `The Stakeholders`,
-    d7: `Summit II · Oct 24–25`,
     p7: `Investment, R&amp;D, entrepreneurship — and regulation as an acceleration mechanism.`,
-    no8: `S2 · 03`,
     t8: `Japan's Model`,
-    d8: `Summit II · Oct 24–25`,
     p8: `Conditional approval generating real-world evidence.`,
-    no9: `S2 · 04`,
     t9: `Visions for the Future of Longevity`,
-    d9: `Summit II · Oct 24–25`,
-    no10: `◆`,
-    t10: `The Frontier Human Fashion Show &amp; Demo Day`,
-    d10: `Finale · Oct 26`,
+    stn3: `<span class="ag-code">STN·03</span>Oct 26`,
+    tag3: `Finale`,
+    t10: `The Frontier Human Fashion Show &amp; Demo&nbsp;Day`,
     p10: SHOW_FASHION
       ? `Devices become couture. <a href="#fashion" style="color:var(--accent); text-decoration:none" data-analytics-action="site_navigation" data-analytics-location="agenda" data-analytics-target="fashion">See the show ↑</a>`
       : `Devices become couture.`,
+    ctaNote: `Oct 17–26 · Kobe`,
     cta: `<a class="btn accent" href="https://luma.com/an4zotn9" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="agenda" data-analytics-target="tickets">Get Tickets</a>`,
   },
 
   /* ─── FAQ ─────────────────────────── */
   faq: {
     eyebrow: `FAQ`,
-    headline: `Before you book.`,
+    headline: `Before you book<span class="fq-tick">.</span>`,
+    meta: SHOW_FASHION
+      ? `<strong>06 questions</strong> on file<br/>Kobe · Port Island<br/>Oct 01–31 · 2026`
+      : `<strong>05 questions</strong> on file<br/>Kobe · Port Island<br/>Oct 01–31 · 2026`,
+    foot: `Retain your stub — further questions issued at the gate`,
     q1: `What is a popup city?`,
     a1: `A temporary village where a curated community lives, works, and builds together in one place for one month. Housing, labs, programming, and social life share the same few blocks on Port Island — and the summits are its two flagship weekends.`,
     q2: `Where exactly in Kobe?`,
@@ -196,42 +190,6 @@ window.MIRAI_COPY = {
     a5: `A live demo day reimagined as a runway show. Device residents showcase their prototypes on models, blending medical technology with fashion. Think CES meets Tokyo Fashion Week.`,
     q6: `How do tickets and applications work?`,
     a6: `Summit tickets and the hotel package are on Luma. The month-long residency is application-only — we review on a rolling basis, and accepted teams receive next steps by email.`,
-  },
-
-  /* ─── WHY KOBE ─────────────────────────── */
-  whyKobe: {
-    eyebrow: `Why Kobe`,
-    headline: `What takes years elsewhere<br/>takes months here.`,
-    body: `Japan's regulatory framework is the fastest legal path from clinical evidence to patients. KBIC is its front door.`,
-    statValue: `$88B`,
-    statLabel: `3rd-largest pharma market · ¥12.4T`,
-    statValue2: `4`,
-    statLabel2: `Accelerated regulatory pathways`,
-    statValue3: `2/3`,
-    statLabel3: `AMED subsidy · matches 1:2 vs VC`,
-    statValue4: `370`,
-    statLabel4: `KBIC member organisations`,
-    statValue5: `32`,
-    statLabel5: `Nobel prizes · 4 biotech clusters`,
-  },
-
-  /* ─── TRACK RECORD ─────────────────────────── */
-  trackRecord: {
-    eyebrow: `Track Record`,
-    headline: `Four times at scale,<br/>on three coasts.`,
-    number: `500+`,
-    title: `Vitalia City Pop-Ups · Roatán · 2024–25`,
-    body: `Builders in a regulatory sandbox. Two popups became a permanent hub.`,
-    number2: `400+`,
-    title2: `Viva Frontier Tower Pop-Up · San Francisco · 2025`,
-    body2: `Residents of a 6-week vertical village with biomarker testing, daily programming, and a Demo Day. Peter Diamandis, Aubrey de Grey, Emmett Shear, Patri Friedman.`,
-    number3: `40M+`,
-    title3: `Meet the Drapers · Roatán &amp; SF · 2025–26`,
-    body3: `TV viewers across two shows with Tim &amp; Adam Draper. Muse.Bio won the $1M finale.`,
-    number4: `MIT`,
-    title4: `Human Augmentation Summit · Media Lab · 2025`,
-    body4: `~300 people on BCIs and bioengineering, with Stephen Wolfram, Life Biosciences, and Harvard.`,
-    stamp: `◆ NEXT · 2026 · KOBE — MIRAI TECH POPUP CITY · <b>YOU ARE HERE</b>`,
   },
 
   /* ─── APPLY ─────────────────────────── */
