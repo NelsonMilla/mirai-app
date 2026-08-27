@@ -46,6 +46,10 @@
   window.MIRAI_FLAGS = Object.freeze({ showSummitPackage: true, showFashionShow: false });
   if (!window.MIRAI_FLAGS.showSummitPackage) document.documentElement.classList.add('package-promo-hidden');
   if (!window.MIRAI_FLAGS.showFashionShow) document.documentElement.classList.add('fashion-hidden');
+  // Kobe University logo use approval #3182: usage window ends Dec 15 2026.
+  // The [data-kobe-permit] block self-hides on Dec 15 JST — do NOT remove this
+  // gate or the logos without checking the approval notice first.
+  if (Date.now() >= new Date('2026-12-15T00:00:00+09:00').getTime()) document.documentElement.classList.add('kobe-permit-over');
 </script>
 <script src="copy.js"></script>
 <script defer src="/posthog.js"></script>
@@ -467,6 +471,16 @@
 
   /* ── ecosystem ── */
   .ecoHead { margin-top: 96px; }
+  .majorPartners { display: flex; align-items: center; gap: 64px; flex-wrap: wrap; margin-top: 30px; }
+  .majorPartners a { display: block; transition: filter .25s; }
+  .majorPartners a:hover { filter: drop-shadow(0 0 22px rgba(var(--accent-rgb),.25)); }
+  .majorPartners img { height: 118px; width: auto; display: block; }
+  /* The MIC PNG ships white-on-solid-black; screen-blending melts its black
+     canvas into the page without altering the file (approval terms). */
+  .majorPartners a:nth-child(2) img { mix-blend-mode: screen; height: 112px; }
+  @media (max-width: 640px) { .majorPartners { gap: 36px; } .majorPartners img,
+    .majorPartners a:nth-child(2) img { height: 76px; } }
+  html.kobe-permit-over [data-kobe-permit] { display: none !important; }
   .ecoWall { position: relative; overflow: hidden; margin-top: 34px; background: var(--bg);
     border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
   .ecoWall::before, .ecoWall::after { content: ''; position: absolute; top: 0; bottom: 0; width: 90px; z-index: 2; pointer-events: none; }
@@ -724,6 +738,16 @@
   </div>
   <p class="alsoline rv" data-copy="speakers.alsoLine"></p>
   <div class="followline rv" data-copy="speakers.followLine"></div>
+
+  <!-- Major partners · Kobe University logo use approval #3182 (window: Aug 19 – Dec 15 2026).
+       Logo files are used verbatim per the approval terms — never edit, recompress, or recolor them. -->
+  <div data-kobe-permit>
+    <div class="eyebrow rv ecoHead" data-copy="ecosystem.majorLabel"></div>
+    <div class="majorPartners rv">
+      <a href="https://www.hosp.kobe-u.ac.jp/ikoujiso/en/" target="_blank" rel="noopener" title="Kobe University"><img src="img/partners/kobe-university.png" alt="Kobe University" loading="lazy" decoding="async" /></a>
+      <a href="https://www.med.kobe-u.ac.jp/mic/en/" target="_blank" rel="noopener" title="MedTech Innovation Center, Kobe University"><img src="img/partners/mic-kobe-university.png" alt="MIC — MedTech Innovation Center, Kobe University" loading="lazy" decoding="async" /></a>
+    </div>
+  </div>
 
   <div class="eyebrow rv ecoHead" data-copy="ecosystem.headline"></div>
   <div class="ecoWall rv" aria-label="Supporting organizations">
