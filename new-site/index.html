@@ -522,16 +522,57 @@
     text-shadow: 0 1px 8px rgba(0,0,0,.8); }
   @media (max-width: 860px) { .strip { grid-template-columns: repeat(2, 1fr); } .strip figure:nth-child(2) { display: none; } }
 
-  /* ── agenda (rundown rows shared with the stashed month section) ── */
-  .month .ep { display: grid; grid-template-columns: 120px 1fr auto; gap: 26px; align-items: baseline;
-    padding: 26px 6px; border-bottom: 1px solid var(--line); }
-  .month .ep:first-of-type { border-top: 1px solid var(--line); margin-top: 40px; }
-  .month .ep .no { font-family: var(--mono); font-size: 12px; color: var(--faint); letter-spacing: .2em; }
-  .month .ep h3 { font-weight: 700; font-size: clamp(17px, 1.9vw, 24px); }
-  .month .ep .d { font-family: var(--mono); font-size: 11px; letter-spacing: .18em; color: var(--accent); text-transform: uppercase; white-space: nowrap; }
-  .month .ep p { grid-column: 2 / 4; color: var(--dim); font-size: 14px; line-height: 1.65; max-width: 74ch; }
-  .monthCta { margin-top: 40px; }
-  @media (max-width: 860px) { .month .ep { grid-template-columns: 70px 1fr; } .month .ep .d { grid-column: 2; } .month .ep p { grid-column: 1 / 3; } }
+  /* ── agenda · day rail ── */
+  .ag-rail { display: grid; grid-template-columns: 1.12fr 1.12fr .84fr; margin-top: 84px; }
+  .ag-stop { position: relative; border-top: 1px solid rgba(var(--accent-rgb),.26);
+    padding: 52px 3.2rem 0 0; margin-top: 44px; }
+  .ag-stop:last-child { padding-right: 0; }
+  .ag-stop::before { content: ""; position: absolute; top: -4px; left: 0; width: 7px; height: 7px;
+    background: var(--bg); border: 1px solid var(--accent); }
+  .ag-stop::after { content: ""; position: absolute; top: 4px; left: 3px; width: 1px; height: 36px;
+    background: rgba(var(--accent-rgb),.32); }
+  .ag-date { position: absolute; top: -40px; left: 0; font-size: 11px; font-weight: 500;
+    letter-spacing: .2em; text-transform: uppercase; color: var(--ink); white-space: nowrap; }
+  .ag-date .ag-code { color: var(--faint); margin-right: 1.1em; }
+  .ag-tag { font-size: 10px; font-weight: 500; letter-spacing: .2em; text-transform: uppercase;
+    color: var(--faint); margin-bottom: 12px; }
+  .ag-title { font-weight: 800; font-size: 19px; line-height: 1.25; letter-spacing: -.01em;
+    margin-bottom: 28px; max-width: 24ch; }
+  .ag-sessions { list-style: none; }
+  .ag-sessions li { display: grid; grid-template-columns: 2.2rem 1fr; align-items: baseline;
+    border-top: 1px solid var(--line); padding: 13px 0; }
+  .ag-sessions li:last-child { border-bottom: 1px solid var(--line); }
+  .ag-num { font-size: 10px; letter-spacing: .1em; color: var(--faint); }
+  .ag-t { font-weight: 700; font-size: 14.5px; line-height: 1.35; letter-spacing: -.005em; }
+  .ag-sub { display: block; font-weight: 400; font-size: 12.5px; line-height: 1.45;
+    color: var(--dim); margin-top: 3px; }
+  .ag-stop--finale { border-top-color: var(--accent); }
+  .ag-stop--finale::before { background: var(--accent); border-color: var(--accent);
+    box-shadow: 0 0 22px rgba(var(--accent-rgb),.85), 0 0 60px rgba(var(--accent-rgb),.35); }
+  .ag-stop--finale::after { background: rgba(var(--accent-rgb),.55); }
+  .ag-stop--finale .ag-date { color: var(--accent); }
+  .ag-stop--finale .ag-date .ag-code { color: rgba(var(--accent-rgb),.55); }
+  .ag-finale { border: 1px solid rgba(var(--accent-rgb),.3);
+    background: linear-gradient(180deg, rgba(var(--accent-rgb),.07), rgba(var(--accent-rgb),.015) 70%);
+    box-shadow: 0 0 44px rgba(var(--accent-rgb),.07) inset, 0 0 60px rgba(var(--accent-rgb),.05);
+    padding: 26px 24px 28px; }
+  .ag-finale .ag-tag { color: rgba(var(--accent-rgb),.75); }
+  .ag-finale-title { font-weight: 900; font-size: 23px; line-height: 1.14; letter-spacing: -.015em;
+    margin-bottom: 14px; }
+  .ag-finale-sub { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); }
+  .ag-cta { display: flex; align-items: center; justify-content: space-between; gap: 2rem;
+    border-top: 1px solid var(--line); margin-top: 72px; padding-top: 34px; }
+  .ag-note { font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--faint); }
+  @media (max-width: 860px) {
+    .ag-rail { display: block; border-left: 1px solid rgba(var(--accent-rgb),.26);
+      padding-left: 30px; margin-top: 60px; }
+    .ag-stop { border-top: none; padding: 0 0 52px 0; margin-top: 0; }
+    .ag-stop::before { top: 2px; left: -34px; }
+    .ag-stop::after { top: 5px; left: -30px; width: 22px; height: 1px; }
+    .ag-date { position: static; display: block; margin-bottom: 16px; }
+    .ag-stop--finale { padding-bottom: 0; }
+    .ag-cta { flex-direction: column; align-items: flex-start; gap: 1.4rem; }
+  }
 
   /* ── faq ── */
   .faqList { margin-top: 44px; border-top: 1px solid var(--line); max-width: 900px; }
@@ -776,69 +817,51 @@
   </div>
 </section>
 
-<!-- ═══ AGENDA (the stashed "Full Program" section lives in ../retreat/full-program-section.html) ═══ -->
-<section class="month" id="agenda" data-track-section="agenda" data-track-position="7">
+<!-- ═══ AGENDA · DAY RAIL (the stashed "Full Program" section lives in ../retreat/full-program-section.html) ═══ -->
+<section id="agenda" data-track-section="agenda" data-track-position="7">
   <div class="eyebrow rv" data-copy="agenda.eyebrow"></div>
   <h2 class="big rv" data-copy="agenda.headline"></h2>
 
-  <div class="ep rv">
-    <div class="no" data-copy="agenda.no1"></div>
-    <div><h3 data-copy="agenda.t1"></h3></div>
-    <div class="d" data-copy="agenda.d1"></div>
-    <p data-copy="agenda.p1"></p>
-  </div>
-  <div class="ep rv">
-    <div class="no" data-copy="agenda.no2"></div>
-    <div><h3 data-copy="agenda.t2"></h3></div>
-    <div class="d" data-copy="agenda.d2"></div>
-  </div>
-  <div class="ep rv">
-    <div class="no" data-copy="agenda.no3"></div>
-    <div><h3 data-copy="agenda.t3"></h3></div>
-    <div class="d" data-copy="agenda.d3"></div>
-  </div>
-  <div class="ep rv">
-    <div class="no" data-copy="agenda.no4"></div>
-    <div><h3 data-copy="agenda.t4"></h3></div>
-    <div class="d" data-copy="agenda.d4"></div>
-    <p data-copy="agenda.p4"></p>
-  </div>
-  <div class="ep rv">
-    <div class="no" data-copy="agenda.no5"></div>
-    <div><h3 data-copy="agenda.t5"></h3></div>
-    <div class="d" data-copy="agenda.d5"></div>
-  </div>
-  <div class="ep rv">
-    <div class="no" data-copy="agenda.no6"></div>
-    <div><h3 data-copy="agenda.t6"></h3></div>
-    <div class="d" data-copy="agenda.d6"></div>
-    <p data-copy="agenda.p6"></p>
-  </div>
-  <div class="ep rv">
-    <div class="no" data-copy="agenda.no7"></div>
-    <div><h3 data-copy="agenda.t7"></h3></div>
-    <div class="d" data-copy="agenda.d7"></div>
-    <p data-copy="agenda.p7"></p>
-  </div>
-  <div class="ep rv">
-    <div class="no" data-copy="agenda.no8"></div>
-    <div><h3 data-copy="agenda.t8"></h3></div>
-    <div class="d" data-copy="agenda.d8"></div>
-    <p data-copy="agenda.p8"></p>
-  </div>
-  <div class="ep rv">
-    <div class="no" data-copy="agenda.no9"></div>
-    <div><h3 data-copy="agenda.t9"></h3></div>
-    <div class="d" data-copy="agenda.d9"></div>
-  </div>
-  <div class="ep rv">
-    <div class="no" data-copy="agenda.no10"></div>
-    <div><h3 data-copy="agenda.t10"></h3></div>
-    <div class="d" data-copy="agenda.d10"></div>
-    <p data-copy="agenda.p10"></p>
+  <div class="ag-rail">
+    <div class="ag-stop rv">
+      <div class="ag-date mono" data-copy="agenda.stn1"></div>
+      <div class="ag-tag mono" data-copy="agenda.tag1"></div>
+      <div class="ag-title" data-copy="agenda.summit1"></div>
+      <ul class="ag-sessions">
+        <li><span class="ag-num mono">01</span><span class="ag-t"><span data-copy="agenda.t1"></span><span class="ag-sub" data-copy="agenda.p1"></span></span></li>
+        <li><span class="ag-num mono">02</span><span class="ag-t" data-copy="agenda.t2"></span></li>
+        <li><span class="ag-num mono">03</span><span class="ag-t" data-copy="agenda.t3"></span></li>
+        <li><span class="ag-num mono">04</span><span class="ag-t"><span data-copy="agenda.t4"></span><span class="ag-sub" data-copy="agenda.p4"></span></span></li>
+        <li><span class="ag-num mono">05</span><span class="ag-t" data-copy="agenda.t5"></span></li>
+      </ul>
+    </div>
+
+    <div class="ag-stop rv">
+      <div class="ag-date mono" data-copy="agenda.stn2"></div>
+      <div class="ag-tag mono" data-copy="agenda.tag2"></div>
+      <div class="ag-title" data-copy="agenda.summit2"></div>
+      <ul class="ag-sessions">
+        <li><span class="ag-num mono">01</span><span class="ag-t"><span data-copy="agenda.t6"></span><span class="ag-sub" data-copy="agenda.p6"></span></span></li>
+        <li><span class="ag-num mono">02</span><span class="ag-t"><span data-copy="agenda.t7"></span><span class="ag-sub" data-copy="agenda.p7"></span></span></li>
+        <li><span class="ag-num mono">03</span><span class="ag-t"><span data-copy="agenda.t8"></span><span class="ag-sub" data-copy="agenda.p8"></span></span></li>
+        <li><span class="ag-num mono">04</span><span class="ag-t" data-copy="agenda.t9"></span></li>
+      </ul>
+    </div>
+
+    <div class="ag-stop ag-stop--finale rv">
+      <div class="ag-date mono" data-copy="agenda.stn3"></div>
+      <div class="ag-finale">
+        <div class="ag-tag mono" data-copy="agenda.tag3"></div>
+        <div class="ag-finale-title" data-copy="agenda.t10"></div>
+        <div class="ag-finale-sub mono" data-copy="agenda.p10"></div>
+      </div>
+    </div>
   </div>
 
-  <div class="monthCta rv" data-copy="agenda.cta"></div>
+  <div class="ag-cta rv">
+    <div class="ag-note mono" data-copy="agenda.ctaNote"></div>
+    <div data-copy="agenda.cta"></div>
+  </div>
 </section>
 
 
