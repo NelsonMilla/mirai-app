@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Mirai Tech City Kobe 2026 · Japan Longevity & Biomedical Summit</title>
-<meta name="description" content="Japan's premier longevity biomedical popup city in Kobe. Summit I Oct 17–18 · Summit II Oct 24–25 · Fashion Show Oct 26. Featuring Aubrey de Grey, Prof. Brian Kennedy, Prof. Motoshi Hayano, and 40+ leading experts." />
+<meta name="description" content="Japan's premier longevity biomedical popup city in Kobe. Summit I Oct 17–18 · Summit II Oct 24–25. Featuring Aubrey de Grey, Prof. Brian Kennedy, Prof. Motoshi Hayano, and 40+ leading experts." />
 <link rel="canonical" href="https://mirai-tech-city.vercel.app/" />
 <link rel="alternate" hreflang="en" href="https://mirai-tech-city.vercel.app/" />
 <link rel="alternate" hreflang="ja" href="https://mirai-tech-city.vercel.app/jp/" />
@@ -13,7 +13,7 @@
 <meta property="og:locale" content="en_US" />
 <meta property="og:type" content="website" />
 <meta property="og:title" content="Mirai Tech City Kobe 2026 · Japan Longevity & Biomedical Summit" />
-<meta property="og:description" content="Japan's premier longevity biomedical popup city in Kobe. Summit I Oct 17–18 · Summit II Oct 24–25 · Fashion Show Oct 26. Featuring Aubrey de Grey, Prof. Brian Kennedy, Prof. Motoshi Hayano, and 40+ leading experts." />
+<meta property="og:description" content="Japan's premier longevity biomedical popup city in Kobe. Summit I Oct 17–18 · Summit II Oct 24–25. Featuring Aubrey de Grey, Prof. Brian Kennedy, Prof. Motoshi Hayano, and 40+ leading experts." />
 <meta property="og:image" content="https://mirai-tech-city.vercel.app/live_city_poster.jpg" />
 <meta property="og:url" content="https://mirai-tech-city.vercel.app/" />
 <meta name="twitter:card" content="summary_large_image" />
@@ -22,23 +22,34 @@
 <meta name="twitter:image" content="https://mirai-tech-city.vercel.app/live_city_poster.jpg" />
 <meta name="theme-color" content="#050506" />
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23050506'/%3E%3Ctext x='50' y='72' font-size='62' font-family='Georgia' font-weight='bold' fill='%239be8f0' text-anchor='middle'%3E未%3C/text%3E%3C/svg%3E" />
-<link rel="preload" href="disease_poster.jpg" as="image" fetchpriority="high" />
+<link rel="preload" href="kobe_harbor_night_poster.jpg" as="image" fetchpriority="high" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link rel="preconnect" href="https://api.fontshare.com" />
 <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin />
-<link href="https://api.fontshare.com/v2/css?f[]=switzer@400,700,800,900&display=swap" rel="stylesheet" />
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<!-- Font CSS loads without blocking render; both use display=swap so system
+     fallbacks paint first either way. noscript keeps fonts for no-JS visitors. -->
+<link href="https://api.fontshare.com/v2/css?f[]=switzer@400,700,800,900&display=swap" rel="stylesheet" media="print" onload="this.onload=null;this.media='all'" />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" media="print" onload="this.onload=null;this.media='all'" />
+<noscript>
+  <link href="https://api.fontshare.com/v2/css?f[]=switzer@400,700,800,900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</noscript>
 <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
 <script defer src="/_vercel/insights/script.js"></script>
+<script>
+  // Launch control: change to true when the Summit + Hotel package is ready for the public landing page.
+  // showFashionShow — false hides the fashion show everywhere EXCEPT the agenda finale row: the section,
+  // the FAQ item, the package ledger line ([data-fashion] elements), and the copy variants in copy.js.
+  // To bring it back: flip to true AND restore "Fashion Show Oct 26" in the two meta descriptions above
+  // plus the Frontier Human Fashion Show subEvent in the JSON-LD below.
+  window.MIRAI_FLAGS = Object.freeze({ showSummitPackage: true, showFashionShow: false });
+  if (!window.MIRAI_FLAGS.showSummitPackage) document.documentElement.classList.add('package-promo-hidden');
+  if (!window.MIRAI_FLAGS.showFashionShow) document.documentElement.classList.add('fashion-hidden');
+</script>
 <script src="copy.js"></script>
 <script defer src="/posthog.js"></script>
 <script defer src="/analytics.js"></script>
-<script>
-  // Launch control: change to true when the Summit + Hotel package is ready for the public landing page.
-  window.MIRAI_FLAGS = Object.freeze({ showSummitPackage: true });
-  if (!window.MIRAI_FLAGS.showSummitPackage) document.documentElement.classList.add('package-promo-hidden');
-</script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -47,7 +58,7 @@
       "@type": "EventSeries",
       "@id": "https://mirai-tech-city.vercel.app/#event",
       "name": "Mirai Tech City 2026",
-      "description": "Japan's premier longevity biomedical popup city in Kobe. Summit I Oct 17–18 · Summit II Oct 24–25 · Frontier Human Fashion Show Oct 26 · Residency Oct 1–31.",
+      "description": "Japan's premier longevity biomedical popup city in Kobe. Summit I Oct 17–18 · Summit II Oct 24–25 · Residency Oct 1–31.",
       "url": "https://mirai-tech-city.vercel.app",
       "startDate": "2026-10-01",
       "endDate": "2026-10-31",
@@ -82,13 +93,6 @@
           "startDate": "2026-10-24",
           "endDate": "2026-10-25",
           "description": "Bridging East & West in longevity science, biomarkers, and rejuvenation biotechnology."
-        },
-        {
-          "@type": "Event",
-          "name": "The Frontier Human Fashion Show & Demo Day",
-          "startDate": "2026-10-26",
-          "endDate": "2026-10-26",
-          "description": "Live runway demo day for exoskeletons, neural interfaces, smart prosthetics, and biosensors."
         }
       ],
       "performer": [
@@ -153,6 +157,17 @@
 }
 </script>
 <style>
+  /* Metric-matched fallback while Switzer loads async: Arial scaled to
+     Switzer's measured advance widths (~0.976) so the swap doesn't reflow
+     the display headlines (CLS). */
+  @font-face {
+    font-family: 'Switzer-fallback';
+    src: local('Arial'), local('Helvetica Neue');
+    size-adjust: 97.6%;
+    ascent-override: 100%;
+    descent-override: 25%;
+    line-gap-override: 0%;
+  }
   :root {
     --bg: #050506;
     --ink: #f4f3f0;
@@ -161,7 +176,7 @@
     --line: rgba(244,243,240,.14);
     --accent: #9be8f0;
     --accent-rgb: 155, 232, 240;
-    --font: 'Switzer', 'Inter', -apple-system, sans-serif;
+    --font: 'Switzer', 'Switzer-fallback', 'Inter', -apple-system, sans-serif;
     --mono: 'IBM Plex Mono', monospace;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -170,6 +185,7 @@
   .package-promo-fallback { display: none !important; }
   html.package-promo-hidden [data-package-promo] { display: none !important; }
   html.package-promo-hidden .package-promo-fallback { display: inline-block !important; }
+  html.fashion-hidden [data-fashion] { display: none !important; }
   ::selection { background: var(--accent); color: #000; }
   :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
   .skip { position: fixed; top: 12px; left: 4vw; z-index: 70; background: var(--bg); color: var(--accent);
@@ -307,24 +323,11 @@
     .heroContinue { display: none; }
   }
 
-  /* ── dates band ── */
-  .dates { padding-top: 90px; }
-  .dates .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border: 1px solid var(--line); margin-top: 34px; }
-  .dates .cell { padding: 34px 30px; border-right: 1px solid var(--line); }
-  .dates .cell:last-child { border-right: 0; }
-  a.cell { transition: background .25s; }
-  a.cell:hover { background: rgba(var(--accent-rgb),.05); }
-  .dates .cell .when { font-weight: 800; text-transform: uppercase; font-size: clamp(26px, 3.4vw, 46px); letter-spacing: -.01em; line-height: 1; margin-top: 12px; }
-  .dates .cell .what { font-family: var(--mono); font-size: 11px; letter-spacing: .22em; text-transform: uppercase; color: var(--accent); }
-  .dates .cell .note { margin-top: 10px; color: var(--dim); font-size: 14px; }
   .resline { display: inline-block; margin-top: 40px; font-weight: 600; font-size: clamp(10.5px, 2.7vw, 34px);
     letter-spacing: -.005em; text-decoration: none; white-space: nowrap; }
   .resline em { font-style: normal; color: var(--accent); }
   .resline:hover em { text-decoration: underline; text-underline-offset: 6px; }
   @media (max-width: 860px) {
-    .dates .grid { grid-template-columns: 1fr; }
-    .dates .cell { border-right: 0; border-bottom: 1px solid var(--line); }
-    .dates .cell:last-child { border-bottom: 0; }
     .resline { white-space: normal; font-size: clamp(19px, 3.4vw, 30px); line-height: 1.4; }
   }
 
@@ -389,6 +392,13 @@
 
   /* ── summits ── */
   .summit { display: grid; grid-template-columns: 1fr 1fr; gap: 44px; margin-top: 44px; }
+  .summit .card { position: relative; overflow: hidden; }
+  .summit .card .cardBg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+    object-position: center top; filter: saturate(.75); transition: transform .6s ease; }
+  .summit .card:hover .cardBg { transform: scale(1.04); }
+  .summit .card .cardVeil { position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(5,5,6,.32) 0%, rgba(5,5,6,.72) 44%, var(--bg) 76%); }
+  .summit .card > :not(.cardBg):not(.cardVeil) { position: relative; z-index: 1; }
   .summit .card { border: 1px solid var(--line); padding: 40px 36px; display: flex; flex-direction: column; gap: 16px;
     background: linear-gradient(160deg, rgba(var(--accent-rgb),.045), transparent 55%); }
   .summit .num { font-family: var(--mono); color: var(--faint); font-size: 12px; letter-spacing: .3em; }
@@ -408,6 +418,18 @@
   .summit .tiein { font-size: 14px; color: var(--ink); font-weight: 500; }
   .summit .tiein a { color: var(--accent); text-decoration: none; }
   .summit .tiein a:hover { text-decoration: underline; text-underline-offset: 4px; }
+  .ebStrip { display: flex; align-items: baseline; gap: 18px; flex-wrap: wrap; margin-top: 24px;
+    padding: 16px 22px; border: 1px solid rgba(var(--accent-rgb),.45); text-decoration: none;
+    transition: background .25s, border-color .25s; }
+  .ebStrip:hover { background: rgba(var(--accent-rgb),.06); border-color: var(--accent); }
+  .ebStrip-tag { font-size: 10px; letter-spacing: .22em; text-transform: uppercase; color: var(--accent); }
+  .ebStrip-text { font-size: 15px; color: var(--ink); }
+  .ebStrip-text b { font-weight: 800; }
+  .ebStrip-clock { font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--faint);
+    font-variant-numeric: tabular-nums; }
+  .ebStrip-clock .ebc { color: var(--ink); letter-spacing: .08em; }
+  .ebStrip-cta { margin-left: auto; font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--accent); }
+  html.ebOver .ebStrip { display: none !important; }
   .voicesbar { display: flex; align-items: center; gap: 18px; margin-top: 38px; flex-wrap: wrap; }
   .voicesbar .faces { display: flex; }
   .voicesbar img { width: 46px; height: 46px; border-radius: 50%; object-fit: cover;
@@ -418,7 +440,11 @@
   .voicesbar a.more { font-family: var(--mono); font-size: 10px; letter-spacing: .2em; text-transform: uppercase;
     color: var(--accent); text-decoration: none; }
   .voicesbar a.more:hover { text-decoration: underline; text-underline-offset: 4px; }
-  @media (max-width: 860px) { .summit { grid-template-columns: 1fr; } }
+  @media (max-width: 860px) {
+    .summit { grid-template-columns: 1fr; }
+    /* stacked cards are taller — bring the solid fade up so body copy stays on ink */
+    .summit .card .cardVeil { background: linear-gradient(180deg, rgba(5,5,6,.36) 0%, rgba(5,5,6,.8) 32%, var(--bg) 58%); }
+  }
 
   /* ── speakers ── */
   .headliners { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; margin-top: 44px; }
@@ -440,6 +466,7 @@
   .followline a:hover { text-decoration: underline; text-underline-offset: 4px; }
 
   /* ── ecosystem ── */
+  .ecoHead { margin-top: 96px; }
   .ecoWall { position: relative; overflow: hidden; margin-top: 34px; background: var(--bg);
     border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
   .ecoWall::before, .ecoWall::after { content: ''; position: absolute; top: 0; bottom: 0; width: 90px; z-index: 2; pointer-events: none; }
@@ -495,7 +522,7 @@
     text-shadow: 0 1px 8px rgba(0,0,0,.8); }
   @media (max-width: 860px) { .strip { grid-template-columns: repeat(2, 1fr); } .strip figure:nth-child(2) { display: none; } }
 
-  /* ── month/residency ── */
+  /* ── agenda (rundown rows shared with the stashed month section) ── */
   .month .ep { display: grid; grid-template-columns: 120px 1fr auto; gap: 26px; align-items: baseline;
     padding: 26px 6px; border-bottom: 1px solid var(--line); }
   .month .ep:first-of-type { border-top: 1px solid var(--line); margin-top: 40px; }
@@ -503,37 +530,21 @@
   .month .ep h3 { font-weight: 700; font-size: clamp(17px, 1.9vw, 24px); }
   .month .ep .d { font-family: var(--mono); font-size: 11px; letter-spacing: .18em; color: var(--accent); text-transform: uppercase; white-space: nowrap; }
   .month .ep p { grid-column: 2 / 4; color: var(--dim); font-size: 14px; line-height: 1.65; max-width: 74ch; }
-  .props { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 44px; }
-  .props .pr { border-left: 2px solid rgba(var(--accent-rgb),.45); padding: 4px 0 4px 20px; }
-  .props .pr .k { font-family: var(--mono); font-size: 10px; letter-spacing: .22em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
-  .props .pr p { color: var(--dim); font-size: 14px; line-height: 1.6; }
-  @media (max-width: 860px) { .props { grid-template-columns: 1fr; } }
-  .rhyt { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; margin-top: 30px; }
-  .rhyt .tile { border: 1px solid var(--line); padding: 18px 16px; }
-  .rhyt .h { font-family: var(--mono); font-size: 11px; letter-spacing: .14em;
-    text-transform: uppercase; color: var(--ink); }
-  .rhyt .h b { font-weight: 400; color: var(--accent); margin-right: 6px; }
-  .rhyt p { color: var(--faint); font-size: 12.5px; line-height: 1.5; margin-top: 6px; }
-  .tracks { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px; }
-  .tracks a.t { display: block; border: 1px solid var(--line); padding: 30px 26px; text-decoration: none;
-    transition: border-color .25s, background .25s; }
-  .tracks a.t:hover { border-color: rgba(var(--accent-rgb),.5); background: rgba(var(--accent-rgb),.04); }
-  .tracks .t h3 { font-weight: 800; text-transform: uppercase; letter-spacing: .02em; font-size: 17px; margin: 10px 0 8px; }
-  .tracks .t p { color: var(--dim); font-size: 14px; line-height: 1.6; }
-  .tracks .t .ebTag { font-family: var(--mono); font-size: 10px; letter-spacing: .22em;
-    text-transform: uppercase; color: var(--accent); margin-top: 14px; }
-  .tracks .t .price { font-weight: 800; font-size: 26px; letter-spacing: -.01em; line-height: 1;
-    margin-top: 6px; font-variant-numeric: tabular-nums; }
-  .tracks .t .price s { font-weight: 400; font-size: .58em; color: var(--faint);
-    text-decoration: line-through; margin-left: 8px; }
-  .tracks .t .left { font-family: var(--mono); font-size: 10px; letter-spacing: .18em;
-    text-transform: uppercase; color: var(--dim); margin-top: 8px; }
-  .tracks .t .ebClock--line { font-family: var(--mono); font-size: 10px; letter-spacing: .18em;
-    text-transform: uppercase; color: var(--accent); margin-top: 8px; }
-  .tracks .t .ebClock--line .ebc { color: var(--ink); letter-spacing: .08em; font-variant-numeric: tabular-nums; }
-  .tracks .t .go { margin-top: 14px; font-family: var(--mono); font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--accent); }
   .monthCta { margin-top: 40px; }
-  @media (max-width: 860px) { .tracks { grid-template-columns: 1fr; } .month .ep { grid-template-columns: 70px 1fr; } .month .ep .d { grid-column: 2; } .month .ep p { grid-column: 1 / 3; } }
+  @media (max-width: 860px) { .month .ep { grid-template-columns: 70px 1fr; } .month .ep .d { grid-column: 2; } .month .ep p { grid-column: 1 / 3; } }
+
+  /* ── faq ── */
+  .faqList { margin-top: 44px; border-top: 1px solid var(--line); max-width: 900px; }
+  .faqItem { border-bottom: 1px solid var(--line); }
+  .faqItem summary { display: flex; align-items: baseline; justify-content: space-between; gap: 24px;
+    padding: 22px 6px; cursor: pointer; list-style: none; font-weight: 700;
+    font-size: clamp(16px, 1.8vw, 21px); letter-spacing: -.005em; }
+  .faqItem summary::-webkit-details-marker { display: none; }
+  .faqItem summary:hover { color: var(--accent); }
+  .faqItem .faqMark { font-family: var(--mono); font-size: 16px; color: var(--accent); flex: none;
+    transition: transform .25s; }
+  .faqItem[open] .faqMark { transform: rotate(45deg); }
+  .faqItem p { color: var(--dim); font-size: 15px; line-height: 1.7; max-width: 74ch; padding: 0 6px 24px; }
 
   /* ── kobe stats ── */
   .stats { display: grid; grid-template-columns: repeat(5, 1fr); border: 1px solid var(--line); margin-top: 44px; }
@@ -594,7 +605,7 @@
 </head>
 <body data-analytics-offer="mirai_city">
 
-<a class="skip" href="#main" data-copy="menu.skipLink"></a>
+<a class="skip" href="#speakers" data-copy="menu.skipLink"></a>
 
 <div role="status" aria-live="polite" id="srStatus" style="position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0)"></div>
 <div class="topbar">
@@ -607,9 +618,11 @@
 <!-- ═══ HERO OFFER ═══ -->
 <section class="hero" id="top" data-track-section="hero" data-track-position="1">
   <div class="heroMedia">
-    <img class="heroPoster" src="disease_poster.jpg" alt="" fetchpriority="high" decoding="async" />
+    <!-- Video: Kobe Harborland at night, Pexels (pexels.com/video/35145859), Pexels license.
+         Re-encoded as a seamless crossfade loop (last 1.5s blends into the first). -->
+    <img class="heroPoster" src="kobe_harbor_night_poster.jpg" alt="" fetchpriority="high" decoding="async" />
     <video class="heroVideo" muted loop playsinline preload="none" aria-hidden="true">
-      <source data-src="disease.mp4" type="video/mp4" />
+      <source data-src="kobe_harbor_night.mp4" type="video/mp4" />
     </video>
     <div class="heroVeil"></div>
   </div>
@@ -621,101 +634,11 @@
     <div class="heroActions" data-copy="hero.buttons"></div>
     <div class="heroProof" aria-label="Featured people and venue" data-copy="hero.proof"></div>
   </div>
-  <a class="heroContinue" href="#main" data-copy="hero.scrollHint"></a>
+  <a class="heroContinue" href="#speakers" data-copy="hero.scrollHint"></a>
 </section>
 
-<!-- ═══ DATES ═══ -->
-<section class="dates" id="main" data-track-section="dates" data-track-position="2">
-  <div class="eyebrow rv" data-copy="dates.eyebrow"></div>
-  <h2 class="big rv" data-copy="dates.headline"></h2>
-  <div class="grid rv">
-    <a class="cell" href="#summits" style="text-decoration:none; display:block">
-      <div class="what" data-copy="dates.label"></div>
-      <div class="when" data-copy="dates.date"></div>
-      <div class="note" data-copy="dates.detail"></div>
-    </a>
-    <a class="cell" href="#summits" style="text-decoration:none; display:block">
-      <div class="what" data-copy="dates.label2"></div>
-      <div class="when" data-copy="dates.date2"></div>
-      <div class="note" data-copy="dates.detail2"></div>
-    </a>
-    <a class="cell" href="#fashion" style="text-decoration:none; display:block">
-      <div class="what" data-copy="dates.label3"></div>
-      <div class="when" data-copy="dates.date3"></div>
-      <div class="note" data-copy="dates.detail3"></div>
-    </a>
-  </div>
-  <a class="resline rv" href="#residency" data-copy="dates.tagline"></a>
-</section>
-
-
-<hr class="rule" />
-
-<!-- ═══ SUMMITS ═══ -->
-<section id="summits" data-track-section="summits" data-track-position="3">
-  <div class="eyebrow rv" data-copy="summits.eyebrow"></div>
-  <h2 class="big rv" data-copy="summits.headline"></h2>
-  <div class="summit">
-    <div class="card rv">
-      <div class="num" data-copy="summits.label"></div>
-      <div class="date" data-copy="summits.date"></div>
-      <h3 data-copy="summits.title"></h3>
-      <p data-copy="summits.body"></p>
-      <div class="topics" data-copy="summits.topics"></div>
-      <div class="priceRow" data-copy="summits.priceRow"></div>
-      <div data-copy="summits.block"></div>
-      <div class="fine" data-copy="summits.footnote"></div>
-    </div>
-    <div class="card rv">
-      <div class="num" data-copy="summits.label2"></div>
-      <div class="date" data-copy="summits.date2"></div>
-      <h3 data-copy="summits.title2"></h3>
-      <p data-copy="summits.body2"></p>
-      <div class="topics" data-copy="summits.topics2"></div>
-      <div class="tiein" data-copy="summits.tieIn"></div>
-      <div class="priceRow" data-copy="summits.priceRow2"></div>
-      <div data-copy="summits.block2"></div>
-      <div class="fine" data-copy="summits.footnote2"></div>
-    </div>
-    <div class="card pkg rv" id="summit-package" data-package-promo data-track-section="summit_package" data-track-position="4">
-      <div class="pkg-top">
-        <div class="num" data-copy="package.name"></div>
-        <div class="eyebrow" data-copy="package.eyebrow"></div>
-      </div>
-      <div class="pkg-grid">
-        <div class="pkg-pitch">
-          <h3 data-copy="package.headline"></h3>
-          <p class="bundle-feature__promise" data-copy="package.promise"></p>
-          <div class="pkg-foot">
-            <p class="bundle-feature__friction" data-copy="package.friction"></p>
-            <div class="bundle-feature__links" data-copy="package.detailsLink"></div>
-          </div>
-        </div>
-        <div class="pkg-buy">
-          <div class="pkg-ledger">
-            <div data-copy="package.fact"></div>
-            <div data-copy="package.fact2"></div>
-            <div class="pkg-sub" data-copy="package.subtotal"></div>
-            <div class="pkg-add" data-copy="package.fact3"></div>
-            <div class="pkg-add" data-copy="package.fact4"></div>
-          </div>
-          <div class="bundle-feature__price" data-copy="package.price"></div>
-          <a class="btn accent bundle-feature__checkout bundle-checkout" href="https://luma.com/an4zotn9?coupon=SFSH&amp;utm_source=mirai-site&amp;utm_campaign=summit-hotel-package" data-luma-action="checkout" data-luma-event-id="evt-OUCqVyqoZI5Jeg4" data-luma-ticket-type="ttype-0BjQv0xV4yY5P0l" data-luma-coupon="SFSH" data-luma-utm-source="mirai-site" data-analytics-action="checkout" data-analytics-location="summit_package" data-analytics-target="summit_hotel" data-copy="package.button"></a>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="voicesbar rv">
-    <div class="faces">
-      <img src="img/aubrey.jpg" alt="Aubrey de Grey" loading="lazy" decoding="async" /><img src="img/jose.jpg" alt="José Cordeiro" loading="lazy" decoding="async" /><img src="img/yuki.jpg" alt="Yuki Hanyu" loading="lazy" decoding="async" /><img src="img/adam.jpg" alt="Adam Gries" loading="lazy" decoding="async" />
-    </div>
-    <div class="who" data-copy="summits.line"></div>
-    <a class="more" href="#speakers" data-copy="summits.link"></a>
-  </div>
-</section>
-
-<!-- ═══ SPEAKERS ═══ -->
-<section id="speakers" data-track-section="speakers" data-track-position="5">
+<!-- ═══ PROOF: SPEAKERS + ECOSYSTEM ═══ -->
+<section id="speakers" data-track-section="proof" data-track-position="2">
   <div class="eyebrow rv" data-copy="speakers.eyebrow"></div>
   <h2 class="big rv" data-copy="speakers.headline"></h2>
   <div class="headliners">
@@ -730,29 +653,8 @@
   </div>
   <p class="alsoline rv" data-copy="speakers.alsoLine"></p>
   <div class="followline rv" data-copy="speakers.followLine"></div>
-</section>
 
-<hr class="rule" />
-
-<!-- ═══ FASHION SHOW ═══ -->
-<section class="fashion" id="fashion" data-track-section="fashion" data-track-position="6">
-  <video muted loop playsinline preload="none" loading="lazy" poster="augment_poster.jpg" aria-hidden="true">
-    <source data-src="augment.mp4" type="video/mp4" /></video>
-  <div class="veil"></div>
-  <div class="content">
-    <div class="eyebrow" data-copy="fashion.eyebrow"></div>
-    <h2 class="big" data-copy="fashion.headline"></h2>
-    <p data-copy="fashion.body"></p>
-    <div class="tags" data-copy="fashion.tags"></div>
-    <div class="mono" style="margin-bottom:26px; color:var(--faint)" data-copy="fashion.block"></div>
-    <div style="display:flex; gap:14px; flex-wrap:wrap" data-copy="fashion.block2"></div>
-  </div>
-</section>
-
-<!-- ═══ ECOSYSTEM ═══ -->
-<section data-track-section="ecosystem" data-track-position="7">
-  <div class="eyebrow rv" data-copy="ecosystem.eyebrow"></div>
-  <h2 class="big rv" data-copy="ecosystem.headline"></h2>
+  <div class="eyebrow rv ecoHead" data-copy="ecosystem.headline"></div>
   <div class="ecoWall rv" aria-label="Supporting organizations">
     <div class="ecoTrack">
       <div class="ecoSeq">
@@ -793,8 +695,101 @@
   </div>
 </section>
 
+<hr class="rule" />
+
+<!-- ═══ SUMMITS ═══ -->
+<section id="summits" data-track-section="summits" data-track-position="3">
+  <div class="eyebrow rv" data-copy="summits.eyebrow"></div>
+  <h2 class="big rv" data-copy="summits.headline"></h2>
+  <div class="summit">
+    <div class="card rv">
+      <!-- Photo: National Cancer Institute on Unsplash (unsplash.com/photos/ct10qdGv1hQ, Unsplash license) -->
+      <img class="cardBg" src="img/summit-pathologist.jpg" alt="" loading="lazy" decoding="async" style="object-position: center 32%" />
+      <div class="cardVeil" aria-hidden="true"></div>
+      <div class="num" data-copy="summits.label"></div>
+      <div class="date" data-copy="summits.date"></div>
+      <h3 data-copy="summits.title"></h3>
+      <p data-copy="summits.body"></p>
+      <div class="topics" data-copy="summits.topics"></div>
+      <div class="priceRow" data-copy="summits.priceRow"></div>
+      <div data-copy="summits.block"></div>
+      <div class="fine" data-copy="summits.footnote"></div>
+    </div>
+    <div class="card rv">
+      <img class="cardBg" src="img/early-bird-bridge.jpg" alt="" loading="lazy" decoding="async" style="object-position: center bottom" />
+      <div class="cardVeil" aria-hidden="true"></div>
+      <div class="num" data-copy="summits.label2"></div>
+      <div class="date" data-copy="summits.date2"></div>
+      <h3 data-copy="summits.title2"></h3>
+      <p data-copy="summits.body2"></p>
+      <div class="topics" data-copy="summits.topics2"></div>
+      <div class="tiein" data-copy="summits.tieIn"></div>
+      <div class="priceRow" data-copy="summits.priceRow2"></div>
+      <div data-copy="summits.block2"></div>
+      <div class="fine" data-copy="summits.footnote2"></div>
+    </div>
+    <div class="card pkg rv" id="summit-package" data-package-promo data-track-section="summit_package" data-track-position="4">
+      <div class="pkg-top">
+        <div class="num" data-copy="package.name"></div>
+        <div class="eyebrow" data-copy="package.eyebrow"></div>
+      </div>
+      <div class="pkg-grid">
+        <div class="pkg-pitch">
+          <h3 data-copy="package.headline"></h3>
+          <p class="bundle-feature__promise" data-copy="package.promise"></p>
+          <div class="pkg-foot">
+            <p class="bundle-feature__friction" data-copy="package.friction"></p>
+            <div class="bundle-feature__links" data-copy="package.detailsLink"></div>
+          </div>
+        </div>
+        <div class="pkg-buy">
+          <div class="pkg-ledger">
+            <div data-copy="package.fact"></div>
+            <div data-copy="package.fact2"></div>
+            <div class="pkg-sub" data-copy="package.subtotal"></div>
+            <div class="pkg-add" data-copy="package.fact3"></div>
+            <div class="pkg-add" data-fashion data-copy="package.fact4"></div>
+          </div>
+          <div class="bundle-feature__price" data-copy="package.price"></div>
+          <a class="btn accent bundle-feature__checkout bundle-checkout" href="https://luma.com/an4zotn9?coupon=SFSH&amp;utm_source=mirai-site&amp;utm_campaign=summit-hotel-package" data-luma-action="checkout" data-luma-event-id="evt-OUCqVyqoZI5Jeg4" data-luma-ticket-type="ttype-0BjQv0xV4yY5P0l" data-luma-coupon="SFSH" data-luma-utm-source="mirai-site" data-analytics-action="checkout" data-analytics-location="summit_package" data-analytics-target="summit_hotel" data-copy="package.button"></a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <a class="ebStrip rv" href="https://luma.com/an4zotn9" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="summits_early_bird" data-analytics-target="early_bird">
+    <span class="ebStrip-tag mono" data-copy="summits.ebTag"></span>
+    <span class="ebStrip-text" data-copy="summits.ebText"></span>
+    <span class="ebStrip-clock mono" data-copy="summits.ebClock"></span>
+    <span class="ebStrip-cta mono" data-copy="summits.ebCta"></span>
+  </a>
+  <div class="voicesbar rv">
+    <div class="faces">
+      <img src="img/aubrey.jpg" alt="Aubrey de Grey" loading="lazy" decoding="async" /><img src="img/jose.jpg" alt="José Cordeiro" loading="lazy" decoding="async" /><img src="img/yuki.jpg" alt="Yuki Hanyu" loading="lazy" decoding="async" /><img src="img/adam.jpg" alt="Adam Gries" loading="lazy" decoding="async" />
+    </div>
+    <div class="who" data-copy="summits.line"></div>
+    <a class="more" href="#speakers" data-copy="summits.link"></a>
+  </div>
+</section>
+
+<hr class="rule" />
+
+<!-- ═══ FASHION SHOW ═══ -->
+<section class="fashion" id="fashion" data-fashion data-track-section="fashion" data-track-position="5">
+  <video muted loop playsinline preload="none" loading="lazy" poster="augment_poster.jpg" aria-hidden="true">
+    <source data-src="augment.mp4" type="video/mp4" /></video>
+  <div class="veil"></div>
+  <div class="content">
+    <div class="eyebrow" data-copy="fashion.eyebrow"></div>
+    <h2 class="big" data-copy="fashion.headline"></h2>
+    <p data-copy="fashion.body"></p>
+    <div class="tags" data-copy="fashion.tags"></div>
+    <div class="mono" style="margin-bottom:26px; color:var(--faint)" data-copy="fashion.block"></div>
+    <div style="display:flex; gap:14px; flex-wrap:wrap" data-copy="fashion.block2"></div>
+  </div>
+</section>
+
 <!-- ═══ JAPAN STRIP ═══ -->
-<section class="stripwrap" aria-label="One evening in Kobe" data-track-section="kobe_evening" data-track-position="8">
+<section class="stripwrap" aria-label="One evening in Kobe" data-track-section="kobe_evening" data-track-position="6">
   <div class="cap mono rv" data-copy="kobe.caption"></div>
   <div class="strip">
     <figure><img src="img/harbor-golden-hour.jpg" alt="Kobe harbor at golden hour" loading="lazy" /><figcaption data-copy="kobe.caption2"></figcaption></figure>
@@ -805,73 +800,75 @@
   </div>
 </section>
 
-<!-- ═══ RESIDENCY / THE MONTH ═══ -->
-<section class="month" id="residency" data-track-section="residency" data-track-position="9">
-  <div class="eyebrow rv" data-copy="residency.eyebrow"></div>
-  <h2 class="big rv" data-copy="residency.headline"></h2>
-  <div class="resline rv" style="margin-top:14px" data-copy="residency.tagline"></div>
-
-  <div class="props rv">
-    <div class="pr">
-      <div class="k" data-copy="residency.statLabel"></div>
-      <p data-copy="residency.body"></p>
-    </div>
-    <div class="pr">
-      <div class="k" data-copy="residency.statLabel2"></div>
-      <p data-copy="residency.body2"></p>
-    </div>
-    <div class="pr">
-      <div class="k" data-copy="residency.statLabel3"></div>
-      <p data-copy="residency.body3"></p>
-    </div>
-  </div>
+<!-- ═══ AGENDA (the stashed "Full Program" section lives in ../retreat/full-program-section.html) ═══ -->
+<section class="month" id="agenda" data-track-section="agenda" data-track-position="7">
+  <div class="eyebrow rv" data-copy="agenda.eyebrow"></div>
+  <h2 class="big rv" data-copy="agenda.headline"></h2>
 
   <div class="ep rv">
-    <div class="no" data-copy="residency.episode"></div>
-    <div><h3 data-copy="residency.title"></h3></div>
-    <div class="d" data-copy="residency.dates"></div>
-    <p data-copy="residency.body4"></p>
+    <div class="no" data-copy="agenda.no1"></div>
+    <div><h3 data-copy="agenda.t1"></h3></div>
+    <div class="d" data-copy="agenda.d1"></div>
+    <p data-copy="agenda.p1"></p>
   </div>
   <div class="ep rv">
-    <div class="no" data-copy="residency.episode2"></div>
-    <div><h3 data-copy="residency.title2"></h3></div>
-    <div class="d" data-copy="residency.dates2"></div>
-    <p data-copy="residency.body5"></p>
+    <div class="no" data-copy="agenda.no2"></div>
+    <div><h3 data-copy="agenda.t2"></h3></div>
+    <div class="d" data-copy="agenda.d2"></div>
   </div>
   <div class="ep rv">
-    <div class="no" data-copy="residency.episode3"></div>
-    <div><h3 data-copy="residency.title3"></h3></div>
-    <div class="d" data-copy="residency.dates3"></div>
-    <p data-copy="residency.body6"></p>
+    <div class="no" data-copy="agenda.no3"></div>
+    <div><h3 data-copy="agenda.t3"></h3></div>
+    <div class="d" data-copy="agenda.d3"></div>
   </div>
   <div class="ep rv">
-    <div class="no" data-copy="residency.episode4"></div>
-    <div><h3 data-copy="residency.title4"></h3></div>
-    <div class="d" data-copy="residency.dates4"></div>
-    <p data-copy="residency.body7"></p>
+    <div class="no" data-copy="agenda.no4"></div>
+    <div><h3 data-copy="agenda.t4"></h3></div>
+    <div class="d" data-copy="agenda.d4"></div>
+    <p data-copy="agenda.p4"></p>
+  </div>
+  <div class="ep rv">
+    <div class="no" data-copy="agenda.no5"></div>
+    <div><h3 data-copy="agenda.t5"></h3></div>
+    <div class="d" data-copy="agenda.d5"></div>
+  </div>
+  <div class="ep rv">
+    <div class="no" data-copy="agenda.no6"></div>
+    <div><h3 data-copy="agenda.t6"></h3></div>
+    <div class="d" data-copy="agenda.d6"></div>
+    <p data-copy="agenda.p6"></p>
+  </div>
+  <div class="ep rv">
+    <div class="no" data-copy="agenda.no7"></div>
+    <div><h3 data-copy="agenda.t7"></h3></div>
+    <div class="d" data-copy="agenda.d7"></div>
+    <p data-copy="agenda.p7"></p>
+  </div>
+  <div class="ep rv">
+    <div class="no" data-copy="agenda.no8"></div>
+    <div><h3 data-copy="agenda.t8"></h3></div>
+    <div class="d" data-copy="agenda.d8"></div>
+    <p data-copy="agenda.p8"></p>
+  </div>
+  <div class="ep rv">
+    <div class="no" data-copy="agenda.no9"></div>
+    <div><h3 data-copy="agenda.t9"></h3></div>
+    <div class="d" data-copy="agenda.d9"></div>
+  </div>
+  <div class="ep rv">
+    <div class="no" data-copy="agenda.no10"></div>
+    <div><h3 data-copy="agenda.t10"></h3></div>
+    <div class="d" data-copy="agenda.d10"></div>
+    <p data-copy="agenda.p10"></p>
   </div>
 
-  <div class="rhyt rv">
-    <div class="tile"><div class="h" data-copy="residency.title5"></div><p data-copy="residency.body8"></p></div>
-    <div class="tile"><div class="h" data-copy="residency.title6"></div><p data-copy="residency.body9"></p></div>
-    <div class="tile"><div class="h" data-copy="residency.title7"></div><p data-copy="residency.body10"></p></div>
-    <div class="tile"><div class="h" data-copy="residency.title8"></div><p data-copy="residency.body11"></p></div>
-    <div class="tile"><div class="h" data-copy="residency.title9"></div><p data-copy="residency.body12"></p></div>
-    <div class="tile"><div class="h" data-copy="residency.title10"></div><p data-copy="residency.body13"></p></div>
-  </div>
-
-  <div class="tracks">
-    <a class="t rv" href="https://luma.com/an4zotn9" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="residency_devices" data-analytics-target="residency"><div class="mono" data-copy="residency.block"></div><h3 data-copy="residency.title11"></h3><p data-copy="residency.body14"></p><div class="go" data-copy="residency.cta"></div></a>
-    <a class="t rv" href="https://luma.com/an4zotn9" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="residency_therapies" data-analytics-target="residency"><div class="mono" data-copy="residency.block2"></div><h3 data-copy="residency.title12"></h3><p data-copy="residency.body15"></p><div class="go" data-copy="residency.cta2"></div></a>
-    <a class="t rv" href="https://luma.com/an4zotn9" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="residency_builder" data-analytics-target="residency"><div class="mono" data-copy="residency.block3"></div><h3 data-copy="residency.title13"></h3><p data-copy="residency.body16"></p><div class="ebTag" data-copy="residency.ebTag"></div><div class="price" data-copy="residency.price"></div><div class="left" data-copy="residency.left"></div><div class="ebClock ebClock--line" data-copy="residency.ebClock"></div><div class="go" data-copy="residency.cta3"></div></a>
-  </div>
-  <div class="monthCta rv" data-copy="residency.cta4"></div>
+  <div class="monthCta rv" data-copy="agenda.cta"></div>
 </section>
 
 <hr class="rule" />
 
 <!-- ═══ WHY KOBE ═══ -->
-<section data-track-section="why_kobe" data-track-position="10">
+<section data-track-section="why_kobe" data-track-position="8">
   <div class="eyebrow rv" data-copy="whyKobe.eyebrow"></div>
   <h2 class="big rv" data-copy="whyKobe.headline"></h2>
   <p class="rv" style="color:var(--dim); max-width:64ch; margin-top:8px; line-height:1.7; font-size:15px" data-copy="whyKobe.body"></p>
@@ -887,7 +884,7 @@
 <hr class="rule" />
 
 <!-- ═══ TRACK RECORD ═══ -->
-<section class="past" data-track-section="track_record" data-track-position="11">
+<section class="past" data-track-section="track_record" data-track-position="9">
   <div class="eyebrow rv" data-copy="trackRecord.eyebrow"></div>
   <h2 class="big rv" data-copy="trackRecord.headline"></h2>
   <div class="item rv"><div class="n" data-copy="trackRecord.number"></div><div><h3 data-copy="trackRecord.title"></h3><p data-copy="trackRecord.body"></p></div></div>
@@ -897,8 +894,42 @@
   <a class="here rv" href="#apply" data-copy="trackRecord.stamp"></a>
 </section>
 
+<hr class="rule" />
+
+<!-- ═══ FAQ ═══ -->
+<section id="faq" data-track-section="faq" data-track-position="10">
+  <div class="eyebrow rv" data-copy="faq.eyebrow"></div>
+  <h2 class="big rv" data-copy="faq.headline"></h2>
+  <div class="faqList rv">
+    <details class="faqItem" data-track-faq="What is a popup city?" data-track-position="1">
+      <summary><span data-copy="faq.q1"></span><span class="faqMark" aria-hidden="true">+</span></summary>
+      <p data-copy="faq.a1"></p>
+    </details>
+    <details class="faqItem" data-track-faq="Where exactly in Kobe?" data-track-position="2">
+      <summary><span data-copy="faq.q2"></span><span class="faqMark" aria-hidden="true">+</span></summary>
+      <p data-copy="faq.a2"></p>
+    </details>
+    <details class="faqItem" data-track-faq="Do I have to stay the whole month?" data-track-position="3">
+      <summary><span data-copy="faq.q3"></span><span class="faqMark" aria-hidden="true">+</span></summary>
+      <p data-copy="faq.a3"></p>
+    </details>
+    <details class="faqItem" data-track-faq="Where do I stay?" data-track-position="4">
+      <summary><span data-copy="faq.q4"></span><span class="faqMark" aria-hidden="true">+</span></summary>
+      <p data-copy="faq.a4"></p>
+    </details>
+    <details class="faqItem" data-fashion data-track-faq="What is the Frontier Human Fashion Show?" data-track-position="5">
+      <summary><span data-copy="faq.q5"></span><span class="faqMark" aria-hidden="true">+</span></summary>
+      <p data-copy="faq.a5"></p>
+    </details>
+    <details class="faqItem" data-track-faq="How do tickets and applications work?" data-track-position="6">
+      <summary><span data-copy="faq.q6"></span><span class="faqMark" aria-hidden="true">+</span></summary>
+      <p data-copy="faq.a6"></p>
+    </details>
+  </div>
+</section>
+
 <!-- ═══ APPLY ═══ -->
-<div class="applywrap" id="apply" data-track-section="apply" data-track-position="12">
+<div class="applywrap" id="apply" data-track-section="apply" data-track-position="11">
   <img class="bg" src="img/future_city.jpg" alt="" aria-hidden="true" loading="lazy" />
   <div class="veil"></div>
   <section class="apply">

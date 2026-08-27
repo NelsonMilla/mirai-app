@@ -8,6 +8,11 @@
    index.html — social previews are read by scrapers that do
    not run JavaScript.
    ============================================================ */
+/* Fashion-show launch control: strings below pick a variant off
+   window.MIRAI_FLAGS.showFashionShow (set in index.html, which loads
+   the flags before this file). Both variants stay here so flipping
+   the flag restores the show everywhere at once. */
+const SHOW_FASHION = !!(window.MIRAI_FLAGS && window.MIRAI_FLAGS.showFashionShow);
 window.MIRAI_COPY = {
 
   /* ─── SKIP LINK ─────────────────────────── */
@@ -26,26 +31,12 @@ window.MIRAI_COPY = {
     eyebrow: `Mirai Tech City 2026 · Kobe, Japan · October 1–31`,
     headline: `<span>Live the future</span> <span>of health.</span>`,
     lead: `Japan's month-long longevity biomedical popup city, where scientists, founders, and operators meet collaborators, learn from field leaders, and experience frontier health in real life.`,
-    program: `<li><b>2</b> <span>summit weekends</span></li><li><span>Fashion Show</span> <b>Oct 26</b></li><li><span>Citizenship</span> <b>all October</b></li>`,
+    program: SHOW_FASHION
+      ? `<li><b>2</b> <span>summit weekends</span></li><li><span>Fashion Show</span> <b>Oct 26</b></li><li><span>Citizenship</span> <b>all October</b></li>`
+      : `<li><b>2</b> <span>summit weekends</span></li><li><span>Citizenship</span> <b>all October</b></li>`,
     buttons: `<a class="btn accent" href="https://luma.com/an4zotn9" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="hero_primary" data-analytics-target="tickets">Get Tickets</a>`,
     proof: `<span><b>43</b> confirmed speakers · Aubrey de Grey + José Cordeiro</span><span><b>300-person</b> popup city</span><span>KBIC · Japan's largest biomedical cluster · <b>370</b> member organizations</span>`,
     scrollHint: `See what October looks like ↓`,
-  },
-
-  /* ─── DATES STRIP ─────────────────────────── */
-  dates: {
-    eyebrow: `World's Premier Longevity Biomedical Popup City`,
-    headline: `Two summits and a runway.`,
-    label: `Summit I`,
-    date: `Oct 17–18`,
-    detail: `The Science &amp; Tech Augmenting Life`,
-    label2: `Summit II`,
-    date2: `Oct 24–25`,
-    detail2: `From East to West: Bridging the Longevity Gap`,
-    label3: `Fashion Show`,
-    date3: `Oct 26`,
-    detail3: `The Frontier Human Fashion Show &amp; Demo Day`,
-    tagline: `Join us this October. <em>See the full program.</em>`,
   },
 
   /* ─── SUMMIT + HOTEL PACKAGE ─────────────────────────── */
@@ -77,8 +68,8 @@ window.MIRAI_COPY = {
     priceRow: `<span class="priceVal">$900</span><span class="priceKey"></span>`,
     block: `<a class="btn ghost" href="https://luma.com/an4zotn9" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="summit_1" data-analytics-target="summit_pass">Get My Ticket</a>`,
     footnote: `Hotel & Transportation not included`,
-    label2: `SUMMIT — 02 + FASHION SHOW`,
-    date2: `October 24–26`,
+    label2: SHOW_FASHION ? `SUMMIT — 02 + FASHION SHOW` : `SUMMIT — 02`,
+    date2: SHOW_FASHION ? `October 24–26` : `October 24–25`,
     title2: `From East to West: Bridging the Longevity Gap`,
     body2: `The bottlenecks holding the field back, and what the world looks like once we cure disease.`,
     topics2: ``,
@@ -86,8 +77,15 @@ window.MIRAI_COPY = {
     priceRow2: `<span class="priceVal">$900</span><span class="priceKey"></span>`,
     block2: `<a class="btn ghost" href="https://luma.com/an4zotn9" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="summit_2" data-analytics-target="summit_pass">Get My Ticket</a>`,
     footnote2: `Hotel & Transportation not included`,
+    /* Early-bird strip — auto-hides after Aug 31 JST via the existing
+       EB_END gate (html.ebOver); the <span class="ebc"> countdown is
+       filled by tick() in index.html. */
+    ebTag: `Early Bird`,
+    ebText: `<b>$399</b> — covers whatever dates you're coming.`,
+    ebClock: `Available until Aug 31 · <span class="ebc">&#8212;</span>`,
+    ebCta: `Get Early Bird →`,
     line: `Across the two weekends: <b>Aubrey de Grey</b>, <b>José Cordeiro</b>, and 41 more.`,
-    link: `Meet the speakers ↓`,
+    link: `Meet the speakers ↑`,
   },
 
   /* ─── SPEAKERS ─────────────────────────── */
@@ -113,12 +111,11 @@ window.MIRAI_COPY = {
     body: `A live demo day, staged as a runway show. Device residents put their prototypes on models. CES meets Tokyo Fashion Week, and everyone's wearing exoskeletons.`,
     tags: `<span>Exoskeletons</span><span>Neural Interfaces</span><span>Smart Prosthetics</span> <span>Biosensors</span><span>Haptic Suits</span><span>AR/VR Medical</span>`,
     block: `0 / 9 presenters revealed · <span class="kanji" role="group" aria-label="Presenter categories, tap to reveal"><span title="Armor — exoskeletons">鎧</span> <span title="Brain — neural interfaces">脳</span> <span title="Prosthetic">義</span> <span title="Sense — biosensors">感</span> <span title="Touch — haptics">触</span> <span title="Machine">機</span> <span title="Garment">衣</span> <span title="Vision">視</span> <span title="Life">命</span></span>`,
-    block2: `<a class="btn accent" href="https://luma.com/an4zotn9" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="fashion" data-analytics-target="fashion_show">Get Show Tickets</a> <a class="btn ghost" href="#residency">Put your device on the runway</a>`,
+    block2: `<a class="btn accent" href="https://luma.com/an4zotn9" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="fashion" data-analytics-target="fashion_show">Get Show Tickets</a> <a class="btn ghost" href="#apply">Put your device on the runway</a>`,
   },
 
-  /* ─── ECOSYSTEM ─────────────────────────── */
+  /* ─── ECOSYSTEM (inside the proof section) ─────────────── */
   ecosystem: {
-    eyebrow: `Ecosystem`,
     headline: `Supporting organizations`,
   },
 
@@ -132,62 +129,73 @@ window.MIRAI_COPY = {
     caption6: `23:41 Mt. Rokko, the ten-million-dollar view · <a href="/experience/" style="color:var(--accent); text-decoration:none; font-size:12px; padding:6px 0; display:inline-block" data-analytics-action="site_navigation" data-analytics-location="kobe_evening" data-analytics-target="experience_guide">Explore Kobe + Kansai →</a>`,
   },
 
-  /* ─── THE RESIDENCY ─────────────────────────── */
-  residency: {
-    eyebrow: `The Full Program`,
-    headline: `Join us this October<br/>to accelerate bio.`,
-    tagline: `A Month for Builders.`,
-    statLabel: `Build together`,
-    body: `Longevity hackathons, Vibe Coding Nights, and benches shared with your cohort.`,
-    statLabel2: `Find your people`,
-    body2: `Co-founders and collaborators: the people you meet at breakfast build with you by night.`,
-    statLabel3: `Partner with Japanese biotech`,
-    body3: `KBIC's 370 member organisations, direct PMDA connection, AMED subsidies.`,
-    episode: `EP.01 壱`,
-    title: `Open Weeks`,
-    dates: `Oct 01–16`,
-    body4: `Arrivals, tours, Welcome Day on Oct 4. Lab visits, Workshops, Hackathons.`,
-    episode2: `EP.02 弐`,
-    title2: `Summit I`,
-    dates2: `Oct 17–18`,
-    body5: `Meet the people that are actively building the frontier of bio.`,
-    episode3: `EP.03 参`,
-    title3: `Summit II`,
-    dates3: `Oct 24–25`,
-    body6: `Capital, regulation, and the bridge between ecosystems.`,
-    episode4: `EP.04 肆`,
-    title4: `Fashion Show &amp; Close`,
-    dates4: `Oct 26–31`,
-    body7: `The show on Oct 26: devices become couture. Showcase what you've built.`,
-    title5: `<b>夜</b>Vibe Coding Nights`,
-    body8: `Ship beside future co-founders.`,
-    title6: `<b>研</b>The Residency`,
-    body9: `A bench in Japan's biomedical cluster.`,
-    title7: `<b>学</b>Learning Layer Labs`,
-    body10: `New skills, taught weekly.`,
-    title8: `<b>実</b>Biohackers Workshops`,
-    body11: `Hands-on frontier techniques.`,
-    title9: `<b>宴</b>Socials`,
-    body12: `Dinners where partnerships start.`,
-    title10: `<b>休</b>Me-Time`,
-    body13: `Onsen, harbor, headspace.`,
-    block: `Medical Devices`,
-    title11: `Devices Residency`,
-    body14: `Lab infrastructure for first-in-human prototypes.`,
-    cta: `Apply →`,
-    block2: `Therapeutics`,
-    title12: `Therapies Residency`,
-    body15: `Direct PMDA connection for conditional approval.`,
-    cta2: `Apply →`,
-    block3: `Community`,
-    title13: `Builder Pass`,
-    body16: `Full access to everything. Build, connect, explore.`,
-    ebTag: `Early Bird`,
-    price: `$399 <s>$1500</s>`,
-    left: `140 passes remaining`,
-    ebClock: `Ends in <span class="ebc">&#8212;</span>`,
-    cta3: `Apply →`,
-    cta4: `<a class="btn accent" href="https://luma.com/an4zotn9" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="residency_cta" data-analytics-target="residency">Become a builder</a>`,
+  /* ─── AGENDA ───────────────────────────
+     Session themes are audited event-deck copy (they mirror the
+     summit chapters in ../src/lib/constants.ts). The stashed
+     "Full Program" section this replaced lives in
+     ../retreat/full-program-section.html for the Retreat page. */
+  agenda: {
+    eyebrow: `The Agenda · Oct 17–26`,
+    headline: `Nine sessions<br/>and a runway.`,
+    no1: `S1 · 01`,
+    t1: `Japan's Longevity Imperative`,
+    d1: `Summit I · Oct 17–18`,
+    p1: `What Japan learned — and what it needs from the world.`,
+    no2: `S1 · 02`,
+    t2: `KBIC as a Global Laboratory for Longevity`,
+    d2: `Summit I · Oct 17–18`,
+    no3: `S1 · 03`,
+    t3: `Bioengineering, MedTech, Biostasis, Replacement &amp; Augmentation`,
+    d3: `Summit I · Oct 17–18`,
+    no4: `S1 · 04`,
+    t4: `Women's Health`,
+    d4: `Summit I · Oct 17–18`,
+    p4: `The next trillion-dollar market.`,
+    no5: `S1 · 05`,
+    t5: `AI &times; Longevity Bio`,
+    d5: `Summit I · Oct 17–18`,
+    no6: `S2 · 01`,
+    t6: `Longevity Trends &amp; Supercentenarians`,
+    d6: `Summit II · Oct 24–25`,
+    p6: `Impact, and the bottlenecks holding the field back.`,
+    no7: `S2 · 02`,
+    t7: `The Stakeholders`,
+    d7: `Summit II · Oct 24–25`,
+    p7: `Investment, R&amp;D, entrepreneurship — and regulation as an acceleration mechanism.`,
+    no8: `S2 · 03`,
+    t8: `Japan's Model`,
+    d8: `Summit II · Oct 24–25`,
+    p8: `Conditional approval generating real-world evidence.`,
+    no9: `S2 · 04`,
+    t9: `Visions for the Future of Longevity`,
+    d9: `Summit II · Oct 24–25`,
+    no10: `◆`,
+    t10: `The Frontier Human Fashion Show &amp; Demo Day`,
+    d10: `Finale · Oct 26`,
+    p10: SHOW_FASHION
+      ? `Devices become couture. <a href="#fashion" style="color:var(--accent); text-decoration:none" data-analytics-action="site_navigation" data-analytics-location="agenda" data-analytics-target="fashion">See the show ↑</a>`
+      : `Devices become couture.`,
+    cta: `<a class="btn accent" href="https://luma.com/an4zotn9" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="agenda" data-analytics-target="tickets">Get Tickets</a>`,
+  },
+
+  /* ─── FAQ ─────────────────────────── */
+  faq: {
+    eyebrow: `FAQ`,
+    headline: `Before you book.`,
+    q1: `What is a popup city?`,
+    a1: `A temporary village where a curated community lives, works, and builds together in one place for one month. Housing, labs, programming, and social life share the same few blocks on Port Island — and the summits are its two flagship weekends.`,
+    q2: `Where exactly in Kobe?`,
+    a2: `Port Island, home to KBIC (Kobe Biomedical Innovation Cluster). A purpose-built biomedical district with lab infrastructure, connected to central Kobe via the Port Liner monorail.`,
+    q3: `Do I have to stay the whole month?`,
+    a3: SHOW_FASHION
+      ? `No. The city runs October 1–31, but summit tickets stand alone — come for one weekend (Oct 17–18 or Oct 24–26), take both with the hotel package, or apply for the residency and stay the month.`
+      : `No. The city runs October 1–31, but summit tickets stand alone — come for one weekend (Oct 17–18 or Oct 24–25), take both with the hotel package, or apply for the residency and stay the month.`,
+    q4: `Where do I stay?`,
+    a4: `Our partner hotel, the Portopia, is a short walk from KBIC, and the community hacker houses — The Sanctuary, Biopunk House, Aevitas, and ZuCity Japan — host residents across the city. The Both Weekends + Hotel package includes 12 nights in Sannomiya.`,
+    q5: `What is the Frontier Human Fashion Show?`,
+    a5: `A live demo day reimagined as a runway show. Device residents showcase their prototypes on models, blending medical technology with fashion. Think CES meets Tokyo Fashion Week.`,
+    q6: `How do tickets and applications work?`,
+    a6: `Summit tickets and the hotel package are on Luma. The month-long residency is application-only — we review on a rolling basis, and accepted teams receive next steps by email.`,
   },
 
   /* ─── WHY KOBE ─────────────────────────── */
@@ -230,7 +238,9 @@ window.MIRAI_COPY = {
   apply: {
     eyebrow: `October 2026 · 300 Curated Residents`,
     headline: `The future is<br/>built here.`,
-    buttons: `Tickets for the Summits &amp; Fashion Show. Applications for the Residency.`,
+    buttons: SHOW_FASHION
+      ? `Tickets for the Summits &amp; Fashion Show. Applications for the Residency.`
+      : `Tickets for the Summits. Applications for the Residency.`,
     buttons2: `<a class="btn accent" href="https://luma.com/an4zotn9" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="apply" data-analytics-target="tickets">Get Tickets</a> <a class="btn" href="https://luma.com/an4zotn9" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="apply" data-analytics-target="residency">Apply for the Residency</a> <a class="btn ghost" href="#">Sponsor the City</a>`,
     footnote: `Tickets &amp; residency on Luma · Applications reviewed on a rolling basis`,
     footnote2: `Sponsors reach 300 residents and 43 speakers`,

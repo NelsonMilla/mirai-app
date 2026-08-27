@@ -1,0 +1,180 @@
+<!--
+  ═══════════════════════════════════════════════════════════════════
+  STASHED: "The Full Program" (residency / the-month) section
+  ═══════════════════════════════════════════════════════════════════
+  Removed from new-site/index.html when the summit agenda replaced it
+  (Aug 2026). Keep for the dedicated Retreat landing page (people
+  staying the whole month).
+
+  To revive, this section needs from new-site/index.html:
+  - The shared classes: section base, .eyebrow, .big, .rv reveal
+    (IntersectionObserver adds .in), .resline, .btn/.btn.accent, .mono
+  - The CSS block below (was in the <style> under "residency / month")
+  - The copy block below (was `residency:` in copy.js; applied via
+    data-copy + window.applyCopy)
+  - The early-bird JS still in new-site/index.html's page script:
+    EB_END gating (removes .ebTag/.left/.ebClock, collapses .price <s>
+    after Aug 31 JST) and the .ebc countdown inside tick(). That JS is
+    element-guarded, so it stayed in new-site even though nothing on
+    that page uses it now.
+  - Analytics attrs assume analytics.js (data-analytics-action etc.)
+-->
+
+<!-- ═══ CSS (from new-site/index.html <style>) ═══
+  NOTE: `.month .ep`, `.monthCta`, and their 860px media rules were NOT
+  removed from new-site — the agenda section reuses them. Only the rules
+  below were deleted with the section; re-add them next to the shared ones.
+
+  .props { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 44px; }
+  .props .pr { border-left: 2px solid rgba(var(--accent-rgb),.45); padding: 4px 0 4px 20px; }
+  .props .pr .k { font-family: var(--mono); font-size: 10px; letter-spacing: .22em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+  .props .pr p { color: var(--dim); font-size: 14px; line-height: 1.6; }
+  @media (max-width: 860px) { .props { grid-template-columns: 1fr; } }
+  .rhyt { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; margin-top: 30px; }
+  .rhyt .tile { border: 1px solid var(--line); padding: 18px 16px; }
+  .rhyt .h { font-family: var(--mono); font-size: 11px; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--ink); }
+  .rhyt .h b { font-weight: 400; color: var(--accent); margin-right: 6px; }
+  .rhyt p { color: var(--faint); font-size: 12.5px; line-height: 1.5; margin-top: 6px; }
+  .tracks { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px; }
+  .tracks a.t { display: block; border: 1px solid var(--line); padding: 30px 26px; text-decoration: none;
+    transition: border-color .25s, background .25s; }
+  .tracks a.t:hover { border-color: rgba(var(--accent-rgb),.5); background: rgba(var(--accent-rgb),.04); }
+  .tracks .t h3 { font-weight: 800; text-transform: uppercase; letter-spacing: .02em; font-size: 17px; margin: 10px 0 8px; }
+  .tracks .t p { color: var(--dim); font-size: 14px; line-height: 1.6; }
+  .tracks .t .ebTag { font-family: var(--mono); font-size: 10px; letter-spacing: .22em;
+    text-transform: uppercase; color: var(--accent); margin-top: 14px; }
+  .tracks .t .price { font-weight: 800; font-size: 26px; letter-spacing: -.01em; line-height: 1;
+    margin-top: 6px; font-variant-numeric: tabular-nums; }
+  .tracks .t .price s { font-weight: 400; font-size: .58em; color: var(--faint);
+    text-decoration: line-through; margin-left: 8px; }
+  .tracks .t .left { font-family: var(--mono); font-size: 10px; letter-spacing: .18em;
+    text-transform: uppercase; color: var(--dim); margin-top: 8px; }
+  .tracks .t .ebClock--line { font-family: var(--mono); font-size: 10px; letter-spacing: .18em;
+    text-transform: uppercase; color: var(--accent); margin-top: 8px; }
+  .tracks .t .ebClock--line .ebc { color: var(--ink); letter-spacing: .08em; font-variant-numeric: tabular-nums; }
+  .tracks .t .go { margin-top: 14px; font-family: var(--mono); font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--accent); }
+  @media (max-width: 860px) { .tracks { grid-template-columns: 1fr; } }
+═══ END CSS ═══ -->
+
+<!-- ═══ SECTION MARKUP (verbatim) ═══ -->
+<section class="month" id="residency" data-track-section="residency" data-track-position="7">
+  <div class="eyebrow rv" data-copy="residency.eyebrow"></div>
+  <h2 class="big rv" data-copy="residency.headline"></h2>
+  <div class="resline rv" style="margin-top:14px" data-copy="residency.tagline"></div>
+
+  <div class="props rv">
+    <div class="pr">
+      <div class="k" data-copy="residency.statLabel"></div>
+      <p data-copy="residency.body"></p>
+    </div>
+    <div class="pr">
+      <div class="k" data-copy="residency.statLabel2"></div>
+      <p data-copy="residency.body2"></p>
+    </div>
+    <div class="pr">
+      <div class="k" data-copy="residency.statLabel3"></div>
+      <p data-copy="residency.body3"></p>
+    </div>
+  </div>
+
+  <div class="ep rv">
+    <div class="no" data-copy="residency.episode"></div>
+    <div><h3 data-copy="residency.title"></h3></div>
+    <div class="d" data-copy="residency.dates"></div>
+    <p data-copy="residency.body4"></p>
+  </div>
+  <div class="ep rv">
+    <div class="no" data-copy="residency.episode2"></div>
+    <div><h3 data-copy="residency.title2"></h3></div>
+    <div class="d" data-copy="residency.dates2"></div>
+    <p data-copy="residency.body5"></p>
+  </div>
+  <div class="ep rv">
+    <div class="no" data-copy="residency.episode3"></div>
+    <div><h3 data-copy="residency.title3"></h3></div>
+    <div class="d" data-copy="residency.dates3"></div>
+    <p data-copy="residency.body6"></p>
+  </div>
+  <div class="ep rv">
+    <div class="no" data-copy="residency.episode4"></div>
+    <div><h3 data-copy="residency.title4"></h3></div>
+    <div class="d" data-copy="residency.dates4"></div>
+    <p data-copy="residency.body7"></p>
+  </div>
+
+  <div class="rhyt rv">
+    <div class="tile"><div class="h" data-copy="residency.title5"></div><p data-copy="residency.body8"></p></div>
+    <div class="tile"><div class="h" data-copy="residency.title6"></div><p data-copy="residency.body9"></p></div>
+    <div class="tile"><div class="h" data-copy="residency.title7"></div><p data-copy="residency.body10"></p></div>
+    <div class="tile"><div class="h" data-copy="residency.title8"></div><p data-copy="residency.body11"></p></div>
+    <div class="tile"><div class="h" data-copy="residency.title9"></div><p data-copy="residency.body12"></p></div>
+    <div class="tile"><div class="h" data-copy="residency.title10"></div><p data-copy="residency.body13"></p></div>
+  </div>
+
+  <div class="tracks">
+    <a class="t rv" href="https://luma.com/an4zotn9" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="residency_devices" data-analytics-target="residency"><div class="mono" data-copy="residency.block"></div><h3 data-copy="residency.title11"></h3><p data-copy="residency.body14"></p><div class="go" data-copy="residency.cta"></div></a>
+    <a class="t rv" href="https://luma.com/an4zotn9" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="residency_therapies" data-analytics-target="residency"><div class="mono" data-copy="residency.block2"></div><h3 data-copy="residency.title12"></h3><p data-copy="residency.body15"></p><div class="go" data-copy="residency.cta2"></div></a>
+    <a class="t rv" href="https://luma.com/an4zotn9" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="residency_builder" data-analytics-target="residency"><div class="mono" data-copy="residency.block3"></div><h3 data-copy="residency.title13"></h3><p data-copy="residency.body16"></p><div class="ebTag" data-copy="residency.ebTag"></div><div class="price" data-copy="residency.price"></div><div class="left" data-copy="residency.left"></div><div class="ebClock ebClock--line" data-copy="residency.ebClock"></div><div class="go" data-copy="residency.cta3"></div></a>
+  </div>
+  <div class="monthCta rv" data-copy="residency.cta4"></div>
+</section>
+
+<!-- ═══ COPY (from new-site/copy.js — `residency:` block) ═══
+  residency: {
+    eyebrow: `The Full Program`,
+    headline: `Join us this October<br/>to accelerate bio.`,
+    tagline: `A Month for Builders.`,
+    statLabel: `Build together`,
+    body: `Longevity hackathons, Vibe Coding Nights, and benches shared with your cohort.`,
+    statLabel2: `Find your people`,
+    body2: `Co-founders and collaborators: the people you meet at breakfast build with you by night.`,
+    statLabel3: `Partner with Japanese biotech`,
+    body3: `KBIC's 370 member organisations, direct PMDA connection, AMED subsidies.`,
+    episode: `EP.01 壱`,
+    title: `Open Weeks`,
+    dates: `Oct 01–16`,
+    body4: `Arrivals, tours, Welcome Day on Oct 4. Lab visits, Workshops, Hackathons.`,
+    episode2: `EP.02 弐`,
+    title2: `Summit I`,
+    dates2: `Oct 17–18`,
+    body5: `Meet the people that are actively building the frontier of bio.`,
+    episode3: `EP.03 参`,
+    title3: `Summit II`,
+    dates3: `Oct 24–25`,
+    body6: `Capital, regulation, and the bridge between ecosystems.`,
+    episode4: `EP.04 肆`,
+    title4: `Fashion Show &amp; Close`,
+    dates4: `Oct 26–31`,
+    body7: `The show on Oct 26: devices become couture. Showcase what you've built.`,
+    title5: `<b>夜</b>Vibe Coding Nights`,
+    body8: `Ship beside future co-founders.`,
+    title6: `<b>研</b>The Residency`,
+    body9: `A bench in Japan's biomedical cluster.`,
+    title7: `<b>学</b>Learning Layer Labs`,
+    body10: `New skills, taught weekly.`,
+    title8: `<b>実</b>Biohackers Workshops`,
+    body11: `Hands-on frontier techniques.`,
+    title9: `<b>宴</b>Socials`,
+    body12: `Dinners where partnerships start.`,
+    title10: `<b>休</b>Me-Time`,
+    body13: `Onsen, harbor, headspace.`,
+    block: `Medical Devices`,
+    title11: `Devices Residency`,
+    body14: `Lab infrastructure for first-in-human prototypes.`,
+    cta: `Apply →`,
+    block2: `Therapeutics`,
+    title12: `Therapies Residency`,
+    body15: `Direct PMDA connection for conditional approval.`,
+    cta2: `Apply →`,
+    block3: `Community`,
+    title13: `Builder Pass`,
+    body16: `Full access to everything. Build, connect, explore.`,
+    ebTag: `Early Bird`,
+    price: `$399 <s>$1500</s>`,
+    left: `140 passes remaining`,
+    ebClock: `Ends in <span class="ebc">&#8212;</span>`,
+    cta3: `Apply →`,
+    cta4: `<a class="btn accent" href="https://luma.com/an4zotn9" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="residency_cta" data-analytics-target="residency">Become a builder</a>`,
+  },
+═══ END COPY ═══ -->
