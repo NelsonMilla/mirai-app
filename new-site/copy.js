@@ -23,7 +23,7 @@ window.MIRAI_COPY = {
   /* ─── NAV ─────────────────────────── */
   nav: {
     logo: `Mirai<span class="logoTech">Tech</span>`,
-    button: `Get Ticket`,
+    button: `Get Tickets`,
   },
 
   /* ─── HERO OFFER ─────────────────────────── */
