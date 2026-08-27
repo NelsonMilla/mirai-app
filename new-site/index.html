@@ -546,30 +546,6 @@
   .faqItem[open] .faqMark { transform: rotate(45deg); }
   .faqItem p { color: var(--dim); font-size: 15px; line-height: 1.7; max-width: 74ch; padding: 0 6px 24px; }
 
-  /* ── kobe stats ── */
-  .stats { display: grid; grid-template-columns: repeat(5, 1fr); border: 1px solid var(--line); margin-top: 44px; }
-  .stats .s { padding: 30px 22px; border-right: 1px solid var(--line); }
-  .stats .s:last-child { border-right: 0; }
-  .stats .v { font-weight: 800; font-size: clamp(26px, 3vw, 44px); letter-spacing: -.02em; }
-  .stats .k { font-family: var(--mono); font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--dim); margin-top: 8px; line-height: 1.5; }
-  @media (max-width: 1000px) {
-    .stats { grid-template-columns: 1fr 1fr; }
-    .stats .s { border-bottom: 1px solid var(--line); }
-    .stats .s:nth-child(even) { border-right: 0; }
-    .stats .s:last-child { grid-column: 1 / -1; border-right: 0; border-bottom: 0; }
-  }
-
-  /* ── track record ── */
-  .past .item { display: grid; grid-template-columns: 150px 1fr; gap: 30px; padding: 26px 6px; border-bottom: 1px solid var(--line); align-items: baseline; }
-  .past .item:first-of-type { border-top: 1px solid var(--line); margin-top: 40px; }
-  .past .n { font-weight: 800; font-size: clamp(24px, 3vw, 40px); letter-spacing: -.02em; color: var(--accent); }
-  .past h3 { font-weight: 700; font-size: 17px; margin-bottom: 6px; }
-  .past p { color: var(--dim); font-size: 14px; line-height: 1.6; max-width: 76ch; }
-  .past .here { display: inline-block; font-family: var(--mono); font-size: 12px; letter-spacing: .22em;
-    text-transform: uppercase; color: var(--ink); margin-top: 26px; text-decoration: none; }
-  .past .here b { color: var(--accent); }
-  .past .here:hover b { text-decoration: underline; text-underline-offset: 4px; }
-
   /* ── apply ── */
   .applywrap { max-width: none; padding: 0; position: relative; overflow: hidden; }
   .applywrap .bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 62%; }
@@ -865,39 +841,9 @@
   <div class="monthCta rv" data-copy="agenda.cta"></div>
 </section>
 
-<hr class="rule" />
-
-<!-- ═══ WHY KOBE ═══ -->
-<section data-track-section="why_kobe" data-track-position="8">
-  <div class="eyebrow rv" data-copy="whyKobe.eyebrow"></div>
-  <h2 class="big rv" data-copy="whyKobe.headline"></h2>
-  <p class="rv" style="color:var(--dim); max-width:64ch; margin-top:8px; line-height:1.7; font-size:15px" data-copy="whyKobe.body"></p>
-  <div class="stats rv">
-    <div class="s"><div class="v" data-copy="whyKobe.statValue"></div><div class="k" data-copy="whyKobe.statLabel"></div></div>
-    <div class="s"><div class="v" data-copy="whyKobe.statValue2"></div><div class="k" data-copy="whyKobe.statLabel2"></div></div>
-    <div class="s"><div class="v" data-copy="whyKobe.statValue3"></div><div class="k" data-copy="whyKobe.statLabel3"></div></div>
-    <div class="s"><div class="v" data-copy="whyKobe.statValue4"></div><div class="k" data-copy="whyKobe.statLabel4"></div></div>
-    <div class="s"><div class="v" data-copy="whyKobe.statValue5"></div><div class="k" data-copy="whyKobe.statLabel5"></div></div>
-  </div>
-</section>
-
-<hr class="rule" />
-
-<!-- ═══ TRACK RECORD ═══ -->
-<section class="past" data-track-section="track_record" data-track-position="9">
-  <div class="eyebrow rv" data-copy="trackRecord.eyebrow"></div>
-  <h2 class="big rv" data-copy="trackRecord.headline"></h2>
-  <div class="item rv"><div class="n" data-copy="trackRecord.number"></div><div><h3 data-copy="trackRecord.title"></h3><p data-copy="trackRecord.body"></p></div></div>
-  <div class="item rv"><div class="n" data-copy="trackRecord.number2"></div><div><h3 data-copy="trackRecord.title2"></h3><p data-copy="trackRecord.body2"></p></div></div>
-  <div class="item rv"><div class="n" data-copy="trackRecord.number3"></div><div><h3 data-copy="trackRecord.title3"></h3><p data-copy="trackRecord.body3"></p></div></div>
-  <div class="item rv"><div class="n" data-copy="trackRecord.number4"></div><div><h3 data-copy="trackRecord.title4"></h3><p data-copy="trackRecord.body4"></p></div></div>
-  <a class="here rv" href="#apply" data-copy="trackRecord.stamp"></a>
-</section>
-
-<hr class="rule" />
 
 <!-- ═══ FAQ ═══ -->
-<section id="faq" data-track-section="faq" data-track-position="10">
+<section id="faq" data-track-section="faq" data-track-position="8">
   <div class="eyebrow rv" data-copy="faq.eyebrow"></div>
   <h2 class="big rv" data-copy="faq.headline"></h2>
   <div class="faqList rv">
@@ -929,7 +875,7 @@
 </section>
 
 <!-- ═══ APPLY ═══ -->
-<div class="applywrap" id="apply" data-track-section="apply" data-track-position="11">
+<div class="applywrap" id="apply" data-track-section="apply" data-track-position="9">
   <img class="bg" src="img/future_city.jpg" alt="" aria-hidden="true" loading="lazy" />
   <div class="veil"></div>
   <section class="apply">

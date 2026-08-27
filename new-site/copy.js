@@ -198,42 +198,6 @@ window.MIRAI_COPY = {
     a6: `Summit tickets and the hotel package are on Luma. The month-long residency is application-only — we review on a rolling basis, and accepted teams receive next steps by email.`,
   },
 
-  /* ─── WHY KOBE ─────────────────────────── */
-  whyKobe: {
-    eyebrow: `Why Kobe`,
-    headline: `What takes years elsewhere<br/>takes months here.`,
-    body: `Japan's regulatory framework is the fastest legal path from clinical evidence to patients. KBIC is its front door.`,
-    statValue: `$88B`,
-    statLabel: `3rd-largest pharma market · ¥12.4T`,
-    statValue2: `4`,
-    statLabel2: `Accelerated regulatory pathways`,
-    statValue3: `2/3`,
-    statLabel3: `AMED subsidy · matches 1:2 vs VC`,
-    statValue4: `370`,
-    statLabel4: `KBIC member organisations`,
-    statValue5: `32`,
-    statLabel5: `Nobel prizes · 4 biotech clusters`,
-  },
-
-  /* ─── TRACK RECORD ─────────────────────────── */
-  trackRecord: {
-    eyebrow: `Track Record`,
-    headline: `Four times at scale,<br/>on three coasts.`,
-    number: `500+`,
-    title: `Vitalia City Pop-Ups · Roatán · 2024–25`,
-    body: `Builders in a regulatory sandbox. Two popups became a permanent hub.`,
-    number2: `400+`,
-    title2: `Viva Frontier Tower Pop-Up · San Francisco · 2025`,
-    body2: `Residents of a 6-week vertical village with biomarker testing, daily programming, and a Demo Day. Peter Diamandis, Aubrey de Grey, Emmett Shear, Patri Friedman.`,
-    number3: `40M+`,
-    title3: `Meet the Drapers · Roatán &amp; SF · 2025–26`,
-    body3: `TV viewers across two shows with Tim &amp; Adam Draper. Muse.Bio won the $1M finale.`,
-    number4: `MIT`,
-    title4: `Human Augmentation Summit · Media Lab · 2025`,
-    body4: `~300 people on BCIs and bioengineering, with Stephen Wolfram, Life Biosciences, and Harvard.`,
-    stamp: `◆ NEXT · 2026 · KOBE — MIRAI TECH POPUP CITY · <b>YOU ARE HERE</b>`,
-  },
-
   /* ─── APPLY ─────────────────────────── */
   apply: {
     eyebrow: `October 2026 · 300 Curated Residents`,
