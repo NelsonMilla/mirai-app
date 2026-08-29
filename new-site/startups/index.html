@@ -326,6 +326,12 @@
     color: var(--accent); text-decoration: none; white-space: nowrap; display: inline-flex; align-items: center; gap: 10px; }
   .wDest .go::after { content: "↓"; color: var(--faint); }
   .wDest .go:hover, .wDest .go:focus-visible { color: var(--ink); }
+  .wDest .destList { list-style: none; margin-top: 12px; width: 100%; }
+  .wDest .destList li { position: relative; padding: 5px 0 5px 22px; font-size: 15px;
+    color: var(--dim); line-height: 1.6; }
+  .wDest .destList li::before { content: ""; position: absolute; left: 0; top: 16px;
+    width: 10px; height: 1px; background: var(--accent); }
+  .wDest .destList b { color: var(--ink); font-weight: 700; }
   @media (max-width: 980px) {
     .wCards { grid-template-columns: 1fr; gap: 34px; }
     .wCards::before, .wCard::before { display: none; }
@@ -653,7 +659,10 @@ also marked inline with a TODO(verify) comment. Edit or confirm before launch:
   7. Outcome trio: "10× faster to first revenue", "100× cheaper than Phase 3 route",
      "+61% more commercial value from the same patent".
   8. Demo Day venue "Orbis Hall" — Demo Day Oct 26 IS on the live site, the venue is not.
-  9. "Earn a place at Antler Japan" and "deck in front of top-tier Silicon Valley VCs".
+  9. PARTIALLY RESOLVED (2026-08-29): Antler wording owner-confirmed as "One company will
+     be able to join Antler" (replacing the draft's "Earn a place at Antler Japan"); the
+     "Meet the Drapers 2027 in Japan" priority-review bullet is also owner-provided.
+     Still unverified: "deck in front of top-tier Silicon Valley VCs".
  10. Fare-ledger line items and market-rate values (coaching $3,000 … total $21,600).
      The $1,800 two-summit line DOES match the live site ($900 × 2).
  11. RESOLVED (2026-08-29): "Talk to us first" now links to the owner-confirmed Calendly
@@ -739,7 +748,7 @@ also marked inline with a TODO(verify) comment. Edit or confirm before launch:
     <a class="stamp" href="https://www.fbri-kobe.org/kbic/english/" target="_blank" rel="noopener" title="KBIC"><img src="/img/partners/kbic.svg" alt="KBIC" loading="lazy" decoding="async" /></a>
     <a data-kobe-permit href="https://www.hosp.kobe-u.ac.jp/ikoujiso/en/" target="_blank" rel="noopener" title="Kobe University"><img class="kobeLogo" src="/img/partners/kobe-university.png" alt="Kobe University" loading="lazy" decoding="async" /></a>
     <a data-kobe-permit href="https://www.med.kobe-u.ac.jp/mic/en/" target="_blank" rel="noopener" title="MedTech Innovation Center, Kobe University"><img class="micLogo" src="/img/partners/mic-kobe-university.png" alt="MIC — MedTech Innovation Center, Kobe University" loading="lazy" decoding="async" /></a>
-    <a class="plate" href="https://www.heka.bio/" target="_blank" rel="noopener" title="HekaBio"><img src="/img/partners/hekabio.avif" alt="HekaBio" loading="lazy" decoding="async" /></a>
+    <a class="stamp" href="https://www.heka.bio/" target="_blank" rel="noopener" title="HekaBio"><img src="/img/partners/hekabio.avif" alt="HekaBio" loading="lazy" decoding="async" /></a>
     <a class="plate" href="https://alv.vc/" target="_blank" rel="noopener" title="Asagi Labs Ventures"><img src="/img/partners/asagi-labs.jpg" alt="Asagi Labs Ventures" loading="lazy" decoding="async" /></a>
     <a class="luma" href="https://brokensymmetry.capital/" target="_blank" rel="noopener" title="Broken Symmetry Capital"><img src="/img/partners/broken-symmetry.jpg" alt="Broken Symmetry Capital" loading="lazy" decoding="async" /></a>
     <a class="plate" href="https://vitalistbay.com/" target="_blank" rel="noopener" title="Vitalist Bay"><img src="/img/partners/vitalist-bay.png" alt="Vitalist Bay" loading="lazy" decoding="async" /></a>
@@ -772,7 +781,7 @@ also marked inline with a TODO(verify) comment. Edit or confirm before launch:
     </div>
     <div class="wCard">
       <div class="art"><img src="/img/why-strategy2-900.webp" width="900" height="600" alt="" loading="eager" decoding="async" /></div>
-      <div class="body"><b>Define your growth strategy in 30 days.</b> <span>One month, one plan, tested against people who have done it.</span></div>
+      <div class="body"><b>Define your growth strategy in less than 30 days.</b> <span>One month, one plan, tested against people who have done it.</span></div>
     </div>
     <div class="wCard">
       <div class="art"><img src="/img/why-fasttrack-900.webp" width="900" height="600" alt="" loading="eager" decoding="async" /></div>
@@ -781,14 +790,19 @@ also marked inline with a TODO(verify) comment. Edit or confirm before launch:
   </div>
 
   <!-- v2 (M1): the Antler Japan and Silicon Valley sentences moved to the terminus, which
-       owns the outcomes; this strip keeps the Demo Day promise. No sentence appears twice
-       except the Demo Day line (promise here, payoff at STN 06) — intentional. -->
+       owns the outcomes; this strip keeps the Demo Day promise. The Demo Day and Antler
+       lines appear both here (promise) and at STN 06 (payoff) — intentional; the Antler
+       bullet was added back here by owner request (2026-08-29). -->
   <!-- TODO(verify): Orbis Hall venue is a draft claim; Demo Day Oct 26 itself is on the live site. -->
   <div class="wDest rv">
     <span class="dot" aria-hidden="true"></span>
     <div class="txt">
       <p class="k2"><span class="code">02 ·</span> Access global VCs, angels and partners</p>
       <b>Startup Demo Day, October 26th at Orbis Hall,</b> <i>alongside curated frontier-bio companies.</i>
+      <ul class="destList">
+        <li><b>One company will be able to join Antler.</b></li>
+        <li><b>Top companies get priority review</b> to participate in Meet the Drapers 2027 in Japan.</li>
+      </ul>
     </div>
     <a class="go" href="#terminus">Terminus · STN 06</a>
   </div>
@@ -1089,8 +1103,10 @@ also marked inline with a TODO(verify) comment. Edit or confirm before launch:
     <!-- TODO(verify): Orbis Hall venue is a draft claim; Demo Day Oct 26 itself is on the live site. -->
     <p class="stn-sub rv" style="margin-top:6px">Startup Demo Day, October 26th at Orbis Hall, alongside curated frontier-bio companies.</p>
     <ul class="termList rv">
-      <!-- TODO(verify): Antler Japan and Silicon Valley VC forwarding are draft claims. -->
-      <li><b>Earn a place at Antler Japan.</b></li>
+      <!-- Antler wording owner-confirmed 2026-08-29 (was the draft's "Earn a place at
+           Antler Japan", which oversold it). TODO(verify): Silicon Valley VC forwarding
+           is still a draft claim. -->
+      <li><b>One company will be able to join Antler.</b></li>
       <li><b>Selected companies get their deck in front of top-tier Silicon Valley VCs,</b> sent on by us after Demo Day.</li>
     </ul>
   </div>

@@ -219,6 +219,10 @@
   nav .logo { font-weight: 800; letter-spacing: .06em; font-size: 15px; text-transform: uppercase; text-decoration: none; }
   nav .logoTech { color: var(--accent); }
   nav .navCta { flex: 0 0 auto; }
+  nav .navStartups { margin-left: auto; margin-right: 26px; font-family: var(--mono); font-size: 11px;
+    letter-spacing: .22em; text-transform: uppercase; color: var(--dim); text-decoration: none;
+    padding: 12px 0; transition: color .2s; }
+  nav .navStartups:hover, nav .navStartups:focus-visible { color: var(--accent); }
   .btn { display: inline-flex; align-items: center; justify-content: center; min-height: 44px;
     background: var(--ink); color: #0a0a0c !important; text-decoration: none;
     padding: 12px 26px; border-radius: 3px; font-family: var(--mono); font-size: 11px;
@@ -231,6 +235,7 @@
   @media (max-width: 760px) {
     nav { padding: 14px 4vw; }
     nav .navCta { padding: 11px 16px; }
+    nav .navStartups { font-size: 10px; letter-spacing: .12em; margin-right: 14px; }
   }
   .daruma { height: 24px; width: auto; vertical-align: middle; opacity: .55; transition: opacity .3s, transform .3s; cursor: help; }
   .daruma:hover { opacity: 1; transform: translateY(-1px); }
@@ -709,6 +714,7 @@
 <div class="topbar">
 <nav>
   <a class="logo" href="#top" data-copy="nav.logo"></a>
+  <a class="navStartups" href="/startups/" data-analytics-action="site_navigation" data-analytics-location="nav" data-analytics-target="startups" data-copy="nav.startups"></a>
   <a class="btn accent navCta" href="https://luma.com/an4zotn9" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="nav" data-analytics-target="tickets" data-copy="nav.button"></a>
 </nav>
 </div>
@@ -776,7 +782,7 @@
       <a class="ecoCell plate" href="https://alv.vc/" target="_blank" rel="noopener" title="Asagi Labs Ventures"><img src="img/partners/asagi-labs.jpg" alt="Asagi Labs Ventures" loading="lazy" decoding="async" /></a>
       <a class="ecoCell plate" href="https://zucity.org/en/market-homes" target="_blank" rel="noopener" title="ZuCity Japan"><img src="img/partners/zucity.svg" alt="ZuCity Japan" loading="lazy" decoding="async" /></a>
       <a class="ecoCell" href="https://ch-ange.de/" target="_blank" rel="noopener" title="CHANGE"><span class="ecoWord">CHANGE</span></a>
-      <a class="ecoCell plate" href="https://www.heka.bio/" target="_blank" rel="noopener" title="HekaBio"><img src="img/partners/hekabio.avif" alt="HekaBio" loading="lazy" decoding="async" /></a>
+      <a class="ecoCell stamp" href="https://www.heka.bio/" target="_blank" rel="noopener" title="HekaBio"><img src="img/partners/hekabio.avif" alt="HekaBio" loading="lazy" decoding="async" /></a>
       <a class="ecoCell stamp" href="https://augmentationlab.org/" target="_blank" rel="noopener" title="Augmentation Lab"><img src="img/partners/augmentation-lab.png" alt="Augmentation Lab" loading="lazy" decoding="async" /></a>
       <a class="ecoCell plate" href="https://vitalistbay.com/" target="_blank" rel="noopener" title="Vitalist Bay"><img src="img/partners/vitalist-bay.png" alt="Vitalist Bay" loading="lazy" decoding="async" /></a>
       <a class="ecoCell stamp" href="https://the-mu.xyz/" target="_blank" rel="noopener" title="The MU"><img src="img/partners/the-mu.png" alt="The MU" loading="lazy" decoding="async" /></a>
@@ -792,7 +798,7 @@
       <a class="ecoCell plate" href="https://alv.vc/" target="_blank" rel="noopener" title="Asagi Labs Ventures" tabindex="-1"><img src="img/partners/asagi-labs.jpg" alt="Asagi Labs Ventures" loading="lazy" decoding="async" /></a>
       <a class="ecoCell plate" href="https://zucity.org/en/market-homes" target="_blank" rel="noopener" title="ZuCity Japan" tabindex="-1"><img src="img/partners/zucity.svg" alt="ZuCity Japan" loading="lazy" decoding="async" /></a>
       <a class="ecoCell" href="https://ch-ange.de/" target="_blank" rel="noopener" title="CHANGE" tabindex="-1"><span class="ecoWord">CHANGE</span></a>
-      <a class="ecoCell plate" href="https://www.heka.bio/" target="_blank" rel="noopener" title="HekaBio" tabindex="-1"><img src="img/partners/hekabio.avif" alt="HekaBio" loading="lazy" decoding="async" /></a>
+      <a class="ecoCell stamp" href="https://www.heka.bio/" target="_blank" rel="noopener" title="HekaBio" tabindex="-1"><img src="img/partners/hekabio.avif" alt="HekaBio" loading="lazy" decoding="async" /></a>
       <a class="ecoCell stamp" href="https://augmentationlab.org/" target="_blank" rel="noopener" title="Augmentation Lab" tabindex="-1"><img src="img/partners/augmentation-lab.png" alt="Augmentation Lab" loading="lazy" decoding="async" /></a>
       <a class="ecoCell plate" href="https://vitalistbay.com/" target="_blank" rel="noopener" title="Vitalist Bay" tabindex="-1"><img src="img/partners/vitalist-bay.png" alt="Vitalist Bay" loading="lazy" decoding="async" /></a>
       <a class="ecoCell stamp" href="https://the-mu.xyz/" target="_blank" rel="noopener" title="The MU" tabindex="-1"><img src="img/partners/the-mu.png" alt="The MU" loading="lazy" decoding="async" /></a>
