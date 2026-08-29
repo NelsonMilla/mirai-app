@@ -535,12 +535,6 @@
   .ticket .was { font-family: var(--mono); font-size: 12px; letter-spacing: .14em; text-transform: uppercase;
     color: var(--faint); text-decoration: line-through; }
   .ticket .pay { font-weight: 800; font-size: clamp(32px, 4vw, 46px); letter-spacing: -.015em; line-height: 1.05; margin-top: 8px; }
-  .ticket .pay .tbc { border-bottom: 3px dashed var(--accent); font-style: italic; color: var(--accent); }
-  /* placeholder treatment as a rubber stamp — intentionally unfinished */
-  .ticket .tbcTag { display: inline-block; margin-top: 14px; font-family: var(--mono); font-size: 10px;
-    letter-spacing: .22em; text-transform: uppercase; color: var(--accent);
-    border: 1.5px dashed rgba(var(--accent-rgb),.55); border-radius: 2px; padding: 6px 10px;
-    transform: rotate(-2.5deg); }
   /* tear-off stub with the CTAs */
   .ticket-stub { position: relative; padding: 22px 24px 26px; min-width: 0;
     border-left: 1px dashed rgba(var(--accent-rgb),.5);
@@ -668,7 +662,8 @@ also marked inline with a TODO(verify) comment. Edit or confirm before launch:
      "Apply Now" → owner-confirmed application form https://form.typeform.com/to/sG9eS2Ok
      (was "Reserve Your Spot" → Luma checkout luma.com/an4zotn9). Analytics keeps the
      'checkout' action for funnel continuity; target renamed tickets → application.
- 12. PRICE $2,500 — rendered as a visible dashed-TBC placeholder by explicit request.
+ 12. RESOLVED (2026-08-29): price $2,500 confirmed — the dashed-TBC placeholder
+     treatment was removed at the owner's request; the figure now renders plain.
  13. Kobe University / MIC logos now appear in the "In partnership with" band (user request):
      approval #3182 was scoped to the landing page — CONFIRM it covers this page before
      launch, or remove the two [data-kobe-permit] entries. Files used verbatim; Dec 15 gate on.
@@ -1068,10 +1063,7 @@ also marked inline with a TODO(verify) comment. Edit or confirm before launch:
           <p class="tk-head"><b>Mirai Tech City</b><span>Admit one</span></p>
           <p class="tk-route" aria-hidden="true"><span class="st st--a">Kobe</span><i></i><span class="st st--b">Market</span></p>
           <span class="was">Instead of $21,600</span>
-          <!-- PRICE PLACEHOLDER — intentionally visible until the number is settled.
-               When final: delete the .tbc wrapper + .tbcTag, write the real figure. -->
-          <p class="pay">You pay <span class="tbc">$2,500</span></p>
-          <span class="tbcTag">Placeholder — price not final</span>
+          <p class="pay">You pay $2,500</p>
         </div>
         <div class="ticket-stub">
           <span class="tk-punch" aria-hidden="true"></span>
