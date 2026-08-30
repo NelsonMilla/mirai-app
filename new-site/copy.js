@@ -117,7 +117,7 @@ window.MIRAI_COPY = {
 
   /* ─── ECOSYSTEM (inside the proof section) ─────────────── */
   ecosystem: {
-    majorLabel: `Thanks to the support of:`,
+    majorLabel: `With support of`,
     headline: `Other supporting organizations`,
   },
 

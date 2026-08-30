@@ -190,7 +190,7 @@ window.MIRAI_COPY = {
     ],
     rosterNote: `Listed in no order · more added through September`,
 
-    partnersTitle: `Supported by`,
+    partnersTitle: `With support of`,
     partner1: `KBIC`,
     partner2: `Viva City`,
     partner3: `Vitalist Bay`,
