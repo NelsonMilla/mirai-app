@@ -1,0 +1,9 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [
+      "new-site/fashion-show/index.html"
+    ],
+    "ignoreValues": []
+  }
+}
