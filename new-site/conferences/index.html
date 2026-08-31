@@ -119,10 +119,15 @@ p { margin: 0 0 1.15em; }
 .logos { padding: 40px 0; border-bottom: 1px solid var(--line); }
 .logos-l { margin-bottom: 30px; color: var(--faint); font-family: var(--mono); font-size: 10px; letter-spacing: .24em;
   text-align: center; text-transform: uppercase; }
-.logos-r { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 26px 46px; }
-.logos-r a { display: block; }
-.logos-r img { height: 30px; width: auto; object-fit: contain; filter: grayscale(1) brightness(1.9); opacity: .55; transition: opacity .25s, filter .25s; }
-.logos-r a:hover img { opacity: 1; filter: grayscale(1) brightness(2.4); }
+.logos-r { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 26px 46px; padding: 0 24px; }
+.logos-r a { display: block; text-decoration: none; }
+.logos-r img { height: 30px; width: auto; object-fit: contain; filter: brightness(0) invert(1); opacity: .55; transition: opacity .25s, filter .25s; }
+.logos-r a:hover img { opacity: 1; }
+/* logos with a baked-in dark background: screen blending dissolves the background */
+.logos-r img.logo-flat { filter: grayscale(1) contrast(1.4) brightness(1.6); mix-blend-mode: screen; }
+/* baked-in white background: invert first so screen blending can dissolve it.
+   Taller than the rest because the wordmark only fills part of its canvas. */
+.logos-r img.logo-flat-light { height: 48px; filter: invert(1) grayscale(1) contrast(1.4) brightness(1.6); mix-blend-mode: screen; }
 .logos-r span { font-size: 14px; font-weight: 800; letter-spacing: .04em; color: var(--faint); text-transform: uppercase; }
 
 /* statement */
@@ -290,10 +295,10 @@ footer a { color: var(--accent); text-decoration: underline; text-underline-offs
   <div class="logos-r">
     <a href="https://www.fbri-kobe.org/kbic/english/"><img src="/img/partners/kbic.svg" width="240" height="231" alt="KBIC"></a>
     <a href="https://www.hosp.kobe-u.ac.jp/ikoujiso/en/"><img src="/img/partners/kobe-university-90.webp" width="99" height="90" alt="Kobe University"></a>
-    <a href="https://www.med.kobe-u.ac.jp/mic/en/"><img src="/img/partners/mic-kobe-university-90.webp" width="160" height="90" alt="MedTech Innovation Center"></a>
+    <a href="https://www.med.kobe-u.ac.jp/mic/en/"><img class="logo-flat" src="/img/partners/mic-kobe-university-90.webp" width="160" height="90" alt="MedTech Innovation Center"></a>
     <a href="https://www.heka.bio/"><img src="/img/partners/hekabio.avif" width="280" height="98" alt="HekaBio"></a>
-    <a href="https://alv.vc/"><img src="/img/partners/asagi-labs.jpg" width="169" height="120" alt="Asagi Labs Ventures"></a>
-    <a href="https://brokensymmetry.capital/"><img src="/img/partners/broken-symmetry.jpg" width="120" height="120" alt="Broken Symmetry Capital"></a>
+    <a href="https://alv.vc/"><img class="logo-flat-light" src="/img/partners/asagi-labs.jpg" width="169" height="120" alt="Asagi Labs Ventures"></a>
+    <a href="https://brokensymmetry.capital/"><img class="logo-flat" src="/img/partners/broken-symmetry.jpg" width="120" height="120" alt="Broken Symmetry Capital"></a>
     <a href="https://vitalistbay.com/"><img src="/img/partners/vitalist-bay.png" width="419" height="120" alt="Vitalist Bay"></a>
     <a href="https://www.levf.org/"><span>LEV Foundation</span></a>
     <a href="https://augmentationlab.org/"><img src="/img/partners/augmentation-lab.png" width="120" height="120" alt="Augmentation Lab"></a>
@@ -618,7 +623,7 @@ footer a { color: var(--accent); text-decoration: underline; text-underline-offs
         <span class="stack-fill"></span><span class="stack-val">$8,000</span>
       </div>
       <div class="stack-row">
-        <span class="stack-name">A seat at the table where the rules get written<small>Government relations retainers run $5,000–15,000 a month at boutique firms and $15,000–30,000 at mid-size ones — and most require a one-year minimum, so a real campaign starts near six figures</small></span>
+        <span class="stack-name">A hand in drafting the Special Zone proposal<small>Policy and regulatory consultancies charge $5,000–15,000 a month at boutique firms and $15,000–30,000 at mid-size ones, with one-year minimums — so professional help with a proposal starts near six figures</small></span>
         <span class="stack-fill"></span><span class="stack-val">$20,000</span>
       </div>
       <div class="stack-total">
@@ -640,7 +645,7 @@ footer a { color: var(--accent); text-decoration: underline; text-underline-offs
         </div>
       </div>
 
-      <p class="stack-foot">And the last line is the one you cannot actually buy. A retainer buys you a lobbyist who takes meetings on your behalf. It does not buy a founder a seat in the room where a Special Zone proposal is drafted. That part is not for sale anywhere — it is what this October is.</p>
+      <p class="stack-foot">And the last line is the one you cannot actually buy. A consultancy writes recommendations on your behalf. It does not put a founder in the room where scientists from the West and their Japanese peers compile, together, what frontier work needs to thrive in Japan — and shape it into the kind of proposal the Special Zone framework was created to receive. That part is not for sale anywhere — it is what this October is.</p>
     </div>
 
     <div class="ctas">
