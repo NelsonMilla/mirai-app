@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>What It Costs · Mirai Tech City · Kobe 2026</title>
+<meta name="description" content="Every way into Mirai Tech City, priced side by side: the $1,200 month-long PopUp, $900 summit weekend tickets, the $2,500 summit + hotel package, and the $2,500 startup Acceleration Sprint. Kobe, October 1–31, 2026." />
+<link rel="canonical" href="https://mirai-tech-city.vercel.app/pricing/" />
+<meta property="og:title" content="What It Costs · Mirai Tech City" />
+<meta property="og:description" content="The $1,200 month-long PopUp, $900 summit weekends, and the $2,500 summit + hotel package — side by side." />
+<meta property="og:url" content="https://mirai-tech-city.vercel.app/pricing/" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="What It Costs · Mirai Tech City" />
+<meta name="theme-color" content="#050506" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23050506'/%3E%3Ctext x='50' y='72' font-size='62' font-family='Georgia' font-weight='bold' fill='%239be8f0' text-anchor='middle'%3E未%3C/text%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="preconnect" href="https://api.fontshare.com" />
+<link rel="preconnect" href="https://cdn.fontshare.com" crossorigin />
+<link href="https://api.fontshare.com/v2/css?f[]=switzer@400,500,700,800,900&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/posthog.js"></script>
+<script defer src="/analytics.js"></script>
+<style>
+  :root {
+    --bg: #050506; --ink: #f4f3f0; --dim: rgba(244,243,240,.62); --faint: rgba(244,243,240,.45);
+    --line: rgba(244,243,240,.14); --accent: #9be8f0; --accent-rgb: 155,232,240;
+    --font: 'Switzer', 'Inter', -apple-system, sans-serif; --mono: 'IBM Plex Mono', monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body { min-width: 320px; overflow-x: hidden; background: var(--bg); color: var(--ink);
+    font-family: var(--font); -webkit-font-smoothing: antialiased; }
+  ::selection { background: var(--accent); color: #000; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  a { color: inherit; }
+  .num { font-variant-numeric: tabular-nums; }
+  .mono { font-family: var(--mono); }
+
+  nav.top { display: flex; align-items: center; justify-content: space-between; gap: 18px;
+    max-width: 1280px; margin: 0 auto; padding: 22px 6vw; }
+  .logo { font-weight: 800; letter-spacing: .06em; font-size: 15px; text-transform: uppercase; text-decoration: none; }
+  .logoTech { color: var(--accent); }
+  .navBack { font-family: var(--mono); font-size: 11px; letter-spacing: .18em; text-transform: uppercase;
+    color: var(--dim); text-decoration: none; }
+  .navBack:hover { color: var(--ink); }
+  .btn { display: inline-block; padding: 13px 22px; border: 1px solid var(--line); border-radius: 2px;
+    font-family: var(--mono); font-size: 11px; letter-spacing: .18em; text-transform: uppercase;
+    color: var(--ink); text-decoration: none; transition: border-color .2s, background .2s, color .2s; }
+  .btn:hover { border-color: var(--accent); }
+  .btn.accent { background: var(--accent); border-color: var(--accent); color: #04191c; font-weight: 500; }
+  .btn.accent:hover { background: #c3f1f6; }
+
+  .wrap { max-width: 1280px; margin: 0 auto; padding: 56px 6vw 0; }
+  .eyebrow { font-family: var(--mono); font-size: 10px; letter-spacing: .26em; text-transform: uppercase; color: var(--accent); }
+  h1 { margin-top: 14px; font-weight: 900; text-transform: uppercase; letter-spacing: -.015em;
+    font-size: clamp(38px, 6vw, 84px); line-height: .95; text-wrap: balance; }
+  h1 .tick { color: var(--accent); }
+  .lede { margin-top: 18px; max-width: 60ch; font-size: 16px; line-height: 1.6; color: var(--dim); text-wrap: pretty; }
+  .lede b { color: var(--ink); }
+
+  /* cards */
+  .cards { max-width: 1280px; margin: 0 auto; padding: 48px 6vw 0; display: grid;
+    grid-template-columns: repeat(4, 1fr); gap: 16px; align-items: stretch; }
+  @media (max-width: 1120px) { .cards { grid-template-columns: 1fr 1fr; } }
+  .card { border: 1px solid var(--line); background: #0a0b0d; padding: 26px 24px 24px;
+    display: flex; flex-direction: column; gap: 0; }
+  .card.hot { border-color: rgba(var(--accent-rgb), .5); box-shadow: 0 0 44px rgba(var(--accent-rgb), .08); }
+  .cName { font-family: var(--mono); font-size: 10px; letter-spacing: .22em; text-transform: uppercase; color: var(--dim); }
+  .card.hot .cName { color: var(--accent); }
+  .cPrice { margin-top: 14px; font-weight: 900; font-size: clamp(38px, 4.2vw, 56px); letter-spacing: -.01em; line-height: 1; }
+  .cPrice small { font-size: .38em; font-weight: 500; color: var(--dim); letter-spacing: 0; }
+  .cSpan { margin-top: 10px; font-family: var(--mono); font-size: 11px; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--ink); line-height: 1.8; }
+  .cList { margin: 16px 0 22px; list-style: none; border-top: 1px solid var(--line); }
+  .cList li { padding: 9px 0; border-bottom: 1px solid var(--line); font-size: 13.5px; color: var(--dim);
+    display: flex; gap: 10px; align-items: baseline; }
+  .cList li::before { content: "▸"; color: var(--accent); font-size: 11px; }
+  .cList li.no { color: var(--faint); }
+  .cList li.no::before { content: "—"; color: var(--faint); }
+  .card .btn { margin-top: auto; text-align: center; }
+  .cFoot { margin-top: 10px; font-family: var(--mono); font-size: 9.5px; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--faint); text-align: center; line-height: 1.8; }
+
+  /* math strip */
+  .math { max-width: 1280px; margin: 40px auto 0; padding: 0 6vw; }
+  .math .inner { border: 1px solid rgba(var(--accent-rgb), .3); background: rgba(var(--accent-rgb), .05);
+    padding: 18px 22px; display: flex; flex-wrap: wrap; gap: 8px 28px; align-items: baseline;
+    font-family: var(--mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--dim); }
+  .math b { color: var(--ink); font-weight: 500; }
+  .math .hot { color: var(--accent); }
+
+  /* table */
+  .tblWrap { max-width: 1280px; margin: 56px auto 0; padding: 0 6vw; }
+  .tblScroll { overflow-x: auto; border: 1px solid var(--line); }
+  table { width: 100%; min-width: 880px; border-collapse: collapse; font-size: 13.5px; }
+  th, td { padding: 13px 16px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+  thead th { font-family: var(--mono); font-size: 10px; letter-spacing: .18em; text-transform: uppercase;
+    color: var(--dim); font-weight: 400; background: #0a0b0d; }
+  thead th.hot { color: var(--accent); }
+  tbody th { font-weight: 600; font-size: 13.5px; color: var(--ink); width: 30%; }
+  td { color: var(--dim); font-family: var(--mono); font-size: 12px; letter-spacing: .04em; }
+  td .y { color: var(--accent); }
+  td .n { color: var(--faint); }
+  tr:last-child th, tr:last-child td { border-bottom: 0; }
+
+  .spon { max-width: 1280px; margin: 56px auto 0; padding: 0 6vw; }
+  .spon .inner { border: 1px solid var(--line); border-left: 3px solid var(--accent); background: #0a0b0d;
+    padding: 26px 28px; display: flex; flex-wrap: wrap; gap: 18px 32px; align-items: center; justify-content: space-between; }
+  .spon h2 { font-weight: 800; font-size: clamp(19px, 2vw, 24px); letter-spacing: -.01em; text-wrap: balance; }
+  .spon p { margin-top: 8px; max-width: 62ch; font-size: 14.5px; line-height: 1.6; color: var(--dim); text-wrap: pretty; }
+  .spon .btn { flex: 0 0 auto; }
+
+  .fine { max-width: 1280px; margin: 28px auto 0; padding: 0 6vw; font-family: var(--mono);
+    font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--faint); line-height: 2.1; }
+  .fine b { color: var(--dim); font-weight: 400; }
+  .fine a { color: var(--accent); text-decoration: none; }
+
+  footer { max-width: 1280px; margin: 72px auto 0; padding: 26px 6vw 40px; border-top: 1px solid var(--line);
+    display: flex; flex-wrap: wrap; gap: 10px 28px; align-items: baseline;
+    font-family: var(--mono); font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--faint); }
+  footer b { color: var(--dim); font-weight: 400; }
+  footer a { color: var(--accent); text-decoration: none; }
+
+  @media (max-width: 680px) { .cards { grid-template-columns: 1fr; } .card.hot { order: -1; } }
+</style>
+</head>
+<body data-analytics-offer="pricing">
+
+<nav class="top" aria-label="Site">
+  <a class="logo" href="/" data-analytics-action="site_navigation" data-analytics-location="nav" data-analytics-target="home">Mirai<span class="logoTech">Tech</span></a>
+  <a class="navBack" href="/experience/" data-analytics-action="site_navigation" data-analytics-location="nav" data-analytics-target="experience">The Experience</a>
+  <a class="btn accent" href="https://luma.com/an4zotn9" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="nav" data-analytics-target="residency">Apply</a>
+</nav>
+
+<header class="wrap" data-track-section="hero" data-track-position="1">
+  <p class="eyebrow">Kobe · Port Island · October 1–31, 2026</p>
+  <h1>What it costs<span class="tick">.</span></h1>
+  <p class="lede">Four ways into Mirai Tech City, side by side. <b>Tickets, the PopUp, and the package check out on Luma; the Acceleration Sprint applies by form.</b> Hotel and transportation are not included unless the line says so.</p>
+</header>
+
+<section class="v3x-board" data-track-section="cards" data-track-position="2" aria-label="The four offers, as a fare board">
+<style>
+  .v3x-board { max-width: 1280px; margin: 0 auto; padding: 48px 6vw 0; }
+  .v3x-frame { border: 1px solid var(--line); background: #08090c; }
+  .v3x-bar { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 18px;
+    padding: 12px 22px; border-bottom: 1px solid var(--line); background: #0a0b0d;
+    font-family: var(--mono); font-size: 9.5px; letter-spacing: .26em; text-transform: uppercase; color: var(--faint); }
+  .v3x-bar b { color: var(--accent); font-weight: 400; }
+  .v3x-head, .v3x-row { display: grid;
+    grid-template-columns: minmax(142px, 1fr) minmax(162px, .65fr) minmax(180px, 1.2fr) minmax(205px, 1.45fr) minmax(146px, .7fr);
+    gap: 10px 26px; align-items: center; padding: 22px; }
+  .v3x-head { padding: 9px 22px; border-bottom: 1px solid var(--line); font-family: var(--mono);
+    font-size: 9px; letter-spacing: .24em; text-transform: uppercase; color: var(--faint); }
+  .v3x-head .v3x-hr { text-align: right; }
+  .v3x-row { border-bottom: 1px solid var(--line); }
+  .v3x-row:last-child { border-bottom: 0; }
+  .v3x-row--hot { background: rgba(var(--accent-rgb), .06); box-shadow: inset 3px 0 0 var(--accent);
+    padding-top: 32px; padding-bottom: 32px; }
+  .v3x-svc { display: flex; flex-direction: column; gap: 8px; align-items: flex-start; min-width: 0; }
+  .v3x-name { font-weight: 800; font-size: 18px; letter-spacing: .015em; text-transform: uppercase; line-height: 1.15; }
+  .v3x-row--hot .v3x-name { font-size: 22px; }
+  .v3x-tag { font-family: var(--mono); font-size: 9.5px; letter-spacing: .2em; text-transform: uppercase; color: var(--dim); }
+  .v3x-flag { font-family: var(--mono); font-size: 8.5px; letter-spacing: .22em; text-transform: uppercase;
+    padding: 3px 8px 2px; border: 1px solid rgba(var(--accent-rgb), .55); color: var(--accent); border-radius: 2px; }
+  .v3x-fare { text-align: right; font-variant-numeric: tabular-nums; }
+  .v3x-price { font-weight: 900; font-size: clamp(28px, 2.6vw, 38px); line-height: 1; letter-spacing: -.01em; }
+  .v3x-row--hot .v3x-price { color: var(--accent); font-size: clamp(32px, 3vw, 44px); }
+  .v3x-unit { margin-top: 6px; font-family: var(--mono); font-size: 9px; letter-spacing: .16em;
+    text-transform: uppercase; color: var(--faint); }
+  .v3x-cover { min-width: 0; }
+  .v3x-strip { display: block; width: 100%; height: auto; }
+  .v3x-strip text { font-family: var(--mono); font-size: 10px; fill: rgba(244,243,240,.5); }
+  .v3x-strip .v3x-or { font-size: 12px; fill: rgba(244,243,240,.9); }
+  .v3x-dates { margin-top: 7px; font-family: var(--mono); font-size: 10px; letter-spacing: .13em;
+    text-transform: uppercase; color: var(--ink); font-variant-numeric: tabular-nums; }
+  .v3x-in { min-width: 0; font-family: var(--mono); font-size: 11.5px; line-height: 1.8;
+    letter-spacing: .02em; color: var(--dim); }
+  .v3x-sub { margin-top: 7px; font-size: 9.5px; letter-spacing: .08em; color: var(--faint);
+    line-height: 1.9; text-transform: uppercase; font-variant-numeric: tabular-nums; }
+  .v3x-sub a { color: var(--accent); text-decoration: none; }
+  .v3x-out { margin-top: 6px; font-size: 9.5px; letter-spacing: .08em; text-transform: uppercase;
+    color: rgba(240,160,160,.8); }
+  .v3x-out .x { color: #f0a0a0; font-weight: 500; margin-right: 4px; }
+  .v3x-cta { display: flex; flex-direction: column; gap: 9px; align-items: stretch; text-align: center; min-width: 0; }
+  .v3x-cta .btn { display: block; text-align: center; padding: 13px 10px; }
+  .v3x-note { font-family: var(--mono); font-size: 8.5px; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--faint); line-height: 1.8; }
+  @media (max-width: 1080px) {
+    .v3x-head { display: none; }
+    .v3x-row { grid-template-columns: minmax(0, 1fr) auto; gap: 16px 18px; padding: 24px 18px; align-items: start; }
+    .v3x-svc { grid-column: 1; }
+    .v3x-fare { grid-column: 2; }
+    .v3x-cover, .v3x-in, .v3x-cta { grid-column: 1 / -1; }
+    .v3x-row--hot { padding-top: 28px; padding-bottom: 28px; }
+    .v3x-row--hot .v3x-price { font-size: 38px; }
+    .v3x-price { font-size: 32px; }
+  }
+</style>
+<div class="v3x-frame">
+  <div class="v3x-bar"><span><b>Mirai Tech City</b> · Fare Board</span><span class="num">Kobe · October 2026 · Prices in USD</span></div>
+  <div class="v3x-head" aria-hidden="true">
+    <span>Service</span><span class="v3x-hr">Fare</span><span>Covers</span><span>What&rsquo;s in</span><span>Board</span>
+  </div>
+  <div class="v3x-row v3x-row--hot">
+    <div class="v3x-svc">
+      <span class="v3x-flag">Featured</span>
+      <p class="v3x-name">The PopUp</p>
+      <p class="v3x-tag">The whole month</p>
+    </div>
+    <div class="v3x-fare">
+      <p class="v3x-price num">$1,200</p>
+    </div>
+    <div class="v3x-cover">
+      <svg class="v3x-strip" viewBox="0 0 306 38" role="img" aria-label="October timeline: covers October 1 to 31, the whole month"><rect x="0" y="10" width="6" height="10" fill="var(--accent)"/><rect x="10" y="10" width="6" height="10" fill="var(--accent)"/><rect x="20" y="10" width="6" height="10" fill="var(--accent)"/><rect x="30" y="10" width="6" height="10" fill="var(--accent)"/><rect x="40" y="10" width="6" height="10" fill="var(--accent)"/><rect x="50" y="10" width="6" height="10" fill="var(--accent)"/><rect x="60" y="10" width="6" height="10" fill="var(--accent)"/><rect x="70" y="10" width="6" height="10" fill="var(--accent)"/><rect x="80" y="10" width="6" height="10" fill="var(--accent)"/><rect x="90" y="10" width="6" height="10" fill="var(--accent)"/><rect x="100" y="10" width="6" height="10" fill="var(--accent)"/><rect x="110" y="10" width="6" height="10" fill="var(--accent)"/><rect x="120" y="10" width="6" height="10" fill="var(--accent)"/><rect x="130" y="10" width="6" height="10" fill="var(--accent)"/><rect x="140" y="10" width="6" height="10" fill="var(--accent)"/><rect x="150" y="10" width="6" height="10" fill="var(--accent)"/><rect x="160" y="6" width="6" height="14" fill="var(--accent)"/><rect x="170" y="6" width="6" height="14" fill="var(--accent)"/><rect x="180" y="10" width="6" height="10" fill="var(--accent)"/><rect x="190" y="10" width="6" height="10" fill="var(--accent)"/><rect x="200" y="10" width="6" height="10" fill="var(--accent)"/><rect x="210" y="10" width="6" height="10" fill="var(--accent)"/><rect x="220" y="10" width="6" height="10" fill="var(--accent)"/><rect x="230" y="6" width="6" height="14" fill="var(--accent)"/><rect x="240" y="6" width="6" height="14" fill="var(--accent)"/><rect x="250" y="6" width="6" height="14" fill="var(--accent)"/><rect x="260" y="10" width="6" height="10" fill="var(--accent)"/><rect x="270" y="10" width="6" height="10" fill="var(--accent)"/><rect x="280" y="10" width="6" height="10" fill="var(--accent)"/><rect x="290" y="10" width="6" height="10" fill="var(--accent)"/><rect x="300" y="10" width="6" height="10" fill="var(--accent)"/><text x="0" y="35">1</text><text x="160" y="35">17</text><text x="230" y="35">24</text><text x="306" y="35" text-anchor="end">31</text></svg>
+      <p class="v3x-dates num">Oct 1&ndash;31 &middot; 31 days</p>
+    </div>
+    <div class="v3x-in">
+      Both summits &middot; Demo Day &amp; Fashion Show &middot; the month&rsquo;s programming &middot; cowork &amp; 300 residents
+      <p class="v3x-sub">Lab tours &middot; workshops &middot; hackathon</p>
+      <p class="v3x-out"><span class="x" aria-hidden="true">&#10005;</span>Housing not included &mdash; matched to your budget after acceptance</p>
+    </div>
+    <div class="v3x-cta">
+      <a class="btn accent" href="https://luma.com/an4zotn9" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="pricing_popup" data-analytics-target="residency">Come Live Japan</a>
+      <p class="v3x-note">Application only &middot; rolling review</p>
+    </div>
+  </div>
+  <div class="v3x-row">
+    <div class="v3x-svc">
+      <p class="v3x-name">Summit weekend ticket</p>
+      <p class="v3x-tag">One weekend &middot; talks &amp; panels</p>
+    </div>
+    <div class="v3x-fare">
+      <p class="v3x-price num">$900</p>
+      <p class="v3x-unit num">per weekend</p>
+    </div>
+    <div class="v3x-cover">
+      <svg class="v3x-strip" viewBox="0 0 306 38" role="img" aria-label="October timeline: covers October 17 to 18 or October 24 to 25, one weekend of your choice"><rect x="0" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="10" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="20" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="30" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="40" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="50" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="60" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="70" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="80" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="90" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="100" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="110" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="120" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="130" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="140" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="150" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="160" y="6" width="6" height="14" fill="var(--accent)"/><rect x="170" y="6" width="6" height="14" fill="var(--accent)"/><rect x="180" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="190" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="200" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="210" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="220" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="230" y="6" width="6" height="14" fill="var(--accent)" opacity=".45"/><rect x="240" y="6" width="6" height="14" fill="var(--accent)" opacity=".45"/><rect x="250" y="6" width="6" height="14" fill="rgba(244,243,240,.28)"/><rect x="260" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="270" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="280" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="290" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="300" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><text x="0" y="35">1</text><text x="160" y="35">17</text><text x="230" y="35">24</text><text x="306" y="35" text-anchor="end">31</text><text x="203" y="17" text-anchor="middle" class="v3x-or">or</text></svg>
+      <p class="v3x-dates num">Oct 17&ndash;18 or Oct 24&ndash;25</p>
+    </div>
+    <div class="v3x-in">
+      One summit weekend of talks &amp; panels &middot; 51 confirmed speakers across the two weekends
+      <p class="v3x-out"><span class="x" aria-hidden="true">&#10005;</span>No weekday programming &nbsp; <span class="x" aria-hidden="true">&#10005;</span>No hotel &amp; transportation</p>
+    </div>
+    <div class="v3x-cta">
+      <a class="btn" href="https://luma.com/an4zotn9" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="pricing_ticket" data-analytics-target="tickets">Get Tickets</a>
+      <p class="v3x-note">No application needed</p>
+    </div>
+  </div>
+  <div class="v3x-row">
+    <div class="v3x-svc">
+      <p class="v3x-name">Summit + hotel package</p>
+      <p class="v3x-tag">12 hotel nights &middot; Sannomiya</p>
+    </div>
+    <div class="v3x-fare">
+      <p class="v3x-price num">$2,500</p>
+      <p class="v3x-unit num">launch price</p>
+    </div>
+    <div class="v3x-cover">
+      <svg class="v3x-strip" viewBox="0 0 306 38" role="img" aria-label="October timeline: covers October 16 to 28, twelve hotel nights"><rect x="0" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="10" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="20" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="30" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="40" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="50" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="60" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="70" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="80" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="90" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="100" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="110" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="120" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="130" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="140" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="150" y="10" width="6" height="10" fill="var(--accent)"/><rect x="160" y="6" width="6" height="14" fill="var(--accent)"/><rect x="170" y="6" width="6" height="14" fill="var(--accent)"/><rect x="180" y="10" width="6" height="10" fill="var(--accent)"/><rect x="190" y="10" width="6" height="10" fill="var(--accent)"/><rect x="200" y="10" width="6" height="10" fill="var(--accent)"/><rect x="210" y="10" width="6" height="10" fill="var(--accent)"/><rect x="220" y="10" width="6" height="10" fill="var(--accent)"/><rect x="230" y="6" width="6" height="14" fill="var(--accent)"/><rect x="240" y="6" width="6" height="14" fill="var(--accent)"/><rect x="250" y="6" width="6" height="14" fill="var(--accent)"/><rect x="260" y="10" width="6" height="10" fill="var(--accent)"/><rect x="270" y="10" width="6" height="10" fill="var(--accent)"/><rect x="280" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="290" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="300" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><text x="0" y="35">1</text><text x="160" y="35">17</text><text x="230" y="35">24</text><text x="306" y="35" text-anchor="end">31</text></svg>
+      <p class="v3x-dates num">Oct 16&ndash;28 &middot; 12 hotel nights</p>
+    </div>
+    <div class="v3x-in">
+      Both weekends &amp; the week between &middot; Demo Day &amp; Fashion Show &middot; room in Sannomiya
+      <p class="v3x-sub num">In Oct 16 &middot; out Oct 28 &middot; breakfast included &middot; $4,000 once the 10 are gone &middot; <a href="/summit-bundle/" data-analytics-action="alternative_offer" data-analytics-location="pricing_package" data-analytics-target="summit_hotel">Details &rarr;</a></p>
+    </div>
+    <div class="v3x-cta">
+      <a class="btn" href="https://luma.com/an4zotn9?coupon=SFSH&amp;utm_source=pricing&amp;utm_campaign=summit-hotel-package" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="pricing_package" data-analytics-target="summit_hotel">Book the Package</a>
+      <p class="v3x-note">No application needed</p>
+    </div>
+  </div>
+  <div class="v3x-row">
+    <div class="v3x-svc">
+      <span class="v3x-flag">For startups</span>
+      <p class="v3x-name">Acceleration Sprint</p>
+      <p class="v3x-tag">Through Demo Day</p>
+    </div>
+    <div class="v3x-fare">
+      <p class="v3x-price num">$2,500</p>
+      <p class="v3x-unit num">$21,600 at market</p>
+    </div>
+    <div class="v3x-cover">
+      <svg class="v3x-strip" viewBox="0 0 306 38" role="img" aria-label="October timeline: program October 1 to 26 through Demo Day; accommodation included through October 31"><rect x="0" y="10" width="6" height="10" fill="var(--accent)"/><rect x="10" y="10" width="6" height="10" fill="var(--accent)"/><rect x="20" y="10" width="6" height="10" fill="var(--accent)"/><rect x="30" y="10" width="6" height="10" fill="var(--accent)"/><rect x="40" y="10" width="6" height="10" fill="var(--accent)"/><rect x="50" y="10" width="6" height="10" fill="var(--accent)"/><rect x="60" y="10" width="6" height="10" fill="var(--accent)"/><rect x="70" y="10" width="6" height="10" fill="var(--accent)"/><rect x="80" y="10" width="6" height="10" fill="var(--accent)"/><rect x="90" y="10" width="6" height="10" fill="var(--accent)"/><rect x="100" y="10" width="6" height="10" fill="var(--accent)"/><rect x="110" y="10" width="6" height="10" fill="var(--accent)"/><rect x="120" y="10" width="6" height="10" fill="var(--accent)"/><rect x="130" y="10" width="6" height="10" fill="var(--accent)"/><rect x="140" y="10" width="6" height="10" fill="var(--accent)"/><rect x="150" y="10" width="6" height="10" fill="var(--accent)"/><rect x="160" y="6" width="6" height="14" fill="var(--accent)"/><rect x="170" y="6" width="6" height="14" fill="var(--accent)"/><rect x="180" y="10" width="6" height="10" fill="var(--accent)"/><rect x="190" y="10" width="6" height="10" fill="var(--accent)"/><rect x="200" y="10" width="6" height="10" fill="var(--accent)"/><rect x="210" y="10" width="6" height="10" fill="var(--accent)"/><rect x="220" y="10" width="6" height="10" fill="var(--accent)"/><rect x="230" y="6" width="6" height="14" fill="var(--accent)"/><rect x="240" y="6" width="6" height="14" fill="var(--accent)"/><rect x="250" y="6" width="6" height="14" fill="var(--accent)"/><rect x="260" y="10" width="6" height="10" fill="var(--accent)" opacity=".28"/><rect x="270" y="10" width="6" height="10" fill="var(--accent)" opacity=".28"/><rect x="280" y="10" width="6" height="10" fill="var(--accent)" opacity=".28"/><rect x="290" y="10" width="6" height="10" fill="var(--accent)" opacity=".28"/><rect x="300" y="10" width="6" height="10" fill="var(--accent)" opacity=".28"/><text x="0" y="35">1</text><text x="160" y="35">17</text><text x="230" y="35">24</text><text x="306" y="35" text-anchor="end">31</text></svg>
+      <p class="v3x-dates num">Oct 1&ndash;26 &middot; through Demo Day</p>
+    </div>
+    <div class="v3x-in">
+      Coaching &middot; accelerator resources &middot; VC introductions &middot; both summits &amp; Demo Day &middot; PMDA consulting
+      <p class="v3x-sub">Lab &amp; co-working &middot; social agenda &middot; <b style="color:var(--ink);font-weight:500">accommodation included through Oct 31</b> &middot; <a href="/startups/" data-analytics-action="alternative_offer" data-analytics-location="pricing_sprint" data-analytics-target="startup_sprint">Details &rarr;</a></p>
+    </div>
+    <div class="v3x-cta">
+      <a class="btn" href="https://form.typeform.com/to/sG9eS2Ok?utm_source=mirai-site&amp;utm_campaign=startup-sprint" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="pricing_sprint" data-analytics-target="application">Apply Now</a>
+      <p class="v3x-note">Application only &middot; rolling review</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<div class="math num" data-track-section="math" data-track-position="3">
+  <div class="inner"><b>The arithmetic:</b> <span>Both weekends bought separately — <b>$1,800</b></span> <span class="hot">The whole month — $1,200</span></div>
+</div>
+
+<section class="tblWrap" data-track-section="table" data-track-position="4" aria-label="Side-by-side comparison">
+  <div class="tblScroll">
+    <table>
+      <thead>
+        <tr><th scope="col">What you get</th><th scope="col" class="hot">The PopUp</th><th scope="col">Weekend ticket</th><th scope="col">Hotel package</th><th scope="col">Startup sprint</th></tr>
+      </thead>
+      <tbody class="num">
+        <tr><th scope="row">Price</th><td class="y">$1,200</td><td>$900 / weekend</td><td>$2,500 launch</td><td>$2,500</td></tr>
+        <tr><th scope="row">Dates covered</th><td>Oct 1–31</td><td>One weekend</td><td>Oct 16–28</td><td>Oct 1–26</td></tr>
+        <tr><th scope="row">Summit I · Oct 17–18</th><td><span class="y">●</span></td><td><span class="y">●</span> if chosen</td><td><span class="y">●</span></td><td><span class="y">●</span></td></tr>
+        <tr><th scope="row">Summit II · Oct 24–25</th><td><span class="y">●</span></td><td><span class="y">●</span> if chosen</td><td><span class="y">●</span></td><td><span class="y">●</span></td></tr>
+        <tr><th scope="row">Demo Day + Fashion Show · Oct 26</th><td><span class="y">●</span></td><td><span class="n">— outside the weekend</span></td><td><span class="y">●</span></td><td><span class="y">●</span> you pitch it</td></tr>
+        <tr><th scope="row">Weekday programming — tours, workshops, hackathon</th><td><span class="y">●</span> all month</td><td><span class="n">—</span></td><td><span class="n">—</span></td><td><span class="y">●</span> + coaching &amp; PMDA consulting</td></tr>
+        <tr><th scope="row">Hotel</th><td><span class="n">— matched separately</span></td><td><span class="n">—</span></td><td><span class="y">●</span> 12 nights, Sannomiya</td><td><span class="y">●</span> room through Oct 31</td></tr>
+        <tr><th scope="row">Application</th><td>Required · rolling</td><td>None</td><td>None</td><td>Required · rolling</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="spon" data-track-section="sponsored" data-track-position="5" aria-label="Sponsored places">
+  <div class="inner">
+    <div>
+      <h2>If you can&rsquo;t cover your own fare.</h2>
+      <p>Some places in the city are sponsored. If you&rsquo;re a researcher, founder, or artist who should be here and the price is the only thing stopping you, book a call and tell us what you&rsquo;re working on.</p>
+    </div>
+    <a class="btn" href="https://calendly.com/nelson-frontierhumans/mtc-acceleration-sprint?utm_source=mirai-site&amp;utm_campaign=pricing-sponsorship" target="_blank" rel="noopener" data-analytics-action="site_navigation" data-analytics-location="pricing_sponsored" data-analytics-target="calendly">Book a Call</a>
+  </div>
+</section>
+
+<p class="fine" data-track-section="fine" data-track-position="6">
+  Prices in USD · Tickets, PopUp &amp; package check out on <b>Luma</b>; the Sprint applies by <b>Typeform</b> · Hotel &amp; transportation not included unless stated ·
+  PopUp housing runs from community hacker houses to the Portopia and is matched after acceptance ·
+  Day-to-day Kobe is affordable — a good lunch under &yen;1,000 · Questions: <a href="mailto:team@miraitech.city">team@miraitech.city</a>
+</p>
+
+<footer>
+  <b>Mirai Tech City</b> <span>Kobe · Oct 1–31 2026</span>
+  <a href="/experience/" data-analytics-action="site_navigation" data-analytics-location="footer" data-analytics-target="experience">What a month here is like →</a>
+  <a href="/" data-analytics-action="site_navigation" data-analytics-location="footer" data-analytics-target="home">Main site →</a>
+</footer>
+
+</body>
+</html>

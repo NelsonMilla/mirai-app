@@ -10,7 +10,7 @@ one event taxonomy to both:
   full property payloads, plus autocapture, heatmaps, session replay, and
   funnel/trend analysis. This is the diagnostic view.
 
-The conversion funnel below applies to `/`, `/early-bird/`, `/summit-bundle/`,
+The conversion funnel below applies to `/`, `/summit-bundle/`, (`/early-bird/` retired Sep 1 2026),
 and `/experience/`. `/jp/` shares the taxonomy but sells no ticket directly; its
 outcome is an email enquiry, not a checkout.
 
@@ -259,7 +259,7 @@ the required sample, report the result as directional and combine it with direct
 feedback from qualified founders/investors rather than claiming statistical
 certainty.
 
-## Active A/B test: Early Bird hero framing
+## Retired A/B test (page removed Sep 1 2026): Early Bird hero framing
 
 The test is active as soon as this deployment reaches production.
 
