@@ -107,6 +107,13 @@
   td .n { color: var(--faint); }
   tr:last-child th, tr:last-child td { border-bottom: 0; }
 
+  .spon { max-width: 1280px; margin: 56px auto 0; padding: 0 6vw; }
+  .spon .inner { border: 1px solid var(--line); border-left: 3px solid var(--accent); background: #0a0b0d;
+    padding: 26px 28px; display: flex; flex-wrap: wrap; gap: 18px 32px; align-items: center; justify-content: space-between; }
+  .spon h2 { font-weight: 800; font-size: clamp(19px, 2vw, 24px); letter-spacing: -.01em; text-wrap: balance; }
+  .spon p { margin-top: 8px; max-width: 62ch; font-size: 14.5px; line-height: 1.6; color: var(--dim); text-wrap: pretty; }
+  .spon .btn { flex: 0 0 auto; }
+
   .fine { max-width: 1280px; margin: 28px auto 0; padding: 0 6vw; font-family: var(--mono);
     font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--faint); line-height: 2.1; }
   .fine b { color: var(--dim); font-weight: 400; }
@@ -315,7 +322,17 @@
   </div>
 </section>
 
-<p class="fine" data-track-section="fine" data-track-position="5">
+<section class="spon" data-track-section="sponsored" data-track-position="5" aria-label="Sponsored places">
+  <div class="inner">
+    <div>
+      <h2>If you can&rsquo;t cover your own fare.</h2>
+      <p>Some places in the city are sponsored. If you&rsquo;re a researcher, founder, or artist who should be here and the price is the only thing stopping you, book a call and tell us what you&rsquo;re working on.</p>
+    </div>
+    <a class="btn" href="https://calendly.com/nelson-frontierhumans/mtc-acceleration-sprint?utm_source=mirai-site&amp;utm_campaign=pricing-sponsorship" target="_blank" rel="noopener" data-analytics-action="site_navigation" data-analytics-location="pricing_sponsored" data-analytics-target="calendly">Book a Call</a>
+  </div>
+</section>
+
+<p class="fine" data-track-section="fine" data-track-position="6">
   Prices in USD · Tickets, PopUp &amp; package check out on <b>Luma</b>; the Sprint applies by <b>Typeform</b> · Hotel &amp; transportation not included unless stated ·
   PopUp housing runs from community hacker houses to the Portopia and is matched after acceptance ·
   Day-to-day Kobe is affordable — a good lunch under &yen;1,000 · Questions: <a href="mailto:team@miraitech.city">team@miraitech.city</a>
