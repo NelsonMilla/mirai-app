@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>What It Costs · Mirai Tech City · Kobe 2026</title>
+<meta name="description" content="Every way into Mirai Tech City, priced side by side: the $1,200 month-long PopUp, $900 summit weekend tickets, and the $2,500 summit + hotel package. Kobe, October 1–31, 2026." />
+<link rel="canonical" href="https://mirai-tech-city.vercel.app/pricing/" />
+<meta property="og:title" content="What It Costs · Mirai Tech City" />
+<meta property="og:description" content="The $1,200 month-long PopUp, $900 summit weekends, and the $2,500 summit + hotel package — side by side." />
+<meta property="og:url" content="https://mirai-tech-city.vercel.app/pricing/" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="What It Costs · Mirai Tech City" />
+<meta name="theme-color" content="#050506" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23050506'/%3E%3Ctext x='50' y='72' font-size='62' font-family='Georgia' font-weight='bold' fill='%239be8f0' text-anchor='middle'%3E未%3C/text%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="preconnect" href="https://api.fontshare.com" />
+<link rel="preconnect" href="https://cdn.fontshare.com" crossorigin />
+<link href="https://api.fontshare.com/v2/css?f[]=switzer@400,500,700,800,900&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/posthog.js"></script>
+<script defer src="/analytics.js"></script>
+<style>
+  :root {
+    --bg: #050506; --ink: #f4f3f0; --dim: rgba(244,243,240,.62); --faint: rgba(244,243,240,.45);
+    --line: rgba(244,243,240,.14); --accent: #9be8f0; --accent-rgb: 155,232,240;
+    --font: 'Switzer', 'Inter', -apple-system, sans-serif; --mono: 'IBM Plex Mono', monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body { min-width: 320px; overflow-x: hidden; background: var(--bg); color: var(--ink);
+    font-family: var(--font); -webkit-font-smoothing: antialiased; }
+  ::selection { background: var(--accent); color: #000; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  a { color: inherit; }
+  .num { font-variant-numeric: tabular-nums; }
+  .mono { font-family: var(--mono); }
+
+  nav.top { display: flex; align-items: center; justify-content: space-between; gap: 18px;
+    max-width: 1280px; margin: 0 auto; padding: 22px 6vw; }
+  .logo { font-weight: 800; letter-spacing: .06em; font-size: 15px; text-transform: uppercase; text-decoration: none; }
+  .logoTech { color: var(--accent); }
+  .navBack { font-family: var(--mono); font-size: 11px; letter-spacing: .18em; text-transform: uppercase;
+    color: var(--dim); text-decoration: none; }
+  .navBack:hover { color: var(--ink); }
+  .btn { display: inline-block; padding: 13px 22px; border: 1px solid var(--line); border-radius: 2px;
+    font-family: var(--mono); font-size: 11px; letter-spacing: .18em; text-transform: uppercase;
+    color: var(--ink); text-decoration: none; transition: border-color .2s, background .2s, color .2s; }
+  .btn:hover { border-color: var(--accent); }
+  .btn.accent { background: var(--accent); border-color: var(--accent); color: #04191c; font-weight: 500; }
+  .btn.accent:hover { background: #c3f1f6; }
+
+  .wrap { max-width: 1280px; margin: 0 auto; padding: 56px 6vw 0; }
+  .eyebrow { font-family: var(--mono); font-size: 10px; letter-spacing: .26em; text-transform: uppercase; color: var(--accent); }
+  h1 { margin-top: 14px; font-weight: 900; text-transform: uppercase; letter-spacing: -.015em;
+    font-size: clamp(38px, 6vw, 84px); line-height: .95; text-wrap: balance; }
+  h1 .tick { color: var(--accent); }
+  .lede { margin-top: 18px; max-width: 60ch; font-size: 16px; line-height: 1.6; color: var(--dim); text-wrap: pretty; }
+  .lede b { color: var(--ink); }
+
+  /* cards */
+  .cards { max-width: 1280px; margin: 0 auto; padding: 48px 6vw 0; display: grid;
+    grid-template-columns: repeat(3, 1fr); gap: 16px; align-items: stretch; }
+  .card { border: 1px solid var(--line); background: #0a0b0d; padding: 26px 24px 24px;
+    display: flex; flex-direction: column; gap: 0; }
+  .card.hot { border-color: rgba(var(--accent-rgb), .5); box-shadow: 0 0 44px rgba(var(--accent-rgb), .08); }
+  .cName { font-family: var(--mono); font-size: 10px; letter-spacing: .22em; text-transform: uppercase; color: var(--dim); }
+  .card.hot .cName { color: var(--accent); }
+  .cPrice { margin-top: 14px; font-weight: 900; font-size: clamp(38px, 4.2vw, 56px); letter-spacing: -.01em; line-height: 1; }
+  .cPrice small { font-size: .38em; font-weight: 500; color: var(--dim); letter-spacing: 0; }
+  .cSpan { margin-top: 10px; font-family: var(--mono); font-size: 11px; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--ink); line-height: 1.8; }
+  .cList { margin: 16px 0 22px; list-style: none; border-top: 1px solid var(--line); }
+  .cList li { padding: 9px 0; border-bottom: 1px solid var(--line); font-size: 13.5px; color: var(--dim);
+    display: flex; gap: 10px; align-items: baseline; }
+  .cList li::before { content: "▸"; color: var(--accent); font-size: 11px; }
+  .cList li.no { color: var(--faint); }
+  .cList li.no::before { content: "—"; color: var(--faint); }
+  .card .btn { margin-top: auto; text-align: center; }
+  .cFoot { margin-top: 10px; font-family: var(--mono); font-size: 9.5px; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--faint); text-align: center; line-height: 1.8; }
+
+  /* math strip */
+  .math { max-width: 1280px; margin: 40px auto 0; padding: 0 6vw; }
+  .math .inner { border: 1px solid rgba(var(--accent-rgb), .3); background: rgba(var(--accent-rgb), .05);
+    padding: 18px 22px; display: flex; flex-wrap: wrap; gap: 8px 28px; align-items: baseline;
+    font-family: var(--mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--dim); }
+  .math b { color: var(--ink); font-weight: 500; }
+  .math .hot { color: var(--accent); }
+
+  /* table */
+  .tblWrap { max-width: 1280px; margin: 56px auto 0; padding: 0 6vw; }
+  .tblScroll { overflow-x: auto; border: 1px solid var(--line); }
+  table { width: 100%; min-width: 720px; border-collapse: collapse; font-size: 13.5px; }
+  th, td { padding: 13px 16px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+  thead th { font-family: var(--mono); font-size: 10px; letter-spacing: .18em; text-transform: uppercase;
+    color: var(--dim); font-weight: 400; background: #0a0b0d; }
+  thead th.hot { color: var(--accent); }
+  tbody th { font-weight: 600; font-size: 13.5px; color: var(--ink); width: 30%; }
+  td { color: var(--dim); font-family: var(--mono); font-size: 12px; letter-spacing: .04em; }
+  td .y { color: var(--accent); }
+  td .n { color: var(--faint); }
+  tr:last-child th, tr:last-child td { border-bottom: 0; }
+
+  .fine { max-width: 1280px; margin: 28px auto 0; padding: 0 6vw; font-family: var(--mono);
+    font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--faint); line-height: 2.1; }
+  .fine b { color: var(--dim); font-weight: 400; }
+  .fine a { color: var(--accent); text-decoration: none; }
+
+  footer { max-width: 1280px; margin: 72px auto 0; padding: 26px 6vw 40px; border-top: 1px solid var(--line);
+    display: flex; flex-wrap: wrap; gap: 10px 28px; align-items: baseline;
+    font-family: var(--mono); font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--faint); }
+  footer b { color: var(--dim); font-weight: 400; }
+  footer a { color: var(--accent); text-decoration: none; }
+
+  @media (max-width: 960px) { .cards { grid-template-columns: 1fr; } .card.hot { order: -1; } }
+</style>
+</head>
+<body data-analytics-offer="pricing">
+
+<nav class="top" aria-label="Site">
+  <a class="logo" href="/" data-analytics-action="site_navigation" data-analytics-location="nav" data-analytics-target="home">Mirai<span class="logoTech">Tech</span></a>
+  <a class="navBack" href="/experience/" data-analytics-action="site_navigation" data-analytics-location="nav" data-analytics-target="experience">The Experience</a>
+  <a class="btn accent" href="https://luma.com/an4zotn9" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="nav" data-analytics-target="residency">Apply</a>
+</nav>
+
+<header class="wrap" data-track-section="hero" data-track-position="1">
+  <p class="eyebrow">Kobe · Port Island · October 1–31, 2026</p>
+  <h1>What it costs<span class="tick">.</span></h1>
+  <p class="lede">Three ways into Mirai Tech City, side by side. <b>Everything is on Luma.</b> Hotel and transportation are not included unless the line says so.</p>
+</header>
+
+<section class="cards" data-track-section="cards" data-track-position="2" aria-label="The three offers">
+  <div class="card hot">
+    <p class="cName">The PopUp · the whole month</p>
+    <p class="cPrice num">$1,200</p>
+    <p class="cSpan num">Oct 1–31 · 31 days</p>
+    <ul class="cList">
+      <li>Both summit weekends, Demo Day &amp; the Fashion Show</li>
+      <li>The month&rsquo;s programming — lab tours, workshops, the hackathon</li>
+      <li>Cowork base &amp; the 300-resident community</li>
+      <li class="no">Housing — matched to your budget after acceptance</li>
+    </ul>
+    <a class="btn accent" href="https://luma.com/an4zotn9" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="pricing_popup" data-analytics-target="residency">Come Live Japan</a>
+    <p class="cFoot">Application only · rolling review</p>
+  </div>
+  <div class="card">
+    <p class="cName">Summit weekend ticket</p>
+    <p class="cPrice num">$900<small> / weekend</small></p>
+    <p class="cSpan num">Oct 17–18 or Oct 24–25</p>
+    <ul class="cList">
+      <li>One summit weekend of talks &amp; panels</li>
+      <li>51 confirmed speakers across the two weekends</li>
+      <li class="no">Weekday programming</li>
+      <li class="no">Hotel &amp; transportation</li>
+    </ul>
+    <a class="btn" href="https://luma.com/an4zotn9" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="pricing_ticket" data-analytics-target="tickets">Get Tickets</a>
+    <p class="cFoot">No application needed</p>
+  </div>
+  <div class="card">
+    <p class="cName">Summit + hotel package</p>
+    <p class="cPrice num">$2,500</p>
+    <p class="cSpan num">Oct 16–28 · 12 hotel nights</p>
+    <ul class="cList">
+      <li>Both summit weekends &amp; the week between</li>
+      <li>Demo Day &amp; the Fashion Show</li>
+      <li>Room in Sannomiya · check in Oct 16, out Oct 28</li>
+      <li class="no">Breakfast</li>
+    </ul>
+    <a class="btn" href="https://luma.com/an4zotn9?coupon=SFSH&amp;utm_source=pricing&amp;utm_campaign=summit-hotel-package" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="pricing_package" data-analytics-target="summit_hotel">Book the Package</a>
+    <p class="cFoot num">Launch price · $4,000 once the 10 are gone · <a href="/summit-bundle/" style="color:var(--accent);text-decoration:none" data-analytics-action="alternative_offer" data-analytics-location="pricing_package" data-analytics-target="summit_hotel">Details →</a></p>
+  </div>
+</section>
+
+<div class="math num" data-track-section="math" data-track-position="3">
+  <div class="inner"><b>The arithmetic:</b> <span>Both weekends bought separately — <b>$1,800</b></span> <span class="hot">The whole month — $1,200</span></div>
+</div>
+
+<section class="tblWrap" data-track-section="table" data-track-position="4" aria-label="Side-by-side comparison">
+  <div class="tblScroll">
+    <table>
+      <thead>
+        <tr><th scope="col">What you get</th><th scope="col" class="hot">The PopUp</th><th scope="col">Weekend ticket</th><th scope="col">Hotel package</th></tr>
+      </thead>
+      <tbody class="num">
+        <tr><th scope="row">Price</th><td class="y">$1,200</td><td>$900 / weekend</td><td>$2,500 launch</td></tr>
+        <tr><th scope="row">Dates covered</th><td>Oct 1–31</td><td>One weekend</td><td>Oct 16–28</td></tr>
+        <tr><th scope="row">Summit I · Oct 17–18</th><td><span class="y">●</span></td><td><span class="y">●</span> if chosen</td><td><span class="y">●</span></td></tr>
+        <tr><th scope="row">Summit II · Oct 24–25</th><td><span class="y">●</span></td><td><span class="y">●</span> if chosen</td><td><span class="y">●</span></td></tr>
+        <tr><th scope="row">Demo Day + Fashion Show · Oct 26</th><td><span class="y">●</span></td><td><span class="n">— outside the weekend</span></td><td><span class="y">●</span></td></tr>
+        <tr><th scope="row">Weekday programming — tours, workshops, hackathon</th><td><span class="y">●</span> all month</td><td><span class="n">—</span></td><td><span class="n">—</span></td></tr>
+        <tr><th scope="row">Hotel</th><td><span class="n">— matched separately</span></td><td><span class="n">—</span></td><td><span class="y">●</span> 12 nights, Sannomiya</td></tr>
+        <tr><th scope="row">Application</th><td>Required · rolling</td><td>None</td><td>None</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<p class="fine" data-track-section="fine" data-track-position="5">
+  Prices in USD · Everything checks out on <b>Luma</b> · Hotel &amp; transportation not included unless stated ·
+  Package breakfast excluded · PopUp housing runs from community hacker houses to the Portopia and is matched after acceptance ·
+  Day-to-day Kobe is affordable — a good lunch under &yen;1,000 · Questions: <a href="mailto:team@miraitech.city">team@miraitech.city</a>
+</p>
+
+<footer>
+  <b>Mirai Tech City</b> <span>Kobe · Oct 1–31 2026</span>
+  <a href="/experience/" data-analytics-action="site_navigation" data-analytics-location="footer" data-analytics-target="experience">What a month here is like →</a>
+  <a href="/" data-analytics-action="site_navigation" data-analytics-location="footer" data-analytics-target="home">Main site →</a>
+</footer>
+
+</body>
+</html>
