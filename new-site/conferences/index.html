@@ -186,9 +186,47 @@ p { margin: 0 0 1.15em; }
 .spk figcaption { padding: 15px 16px 18px; font-size: 15px; font-weight: 800; letter-spacing: .01em; line-height: 1.15; text-transform: uppercase; }
 .spk small { display: block; margin-top: 6px; color: var(--accent); font-family: var(--mono); font-size: 9px; font-weight: 400;
   letter-spacing: .16em; text-transform: uppercase; }
-.spk-more { margin: 26px 0 0; color: var(--faint); font-family: var(--mono); font-size: 10px; letter-spacing: .16em;
-  text-align: center; text-transform: uppercase; }
+.spk .idx { color: var(--faint); font-family: var(--mono); font-size: 9px; font-weight: 400; margin-right: 8px; }
 @media (max-width: 760px) { .spk { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+/* speaker manifest — continues the photo grid as entries 05–51 */
+.msp { margin-top: 1px; }
+.msp-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 10px 24px;
+  padding: 18px 2px 14px; border-bottom: 1px solid var(--line); }
+.msp-head b { font-size: 13px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
+.msp-head b em { font-style: normal; color: var(--accent); font-variant-numeric: tabular-nums; }
+.msp-key { color: var(--faint); font-family: var(--mono); font-size: 9px; letter-spacing: .16em; text-transform: uppercase; }
+.msp-key i { font-style: normal; color: var(--accent); }
+.msp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; padding: 1px; background: var(--line); }
+.msp details .msp-grid { padding-top: 0; }
+.msp-row { display: flex; align-items: baseline; gap: 14px; min-width: 0; padding: 13px 16px 14px; background: var(--bg); }
+.msp-row:hover { background: rgba(244,243,240,.04); }
+.msp-i { flex: none; width: 2ch; color: var(--faint); font-family: var(--mono); font-size: 9px; letter-spacing: .1em;
+  font-variant-numeric: tabular-nums; }
+.msp-n { flex: 1 1 auto; min-width: 0; font-size: 13px; font-weight: 800; letter-spacing: .01em; line-height: 1.2; text-transform: uppercase; }
+.msp-n em { display: block; margin-top: 3px; color: var(--dim); font-size: 12px; font-weight: 400; font-style: normal;
+  letter-spacing: 0; line-height: 1.4; text-transform: none; }
+.msp-s { flex: none; color: var(--accent); font-family: var(--mono); font-size: 9px; font-weight: 500;
+  letter-spacing: .14em; text-transform: uppercase; white-space: nowrap; }
+.msp details { border-bottom: 1px solid var(--line); }
+.msp details[open] { display: flex; flex-direction: column-reverse; }
+.msp summary { display: flex; align-items: center; justify-content: center; gap: 10px; min-height: 46px; padding: 12px 16px;
+  border-top: 1px solid var(--line); color: var(--ink); cursor: pointer; font-family: var(--mono); font-size: 10px;
+  letter-spacing: .2em; text-transform: uppercase; list-style: none; user-select: none; }
+.msp summary::-webkit-details-marker { display: none; }
+.msp summary:hover { color: var(--accent); }
+.msp summary::before { content: '+'; color: var(--accent); font-size: 12px; }
+.msp details[open] summary::before { content: '\2212'; }
+.msp summary .msp-lo { display: none; }
+.msp details[open] summary .msp-lc { display: none; }
+.msp details[open] summary .msp-lo { display: inline; }
+.msp details[open] summary { position: sticky; bottom: 0; background: rgba(5,5,6,.94); border-bottom: 1px solid var(--line); }
+@media (max-width: 760px) { .msp-grid { grid-template-columns: 1fr; } }
+@media (max-width: 640px) {
+  .msp-row { padding: 11px 12px 12px; gap: 11px; }
+  .msp-n { font-size: 12px; } .msp-n em { font-size: 11px; }
+  .msp-head { padding-top: 14px; } .msp-key { letter-spacing: .1em; }
+}
 
 /* join us */
 .join { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; margin-top: 60px; padding: 1px; background: var(--line); }
@@ -550,12 +588,74 @@ footer a { color: var(--accent); text-decoration: underline; text-underline-offs
     </div>
 
     <div class="spk">
-      <figure><div class="im"><img src="/img/aubrey.webp" alt="Aubrey de Grey" loading="lazy" decoding="async"></div><figcaption>Aubrey de Grey<small>LEV Foundation</small></figcaption></figure>
-      <figure><div class="im"><img src="/img/hayano.webp" alt="Motoshi Hayano" loading="lazy" decoding="async"></div><figcaption>Motoshi Hayano<small>Keio University</small></figcaption></figure>
-      <figure><div class="im"><img src="/img/yuki.webp" alt="Yuki Hanyu" loading="lazy" decoding="async"></div><figcaption>Yuki Hanyu<small>IntegriCulture</small></figcaption></figure>
-      <figure><div class="im"><img src="/img/adam.webp" alt="Adam Gries" loading="lazy" decoding="async"></div><figcaption>Adam Gries<small>Vitalist Bay</small></figcaption></figure>
+      <figure><div class="im"><img src="/img/aubrey.webp" alt="Aubrey de Grey" loading="lazy" decoding="async"></div><figcaption><span class="idx">01</span>Aubrey de Grey<small>LEV Foundation</small></figcaption></figure>
+      <figure><div class="im"><img src="/img/hayano.webp" alt="Motoshi Hayano" loading="lazy" decoding="async"></div><figcaption><span class="idx">02</span>Motoshi Hayano<small>Keio University</small></figcaption></figure>
+      <figure><div class="im"><img src="/img/yuki.webp" alt="Yuki Hanyu" loading="lazy" decoding="async"></div><figcaption><span class="idx">03</span>Yuki Hanyu<small>IntegriCulture</small></figcaption></figure>
+      <figure><div class="im"><img src="/img/adam.webp" alt="Adam Gries" loading="lazy" decoding="async"></div><figcaption><span class="idx">04</span>Adam Gries<small>Vitalist Bay</small></figcaption></figure>
     </div>
-    <p class="spk-more">Four of 40+ leading experts across the month.</p>
+
+    <div class="msp">
+      <div class="msp-head">
+        <b>Confirmed speakers — <em>51</em></b>
+        <span class="msp-key"><i>S1</i> Oct 17–18 &nbsp; <i>S2</i> Oct 24–25 &nbsp; <i>F</i> Finale Oct 26</span>
+      </div>
+
+      <div class="msp-grid">
+        <div class="msp-row"><span class="msp-i">05</span><span class="msp-n">Brian Kennedy<em>NUS Centre for Healthy Longevity</em></span><span class="msp-s">S2</span></div>
+        <div class="msp-row"><span class="msp-i">06</span><span class="msp-n">Marian Goodell<em>CEO, Burning Man Project</em></span><span class="msp-s">S2</span></div>
+        <div class="msp-row"><span class="msp-i">07</span><span class="msp-n">Jose Cordeiro<em>International Longevity Summit</em></span><span class="msp-s">S1·S2</span></div>
+        <div class="msp-row"><span class="msp-i">08</span><span class="msp-n">Eleanor Sheekey<em>RIKEN Kobe / Sheekey Science Show</em></span><span class="msp-s">S1·S2·F</span></div>
+        <div class="msp-row"><span class="msp-i">09</span><span class="msp-n">Mac Davis<em>Minicircle</em></span><span class="msp-s">S2</span></div>
+        <div class="msp-row"><span class="msp-i">10</span><span class="msp-n">Yuri Deigin<em>YouthBio Therapeutics</em></span><span class="msp-s">S1</span></div>
+        <div class="msp-row"><span class="msp-i">11</span><span class="msp-n">Laurence Ion<em>VitaDAO / Vitalia</em></span><span class="msp-s">S2</span></div>
+        <div class="msp-row"><span class="msp-i">12</span><span class="msp-n">Sebastian Brunemeier<em>Healthspan Capital / Cambrian</em></span><span class="msp-s">S2</span></div>
+        <div class="msp-row"><span class="msp-i">13</span><span class="msp-n">Patri Friedman<em>Pronomos Capital</em></span><span class="msp-s">S2·Online</span></div>
+        <div class="msp-row"><span class="msp-i">14</span><span class="msp-n">Natalie S. Coles de Grey<em>Human Longevity Inc &amp; LEV Foundation</em></span><span class="msp-s">S2</span></div>
+      </div>
+
+      <details>
+        <summary><span class="msp-lc">Show all 51 confirmed speakers</span><span class="msp-lo">Show fewer</span></summary>
+        <div class="msp-grid">
+          <div class="msp-row"><span class="msp-i">15</span><span class="msp-n">Walter Marion Patterson<em>CSO, Minicircle</em></span><span class="msp-s">S2·F</span></div>
+          <div class="msp-row"><span class="msp-i">16</span><span class="msp-n">Matt Scholz<em>Oisin Bio</em></span><span class="msp-s">S2</span></div>
+          <div class="msp-row"><span class="msp-i">17</span><span class="msp-n">Todd Porter<em>EDGEof / Venture Cafe Tokyo</em></span><span class="msp-s">S2</span></div>
+          <div class="msp-row"><span class="msp-i">18</span><span class="msp-n">Josh Mann<em>COO, The LARTA Agency</em></span><span class="msp-s">S2</span></div>
+          <div class="msp-row"><span class="msp-i">19</span><span class="msp-n">Florian<em>Antler</em></span><span class="msp-s">S2</span></div>
+          <div class="msp-row"><span class="msp-i">20</span><span class="msp-n">Prof. Stuart Reid<em>University of Strathclyde</em></span><span class="msp-s">S2</span></div>
+          <div class="msp-row"><span class="msp-i">21</span><span class="msp-n">Rob Claar<em>CEO, HekaBio</em></span><span class="msp-s">S1</span></div>
+          <div class="msp-row"><span class="msp-i">22</span><span class="msp-n">Prof. Takahiro Yasuda<em>Kobe University</em></span><span class="msp-s">S1</span></div>
+          <div class="msp-row"><span class="msp-i">23</span><span class="msp-n">Keiko Kobayashi<em>Kobe Biomedical Innovation Cluster (FBRI)</em></span><span class="msp-s">S1</span></div>
+          <div class="msp-row"><span class="msp-i">24</span><span class="msp-n">Rodney Kelly<em>MEDISO</em></span><span class="msp-s">S2</span></div>
+          <div class="msp-row"><span class="msp-i">25</span><span class="msp-n">Ian Huyett<em>Granite Bio Innovation</em></span><span class="msp-s">S1</span></div>
+          <div class="msp-row"><span class="msp-i">26</span><span class="msp-n">Sandeep Casi<em>Investor</em></span><span class="msp-s">S2</span></div>
+          <div class="msp-row"><span class="msp-i">27</span><span class="msp-n">Keita Masui<em>ASAGI Labs</em></span><span class="msp-s">S2</span></div>
+          <div class="msp-row"><span class="msp-i">28</span><span class="msp-n">Muneaki Goto<em>Reskilling initiative</em></span><span class="msp-s">S2</span></div>
+          <div class="msp-row"><span class="msp-i">29</span><span class="msp-n">Devinder Sodhi<em>Learning Layer Labs</em></span><span class="msp-s">S1</span></div>
+          <div class="msp-row"><span class="msp-i">30</span><span class="msp-n">Sumit Jamuar<em>XPRIZE Brain Trust</em></span><span class="msp-s">S2</span></div>
+          <div class="msp-row"><span class="msp-i">31</span><span class="msp-n">Daniel Burger<em>Eightsix Science</em></span><span class="msp-s">S2</span></div>
+          <div class="msp-row"><span class="msp-i">32</span><span class="msp-n">Juliette Humer<em>Muse Bio</em></span><span class="msp-s">S1</span></div>
+          <div class="msp-row"><span class="msp-i">33</span><span class="msp-n">Jeffrey Tibbetts<em>Symbiont Labs</em></span><span class="msp-s">S1</span></div>
+          <div class="msp-row"><span class="msp-i">34</span><span class="msp-n">Ada Cyborg<em>Transhumanist AI / BCI artist</em></span><span class="msp-s">F</span></div>
+          <div class="msp-row"><span class="msp-i">35</span><span class="msp-n">Elen Capri<em>Wellness &amp; longevity creator</em></span><span class="msp-s">F</span></div>
+          <div class="msp-row"><span class="msp-i">36</span><span class="msp-n">Jordan Lasker<em>Researcher / writer</em></span><span class="msp-s">S2</span></div>
+          <div class="msp-row"><span class="msp-i">37</span><span class="msp-n">Nathan Cheng<em>Longevity Biotech Fellowship</em></span><span class="msp-s">F</span></div>
+          <div class="msp-row"><span class="msp-i">38</span><span class="msp-n">Felix Oen<em>Co-founder &amp; CEO</em></span><span class="msp-s">S1</span></div>
+          <div class="msp-row"><span class="msp-i">39</span><span class="msp-n">Brandon Possin<em>ZōVillage</em></span><span class="msp-s">S1</span></div>
+          <div class="msp-row"><span class="msp-i">40</span><span class="msp-n">Bilal Kharouni<em>Ekei Labs</em></span><span class="msp-s">S1</span></div>
+          <div class="msp-row"><span class="msp-i">41</span><span class="msp-n">Alice Gilman<em>R3 Bio</em></span><span class="msp-s">S1</span></div>
+          <div class="msp-row"><span class="msp-i">42</span><span class="msp-n">Julie Ying Baron<em>LiveBeyond</em></span><span class="msp-s">S2</span></div>
+          <div class="msp-row"><span class="msp-i">43</span><span class="msp-n">Irit Rappley<em>Co-founder &amp; CEO, NNP Labs</em></span><span class="msp-s">S2</span></div>
+          <div class="msp-row"><span class="msp-i">44</span><span class="msp-n">Czar Gonzalez<em>HEIRITAGE EcoCultural</em></span><span class="msp-s">S2</span></div>
+          <div class="msp-row"><span class="msp-i">45</span><span class="msp-n">Iris Jiang<em>Stellar Science Foundation</em></span><span class="msp-s">S1</span></div>
+          <div class="msp-row"><span class="msp-i">46</span><span class="msp-n">Louise Hecker, PhD<em>Baylor College of Medicine</em></span><span class="msp-s">S1</span></div>
+          <div class="msp-row"><span class="msp-i">47</span><span class="msp-n">Kosuke Kato, PhD<em>Baylor College of Medicine</em></span><span class="msp-s">S1</span></div>
+          <div class="msp-row"><span class="msp-i">48</span><span class="msp-n">Tomonari Abe<em>ABE YOANDO</em></span><span class="msp-s">S1</span></div>
+          <div class="msp-row"><span class="msp-i">49</span><span class="msp-n">Kentaroh Takagaki<em>Eighteen Six</em></span><span class="msp-s"></span></div>
+          <div class="msp-row"><span class="msp-i">50</span><span class="msp-n">Masataka Watanabe<em>Eighteen Six</em></span><span class="msp-s"></span></div>
+          <div class="msp-row"><span class="msp-i">51</span><span class="msp-n">Kaarthik Abhinav Balakrishnan<em>Eighteen Six</em></span><span class="msp-s"></span></div>
+        </div>
+      </details>
+    </div>
 
     <div class="ctas">
       <a class="btn" href="https://luma.com/an4zotn9" data-analytics-action="checkout" data-analytics-location="who_for" data-analytics-target="summit_package">Get my package — $2,500</a>
