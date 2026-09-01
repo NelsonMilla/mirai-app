@@ -223,6 +223,7 @@
     letter-spacing: .22em; text-transform: uppercase; color: var(--dim); text-decoration: none;
     padding: 12px 0; transition: color .2s; }
   nav .navStartups:hover, nav .navStartups:focus-visible { color: var(--accent); }
+  nav .navStartups + .navStartups { margin-left: 0; }
   .btn { display: inline-flex; align-items: center; justify-content: center; min-height: 44px;
     background: var(--ink); color: #0a0a0c !important; text-decoration: none;
     padding: 12px 26px; border-radius: 3px; font-family: var(--mono); font-size: 11px;
@@ -702,6 +703,7 @@
 <div class="topbar">
 <nav>
   <a class="logo" href="#top" data-copy="nav.logo"></a>
+  <a class="navStartups" href="/pricing/" data-analytics-action="site_navigation" data-analytics-location="nav" data-analytics-target="pricing" data-copy="nav.pricing"></a>
   <a class="navStartups" href="/startups/" data-analytics-action="site_navigation" data-analytics-location="nav" data-analytics-target="startups" data-copy="nav.startups"></a>
   <a class="btn accent navCta" href="https://luma.com/an4zotn9" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="nav" data-analytics-target="tickets" data-copy="nav.button"></a>
 </nav>
@@ -862,6 +864,7 @@
     </div>
     <div class="who" data-copy="summits.line"></div>
     <a class="more" href="#speakers" data-copy="summits.link"></a>
+    <a class="more" href="/pricing/" data-analytics-action="site_navigation" data-analytics-location="summits" data-analytics-target="pricing" data-copy="summits.pricingLink"></a>
   </div>
 </section>
 

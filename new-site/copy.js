@@ -23,6 +23,7 @@ window.MIRAI_COPY = {
   /* ─── NAV ─────────────────────────── */
   nav: {
     logo: `Mirai<span class="logoTech">Tech</span>`,
+    pricing: `Pricing`,
     startups: `For Startups`,
     button: `Get Tickets`,
   },
@@ -80,6 +81,7 @@ window.MIRAI_COPY = {
     footnote2: `Hotel & Transportation not included`,
     line: `Across the two weekends: <b>Aubrey de Grey</b>, <b>Motoshi Hayano</b>, and 41 more.`,
     link: `Meet the speakers ↑`,
+    pricingLink: `See all pricing →`,
   },
 
   /* ─── SPEAKERS ─────────────────────────── */
@@ -194,7 +196,7 @@ window.MIRAI_COPY = {
       ? `Tickets for the Summits &amp; Fashion Show. Applications for the PopUp.`
       : `Tickets for the Summits. Applications for the PopUp.`,
     buttons2: `<a class="btn accent" href="https://luma.com/an4zotn9" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="apply" data-analytics-target="tickets">Get Tickets</a> <a class="btn" href="https://luma.com/an4zotn9" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="apply" data-analytics-target="residency">Come Live Japan</a> <a class="btn ghost" href="#">Sponsor the City</a>`,
-    footnote: `Tickets &amp; PopUp on Luma · Applications reviewed on a rolling basis`,
+    footnote: `Tickets &amp; PopUp on Luma · Applications reviewed on a rolling basis · <a href="/pricing/" data-analytics-action="site_navigation" data-analytics-location="apply" data-analytics-target="pricing">See pricing →</a>`,
     footnote2: `Sponsors reach 300 residents and 51 speakers`,
   },
 
