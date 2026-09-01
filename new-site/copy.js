@@ -78,13 +78,6 @@ window.MIRAI_COPY = {
     priceRow2: `<span class="priceVal">$900</span><span class="priceKey"></span>`,
     block2: `<a class="btn ghost" href="https://luma.com/an4zotn9" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="summit_2" data-analytics-target="summit_pass">Get My Ticket</a>`,
     footnote2: `Hotel & Transportation not included`,
-    /* Early-bird strip — auto-hides after Aug 31 JST via the existing
-       EB_END gate (html.ebOver); the <span class="ebc"> countdown is
-       filled by tick() in index.html. */
-    ebTag: `Early Bird`,
-    ebText: `<b>$399</b> — covers whatever dates you're coming.`,
-    ebClock: `Available until Aug 31 · <span class="ebc">&#8212;</span>`,
-    ebCta: `Get Early Bird →`,
     line: `Across the two weekends: <b>Aubrey de Grey</b>, <b>Motoshi Hayano</b>, and 41 more.`,
     link: `Meet the speakers ↑`,
   },
@@ -183,14 +176,14 @@ window.MIRAI_COPY = {
     a2: `Port Island, home to KBIC (Kobe Biomedical Innovation Cluster). A purpose-built biomedical district with lab infrastructure, connected to central Kobe via the Port Liner monorail.`,
     q3: `Do I have to stay the whole month?`,
     a3: SHOW_FASHION
-      ? `No. The city runs October 1–31, but summit tickets stand alone — come for one weekend (Oct 17–18 or Oct 24–26), take both with the hotel package, or apply for the residency and stay the month.`
-      : `No. The city runs October 1–31, but summit tickets stand alone — come for one weekend (Oct 17–18 or Oct 24–25), take both with the hotel package, or apply for the residency and stay the month.`,
+      ? `No. The city runs October 1–31, but summit tickets stand alone — come for one weekend (Oct 17–18 or Oct 24–26), take both with the hotel package, or apply for the PopUp and stay the month.`
+      : `No. The city runs October 1–31, but summit tickets stand alone — come for one weekend (Oct 17–18 or Oct 24–25), take both with the hotel package, or apply for the PopUp and stay the month.`,
     q4: `Where do I stay?`,
     a4: `Our partner hotel, the Portopia, is a short walk from KBIC, and the community hacker houses — The Sanctuary, Biopunk House, Aevitas, and ZuCity Japan — host residents across the city. The Both Weekends + Hotel package includes 12 nights in Sannomiya.`,
     q5: `What is the Frontier Human Fashion Show?`,
     a5: `A live demo day reimagined as a runway show. Device residents showcase their prototypes on models, blending medical technology with fashion. Think CES meets Tokyo Fashion Week.`,
     q6: `How do tickets and applications work?`,
-    a6: `Summit tickets and the hotel package are on Luma. The month-long residency is application-only — we review on a rolling basis, and accepted teams receive next steps by email.`,
+    a6: `Summit tickets and the hotel package are on Luma. The month-long PopUp is <b>$1,200</b> and application-only — we review on a rolling basis, and accepted teams receive next steps by email.`,
   },
 
   /* ─── APPLY ─────────────────────────── */
@@ -198,10 +191,10 @@ window.MIRAI_COPY = {
     eyebrow: `October 2026 · 300 Curated Residents`,
     headline: `The future is<br/>built here.`,
     buttons: SHOW_FASHION
-      ? `Tickets for the Summits &amp; Fashion Show. Applications for the Residency.`
-      : `Tickets for the Summits. Applications for the Residency.`,
-    buttons2: `<a class="btn accent" href="https://luma.com/an4zotn9" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="apply" data-analytics-target="tickets">Get Tickets</a> <a class="btn" href="https://luma.com/an4zotn9" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="apply" data-analytics-target="residency">Apply for the Residency</a> <a class="btn ghost" href="#">Sponsor the City</a>`,
-    footnote: `Tickets &amp; residency on Luma · Applications reviewed on a rolling basis`,
+      ? `Tickets for the Summits &amp; Fashion Show. Applications for the PopUp.`
+      : `Tickets for the Summits. Applications for the PopUp.`,
+    buttons2: `<a class="btn accent" href="https://luma.com/an4zotn9" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="apply" data-analytics-target="tickets">Get Tickets</a> <a class="btn" href="https://luma.com/an4zotn9" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="apply" data-analytics-target="residency">Come Live Japan</a> <a class="btn ghost" href="#">Sponsor the City</a>`,
+    footnote: `Tickets &amp; PopUp on Luma · Applications reviewed on a rolling basis`,
     footnote2: `Sponsors reach 300 residents and 51 speakers`,
   },
 
