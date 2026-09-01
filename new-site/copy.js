@@ -53,7 +53,7 @@ window.MIRAI_COPY = {
     fact4: `<b>+ Finale</b><span>Frontier Human Fashion Show &amp; Demo Day · October 26</span>`,
     price: `$2,500<span>Launch price · $4,000 once these {spotsTotal} are gone</span>`,
     button: `Get My Package — $2,500`,
-    friction: `Only {spotsTotal} at this price · Then $4,000 · Breakfast excluded`,
+    friction: `Only {spotsTotal} at this price · Then $4,000 · Breakfast included`,
     detailsLink: `<a class="bundle-feature__details" href="/summit-bundle/" data-analytics-action="alternative_offer" data-analytics-location="summit_package" data-analytics-target="summit_hotel">See everything included →</a>`,
   },
 
