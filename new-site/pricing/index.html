@@ -135,59 +135,156 @@
   <p class="lede">Four ways into Mirai Tech City, side by side. <b>Tickets, the PopUp, and the package check out on Luma; the Acceleration Sprint applies by form.</b> Hotel and transportation are not included unless the line says so.</p>
 </header>
 
-<section class="cards" data-track-section="cards" data-track-position="2" aria-label="The three offers">
-  <div class="card hot">
-    <p class="cName">The PopUp · the whole month</p>
-    <p class="cPrice num">$1,200</p>
-    <p class="cSpan num">Oct 1–31 · 31 days</p>
-    <ul class="cList">
-      <li>Both summit weekends, Demo Day &amp; the Fashion Show</li>
-      <li>The month&rsquo;s programming — lab tours, workshops, the hackathon</li>
-      <li>Cowork base &amp; the 300-resident community</li>
-      <li class="no">Housing — matched to your budget after acceptance</li>
-    </ul>
-    <a class="btn accent" href="https://luma.com/an4zotn9" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="pricing_popup" data-analytics-target="residency">Come Live Japan</a>
-    <p class="cFoot">Application only · rolling review</p>
+<section class="v3x-board" data-track-section="cards" data-track-position="2" aria-label="The four offers, as a fare board">
+<style>
+  .v3x-board { max-width: 1280px; margin: 0 auto; padding: 48px 6vw 0; }
+  .v3x-frame { border: 1px solid var(--line); background: #08090c; }
+  .v3x-bar { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 18px;
+    padding: 12px 22px; border-bottom: 1px solid var(--line); background: #0a0b0d;
+    font-family: var(--mono); font-size: 9.5px; letter-spacing: .26em; text-transform: uppercase; color: var(--faint); }
+  .v3x-bar b { color: var(--accent); font-weight: 400; }
+  .v3x-head, .v3x-row { display: grid;
+    grid-template-columns: minmax(142px, 1fr) minmax(162px, .65fr) minmax(180px, 1.2fr) minmax(205px, 1.45fr) minmax(146px, .7fr);
+    gap: 10px 26px; align-items: center; padding: 22px; }
+  .v3x-head { padding: 9px 22px; border-bottom: 1px solid var(--line); font-family: var(--mono);
+    font-size: 9px; letter-spacing: .24em; text-transform: uppercase; color: var(--faint); }
+  .v3x-head .v3x-hr { text-align: right; }
+  .v3x-row { border-bottom: 1px solid var(--line); }
+  .v3x-row:last-child { border-bottom: 0; }
+  .v3x-row--hot { background: rgba(var(--accent-rgb), .06); box-shadow: inset 3px 0 0 var(--accent);
+    padding-top: 32px; padding-bottom: 32px; }
+  .v3x-svc { display: flex; flex-direction: column; gap: 8px; align-items: flex-start; min-width: 0; }
+  .v3x-name { font-weight: 800; font-size: 18px; letter-spacing: .015em; text-transform: uppercase; line-height: 1.15; }
+  .v3x-row--hot .v3x-name { font-size: 22px; }
+  .v3x-tag { font-family: var(--mono); font-size: 9.5px; letter-spacing: .2em; text-transform: uppercase; color: var(--dim); }
+  .v3x-flag { font-family: var(--mono); font-size: 8.5px; letter-spacing: .22em; text-transform: uppercase;
+    padding: 3px 8px 2px; border: 1px solid rgba(var(--accent-rgb), .55); color: var(--accent); border-radius: 2px; }
+  .v3x-fare { text-align: right; font-variant-numeric: tabular-nums; }
+  .v3x-price { font-weight: 900; font-size: clamp(28px, 2.6vw, 38px); line-height: 1; letter-spacing: -.01em; }
+  .v3x-row--hot .v3x-price { color: var(--accent); font-size: clamp(32px, 3vw, 44px); }
+  .v3x-unit { margin-top: 6px; font-family: var(--mono); font-size: 9px; letter-spacing: .16em;
+    text-transform: uppercase; color: var(--faint); }
+  .v3x-cover { min-width: 0; }
+  .v3x-strip { display: block; width: 100%; height: auto; }
+  .v3x-strip text { font-family: var(--mono); font-size: 10px; fill: rgba(244,243,240,.5); }
+  .v3x-strip .v3x-or { font-size: 12px; fill: rgba(244,243,240,.9); }
+  .v3x-dates { margin-top: 7px; font-family: var(--mono); font-size: 10px; letter-spacing: .13em;
+    text-transform: uppercase; color: var(--ink); font-variant-numeric: tabular-nums; }
+  .v3x-in { min-width: 0; font-family: var(--mono); font-size: 11.5px; line-height: 1.8;
+    letter-spacing: .02em; color: var(--dim); }
+  .v3x-sub { margin-top: 7px; font-size: 9.5px; letter-spacing: .08em; color: var(--faint);
+    line-height: 1.9; text-transform: uppercase; font-variant-numeric: tabular-nums; }
+  .v3x-sub a { color: var(--accent); text-decoration: none; }
+  .v3x-cta { display: flex; flex-direction: column; gap: 9px; align-items: stretch; text-align: center; min-width: 0; }
+  .v3x-cta .btn { display: block; text-align: center; padding: 13px 10px; }
+  .v3x-note { font-family: var(--mono); font-size: 8.5px; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--faint); line-height: 1.8; }
+  @media (max-width: 1080px) {
+    .v3x-head { display: none; }
+    .v3x-row { grid-template-columns: minmax(0, 1fr) auto; gap: 16px 18px; padding: 24px 18px; align-items: start; }
+    .v3x-svc { grid-column: 1; }
+    .v3x-fare { grid-column: 2; }
+    .v3x-cover, .v3x-in, .v3x-cta { grid-column: 1 / -1; }
+    .v3x-row--hot { padding-top: 28px; padding-bottom: 28px; }
+    .v3x-row--hot .v3x-price { font-size: 38px; }
+    .v3x-price { font-size: 32px; }
+  }
+</style>
+<div class="v3x-frame">
+  <div class="v3x-bar"><span><b>Mirai Tech City</b> · Fare Board</span><span class="num">Kobe · October 2026 · Prices in USD</span></div>
+  <div class="v3x-head" aria-hidden="true">
+    <span>Service</span><span class="v3x-hr">Fare</span><span>Covers</span><span>What&rsquo;s in</span><span>Board</span>
   </div>
-  <div class="card">
-    <p class="cName">Summit weekend ticket</p>
-    <p class="cPrice num">$900</p>
-    <p class="cSpan num">Per weekend · Oct 17–18 or Oct 24–25</p>
-    <ul class="cList">
-      <li>One summit weekend of talks &amp; panels</li>
-      <li>51 confirmed speakers across the two weekends</li>
-      <li class="no">Weekday programming</li>
-      <li class="no">Hotel &amp; transportation</li>
-    </ul>
-    <a class="btn" href="https://luma.com/an4zotn9" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="pricing_ticket" data-analytics-target="tickets">Get Tickets</a>
-    <p class="cFoot">No application needed</p>
+  <div class="v3x-row v3x-row--hot">
+    <div class="v3x-svc">
+      <span class="v3x-flag">Featured</span>
+      <p class="v3x-name">The PopUp</p>
+      <p class="v3x-tag">The whole month</p>
+    </div>
+    <div class="v3x-fare">
+      <p class="v3x-price num">$1,200</p>
+    </div>
+    <div class="v3x-cover">
+      <svg class="v3x-strip" viewBox="0 0 306 38" role="img" aria-label="October timeline: covers October 1 to 31, the whole month"><rect x="0" y="10" width="6" height="10" fill="var(--accent)"/><rect x="10" y="10" width="6" height="10" fill="var(--accent)"/><rect x="20" y="10" width="6" height="10" fill="var(--accent)"/><rect x="30" y="10" width="6" height="10" fill="var(--accent)"/><rect x="40" y="10" width="6" height="10" fill="var(--accent)"/><rect x="50" y="10" width="6" height="10" fill="var(--accent)"/><rect x="60" y="10" width="6" height="10" fill="var(--accent)"/><rect x="70" y="10" width="6" height="10" fill="var(--accent)"/><rect x="80" y="10" width="6" height="10" fill="var(--accent)"/><rect x="90" y="10" width="6" height="10" fill="var(--accent)"/><rect x="100" y="10" width="6" height="10" fill="var(--accent)"/><rect x="110" y="10" width="6" height="10" fill="var(--accent)"/><rect x="120" y="10" width="6" height="10" fill="var(--accent)"/><rect x="130" y="10" width="6" height="10" fill="var(--accent)"/><rect x="140" y="10" width="6" height="10" fill="var(--accent)"/><rect x="150" y="10" width="6" height="10" fill="var(--accent)"/><rect x="160" y="6" width="6" height="14" fill="var(--accent)"/><rect x="170" y="6" width="6" height="14" fill="var(--accent)"/><rect x="180" y="10" width="6" height="10" fill="var(--accent)"/><rect x="190" y="10" width="6" height="10" fill="var(--accent)"/><rect x="200" y="10" width="6" height="10" fill="var(--accent)"/><rect x="210" y="10" width="6" height="10" fill="var(--accent)"/><rect x="220" y="10" width="6" height="10" fill="var(--accent)"/><rect x="230" y="6" width="6" height="14" fill="var(--accent)"/><rect x="240" y="6" width="6" height="14" fill="var(--accent)"/><rect x="250" y="6" width="6" height="14" fill="var(--accent)"/><rect x="260" y="10" width="6" height="10" fill="var(--accent)"/><rect x="270" y="10" width="6" height="10" fill="var(--accent)"/><rect x="280" y="10" width="6" height="10" fill="var(--accent)"/><rect x="290" y="10" width="6" height="10" fill="var(--accent)"/><rect x="300" y="10" width="6" height="10" fill="var(--accent)"/><text x="0" y="35">1</text><text x="160" y="35">17</text><text x="230" y="35">24</text><text x="306" y="35" text-anchor="end">31</text></svg>
+      <p class="v3x-dates num">Oct 1&ndash;31 &middot; 31 days</p>
+    </div>
+    <div class="v3x-in">
+      Both summits &middot; Demo Day &amp; Fashion Show &middot; the month&rsquo;s programming &middot; cowork &amp; 300 residents
+      <p class="v3x-sub">Lab tours &middot; workshops &middot; hackathon &middot; housing matched to your budget after acceptance &mdash; not included</p>
+    </div>
+    <div class="v3x-cta">
+      <a class="btn accent" href="https://luma.com/an4zotn9" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="pricing_popup" data-analytics-target="residency">Come Live Japan</a>
+      <p class="v3x-note">Application only &middot; rolling review</p>
+    </div>
   </div>
-  <div class="card">
-    <p class="cName">Summit + hotel package</p>
-    <p class="cPrice num">$2,500</p>
-    <p class="cSpan num">Oct 16–28 · 12 hotel nights</p>
-    <ul class="cList">
-      <li>Both summit weekends &amp; the week between</li>
-      <li>Demo Day &amp; the Fashion Show</li>
-      <li>Room in Sannomiya · check in Oct 16, out Oct 28</li>
-      <li class="no">Breakfast</li>
-    </ul>
-    <a class="btn" href="https://luma.com/an4zotn9?coupon=SFSH&amp;utm_source=pricing&amp;utm_campaign=summit-hotel-package" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="pricing_package" data-analytics-target="summit_hotel">Book the Package</a>
-    <p class="cFoot num">Launch price · $4,000 once the 10 are gone · <a href="/summit-bundle/" style="color:var(--accent);text-decoration:none" data-analytics-action="alternative_offer" data-analytics-location="pricing_package" data-analytics-target="summit_hotel">Details →</a></p>
+  <div class="v3x-row">
+    <div class="v3x-svc">
+      <p class="v3x-name">Summit weekend ticket</p>
+      <p class="v3x-tag">One weekend &middot; talks &amp; panels</p>
+    </div>
+    <div class="v3x-fare">
+      <p class="v3x-price num">$900</p>
+      <p class="v3x-unit num">per weekend</p>
+    </div>
+    <div class="v3x-cover">
+      <svg class="v3x-strip" viewBox="0 0 306 38" role="img" aria-label="October timeline: covers October 17 to 18 or October 24 to 25, one weekend of your choice"><rect x="0" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="10" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="20" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="30" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="40" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="50" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="60" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="70" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="80" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="90" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="100" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="110" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="120" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="130" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="140" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="150" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="160" y="6" width="6" height="14" fill="var(--accent)"/><rect x="170" y="6" width="6" height="14" fill="var(--accent)"/><rect x="180" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="190" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="200" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="210" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="220" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="230" y="6" width="6" height="14" fill="var(--accent)" opacity=".45"/><rect x="240" y="6" width="6" height="14" fill="var(--accent)" opacity=".45"/><rect x="250" y="6" width="6" height="14" fill="rgba(244,243,240,.28)"/><rect x="260" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="270" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="280" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="290" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="300" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><text x="0" y="35">1</text><text x="160" y="35">17</text><text x="230" y="35">24</text><text x="306" y="35" text-anchor="end">31</text><text x="203" y="17" text-anchor="middle" class="v3x-or">or</text></svg>
+      <p class="v3x-dates num">Oct 17&ndash;18 or Oct 24&ndash;25</p>
+    </div>
+    <div class="v3x-in">
+      One summit weekend of talks &amp; panels &middot; 51 confirmed speakers across the two weekends
+      <p class="v3x-sub">No weekday programming &middot; no hotel &amp; transportation</p>
+    </div>
+    <div class="v3x-cta">
+      <a class="btn" href="https://luma.com/an4zotn9" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="pricing_ticket" data-analytics-target="tickets">Get Tickets</a>
+      <p class="v3x-note">No application needed</p>
+    </div>
   </div>
-  <div class="card">
-    <p class="cName">Acceleration Sprint · for startups</p>
-    <p class="cPrice num">$2,500</p>
-    <p class="cSpan num">Oct 1–26 · through Demo Day</p>
-    <ul class="cList">
-      <li>A month of coaching, accelerator resources &amp; VC introductions</li>
-      <li>Both summit weekends &amp; Demo Day</li>
-      <li>PMDA regulatory consulting · lab &amp; co-working access</li>
-      <li>Accommodation &amp; the social agenda</li>
-    </ul>
-    <a class="btn" href="https://form.typeform.com/to/sG9eS2Ok?utm_source=mirai-site&amp;utm_campaign=startup-sprint" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="pricing_sprint" data-analytics-target="application">Apply Now</a>
-    <p class="cFoot num">Application only · rolling review · $21,600 at market · <a href="/startups/" style="color:var(--accent);text-decoration:none" data-analytics-action="alternative_offer" data-analytics-location="pricing_sprint" data-analytics-target="startup_sprint">Details →</a></p>
+  <div class="v3x-row">
+    <div class="v3x-svc">
+      <p class="v3x-name">Summit + hotel package</p>
+      <p class="v3x-tag">12 hotel nights &middot; Sannomiya</p>
+    </div>
+    <div class="v3x-fare">
+      <p class="v3x-price num">$2,500</p>
+      <p class="v3x-unit num">launch price</p>
+    </div>
+    <div class="v3x-cover">
+      <svg class="v3x-strip" viewBox="0 0 306 38" role="img" aria-label="October timeline: covers October 16 to 28, twelve hotel nights"><rect x="0" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="10" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="20" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="30" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="40" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="50" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="60" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="70" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="80" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="90" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="100" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="110" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="120" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="130" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="140" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="150" y="10" width="6" height="10" fill="var(--accent)"/><rect x="160" y="6" width="6" height="14" fill="var(--accent)"/><rect x="170" y="6" width="6" height="14" fill="var(--accent)"/><rect x="180" y="10" width="6" height="10" fill="var(--accent)"/><rect x="190" y="10" width="6" height="10" fill="var(--accent)"/><rect x="200" y="10" width="6" height="10" fill="var(--accent)"/><rect x="210" y="10" width="6" height="10" fill="var(--accent)"/><rect x="220" y="10" width="6" height="10" fill="var(--accent)"/><rect x="230" y="6" width="6" height="14" fill="var(--accent)"/><rect x="240" y="6" width="6" height="14" fill="var(--accent)"/><rect x="250" y="6" width="6" height="14" fill="var(--accent)"/><rect x="260" y="10" width="6" height="10" fill="var(--accent)"/><rect x="270" y="10" width="6" height="10" fill="var(--accent)"/><rect x="280" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="290" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="300" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><text x="0" y="35">1</text><text x="160" y="35">17</text><text x="230" y="35">24</text><text x="306" y="35" text-anchor="end">31</text></svg>
+      <p class="v3x-dates num">Oct 16&ndash;28 &middot; 12 hotel nights</p>
+    </div>
+    <div class="v3x-in">
+      Both weekends &amp; the week between &middot; Demo Day &amp; Fashion Show &middot; room in Sannomiya
+      <p class="v3x-sub num">In Oct 16 &middot; out Oct 28 &middot; breakfast excluded &middot; $4,000 once the 10 are gone &middot; <a href="/summit-bundle/" data-analytics-action="alternative_offer" data-analytics-location="pricing_package" data-analytics-target="summit_hotel">Details &rarr;</a></p>
+    </div>
+    <div class="v3x-cta">
+      <a class="btn" href="https://luma.com/an4zotn9?coupon=SFSH&amp;utm_source=pricing&amp;utm_campaign=summit-hotel-package" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="pricing_package" data-analytics-target="summit_hotel">Book the Package</a>
+      <p class="v3x-note">No application needed</p>
+    </div>
   </div>
+  <div class="v3x-row">
+    <div class="v3x-svc">
+      <span class="v3x-flag">For startups</span>
+      <p class="v3x-name">Acceleration Sprint</p>
+      <p class="v3x-tag">Through Demo Day</p>
+    </div>
+    <div class="v3x-fare">
+      <p class="v3x-price num">$2,500</p>
+      <p class="v3x-unit num">$21,600 at market</p>
+    </div>
+    <div class="v3x-cover">
+      <svg class="v3x-strip" viewBox="0 0 306 38" role="img" aria-label="October timeline: covers October 1 to 26, through Demo Day"><rect x="0" y="10" width="6" height="10" fill="var(--accent)"/><rect x="10" y="10" width="6" height="10" fill="var(--accent)"/><rect x="20" y="10" width="6" height="10" fill="var(--accent)"/><rect x="30" y="10" width="6" height="10" fill="var(--accent)"/><rect x="40" y="10" width="6" height="10" fill="var(--accent)"/><rect x="50" y="10" width="6" height="10" fill="var(--accent)"/><rect x="60" y="10" width="6" height="10" fill="var(--accent)"/><rect x="70" y="10" width="6" height="10" fill="var(--accent)"/><rect x="80" y="10" width="6" height="10" fill="var(--accent)"/><rect x="90" y="10" width="6" height="10" fill="var(--accent)"/><rect x="100" y="10" width="6" height="10" fill="var(--accent)"/><rect x="110" y="10" width="6" height="10" fill="var(--accent)"/><rect x="120" y="10" width="6" height="10" fill="var(--accent)"/><rect x="130" y="10" width="6" height="10" fill="var(--accent)"/><rect x="140" y="10" width="6" height="10" fill="var(--accent)"/><rect x="150" y="10" width="6" height="10" fill="var(--accent)"/><rect x="160" y="6" width="6" height="14" fill="var(--accent)"/><rect x="170" y="6" width="6" height="14" fill="var(--accent)"/><rect x="180" y="10" width="6" height="10" fill="var(--accent)"/><rect x="190" y="10" width="6" height="10" fill="var(--accent)"/><rect x="200" y="10" width="6" height="10" fill="var(--accent)"/><rect x="210" y="10" width="6" height="10" fill="var(--accent)"/><rect x="220" y="10" width="6" height="10" fill="var(--accent)"/><rect x="230" y="6" width="6" height="14" fill="var(--accent)"/><rect x="240" y="6" width="6" height="14" fill="var(--accent)"/><rect x="250" y="6" width="6" height="14" fill="var(--accent)"/><rect x="260" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="270" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="280" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="290" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="300" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><text x="0" y="35">1</text><text x="160" y="35">17</text><text x="230" y="35">24</text><text x="306" y="35" text-anchor="end">31</text></svg>
+      <p class="v3x-dates num">Oct 1&ndash;26 &middot; through Demo Day</p>
+    </div>
+    <div class="v3x-in">
+      Coaching &middot; accelerator resources &middot; VC introductions &middot; both summits &amp; Demo Day &middot; PMDA consulting
+      <p class="v3x-sub">Lab &amp; co-working &middot; accommodation &amp; social agenda included &middot; <a href="/startups/" data-analytics-action="alternative_offer" data-analytics-location="pricing_sprint" data-analytics-target="startup_sprint">Details &rarr;</a></p>
+    </div>
+    <div class="v3x-cta">
+      <a class="btn" href="https://form.typeform.com/to/sG9eS2Ok?utm_source=mirai-site&amp;utm_campaign=startup-sprint" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="pricing_sprint" data-analytics-target="application">Apply Now</a>
+      <p class="v3x-note">Application only &middot; rolling review</p>
+    </div>
+  </div>
+</div>
 </section>
 
 <div class="math num" data-track-section="math" data-track-position="3">
