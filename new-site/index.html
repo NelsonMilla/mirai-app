@@ -303,6 +303,8 @@
   .heroContent h1 { font-weight: 900; text-transform: uppercase; letter-spacing: -.015em;
     font-size: clamp(58px, 8.2vw, 118px); line-height: .88; color: var(--ink); max-width: none; }
   .heroContent h1 span { display: block; }
+  .heroThesis { margin: 14px 0 0; color: var(--accent); font-weight: 800; letter-spacing: -.01em;
+    font-size: clamp(19px, 2.2vw, 27px); line-height: 1.2; }
   .heroLead { max-width: 68ch; margin-top: 16px; color: rgba(244,243,240,.9);
     font-size: clamp(16px, 1.45vw, 19px); line-height: 1.5; text-shadow: 0 1px 18px rgba(0,0,0,.7); }
   .heroProgram { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 0; max-width: 980px;
@@ -336,6 +338,7 @@
     .heroContent { bottom: 62px; }
     .heroContent .eyebrow { margin-bottom: 12px; font-size: 10px; letter-spacing: .16em; }
     .heroContent h1 { font-size: clamp(34px, 10.5vw, 60px); letter-spacing: -.025em; }
+    .heroThesis { margin-top: 10px; font-size: 17px; }
     .heroLead { max-width: 39ch; margin-top: 12px; font-size: 15px; line-height: 1.42; }
     .heroProgram { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 16px;
       max-width: 520px; margin-top: 12px; font-size: 11px; letter-spacing: .04em; }
@@ -357,6 +360,7 @@
     .heroContent { top: 80px; bottom: auto; }
     .heroContent .eyebrow { margin-bottom: 8px; font-size: 9px; line-height: 1.45; letter-spacing: .1em; }
     .heroContent h1 { font-size: 34px; line-height: .86; }
+    .heroThesis { margin-top: 8px; font-size: 15px; }
     .heroLead { margin-top: 8px; font-size: 13px; line-height: 1.34; }
     .heroProgram { margin-top: 8px; gap: 5px 10px; font-size: 10px; line-height: 1.3; }
     .heroActions { margin-top: 10px; }
@@ -368,12 +372,40 @@
     .heroContent { top: 92px; bottom: auto; }
     .heroContent .eyebrow { margin-bottom: 8px; font-size: 9px; }
     .heroContent h1 { max-width: none; font-size: clamp(42px, 6.4vw, 58px); line-height: .86; white-space: nowrap; }
+    .heroThesis { margin-top: 6px; font-size: 14px; }
     .heroLead { max-width: 78ch; margin-top: 8px; font-size: 12px; line-height: 1.35; }
     .heroProgram { margin-top: 8px; gap: 4px 0; font-size: 10px; }
     .heroProgram li + li::before { margin: 0 8px; }
     .heroActions { margin-top: 10px; }
     .heroProof { margin-top: 8px; }
     .heroContinue { display: none; }
+  }
+
+  /* ── intro + pillars: Accelerate / Inspire / Live ── */
+  #pillars { padding-bottom: 40px; }
+  .introStatement { max-width: 34ch; margin: 0 0 84px; font-weight: 800; letter-spacing: -.01em;
+    font-size: clamp(26px, 3.4vw, 44px); line-height: 1.24; text-wrap: balance; }
+  .introStatement b { color: var(--accent); }
+  .pillar { padding: 44px 0 50px; border-top: 1px solid var(--line); }
+  .pillarHead { display: flex; align-items: baseline; gap: 22px; margin-bottom: 8px; }
+  .pillarNum { font-family: var(--mono); font-size: 12px; letter-spacing: .26em; color: var(--accent); }
+  .pillarHead h2 { margin: 0; }
+  .pillarList { list-style: none; margin: 0; padding: 0; }
+  .pillarList li { position: relative; padding: 16px 0 16px 30px; max-width: 74ch;
+    color: var(--dim); font-size: clamp(16px, 1.5vw, 19px); line-height: 1.55; }
+  .pillarList li::before { content: '→'; position: absolute; left: 0; top: 16px;
+    font-family: var(--mono); font-size: 15px; color: var(--accent); }
+  .pillarList li + li { border-top: 1px solid var(--line); }
+  .pillarList b { color: var(--ink); font-weight: 650; }
+  .pillarList a { color: var(--ink); font-weight: 650; text-decoration: underline;
+    text-decoration-color: var(--accent); text-underline-offset: 4px; }
+  .pillarList a:hover { color: var(--accent); }
+  @media (max-width: 700px) {
+    .introStatement { margin-bottom: 56px; font-size: clamp(23px, 6.6vw, 30px); }
+    .pillar { padding: 32px 0 36px; }
+    .pillarHead { gap: 14px; }
+    .pillarList li { padding: 13px 0 13px 26px; font-size: 15px; }
+    .pillarList li::before { top: 13px; }
   }
 
   .resline { display: inline-block; margin-top: 40px; font-weight: 600; font-size: clamp(10.5px, 2.7vw, 34px);
@@ -782,16 +814,34 @@
   <div class="heroContent">
     <div class="eyebrow" data-copy="hero.eyebrow"></div>
     <h1 data-copy="hero.headline"></h1>
+    <p class="heroThesis" data-copy="hero.thesis"></p>
     <p class="heroLead" data-copy="hero.lead"></p>
     <ul class="heroProgram" aria-label="Program at a glance" data-copy="hero.program"></ul>
     <div class="heroActions" data-copy="hero.buttons"></div>
     <div class="heroProof" aria-label="Featured people and venue" data-copy="hero.proof"></div>
   </div>
-  <a class="heroContinue" href="#speakers" data-copy="hero.scrollHint"></a>
+  <a class="heroContinue" href="#pillars" data-copy="hero.scrollHint"></a>
+</section>
+
+<!-- ═══ INTRO + PILLARS: ACCELERATE / INSPIRE / LIVE ═══ -->
+<section id="pillars" data-track-section="pillars" data-track-position="2">
+  <p class="introStatement rv" data-copy="pillars.statement"></p>
+  <div class="pillar rv">
+    <div class="pillarHead"><span class="pillarNum" data-copy="pillars.num1"></span><h2 class="big" data-copy="pillars.title1"></h2></div>
+    <ul class="pillarList" data-copy="pillars.items1"></ul>
+  </div>
+  <div class="pillar rv">
+    <div class="pillarHead"><span class="pillarNum" data-copy="pillars.num2"></span><h2 class="big" data-copy="pillars.title2"></h2></div>
+    <ul class="pillarList" data-copy="pillars.items2"></ul>
+  </div>
+  <div class="pillar rv">
+    <div class="pillarHead"><span class="pillarNum" data-copy="pillars.num3"></span><h2 class="big" data-copy="pillars.title3"></h2></div>
+    <ul class="pillarList" data-copy="pillars.items3"></ul>
+  </div>
 </section>
 
 <!-- ═══ PROOF: SPEAKERS + ECOSYSTEM ═══ -->
-<section id="speakers" data-track-section="proof" data-track-position="2">
+<section id="speakers" data-track-section="proof" data-track-position="3">
   <div class="eyebrow rv" data-copy="speakers.eyebrow"></div>
   <h2 class="big rv" data-copy="speakers.headline"></h2>
   <div class="headliners">
@@ -859,7 +909,7 @@
 <hr class="rule" />
 
 <!-- ═══ SUMMITS ═══ -->
-<section id="summits" data-track-section="summits" data-track-position="3">
+<section id="summits" data-track-section="summits" data-track-position="4">
   <div class="eyebrow rv" data-copy="summits.eyebrow"></div>
   <h2 class="big rv" data-copy="summits.headline"></h2>
   <div class="summit">
@@ -889,7 +939,7 @@
       <div data-copy="summits.block2"></div>
       <div class="fine" data-copy="summits.footnote2"></div>
     </div>
-    <div class="card pkg rv" id="summit-package" data-package-promo data-track-section="summit_package" data-track-position="4">
+    <div class="card pkg rv" id="summit-package" data-package-promo data-track-section="summit_package" data-track-position="5">
       <div class="pkg-top">
         <div class="num" data-copy="package.name"></div>
         <div class="eyebrow" data-copy="package.eyebrow"></div>
@@ -930,7 +980,7 @@
 <hr class="rule" />
 
 <!-- ═══ FASHION SHOW ═══ -->
-<section class="fashion" id="fashion" data-fashion data-track-section="fashion" data-track-position="5">
+<section class="fashion" id="fashion" data-fashion data-track-section="fashion" data-track-position="6">
   <video muted loop playsinline preload="none" loading="lazy" poster="augment_poster.jpg" aria-hidden="true">
     <source data-src="augment.mp4" type="video/mp4" /></video>
   <div class="veil"></div>
@@ -945,7 +995,7 @@
 </section>
 
 <!-- ═══ JAPAN STRIP ═══ -->
-<section class="stripwrap" aria-label="One evening in Kobe" data-track-section="kobe_evening" data-track-position="6">
+<section class="stripwrap" aria-label="One evening in Kobe" data-track-section="kobe_evening" data-track-position="7">
   <div class="cap mono rv" data-copy="kobe.caption"></div>
   <div class="strip">
     <figure><img src="img/harbor-golden-hour.jpg" alt="Kobe harbor at golden hour" loading="lazy" /><figcaption data-copy="kobe.caption2"></figcaption></figure>
@@ -957,7 +1007,7 @@
 </section>
 
 <!-- ═══ AGENDA · DAY RAIL (the stashed "Full Program" section lives in ../retreat/full-program-section.html) ═══ -->
-<section id="agenda" data-track-section="agenda" data-track-position="7">
+<section id="agenda" data-track-section="agenda" data-track-position="8">
   <div class="eyebrow rv" data-copy="agenda.eyebrow"></div>
   <h2 class="big rv" data-copy="agenda.headline"></h2>
 
@@ -1005,7 +1055,7 @@
 
 
 <!-- ═══ FAQ · TICKET STUBS ═══ -->
-<section id="faq" data-track-section="faq" data-track-position="8">
+<section id="faq" data-track-section="faq" data-track-position="9">
   <div class="fq-grid">
     <header class="fq-head rv">
       <div class="eyebrow" data-copy="faq.eyebrow"></div>
@@ -1045,7 +1095,7 @@
 </section>
 
 <!-- ═══ APPLY ═══ -->
-<div class="applywrap" id="apply" data-track-section="apply" data-track-position="9">
+<div class="applywrap" id="apply" data-track-section="apply" data-track-position="10">
   <img class="bg" src="img/future_city.jpg" alt="" aria-hidden="true" loading="lazy" />
   <div class="veil"></div>
   <section class="apply">
