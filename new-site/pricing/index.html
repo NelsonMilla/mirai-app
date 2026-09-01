@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>What It Costs · Mirai Tech City · Kobe 2026</title>
-<meta name="description" content="Every way into Mirai Tech City, priced side by side: the $1,200 month-long PopUp, $900 summit weekend tickets, and the $2,500 summit + hotel package. Kobe, October 1–31, 2026." />
+<meta name="description" content="Every way into Mirai Tech City, priced side by side: the $1,200 month-long PopUp, $900 summit weekend tickets, the $2,500 summit + hotel package, and the $2,500 startup Acceleration Sprint. Kobe, October 1–31, 2026." />
 <link rel="canonical" href="https://mirai-tech-city.vercel.app/pricing/" />
 <meta property="og:title" content="What It Costs · Mirai Tech City" />
 <meta property="og:description" content="The $1,200 month-long PopUp, $900 summit weekends, and the $2,500 summit + hotel package — side by side." />
@@ -64,7 +64,8 @@
 
   /* cards */
   .cards { max-width: 1280px; margin: 0 auto; padding: 48px 6vw 0; display: grid;
-    grid-template-columns: repeat(3, 1fr); gap: 16px; align-items: stretch; }
+    grid-template-columns: repeat(4, 1fr); gap: 16px; align-items: stretch; }
+  @media (max-width: 1120px) { .cards { grid-template-columns: 1fr 1fr; } }
   .card { border: 1px solid var(--line); background: #0a0b0d; padding: 26px 24px 24px;
     display: flex; flex-direction: column; gap: 0; }
   .card.hot { border-color: rgba(var(--accent-rgb), .5); box-shadow: 0 0 44px rgba(var(--accent-rgb), .08); }
@@ -95,7 +96,7 @@
   /* table */
   .tblWrap { max-width: 1280px; margin: 56px auto 0; padding: 0 6vw; }
   .tblScroll { overflow-x: auto; border: 1px solid var(--line); }
-  table { width: 100%; min-width: 720px; border-collapse: collapse; font-size: 13.5px; }
+  table { width: 100%; min-width: 880px; border-collapse: collapse; font-size: 13.5px; }
   th, td { padding: 13px 16px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
   thead th { font-family: var(--mono); font-size: 10px; letter-spacing: .18em; text-transform: uppercase;
     color: var(--dim); font-weight: 400; background: #0a0b0d; }
@@ -117,7 +118,7 @@
   footer b { color: var(--dim); font-weight: 400; }
   footer a { color: var(--accent); text-decoration: none; }
 
-  @media (max-width: 960px) { .cards { grid-template-columns: 1fr; } .card.hot { order: -1; } }
+  @media (max-width: 680px) { .cards { grid-template-columns: 1fr; } .card.hot { order: -1; } }
 </style>
 </head>
 <body data-analytics-offer="pricing">
@@ -131,7 +132,7 @@
 <header class="wrap" data-track-section="hero" data-track-position="1">
   <p class="eyebrow">Kobe · Port Island · October 1–31, 2026</p>
   <h1>What it costs<span class="tick">.</span></h1>
-  <p class="lede">Three ways into Mirai Tech City, side by side. <b>Everything is on Luma.</b> Hotel and transportation are not included unless the line says so.</p>
+  <p class="lede">Four ways into Mirai Tech City, side by side. <b>Tickets, the PopUp, and the package check out on Luma; the Acceleration Sprint applies by form.</b> Hotel and transportation are not included unless the line says so.</p>
 </header>
 
 <section class="cards" data-track-section="cards" data-track-position="2" aria-label="The three offers">
@@ -150,8 +151,8 @@
   </div>
   <div class="card">
     <p class="cName">Summit weekend ticket</p>
-    <p class="cPrice num">$900<small> / weekend</small></p>
-    <p class="cSpan num">Oct 17–18 or Oct 24–25</p>
+    <p class="cPrice num">$900</p>
+    <p class="cSpan num">Per weekend · Oct 17–18 or Oct 24–25</p>
     <ul class="cList">
       <li>One summit weekend of talks &amp; panels</li>
       <li>51 confirmed speakers across the two weekends</li>
@@ -174,6 +175,19 @@
     <a class="btn" href="https://luma.com/an4zotn9?coupon=SFSH&amp;utm_source=pricing&amp;utm_campaign=summit-hotel-package" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="pricing_package" data-analytics-target="summit_hotel">Book the Package</a>
     <p class="cFoot num">Launch price · $4,000 once the 10 are gone · <a href="/summit-bundle/" style="color:var(--accent);text-decoration:none" data-analytics-action="alternative_offer" data-analytics-location="pricing_package" data-analytics-target="summit_hotel">Details →</a></p>
   </div>
+  <div class="card">
+    <p class="cName">Acceleration Sprint · for startups</p>
+    <p class="cPrice num">$2,500</p>
+    <p class="cSpan num">Oct 1–26 · through Demo Day</p>
+    <ul class="cList">
+      <li>A month of coaching, accelerator resources &amp; VC introductions</li>
+      <li>Both summit weekends &amp; Demo Day</li>
+      <li>PMDA regulatory consulting · lab &amp; co-working access</li>
+      <li>Accommodation &amp; the social agenda</li>
+    </ul>
+    <a class="btn" href="https://form.typeform.com/to/sG9eS2Ok?utm_source=mirai-site&amp;utm_campaign=startup-sprint" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="pricing_sprint" data-analytics-target="application">Apply Now</a>
+    <p class="cFoot num">Application only · rolling review · $21,600 at market · <a href="/startups/" style="color:var(--accent);text-decoration:none" data-analytics-action="alternative_offer" data-analytics-location="pricing_sprint" data-analytics-target="startup_sprint">Details →</a></p>
+  </div>
 </section>
 
 <div class="math num" data-track-section="math" data-track-position="3">
@@ -184,24 +198,24 @@
   <div class="tblScroll">
     <table>
       <thead>
-        <tr><th scope="col">What you get</th><th scope="col" class="hot">The PopUp</th><th scope="col">Weekend ticket</th><th scope="col">Hotel package</th></tr>
+        <tr><th scope="col">What you get</th><th scope="col" class="hot">The PopUp</th><th scope="col">Weekend ticket</th><th scope="col">Hotel package</th><th scope="col">Startup sprint</th></tr>
       </thead>
       <tbody class="num">
-        <tr><th scope="row">Price</th><td class="y">$1,200</td><td>$900 / weekend</td><td>$2,500 launch</td></tr>
-        <tr><th scope="row">Dates covered</th><td>Oct 1–31</td><td>One weekend</td><td>Oct 16–28</td></tr>
-        <tr><th scope="row">Summit I · Oct 17–18</th><td><span class="y">●</span></td><td><span class="y">●</span> if chosen</td><td><span class="y">●</span></td></tr>
-        <tr><th scope="row">Summit II · Oct 24–25</th><td><span class="y">●</span></td><td><span class="y">●</span> if chosen</td><td><span class="y">●</span></td></tr>
-        <tr><th scope="row">Demo Day + Fashion Show · Oct 26</th><td><span class="y">●</span></td><td><span class="n">— outside the weekend</span></td><td><span class="y">●</span></td></tr>
-        <tr><th scope="row">Weekday programming — tours, workshops, hackathon</th><td><span class="y">●</span> all month</td><td><span class="n">—</span></td><td><span class="n">—</span></td></tr>
-        <tr><th scope="row">Hotel</th><td><span class="n">— matched separately</span></td><td><span class="n">—</span></td><td><span class="y">●</span> 12 nights, Sannomiya</td></tr>
-        <tr><th scope="row">Application</th><td>Required · rolling</td><td>None</td><td>None</td></tr>
+        <tr><th scope="row">Price</th><td class="y">$1,200</td><td>$900 / weekend</td><td>$2,500 launch</td><td>$2,500</td></tr>
+        <tr><th scope="row">Dates covered</th><td>Oct 1–31</td><td>One weekend</td><td>Oct 16–28</td><td>Oct 1–26</td></tr>
+        <tr><th scope="row">Summit I · Oct 17–18</th><td><span class="y">●</span></td><td><span class="y">●</span> if chosen</td><td><span class="y">●</span></td><td><span class="y">●</span></td></tr>
+        <tr><th scope="row">Summit II · Oct 24–25</th><td><span class="y">●</span></td><td><span class="y">●</span> if chosen</td><td><span class="y">●</span></td><td><span class="y">●</span></td></tr>
+        <tr><th scope="row">Demo Day + Fashion Show · Oct 26</th><td><span class="y">●</span></td><td><span class="n">— outside the weekend</span></td><td><span class="y">●</span></td><td><span class="y">●</span> you pitch it</td></tr>
+        <tr><th scope="row">Weekday programming — tours, workshops, hackathon</th><td><span class="y">●</span> all month</td><td><span class="n">—</span></td><td><span class="n">—</span></td><td><span class="y">●</span> + coaching &amp; PMDA consulting</td></tr>
+        <tr><th scope="row">Hotel</th><td><span class="n">— matched separately</span></td><td><span class="n">—</span></td><td><span class="y">●</span> 12 nights, Sannomiya</td><td><span class="y">●</span> accommodation included</td></tr>
+        <tr><th scope="row">Application</th><td>Required · rolling</td><td>None</td><td>None</td><td>Required · rolling</td></tr>
       </tbody>
     </table>
   </div>
 </section>
 
 <p class="fine" data-track-section="fine" data-track-position="5">
-  Prices in USD · Everything checks out on <b>Luma</b> · Hotel &amp; transportation not included unless stated ·
+  Prices in USD · Tickets, PopUp &amp; package check out on <b>Luma</b>; the Sprint applies by <b>Typeform</b> · Hotel &amp; transportation not included unless stated ·
   Package breakfast excluded · PopUp housing runs from community hacker houses to the Portopia and is matched after acceptance ·
   Day-to-day Kobe is affordable — a good lunch under &yen;1,000 · Questions: <a href="mailto:team@miraitech.city">team@miraitech.city</a>
 </p>
