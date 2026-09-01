@@ -21,10 +21,12 @@ Single static `index.html` — no framework, no build step. Deploys anywhere
   a full-size Luma checkout in a new tab with the hotel ticket preselected
   (`ttype-0BjQv0xV4yY5P0l`) and access coupon `SFSH`. The site moves to standard
   pricing after Aug 20 JST.
-- `/experience/` is the attendee-facing Kobe + Kansai field guide. Like the
-  summit bundle, it is deployment-ready static code: `experience/index.html`
-  owns the presentation and filtering, while `experience/experience.js` is the
-  canonical content registry. No build step is required after guide edits.
+- `/experience/` is the attendee-facing "what a month here is like" page
+  (daily rhythm, week-by-week arc, joinable programs, people, apply path),
+  built from the Mirai Tech Source of Truth spreadsheet. Self-contained
+  `experience/index.html`, no build step. `experience/experience.js` is the
+  retired field-guide content registry — kept on disk, no longer loaded
+  (the old field-guide page lives in git history).
 - Fonts: Switzer (Fontshare) + IBM Plex Mono. Speaker photos + Kobe stills
   from this repo's `public/images` (comic-style avatars intentionally not used).
 - Analytics: every page loads `/posthog.js` (PostHog: autocapture, heatmaps,

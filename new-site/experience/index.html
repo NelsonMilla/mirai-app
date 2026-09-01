@@ -3,494 +3,1838 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>The Experience · Kobe &amp; Kansai · Mirai Tech City</title>
-<meta name="description" content="The navigation-first Kobe and Kansai field guide for Mirai Tech City attendees: arrival, stays, food, onsen, work, nightlife, Osaka, Kyoto, Nara, and day trips." />
-<meta property="og:title" content="The Experience · Live Kobe. Explore Kansai." />
-<meta property="og:description" content="Every route starts from Port Island. Plan your month at Mirai Tech City and discover the region around it." />
-<meta property="og:image" content="https://mirai-tech-city.vercel.app/img/harbor-golden-hour.jpg" />
+<title>The Experience · One Month at Mirai Tech City · Kobe 2026</title>
+<meta name="description" content="Live in Japan for a month to work on living longer: the daily rhythm on Port Island, the week-by-week arc to Demo Day, and the 300 people you'll live with. Kobe, October 1–31, 2026." />
+<link rel="canonical" href="https://mirai-tech-city.vercel.app/experience/" />
+<meta property="og:site_name" content="Mirai Tech City" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="The Experience · One Month at Mirai Tech City" />
+<meta property="og:description" content="Live in Japan for a month to work on living longer. Kobe, October 1–31, 2026." />
+<meta property="og:image" content="https://mirai-tech-city.vercel.app/kobe_harbor_night_poster.jpg" />
 <meta property="og:url" content="https://mirai-tech-city.vercel.app/experience/" />
 <meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="The Experience · One Month at Mirai Tech City" />
+<meta name="twitter:description" content="Live in Japan for a month to work on living longer. Kobe, October 1–31, 2026." />
+<meta name="twitter:image" content="https://mirai-tech-city.vercel.app/kobe_harbor_night_poster.jpg" />
 <meta name="theme-color" content="#050506" />
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23050506'/%3E%3Ctext x='50' y='72' font-size='62' font-family='Georgia' font-weight='bold' fill='%239be8f0' text-anchor='middle'%3E未%3C/text%3E%3C/svg%3E" />
+<link rel="preload" href="/kobe_harbor_night_poster.jpg" as="image" fetchpriority="high" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link rel="preconnect" href="https://api.fontshare.com" />
 <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin />
-<link href="https://api.fontshare.com/v2/css?f[]=switzer@400,500,600,700,800,900&amp;display=swap" rel="stylesheet" />
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet" />
+<link href="https://api.fontshare.com/v2/css?f[]=switzer@400,700,800,900&display=swap" rel="stylesheet" media="print" onload="this.onload=null;this.media='all'" />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" media="print" onload="this.onload=null;this.media='all'" />
+<noscript>
+  <link href="https://api.fontshare.com/v2/css?f[]=switzer@400,700,800,900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</noscript>
 <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
 <script defer src="/_vercel/insights/script.js"></script>
 <script defer src="/posthog.js"></script>
 <script defer src="/analytics.js"></script>
 <style>
+  @font-face {
+    font-family: 'Switzer-fallback';
+    src: local('Arial'), local('Helvetica Neue');
+    size-adjust: 97.6%;
+    ascent-override: 100%;
+    descent-override: 25%;
+    line-gap-override: 0%;
+  }
   :root {
     --bg: #050506;
     --ink: #f4f3f0;
     --dim: rgba(244,243,240,.62);
-    --faint: rgba(244,243,240,.48);
-    --line: rgba(244,243,240,.14);
+    --faint: rgba(244,243,240,.46);
+    --line: rgba(244,243,240,.13);
+    --line-soft: rgba(244,243,240,.08);
     --accent: #9be8f0;
-    --accent-rgb: 155,232,240;
-    --font: 'Switzer', 'Inter', -apple-system, sans-serif;
-    --mono: 'IBM Plex Mono', monospace;
+    --accent-rgb: 155, 232, 240;
+    --font: 'Switzer', 'Switzer-fallback', 'Inter', -apple-system, sans-serif;
+    --mono: 'IBM Plex Mono', ui-monospace, monospace;
   }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
-  body { min-width: 320px; overflow-x: hidden; background: var(--bg); color: var(--ink); font-family: var(--font); }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--ink); font-family: var(--font); overflow-x: hidden; }
   ::selection { background: var(--accent); color: #000; }
   :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
-  .experience-skip { position: fixed; top: 12px; left: 4vw; z-index: 90; padding: 12px 16px;
-    border: 1px solid rgba(var(--accent-rgb),.4); border-radius: 3px; background: var(--bg); color: var(--accent);
-    font-family: var(--mono); font-size: 10px; letter-spacing: .18em; text-decoration: none; text-transform: uppercase;
+  a { color: inherit; }
+  img { max-width: 100%; }
+  h1, h2, h3 { text-wrap: balance; }
+  .num { font-variant-numeric: tabular-nums; }
+  .mono { font-family: var(--mono); }
+
+  .skip { position: fixed; top: 12px; left: 4vw; z-index: 70; background: var(--bg); color: var(--accent);
+    font-family: var(--mono); font-size: 11px; letter-spacing: .2em; text-transform: uppercase;
+    text-decoration: none; border: 1px solid rgba(var(--accent-rgb),.3); border-radius: 3px; padding: 12px 16px;
     transform: translateY(-200%); }
-  .experience-skip:focus { transform: none; }
-  .experience-eyebrow { color: var(--accent); font-family: var(--mono); font-size: 11px; letter-spacing: .28em; text-transform: uppercase; }
+  .skip:focus { transform: none; }
 
-  /* ── route nav ── */
-  .experience-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 70; display: flex; min-height: 68px;
-    align-items: center; justify-content: space-between; gap: 24px; padding: 0 4vw; border-bottom: 1px solid var(--line);
-    background: rgba(5,5,6,.84); backdrop-filter: blur(18px) saturate(120%); }
-  .experience-logo { color: var(--ink); font-size: 15px; font-weight: 800; letter-spacing: .06em; text-decoration: none; text-transform: uppercase; }
-  .experience-logo span { color: var(--accent); }
-  .experience-navlinks { display: flex; align-items: center; gap: 24px; }
-  .experience-navlinks a { color: var(--dim); font-family: var(--mono); font-size: 10px; letter-spacing: .18em;
-    text-decoration: none; text-transform: uppercase; transition: color .2s; }
-  .experience-navlinks a:hover { color: var(--ink); }
-  .experience-navlinks .experience-apply { padding: 11px 18px; border-radius: 3px; background: var(--accent); color: #0a0a0c; font-weight: 500; }
+  .rv { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s ease; }
+  .rv.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) { .rv { opacity: 1; transform: none; transition: none; } }
 
-  /* ── hero ── */
-  .experience-hero { position: relative; display: flex; min-height: 92svh; align-items: flex-end; overflow: hidden;
-    padding: clamp(130px, 17vh, 190px) 6vw 8vh; }
-  .experience-hero-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 52%;
-    filter: grayscale(.42) contrast(1.08); }
-  .experience-hero::after { position: absolute; inset: 0; content: '';
-    background: linear-gradient(90deg, rgba(5,5,6,.96), rgba(5,5,6,.65) 48%, rgba(5,5,6,.18)),
-                linear-gradient(to top, rgba(5,5,6,.92), transparent 45%); }
-  .experience-hero-copy { position: relative; z-index: 2; width: min(1080px, 100%); }
-  .experience-hero h1 { max-width: 10ch; margin: 22px 0; font-size: clamp(64px, 11.5vw, 164px); font-weight: 900;
-    letter-spacing: -.045em; line-height: .82; text-transform: uppercase; }
-  .experience-hero-lede { max-width: 61ch; color: rgba(244,243,240,.82); font-size: clamp(17px, 1.55vw, 22px); line-height: 1.55; }
-  .experience-hero-meta { display: flex; flex-wrap: wrap; gap: 10px 30px; margin-top: 28px; color: var(--accent);
-    font-family: var(--mono); font-size: 10px; letter-spacing: .18em; text-transform: uppercase; }
-  .experience-credit { position: absolute; right: 20px; bottom: 12px; z-index: 2; color: var(--faint); font-family: var(--mono);
-    font-size: 9px; letter-spacing: .08em; }
-
-  /* ── quick start + radius ── */
-  .experience-start, .experience-radius { display: grid; grid-template-columns: minmax(240px,.72fr) minmax(0,1.6fr);
-    gap: 6vw; max-width: 1440px; margin: 0 auto; padding: 100px 6vw; }
-  .experience-start h2, .experience-radius h2, .experience-finale h2 { margin-top: 16px; font-size: clamp(38px,5vw,76px);
-    font-weight: 850; letter-spacing: -.025em; line-height: .96; text-transform: uppercase; }
-  .experience-quick { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
-  .experience-quick a { position: relative; display: grid; min-height: 155px; align-content: end; padding: 24px;
-    border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); color: var(--ink); text-decoration: none;
-    transition: background .2s, border-color .2s; }
-  .experience-quick a:hover { border-color: rgba(var(--accent-rgb),.5); background: rgba(var(--accent-rgb),.045); }
-  .experience-quick-no { position: absolute; top: 16px; left: 20px; color: var(--accent); font-family: var(--mono); font-size: 10px; }
-  .experience-quick strong { font-size: clamp(18px,2vw,25px); letter-spacing: -.01em; }
-  .experience-quick small { margin-top: 6px; color: var(--dim); font-size: 13px; }
-  .experience-quick-arrow { position: absolute; top: 16px; right: 20px; color: var(--faint); }
-  .experience-radius { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-  .experience-radius-copy p:last-child { max-width: 54ch; margin-top: 22px; color: var(--dim); font-size: 15px; line-height: 1.7; }
-  .experience-radius-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
-  .experience-radius-cell { min-height: 165px; padding: 22px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-  .experience-radius-place { color: var(--dim); font-family: var(--mono); font-size: 10px; letter-spacing: .18em; text-transform: uppercase; }
-  .experience-radius-time { margin: 22px 0 6px; font-size: clamp(30px,3.5vw,54px); font-weight: 850; letter-spacing: -.035em; line-height: .95; }
-  .experience-radius-detail { color: var(--faint); font-size: 12px; }
-
-  /* ── guide chrome ── */
-  .experience-guide { display: grid; grid-template-columns: 250px minmax(0,1fr); gap: clamp(32px,5vw,76px);
-    max-width: 1440px; margin: 0 auto; padding: 110px 6vw; }
-  .experience-directory { position: sticky; top: 104px; align-self: start; padding-right: 20px; border-right: 1px solid var(--line); }
-  .experience-directory-label { margin-bottom: 16px; color: var(--faint); font-family: var(--mono); font-size: 10px;
-    letter-spacing: .18em; text-transform: uppercase; }
-  .experience-directory-nav { display: grid; }
-  .experience-directory-nav a, .experience-mobile-links a { display: grid; grid-template-columns: 34px 1fr; min-height: 46px;
-    align-items: center; border-top: 1px solid var(--line); color: var(--dim); font-size: 13px; font-weight: 650;
-    text-decoration: none; transition: color .2s, padding .2s; }
-  .experience-directory-nav a:last-child, .experience-mobile-links a:last-child { border-bottom: 1px solid var(--line); }
-  .experience-directory-nav a span, .experience-mobile-links a span { color: var(--faint); font-family: var(--mono); font-size: 9px; }
-  .experience-directory-nav a:hover, .experience-directory-nav a[aria-current="location"],
-  .experience-mobile-links a[aria-current="location"] { padding-left: 6px; color: var(--accent); }
-  .experience-midnight { display: grid; margin-top: 36px; padding: 16px; border: 1px solid rgba(var(--accent-rgb),.3); }
-  .experience-midnight span { color: var(--dim); font-family: var(--mono); font-size: 9px; letter-spacing: .14em; text-transform: uppercase; }
-  .experience-midnight strong { margin: 8px 0; color: var(--accent); font-size: 38px; font-variant-numeric: tabular-nums; }
-  .experience-midnight a { color: var(--ink); font-size: 12px; text-underline-offset: 4px; }
-  .experience-mobile-directory { display: none; }
-  .experience-guide-content { min-width: 0; }
-
-  /* ── search ── */
-  .experience-search { padding: 24px; border: 1px solid var(--line); background: rgba(244,243,240,.018); }
-  .experience-search label { display: block; margin-bottom: 12px; color: var(--accent); font-family: var(--mono); font-size: 10px;
-    letter-spacing: .18em; text-transform: uppercase; }
-  .experience-search-row { display: flex; gap: 12px; }
-  .experience-search input { width: 100%; min-height: 50px; padding: 0 16px; border: 1px solid rgba(244,243,240,.25);
-    border-radius: 2px; background: transparent; color: var(--ink); font: inherit; }
-  .experience-search input::placeholder { color: var(--faint); }
-  .experience-search input:focus { border-color: var(--accent); }
-  .experience-clear, .experience-empty button { min-height: 44px; padding: 0 16px; border: 1px solid var(--line); border-radius: 2px;
-    background: transparent; color: var(--ink); cursor: pointer; font-family: var(--mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; }
-  .experience-filters { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
-  .experience-filter { min-height: 44px; padding: 8px 12px; border: 1px solid var(--line); border-radius: 2px; background: transparent;
-    color: var(--dim); cursor: pointer; font-family: var(--mono); font-size: 9px; letter-spacing: .1em; text-transform: uppercase; }
-  .experience-filter:hover, .experience-filter.active { border-color: rgba(var(--accent-rgb),.55); background: rgba(var(--accent-rgb),.055); color: var(--accent); }
-  .experience-result-count { margin-top: 15px; color: var(--faint); font-family: var(--mono); font-size: 9px; letter-spacing: .1em; text-transform: uppercase; }
-
-  /* ── guide content ── */
-  .experience-guide-section { scroll-margin-top: 130px; padding-top: 125px; }
-  .experience-section-head { display: grid; grid-template-columns: minmax(0,1.15fr) minmax(250px,.85fr); gap: 24px 60px;
-    padding-bottom: 50px; border-bottom: 1px solid var(--line); }
-  .experience-section-kicker { grid-column: 1/-1; color: var(--accent); font-family: var(--mono); font-size: 10px; letter-spacing: .24em; text-transform: uppercase; }
-  .experience-section-head h2 { font-size: clamp(42px,6vw,92px); font-weight: 880; letter-spacing: -.04em; line-height: .9; text-transform: uppercase; }
-  .experience-section-intro { align-self: end; color: var(--dim); font-size: 15px; line-height: 1.7; }
-  .experience-group { scroll-margin-top: 130px; padding-top: 72px; }
-  .experience-group-head { display: grid; grid-template-columns: minmax(220px,.7fr) minmax(0,1.3fr); gap: 12px 46px; margin-bottom: 28px; }
-  .experience-group-source { grid-column: 1/-1; color: var(--faint); font-family: var(--mono); font-size: 9px; letter-spacing: .14em; text-transform: uppercase; }
-  .experience-group-head h3 { font-size: clamp(27px,3.2vw,46px); font-weight: 800; letter-spacing: -.025em; line-height: 1; text-transform: uppercase; }
-  .experience-group-intro { color: var(--dim); font-size: 14px; line-height: 1.65; }
-  .experience-entry-list { border-top: 1px solid var(--line); }
-  .experience-entry { scroll-margin-top: 130px; display: grid; grid-template-columns: 44px minmax(0,1.08fr) minmax(280px,.92fr);
-    gap: 20px; padding: 30px 0; border-bottom: 1px solid var(--line); }
-  .experience-entry-index { padding-top: 3px; color: var(--accent); font-family: var(--mono); font-size: 10px; }
-  .experience-entry h4 { font-size: clamp(21px,2vw,28px); font-weight: 740; letter-spacing: -.015em; line-height: 1.1; }
-  .experience-entry-dek { margin-top: 8px; color: var(--accent); font-size: 14px; font-style: italic; line-height: 1.5; }
-  .experience-entry-summary { max-width: 68ch; margin-top: 15px; color: var(--dim); font-size: 14px; line-height: 1.7; }
-  .experience-tags { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 16px; list-style: none; }
-  .experience-tags li { padding: 4px 7px; border: 1px solid rgba(var(--accent-rgb),.25); border-radius: 2px; color: var(--accent);
-    font-family: var(--mono); font-size: 8px; letter-spacing: .1em; text-transform: uppercase; }
-  .experience-facts { padding: 18px; border-left: 1px solid rgba(var(--accent-rgb),.34); background: rgba(var(--accent-rgb),.025); }
-  .experience-facts-title { color: var(--accent); font-family: var(--mono); font-size: 9px; letter-spacing: .16em; text-transform: uppercase; }
-  .experience-facts ul { display: grid; gap: 8px; margin-top: 13px; list-style: none; }
-  .experience-facts li { position: relative; padding-left: 14px; color: rgba(244,243,240,.76); font-size: 12px; line-height: 1.55; }
-  .experience-facts li::before { position: absolute; top: .65em; left: 0; width: 3px; height: 3px; background: var(--accent); content: ''; }
-  .experience-note { margin-top: 14px; padding-top: 13px; border-top: 1px solid var(--line); color: var(--dim); font-size: 11px; line-height: 1.55; }
-  .experience-source-date { display: block; margin-top: 15px; color: var(--faint); font-family: var(--mono); font-size: 8px; letter-spacing: .1em; text-transform: uppercase; }
-  .experience-empty { display: grid; min-height: 360px; place-content: center; justify-items: center; gap: 20px; color: var(--dim); text-align: center; }
-
-  /* ── close ── */
-  .experience-finale { max-width: 1180px; margin: 20px auto 0; padding: 110px 6vw 125px; border-top: 1px solid var(--line); }
-  .experience-finale > p:not(.experience-eyebrow) { max-width: 58ch; margin-top: 22px; color: var(--dim); font-size: 16px; line-height: 1.7; }
-  .experience-finale-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 24px; margin-top: 30px; }
-  .experience-finale-actions a { color: var(--ink); font-family: var(--mono); font-size: 10px; letter-spacing: .15em; text-decoration: none; text-transform: uppercase; }
-  .experience-finale-actions .experience-cta { padding: 14px 22px; border-radius: 3px; background: var(--accent); color: #0a0a0c; font-weight: 500; }
-  .experience-finale small { display: block; max-width: 72ch; margin-top: 54px; color: var(--faint); font-size: 11px; line-height: 1.6; }
-  .experience-footer { padding: 38px 6vw; border-top: 1px solid var(--line); color: var(--faint); font-family: var(--mono);
-    font-size: 9px; letter-spacing: .14em; line-height: 1.7; text-align: center; text-transform: uppercase; }
-  .experience-footer a { color: var(--accent); text-underline-offset: 4px; }
-
-  @media (max-width: 1000px) {
-    .experience-start, .experience-radius { grid-template-columns: 1fr; }
-    .experience-guide { display: block; padding-top: 0; }
-    .experience-directory { display: none; }
-    .experience-mobile-directory { position: sticky; top: 68px; z-index: 60; display: block; margin: 0 -6vw 24px;
-      border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: rgba(5,5,6,.96); backdrop-filter: blur(16px); }
-    .experience-mobile-directory summary { display: flex; min-height: 56px; align-items: center; justify-content: space-between; padding: 0 6vw;
-      color: var(--dim); cursor: pointer; font-family: var(--mono); font-size: 9px; letter-spacing: .14em; list-style: none; text-transform: uppercase; }
-    .experience-mobile-directory summary::-webkit-details-marker { display: none; }
-    .experience-mobile-directory summary::after { margin-left: 12px; color: var(--accent); content: '+'; font-size: 16px; }
-    .experience-mobile-directory[open] summary::after { content: '−'; }
-    .experience-mobile-current { margin-left: auto; color: var(--accent); }
-    .experience-mobile-links { display: grid; padding: 0 6vw 16px; }
-    .experience-section-head, .experience-group-head { grid-template-columns: 1fr; }
-    .experience-section-kicker, .experience-group-source { grid-column: auto; }
+  /* ── nav ── */
+  .topbar { position: fixed; top: 0; left: 0; right: 0; z-index: 50; }
+  nav.top { display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 4vw; background: rgba(5,5,6,.94); backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--line-soft); }
+  nav.top .logo { font-weight: 800; letter-spacing: .06em; font-size: 15px; text-transform: uppercase; text-decoration: none; }
+  nav.top .logoTech { color: var(--accent); }
+  nav.top .navBack { margin-left: auto; margin-right: 26px; font-family: var(--mono); font-size: 11px;
+    letter-spacing: .22em; text-transform: uppercase; color: var(--dim); text-decoration: none;
+    padding: 12px 0; transition: color .2s; }
+  nav.top .navBack:hover, nav.top .navBack:focus-visible { color: var(--accent); }
+  .btn { display: inline-flex; align-items: center; justify-content: center; min-height: 44px;
+    background: var(--ink); color: #0a0a0c !important; text-decoration: none;
+    padding: 12px 26px; border-radius: 3px; font-family: var(--mono); font-size: 11px;
+    letter-spacing: .2em; text-transform: uppercase; font-weight: 500; white-space: nowrap;
+    transition: transform .2s, box-shadow .2s; }
+  .btn:hover { transform: translateY(-1px); box-shadow: 0 8px 32px rgba(244,243,240,.22); }
+  .btn.accent { background: var(--accent); }
+  .btn.accent:hover { box-shadow: 0 8px 32px rgba(var(--accent-rgb),.3); }
+  .btn.ghost { background: transparent; color: var(--ink) !important; border: 1px solid rgba(244,243,240,.4); }
+  .btn.ghost:hover { border-color: var(--ink); }
+  @media (max-width: 760px) {
+    nav.top { padding: 13px 4vw; }
+    nav.top .navBack { font-size: 10px; letter-spacing: .12em; margin-right: 14px; }
+    nav.top .btn { padding: 11px 16px; }
   }
-  @media (max-width: 720px) {
-    .experience-nav { padding: 0 16px; }
-    .experience-navlinks { gap: 14px; }
-    .experience-navlinks a:first-child, .experience-navlinks a:nth-child(2) { display: none; }
-    .experience-hero { min-height: 82svh; padding: 135px 20px 70px; }
-    .experience-hero-bg { object-position: 64% 50%; }
-    .experience-hero::after { background: linear-gradient(90deg, rgba(5,5,6,.9), rgba(5,5,6,.28)),
-      linear-gradient(to top, rgba(5,5,6,.96), transparent 58%); }
-    .experience-hero h1 { font-size: clamp(54px,18vw,86px); }
-    .experience-start, .experience-radius, .experience-guide { padding-left: 20px; padding-right: 20px; }
-    .experience-start, .experience-radius { padding-top: 76px; padding-bottom: 76px; }
-    .experience-quick, .experience-radius-grid { grid-template-columns: 1fr; }
-    .experience-quick a { min-height: 132px; }
-    .experience-radius-cell { min-height: 135px; }
-    .experience-mobile-directory { margin-left: -20px; margin-right: -20px; }
-    .experience-mobile-directory summary, .experience-mobile-links { padding-left: 20px; padding-right: 20px; }
-    .experience-search { padding: 16px; }
-    .experience-guide-section { padding-top: 90px; }
-    .experience-section-head { padding-bottom: 36px; }
-    .experience-group { padding-top: 60px; }
-    .experience-entry { grid-template-columns: 32px minmax(0,1fr); gap: 14px; padding: 24px 0; }
-    .experience-facts { grid-column: 2; }
-    .experience-finale { margin-left: 20px; margin-right: 20px; padding-left: 0; padding-right: 0; }
+
+  /* ═══ HERO · the boarding pass (from A) ═══ */
+  .hero { position: relative; overflow: hidden; padding: 128px 4vw 0; }
+  .heroBg { position: absolute; inset: 0; z-index: 0; }
+  .heroBg img, .heroBg video { position: absolute; inset: 0; width: 100%; height: 100%;
+    object-fit: cover; object-position: center 42%; }
+  .heroBg video { opacity: 0; transition: opacity .45s ease; }
+  .heroBg video.playing { opacity: 1; }
+  .heroBg::after { content: ""; position: absolute; inset: 0;
+    background: linear-gradient(rgba(5,5,6,.7), rgba(5,5,6,.84) 55%, var(--bg)); }
+  .heroInner { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; }
+  .stationSign { border: 1px solid rgba(var(--accent-rgb),.35); background: rgba(5,5,6,.68);
+    box-shadow: 0 0 60px -18px rgba(var(--accent-rgb),.35), inset 0 0 40px -30px rgba(var(--accent-rgb),.5); }
+  .signTop { display: flex; align-items: center; justify-content: space-between; gap: 14px;
+    padding: 12px 22px; border-bottom: 1px solid rgba(var(--accent-rgb),.25);
+    font-family: var(--mono); font-size: 10px; letter-spacing: .28em; text-transform: uppercase; color: var(--accent); }
+  .signTop .live { display: inline-flex; align-items: center; gap: 8px; color: var(--dim); letter-spacing: .18em; }
+  .signTop .live::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--accent);
+    box-shadow: 0 0 10px rgba(var(--accent-rgb),.9); animation: pulse 1.6s ease-in-out infinite; }
+  @keyframes pulse { 0%,100% { opacity: 1 } 50% { opacity: .35 } }
+  @media (prefers-reduced-motion: reduce) { .signTop .live::before { animation: none; } }
+  .signMain { padding: 30px 22px 26px; }
+  h1 { font-weight: 900; text-transform: uppercase; letter-spacing: -.015em;
+    font-size: clamp(44px, 7.4vw, 108px); line-height: .92; }
+  h1 em { font-style: normal; color: var(--accent); }
+  .signSub { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 8px 26px;
+    font-family: var(--mono); font-size: clamp(12px, 1.4vw, 16px); letter-spacing: .22em;
+    text-transform: uppercase; color: var(--ink); }
+  .signSub span b { color: var(--accent); font-weight: 500; }
+  .signState { margin-top: 18px; max-width: 62ch; color: var(--dim); font-size: 15.5px; line-height: 1.6; }
+  .signState b { color: var(--ink); font-weight: 650; }
+  .heroStats { display: grid; grid-template-columns: repeat(6, 1fr); border-top: 1px solid rgba(var(--accent-rgb),.25); }
+  .heroStats > div { padding: 16px 10px 14px; text-align: center; border-left: 1px solid rgba(var(--accent-rgb),.14); }
+  .heroStats > div:first-child { border-left: 0; }
+  .heroStats .v { font-weight: 800; font-size: clamp(20px, 2.6vw, 34px); letter-spacing: -.01em; font-variant-numeric: tabular-nums; }
+  .heroStats .v small { font-size: .55em; font-weight: 700; color: var(--dim); }
+  .heroStats .k { margin-top: 5px; font-family: var(--mono); font-size: 9px; letter-spacing: .16em;
+    text-transform: uppercase; color: var(--faint); line-height: 1.5; }
+  .heroActions { display: flex; gap: 12px; flex-wrap: wrap; margin: 26px 0 0; }
+  .heroHow { margin: 14px 0 0; font-family: var(--mono); font-size: 10px; letter-spacing: .16em;
+    text-transform: uppercase; color: var(--faint); line-height: 1.9; }
+  .heroHow b { color: var(--accent); font-weight: 500; }
+  .heroPad { height: 72px; }
+  @media (max-width: 860px) {
+    .hero { padding-top: 104px; }
+    .heroStats { grid-template-columns: repeat(3, 1fr); }
+    .heroStats > div:nth-child(4) { border-left: 0; }
+    .heroStats > div { border-top: 1px solid rgba(var(--accent-rgb),.14); }
+    .heroStats > div:nth-child(-n+3) { border-top: 0; }
+    .signTop { letter-spacing: .16em; }
+    .signSub { letter-spacing: .14em; }
+    .heroPad { height: 52px; }
   }
-  @media (max-width: 440px) {
-    .experience-logo .experience-logo-word { display: none; }
-    .experience-search-row { flex-direction: column; }
-    .experience-clear { align-self: flex-start; }
-    .experience-entry { grid-template-columns: 1fr; }
-    .experience-facts { grid-column: auto; }
+  @media (max-width: 420px) { .heroActions .btn { flex: 1 1 100%; } }
+
+  /* ═══ section header · numbered, plain (from B) ═══ */
+  .wrap { max-width: 1280px; margin: 0 auto; padding: 88px 6vw 0; }
+  .secHead { display: grid; grid-template-columns: 84px minmax(0,1fr); gap: 8px 28px; align-items: baseline; }
+  .secNo { font-family: var(--mono); font-size: 13px; letter-spacing: .2em; color: var(--faint);
+    font-variant-numeric: tabular-nums; }
+  .secNo::after { content: ""; display: block; width: 34px; border-top: 1px solid rgba(var(--accent-rgb),.5); margin-top: 10px; }
+  h2.big { font-weight: 800; text-transform: uppercase; letter-spacing: -.01em;
+    font-size: clamp(30px, 4.6vw, 62px); line-height: .98; }
+  h2.big .tick { color: var(--accent); }
+  .secLine { grid-column: 2; margin-top: 14px; color: var(--dim); font-size: clamp(15px, 1.35vw, 18px);
+    line-height: 1.5; max-width: 60ch; }
+  .secLine b { color: var(--ink); font-weight: 650; }
+  @media (max-width: 760px) {
+    .wrap { padding-top: 68px; }
+    .secHead { grid-template-columns: 1fr; }
+    .secNo::after { display: none; }
+    .secLine { grid-column: 1; margin-top: 10px; }
+  }
+  .rule { border: 0; border-top: 1px solid var(--line); max-width: calc(1280px - 12vw); margin: 88px auto 0; }
+  @media (max-width: 760px) { .rule { margin-top: 68px; } }
+
+  /* ═══ 01 · one day — film-frame grid (from C) ═══ */
+  .dayFrames { max-width: 1280px; margin: 0 auto; padding: 48px 6vw 0; display: grid;
+    grid-template-columns: repeat(12, 1fr); gap: 18px; }
+  .frame { position: relative; overflow: hidden; border: 1px solid var(--line); background: #0a0a0c; }
+  .frame img { width: 100%; height: 100%; object-fit: cover; filter: contrast(1.02);
+    transition: transform .7s ease; }
+  .frame:hover img { transform: scale(1.03); }
+  .frame .scrim { position: absolute; left: 0; right: 0; bottom: 0; z-index: 1; padding: 72px 18px 16px;
+    background: linear-gradient(to top, rgba(5,5,6,.93) 0%, rgba(5,5,6,.55) 55%, transparent 100%); }
+  .frame .time { font-family: var(--mono); font-weight: 500; color: var(--accent);
+    font-size: clamp(26px, 2.6vw, 40px); letter-spacing: .04em; font-variant-numeric: tabular-nums; line-height: 1; }
+  .frame .fcap { margin-top: 8px; font-weight: 800; text-transform: uppercase; letter-spacing: .01em;
+    font-size: clamp(15px, 1.4vw, 20px); line-height: 1.15; text-wrap: balance; }
+  .frame .fsub { margin-top: 6px; font-family: var(--mono); font-size: 10px; letter-spacing: .16em;
+    text-transform: uppercase; color: rgba(244,243,240,.72); line-height: 1.7; }
+  .f-a, .f-b, .f-c, .f-d, .f-g { height: clamp(400px, 54vh, 600px); }
+  .f-e, .f-f, .f-h { height: clamp(330px, 44vh, 500px); }
+  .f-sat, .f-sun { height: clamp(300px, 40vh, 440px); }
+  .f-a { grid-column: span 5; }
+  .f-b { grid-column: span 7; }
+  .f-g { grid-column: span 5; }
+  .f-c { grid-column: span 7; }
+  .f-d { grid-column: span 7; }
+  .f-e { grid-column: span 5; }
+  .f-f { grid-column: span 6; }
+  .f-h { grid-column: span 6; }
+  .f-sat { grid-column: span 6; }
+  .f-sun { grid-column: span 6; }
+  .f-c img { object-position: center 22%; }
+  .dayCoda { max-width: 1280px; margin: 0 auto; padding: 22px 6vw 0; font-family: var(--mono);
+    font-size: 10.5px; letter-spacing: .2em; text-transform: uppercase; color: var(--faint); line-height: 2; }
+  .dayCoda b { color: var(--dim); font-weight: 500; }
+  @media (max-width: 860px) {
+    .dayFrames { grid-template-columns: 1fr; gap: 12px; padding-top: 36px; }
+    .f-a, .f-b, .f-c, .f-d, .f-e, .f-f, .f-g, .f-h, .f-sat, .f-sun { grid-column: span 1; height: auto; aspect-ratio: 16/11; }
+    .f-a { aspect-ratio: 4/4.6; }
+    .frame .scrim { padding: 56px 14px 12px; }
   }
   @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+    .frame img { transition: none; }
+    .frame:hover img { transform: none; }
+  }
+
+  /* ═══ 02 · the month — full-bleed week frames (from C) ═══ */
+  .weekReel { margin-top: 48px; display: flex; flex-direction: column; }
+  .wk { position: relative; min-height: 76svh; display: flex; align-items: flex-end; overflow: hidden; }
+  .wk .bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: contrast(1.02); }
+  .wk .veil { position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(5,5,6,.94) 0%, rgba(5,5,6,.34) 48%, rgba(5,5,6,.46) 100%); }
+  .wk .wkKanji { position: absolute; top: 10vh; right: 6vw; font-family: Georgia, serif;
+    font-size: clamp(80px, 12vw, 180px); line-height: 1; color: rgba(244,243,240,.14);
+    text-shadow: 0 0 60px rgba(0,0,0,.5); pointer-events: none; }
+  .wk .inner { position: relative; z-index: 2; width: 100%; max-width: 1280px; margin: 0 auto;
+    padding: 0 6vw 52px; display: flex; align-items: flex-end; gap: 40px; flex-wrap: wrap; }
+  .wk .stamp { flex: 0 0 auto; }
+  .wk .stamp .wn { font-family: var(--mono); font-size: clamp(56px, 7vw, 104px); font-weight: 500;
+    line-height: .9; color: var(--accent); font-variant-numeric: tabular-nums;
+    text-shadow: 0 2px 30px rgba(0,0,0,.65); }
+  .wk .stamp .wd { margin-top: 10px; font-family: var(--mono); font-size: 11px; letter-spacing: .22em;
+    text-transform: uppercase; color: rgba(244,243,240,.85); text-shadow: 0 1px 8px rgba(0,0,0,.85);
+    font-variant-numeric: tabular-nums; }
+  .wk .story { flex: 1 1 380px; max-width: 640px; }
+  .wk .story h3 { font-weight: 900; text-transform: uppercase; letter-spacing: -.01em;
+    font-size: clamp(26px, 3.6vw, 50px); line-height: .96; text-shadow: 0 2px 30px rgba(0,0,0,.65); }
+  .wk .story .wcap { margin-top: 12px; font-size: clamp(14px, 1.3vw, 17px); line-height: 1.5;
+    color: rgba(244,243,240,.92); max-width: 52ch; text-shadow: 0 1px 16px rgba(0,0,0,.85); text-wrap: balance; }
+  .wk .story .wcap b { color: var(--accent); font-weight: 650; }
+  .wk .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+  .chip { font-family: var(--mono); font-size: 9.5px; letter-spacing: .14em; text-transform: uppercase;
+    color: rgba(244,243,240,.88); background: rgba(5,5,6,.72); border: 1px solid rgba(244,243,240,.25);
+    padding: 7px 11px; border-radius: 2px; backdrop-filter: blur(4px); font-variant-numeric: tabular-nums; }
+  .chip.hot { color: var(--accent); border-color: rgba(var(--accent-rgb),.5); }
+  .wk + .wk { border-top: 1px solid rgba(244,243,240,.1); }
+  .wk.w4 .bg { object-position: center 30%; }
+  @media (max-width: 760px) {
+    .wk { min-height: 82svh; }
+    .wk .veil { background: linear-gradient(to top, rgba(5,5,6,.95) 0%, rgba(5,5,6,.44) 52%, rgba(5,5,6,.5) 100%); }
+    .wk .inner { gap: 18px; padding-bottom: 40px; }
+    .wk .wkKanji { top: 8vh; }
+  }
+
+  /* ═══ 03 · programs — dated table rows (from A) + expanders (from B) ═══ */
+  .progGroup { display: flex; align-items: baseline; gap: 16px; margin-top: 44px; }
+  .progGroup b { font-size: 20px; font-weight: 800; letter-spacing: -.01em; white-space: nowrap; }
+  .progGroup span { font-family: var(--mono); font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--faint); }
+  .colHead { display: grid; grid-template-columns: 132px minmax(0,.9fr) minmax(0,1.1fr) 148px 34px;
+    gap: 8px 26px; margin-top: 14px; padding: 10px 6px 8px 2px; border-bottom: 1px solid var(--line);
+    font-family: var(--mono); font-size: 9px; letter-spacing: .24em; text-transform: uppercase; color: var(--faint); }
+  @media (max-width: 860px) { .colHead { display: none; } }
+
+  details.row { border-bottom: 1px solid var(--line-soft);
+    transition: border-color .25s ease, box-shadow .25s ease, background .25s ease; }
+  details.row:hover, details.row[open] { border-color: rgba(var(--accent-rgb),.35);
+    box-shadow: 0 14px 34px -26px rgba(var(--accent-rgb),.45); }
+  details.row[open] { background: linear-gradient(180deg, rgba(var(--accent-rgb),.035), rgba(var(--accent-rgb),0) 120px); }
+  details.row > summary { list-style: none; cursor: pointer; user-select: none;
+    display: grid; grid-template-columns: 132px minmax(0,.9fr) minmax(0,1.1fr) 148px 34px;
+    gap: 8px 26px; align-items: baseline; padding: 16px 6px 16px 2px; min-height: 56px; }
+  details.row > summary::-webkit-details-marker { display: none; }
+  details.row > summary:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+  .rk { font-family: var(--mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--accent); font-variant-numeric: tabular-nums; line-height: 1.6; white-space: nowrap; }
+  .rt { font-weight: 800; text-transform: uppercase; font-size: clamp(14px, 1.5vw, 18px); line-height: 1.15; letter-spacing: 0; }
+  .rl { font-family: var(--mono); font-size: 10.5px; letter-spacing: .06em; color: var(--dim); line-height: 1.6; }
+  .rl b { color: var(--ink); font-weight: 600; }
+  .mk { justify-self: end; align-self: center; font-family: var(--mono); font-size: 15px; color: var(--faint);
+    width: 26px; height: 26px; display: inline-flex; align-items: center; justify-content: center;
+    border: 1px solid var(--line); border-radius: 2px;
+    transition: transform .3s ease, color .2s ease, border-color .2s ease; }
+  .mk::before { content: "+"; }
+  details.row:hover .mk, details.row[open] .mk { color: var(--accent); border-color: rgba(var(--accent-rgb),.4); }
+  details.row[open] .mk { transform: rotate(45deg); }
+  .rbody { padding: 2px 6px 24px 2px; }
+  .rbody p { max-width: 62ch; color: var(--dim); font-size: 15px; line-height: 1.65; }
+  .rbody p b, .rbody p strong { color: var(--ink); font-weight: 650; }
+  .rbody a { color: var(--accent); }
+  @media (prefers-reduced-motion: no-preference) {
+    details.row[open] .rbody { animation: bodyIn .38s ease both; }
+    @keyframes bodyIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: none; } }
+  }
+  @media (prefers-reduced-motion: reduce) { .mk { transition: none; } }
+  .pt { font-family: var(--mono); font-size: 9px; letter-spacing: .16em; text-transform: uppercase;
+    color: var(--cat, var(--faint)); display: inline-flex; align-items: center; gap: 7px; white-space: nowrap; }
+  .pt::before { content: ""; width: 6px; height: 6px; flex: 0 0 auto; background: var(--cat, var(--faint)); }
+  .c-sci { --cat: rgba(155,232,240,.85); }
+  .c-build { --cat: rgba(232,201,139,.85); }
+  .c-health { --cat: rgba(167,232,180,.85); }
+  .c-rec { --cat: rgba(201,184,240,.85); }
+  .c-reg { --cat: rgba(240,184,155,.85); }
+  .c-inv { --cat: rgba(224,213,143,.85); }
+  .c-com { --cat: rgba(240,169,196,.85); }
+  .c-cul { --cat: rgba(168,184,224,.85); }
+  @media (max-width: 860px) {
+    details.row > summary { grid-template-columns: minmax(0,1fr) 34px; gap: 5px 14px; padding: 14px 2px; }
+    .rk, .rt, .rl, .pt { grid-column: 1; }
+    .mk { grid-column: 2; grid-row: 1 / span 4; }
+  }
+  .progFoot { margin-top: 24px; font-family: var(--mono); font-size: 10px; letter-spacing: .18em;
+    text-transform: uppercase; color: var(--faint); line-height: 2; }
+  .progFoot a { color: var(--accent); text-decoration: none; }
+  .progFoot a:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+  /* ═══ 04 · people ═══ */
+  .headliners { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin-top: 48px; }
+  .hcard { position: relative; border: 1px solid var(--line); overflow: hidden; }
+  .hcard img { width: 100%; height: auto; aspect-ratio: 4/5; object-fit: cover; display: block;
+    filter: grayscale(28%) contrast(1.04); transition: filter .3s, transform .5s; }
+  .hcard:hover img { filter: grayscale(0%); transform: scale(1.025); }
+  @media (prefers-reduced-motion: reduce) { .hcard:hover img { transform: none; } }
+  .hcard .meta { position: absolute; left: 0; right: 0; bottom: 0; padding: 36px 14px 12px;
+    background: linear-gradient(to top, rgba(5,5,6,.94), transparent); }
+  .hcard .nm { font-weight: 800; text-transform: uppercase; font-size: clamp(13px, 1.25vw, 17px);
+    letter-spacing: -.005em; line-height: 1.05; }
+  .hcard .og { font-family: var(--mono); font-size: 9px; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--accent); margin-top: 5px; }
+  .peopleIx { margin-top: 30px; border-top: 1px solid var(--line); }
+  .peopleIx details.row > summary { grid-template-columns: 132px minmax(0,.9fr) minmax(0,1.1fr) 34px; }
+  @media (max-width: 860px) {
+    .peopleIx details.row > summary { grid-template-columns: minmax(0,1fr) 34px; }
+    .peopleIx .mk { grid-row: 1 / span 3; }
+  }
+  .followline { margin-top: 20px; font-family: var(--mono); font-size: 11px; letter-spacing: .18em; text-transform: uppercase; }
+  .followline a { color: var(--accent); text-decoration: none; display: inline-block; padding: 8px 2px; }
+  .followline a:hover { text-decoration: underline; text-underline-offset: 4px; }
+  @media (max-width: 860px) { .headliners { grid-template-columns: repeat(3, 1fr); }
+    .headliners .hcard:nth-child(n+4) { display: none; } }
+  @media (max-width: 640px) { .headliners { grid-template-columns: 1fr 1fr; }
+    .headliners .hcard:nth-child(4) { display: block; } }
+
+  /* ═══ 05 · radius — transit-numeral photo cards (from C) ═══ */
+  .radiusGrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 48px; }
+  .rcard { position: relative; border: 1px solid var(--line); overflow: hidden; }
+  .rcard img { width: 100%; height: auto; aspect-ratio: 3/4; object-fit: cover; display: block;
+    filter: saturate(.95); transition: transform .6s ease; }
+  .rcard:hover img { transform: scale(1.03); }
+  @media (prefers-reduced-motion: reduce) { .rcard img { transition: none; } .rcard:hover img { transform: none; } }
+  .rcard .meta { position: absolute; left: 0; right: 0; bottom: 0; padding: 60px 16px 14px;
+    background: linear-gradient(to top, rgba(5,5,6,.94), transparent); }
+  .rcard .rmin { font-family: var(--mono); font-weight: 500; color: var(--accent);
+    font-size: clamp(26px, 2.8vw, 42px); line-height: 1; font-variant-numeric: tabular-nums; }
+  .rcard .rn { margin-top: 8px; font-weight: 800; text-transform: uppercase; font-size: 18px; letter-spacing: -.005em; }
+  .rcard .rt2 { margin-top: 4px; font-family: var(--mono); font-size: 9.5px; letter-spacing: .16em;
+    text-transform: uppercase; color: rgba(244,243,240,.75); }
+  .radiusNote { margin-top: 18px; font-family: var(--mono); font-size: 10px; letter-spacing: .18em;
+    text-transform: uppercase; color: var(--faint); line-height: 2; }
+  @media (max-width: 760px) { .radiusGrid { grid-template-columns: 1fr; }
+    .rcard img { aspect-ratio: 16/9; } }
+
+  /* ═══ 06 · faq — one-line answers + expanders ═══ */
+  .fqIx { margin-top: 44px; border-top: 1px solid var(--line); }
+  .fqIx details.row > summary { grid-template-columns: 34px minmax(0,.9fr) minmax(0,1.15fr) 34px; }
+  .qn { font-family: var(--mono); font-size: 10px; color: var(--faint); font-variant-numeric: tabular-nums; }
+  .fqIx .q { font-weight: 700; text-transform: none; font-size: clamp(15px, 1.5vw, 17px); line-height: 1.3; letter-spacing: -.005em; }
+  .fqIx .rl a { color: var(--accent); }
+  .fqIx .rbody { padding-left: 60px; }
+  @media (max-width: 860px) {
+    .fqIx details.row > summary { grid-template-columns: 30px minmax(0,1fr) 34px; }
+    .fqIx .qn { grid-column: 1; }
+    .fqIx .q { grid-column: 2; }
+    .fqIx .rl { grid-column: 2; }
+    .fqIx .mk { grid-column: 3; grid-row: 1 / span 2; }
+    .fqIx .rbody { padding-left: 44px; }
+  }
+
+  /* ═══ close · two ways in (from A) ═══ */
+  .boardingWrap { position: relative; overflow: hidden; margin-top: 88px; }
+  .boardingWrap .bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 62%; }
+  .boardingWrap .veil { position: absolute; inset: 0;
+    background: linear-gradient(to bottom, var(--bg) 0%, rgba(5,5,6,.72) 40%, rgba(5,5,6,.9) 100%); }
+  .boarding { position: relative; max-width: 1200px; margin: 0 auto; padding: 96px 6vw 104px; }
+  .boarding h2 { font-weight: 900; text-transform: uppercase; font-size: clamp(38px, 6.4vw, 92px);
+    letter-spacing: -.015em; line-height: .95; text-shadow: 0 2px 50px rgba(0,0,0,.6); }
+  .gates { margin-top: 36px; border: 1px solid rgba(var(--accent-rgb),.3); background: rgba(5,5,6,.72);
+    box-shadow: 0 0 60px -20px rgba(var(--accent-rgb),.3); }
+  .gate-row { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1.2fr) auto; gap: 16px;
+    align-items: center; padding: 22px; border-top: 1px solid rgba(var(--accent-rgb),.18); }
+  .gate-row:first-child { border-top: 0; }
+  .gate-row .gnm { font-weight: 800; text-transform: uppercase; font-size: clamp(17px, 2vw, 24px); line-height: 1.1; }
+  .gate-row .gnt { font-family: var(--mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--dim); line-height: 1.9; font-variant-numeric: tabular-nums; }
+  .gate-row .gnt b { color: var(--ink); font-weight: 600; }
+  @media (max-width: 860px) {
+    .gate-row { grid-template-columns: 1fr; gap: 10px; }
+    .gate-row .btn { justify-self: start; }
+  }
+  .fine { margin-top: 20px; font-family: var(--mono); font-size: 10px; letter-spacing: .2em;
+    text-transform: uppercase; color: rgba(244,243,240,.6); line-height: 2; }
+
+  /* ═══ footer ═══ */
+  footer { border-top: 1px solid var(--line); padding: 64px 6vw 56px; text-align: center; }
+  footer .see { font-weight: 800; text-transform: uppercase; font-size: clamp(20px, 3vw, 36px); letter-spacing: .02em; }
+  footer .date { font-family: var(--mono); color: var(--accent); letter-spacing: .4em; margin-top: 10px;
+    font-size: 14px; font-variant-numeric: tabular-nums; }
+  footer .jst { margin-top: 26px; font-family: var(--mono); font-size: 11px; letter-spacing: .18em;
+    text-transform: uppercase; color: var(--dim); }
+  footer .jst b { color: var(--accent); font-weight: 500; font-variant-numeric: tabular-nums; }
+  .orgIx { max-width: 860px; margin: 30px auto 0; border-top: 1px solid var(--line-soft); }
+  .orgIx details.row > summary { grid-template-columns: minmax(0,1fr) 34px; gap: 8px 14px; text-align: left; }
+  .orgIx .rl { line-height: 2; }
+  .orgIx .rbody { text-align: left; }
+  .orgIx .rbody p { max-width: none; font-family: var(--mono); font-size: 10px; letter-spacing: .14em;
+    text-transform: uppercase; line-height: 2.2; }
+  footer .doors { display: flex; gap: 30px; justify-content: center; margin-top: 34px; flex-wrap: wrap; }
+  footer .doors a { font-family: var(--mono); font-size: 11px; letter-spacing: .2em; text-transform: uppercase;
+    color: var(--dim); text-decoration: none; display: inline-block; min-width: 150px; text-align: center; padding: 12px 8px; }
+  footer .doors a:hover { color: var(--ink); }
+  .daruma.foot { height: 46px; width: auto; opacity: .6; cursor: pointer; transition: opacity .3s; margin: 34px auto 0; display: block; }
+  .daruma.foot:hover { opacity: 1; }
+  @keyframes okiagari { 0% { transform: rotate(0) } 22% { transform: rotate(-16deg) } 48% { transform: rotate(11deg) } 70% { transform: rotate(-6deg) } 88% { transform: rotate(2deg) } 100% { transform: rotate(0) } }
+  .daruma.wobble { animation: okiagari 1s ease-out; transform-origin: 50% 88%; }
+  footer .credits { margin-top: 26px; font-family: var(--mono); font-size: 9px; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--faint); }
+  @media (prefers-reduced-motion: reduce) { .daruma.wobble { animation: none; } .heroBg video { display: none; } }
+</style>
+<noscript><style>.rv{opacity:1;transform:none}</style></noscript>
+</head>
+<body data-analytics-offer="mirai_experience">
+
+<a class="skip" href="#day">Skip to content</a>
+
+<div class="topbar">
+<nav class="top" aria-label="Site">
+  <a class="logo" href="/" data-analytics-action="site_navigation" data-analytics-location="nav" data-analytics-target="home">Mirai<span class="logoTech">Tech</span></a>
+  <a class="navBack" href="/#summits" data-analytics-action="site_navigation" data-analytics-location="nav" data-analytics-target="summits">The Summits</a>
+  <a class="btn accent" href="https://luma.com/an4zotn9" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="nav" data-analytics-target="residency">Apply</a>
+</nav>
+</div>
+
+<!-- ═══ HERO · THE LIVING CANVAS (h2x) ═══ -->
+<style>
+  /* h2x — scoped hero styles. Body-level block deliberately beats head styles. */
+  .hero.h2x { padding: 0; min-height: 100vh; min-height: 100svh; display: flex; flex-direction: column; }
+  .hero.h2x .heroBg img { opacity: .45; transition: opacity 1.6s ease; }
+  .hero.h2x.h2x-live .heroBg img { opacity: 0; }
+  .h2x-canvas { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
+  .h2x-sr { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden;
+    clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+  .h2x-inner { position: relative; z-index: 2; flex: 1; display: flex; flex-direction: column;
+    width: 100%; max-width: 1280px; margin: 0 auto; padding: 118px 4vw 0; }
+  .h2x-copy { position: relative; max-width: 880px; margin: auto 0; padding: 8px 0; }
+  .h2x-copy::before { content: ""; position: absolute; inset: -70px -110px; z-index: -1; pointer-events: none;
+    background: radial-gradient(85% 85% at 34% 48%, rgba(5,5,6,.86) 0%, rgba(5,5,6,.55) 52%, rgba(5,5,6,0) 78%); }
+  .h2x-over { font-family: var(--mono); font-size: 10px; letter-spacing: .28em; text-transform: uppercase;
+    color: var(--dim); display: flex; flex-wrap: wrap; gap: 8px 22px; align-items: baseline; }
+  .h2x-over span { color: var(--dim); letter-spacing: .18em; }
+  .h2x-over span::before { content: ""; display: inline-block; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--accent); box-shadow: 0 0 10px rgba(var(--accent-rgb),.9); margin-right: 9px;
+    animation: pulse 1.6s ease-in-out infinite; }
+  /* t2 — editorial mixed case: sentence-case claim; cyan reserved for the claim's key phrase + dates */
+  .h2x-copy h1 { margin-top: 20px; text-shadow: 0 2px 44px rgba(0,0,0,.85);
+    text-transform: none; font-weight: 800; letter-spacing: -.02em;
+    font-size: clamp(34px, 5.2vw, 74px); line-height: 1.05; }
+  .h2x-copy h1 em { font-style: normal; color: var(--accent); }
+  .h2x-meta { margin-top: 26px; display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px;
+    font-family: var(--mono); text-transform: uppercase; font-size: clamp(11px, .95vw, 13px);
+    text-shadow: 0 1px 12px rgba(0,0,0,.8); }
+  .h2x-meta .d { color: var(--accent); font-weight: 500; letter-spacing: .26em; }
+  .h2x-meta .mrule { width: 34px; height: 1px; background: rgba(var(--accent-rgb), .5); }
+  .h2x-meta .l { color: var(--dim); font-weight: 400; letter-spacing: .2em; }
+  @media (max-width: 760px) { .h2x-copy h1 br { display: none; } .h2x-meta .mrule { display: none; } }
+  .h2x-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 30px; }
+  .h2x-terms { margin-top: 16px; font-family: var(--mono); font-size: 10px; letter-spacing: .16em;
+    text-transform: uppercase; color: var(--faint); line-height: 1.9; }
+  .h2x-terms b { color: var(--accent); font-weight: 500; }
+  .h2x-stats { margin-top: auto; border: 1px solid rgba(var(--accent-rgb),.22);
+    background: rgba(5,5,6,.62); backdrop-filter: blur(8px); }
+  .statBand { max-width: 1280px; margin: 0 auto; padding: 34px 6vw 0; position: relative; z-index: 2; }
+  .statTerms { margin-top: 14px; text-align: center; font-family: var(--mono); font-size: 10px;
+    letter-spacing: .16em; text-transform: uppercase; color: var(--faint); }
+  .statTerms b { color: var(--accent); font-weight: 500; }
+  .h2x-cue { display: flex; align-items: center; justify-content: center; gap: 16px; padding: 15px 0 17px;
+    font-family: var(--mono); font-size: 9.5px; letter-spacing: .26em; text-transform: uppercase; color: var(--faint); }
+  .h2x-cue .h2x-drop { width: 1px; height: 26px; position: relative; overflow: hidden;
+    background: rgba(var(--accent-rgb),.16); }
+  .h2x-cue .h2x-drop::after { content: ""; position: absolute; left: 0; top: -45%; width: 1px; height: 45%;
+    background: var(--accent); animation: h2xdrop 1.9s cubic-bezier(.45,0,.55,1) infinite; }
+  @keyframes h2xdrop { to { top: 145%; } }
+  @media (max-width: 767px) {
+    .h2x-inner { padding-top: 96px; }
+    .h2x-copy { margin-top: clamp(110px, 26svh, 230px); margin-bottom: auto; }
+    .h2x-copy::before { inset: -54px -60px; }
+    .h2x-over { letter-spacing: .18em; }
+    .h2x-cue span:last-child { display: none; }
+  }
+  @media (max-width: 420px) { .h2x-actions .btn { flex: 1 1 100%; } }
+  @media (prefers-reduced-motion: reduce) {
+    .h2x-over span::before { animation: none; }
+    .h2x-cue .h2x-drop::after { animation: none; top: 30%; height: 40%; }
+    .hero.h2x .heroBg img { transition: none; }
   }
 </style>
-</head>
-<body data-analytics-offer="experience_guide">
-<a class="experience-skip" href="#guide">Skip to the guide</a>
-
-<nav class="experience-nav" aria-label="Experience page">
-  <a class="experience-logo" href="/" aria-label="Mirai Tech home"><span class="experience-logo-word">Mirai </span><span>Tech</span></a>
-  <div class="experience-navlinks">
-    <a href="/">Event</a>
-    <a href="#guide">Guide</a>
-    <a class="experience-apply" href="https://luma.com/an4zotn9" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="nav" data-analytics-target="tickets">Apply</a>
+<header class="hero h2x" id="top" data-track-section="hero" data-track-position="1">
+  <div class="heroBg" aria-hidden="true">
+    <img src="/kobe_harbor_night_poster.jpg" alt="" width="1920" height="1080" fetchpriority="high" decoding="async" />
+    <video class="heroVideo" muted loop playsinline preload="none" aria-hidden="true">
+      <source type="video/mp4" />
+    </video>
   </div>
-</nav>
-
-<header class="experience-hero" data-track-section="hero" data-track-position="1">
-  <img class="experience-hero-bg" src="/img/harbor-golden-hour.jpg" alt="Kobe harbor and Port Tower seen across the water at golden hour" />
-  <div class="experience-hero-copy">
-    <div class="experience-eyebrow">The experience · Kobe / Kansai</div>
-    <h1>Live the region.</h1>
-    <p class="experience-hero-lede">A month based here is a month based in a region. Every route in this guide starts from Port Island, because that is where you will be standing.</p>
-    <div class="experience-hero-meta"><span>October 1–31, 2026</span><span>Port Island · Kobe</span></div>
+  <canvas class="h2x-canvas" id="h2xCanvas" aria-hidden="true"></canvas>
+  <p class="h2x-sr">Background animation: thousands of drifting cyan particles, like cells under a microscope, gather into the kanji 未来 — mirai, the future — then scatter into the harbor lights of Kobe at night, on a slow loop.</p>
+  <div class="h2x-inner">
+    <div class="h2x-copy">
+      <p class="h2x-over">未来 · Mirai Tech City</p>
+      <h1>Live in Japan for a month <br />to work on <em>living longer.</em></h1>
+      <p class="h2x-meta num"><span class="d">October 01 — 31 · 2026</span><span class="mrule" aria-hidden="true"></span><span class="l">Longevity Biotech Popup City · Kobe, Japan</span></p>
+      <div class="h2x-actions">
+        <a class="btn accent" href="https://luma.com/an4zotn9" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="hero_primary" data-analytics-target="residency">Apply for the Residency</a>
+        <a class="btn ghost" href="https://luma.com/an4zotn9" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="hero_secondary" data-analytics-target="tickets">Summit Tickets — $900</a>
+      </div>
+    </div>
+    <div class="h2x-cue" aria-hidden="true"><span>Scroll</span><span class="h2x-drop"></span><span>01 · One day on Port Island</span></div>
   </div>
-  <div class="experience-credit">Photo: JohnnyLCY · CC BY 2.0</div>
 </header>
-
-<main>
-  <section class="experience-start" aria-labelledby="startTitle" data-track-section="quick_paths" data-track-position="2">
-    <div><div class="experience-eyebrow">Choose your next move</div><h2 id="startTitle">What do you need right now?</h2></div>
-    <div class="experience-quick" id="quickPaths"></div>
-  </section>
-
-  <section class="experience-radius" aria-labelledby="radiusTitle" data-track-section="kansai_radius" data-track-position="3">
-    <div class="experience-radius-copy">
-      <div class="experience-eyebrow">Your radius</div>
-      <h2 id="radiusTitle">Kansai is your neighbourhood.</h2>
-      <p>Port Island is the origin, not the edge. These figures name the station they start from so the route never promises a train time as a door-to-door time.</p>
-    </div>
-    <div class="experience-radius-grid" id="routeFacts"></div>
-  </section>
-
-  <div class="experience-guide" id="guide" data-track-section="guide" data-track-position="4">
-    <details class="experience-mobile-directory" id="mobileDirectory">
-      <summary><span>Explore guide</span><strong class="experience-mobile-current" id="mobileCurrent">Start here</strong></summary>
-      <div class="experience-mobile-links" id="mobileNav" role="navigation" aria-label="Experience guide sections"></div>
-    </details>
-
-    <aside class="experience-directory" aria-label="Experience guide directory">
-      <div class="experience-directory-label">Explore the guide</div>
-      <nav class="experience-directory-nav" id="desktopNav" aria-label="Experience guide sections"></nav>
-      <div class="experience-midnight" id="midnightUtility">
-        <span>Last southern-branch train</span><strong>00:00</strong><a href="#midnight-mechanic">Understand the cutoff</a>
-      </div>
-    </aside>
-
-    <article class="experience-guide-content">
-      <div class="experience-search" role="search">
-        <label for="guideSearch">Find a place, need, or moment</label>
-        <div class="experience-search-row">
-          <input id="guideSearch" type="search" placeholder="Try “rainy day”, “Kyoto”, or “last train”" autocomplete="off" />
-          <button class="experience-clear" id="clearSearch" type="button" hidden>Clear</button>
-        </div>
-        <div class="experience-filters" id="filters" role="group" aria-label="Filter the guide"></div>
-        <div class="experience-result-count" id="resultCount" aria-live="polite"></div>
-      </div>
-      <div id="guideSections"></div>
-    </article>
+<div class="statBand">
+  <div class="heroStats h2x-stats num" aria-label="The city in numbers">
+    <div><div class="v">31</div><div class="k">Days<br />Oct 1–31</div></div>
+    <div><div class="v">300</div><div class="k">Curated<br />residents</div></div>
+    <div><div class="v">43</div><div class="k">Confirmed<br />speakers</div></div>
+    <div><div class="v">2</div><div class="k">Summits<br />17–18 · 24–25</div></div>
+    <div><div class="v">370</div><div class="k">KBIC<br />orgs</div></div>
+    <div><div class="v"><small>$</small>900</div><div class="k">Summit<br />ticket</div></div>
   </div>
-
-  <section class="experience-finale" aria-labelledby="finaleTitle" data-track-section="finale" data-track-position="5">
-    <div class="experience-eyebrow">October 2026</div>
-    <h2 id="finaleTitle">Live the future now.</h2>
-    <p>Arrive before opening day. Learn the last train. Book one table before you know who will fill it. Then let the month get larger than the event.</p>
-    <div class="experience-finale-actions">
-      <a class="experience-cta" href="https://luma.com/an4zotn9" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="finale" data-analytics-target="tickets">Join Mirai Tech City</a>
-      <a href="/">Back to the event</a>
-    </div>
-    <small>Source guide dated August 2026. Fares, timetables, entry rules, and seasonal closures can change; confirm practical details with the operator.</small>
-  </section>
-</main>
-
-<footer class="experience-footer">Mirai Tech City · October 1–31, 2026 · <a href="/">Port Island, Kobe</a></footer>
-
-<noscript><div style="padding:40px 6vw;border-top:1px solid rgba(244,243,240,.14);color:rgba(244,243,240,.72);font:15px/1.7 sans-serif">This searchable field guide needs JavaScript. The event page and application remain available at <a href="/" style="color:#9be8f0">Mirai Tech City</a>.</div></noscript>
-
-<script src="/experience/experience.js"></script>
+  <p class="statTerms num">Residency <b>application-only</b> · rolling review — Summit tickets <b>$900</b>/weekend · no application — both on <b>Luma</b></p>
+</div>
 <script>
-  const FILTERS = [
-    ['All', 'all'], ['Essentials', 'essential'], ['Food', 'food'], ['Day trips', 'full day'],
-    ['After hours', 'nightlife'], ['With a partner', 'partner'], ['Work', 'work']
+(() => {
+  'use strict';
+  const canvas = document.getElementById('h2xCanvas');
+  const hero = document.getElementById('top');
+  if (!canvas || !canvas.getContext) return;
+  const ctx = canvas.getContext('2d');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const small = matchMedia('(max-width: 767px)').matches;
+  const canHover = matchMedia('(hover: hover) and (pointer: fine)').matches;
+  const DPR = Math.min(window.devicePixelRatio || 1, 1.5);
+  const TAU = Math.PI * 2;
+  const N = small ? 800 : 2400;
+  const rand = (a, b) => a + Math.random() * (b - a);
+  let W = 0, H = 0;
+
+  // ── offscreen sprite stamps (3 variants: hot core, cyan, deep) ──
+  function makeSprite(core, mid) {
+    const s = document.createElement('canvas'); s.width = s.height = 32;
+    const c = s.getContext('2d');
+    const g = c.createRadialGradient(16, 16, 0, 16, 16, 16);
+    g.addColorStop(0, core); g.addColorStop(.3, mid); g.addColorStop(1, 'rgba(155,232,240,0)');
+    c.fillStyle = g; c.beginPath(); c.arc(16, 16, 16, 0, TAU); c.fill();
+    return s;
+  }
+  const SPR = [
+    makeSprite('rgba(240,255,255,1)', 'rgba(155,232,240,.5)'),
+    makeSprite('rgba(155,232,240,.9)', 'rgba(155,232,240,.32)'),
+    makeSprite('rgba(115,185,215,.75)', 'rgba(110,170,205,.22)')
   ];
 
-  const els = {
-    quick: document.getElementById('quickPaths'),
-    radius: document.getElementById('routeFacts'),
-    desktopNav: document.getElementById('desktopNav'),
-    mobileNav: document.getElementById('mobileNav'),
-    mobileDirectory: document.getElementById('mobileDirectory'),
-    mobileCurrent: document.getElementById('mobileCurrent'),
-    search: document.getElementById('guideSearch'),
-    clear: document.getElementById('clearSearch'),
-    filters: document.getElementById('filters'),
-    count: document.getElementById('resultCount'),
-    sections: document.getElementById('guideSections'),
-    midnight: document.getElementById('midnightUtility')
-  };
-
-  let activeFilter = 'all';
-  let sectionObserver;
-
-  function esc(value) {
-    return String(value)
-      .replaceAll('&', '&amp;')
-      .replaceAll('<', '&lt;')
-      .replaceAll('>', '&gt;')
-      .replaceAll('"', '&quot;')
-      .replaceAll("'", '&#039;');
+  // ── particles ──
+  const P = [];
+  function seedParticles() {
+    P.length = 0;
+    for (let i = 0; i < N; i++) P.push({
+      x: Math.random() * W, y: Math.random() * H,
+      vx: rand(-6, 6), vy: rand(-6, 6),
+      tx: 0, ty: 0, hasT: false,
+      r: rand(2, small ? 4.6 : 6),
+      s: Math.random() < .1 ? 0 : (Math.random() < .55 ? 1 : 2),
+      ta: rand(.35, .9), tj: Math.random() * TAU
+    });
   }
 
-  els.quick.innerHTML = EXPERIENCE_QUICK_PATHS.map((path, index) => `
-    <a href="${esc(path.href)}">
-      <span class="experience-quick-no">${String(index + 1).padStart(2, '0')}</span>
-      <strong>${esc(path.label)}</strong><small>${esc(path.detail)}</small>
-      <span class="experience-quick-arrow" aria-hidden="true">↘</span>
-    </a>`).join('');
-
-  els.radius.innerHTML = EXPERIENCE_ROUTE_FACTS.map(fact => `
-    <div class="experience-radius-cell">
-      <div class="experience-radius-place">${esc(fact.place)}</div>
-      <div class="experience-radius-time">${esc(fact.time)}</div>
-      <div class="experience-radius-detail">${esc(fact.detail)}</div>
-    </div>`).join('');
-
-  els.filters.innerHTML = FILTERS.map(([label, value]) => `
-    <button class="experience-filter${value === 'all' ? ' active' : ''}" type="button" data-filter="${esc(value)}" aria-pressed="${value === 'all'}">${esc(label)}</button>`).join('');
-
-  function entryMatches(entry, query, context) {
-    if (activeFilter !== 'all' && !entry.tags.includes(activeFilter)) return false;
-    if (!query) return true;
-    return [entry.title, entry.dek, entry.summary, ...entry.facts, ...entry.tags, context]
-      .join(' ').toLocaleLowerCase().includes(query);
+  // ── formation targets: 未来 + kobe skyline ──
+  let kanjiPts = [], cityPts = [];
+  function sampleKanji() {
+    const pts = [];
+    const f = small ? Math.min(W * .36, H * .24) : Math.min(H * .5, W * .25);
+    const off = document.createElement('canvas');
+    off.width = Math.ceil(f * 2.6); off.height = Math.ceil(f * 1.5);
+    const oc = off.getContext('2d', { willReadFrequently: true });
+    oc.fillStyle = '#fff';
+    oc.font = '900 ' + Math.round(f) + 'px "Hiragino Mincho ProN","Yu Mincho","Noto Serif JP",Georgia,serif';
+    oc.textAlign = 'center'; oc.textBaseline = 'middle';
+    oc.fillText('未来', off.width / 2, off.height / 2);
+    const step = Math.max(3, Math.round(f / 46));
+    const d = oc.getImageData(0, 0, off.width, off.height).data;
+    const cx = small ? W * .5 : W * .64;
+    const cy = small ? H * .26 : H * .42;
+    for (let y = 0; y < off.height; y += step)
+      for (let x = 0; x < off.width; x += step)
+        if (d[(y * off.width + x) * 4 + 3] > 120)
+          pts.push([cx + x - off.width / 2, cy + y - off.height / 2]);
+    return pts;
   }
-
-  function filteredSections() {
-    const query = els.search.value.trim().toLocaleLowerCase();
-    return EXPERIENCE_SECTIONS.map(section => ({
-      ...section,
-      groups: section.groups.map(group => ({
-        ...group,
-        entries: group.entries.filter(entry => entryMatches(
-          entry, query, [section.title, section.navLabel, group.title, group.sourceTitle].join(' ')
-        ))
-      })).filter(group => group.entries.length)
-    })).filter(section => section.groups.length);
-  }
-
-  function renderNav(sections) {
-    const links = sections.map(section => `
-      <a href="#${esc(section.id)}"><span>${esc(section.eyebrow.split(' / ')[0])}</span>${esc(section.navLabel)}</a>`).join('');
-    els.desktopNav.innerHTML = links;
-    els.mobileNav.innerHTML = links;
-    els.mobileNav.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
-      els.mobileDirectory.open = false;
-    }));
-    observeSections();
-  }
-
-  function renderEntry(entry, index) {
-    return `<article class="experience-entry" id="${esc(entry.id)}">
-      <div class="experience-entry-index" aria-hidden="true">${String(index + 1).padStart(2, '0')}</div>
-      <div>
-        <h4>${esc(entry.title)}</h4>
-        <p class="experience-entry-dek">${esc(entry.dek)}</p>
-        <p class="experience-entry-summary">${esc(entry.summary)}</p>
-        <ul class="experience-tags" aria-label="Topics">${entry.tags.slice(0, 3).map(tag => `<li>${esc(tag)}</li>`).join('')}</ul>
-      </div>
-      <div class="experience-facts">
-        <div class="experience-facts-title">Know before you go</div>
-        <ul>${entry.facts.map(fact => `<li>${esc(fact)}</li>`).join('')}</ul>
-        ${entry.note ? `<div class="experience-note">${esc(entry.note)}</div>` : ''}
-        <span class="experience-source-date">Source guide dated ${esc(EXPERIENCE_LAST_CHECKED)}</span>
-      </div>
-    </article>`;
-  }
-
-  function renderGuide() {
-    const sections = filteredSections();
-    const resultCount = sections.reduce((total, section) => total + section.groups.reduce((n, group) => n + group.entries.length, 0), 0);
-    renderNav(sections);
-    els.count.textContent = `${resultCount} ${resultCount === 1 ? 'guide entry' : 'guide entries'}`;
-    els.clear.hidden = !els.search.value && activeFilter === 'all';
-    els.midnight.hidden = Boolean(els.search.value.trim()) || activeFilter !== 'all';
-
-    if (!sections.length) {
-      els.sections.innerHTML = `<div class="experience-empty"><p>No guide entries match that search.</p><button type="button" id="showAll">Show the whole guide</button></div>`;
-      document.getElementById('showAll').addEventListener('click', clearAll);
-      return;
+  function sampleCity() {
+    const pts = [];
+    const yb = H * .8;
+    const colW = small ? 18 : 15;
+    for (let x = colW * .5; x < W; x += colW) {
+      const t = x / W;
+      const hMax = H * (.08 + .17 * Math.abs(Math.sin(t * 9.7 + 2)) + .09 * Math.abs(Math.sin(t * 23.3 + .6)));
+      const bh = hMax * rand(.45, 1);
+      for (let y = yb - bh; y < yb; y += small ? 15 : 12) {
+        if (Math.random() < .6) {
+          const px = x + rand(-3, 3), py = y + rand(-2, 2);
+          pts.push([px, py]);
+          if (Math.random() < .2) pts.push([px + rand(-2, 2), yb + (yb - py) * .2 + rand(2, 8)]);
+        }
+      }
     }
+    for (let i = 0, n = small ? 12 : 26; i < n; i++) pts.push([rand(0, W), yb + rand(12, H * .1)]);
+    return pts;
+  }
+  function assign(pts) {
+    if (!pts.length) return;
+    for (let i = 0; i < N; i++) {
+      const p = P[i];
+      if (i % 7 === 0) { p.hasT = false; continue; } // keep some ambient drifters
+      const tgt = pts[(i * 7919 + 3) % pts.length];
+      p.tx = tgt[0] + rand(-1.5, 1.5); p.ty = tgt[1] + rand(-1.5, 1.5);
+      p.hasT = true;
+    }
+  }
+  function release() { for (let i = 0; i < N; i++) P[i].hasT = false; }
 
-    els.sections.innerHTML = sections.map(section => `
-      <section class="experience-guide-section" id="${esc(section.id)}">
-        <header class="experience-section-head">
-          <div class="experience-section-kicker">${esc(section.eyebrow)}</div>
-          <h2>${esc(section.title)}</h2>
-          <p class="experience-section-intro">${esc(section.intro)}</p>
-        </header>
-        ${section.groups.map(group => `
-          <div class="experience-group" id="${esc(group.id)}">
-            <header class="experience-group-head">
-              <div class="experience-group-source">From the source guide · ${esc(group.sourceTitle)}</div>
-              <h3>${esc(group.title)}</h3>
-              <p class="experience-group-intro">${esc(group.intro)}</p>
-            </header>
-            <div class="experience-entry-list">${group.entries.map(renderEntry).join('')}</div>
-          </div>`).join('')}
-      </section>`).join('');
-
-    observeSections();
+  // ── phase choreography ──
+  const PHASES = [
+    { n: 'drift', d: 3500, form: false },
+    { n: 'kanji', d: 9000, form: true },
+    { n: 'drift', d: 3600, form: false },
+    { n: 'city', d: 9000, form: true }
+  ];
+  let phI = 0, phT = 0, strength = 0;
+  function enterPhase() {
+    const ph = PHASES[phI];
+    if (ph.n === 'kanji') assign(kanjiPts);
+    else if (ph.n === 'city') assign(cityPts);
+    else release();
   }
 
-  function observeSections() {
-    if (sectionObserver) sectionObserver.disconnect();
-    sectionObserver = new IntersectionObserver(entries => entries.forEach(entry => {
-      if (!entry.isIntersecting) return;
-      document.querySelectorAll('.experience-directory-nav a, .experience-mobile-links a').forEach(link => {
-        const current = link.getAttribute('href') === `#${entry.target.id}`;
-        if (current) link.setAttribute('aria-current', 'location');
-        else link.removeAttribute('aria-current');
-      });
-      const section = EXPERIENCE_SECTIONS.find(item => item.id === entry.target.id);
-      if (section) els.mobileCurrent.textContent = section.navLabel;
-    }), { rootMargin: '-40% 0px -40% 0px', threshold: 0 });
-    document.querySelectorAll('.experience-guide-section').forEach(section => sectionObserver.observe(section));
+  // ── input: cursor field force + click pulse ──
+  let mx = -9999, my = -9999;
+  const pulses = [];
+  if (canHover && !reduce) {
+    addEventListener('pointermove', e => { mx = e.clientX; my = e.clientY; }, { passive: true });
+    hero.addEventListener('pointerleave', () => { mx = my = -9999; });
   }
-
-  function clearAll() {
-    els.search.value = '';
-    activeFilter = 'all';
-    els.filters.querySelectorAll('button').forEach(button => {
-      const active = button.dataset.filter === 'all';
-      button.classList.toggle('active', active);
-      button.setAttribute('aria-pressed', String(active));
-    });
-    renderGuide();
-  }
-
-  els.filters.addEventListener('click', event => {
-    const button = event.target.closest('button[data-filter]');
-    if (!button) return;
-    activeFilter = button.dataset.filter;
-    els.filters.querySelectorAll('button').forEach(item => {
-      const active = item === button;
-      item.classList.toggle('active', active);
-      item.setAttribute('aria-pressed', String(active));
-    });
-    renderGuide();
+  if (!reduce) hero.addEventListener('pointerdown', e => {
+    pulses.push({ x: e.clientX, y: e.clientY, t: performance.now() });
+    if (pulses.length > 4) pulses.shift();
   });
-  els.search.addEventListener('input', renderGuide);
-  els.clear.addEventListener('click', clearAll);
 
-  renderGuide();
+  // ── scroll: the pour ──
+  let scY = scrollY;
+  const scrollF = () => Math.min(1, scY / (H * 1.5 || 1));
+  const ease = t => t * t * (3 - 2 * t);
 
-  if (location.hash) requestAnimationFrame(() => requestAnimationFrame(() => {
-    document.getElementById(location.hash.slice(1))?.scrollIntoView();
-  }));
+  function update(dt, tm) {
+    const dts = dt / 1000;
+    const sF = scrollF();
+    const ph = PHASES[phI];
+    if (ph.form) {
+      const env = Math.min(Math.min(1, phT / 1600), Math.min(1, (ph.d - phT) / 1400));
+      strength = ease(Math.max(0, env)) * (1 - sF);
+    } else strength = Math.max(0, strength - dts * 1.8);
+
+    const R = 130, R2 = R * R;
+    for (let i = 0; i < N; i++) {
+      const p = P[i];
+      const drifting = !(p.hasT && strength > .45);
+      const ang = 2.2 * (Math.sin(p.x * .0016 + tm * .00021 + p.tj * .35) + Math.cos(p.y * .0019 - tm * .00016));
+      const dr = drifting ? 22 : 3;
+      p.vx += Math.cos(ang) * dr * dts;
+      p.vy += (Math.sin(ang) * dr - 1.5) * dts;
+      if (p.hasT && strength > 0) {
+        const k = 4.4 * strength;
+        p.vx += (p.tx - p.x) * k * dts;
+        p.vy += (p.ty - p.y) * k * dts;
+      }
+      if (mx > -999) {
+        const dx = p.x - mx, dy = p.y - my, d2 = dx * dx + dy * dy;
+        if (d2 < R2 && d2 > .01) {
+          const d = Math.sqrt(d2), f = (1 - d / R) * 640 * dts / d;
+          p.vx += dx * f; p.vy += dy * f;
+        }
+      }
+      for (let j = 0; j < pulses.length; j++) {
+        const ps = pulses[j], age = tm - ps.t;
+        if (age > 1100) continue;
+        const dx = p.x - ps.x, dy = p.y - ps.y;
+        const d = Math.sqrt(dx * dx + dy * dy) || 1;
+        const dd = Math.abs(d - age * .5);
+        if (dd < 90) {
+          const f = (1 - dd / 90) * (1 - age / 1100) * 480 * dts / d;
+          p.vx += dx * f; p.vy += dy * f;
+        }
+      }
+      if (sF > 0) {
+        p.vy += 950 * sF * dts;
+        p.vx += Math.sin(p.y * .01 + tm * .002 + p.tj) * 60 * sF * dts;
+      }
+      const damp = Math.exp(-dts * (p.hasT && strength > 0 ? 3.3 : .85));
+      p.vx *= damp; p.vy *= damp;
+      const cap = sF > 0 ? 720 : (p.hasT && strength > 0 ? 340 : 70);
+      const sp2 = p.vx * p.vx + p.vy * p.vy;
+      if (sp2 > cap * cap) { const s = cap / Math.sqrt(sp2); p.vx *= s; p.vy *= s; }
+      p.x += p.vx * dts; p.y += p.vy * dts;
+      if (p.x < -24) p.x = W + 24; else if (p.x > W + 24) p.x = -24;
+      if (p.y > H + 24) { p.y = -24; if (sF > 0) p.x = Math.random() * W; }
+      else if (p.y < -24) p.y = H + 24;
+    }
+    for (let j = pulses.length - 1; j >= 0; j--) if (tm - pulses[j].t > 1100) pulses.splice(j, 1);
+  }
+
+  function draw(tm) {
+    ctx.clearRect(0, 0, W, H);
+    ctx.globalCompositeOperation = 'lighter';
+    for (let i = 0; i < N; i++) {
+      const p = P[i];
+      const tw = .72 + .28 * Math.sin(tm * .0012 + p.tj);
+      let a = p.ta * tw, r = p.r;
+      if (p.hasT && strength > 0) { a = Math.min(1, a + strength * .4); r *= 1 + strength * .2; }
+      ctx.globalAlpha = a;
+      ctx.drawImage(SPR[p.s], p.x - r, p.y - r, r * 2, r * 2);
+    }
+    for (let j = 0; j < pulses.length; j++) {
+      const age = tm - pulses[j].t;
+      if (age > 1100) continue;
+      ctx.globalAlpha = .15 * (1 - age / 1100);
+      ctx.strokeStyle = '#9be8f0'; ctx.lineWidth = 1.25;
+      ctx.beginPath(); ctx.arc(pulses[j].x, pulses[j].y, age * .5, 0, TAU); ctx.stroke();
+    }
+    ctx.globalAlpha = 1;
+    ctx.globalCompositeOperation = 'source-over';
+  }
+
+  // ── loop ──
+  let raf = 0, last = 0, running = false, live = false, lastOp = -1;
+  function frame(t) {
+    raf = 0;
+    const dt = Math.min(48, last ? t - last : 16);
+    last = t;
+    phT += dt;
+    if (phT >= PHASES[phI].d) { phI = (phI + 1) % PHASES.length; phT = 0; enterPhase(); }
+    update(dt, t);
+    draw(t);
+    const op = Math.max(0, 1 - scrollF() * 1.12);
+    if (Math.abs(op - lastOp) > .01) { canvas.style.opacity = op.toFixed(3); lastOp = op; }
+    if (!live) { live = true; hero.classList.add('h2x-live'); }
+    if (scrollF() >= 1) { stop(); canvas.style.display = 'none'; return; }
+    if (running) raf = requestAnimationFrame(frame);
+  }
+  function start() { if (running || reduce) return; running = true; last = 0; raf = requestAnimationFrame(frame); }
+  function stop() { running = false; if (raf) { cancelAnimationFrame(raf); raf = 0; } }
+
+  addEventListener('scroll', () => {
+    scY = scrollY;
+    if (reduce) { canvas.style.opacity = Math.max(0, 1 - scrollF() * 1.12).toFixed(3); return; }
+    if (scrollF() < 1 && !running && !document.hidden) { canvas.style.display = ''; start(); }
+  }, { passive: true });
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) stop();
+    else if (scrollF() < 1) { canvas.style.display = ''; start(); }
+  });
+
+  let rsT = 0;
+  addEventListener('resize', () => {
+    clearTimeout(rsT);
+    rsT = setTimeout(() => { setup(false); if (reduce) staticFrame(); }, 160);
+  });
+
+  function setup(seed) {
+    W = innerWidth; H = innerHeight;
+    canvas.width = Math.round(W * DPR); canvas.height = Math.round(H * DPR);
+    canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+    kanjiPts = sampleKanji(); cityPts = sampleCity();
+    if (seed) seedParticles(); else enterPhase();
+  }
+
+  // reduced motion: one beautiful still — the field with 未来 formed
+  function staticFrame() {
+    assign(kanjiPts);
+    strength = 1;
+    for (let i = 0; i < N; i++) {
+      const p = P[i];
+      if (p.hasT) { p.x = p.tx + rand(-2.5, 2.5); p.y = p.ty + rand(-2.5, 2.5); }
+    }
+    draw(4000);
+    hero.classList.add('h2x-live');
+    canvas.style.opacity = Math.max(0, 1 - scrollF() * 1.12).toFixed(3);
+  }
+
+  setup(true);
+  enterPhase();
+  if (reduce) staticFrame();
+  else start();
+})();
 </script>
+
+<!-- ═══ 01 · ONE DAY ═══ -->
+<section id="day" data-track-section="day" data-track-position="2">
+  <div class="wrap">
+    <header class="secHead rv">
+      <p class="secNo">01</p>
+      <h2 class="big">One day on Port Island<span class="tick">.</span></h2>
+      <p class="secLine"><b>Mornings for your own work, afternoons for labs and workshops, evenings for the city.</b> No two days repeat; most keep this shape.</p>
+    </header>
+  </div>
+  <div class="dayFrames rv">
+    <figure class="frame f-a">
+      <img src="/img/early-bird-bridge-821.webp" alt="Runner crossing a Kobe harbor bridge at dawn" width="821" height="1232" loading="lazy" decoding="async" />
+      <figcaption class="scrim">
+        <div class="time">07:12</div>
+        <div class="fcap">The harbor loop</div>
+        <div class="fsub">Mt. Rokko trailheads · 20 min</div>
+      </figcaption>
+    </figure>
+    <figure class="frame f-b">
+      <img src="/img/early-bird-month-1280.webp" alt="Morning light over Kobe&rsquo;s waterfront" width="1280" height="570" loading="lazy" decoding="async" />
+      <figcaption class="scrim">
+        <div class="time">09:00</div>
+        <div class="fcap">Breakfast, then heads-down</div>
+        <div class="fsub">The morning block is protected for deep work</div>
+      </figcaption>
+    </figure>
+    <figure class="frame f-g">
+      <img src="/img/prog-lunch-teishoku.webp" alt="A Japanese set lunch on a tray" width="960" height="640" loading="lazy" decoding="async" />
+      <figcaption class="scrim">
+        <div class="time">12:30</div>
+        <div class="fcap">A set lunch, under &yen;1,000</div>
+        <div class="fsub">Back at the desk by one</div>
+      </figcaption>
+    </figure>
+    <figure class="frame f-c">
+      <img src="/img/summit-lab.webp" alt="Researcher working in a KBIC lab" width="900" height="1350" loading="lazy" decoding="async" />
+      <figcaption class="scrim">
+        <div class="time">14:00</div>
+        <div class="fcap">Into the cluster</div>
+        <div class="fsub">KBIC · Japan&rsquo;s largest biomedical cluster · one stop</div>
+      </figcaption>
+    </figure>
+    <figure class="frame f-d">
+      <img src="/img/harbor-golden-hour.webp" alt="Kobe harbor at golden hour" width="1024" height="683" loading="lazy" decoding="async" />
+      <figcaption class="scrim">
+        <div class="time">17:58</div>
+        <div class="fcap">Golden hour, Port Liner home</div>
+        <div class="fsub">The commute you&rsquo;ll stop noticing by week three</div>
+      </figcaption>
+    </figure>
+    <figure class="frame f-e">
+      <img src="/img/izakaya-counter-640.webp" alt="Izakaya counter seats under warm light" width="640" height="400" loading="lazy" decoding="async" />
+      <figcaption class="scrim">
+        <div class="time">19:47</div>
+        <div class="fcap">Dinner is a counter seat</div>
+        <div class="fsub">Groups form in the chat by six</div>
+      </figcaption>
+    </figure>
+    <figure class="frame f-f">
+      <img src="/img/prog-hackathon.webp" alt="Two people building together on laptops at night" width="960" height="640" loading="lazy" decoding="async" />
+      <figcaption class="scrim">
+        <div class="time">21:30</div>
+        <div class="fcap">Night shift at the base</div>
+        <div class="fsub">Vibe-coding nights · demos · optional</div>
+      </figcaption>
+    </figure>
+    <figure class="frame f-h">
+      <img src="/img/sprint-night-train-960.webp" alt="Night train crossing the illuminated city" width="960" height="612" loading="lazy" decoding="async" />
+      <figcaption class="scrim">
+        <div class="time">23:41</div>
+        <div class="fcap">The last train home</div>
+        <div class="fsub">Or stay a while longer</div>
+      </figcaption>
+    </figure>
+    <figure class="frame f-sat">
+      <img src="/img/prog-market.webp" alt="A stall at a Japanese food market" width="960" height="640" loading="lazy" decoding="async" />
+      <figcaption class="scrim">
+        <div class="time">Saturday</div>
+        <div class="fcap">Weekends run different</div>
+        <div class="fsub">Farmers market in the morning · Rokko trails after</div>
+      </figcaption>
+    </figure>
+    <figure class="frame f-sun">
+      <img src="/img/prog-onsen-steam.webp" alt="Steam rising from the Tenjin hot-spring source in Arima Onsen" width="803" height="535" loading="lazy" decoding="async" />
+      <figcaption class="scrim">
+        <div class="time">Sunday</div>
+        <div class="fcap">End the week in the onsen</div>
+        <div class="fsub">Arima&rsquo;s iron-red gold spring · one of Japan&rsquo;s oldest onsen towns · 30 min</div>
+      </figcaption>
+    </figure>
+  </div>
+  <p class="dayCoda rv"><b>Base</b> cowork + breakfast — <b>Labs</b> KBIC, one monorail stop — <b>City</b> Kobe, across the bridge</p>
+</section>
+
+<!-- ═══ 02 · THE MONTH ═══ -->
+<section id="weeks" data-track-section="weeks" data-track-position="3">
+  <div class="wrap">
+    <header class="secHead rv">
+      <p class="secNo">02</p>
+      <h2 class="big">The month, week by week<span class="tick">.</span></h2>
+      <p class="secLine"><b>Each week has a job</b>, and each one builds on the last.</p>
+    </header>
+  </div>
+  <div class="weekReel">
+    <article class="wk">
+      <img class="bg" src="/img/early-bird-portliner-851.webp" alt="Riding the Port Liner monorail over the harbor" width="851" height="1277" loading="lazy" decoding="async" />
+      <div class="veil" aria-hidden="true"></div>
+      <span class="wkKanji" aria-hidden="true">着</span>
+      <div class="inner">
+        <div class="stamp"><div class="wn">W1</div><div class="wd">Oct 1–4</div></div>
+        <div class="story">
+          <h3>Arrive</h3>
+          <p class="wcap">Land, find your desk, meet the city. <b>Opening night Oct 4</b> at the Medtech Innovation Center.</p>
+          <div class="chips num"><span class="chip hot">Opening night · Oct 4</span><span class="chip">Autumn festival</span><span class="chip">Farmers market Saturdays</span></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="wk">
+      <img class="bg" src="/img/kansai-kyoto-autumn-1280.webp" alt="Kyoto temple gardens in autumn color" width="1280" height="848" loading="lazy" decoding="async" />
+      <div class="veil" aria-hidden="true"></div>
+      <span class="wkKanji" aria-hidden="true">探</span>
+      <div class="inner">
+        <div class="stamp"><div class="wn">W2</div><div class="wd">Oct 5–11</div></div>
+        <div class="story">
+          <h3>Explore</h3>
+          <p class="wcap">Lab tours through KBIC, Kyoto, and Osaka — Fugaku, CiRA — and <b>BioJapan in Yokohama</b>. The hackathon kicks off.</p>
+          <div class="chips num"><span class="chip hot">BioJapan · Oct 7–9</span><span class="chip">Ningen dock</span><span class="chip">Arima Onsen</span></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="wk">
+      <img class="bg" src="/img/summit-pathologist.jpg" alt="Scientist at the microscope" width="900" height="1350" loading="lazy" decoding="async" />
+      <div class="veil" aria-hidden="true"></div>
+      <span class="wkKanji" aria-hidden="true">研</span>
+      <div class="inner">
+        <div class="stamp"><div class="wn">W3</div><div class="wd">Oct 12–18</div></div>
+        <div class="story">
+          <h3>Build</h3>
+          <p class="wcap">Hands in the science: DIY bio, cultured meat, gene-therapy workshops. The week ends with <b>Summit I</b>.</p>
+          <div class="chips num"><span class="chip hot">Summit I · Oct 17–18</span><span class="chip">Biohackathon</span><span class="chip">FabLab</span></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="wk w4">
+      <img class="bg" src="/img/summit-runway.webp" alt="Model walking a darkened runway" width="682" height="1024" loading="lazy" decoding="async" />
+      <div class="veil" aria-hidden="true"></div>
+      <span class="wkKanji" aria-hidden="true">商</span>
+      <div class="inner">
+        <div class="stamp"><div class="wn">W4</div><div class="wd">Oct 19–26</div></div>
+        <div class="story">
+          <h3>Launch</h3>
+          <p class="wcap">Lab to market: PMDA regulatory workshops, pitch practice with Antler, fireworks over the harbor. Then <b>Summit II, Demo Day, and the Frontier Human Fashion Show</b>.</p>
+          <div class="chips num"><span class="chip hot">Summit II · Oct 24–25</span><span class="chip hot">Demo Day + Fashion Show · Oct 26</span><span class="chip">Fireworks</span></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="wk">
+      <img class="bg" src="/img/rokko-night.webp" alt="The ten-million-dollar night view from Mt. Rokko" width="1024" height="683" loading="lazy" decoding="async" />
+      <div class="veil" aria-hidden="true"></div>
+      <span class="wkKanji" aria-hidden="true">続</span>
+      <div class="inner">
+        <div class="stamp"><div class="wn">+5</div><div class="wd">Oct 27–31</div></div>
+        <div class="story">
+          <h3>The last days</h3>
+          <p class="wcap">Unprogrammed, on purpose: follow-up meetings, last onsen trips, goodbyes. <b>CellHaus continues to Dec 31.</b></p>
+          <div class="chips num"><span class="chip">Open week</span><span class="chip">Rokko Meets Art</span><span class="chip hot">CellHaus → Dec 31</span></div>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ═══ 03 · PROGRAMS ═══ -->
+<section id="programs" data-track-section="programs" data-track-position="4">
+  <div class="wrap">
+    <header class="secHead rv">
+      <p class="secNo">03</p>
+      <h2 class="big">19 programs you can join<span class="tick">.</span></h2>
+      <p class="secLine">All real, dated, optional. <b>Half builds your company; the other half builds you.</b></p>
+    </header>
+    <div class="p4x-sky rv" id="p4xSky" hidden>
+      <div class="p4x-chart" id="p4xChart" role="group" aria-label="October star chart of the 19 programs. Work programs form the upper band, life programs the lower band; the two summits and Demo Day sit on the line between them. Each star opens its program's details — the full list also follows below.">
+        <svg class="p4x-svg" aria-hidden="true" focusable="false"></svg>
+        <div class="p4x-panel" id="p4xPanel" role="region" aria-label="Program details" aria-live="polite" hidden>
+          <button type="button" class="p4x-close" id="p4xClose" aria-label="Close program details">×</button>
+          <div class="p4x-panel-body" id="p4xPanelBody"></div>
+        </div>
+      </div>
+      <div class="p4x-legend num" aria-hidden="true">
+        <span class="p4x-lg-hint">tap a star ·</span>
+        <span class="p4x-lg" style="--sc:155,232,240">Science &amp; Labs</span>
+        <span class="p4x-lg" style="--sc:232,201,139">Build</span>
+        <span class="p4x-lg" style="--sc:240,184,155">Regulatory &amp; GTM</span>
+        <span class="p4x-lg" style="--sc:224,213,143">Investment</span>
+        <span class="p4x-lg" style="--sc:240,169,196">Community</span>
+        <span class="p4x-lg" style="--sc:168,184,224">Kobe &amp; Culture</span>
+        <span class="p4x-lg" style="--sc:167,232,180">Health</span>
+        <span class="p4x-lg" style="--sc:201,184,240">Recovery</span>
+        <span class="p4x-lg p4x-lg-anchor">✦ summits + demo day</span>
+      </div>
+    </div>
+
+    <div class="p4x-index">
+    <h3 class="progGroup rv"><b>The work</b><span>14 programs · what you&rsquo;re here to build</span></h3>
+    <div class="rv p4x-cols">
+      <details class="row" data-track-faq="Opening networking night" data-track-position="1">
+        <summary><img class="rth" src="/img/lanterns-640.webp" alt="" width="640" height="427" loading="lazy" decoding="async" /><span class="rk num">Oct 4 · eve</span><span class="rt">Opening networking night</span><span class="rl">Medtech Innovation Center · month starts here</span><span class="pt c-com">Community</span><span class="mk" aria-hidden="true"></span></summary>
+        <div class="rbody"><p>Residents, speakers, and the local biotech scene at the Medtech Innovation Center. The month starts here.</p></div>
+      </details>
+      <details class="row" data-track-faq="KBIC and Kansai lab tours" data-track-position="2">
+        <summary><img class="rth" src="/img/summit-lab.webp" alt="" width="900" height="1350" loading="lazy" decoding="async" /><span class="rk num">Oct 5–16</span><span class="rt">KBIC &amp; Kansai lab tours</span><span class="rl">Fugaku · CiRA · Kyoto Research Park · LINK-J</span><span class="pt c-sci">Science &amp; Labs</span><span class="mk" aria-hidden="true"></span></summary>
+        <div class="rbody"><p>Small guided tours of the region&rsquo;s labs: Fugaku, CiRA, Kyoto Research Park, LINK-J, Nakanoshima Qross. Weekdays.</p></div>
+      </details>
+      <details class="row" data-track-faq="FabLab and maker spaces" data-track-position="3">
+        <summary><img class="rth" src="/img/prog-fablab.webp" alt="" width="960" height="640" loading="lazy" decoding="async" /><span class="rk num">Oct 5–18</span><span class="rt">FabLab &amp; maker spaces</span><span class="rl">3D printers · electronics benches · access days</span><span class="pt c-build">Build</span><span class="mk" aria-hidden="true"></span></summary>
+        <div class="rbody"><p>Access days at the FabLab MakerSpace — 3D printers, electronics benches, and room to prototype.</p></div>
+      </details>
+      <details class="row" data-track-faq="BioJapan 2026" data-track-position="4">
+        <summary><img class="rth" src="/img/prog-biojapan.webp" alt="" width="960" height="640" loading="lazy" decoding="async" /><span class="rk num">Oct 7–9</span><span class="rt">BioJapan 2026</span><span class="rl">Yokohama · Asia&rsquo;s largest biotech partnering event</span><span class="pt c-sci">Science &amp; Labs</span><span class="mk" aria-hidden="true"></span></summary>
+        <div class="rbody"><p>A field trip to Asia&rsquo;s largest biotech partnering event — three expos under one Yokohama roof.</p></div>
+      </details>
+      <details class="row" data-track-faq="Longevity x Bio Hackathon" data-track-position="5">
+        <summary><img class="rth" src="/img/prog-hackathon.webp" alt="" width="960" height="640" loading="lazy" decoding="async" /><span class="rk num">Oct 9 →</span><span class="rt">Longevity × Bio Hackathon</span><span class="rl">With Nucleate Japan · pitch investors at Demo Day</span><span class="pt c-build">Build</span><span class="mk" aria-hidden="true"></span></summary>
+        <div class="rbody"><p>With Nucleate Japan: form a team in week two, build all month, pitch investors at Demo Day. Kickoff October 9.</p></div>
+      </details>
+      <details class="row" data-track-faq="Minicircle gene-therapy workshop" data-track-position="6">
+        <summary><img class="rth" src="/img/summit-pathologist.jpg" alt="" width="900" height="1350" loading="lazy" decoding="async" /><span class="rk num">Oct 12–18</span><span class="rt">Minicircle gene-therapy workshop</span><span class="rl">Plasmid cell therapy · with Kobe University</span><span class="pt c-sci">Science &amp; Labs</span><span class="mk" aria-hidden="true"></span></summary>
+        <div class="rbody"><p>Plasmid cell-therapy workshops with the Minicircle team and Kobe University researchers.</p></div>
+      </details>
+      <details class="row" data-track-faq="Shojinmeat DIY-bio workshop" data-track-position="7">
+        <summary><img class="rth" src="/img/prog-shojinmeat.webp" alt="" width="960" height="640" loading="lazy" decoding="async" /><span class="rk num">Oct 16</span><span class="rt">Shojinmeat DIY-bio workshop</span><span class="rl">Open-source cultured meat · grow it, taste it</span><span class="pt c-sci">Science &amp; Labs</span><span class="mk" aria-hidden="true"></span></summary>
+        <div class="rbody"><p>Open-source cultured meat — grow it, understand it, taste it.</p></div>
+      </details>
+      <details class="row" data-track-faq="Regulatory pathway workshops" data-track-position="8">
+        <summary><img class="rth" src="/img/why-strategy-900.webp" alt="" width="900" height="675" loading="lazy" decoding="async" /><span class="rk num">Oct 19–23</span><span class="rt">Regulatory pathway workshops</span><span class="rl">PMDA · CROs · HekaBio · ASAGI Labs</span><span class="pt c-reg">Regulatory &amp; GTM</span><span class="mk" aria-hidden="true"></span></summary>
+        <div class="rbody"><p>The Japanese approval route with PMDA, CROs, HekaBio, and ASAGI Labs — what a trial here takes. Weekdays.</p></div>
+      </details>
+      <details class="row" data-track-faq="Pitch practice with Antler" data-track-position="9">
+        <summary><img class="rth" src="/img/why-pitch-900.webp" alt="" width="900" height="643" loading="lazy" decoding="async" /><span class="rk num">Oct 19–23</span><span class="rt">Pitch practice with Antler</span><span class="rl">GTM sessions · pitch day Oct 23</span><span class="pt c-reg">Regulatory &amp; GTM</span><span class="mk" aria-hidden="true"></span></summary>
+        <div class="rbody"><p>Go-to-market sessions and pitch practice to get you ready for Demo Day.</p></div>
+      </details>
+      <details class="row" data-track-faq="Longevity Biotech Fellowship day" data-track-position="10">
+        <summary><img class="rth" src="/img/prog-lbf-fireworks.webp" alt="" width="960" height="640" loading="lazy" decoding="async" /><span class="rk num">Oct 23</span><span class="rt">Longevity Biotech Fellowship day</span><span class="rl">Closes under the Kobe Port fireworks</span><span class="pt c-inv">Investment</span><span class="mk" aria-hidden="true"></span></summary>
+        <div class="rbody"><p>An LBF day in the city, closing under the Kobe Port fireworks.</p></div>
+      </details>
+      <details class="row" data-track-faq="Ecosystem speed-dating" data-track-position="11">
+        <summary><img class="rth" src="/img/izakaya-counter-640.webp" alt="" width="640" height="400" loading="lazy" decoding="async" /><span class="rk num">Sundays</span><span class="rt">Ecosystem speed-dating</span><span class="rl">KBIC + Kansai · researchers, operators, partners</span><span class="pt c-com">Community</span><span class="mk" aria-hidden="true"></span></summary>
+        <div class="rbody"><p>Recurring matchmaking with KBIC and the wider Kansai biotech scene — researchers, operators, partners. All month.</p></div>
+      </details>
+      <details class="row" data-track-faq="Vibe-coding nights" data-track-position="12">
+        <summary><img class="rth" src="/img/sprint-night-train-960.webp" alt="" width="960" height="612" loading="lazy" decoding="async" /><span class="rk num">Weekly</span><span class="rt">Vibe-coding nights</span><span class="rl">Laptops open · demos encouraged · just ship</span><span class="pt c-build">Build</span><span class="mk" aria-hidden="true"></span></summary>
+        <div class="rbody"><p>A weekly night of building in public — laptops open, demos encouraged, no agenda. Evenings.</p></div>
+      </details>
+      <details class="row" data-track-faq="CellHaus residency" data-track-position="13">
+        <summary><img class="rth" src="/img/prog-cellhaus.webp" alt="" width="960" height="640" loading="lazy" decoding="async" /><span class="rk num">Oct → Dec 31</span><span class="rt">CellHaus residency</span><span class="rl">3-month build-in-Japan · lab space · on approval</span><span class="pt c-com">Community</span><span class="mk" aria-hidden="true"></span></summary>
+        <div class="rbody"><p>A three-month build-in-Japan residency with Kobe University and the MIC — lab space included. On approval.</p></div>
+      </details>
+      <details class="row" data-track-faq="Bring your own program" data-track-position="14">
+        <summary><img class="rth" src="/img/early-bird-month-640.webp" alt="" width="640" height="285" loading="lazy" decoding="async" /><span class="rk num">All month</span><span class="rt">Bring your own program</span><span class="rl">Residents run part of the calendar · propose yours</span><span class="pt c-com">Community</span><span class="mk" aria-hidden="true"></span></summary>
+        <div class="rbody"><p>Residents run part of the calendar — propose a workshop, a study, or a session: <a href="mailto:team@miraitech.city">team@miraitech.city</a>.</p></div>
+      </details>
+    </div>
+
+    <h3 class="progGroup rv"><b>The life</b><span>5 programs · the way you&rsquo;ll live</span></h3>
+    <div class="rv p4x-cols" style="border-top: 1px solid var(--line)">
+      <details class="row" data-track-faq="Akiya hunting" data-track-position="15">
+        <summary><img class="rth" src="/img/prog-akiya.webp" alt="" width="780" height="520" loading="lazy" decoding="async" /><span class="rk num">Oct 5–11</span><span class="rt">Akiya hunting</span><span class="rl">Japan&rsquo;s vacant homes · Akiya Air + Rokko Nomad</span><span class="pt c-cul">Kobe &amp; Culture</span><span class="mk" aria-hidden="true"></span></summary>
+        <div class="rbody"><p>Explore Japan&rsquo;s vacant homes with Akiya Air and Rokko Nomad — how they&rsquo;re found, bought, and revived.</p></div>
+      </details>
+      <details class="row" data-track-faq="Ningen dock screening" data-track-position="16">
+        <summary><img class="rth" src="/img/prog-ningen.webp" alt="" width="960" height="640" loading="lazy" decoding="async" /><span class="rk num">Oct 10–11</span><span class="rt">Ningen dock screening</span><span class="rl">Japan&rsquo;s full-body health screening · book ahead</span><span class="pt c-health">Health</span><span class="mk" aria-hidden="true"></span></summary>
+        <div class="rbody"><p>Japan&rsquo;s famously thorough full-body health screening — a normal thing to do here. Arrive with a baseline; leave with a plan.</p></div>
+      </details>
+      <details class="row" data-track-faq="Rokko weekend and Arima Onsen" data-track-position="17">
+        <summary><img class="rth" src="/img/arima-steam.jpg" alt="" width="375" height="500" loading="lazy" decoding="async" /><span class="rk num">Oct 10–11 +</span><span class="rt">Rokko weekend &amp; Arima Onsen</span><span class="rl">Hike Rokko, walk down into the onsen town</span><span class="pt c-rec">Recovery</span><span class="mk" aria-hidden="true"></span></summary>
+        <div class="rbody"><p>Hike Rokko with Rokko Nomad, then walk down into one of Japan&rsquo;s oldest onsen towns, 30 minutes away. Most weekends.</p></div>
+      </details>
+      <details class="row" data-track-faq="Eat Local Kobe farmers market" data-track-position="18">
+        <summary><img class="rth" src="/img/prog-market.webp" alt="" width="900" height="600" loading="lazy" decoding="async" /><span class="rk num">Saturdays</span><span class="rt">Eat Local Kobe farmers market</span><span class="rl">Where your Saturdays begin · free</span><span class="pt c-cul">Kobe &amp; Culture</span><span class="mk" aria-hidden="true"></span></summary>
+        <div class="rbody"><p>The weekly farmers market in central Kobe — where the city buys breakfast, and where your Saturdays begin.</p></div>
+      </details>
+      <details class="row" data-track-faq="Rokko Meets Art 2026" data-track-position="19">
+        <summary><img class="rth" src="/img/rokko-night-640.webp" alt="" width="640" height="427" loading="lazy" decoding="async" /><span class="rk num">All month</span><span class="rt">Rokko Meets Art 2026</span><span class="rl">Contemporary art festival across Mt. Rokko</span><span class="pt c-cul">Kobe &amp; Culture</span><span class="mk" aria-hidden="true"></span></summary>
+        <div class="rbody"><p>A contemporary art festival across Mt. Rokko, running the whole residency.</p></div>
+      </details>
+    </div>
+    </div>
+    <p class="progFoot rv">None of it mandatory · propose a workshop, study, or session · <a href="mailto:team@miraitech.city">team@miraitech.city</a></p>
+
+    <style>
+      /* ── p4x · THE CONSTELLATION ─────────────────────────────── */
+      .p4x-sky { margin-top: 46px; }
+      .p4x-chart { position: relative; width: 100%; overflow: hidden;
+        border: 1px solid var(--line-soft); border-radius: 3px;
+        background:
+          radial-gradient(1100px 480px at 30% -10%, rgba(155,232,240,.05), transparent 62%),
+          radial-gradient(900px 500px at 85% 115%, rgba(201,184,240,.045), transparent 60%),
+          #060608; }
+      .p4x-svg { position: absolute; inset: 0; display: block; }
+
+      /* band + axis chrome (DOM) */
+      .p4x-band-cap { position: absolute; font-family: var(--mono); font-size: 10px;
+        letter-spacing: .26em; text-transform: uppercase; color: rgba(244,243,240,.55);
+        white-space: nowrap; pointer-events: none; }
+      .p4x-band-cap b { color: var(--ink); font-weight: 600; }
+      .p4x-band-cap em { font-style: normal; color: var(--faint); letter-spacing: .18em; }
+      .p4x-tick { position: absolute; transform: translateX(-50%); font-family: var(--mono);
+        font-size: 9.5px; letter-spacing: .18em; color: var(--faint); pointer-events: none;
+        font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+      /* stars */
+      .p4x-star { position: absolute; width: 38px; height: 38px; margin: 0; padding: 0;
+        transform: translate(-50%,-50%); background: none; border: 0; cursor: pointer;
+        -webkit-tap-highlight-color: transparent; }
+      .p4x-star:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 50%; }
+      .p4x-core { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%);
+        width: var(--cs, 7px); height: var(--cs, 7px); border-radius: 50%;
+        background: rgba(var(--sc), .96);
+        box-shadow: 0 0 7px 1px rgba(var(--sc), .55), 0 0 20px 5px rgba(var(--sc), .16);
+        animation: p4xTw var(--twd, 4.2s) ease-in-out var(--twl, 0s) infinite alternate; }
+      .p4x-star.s0 { --cs: 6px; }
+      .p4x-star.s1 { --cs: 9px; }
+      .p4x-star.s2 { --cs: 13px; }
+      .p4x-star.s2 .p4x-core::before, .p4x-star.s2 .p4x-core::after { content: "";
+        position: absolute; left: 50%; top: 50%; background: rgba(var(--sc), .4); }
+      .p4x-star.s2 .p4x-core::before { width: 34px; height: 1px; transform: translate(-50%,-50%); }
+      .p4x-star.s2 .p4x-core::after { width: 1px; height: 34px; transform: translate(-50%,-50%); }
+      @keyframes p4xTw { from { opacity: .68; } to { opacity: 1; } }
+
+      /* labels */
+      .p4x-lab { position: absolute; font-family: var(--mono); font-size: 10px; font-weight: 500;
+        letter-spacing: .05em; text-transform: uppercase; white-space: nowrap; line-height: 1.4;
+        color: rgba(244,243,240,.88); pointer-events: none; text-shadow: 0 1px 6px rgba(5,5,6,.9); }
+      .p4x-lab em { font-style: normal; color: rgba(244,243,240,.44); margin-left: 8px; letter-spacing: .1em;
+        font-variant-numeric: tabular-nums; }
+      .lp-r .p4x-lab { left: calc(50% + 13px); top: 50%; transform: translateY(-50%); }
+      .lp-l .p4x-lab { right: calc(50% + 13px); top: 50%; transform: translateY(-50%); }
+      .lp-t .p4x-lab { bottom: calc(50% + 11px); left: 50%; transform: translateX(-50%); }
+      .lp-b .p4x-lab { top: calc(50% + 11px); left: 50%; transform: translateX(-50%); }
+
+      /* anchors */
+      .p4x-anchor { position: absolute; transform: translate(-50%,-50%); width: 30px; height: 30px;
+        pointer-events: none; }
+      .p4x-anchor .ac { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%);
+        width: 15px; height: 15px; border-radius: 50%;
+        background: radial-gradient(circle, #fff 0%, var(--accent) 55%, rgba(155,232,240,.4) 100%);
+        box-shadow: 0 0 12px 3px rgba(155,232,240,.6), 0 0 44px 14px rgba(155,232,240,.16);
+        animation: p4xTw 3.4s ease-in-out infinite alternate; }
+      .p4x-anchor .ac::before, .p4x-anchor .ac::after { content: ""; position: absolute; left: 50%; top: 50%;
+        background: linear-gradient(90deg, transparent, rgba(155,232,240,.75), transparent); }
+      .p4x-anchor .ac::before { width: 58px; height: 1px; transform: translate(-50%,-50%); }
+      .p4x-anchor .ac::after { width: 1px; height: 58px; transform: translate(-50%,-50%);
+        background: linear-gradient(180deg, transparent, rgba(155,232,240,.75), transparent); }
+      .p4x-anchor .p4x-lab { color: var(--accent); text-shadow: 0 0 12px rgba(5,5,6,1); }
+      .p4x-anchor .p4x-lab em { color: rgba(155,232,240,.55); }
+
+      /* hover / focus constellation lighting */
+      .p4x-chart.is-hot .p4x-star:not(.lit) { opacity: .3; }
+      .p4x-chart.is-hot .p4x-anchor { opacity: .45; }
+      .p4x-chart.is-hot .p4x-cline:not(.lit), .p4x-chart.is-hot .p4x-trail:not(.lit) { opacity: .25; }
+      .p4x-star, .p4x-anchor, .p4x-cline, .p4x-trail { transition: opacity .3s ease; }
+      .p4x-cline.lit { stroke-opacity: .6; }
+      .p4x-trail.lit { stroke-opacity: .55; }
+      .p4x-star.lit .p4x-core { box-shadow: 0 0 10px 2px rgba(var(--sc), .8), 0 0 30px 9px rgba(var(--sc), .28); }
+      .p4x-star.sel .p4x-core { outline: 1px solid rgba(var(--sc), .8); outline-offset: 4px; }
+
+      /* detail panel */
+      .p4x-panel { position: absolute; top: 14px; right: 14px; width: min(360px, calc(100% - 28px));
+        max-height: calc(100% - 28px); overflow: auto; z-index: 5;
+        background: rgba(8,8,11,.92); border: 1px solid rgba(155,232,240,.28); border-radius: 3px;
+        padding: 20px 22px 22px; backdrop-filter: blur(8px); box-shadow: 0 12px 50px rgba(0,0,0,.6); }
+      .p4x-close { position: absolute; top: 8px; right: 8px; width: 32px; height: 32px;
+        background: none; border: 0; color: var(--faint); font-size: 20px; line-height: 1;
+        cursor: pointer; border-radius: 2px; }
+      .p4x-close:hover { color: var(--ink); }
+      .p4x-close:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+      .p4x-panel .pk { display: flex; align-items: center; gap: 10px; font-family: var(--mono);
+        font-size: 9.5px; letter-spacing: .16em; text-transform: uppercase; color: var(--faint);
+        font-variant-numeric: tabular-nums; }
+      .p4x-panel .pk i { width: 8px; height: 8px; border-radius: 50%; font-style: normal; flex: 0 0 auto;
+        background: rgba(var(--sc), .95); box-shadow: 0 0 8px 1px rgba(var(--sc), .5); }
+      .p4x-panel .pk b { color: rgba(var(--sc), .95); font-weight: 500; }
+      .p4x-panel h4 { margin: 10px 0 0; font-size: 19px; font-weight: 800; letter-spacing: -.01em;
+        line-height: 1.15; padding-right: 16px; }
+      .p4x-panel .pimg { display: block; width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover;
+        margin-top: 12px; border: 1px solid rgba(244,243,240,.12); border-radius: 2px;
+        background: rgba(244,243,240,.04); filter: saturate(.9); }
+      .p4x-panel .pl { margin-top: 7px; font-family: var(--mono); font-size: 10px; letter-spacing: .1em;
+        text-transform: uppercase; color: var(--faint); line-height: 1.7; }
+      .p4x-panel p.pd { margin-top: 12px; color: var(--dim); font-size: 14.5px; line-height: 1.6; }
+      .p4x-panel p.pd a { color: var(--accent); }
+
+      /* legend */
+      .p4x-legend { display: flex; flex-wrap: wrap; gap: 7px 18px; margin-top: 14px;
+        font-family: var(--mono); font-size: 9px; letter-spacing: .14em; text-transform: uppercase;
+        color: var(--faint); }
+      .p4x-lg { display: inline-flex; align-items: center; gap: 7px; }
+      .p4x-lg::before { content: ""; width: 6px; height: 6px; border-radius: 50%;
+        background: rgba(var(--sc), .9); box-shadow: 0 0 6px rgba(var(--sc), .5); }
+      .p4x-lg-anchor { color: rgba(155,232,240,.75); }
+      .p4x-lg-anchor::before { display: none; }
+      .p4x-lg-hint { color: rgba(244,243,240,.5); letter-spacing: .2em; }
+
+      /* compact index under the chart */
+      .p4x-index { margin-top: 10px; }
+      .p4x-index .progGroup { margin-top: 40px; }
+      .p4x-cols details.row > summary { grid-template-columns: 56px 104px minmax(0,1fr) auto 24px;
+        gap: 3px 16px; padding: 12px 2px; }
+      .p4x-cols .rth { grid-column: 1; grid-row: 1 / span 2; align-self: center;
+        width: 56px; height: 56px; object-fit: cover; display: block;
+        border: 1px solid var(--line-soft); border-radius: 2px;
+        filter: saturate(.85) brightness(.92) contrast(1.02); }
+      details.row:hover .rth, details.row[open] .rth { filter: none; }
+      .p4x-cols .rk { font-size: 10px; }
+      .p4x-cols .rt { font-size: 14.5px; }
+      .p4x-cols .rl { grid-column: 3 / 5; font-size: 10px; opacity: .8; }
+      .p4x-cols .pt { font-size: 8.5px; }
+      .p4x-cols .mk { grid-row: 1 / span 2; grid-column: 5; align-self: center; }
+      @media (max-width: 860px) {
+        .p4x-cols details.row > summary { grid-template-columns: 44px 96px minmax(0,1fr) 24px; gap: 3px 12px; }
+        .p4x-cols .rth { width: 44px; height: 44px; grid-row: 1 / span 4; align-self: start; }
+        .p4x-cols .rk, .p4x-cols .rt, .p4x-cols .pt { grid-column: 2; }
+        .p4x-cols .rl { grid-column: 3 / 4; }
+        .p4x-cols .mk { grid-column: 4; grid-row: 1 / span 4; }
+      }
+      @media (min-width: 1000px) {
+        .p4x-cols { display: grid; grid-template-columns: 1fr 1fr; column-gap: 56px; align-items: start; }
+        .p4x-cols details.row:nth-child(2) { border-top: 1px solid var(--line-soft); margin-top: -1px; }
+      }
+
+      /* mobile: panel becomes a bottom sheet */
+      @media (max-width: 759px) {
+        .p4x-panel { position: fixed; left: 10px; right: 10px; bottom: 10px; top: auto; width: auto;
+          max-height: 46vh; z-index: 60; }
+        .p4x-panel .pimg { aspect-ratio: 21 / 9; }
+        .p4x-lab { font-size: 8.5px; letter-spacing: .03em; white-space: normal; width: max-content; max-width: 92px; line-height: 1.45; }
+        .lp-l .p4x-lab { text-align: right; }
+        .lp-b .p4x-lab, .lp-t .p4x-lab { text-align: center; }
+        .p4x-lab em { display: block; margin-left: 0; }
+        .p4x-legend { gap: 6px 13px; }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .p4x-core, .p4x-anchor .ac { animation: none; }
+        .p4x-star, .p4x-anchor, .p4x-cline, .p4x-trail { transition: none; }
+      }
+    </style>
+
+    <script>
+    (() => {
+      const sky = document.getElementById('p4xSky');
+      const chart = document.getElementById('p4xChart');
+      const panel = document.getElementById('p4xPanel');
+      const panelBody = document.getElementById('p4xPanelBody');
+      const closeBtn = document.getElementById('p4xClose');
+      if (!sky || !chart) return;
+      sky.hidden = false;
+      const svg = chart.querySelector('.p4x-svg');
+      const NS = 'http://www.w3.org/2000/svg';
+
+      const CAT = {
+        sci: ['Science & Labs', '155,232,240'],
+        build: ['Build', '232,201,139'],
+        reg: ['Regulatory & GTM', '240,184,155'],
+        inv: ['Investment', '224,213,143'],
+        com: ['Community', '240,169,196'],
+        cul: ['Kobe & Culture', '168,184,224'],
+        health: ['Health', '167,232,180'],
+        rec: ['Recovery', '201,184,240']
+      };
+
+      /* day: star position on the Oct 1–31 axis · t0/t1: trail span · dots: recurrence days
+         size: duration class · lane: position across the band (desktop) · vlane: mobile · lp: label side */
+      const P = [
+        { id:'labtours', img:'/img/summit-lab.webp', alt:'Researcher pipetting inside a biosafety cabinet beside racked sample tubes', iw:900, ih:1350, band:'w', cat:'sci', name:'KBIC & Kansai lab tours', sn:'KBIC lab tours', date:'Oct 5–16',
+          day:10.5, t0:5, t1:16, size:1, lane:.02, vlane:.15, lp:'t',
+          line:'Fugaku · CiRA · Kyoto Research Park · LINK-J',
+          desc:'Small guided tours of the region’s labs: Fugaku, CiRA, Kyoto Research Park, LINK-J, Nakanoshima Qross. Weekdays.' },
+        { id:'regulatory', img:'/img/why-strategy-900.webp', alt:'Two figures silhouetted before a large illuminated display in a dark room', iw:900, ih:675, band:'w', cat:'reg', name:'Regulatory pathway workshops', sn:'Regulatory workshops', date:'Oct 19–23',
+          day:20.2, t0:19, t1:23, size:1, lane:.04, vlane:.25, lp:'t',
+          line:'PMDA · CROs · HekaBio · ASAGI Labs',
+          desc:'The Japanese approval route with PMDA, CROs, HekaBio, and ASAGI Labs — what a trial here takes. Weekdays.' },
+        { id:'opening', img:'/img/lanterns-640.webp', alt:'Paper lanterns glowing pink and gold among dark trees at night', iw:640, ih:427, band:'w', cat:'com', name:'Opening networking night', sn:'Opening night', date:'Oct 4 · eve',
+          day:4, size:0, lane:.18, vlane:.50, lp:'r',
+          line:'Medtech Innovation Center · month starts here',
+          desc:'Residents, speakers, and the local biotech scene at the Medtech Innovation Center. The month starts here.' },
+        { id:'minicircle', img:'/img/summit-pathologist.jpg', alt:'Scientist silhouetted in deep blue light, holding a slide beside a microscope', iw:900, ih:1350, band:'w', cat:'sci', name:'Minicircle gene-therapy workshop', sn:'Minicircle workshop', date:'Oct 12–18',
+          day:15, t0:12, t1:18, size:1, lane:.24, vlane:.30, lp:'r',
+          line:'Plasmid cell therapy · with Kobe University',
+          desc:'Plasmid cell-therapy workshops with the Minicircle team and Kobe University researchers.' },
+        { id:'antler', img:'/img/why-pitch-900.webp', alt:'Founder pitching on a bright stage to a packed, darkened auditorium', iw:900, ih:643, band:'w', cat:'reg', name:'Pitch practice with Antler', sn:'Antler pitch practice', date:'Oct 19–23',
+          day:21.8, t0:19, t1:23, size:1, lane:.34, vlane:.70, lp:'r',
+          line:'GTM sessions · pitch day Oct 23',
+          desc:'Go-to-market sessions and pitch practice to get you ready for Demo Day.' },
+        { id:'biojapan', img:'/img/prog-biojapan.webp', alt:'Yokohama waterfront at night with the great ferris wheel and towers aglow', iw:960, ih:640, band:'w', cat:'sci', name:'BioJapan 2026', sn:'BioJapan 2026', date:'Oct 7–9',
+          day:8, t0:7, t1:9, size:1, lane:.38, vlane:.45, lp:'r',
+          line:'Yokohama · Asia’s largest biotech partnering event',
+          desc:'A field trip to Asia’s largest biotech partnering event — three expos under one Yokohama roof.' },
+        { id:'shojinmeat', img:'/img/prog-shojinmeat.webp', alt:'Gloved hand holding a small culture dish of pink growth medium', iw:960, ih:640, band:'w', cat:'sci', name:'Shojinmeat DIY-bio workshop', sn:'Shojinmeat DIY-bio', date:'Oct 16',
+          day:16, size:0, lane:.56, vlane:.55, lp:'r',
+          line:'Open-source cultured meat · grow it, taste it',
+          desc:'Open-source cultured meat — grow it, understand it, taste it.' },
+        { id:'lbf', img:'/img/prog-lbf-fireworks.webp', alt:'Fireworks bursting in colored streaks across a black night sky', iw:960, ih:640, band:'w', cat:'inv', name:'Longevity Biotech Fellowship day', sn:'LBF day', date:'Oct 23',
+          day:23, size:0, lane:.42, vlane:.45, lp:'r',
+          line:'Closes under the Kobe Port fireworks',
+          desc:'An LBF day in the city, closing under the Kobe Port fireworks.' },
+        { id:'fablab', img:'/img/prog-fablab.webp', alt:'A 3D printer nozzle extruding bright orange parts onto a glass bed', iw:960, ih:640, band:'w', cat:'build', name:'FabLab & maker spaces', sn:'FabLab access', date:'Oct 5–18',
+          day:11.5, t0:5, t1:18, size:1, lane:.62, vlane:.80, lp:'l',
+          line:'3D printers · electronics benches · access days',
+          desc:'Access days at the FabLab MakerSpace — 3D printers, electronics benches, and room to prototype.' },
+        { id:'hackathon', img:'/img/prog-hackathon.webp', alt:'Two builders leaning into one laptop, working through a problem together', iw:960, ih:640, band:'w', cat:'build', name:'Longevity × Bio Hackathon', sn:'Bio Hackathon', date:'Oct 9 →',
+          day:9, size:2, lane:.72, vlane:.62, lp:'r', toDemo:true,
+          line:'With Nucleate Japan · pitch investors at Demo Day',
+          desc:'With Nucleate Japan: form a team in week two, build all month, pitch investors at Demo Day. Kickoff October 9.' },
+        { id:'cellhaus', img:'/img/prog-cellhaus.webp', alt:'Rack of micropipettes on a working laboratory bench', iw:960, ih:640, band:'w', cat:'com', name:'CellHaus residency', sn:'CellHaus residency', date:'Oct → Dec 31',
+          day:27.5, t0:1, t1:31, arrow:true, size:2, lane:.82, vlane:.90, lp:'l',
+          line:'3-month build-in-Japan · lab space · on approval',
+          desc:'A three-month build-in-Japan residency with Kobe University and the MIC — lab space included. On approval.' },
+        { id:'byop', img:'/img/early-bird-month-640.webp', alt:'Residents prototyping and talking around long tables as dusk settles over the harbor', iw:640, ih:285, band:'w', cat:'com', name:'Bring your own program', sn:'BYO program', date:'All month',
+          day:2.2, t0:1, t1:31, dashed:true, size:1, lane:.90, vlane:.06, lp:'r',
+          line:'Residents run part of the calendar · propose yours',
+          desc:'Residents run part of the calendar — propose a workshop, a study, or a session: <a href="mailto:team@miraitech.city">team@miraitech.city</a>.' },
+        { id:'vibe', img:'/img/sprint-night-train-960.webp', alt:'Train streaking past a teal-lit station platform late at night', iw:960, ih:612, band:'w', cat:'build', name:'Vibe-coding nights', sn:'Vibe-coding', date:'Weekly',
+          day:12.5, t0:2, t1:30, dashed:true, size:1, lane:.985, vlane:.98, lp:'l',
+          line:'Laptops open · demos encouraged · just ship',
+          desc:'A weekly night of building in public — laptops open, demos encouraged, no agenda. Evenings.' },
+        { id:'speeddating', img:'/img/izakaya-counter-640.webp', alt:'Warm izakaya counter crowded with diners under handwritten menu signs', iw:640, ih:400, band:'w', cat:'com', name:'Ecosystem speed-dating', sn:'Speed-dating', date:'Sundays',
+          day:18, t0:4, t1:25, dashed:true, dots:[4,11,25], size:1, lane:1.06, vlane:.30, lp:'r',
+          line:'KBIC + Kansai · researchers, operators, partners',
+          desc:'Recurring matchmaking with KBIC and the wider Kansai biotech scene — researchers, operators, partners. All month.' },
+        /* the life */
+        { id:'akiya', img:'/img/prog-akiya.webp', alt:'Vacant countryside house half swallowed by shrubs and vines', iw:780, ih:520, band:'l', cat:'cul', name:'Akiya hunting', sn:'Akiya hunting', date:'Oct 5–11',
+          day:8, t0:5, t1:11, size:1, lane:.06, vlane:.30, lp:'r', vlp:'b',
+          line:'Japan’s vacant homes · Akiya Air + Rokko Nomad',
+          desc:'Explore Japan’s vacant homes with Akiya Air and Rokko Nomad — how they’re found, bought, and revived.' },
+        { id:'art', img:'/img/rokko-night-640.webp', alt:'City lights spread along the bay at night, seen from the mountain above', iw:640, ih:427, band:'l', cat:'cul', name:'Rokko Meets Art 2026', sn:'Rokko Meets Art', date:'All month',
+          day:24, t0:1, t1:31, size:1, lane:.30, vlane:.88, lp:'l',
+          line:'Contemporary art festival across Mt. Rokko',
+          desc:'A contemporary art festival across Mt. Rokko, running the whole residency.' },
+        { id:'rokko', img:'/img/arima-steam.jpg', alt:'Steam rising from a wooden hot-spring source in an onsen town', iw:375, ih:500, band:'l', cat:'rec', name:'Rokko weekend & Arima Onsen', sn:'Rokko & Arima Onsen', date:'Oct 10–11 +',
+          day:10.8, size:1, lane:.55, vlane:.70, lp:'r', vlp:'b',
+          line:'Hike Rokko, walk down into the onsen town',
+          desc:'Hike Rokko with Rokko Nomad, then walk down into one of Japan’s oldest onsen towns, 30 minutes away. Most weekends.' },
+        { id:'market', img:'/img/prog-market.webp', alt:'Barrels of pickled vegetables under handwritten price signs at a market stall', iw:900, ih:600, band:'l', cat:'cul', name:'Eat Local Kobe farmers market', sn:'Farmers market', date:'Saturdays',
+          day:17, t0:3, t1:31, dashed:true, dots:[3,10,24,31], size:1, lane:.80, vlane:.50, lp:'r',
+          line:'Where your Saturdays begin · free',
+          desc:'The weekly farmers market in central Kobe — where the city buys breakfast, and where your Saturdays begin.' },
+        { id:'ningen', img:'/img/prog-ningen.webp', alt:'Scanner suite prepared for a full-body imaging session under warm lights', iw:960, ih:640, band:'l', cat:'health', name:'Ningen dock screening', sn:'Ningen dock', date:'Oct 10–11',
+          day:10.4, size:1, lane:1.02, vlane:.12, lp:'r',
+          line:'Japan’s full-body health screening · book ahead',
+          desc:'Japan’s famously thorough full-body health screening — a normal thing to do here. Arrive with a baseline; leave with a plan.' }
+      ];
+
+      const ANCHORS = [
+        { name:'Summit I', date:'Oct 17–18', day:17.5, lp:'b' },
+        { name:'Summit II', date:'Oct 24–25', day:24.5, lp:'b' },
+        { name:'Demo Day + Fashion Show', date:'Oct 26', day:26, lp:'t' }
+      ];
+
+      /* seeded PRNG for the background dust */
+      const mulberry = s => () => { s |= 0; s = s + 0x6D2B79F5 | 0; let t = Math.imul(s ^ s >>> 15, 1 | s);
+        t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; };
+
+      const el = (tag, cls) => { const n = document.createElementNS(NS, tag); if (cls) n.setAttribute('class', cls); return n; };
+      let lastW = -1;
+
+      function render() {
+        const W = chart.clientWidth;
+        if (!W) return;
+        lastW = W;
+        const V = W < 700;                      /* vertical time on small screens */
+        const H = V ? 1240 : 680;
+        chart.style.height = H + 'px';
+        svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+        svg.setAttribute('width', W); svg.setAttribute('height', H);
+        svg.textContent = '';
+        chart.querySelectorAll('.p4x-star, .p4x-anchor, .p4x-tick, .p4x-band-cap').forEach(n => n.remove());
+
+        /* geometry */
+        let tPos, pos, ecl;
+        if (!V) {
+          const padL = 56, padR = 46, wT = 104, wB = 366, lT = 468, lB = 606;
+          ecl = 414;
+          tPos = d => padL + (d - 1) / 30 * (W - padL - padR);
+          pos = p => p.band === 'w'
+            ? [tPos(p.day), wT + p.lane * (wB - wT)]
+            : [tPos(p.day), lT + p.lane * (lB - lT)];
+          pos.trail = (d, p) => [tPos(d), pos(p)[1]];
+          pos.anchor = a => [tPos(a.day), ecl];
+          pos.bands = { wT, wB, lT, lB };
+        } else {
+          const padT = 64, padB = 46, div = W * .56;
+          const wL = 14, wR = div - 30, lL = div + 30, lR = W - 12;
+          ecl = div;
+          tPos = d => padT + (d - 1) / 30 * (H - padT - padB);
+          pos = p => p.band === 'w'
+            ? [wL + p.vlane * (wR - wL), tPos(p.day)]
+            : [lL + p.vlane * (lR - lL), tPos(p.day)];
+          pos.trail = (d, p) => [pos(p)[0], tPos(d)];
+          pos.anchor = a => [div, tPos(a.day)];
+          pos.bands = { wL, wR, lL, lR, padT };
+        }
+
+        /* dust */
+        const rnd = mulberry(20261001);
+        const dust = el('g');
+        for (let i = 0; i < 130; i++) {
+          const c = el('circle');
+          c.setAttribute('cx', (rnd() * W).toFixed(1)); c.setAttribute('cy', (rnd() * H).toFixed(1));
+          c.setAttribute('r', (0.4 + rnd() * 0.9).toFixed(2));
+          c.setAttribute('fill', `rgba(244,243,240,${(0.05 + rnd() * 0.22).toFixed(2)})`);
+          dust.appendChild(c);
+        }
+        svg.appendChild(dust);
+
+        /* week grid + axis ticks */
+        const ticks = [1, 8, 15, 22, 29];
+        for (const d of ticks) {
+          const ln = el('line');
+          if (!V) { ln.setAttribute('x1', tPos(d)); ln.setAttribute('x2', tPos(d)); ln.setAttribute('y1', 56); ln.setAttribute('y2', H - 20); }
+          else { ln.setAttribute('x1', 8); ln.setAttribute('x2', W - 8); ln.setAttribute('y1', tPos(d)); ln.setAttribute('y2', tPos(d)); }
+          ln.setAttribute('stroke', 'rgba(244,243,240,.055)'); ln.setAttribute('stroke-width', '1');
+          svg.appendChild(ln);
+          const t = document.createElement('span'); t.className = 'p4x-tick num';
+          t.textContent = 'OCT ' + d;
+          if (!V) { t.style.left = tPos(d) + 'px'; t.style.top = '30px'; }
+          else { t.style.left = '10px'; t.style.top = (tPos(d) - 16) + 'px'; t.style.transform = 'none'; }
+          chart.appendChild(t);
+        }
+
+        /* ecliptic — the summit line between the bands */
+        const ec = el('line', 'p4x-ecl');
+        if (!V) { ec.setAttribute('x1', 14); ec.setAttribute('x2', W - 14); ec.setAttribute('y1', ecl); ec.setAttribute('y2', ecl); }
+        else { ec.setAttribute('x1', ecl); ec.setAttribute('x2', ecl); ec.setAttribute('y1', 40); ec.setAttribute('y2', H - 16); }
+        ec.setAttribute('stroke', 'rgba(155,232,240,.16)'); ec.setAttribute('stroke-dasharray', '1 7');
+        ec.setAttribute('stroke-width', '1'); ec.setAttribute('stroke-linecap', 'round');
+        svg.appendChild(ec);
+
+        /* band captions */
+        const capW = document.createElement('span'); capW.className = 'p4x-band-cap';
+        capW.innerHTML = '<b>THE WORK</b> <em>· 14 programs · what you’re here to build</em>';
+        const capL = document.createElement('span'); capL.className = 'p4x-band-cap';
+        capL.innerHTML = '<b>THE LIFE</b> <em>· 5 programs · the way you’ll live</em>';
+        if (!V) {
+          capW.style.left = '18px'; capW.style.top = '68px';
+          capL.style.left = '18px'; capL.style.top = (pos.bands.lT - 30) + 'px';
+        } else {
+          capW.style.left = '14px'; capW.style.top = '14px';
+          capW.innerHTML = '<b>THE WORK</b> <em>· 14</em>';
+          capL.innerHTML = '<b>THE LIFE</b> <em>· 5</em>';
+          capL.style.right = '12px'; capL.style.top = '14px';
+        }
+        chart.appendChild(capW); chart.appendChild(capL);
+
+        /* trails (duration spans + recurrence rhythms) */
+        for (const p of P) {
+          if (p.t0 == null && !p.toDemo) continue;
+          const g = el('g', 'p4x-trail'); g.setAttribute('data-cat', p.cat);
+          const col = `rgba(${CAT[p.cat][1]},1)`;
+          if (p.t0 != null) {
+            const [x1, y1] = pos.trail(p.t0, p), [x2, y2] = pos.trail(p.t1, p);
+            const ln = el('line');
+            ln.setAttribute('x1', x1); ln.setAttribute('y1', y1); ln.setAttribute('x2', x2); ln.setAttribute('y2', y2);
+            ln.setAttribute('stroke', col); ln.setAttribute('stroke-width', '1');
+            ln.setAttribute('stroke-dasharray', p.dashed ? '1 6' : '');
+            ln.setAttribute('stroke-linecap', 'round');
+            g.setAttribute('stroke-opacity', '.28');
+            g.appendChild(ln);
+            if (p.arrow) {   /* continues past Oct 31 */
+              const [ax, ay] = pos.trail(31, p);
+              const ar = el('path');
+              ar.setAttribute('d', V ? `M ${ax - 3.5} ${ay - 5} L ${ax} ${ay + 1} L ${ax + 3.5} ${ay - 5}`
+                                     : `M ${ax - 5} ${ay - 3.5} L ${ax + 1} ${ay} L ${ax - 5} ${ay + 3.5}`);
+              ar.setAttribute('fill', 'none'); ar.setAttribute('stroke', col); ar.setAttribute('stroke-width', '1');
+              g.appendChild(ar);
+            }
+            if (p.dots) for (const d of p.dots) {
+              const [dx, dy] = pos.trail(d, p);
+              const c = el('circle');
+              c.setAttribute('cx', dx); c.setAttribute('cy', dy); c.setAttribute('r', '2.2');
+              c.setAttribute('fill', col); c.setAttribute('stroke', 'none');
+              g.appendChild(c);
+            }
+          }
+          if (p.toDemo) {  /* the hackathon's road to Demo Day */
+            const [x1, y1] = pos(p), [x2, y2] = pos.anchor(ANCHORS[2]);
+            const ln = el('line');
+            ln.setAttribute('x1', x1); ln.setAttribute('y1', y1); ln.setAttribute('x2', x2); ln.setAttribute('y2', y2);
+            ln.setAttribute('stroke', col); ln.setAttribute('stroke-width', '1');
+            ln.setAttribute('stroke-dasharray', '3 5'); ln.setAttribute('stroke-linecap', 'round');
+            g.setAttribute('stroke-opacity', '.3');
+            g.appendChild(ln);
+          }
+          svg.appendChild(g);
+        }
+
+        /* constellation lines — same category, date order */
+        const byCat = {};
+        for (const p of P) (byCat[p.cat] = byCat[p.cat] || []).push(p);
+        for (const cat in byCat) {
+          const list = byCat[cat].slice().sort((a, b) => a.day - b.day);
+          for (let i = 0; i < list.length - 1; i++) {
+            const [x1, y1] = pos(list[i]), [x2, y2] = pos(list[i + 1]);
+            const ln = el('line', 'p4x-cline'); ln.setAttribute('data-cat', cat);
+            ln.setAttribute('x1', x1); ln.setAttribute('y1', y1); ln.setAttribute('x2', x2); ln.setAttribute('y2', y2);
+            ln.setAttribute('stroke', `rgba(${CAT[cat][1]},1)`); ln.setAttribute('stroke-opacity', '.16');
+            ln.setAttribute('stroke-width', '1');
+            svg.appendChild(ln);
+          }
+        }
+
+        /* anchor stars — the two summits + Demo Day */
+        for (const a of ANCHORS) {
+          const [x, y] = pos.anchor(a);
+          const d = document.createElement('div');
+          let lp = a.lp;
+          if (V) lp = 'l';
+          d.className = 'p4x-anchor lp-' + lp;
+          d.style.left = x + 'px'; d.style.top = y + 'px';
+          d.innerHTML = `<span class="ac" aria-hidden="true"></span><span class="p4x-lab">${V && a.day === 26 ? 'Demo Day' : a.name}<em>${a.date}</em></span>`;
+          chart.appendChild(d);
+        }
+
+        /* program stars */
+        const rr = mulberry(7);
+        P.forEach((p, i) => {
+          const [x, y] = pos(p);
+          const b = document.createElement('button');
+          b.type = 'button';
+          let lp = p.lp;
+          if (V) lp = p.vlp || (x > W - 105 ? 'l' : x < 105 ? 'r' : (p.vlane > .55 ? 'l' : 'r'));
+          b.className = `p4x-star s${p.size} lp-${lp}`;
+          b.dataset.cat = p.cat; b.dataset.id = p.id;
+          b.style.left = x + 'px'; b.style.top = y + 'px';
+          b.style.setProperty('--sc', CAT[p.cat][1]);
+          b.style.setProperty('--twd', (3.2 + rr() * 3.4).toFixed(2) + 's');
+          b.style.setProperty('--twl', (-rr() * 4).toFixed(2) + 's');
+          b.setAttribute('aria-label', `${p.name}, ${p.date}, ${CAT[p.cat][0]}. Open details.`);
+          b.setAttribute('aria-expanded', 'false');
+          b.innerHTML = `<span class="p4x-core" aria-hidden="true"></span><span class="p4x-lab" aria-hidden="true">${V ? p.sn : p.name}<em>${p.date}</em></span>`;
+          b.addEventListener('click', e => { e.stopPropagation(); openPanel(p, b); });
+          b.addEventListener('mouseenter', () => hot(p.cat, true));
+          b.addEventListener('mouseleave', () => hot(p.cat, false));
+          b.addEventListener('focus', () => hot(p.cat, true));
+          b.addEventListener('blur', () => hot(p.cat, false));
+          chart.appendChild(b);
+        });
+      }
+
+      function hot(cat, on) {
+        chart.classList.toggle('is-hot', on);
+        chart.querySelectorAll('.lit').forEach(n => n.classList.remove('lit'));
+        if (on) chart.querySelectorAll(`[data-cat="${cat}"]`).forEach(n => n.classList.add('lit'));
+      }
+
+      function openPanel(p, btn) {
+        chart.querySelectorAll('.p4x-star').forEach(s => { s.classList.remove('sel'); s.setAttribute('aria-expanded', 'false'); });
+        if (btn) { btn.classList.add('sel'); btn.setAttribute('aria-expanded', 'true'); }
+        panelBody.innerHTML =
+          `<div class="pk" style="--sc:${CAT[p.cat][1]}"><i aria-hidden="true"></i><b>${CAT[p.cat][0]}</b><span>·</span><span>${p.date}</span></div>` +
+          `<h4>${p.name}</h4>` +
+          (p.img ? `<img class="pimg" src="${p.img}" alt="${p.alt}" width="${p.iw}" height="${p.ih}" loading="lazy" decoding="async">` : '') +
+          `<p class="pl">${p.line}</p>` +
+          `<p class="pd">${p.desc}</p>`;
+        panel.hidden = false;
+      }
+      function closePanel() {
+        panel.hidden = true;
+        chart.querySelectorAll('.p4x-star.sel').forEach(s => { s.classList.remove('sel'); s.setAttribute('aria-expanded', 'false'); });
+      }
+      closeBtn.addEventListener('click', closePanel);
+      chart.addEventListener('click', e => { if (!panel.contains(e.target)) closePanel(); });
+      document.addEventListener('keydown', e => { if (e.key === 'Escape' && !panel.hidden) closePanel(); });
+
+      let raf = 0;
+      addEventListener('resize', () => {
+        cancelAnimationFrame(raf);
+        raf = requestAnimationFrame(() => { if (chart.clientWidth !== lastW) render(); });
+      }, { passive: true });
+      render();
+    })();
+    </script>
+  </div>
+</section>
+
+<hr class="rule" />
+
+<!-- ═══ 04 · PEOPLE ═══ -->
+<section id="people" data-track-section="people" data-track-position="5">
+  <div class="wrap" style="padding-top: 0">
+    <header class="secHead rv">
+      <p class="secNo">04</p>
+      <h2 class="big">The people — they live here too<span class="tick">.</span></h2>
+      <p class="secLine">The speakers don&rsquo;t fly out after their slot. <b>The person on stage Saturday is at the next desk on Monday.</b></p>
+    </header>
+    <div class="headliners rv">
+      <div class="hcard"><img src="/img/aubrey.webp" alt="Aubrey de Grey" width="768" height="710" loading="lazy" decoding="async" />
+        <div class="meta"><div class="nm">Aubrey de Grey</div><div class="og">LEV Foundation</div></div></div>
+      <div class="hcard"><img src="/img/hayano.webp" alt="Motoshi Hayano" width="600" height="750" loading="lazy" decoding="async" />
+        <div class="meta"><div class="nm">Motoshi Hayano</div><div class="og">Asagi Labs</div></div></div>
+      <div class="hcard"><img src="/img/jose.webp" alt="José Cordeiro" width="500" height="500" loading="lazy" decoding="async" />
+        <div class="meta"><div class="nm">José Cordeiro</div><div class="og">Int&rsquo;l Longevity Summit</div></div></div>
+      <div class="hcard"><img src="/img/yuki.webp" alt="Yuki Hanyu" width="480" height="480" loading="lazy" decoding="async" />
+        <div class="meta"><div class="nm">Yuki Hanyu</div><div class="og">Shojinmeat Project</div></div></div>
+      <div class="hcard"><img src="/img/adam.webp" alt="Adam Gries" width="800" height="1118" loading="lazy" decoding="async" />
+        <div class="meta"><div class="nm">Adam Gries</div><div class="og">Vitalist Bay</div></div></div>
+    </div>
+    <div class="peopleIx rv">
+      <details class="row" data-track-faq="Also in the city" data-track-position="20">
+        <summary>
+          <span class="rk num">43 total</span>
+          <span class="rt">Also in the city</span>
+          <span class="rl">Brian Kennedy, Marian Goodell, Patri Friedman, Mac Davis…</span>
+          <span class="mk" aria-hidden="true"></span>
+        </summary>
+        <div class="rbody">
+          <p>Also in the city: <strong>Brian Kennedy</strong> (NUS Centre for Healthy Longevity), <strong>Marian Goodell</strong> (Burning Man Project), <strong>Patri Friedman</strong> (Pronomos Capital), <strong>Sebastian Brunemeier</strong> (Healthspan Capital), <strong>Mac Davis</strong> (Minicircle), <strong>Laurence Ion</strong> (VitaDAO), <strong>Nathan Cheng</strong> (Longevity Biotech Fellowship), <strong>Eleanor Sheekey</strong> (RIKEN Kobe), <strong>Yuri Deigin</strong> (YouthBio), <strong>Rob Claar</strong> (HekaBio), and thirty more — in the onsen on Sunday, and in the dinner group chat by six.</p>
+        </div>
+      </details>
+    </div>
+    <p class="followline rv"><a href="/#speakers" data-analytics-action="site_navigation" data-analytics-location="people" data-analytics-target="speakers">See all 43 speakers →</a></p>
+  </div>
+</section>
+
+<hr class="rule" />
+
+<!-- ═══ 05 · THE RADIUS ═══ -->
+<section id="kobe" data-track-section="kobe" data-track-position="6">
+  <div class="wrap" style="padding-top: 0">
+    <header class="secHead rv">
+      <p class="secNo">05</p>
+      <h2 class="big">The weekend radius<span class="tick">.</span></h2>
+      <p class="secLine">Mountains on one side, open harbor on the other — <b>October turns the whole region gold</b>.</p>
+    </header>
+    <div class="radiusGrid rv">
+      <figure class="rcard">
+        <img src="/img/kansai-osaka-night-1280.webp" alt="Osaka neon streets at night" width="1280" height="1920" loading="lazy" decoding="async" />
+        <figcaption class="meta"><div class="rmin">~40 min</div><div class="rn">Osaka</div><div class="rt2">Street food &amp; nightlife</div></figcaption>
+      </figure>
+      <figure class="rcard">
+        <img src="/img/kansai-kyoto-autumn-1280.webp" alt="Kyoto temples in autumn color" width="1280" height="848" loading="lazy" decoding="async" />
+        <figcaption class="meta"><div class="rmin">~90 min</div><div class="rn">Kyoto</div><div class="rt2">Temples in autumn color</div></figcaption>
+      </figure>
+      <figure class="rcard">
+        <img src="/img/kansai-nara-autumn-1280.webp" alt="Deer in Nara park in autumn" width="1280" height="854" loading="lazy" decoding="async" />
+        <figcaption class="meta"><div class="rmin">Day trip</div><div class="rn">Nara</div><div class="rt2">The deer park</div></figcaption>
+      </figure>
+    </div>
+    <p class="radiusNote rv num">Arima Onsen · 30 min — Rokko trails · 20 min — Tokyo · 3 h by shinkansen</p>
+  </div>
+</section>
+
+<hr class="rule" />
+
+<!-- ═══ 06 · FAQ ═══ -->
+<section id="faq" data-track-section="faq" data-track-position="7">
+  <div class="wrap" style="padding-top: 0">
+    <header class="secHead rv">
+      <p class="secNo">06</p>
+      <h2 class="big">Before you apply<span class="tick">.</span></h2>
+      <p class="secLine num">Nine questions, short answers — open a row for the full one.</p>
+    </header>
+    <div class="fqIx rv">
+      <details class="row" data-track-faq="What is the residency?" data-track-position="1">
+        <summary><span class="qn num">01</span><span class="q">What is the residency?</span><span class="rl">A month inside the popup city · <b>300 residents</b> · housing, cowork, labs, social life</span><span class="mk" aria-hidden="true"></span></summary>
+        <div class="rbody"><p>A month living inside a popup city: 300 curated residents sharing housing, coworking, labs, programming, and social life on a few blocks of Port Island through October. The summits are its two flagship weekends; the other 27 days are the point.</p></div>
+      </details>
+      <details class="row" data-track-faq="Do I have to stay the whole month?" data-track-position="2">
+        <summary><span class="qn num">02</span><span class="q">Do I have to stay all 31 days?</span><span class="rl">No · summit tickets stand alone · the full month gets the most</span><span class="mk" aria-hidden="true"></span></summary>
+        <div class="rbody"><p>No. The city runs October 1–31 and the longest stays get the most out of it, but summit tickets stand alone — come for one weekend (Oct 17–18 or Oct 24–25), take both, or apply for the residency and stay the month.</p></div>
+      </details>
+      <details class="row" data-track-faq="Where do I stay?" data-track-position="3">
+        <summary><span class="qn num">03</span><span class="q">Where will I sleep?</span><span class="rl"><b>Portopia hotel</b> or hacker houses · Sanctuary · Biopunk · Aevitas · ZuCity</span><span class="mk" aria-hidden="true"></span></summary>
+        <div class="rbody"><p>The Portopia, our partner hotel, is a short walk from KBIC; community hacker houses — The Sanctuary, Biopunk House, Aevitas, ZuCity Japan — host residents across the city.</p></div>
+      </details>
+      <details class="row" data-track-faq="What does a month cost to live?" data-track-position="4">
+        <summary><span class="qn num">04</span><span class="q">What does a month here cost to live?</span><span class="rl">Kobe is affordable · lunch under <b>¥1,000</b> · housing matched to budget</span><span class="mk" aria-hidden="true"></span></summary>
+        <div class="rbody"><p>Kobe is one of Japan&rsquo;s more affordable major cities — a good lunch under ¥1,000, transit a few hundred yen. Housing runs from community hacker houses to the Portopia hotel; we match accepted residents to their budget.</p></div>
+      </details>
+      <details class="row" data-track-faq="How structured is the month?" data-track-position="5">
+        <summary><span class="qn num">05</span><span class="q">How structured is the month?</span><span class="rl">A schedule, nothing mandatory · <b>mornings protected</b> — keep your job running</span><span class="mk" aria-hidden="true"></span></summary>
+        <div class="rbody"><p>There&rsquo;s a schedule — tours, workshops, and two summit weekends — but nothing is mandatory. Mornings stay protected for deep work, so you can keep your job or your company running while you&rsquo;re here.</p></div>
+      </details>
+      <details class="row" data-track-faq="What does an ordinary Tuesday look like?" data-track-position="6">
+        <summary><span class="qn num">06</span><span class="q">What does an ordinary Tuesday look like?</span><span class="rl">See <a href="#day">one day on Port Island</a> · morning work · afternoon labs · evening city</span><span class="mk" aria-hidden="true"></span></summary>
+        <div class="rbody"><p>See <a href="#day">the daily rhythm</a>: a morning of your own work, an afternoon of labs and workshops, an evening in the city. No two days repeat; most keep that shape.</p></div>
+      </details>
+      <details class="row" data-track-faq="Do I need Japanese?" data-track-position="7">
+        <summary><span class="qn num">07</span><span class="q">Do I need Japanese?</span><span class="rl">No · everything runs in <b>English</b></span><span class="mk" aria-hidden="true"></span></summary>
+        <div class="rbody"><p>No — the residency, summits, and workshops run in English. Learning to order your ramen in Japanese is optional, and recommended.</p></div>
+      </details>
+      <details class="row" data-track-faq="What access do I actually get?" data-track-position="8">
+        <summary><span class="qn num">08</span><span class="q">I&rsquo;m here for the science. What access do I actually get?</span><span class="rl">KBIC tours · Minicircle &amp; Shojinmeat workshops · <b>CellHaus lab space</b> on approval</span><span class="mk" aria-hidden="true"></span></summary>
+        <div class="rbody"><p>Guided tours through KBIC and the Kansai institutes, hands-on workshops with teams like Minicircle and Shojinmeat, regulators and CROs in the room during go-to-market week — and, on approval, lab space through the CellHaus residency with Kobe University.</p></div>
+      </details>
+      <details class="row" data-track-faq="How do applications work?" data-track-position="9">
+        <summary><span class="qn num">09</span><span class="q">How do tickets and applications work?</span><span class="rl">Residency by <b>application</b>, rolling · tickets <b>$900</b> · both on Luma</span><span class="mk" aria-hidden="true"></span></summary>
+        <div class="rbody"><p>Summit tickets are on Luma. The month-long residency is application-only — we review on a rolling basis, and accepted residents receive next steps by email.</p></div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CLOSE · TWO WAYS IN ═══ -->
+<div class="boardingWrap" id="apply" data-track-section="apply" data-track-position="8">
+  <img class="bg" src="/img/kobe-rokko-island-night.webp" alt="" width="1600" height="1067" aria-hidden="true" loading="lazy" decoding="async" />
+  <div class="veil" aria-hidden="true"></div>
+  <section class="boarding">
+    <h2 class="rv">Two ways in<span style="color:var(--accent)">.</span></h2>
+    <div class="gates rv">
+      <div class="gate-row">
+        <span class="gnm">The Residency</span>
+        <span class="gnt num"><b>Application only</b> · rolling review · Oct 1–31 · next steps by email</span>
+        <a class="btn accent" href="https://luma.com/an4zotn9" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="apply" data-analytics-target="residency">Apply on Luma</a>
+      </div>
+      <div class="gate-row">
+        <span class="gnm">Summit Weekends</span>
+        <span class="gnt num"><b>$900</b> per weekend · Oct 17–18 · Oct 24–25 · no application</span>
+        <a class="btn" href="https://luma.com/an4zotn9" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="apply" data-analytics-target="tickets">Get Tickets — $900</a>
+      </div>
+    </div>
+    <p class="fine rv">Everything on Luma · Questions: team@miraitech.city</p>
+  </section>
+</div>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="see">See you on Port Island</div>
+  <div class="date">10 · 01 · 2026</div>
+  <div class="jst">Kobe right now · <b id="jst">—</b> JST</div>
+  <div class="orgIx">
+    <details class="row" data-track-faq="Organizers and partners" data-track-position="21">
+      <summary>
+        <span class="rl">Organized by <b>Frontier Humans</b> · Kobe University MedTech Innovation Center · KBIC + partners</span>
+        <span class="mk" aria-hidden="true"></span>
+      </summary>
+      <div class="rbody">
+        <p>With support of: Kobe University · MedTech Innovation Center · KBIC · HekaBio · Asagi Labs Ventures · Viva City · Vitalist Bay · Augmentation Lab · ZuCity Japan · Learning Layer Labs · Biopunk · Aevitas · Broken Symmetry Capital · Vibe Coding Nights · The MU — Frontier Humans also runs the Enhanced Fashion Meetup Tokyo and the MIT Human Augmentation Summit · <a href="mailto:team@miraitech.city">team@miraitech.city</a></p>
+      </div>
+    </details>
+  </div>
+  <div class="doors">
+    <a href="/" data-analytics-action="site_navigation" data-analytics-location="footer" data-analytics-target="home">Main Site →</a>
+    <a href="https://luma.com/an4zotn9" target="_blank" rel="noopener" data-analytics-action="site_navigation" data-analytics-location="footer" data-analytics-target="luma_listing">Follow on Luma →</a>
+    <a href="/startups/" data-analytics-action="site_navigation" data-analytics-location="footer" data-analytics-target="startups">For Startups →</a>
+  </div>
+  <img class="daruma foot" id="darumaFoot" src="/img/daruma.png" alt="Daruma" width="44" height="46" loading="lazy" title="One eye at the start. The other on October 1." />
+  <div class="credits">Stills: Kobe Tourism Bureau · Hideyuki Kamon (CC BY-SA) · art comments (CC BY) · Wikimedia Commons contributors (CC0/CC BY/CC BY-SA, see credits)</div>
+</footer>
+
+<script>
+  const noMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Hero video: poster paints first, video starts when the main thread is idle.
+  const heroBg = document.querySelector('.heroBg');
+  const heroPoster = heroBg.querySelector('img');
+  const heroVideo = heroBg.querySelector('video');
+  const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+  const slowConnection = connection && /(^|-)2g$/.test(connection.effectiveType || '');
+  const canPlayHeroVideo = !noMotion && matchMedia('(min-width: 761px)').matches &&
+    !connection?.saveData && !slowConnection;
+
+  function loadHeroVideo() {
+    const source = heroVideo.querySelector('source[data-src]');
+    if (!source || source.src) return;
+    source.src = source.dataset.src;
+    heroVideo.load();
+    heroVideo.play().then(() => heroVideo.classList.add('playing')).catch(() => {});
+  }
+  function scheduleHeroVideo() {
+    const start = () => loadHeroVideo();
+    if ('requestIdleCallback' in window) requestIdleCallback(start, { timeout: 2500 });
+    else setTimeout(start, 1200);
+  }
+  if (canPlayHeroVideo) {
+    if (heroPoster.complete) scheduleHeroVideo();
+    else heroPoster.addEventListener('load', scheduleHeroVideo, { once: true });
+  }
+  new IntersectionObserver(es => es.forEach(e => {
+    if (!heroVideo.currentSrc) return;
+    if (e.isIntersecting) heroVideo.play().catch(() => {});
+    else heroVideo.pause();
+  }), { threshold: .05 }).observe(document.querySelector('.hero'));
+
+  // reveal-on-scroll — threshold near zero: several .rv blocks are taller than
+  // the viewport and a ratio-based threshold would never fire for them.
+  const ro = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('in'); ro.unobserve(e.target); }
+  }), { threshold: 0, rootMargin: '0px 0px -6% 0px' });
+  document.querySelectorAll('.rv').forEach(el => ro.observe(el));
+
+  // daruma: knock him over, he rights himself
+  const df = document.getElementById('darumaFoot');
+  df.addEventListener('click', () => {
+    df.classList.remove('wobble');
+    void df.offsetWidth;
+    df.classList.add('wobble');
+  });
+
+  // smooth in-page anchors (JS-only so programmatic scrollTo stays instant)
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (!target) return;
+      e.preventDefault();
+      target.scrollIntoView({ behavior: noMotion ? 'auto' : 'smooth', block: 'start' });
+      history.replaceState(null, '', a.getAttribute('href'));
+    });
+  });
+
+  // live JST clock
+  const JST_FMT = new Intl.DateTimeFormat('en-GB', {
+    timeZone: 'Asia/Tokyo', weekday: 'short', hour: '2-digit', minute: '2-digit' });
+  const jstEl = document.getElementById('jst');
+  function tick() { jstEl.textContent = JST_FMT.format(new Date()); }
+  tick(); setInterval(tick, 30000);
+</script>
+
 </body>
 </html>
