@@ -615,13 +615,18 @@
   /* The MIC PNG ships white-on-solid-black; screen-blending melts its black
      canvas into the page without altering the file (approval terms). */
   .majorPartners .micLogo { mix-blend-mode: screen; height: 112px; }
-  /* Broken Symmetry ships as gold-on-solid-black JPG; screen-blending melts
-     the black canvas into the page (same trick as the MIC logo). Source file
-     is 120×120 — replace with a larger asset when the sponsor provides one. */
-  .majorPartners .bscLogo { mix-blend-mode: screen; }
+  /* Broken Symmetry Capital rendered typographically (the only supplied logo
+     file is a 120×120 JPG, too small for this row) — serif gold echoing their
+     wordmark, same approach as the LEV Foundation mark. */
+  .bscWordmark { text-align: center; color: #cfa85e; text-decoration: none;
+    font-family: Georgia, 'Times New Roman', serif; }
+  .bscWordmark .bsym { display: block; font-size: 31px; line-height: 1.1; letter-spacing: .04em; }
+  .bscWordmark .bcap { display: block; font-size: 15px; margin-top: 7px;
+    letter-spacing: .42em; margin-right: -.42em; text-transform: uppercase; }
   @media (max-width: 640px) { .majorPartners { gap: 36px; } .majorPartners img,
     .majorPartners .micLogo { height: 76px; }
-    .levWordmark .lev { font-size: 40px; } .levWordmark .found { font-size: 15px; } }
+    .levWordmark .lev { font-size: 40px; } .levWordmark .found { font-size: 15px; }
+    .bscWordmark .bsym { font-size: 22px; } .bscWordmark .bcap { font-size: 11px; margin-top: 5px; } }
   html.kobe-permit-over [data-kobe-permit] { display: none !important; }
   .ecoWall { position: relative; overflow: hidden; margin-top: 34px; background: var(--bg);
     border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
@@ -947,7 +952,7 @@
     <a class="levWordmark" href="https://www.levf.org/" target="_blank" rel="noopener" title="LEV Foundation"><span class="lev">LEV</span><span class="found">Foundation</span></a>
     <a data-kobe-permit href="https://www.hosp.kobe-u.ac.jp/ikoujiso/en/" target="_blank" rel="noopener" title="Kobe University"><img src="img/partners/kobe-university.png" alt="Kobe University" loading="lazy" decoding="async" /></a>
     <a data-kobe-permit href="https://www.med.kobe-u.ac.jp/mic/en/" target="_blank" rel="noopener" title="MedTech Innovation Center, Kobe University"><img class="micLogo" src="img/partners/mic-kobe-university.png" alt="MIC — MedTech Innovation Center, Kobe University" loading="lazy" decoding="async" /></a>
-    <a href="https://brokensymmetry.capital/" target="_blank" rel="noopener" title="Broken Symmetry Capital"><img class="bscLogo" src="img/partners/broken-symmetry.jpg" alt="Broken Symmetry Capital" loading="lazy" decoding="async" /></a>
+    <a class="bscWordmark" href="https://brokensymmetry.capital/" target="_blank" rel="noopener" title="Broken Symmetry Capital"><span class="bsym">Broken Symmetry</span><span class="bcap">Capital</span></a>
   </div>
 
   <div class="eyebrow rv ecoHead" data-copy="ecosystem.headline"></div>
