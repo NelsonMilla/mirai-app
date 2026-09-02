@@ -66,6 +66,13 @@ window.MIRAI_COPY = {
     gloss3: `暮らし / Kurashi`,
     title3: `Live`,
     items3: `<li><b>Bring your community:</b> peptides, biohacking, AI, philosophy, human augmentation</li><li><b>Enjoy:</b> onsens, cold plunges, fitness, delicious food and a unique culture</li>`,
+    /* Harimaze prints: mounted-photo figures beside each pillar's ledger.
+       Imagery from Wikimedia Commons — licenses and attribution in
+       img/PILLARS-CREDITS.md. Captions are checkable facts, museum-label
+       register; the figures are aria-hidden decoration. */
+    prints1: `<figure class="knt-chip" style="--r:-2.4deg"><img src="img/pillar-lab-robot.webp" alt="" loading="lazy" decoding="async" width="960" height="540"><figcaption><b>Fig. 01</b>Liquid-handling robot</figcaption></figure><figure class="knt-chip knt-chip--tape" style="--r:2deg"><img src="img/summit-lab.webp" alt="" loading="lazy" decoding="async" width="900" height="600"><figcaption><b>Fig. 02</b>KBIC — wet lab</figcaption></figure>`,
+    prints2: `<figure class="knt-chip knt-chip--tall" style="--r:2.6deg"><img src="img/pillar-exoskeleton-hal.webp" alt="" loading="lazy" decoding="async" width="960" height="1440"><figcaption><b>Fig. 03</b>HAL — Cyberdyne exoskeleton</figcaption></figure>`,
+    prints3: `<figure class="knt-chip knt-chip--tall" style="--r:-2.2deg"><img src="img/pillar-nankinmachi-night.webp" alt="" loading="lazy" decoding="async" width="960" height="1280"><figcaption><b>Fig. 04</b>Nankinmachi — Kobe Chinatown</figcaption></figure><figure class="knt-chip knt-chip--tape" style="--r:2.4deg"><img src="img/pillar-harborland-wheel.webp" alt="" loading="lazy" decoding="async" width="960" height="540"><figcaption><b>Fig. 05</b>Harborland — Mosaic wheel</figcaption></figure>`,
   },
 
   /* ─── SUMMIT + HOTEL PACKAGE ─────────────────────────── */
