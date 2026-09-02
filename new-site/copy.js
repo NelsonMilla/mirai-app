@@ -49,7 +49,11 @@ window.MIRAI_COPY = {
      MIRAI_FLAGS.showFashionShow flag controls it like
      everywhere else on the page. */
   pillars: {
-    statement: `Month-long popup city, for scientists, founders, and builders to experience <b>Japan's Frontier Tech Renaissance</b>.`,
+    /* The statement is a composed five-line lockup ("Brodovitch Cascade"):
+       whispered mono qualifier, display subject, indented bridge, accent
+       payoff. The spans are aria-hidden because the <p> in index.html
+       carries the full sentence as its aria-label. */
+    statement: `<span class="msl-line msl-mono" aria-hidden="true">Month-long</span><span class="msl-line msl-subject" aria-hidden="true">Popup City,</span><span class="msl-line msl-bridge" aria-hidden="true">for scientists, founders, and builders <em>to&nbsp;experience</em></span><span class="msl-line msl-payoff" aria-hidden="true">Japan's Frontier</span><span class="msl-line msl-payoff msl-payoff--shift" aria-hidden="true">Tech Renaissance.</span>`,
     num1: `01`,
     gloss1: `加速 / Kasoku`,
     title1: `Accelerate`,
