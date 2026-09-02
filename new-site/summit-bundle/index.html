@@ -65,6 +65,9 @@
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-padding-top: calc(78px + env(safe-area-inset-top)); }
   @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+  /* Paint the root too: mobile browsers reveal the html canvas when the
+     URL bar retracts, and an unset html background flashes white. */
+  html { background: var(--bg); }
   body { min-width: 320px; background: var(--bg); color: var(--ink); font-family: var(--font); }
   ::selection { background: var(--accent); color: #000; }
   :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
