@@ -68,6 +68,33 @@ window.MIRAI_COPY = {
     items3: `<li><b>Bring your community:</b> peptides, biohacking, AI, philosophy, human augmentation</li><li><b>Enjoy:</b> onsens, cold plunges, fitness, delicious food and a unique culture</li>`,
   },
 
+  /* ─── WHY JAPAN (the approval record) ───────────────────
+     Compressed proof band under the pillars — "Kessai-ran":
+     one claim plus the three audited numbers, each stamped by
+     the institution that certifies it. The vermilion seal SVGs
+     live in index.html (decorative, aria-hidden); every word
+     lives here. Numbers mirror the /conferences outcome strip. */
+  whyjapan: {
+    head1: `Why Japan <b>· 証明 / Proof</b>`,
+    head2: `<b>決裁欄</b> · Approval record`,
+    claim: `<span class="hkb-cl">What takes years elsewhere</span><span class="hkb-cl hkb-cl2">takes months here.</span>`,
+    gloss: `何年も → 数ヶ月`,
+    mach1: `<b>PMDA</b> · conditional approval`,
+    stat1: `10×`,
+    qual1: `Faster`,
+    fact1: `to first revenue`,
+    mach2: `<b>AMED</b> · matches VC 2:1 in non-dilutive grants`,
+    stat2: `100×`,
+    qual2: `Cheaper`,
+    fact2: `than the Phase 3 route`,
+    mach3: `<b>KBIC</b> · Japan's largest biomedical cluster — 370 member organizations`,
+    stat3: `+61%`,
+    qual3: `More value`,
+    fact3: `from the same patent`,
+    footLabel: `The full argument`,
+    footLink: `<a class="hkb-link" href="/conferences/" data-analytics-action="site_navigation" data-analytics-location="whyjapan" data-analytics-target="conferences">Why Japan? <em>»</em></a>`,
+  },
+
   /* ─── SUMMIT + HOTEL PACKAGE ─────────────────────────── */
   package: {
     eyebrow: `Launch price · {spots} of {spotsTotal} spots left`,
