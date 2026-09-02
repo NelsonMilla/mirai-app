@@ -185,6 +185,9 @@
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+  /* Paint the root too: mobile browsers reveal the html canvas when the
+     URL bar retracts, and an unset html background flashes white. */
+  html { background: var(--bg); }
   body { background: var(--bg); color: var(--ink); font-family: var(--font); overflow-x: hidden; }
   .package-promo-fallback { display: none !important; }
   html.package-promo-hidden [data-package-promo] { display: none !important; }
