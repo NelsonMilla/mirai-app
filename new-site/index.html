@@ -381,31 +381,75 @@
     .heroContinue { display: none; }
   }
 
-  /* ── intro + pillars: Accelerate / Inspire / Live ── */
-  #pillars { padding-bottom: 40px; }
-  .introStatement { max-width: 34ch; margin: 0 0 84px; font-weight: 800; letter-spacing: -.01em;
+  /* ── intro + pillars: Accelerate / Inspire / Live ("Drift Gauge") ──
+     Giant titles ride over slow-drifting outlined-kanji marquee bands.
+     The bands are 100vw and absolutely centered, so #pillars clips them
+     with overflow:hidden — do not remove it or the smoke test's
+     horizontal-overflow assertion fails. Kanji renders from system JP
+     fonts; the letter-split entrance is wired after applyCopy(). */
+  #pillars { padding-bottom: 40px; overflow: hidden; }
+  .introWrap { position: relative; margin: 0 0 76px; }
+  .introStatement { max-width: 34ch; margin: 0; font-weight: 800; letter-spacing: -.01em;
     font-size: clamp(26px, 3.4vw, 44px); line-height: 1.24; text-wrap: balance; }
   .introStatement b { color: var(--accent); }
-  .pillar { padding: 44px 0 50px; border-top: 1px solid var(--line); }
-  .pillarHead { display: flex; align-items: baseline; gap: 22px; margin-bottom: 8px; }
-  .pillarNum { font-family: var(--mono); font-size: 12px; letter-spacing: .26em; color: var(--accent); }
-  .pillarHead h2 { margin: 0; }
-  .pillarList { list-style: none; margin: 0; padding: 0; }
-  .pillarList li { position: relative; padding: 16px 0 16px 30px; max-width: 74ch;
-    color: var(--dim); font-size: clamp(16px, 1.5vw, 19px); line-height: 1.55; }
-  .pillarList li::before { content: '→'; position: absolute; left: 0; top: 16px;
-    font-family: var(--mono); font-size: 15px; color: var(--accent); }
-  .pillarList li + li { border-top: 1px solid var(--line); }
-  .pillarList b { color: var(--ink); font-weight: 650; }
-  .pillarList a { color: var(--ink); font-weight: 650; text-decoration: underline;
+  .introKanji { position: absolute; top: -28px; right: 0; writing-mode: vertical-rl;
+    pointer-events: none; user-select: none; line-height: 1; font-weight: 800;
+    font-family: 'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Noto Sans JP', sans-serif;
+    font-size: clamp(72px, 8vw, 124px); color: transparent; -webkit-text-stroke: 1px rgba(244,243,240,.14); }
+  .knt-pillar { position: relative; border-top: 1px solid var(--line); padding: 30px 0 44px; }
+  .knt-meta { display: flex; gap: 16px; align-items: baseline; font-family: var(--mono);
+    font-size: 10px; letter-spacing: .26em; text-transform: uppercase; }
+  .knt-num { color: var(--accent); }
+  .knt-gloss { color: var(--faint); }
+  .knt-p2 .knt-meta { justify-content: flex-end; }
+  .knt-stage { position: relative; margin-top: 12px; }
+  .knt-band { position: absolute; top: 50%; left: 50%; width: 100vw; transform: translate(-50%,-50%);
+    overflow: hidden; pointer-events: none; user-select: none; }
+  .knt-track { display: flex; width: max-content; animation: kntDrift 70s linear infinite; }
+  .knt-band span { display: block; white-space: nowrap; font-weight: 800; line-height: 1;
+    font-family: 'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Noto Sans JP', sans-serif;
+    font-size: clamp(56px, 13vw, 190px); color: transparent; -webkit-text-stroke: 1px rgba(244,243,240,.13); }
+  .knt-band i { font-style: normal; margin-right: .5em; }
+  .knt-band i:nth-child(4n) { -webkit-text-stroke-color: rgba(var(--accent-rgb),.22); }
+  @keyframes kntDrift { to { transform: translateX(-50%); } }
+  .knt-p2 .knt-track { animation-duration: 90s; animation-direction: reverse; }
+  .knt-p3 .knt-track { animation-duration: 60s; }
+  .knt-pillar:hover .knt-track, .knt-pillar:focus-within .knt-track { animation-play-state: paused; }
+  .knt-title { position: relative; margin: 0; overflow: hidden; padding: .05em 0;
+    font-weight: 900; text-transform: uppercase; letter-spacing: -.03em;
+    font-size: clamp(52px, 10.5vw, 150px); line-height: .92; }
+  .knt-p2 .knt-title { text-align: right; }
+  .knt-title i { font-style: normal; display: inline-block; transform: translateY(115%);
+    transition: transform .7s cubic-bezier(.16,1,.3,1); transition-delay: calc(var(--i)*45ms); }
+  .knt-pillar.in .knt-title i { transform: none; }
+  .knt-list { list-style: none; margin: 24px 0 0; padding: 0; max-width: 56ch; }
+  .knt-p1 .knt-list, .knt-p3 .knt-list { margin-left: auto; }
+  .knt-list li { position: relative; padding: 14px 0 14px 28px; color: var(--dim);
+    font-size: clamp(15px, 1.3vw, 18px); line-height: 1.55; }
+  .knt-list li::before { content: '→'; position: absolute; left: 0; top: 14px;
+    font-family: var(--mono); font-size: 14px; color: var(--accent); }
+  .knt-list li + li { border-top: 1px solid var(--line); }
+  .knt-list b { color: var(--ink); font-weight: 650; }
+  .knt-list a { color: var(--ink); font-weight: 650; text-decoration: underline;
     text-decoration-color: var(--accent); text-underline-offset: 4px; }
-  .pillarList a:hover { color: var(--accent); }
+  .knt-list a:hover { color: var(--accent); }
+  .knt-list a:focus-visible { outline: 1px solid var(--accent); outline-offset: 3px; }
   @media (max-width: 700px) {
-    .introStatement { margin-bottom: 56px; font-size: clamp(23px, 6.6vw, 30px); }
-    .pillar { padding: 32px 0 36px; }
-    .pillarHead { gap: 14px; }
-    .pillarList li { padding: 13px 0 13px 26px; font-size: 15px; }
-    .pillarList li::before { top: 13px; }
+    .introWrap { margin-bottom: 52px; }
+    .introKanji { display: none; }
+    .introStatement { font-size: clamp(23px, 6.6vw, 30px); }
+    .knt-pillar { padding: 24px 0 34px; }
+    .knt-p2 .knt-meta { justify-content: flex-start; }
+    .knt-title, .knt-p2 .knt-title { text-align: left; letter-spacing: -.035em;
+      font-size: clamp(38px, 13.5vw, 64px); }
+    .knt-band span { font-size: clamp(48px, 20vw, 90px); }
+    .knt-list, .knt-p1 .knt-list, .knt-p3 .knt-list { margin-left: 0; max-width: none; }
+    .knt-list li { padding: 12px 0 12px 24px; font-size: 15px; }
+    .knt-list li::before { top: 12px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .knt-track { animation: none; }
+    .knt-title i { transform: none; transition: none; }
   }
 
   .resline { display: inline-block; margin-top: 40px; font-weight: 600; font-size: clamp(10.5px, 2.7vw, 34px);
@@ -825,19 +869,43 @@
 
 <!-- ═══ INTRO + PILLARS: ACCELERATE / INSPIRE / LIVE ═══ -->
 <section id="pillars" data-track-section="pillars" data-track-position="2">
-  <p class="introStatement rv" data-copy="pillars.statement"></p>
-  <div class="pillar rv">
-    <div class="pillarHead"><span class="pillarNum" data-copy="pillars.num1"></span><h2 class="big" data-copy="pillars.title1"></h2></div>
-    <ul class="pillarList" data-copy="pillars.items1"></ul>
+  <div class="introWrap rv">
+    <p class="introStatement" data-copy="pillars.statement"></p>
+    <div class="introKanji" aria-hidden="true">未来</div>
   </div>
-  <div class="pillar rv">
-    <div class="pillarHead"><span class="pillarNum" data-copy="pillars.num2"></span><h2 class="big" data-copy="pillars.title2"></h2></div>
-    <ul class="pillarList" data-copy="pillars.items2"></ul>
-  </div>
-  <div class="pillar rv">
-    <div class="pillarHead"><span class="pillarNum" data-copy="pillars.num3"></span><h2 class="big" data-copy="pillars.title3"></h2></div>
-    <ul class="pillarList" data-copy="pillars.items3"></ul>
-  </div>
+  <article class="knt-pillar knt-p1 rv">
+    <div class="knt-meta"><span class="knt-num" data-copy="pillars.num1"></span><span class="knt-gloss" aria-hidden="true" data-copy="pillars.gloss1"></span></div>
+    <div class="knt-stage">
+      <div class="knt-band" aria-hidden="true"><div class="knt-track">
+        <span><i>加速</i><i>加速</i><i>加速</i><i>加速</i><i>加速</i><i>加速</i><i>加速</i><i>加速</i><i>加速</i><i>加速</i></span>
+        <span><i>加速</i><i>加速</i><i>加速</i><i>加速</i><i>加速</i><i>加速</i><i>加速</i><i>加速</i><i>加速</i><i>加速</i></span>
+      </div></div>
+      <h2 class="knt-title" data-copy="pillars.title1"></h2>
+    </div>
+    <ul class="knt-list" data-copy="pillars.items1"></ul>
+  </article>
+  <article class="knt-pillar knt-p2 rv">
+    <div class="knt-meta"><span class="knt-num" data-copy="pillars.num2"></span><span class="knt-gloss" aria-hidden="true" data-copy="pillars.gloss2"></span></div>
+    <div class="knt-stage">
+      <div class="knt-band" aria-hidden="true"><div class="knt-track">
+        <span><i>刺激</i><i>刺激</i><i>刺激</i><i>刺激</i><i>刺激</i><i>刺激</i><i>刺激</i><i>刺激</i><i>刺激</i><i>刺激</i></span>
+        <span><i>刺激</i><i>刺激</i><i>刺激</i><i>刺激</i><i>刺激</i><i>刺激</i><i>刺激</i><i>刺激</i><i>刺激</i><i>刺激</i></span>
+      </div></div>
+      <h2 class="knt-title" data-copy="pillars.title2"></h2>
+    </div>
+    <ul class="knt-list" data-copy="pillars.items2"></ul>
+  </article>
+  <article class="knt-pillar knt-p3 rv">
+    <div class="knt-meta"><span class="knt-num" data-copy="pillars.num3"></span><span class="knt-gloss" aria-hidden="true" data-copy="pillars.gloss3"></span></div>
+    <div class="knt-stage">
+      <div class="knt-band" aria-hidden="true"><div class="knt-track">
+        <span><i>暮らし</i><i>暮らし</i><i>暮らし</i><i>暮らし</i><i>暮らし</i><i>暮らし</i><i>暮らし</i><i>暮らし</i></span>
+        <span><i>暮らし</i><i>暮らし</i><i>暮らし</i><i>暮らし</i><i>暮らし</i><i>暮らし</i><i>暮らし</i><i>暮らし</i></span>
+      </div></div>
+      <h2 class="knt-title" data-copy="pillars.title3"></h2>
+    </div>
+    <ul class="knt-list" data-copy="pillars.items3"></ul>
+  </article>
 </section>
 
 <!-- ═══ PROOF: SPEAKERS + ECOSYSTEM ═══ -->
@@ -1127,7 +1195,16 @@
   <div class="mono" style="margin-top:18px; font-size:9px; letter-spacing:.14em; color:var(--faint)" data-copy="footer.block"></div>
 </footer>
 
-<script>applyCopy();</script>
+<script>applyCopy();
+/* Split pillar titles into letters for the staggered rise (runs after
+   copy hydration; titles stay plain strings in copy.js). */
+document.querySelectorAll('.knt-title').forEach(function (h) {
+  var t = h.textContent;
+  h.setAttribute('aria-label', t);
+  h.innerHTML = '<span aria-hidden="true">' + t.split('').map(function (c, i) {
+    return c === ' ' ? ' ' : '<i style="--i:' + i + '">' + c + '</i>';
+  }).join('') + '</span>';
+});</script>
 
 <script id="luma-checkout"></script>
 <script>
