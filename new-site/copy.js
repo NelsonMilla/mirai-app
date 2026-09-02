@@ -31,14 +31,34 @@ window.MIRAI_COPY = {
   /* ─── HERO OFFER ─────────────────────────── */
   hero: {
     eyebrow: `Mirai Tech City 2026 · Kobe, Japan · October 1–31`,
-    headline: `<span>Live the future</span> <span>of health.</span>`,
-    lead: `Japan's month-long longevity biomedical popup city, where scientists, founders, and operators meet collaborators, learn from field leaders, and experience frontier health in real life.`,
+    headline: `<span>Live the future</span> <span>of frontier tech.</span>`,
+    thesis: `Biotech is the next AI race.`,
+    lead: `Cell and gene therapy, AI-designed drugs, N-of-1 medicine, brain-computer interfaces, radical life extension, human augmentation.`,
     program: SHOW_FASHION
       ? `<li><b>2</b> <span>summit weekends</span></li><li><span>Fashion Show</span> <b>Oct 26</b></li><li><span>Citizenship</span> <b>all October</b></li>`
       : `<li><b>2</b> <span>summit weekends</span></li><li><span>Citizenship</span> <b>all October</b></li>`,
     buttons: `<a class="btn accent" href="https://luma.com/an4zotn9" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="hero_primary" data-analytics-target="tickets">Get Tickets</a>`,
     proof: `<span><b>51</b> confirmed speakers · Aubrey de Grey + José Cordeiro</span><span><b>300-person</b> popup city</span><span>KBIC · Japan's largest biomedical cluster · <b>370</b> member organizations</span>`,
     scrollHint: `See what October looks like ↓`,
+  },
+
+  /* ─── INTRO + PILLARS (under the fold) ─────────────────
+     Structure and copy from marketing's hero-intro mockup:
+     one plain statement, then Accelerate / Inspire / Live.
+     The fashion-show line carries data-fashion so the
+     MIRAI_FLAGS.showFashionShow flag controls it like
+     everywhere else on the page. */
+  pillars: {
+    statement: `Month-long popup city, for scientists, founders, and builders to experience <b>Japan's Frontier Tech Renaissance</b>.`,
+    num1: `01`,
+    title1: `Accelerate`,
+    items1: `<li><b>Biotech commercialization in under 1 year</b> — <a href="/conferences/" data-analytics-action="site_navigation" data-analytics-location="pillars" data-analytics-target="conferences">Why Japan? »</a></li><li><b>Get ready to fundraise in less than 1 month</b> — <a href="/startups/" data-analytics-action="site_navigation" data-analytics-location="pillars" data-analytics-target="startups">the startup program</a></li>`,
+    num2: `02`,
+    title2: `Inspire`,
+    items2: `<li><b>2 summits</b> on the future of longevity, human augmentation and frontier tech</li><li data-fashion><b>Enhanced Fashion:</b> Brightmirror narratives of the future of humanity — <a href="/fashion-show/" data-analytics-action="site_navigation" data-analytics-location="pillars" data-analytics-target="fashion_show">the fashion show</a></li>`,
+    num3: `03`,
+    title3: `Live`,
+    items3: `<li><b>Bring your community:</b> peptides, biohacking, AI, philosophy, human augmentation</li><li><b>Enjoy:</b> onsens, cold plunges, fitness, delicious food and a unique culture</li>`,
   },
 
   /* ─── SUMMIT + HOTEL PACKAGE ─────────────────────────── */
@@ -120,7 +140,7 @@ window.MIRAI_COPY = {
   kobe: {
     caption: `One evening in Kobe · 17:58 → 23:41`,
     caption2: `17:58 Kobe Harbor`,
-    caption3: `19:47 Dinner is a counter seat`,
+    caption3: `19:47 Dinner at the local izakaya`,
     caption4: `21:15 Lantern night`,
     caption5: `22:30 One more street`,
     caption6: `23:41 Mt. Rokko, the ten-million-dollar view · <a href="/experience/" style="color:var(--accent); text-decoration:none; font-size:12px; padding:6px 0; display:inline-block" data-analytics-action="site_navigation" data-analytics-location="kobe_evening" data-analytics-target="experience_guide">Explore Kobe + Kansai →</a>`,
