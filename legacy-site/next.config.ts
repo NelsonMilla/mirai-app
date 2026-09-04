@@ -1,7 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  // Pin the workspace root to this folder: the repo root also holds the static
+  // new-site/, and without this Turbopack writes dev chunks into <repo>/.next.
+  turbopack: { root: __dirname },
   async rewrites() {
     return [
       {

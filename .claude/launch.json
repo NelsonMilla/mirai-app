@@ -2,9 +2,11 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "next-dev",
+      "name": "legacy-next-dev",
       "runtimeExecutable": "/opt/homebrew/bin/npm",
       "runtimeArgs": [
+        "--prefix",
+        "legacy-site",
         "run",
         "dev"
       ],
@@ -25,6 +27,18 @@
         "new-site"
       ],
       "port": 4321
+    },
+    {
+      "name": "new-site-alt",
+      "runtimeExecutable": "/opt/homebrew/bin/python3",
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "4325",
+        "-d",
+        "new-site"
+      ],
+      "port": 4325
     }
   ]
 }

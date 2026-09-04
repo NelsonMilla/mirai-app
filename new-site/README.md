@@ -28,7 +28,14 @@ Single static `index.html` — no framework, no build step. Deploys anywhere
   retired field-guide content registry — kept on disk, no longer loaded
   (the old field-guide page lives in git history).
 - Fonts: Switzer (Fontshare) + IBM Plex Mono. Speaker photos + Kobe stills
-  from this repo's `public/images` (comic-style avatars intentionally not used).
+  copied into `img/` from `legacy-site/public/images` (comic-style avatars intentionally not used).
+- Nav: the top bar on the site pages (`/`, `/experience/`, `/conferences/`, `/pricing/`,
+  `/startups/`) is one shared component — `/nav.js` inserts the markup where the
+  `<script src="/nav.js">` tag sits at the top of `<body>`, `/nav.css` styles it. Edit
+  the links in `nav.js` once and every page follows. A page may swap the CTA with
+  `data-cta-label` / `data-cta-href` / `data-cta-target` on the script tag (see
+  `startups/`). `/summit-bundle/`, `/jp/` and `/fashion-show/` keep their own headers
+  (offer page with Luma embed checkout, Japanese page, co-branded event page).
 - Analytics: every page loads `/posthog.js` (PostHog: autocapture, heatmaps,
   session replay, funnels) then `/analytics.js` (the shared event taxonomy,
   dispatched to both PostHog and Vercel Web Analytics). Section reach and

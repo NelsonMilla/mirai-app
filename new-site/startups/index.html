@@ -55,6 +55,7 @@
   "organizer": { "@type": "Organization", "name": "Mirai Tech City", "url": "https://mirai-tech-city.vercel.app" }
 }
 </script>
+<link rel="stylesheet" href="/nav.css" />
 <style>
   @font-face {
     font-family: 'Switzer-fallback';
@@ -105,14 +106,6 @@
   .rv.in { opacity: 1; transform: none; }
   @media (prefers-reduced-motion: reduce) { .rv { opacity: 1; transform: none; transition: none; } }
 
-  /* ── nav ── */
-  .topbar { position: fixed; top: 0; left: 0; right: 0; z-index: 50; }
-  nav { display: flex; align-items: center; justify-content: space-between; gap: 16px;
-    padding: 18px 4vw; background: rgba(5,5,6,.94); backdrop-filter: blur(14px); }
-  nav .logo { font-weight: 800; letter-spacing: .06em; font-size: 15px; text-transform: uppercase; text-decoration: none; }
-  nav .logoTech { color: var(--accent); }
-  nav .navLine { font-family: var(--mono); font-size: 11px; letter-spacing: .22em; text-transform: uppercase; color: var(--dim); }
-  nav .navLine b { color: var(--accent); font-weight: 500; }
   .btn { display: inline-flex; align-items: center; justify-content: center; min-height: 44px;
     background: var(--ink); color: #0a0a0c !important; text-decoration: none;
     padding: 12px 26px; border-radius: 3px; font-family: var(--mono); font-size: 11px;
@@ -122,11 +115,6 @@
   .btn.accent { background: var(--accent); }
   .btn.ghost { background: transparent; color: var(--ink) !important; border: 1px solid rgba(244,243,240,.4); }
   .btn.ghost:hover { border-color: var(--ink); }
-  @media (max-width: 760px) {
-    nav { padding: 14px 4vw; }
-    nav .navLine { display: none; }
-    nav .navCta { padding: 11px 16px; }
-  }
 
   /* ── hero ── */
   .hero { position: relative; height: calc(100svh - 46px); min-height: 640px; overflow: hidden; }
@@ -694,13 +682,7 @@ also marked inline with a TODO(verify) comment. Edit or confirm before launch:
 
 <a class="skip" href="#why">Skip to content</a>
 
-<div class="topbar">
-<nav aria-label="Site">
-  <a class="logo" href="/" data-analytics-action="site_navigation" data-analytics-target="full_city" data-analytics-location="nav">Mirai<span class="logoTech">Tech</span></a>
-  <span class="navLine"><b>Acceleration Sprint</b> · Oct 01–26, 2026 · Kobe</span>
-  <a class="btn accent navCta" href="https://form.typeform.com/to/sG9eS2Ok?utm_source=mirai-site&amp;utm_campaign=startup-sprint" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="nav" data-analytics-target="application">Apply Now</a>
-</nav>
-</div>
+<script src="/nav.js" data-cta-label="Apply Now" data-cta-href="https://form.typeform.com/to/sG9eS2Ok?utm_source=mirai-site&amp;utm_campaign=startup-sprint" data-cta-target="application"></script>
 
 <!-- ═══ STN 00 · BOARDING (hero) ═══ -->
 <section class="hero" id="top" data-track-section="hero" data-track-position="1">

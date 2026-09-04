@@ -22,7 +22,7 @@ export default defineConfig({
     // The standalone new-site deployment is plain static files; analytics.spec.ts
     // drives the real pages to check the conversion funnel end to end.
     {
-      command: 'python3 -m http.server 4321 -d new-site',
+      command: 'python3 -m http.server 4321 -d ../new-site',
       url: 'http://localhost:4321/',
       reuseExistingServer: true,
       timeout: 30_000,

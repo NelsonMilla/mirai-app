@@ -1,5 +1,5 @@
 {
-  "files": ["src/app/layout.tsx", "new-site/index.html"],
+  "files": ["legacy-site/src/app/layout.tsx", "new-site/index.html"],
   "insertBefore": "</body>",
   "commentSyntax": "html",
   "cspChecked": true

@@ -1,69 +1,44 @@
 # Mirai — Tech PopUp City
 
-Landing site for **Mirai**, a 4-week longevity-biotech popup city on Kobe Port Island, Japan — October 1–31, 2026. Built with Next.js (App Router), React 19, and hand-rolled CSS.
+Website for **Mirai**, a 4-week longevity-biotech popup city on Kobe Port Island, Japan — October 1–31, 2026.
 
-**Live site:** the `/` landing page is the product. Apply/fashion-show pages are secondary routes; checkout/console/invite are dormant (see below).
+This repository holds **two separate sites**. Only one is deployed.
 
-## Quick start
+| Folder | What it is | Status |
+|---|---|---|
+| [`new-site/`](new-site/) | Static HTML site — no framework, no build step | **Live** at https://mirai-tech-city.vercel.app (Vercel) |
+| [`legacy-site/`](legacy-site/) | The previous Next.js 16 / React 19 app | **Not deployed.** Reference only |
 
-```bash
-npm install
-npm run dev
-```
+`new-site/` is fully self-contained: every image, script and video it uses lives inside that folder, and Vercel deploys that folder alone. Nothing in it may reference `legacy-site/` or the repo root.
 
-Open [http://localhost:3000](http://localhost:3000). **No environment variables are needed for landing-page work** — analytics and the dormant routes degrade gracefully without them. If you're touching those, copy `.env.example` to `.env.local` and fill in what you need.
+## Working on the live site (`new-site/`)
 
-## Scripts
-
-| Command | What it does |
-|---|---|
-| `npm run dev` | Dev server with hot reload |
-| `npm run build` | Production build (must pass before merging) |
-| `npm run lint` | ESLint |
-| `npm run smoke` | Playwright cross-viewport smoke test — first run needs `npx playwright install chromium` |
-
-## Before you open a PR
-
-All three must pass:
+There is nothing to install. Serve the folder and open it:
 
 ```bash
-npx tsc --noEmit
-npm run build
-npm run smoke
+python3 -m http.server 4321 -d new-site
 ```
 
-The smoke test ([e2e/smoke.spec.ts](e2e/smoke.spec.ts)) scrolls the landing page at multiple viewports and asserts every section reveals, nothing overflows horizontally, and the console is clean. It exists because these exact bugs shipped before — please don't skip it.
+Conventions (page structure, analytics attributes, sitemap entries) are in [new-site/README.md](new-site/README.md) and [new-site/ANALYTICS.md](new-site/ANALYTICS.md). Brand and design context: [PRODUCT.md](PRODUCT.md) and [DESIGN.md](DESIGN.md).
 
-## Project layout
+The end-to-end analytics check for `new-site/` runs from the legacy folder's Playwright setup:
 
-```
-src/
-├── app/            # Routes. page.tsx is the landing page.
-│   ├── apply/      #   Application flow
-│   ├── fashion-show/
-│   └── checkout|console|invite/   # DORMANT — kept intentionally, don't refactor
-├── components/     # One folder per landing-page section (hero, tracks, kobe, …)
-├── data/           # Content data (speakers, cards) — colors live next to data
-├── styles/         # base.css (tokens/reset) + one CSS file per route
-├── lib/            # constants.ts (SECTIONS list, copy), integrations
-└── hooks/          # useActiveSection, scroll state
+```bash
+cd legacy-site && npm install && npm run smoke
 ```
 
-## Conventions (the short version)
+## The legacy app (`legacy-site/`)
 
-The full rules live in [AGENTS.md](AGENTS.md) — **read it before writing code**, whether you're a human or an agent. Highlights:
+Kept for reference; do not add pages or routes to it. Everything about it — setup, scripts, conventions, dormant checkout/console routes — is documented in [legacy-site/README.md](legacy-site/README.md) and [legacy-site/AGENTS.md](legacy-site/AGENTS.md).
 
-- **Styles go in the route CSS files** (`src/styles/`), in page order, prefix-disciplined. No new component `<style>` blocks or styled-jsx; no bare element selectors in shared CSS.
-- **Design tokens** come from `:root` in [base.css](src/styles/base.css). Don't hardcode hex values in JSX.
-- **The section list lives in one place**: `SECTIONS` in [constants.ts](src/lib/constants.ts). Nav, progress rail, and scroll tracking all derive from it.
-- **Copy and numbers are frozen.** Figures in `src/lib/constants.ts` and `src/data/` were audited against the event deck. Don't "fix" them without an explicit request.
-- **Dormant code is intentional.** `checkout`, `console`, `invite`, and their supporting libs are kept on purpose (see [src/app/checkout/README.md](src/app/checkout/README.md)). Leave them out of cleanup passes.
+## Other folders
 
-Design context, if you're proposing visual or copy changes: [PRODUCT.md](PRODUCT.md) (positioning, audience, brand personality) and [DESIGN.md](DESIGN.md) (palette, type, elevation doctrine).
+- `retreat/` — a "Full Program" section removed from `new-site/index.html`, stashed outside the deploy folder so it is not served.
+- `.claude/`, `.impeccable/` — agent and design-review tooling config.
 
 ## Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md). Short version: open an issue or small PR, run the three checks, keep diffs surgical.
+See [legacy-site/CONTRIBUTING.md](legacy-site/CONTRIBUTING.md) for the ground rules; they apply to both folders (surgical diffs, frozen copy and numbers, one concern per PR).
 
 ## License
 
