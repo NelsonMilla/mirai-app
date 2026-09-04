@@ -52,10 +52,10 @@ viewport bugs. Follow them exactly; don't introduce a fifth idiom.
 
 ## Design context
 
-- `PRODUCT.md` (project root) — strategy: register (brand), primary
+- `../PRODUCT.md` (repo root) — strategy: register (brand), primary
   audience, positioning, belief ladder, brand personality, anti-references,
   design principles. Read it before any design or copy decision.
-- `DESIGN.md` (project root) — the visual system: palette names, type
+- `../DESIGN.md` (repo root) — the visual system: palette names, type
   hierarchy, elevation doctrine ("glow, not shadow"), component rules.
   Tokens in its frontmatter mirror `base.css`; `base.css` stays canonical.
 

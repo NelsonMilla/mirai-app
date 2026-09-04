@@ -2,7 +2,7 @@ import { expect, test, type Page } from '@playwright/test';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 
-const siteRoot = join(process.cwd(), 'new-site');
+const siteRoot = join(process.cwd(), '..', 'new-site');
 const analyticsSource = readFileSync(join(siteRoot, 'analytics.js'), 'utf8');
 
 test('every standalone page loads the shared analytics tracker', () => {

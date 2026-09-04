@@ -189,7 +189,7 @@ window.MIRAI_COPY = {
 
   /* ─── AGENDA ───────────────────────────
      Session themes are audited event-deck copy (they mirror the
-     summit chapters in ../src/lib/constants.ts). The stashed
+     summit chapters in ../legacy-site/src/lib/constants.ts). The stashed
      "Full Program" section this replaced lives in
      ../retreat/full-program-section.html for the Retreat page. */
   agenda: {
