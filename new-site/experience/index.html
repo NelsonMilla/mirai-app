@@ -34,6 +34,7 @@
 <script defer src="/_vercel/insights/script.js"></script>
 <script defer src="/posthog.js"></script>
 <script defer src="/analytics.js"></script>
+<link rel="stylesheet" href="/nav.css" />
 <style>
   @font-face {
     font-family: 'Switzer-fallback';
@@ -419,67 +420,6 @@
   footer .credits { margin-top: 26px; font-family: var(--mono); font-size: 9px; letter-spacing: .14em;
     text-transform: uppercase; color: var(--faint); }
   @media (prefers-reduced-motion: reduce) { .daruma.wobble { animation: none; } .heroBg video { display: none; } }
-  /* ── nav: glass pill (nd-) ── */
-  .topbar { position: fixed; top: 0; left: 0; right: 0; z-index: 50; }
-  .nd-nav { display: flex; align-items: center; justify-content: space-between;
-    padding: 20px 4vw; }
-  .nd-logo { font-weight: 800; letter-spacing: .06em; font-size: 15px; text-transform: uppercase;
-    text-decoration: none; line-height: 1; padding: 15px 0;
-    text-shadow: 0 1px 14px rgba(5,5,6,.55); }
-  .nd-logoTech { color: var(--accent); }
-  .nd-pill { display: flex; align-items: stretch; border-radius: 999px; overflow: hidden;
-    background: rgba(9,10,13,.36);
-    -webkit-backdrop-filter: blur(18px) saturate(1.4); backdrop-filter: blur(18px) saturate(1.4);
-    border: 1px solid rgba(244,243,240,.14);
-    box-shadow: inset 0 1px 0 rgba(244,243,240,.09), 0 2px 18px rgba(0,0,0,.18);
-    transition: background .35s ease, border-color .35s ease, box-shadow .35s ease; }
-  .nd-links { display: flex; align-items: stretch; padding: 0 8px; }
-  .nd-link { display: inline-flex; align-items: center; min-height: 46px; padding: 0 16px;
-    font-family: var(--mono); font-size: 11px; letter-spacing: .18em; text-transform: uppercase;
-    color: rgba(244,243,240,.72); text-decoration: none;
-    transition: color .25s ease, padding .3s ease; }
-  .nd-lbl { position: relative; display: inline-block; padding: 3px 0; }
-  .nd-lbl::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px;
-    background: var(--accent); transform: scaleX(0); transform-origin: left center;
-    transition: transform .3s ease; }
-  .nd-link:hover, .nd-link:focus-visible { color: var(--ink); }
-  .nd-link:hover .nd-lbl::after, .nd-link:focus-visible .nd-lbl::after { transform: scaleX(1); }
-  .nd-link[aria-current="page"] { color: var(--ink); }
-  .nd-link[aria-current="page"] .nd-lbl::before { content: ""; display: inline-block; width: 5px; height: 5px;
-    border-radius: 50%; background: var(--accent); margin-right: 9px; vertical-align: 2px; }
-  .nd-cta { display: inline-flex; align-items: center; min-height: 46px; padding: 0 24px;
-    background: var(--accent); color: #0a0a0c; text-decoration: none;
-    font-family: var(--mono); font-size: 11px; letter-spacing: .2em; text-transform: uppercase;
-    font-weight: 500; white-space: nowrap;
-    transition: background .25s ease, padding .3s ease; }
-  .nd-cta:hover { background: #c6f2f7; }
-  .nd-logo:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 2px; }
-  .nd-link:focus-visible { outline: 2px solid var(--accent); outline-offset: -5px; border-radius: 999px; }
-  .nd-cta:focus-visible { outline: 2px solid #0a0a0c; outline-offset: -5px; border-radius: 999px; }
-  .nd-scrolled .nd-pill { background: rgba(7,7,9,.74); border-color: rgba(244,243,240,.22);
-    box-shadow: inset 0 1px 0 rgba(244,243,240,.12), 0 10px 34px rgba(0,0,0,.45); }
-  .nd-scrolled .nd-link { padding: 0 13px; }
-  .nd-scrolled .nd-cta { padding: 0 19px; }
-  @media (max-width: 700px) {
-    .nd-nav { flex-wrap: wrap; row-gap: 10px; padding: 12px 4vw 10px; }
-    .nd-pill { display: contents; }
-    .nd-cta { border-radius: 999px; min-height: 44px;
-      box-shadow: 0 2px 18px rgba(0,0,0,.25); }
-    .nd-links { order: 3; width: 100%; padding: 0 6px; border-radius: 999px;
-      background: rgba(9,10,13,.36);
-      -webkit-backdrop-filter: blur(18px) saturate(1.4); backdrop-filter: blur(18px) saturate(1.4);
-      border: 1px solid rgba(244,243,240,.14);
-      box-shadow: inset 0 1px 0 rgba(244,243,240,.09), 0 2px 18px rgba(0,0,0,.18);
-      transition: background .35s ease, border-color .35s ease, box-shadow .35s ease; }
-    .nd-scrolled .nd-links { background: rgba(7,7,9,.74); border-color: rgba(244,243,240,.22);
-      box-shadow: inset 0 1px 0 rgba(244,243,240,.12), 0 10px 34px rgba(0,0,0,.45); }
-    .nd-link { flex: 1 1 auto; justify-content: center; min-height: 44px; padding: 0 4px;
-      font-size: 10px; letter-spacing: .1em; }
-    .nd-scrolled .nd-link { padding: 0 4px; }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .nd-pill, .nd-links, .nd-link, .nd-cta, .nd-lbl::after { transition: none; }
-  }
 </style>
 <noscript><style>.rv{opacity:1;transform:none}</style></noscript>
 </head>
@@ -487,30 +427,7 @@
 
 <a class="skip" href="#day">Skip to content</a>
 
-<div class="topbar">
-<nav class="nd-nav" aria-label="Primary">
-  <a class="nd-logo" href="/">Mirai<span class="nd-logoTech">Tech</span></a>
-  <div class="nd-pill">
-    <div class="nd-links">
-      <a class="nd-link" href="/experience/" data-analytics-action="site_navigation" data-analytics-location="nav" data-analytics-target="experience" aria-current="page"><span class="nd-lbl">The Experience</span></a>
-      <a class="nd-link" href="/pricing/" data-analytics-action="site_navigation" data-analytics-location="nav" data-analytics-target="pricing"><span class="nd-lbl">Pricing</span></a>
-      <a class="nd-link" href="/startups/" data-analytics-action="site_navigation" data-analytics-location="nav" data-analytics-target="startups"><span class="nd-lbl">For Startups</span></a>
-    </div>
-    <a class="nd-cta" href="https://luma.com/an4zotn9" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="nav" data-analytics-target="tickets">Get Tickets</a>
-  </div>
-  <script>
-  (function () {
-    var nav = document.querySelector('.nd-nav'), on = false;
-    function sync() {
-      var s = window.scrollY > 24;
-      if (s !== on) { on = s; nav.classList.toggle('nd-scrolled', s); }
-    }
-    window.addEventListener('scroll', sync, { passive: true });
-    sync();
-  })();
-  </script>
-</nav>
-</div>
+<script src="/nav.js"></script>
 
 <!-- ═══ HERO · THE LIVING CANVAS (h2x) ═══ -->
 <style>
