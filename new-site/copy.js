@@ -30,16 +30,11 @@ window.MIRAI_COPY = {
 
   /* ─── HERO OFFER ─────────────────────────── */
   hero: {
-    eyebrow: `Mirai Tech City 2026 · Kobe, Japan · October 1–31`,
     headline: `<span>Live the future</span> <span>of frontier tech.</span>`,
-    thesis: `Biotech is the next AI race.`,
     lead: `Cell and gene therapy, AI-designed drugs, N-of-1 medicine, brain-computer interfaces, radical life extension, human augmentation.`,
-    program: SHOW_FASHION
-      ? `<li><b>2</b> <span>summit weekends</span></li><li><span>Fashion Show</span> <b>Oct 26</b></li><li><span>Citizenship</span> <b>all October</b></li>`
-      : `<li><b>2</b> <span>summit weekends</span></li><li><span>Citizenship</span> <b>all October</b></li>`,
+    where: `Kobe, Japan &ndash; <b>October 1&ndash;31, 2026</b>`,
     buttons: `<a class="btn accent" href="https://luma.com/an4zotn9" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="hero_primary" data-analytics-target="tickets">Get Tickets</a>`,
-    proof: `<span><b>51</b> confirmed speakers · Aubrey de Grey + José Cordeiro</span><span><b>300-person</b> popup city</span><span>KBIC · Japan's largest biomedical cluster · <b>370</b> member organizations</span>`,
-    scrollHint: `See what October looks like ↓`,
+    scrollHint: `&darr;`,
   },
 
   /* ─── INTRO + PILLARS (under the fold) ─────────────────
@@ -147,7 +142,7 @@ window.MIRAI_COPY = {
 
   /* ─── SPEAKERS ─────────────────────────── */
   speakers: {
-    eyebrow: `51 Confirmed Speakers`,
+    eyebrow: `55 Confirmed Speakers`,
     headline: `Speakers &amp; Residents`,
     name: `Aubrey de Grey`,
     org: `LEV Foundation`,
@@ -157,8 +152,10 @@ window.MIRAI_COPY = {
     org3: `Cellular Agriculture`,
     name4: `Adam Gries`,
     org4: `Vitalist Bay`,
-    alsoLine: `Also in the arena: <b>José Cordeiro</b>, <b>Todd Porter</b>, <b>Josh Mann</b>, <b>Patri Friedman</b>, <b>Ian Huyett</b>, <b>Sandeep Casi</b>, <b>Sebastian Brunemeier</b>, <b>Brian Kennedy</b>, <b>Rob Claar</b>, <b>Natalie Coles</b>, <b>Devinder Sodhi</b>, <b>Sumit Jamuar</b>, <b>Keita Masui</b>, <b>Muneaki Goto</b>, <b>Takahiro Yasuda</b>, <b>Yuri Deigin</b>, <b>Laurence Ion</b>, <b>Rodney Kelly</b>, <b>Eleanor Sheekey</b>, <b>Stuart Reid</b>, <b>Mac Davis</b>, <b>Daniel Burger</b>, <b>Juliette Humer</b>, <b>Jeffrey Tibbetts</b>, <b>Ada Cyborg</b>, <b>Elen Capri</b>, <b>Cremieux</b>, <b>Nathan Cheng</b>, <b>Keiko Kobayashi</b>, <b>Felix OENS</b>, <b>Brandon Possin</b>, <b>Bilal Kharouni</b>, <b>Alice Gilman</b>, <b>Julie Ying Baron</b>, <b>Irit Rappley, PhD</b>, <b>Walter Patterson</b>, <b>Czar Gonzalez</b>, <b>Pedro Henrich</b>, <b>Nelson Milla</b>.`,
-    followLine: `51 confirmed · more announced through September · <a href="#doors">Follow along ↓</a>`,
+    name5: `Brian Kennedy`,
+    org5: `NUS Centre for Healthy Longevity`,
+    alsoLine: `Also in the arena: <b>José Cordeiro</b>, <b>Todd Porter</b>, <b>Josh Mann</b>, <b>Patri Friedman</b>, <b>Ian Huyett</b>, <b>Sandeep Casi</b>, <b>Sebastian Brunemeier</b>, <b>Rob Claar</b>, <b>Natalie Coles</b>, <b>Devinder Sodhi</b>, <b>Sumit Jamuar</b>, <b>Keita Masui</b>, <b>Muneaki Goto</b>, <b>Takahiro Yasuda</b>, <b>Yuri Deigin</b>, <b>Laurence Ion</b>, <b>Rodney Kelly</b>, <b>Eleanor Sheekey</b>, <b>Stuart Reid</b>, <b>Mac Davis</b>, <b>Daniel Burger</b>, <b>Juliette Humer</b>, <b>Jeffrey Tibbetts</b>, <b>Ada Cyborg</b>, <b>Elen Capri</b>, <b>Cremieux</b>, <b>Nathan Cheng</b>, <b>Keiko Kobayashi</b>, <b>Felix OENS</b>, <b>Brandon Possin</b>, <b>Bilal Kharouni</b>, <b>Alice Gilman</b>, <b>Julie Ying Baron</b>, <b>Irit Rappley, PhD</b>, <b>Walter Patterson</b>, <b>Czar Gonzalez</b>, <b>Takashi Aoi</b>, <b>Yoshihiro Muragaki</b>, <b>Masanori Miyanishi</b>, <b>Paul Yang</b>, <b>Pedro Henrich</b>, <b>Nelson Milla</b>.`,
+    followLine: `55 confirmed · more announced through September · <a href="#doors">Follow along ↓</a>`,
   },
 
   /* ─── FASHION SHOW ─────────────────────────── */
@@ -258,7 +255,7 @@ window.MIRAI_COPY = {
       : `Tickets for the Summits. Applications for the PopUp.`,
     buttons2: `<a class="btn accent" href="https://luma.com/an4zotn9" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="apply" data-analytics-target="tickets">Get Tickets</a> <a class="btn" href="https://luma.com/an4zotn9" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="apply" data-analytics-target="residency">Come Live Japan</a> <a class="btn ghost" href="#">Sponsor the City</a>`,
     footnote: `Tickets &amp; PopUp on Luma · Applications reviewed on a rolling basis · <a href="/pricing/" data-analytics-action="site_navigation" data-analytics-location="apply" data-analytics-target="pricing">See pricing →</a>`,
-    footnote2: `Sponsors reach 300 residents and 51 speakers`,
+    footnote2: `Sponsors reach 300 residents and 55 speakers`,
   },
 
   /* ─── FOOTER ─────────────────────────── */
