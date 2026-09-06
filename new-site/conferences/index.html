@@ -171,7 +171,7 @@ p { margin: 0 0 1.15em; }
 @media (max-width: 860px) { .areas { grid-template-columns: 1fr; } }
 
 /* speakers */
-.spk { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1px; margin-top: 60px; padding: 1px; background: var(--line); }
+.spk { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 1px; margin-top: 60px; padding: 1px; background: var(--line); }
 .spk figure { margin: 0; background: var(--bg); }
 .spk .im { aspect-ratio: 1/1; overflow: hidden; background: rgba(244,243,240,.035); }
 .spk img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.06); transition: filter .3s; }
@@ -180,9 +180,9 @@ p { margin: 0 0 1.15em; }
 .spk small { display: block; margin-top: 6px; color: var(--accent); font-family: var(--mono); font-size: 9px; font-weight: 400;
   letter-spacing: .16em; text-transform: uppercase; }
 .spk .idx { color: var(--faint); font-family: var(--mono); font-size: 9px; font-weight: 400; margin-right: 8px; }
-@media (max-width: 760px) { .spk { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 760px) { .spk { grid-template-columns: repeat(2, minmax(0, 1fr)); } .spk figure:nth-child(5) { display: none; } }
 
-/* speaker manifest — continues the photo grid as entries 05–51 */
+/* speaker manifest — continues the photo grid as entries 06–55 */
 .msp { margin-top: 1px; }
 .msp-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 10px 24px;
   padding: 18px 2px 14px; border-bottom: 1px solid var(--line); }
@@ -578,19 +578,19 @@ footer a { color: var(--accent); text-decoration: underline; text-underline-offs
 
     <div class="spk">
       <figure><div class="im"><img src="/img/aubrey.webp" alt="Aubrey de Grey" loading="lazy" decoding="async"></div><figcaption><span class="idx">01</span>Aubrey de Grey<small>LEV Foundation</small></figcaption></figure>
-      <figure><div class="im"><img src="/img/hayano.webp" alt="Motoshi Hayano" loading="lazy" decoding="async"></div><figcaption><span class="idx">02</span>Motoshi Hayano<small>Keio University</small></figcaption></figure>
-      <figure><div class="im"><img src="/img/yuki.webp" alt="Yuki Hanyu" loading="lazy" decoding="async"></div><figcaption><span class="idx">03</span>Yuki Hanyu<small>IntegriCulture</small></figcaption></figure>
-      <figure><div class="im"><img src="/img/adam.webp" alt="Adam Gries" loading="lazy" decoding="async"></div><figcaption><span class="idx">04</span>Adam Gries<small>Vitalist Bay</small></figcaption></figure>
+      <figure><div class="im"><img src="/img/kennedy.webp" alt="Brian Kennedy" loading="lazy" decoding="async"></div><figcaption><span class="idx">02</span>Brian Kennedy<small>NUS Centre for Healthy Longevity</small></figcaption></figure>
+      <figure><div class="im"><img src="/img/hayano.webp" alt="Motoshi Hayano" loading="lazy" decoding="async"></div><figcaption><span class="idx">03</span>Motoshi Hayano<small>Keio University</small></figcaption></figure>
+      <figure><div class="im"><img src="/img/yuki.webp" alt="Yuki Hanyu" loading="lazy" decoding="async"></div><figcaption><span class="idx">04</span>Yuki Hanyu<small>IntegriCulture</small></figcaption></figure>
+      <figure><div class="im"><img src="/img/adam.webp" alt="Adam Gries" loading="lazy" decoding="async"></div><figcaption><span class="idx">05</span>Adam Gries<small>Vitalist Bay</small></figcaption></figure>
     </div>
 
     <div class="msp">
       <div class="msp-head">
-        <b>Confirmed speakers — <em>51</em></b>
+        <b>Confirmed speakers — <em>55</em></b>
         <span class="msp-key"><i>S1</i> Oct 17–18 &nbsp; <i>S2</i> Oct 24–25 &nbsp; <i>F</i> Finale Oct 26</span>
       </div>
 
       <div class="msp-grid">
-        <div class="msp-row"><span class="msp-i">05</span><span class="msp-n">Brian Kennedy<em>NUS Centre for Healthy Longevity</em></span><span class="msp-s">S2</span></div>
         <div class="msp-row"><span class="msp-i">06</span><span class="msp-n">Marian Goodell<em>CEO, Burning Man Project</em></span><span class="msp-s">S2</span></div>
         <div class="msp-row"><span class="msp-i">07</span><span class="msp-n">Jose Cordeiro<em>International Longevity Summit</em></span><span class="msp-s">S1·S2</span></div>
         <div class="msp-row"><span class="msp-i">08</span><span class="msp-n">Eleanor Sheekey<em>RIKEN Kobe / Sheekey Science Show</em></span><span class="msp-s">S1·S2·F</span></div>
@@ -603,7 +603,7 @@ footer a { color: var(--accent); text-decoration: underline; text-underline-offs
       </div>
 
       <details>
-        <summary><span class="msp-lc">Show all 51 confirmed speakers</span><span class="msp-lo">Show fewer</span></summary>
+        <summary><span class="msp-lc">Show all 55 confirmed speakers</span><span class="msp-lo">Show fewer</span></summary>
         <div class="msp-grid">
           <div class="msp-row"><span class="msp-i">15</span><span class="msp-n">Walter Marion Patterson<em>CSO, Minicircle</em></span><span class="msp-s">S2·F</span></div>
           <div class="msp-row"><span class="msp-i">16</span><span class="msp-n">Matt Scholz<em>Oisin Bio</em></span><span class="msp-s">S2</span></div>
@@ -642,6 +642,10 @@ footer a { color: var(--accent); text-decoration: underline; text-underline-offs
           <div class="msp-row"><span class="msp-i">49</span><span class="msp-n">Kentaroh Takagaki<em>Eighteen Six</em></span><span class="msp-s"></span></div>
           <div class="msp-row"><span class="msp-i">50</span><span class="msp-n">Masataka Watanabe<em>Eighteen Six</em></span><span class="msp-s"></span></div>
           <div class="msp-row"><span class="msp-i">51</span><span class="msp-n">Kaarthik Abhinav Balakrishnan<em>Eighteen Six</em></span><span class="msp-s"></span></div>
+          <div class="msp-row"><span class="msp-i">52</span><span class="msp-n">Prof. Takashi Aoi<em>Kobe University Graduate School of Medicine</em></span><span class="msp-s">S1</span></div>
+          <div class="msp-row"><span class="msp-i">53</span><span class="msp-n">Yoshihiro Muragaki<em>Faculty of Advanced Techno-Surgery (FATS)</em></span><span class="msp-s">S1·S2</span></div>
+          <div class="msp-row"><span class="msp-i">54</span><span class="msp-n">Masanori Miyanishi, MD PhD<em>Kobe University Graduate School of Medicine</em></span><span class="msp-s">S1</span></div>
+          <div class="msp-row"><span class="msp-i">55</span><span class="msp-n">Paul Yang<em>Governance Partners</em></span><span class="msp-s">S2</span></div>
         </div>
       </details>
     </div>

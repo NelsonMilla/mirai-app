@@ -242,34 +242,21 @@
                 linear-gradient(to top, rgba(5,5,6,.88), rgba(5,5,6,.12) 62%),
                 linear-gradient(105deg, rgba(5,5,6,.68) 0%, transparent 58%); }
   .heroContent { position: absolute; left: 6vw; right: 6vw; bottom: clamp(76px, 9vh, 96px); z-index: 2; max-width: 1120px; }
-  .heroContent .eyebrow { margin-bottom: 14px; font-size: 12px; letter-spacing: .22em; }
   .heroContent h1 { font-weight: 900; text-transform: uppercase; letter-spacing: -.015em;
     font-size: clamp(58px, 8.2vw, 118px); line-height: .88; color: var(--ink); max-width: none; }
   .heroContent h1 span { display: block; }
-  .heroThesis { margin: 14px 0 0; color: var(--accent); font-weight: 800; letter-spacing: -.01em;
-    font-size: clamp(19px, 2.2vw, 27px); line-height: 1.2; }
-  .heroLead { max-width: 68ch; margin-top: 16px; color: rgba(244,243,240,.9);
+  .heroLead { max-width: 68ch; margin-top: 22px; color: rgba(244,243,240,.92);
     font-size: clamp(16px, 1.45vw, 19px); line-height: 1.5; text-shadow: 0 1px 18px rgba(0,0,0,.7); }
-  .heroProgram { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 0; max-width: 980px;
-    margin-top: 16px; list-style: none; font-family: var(--mono); font-size: 12px; line-height: 1.4;
-    letter-spacing: .08em; text-transform: uppercase; color: rgba(244,243,240,.82); }
-  .heroProgram li { display: flex; align-items: baseline; gap: 5px; white-space: nowrap; }
-  .heroProgram li + li::before { content: '/'; margin: 0 12px; color: var(--accent); opacity: .76; }
-  .heroProgram b { color: var(--accent); font-weight: 500; }
-  .heroActions { display: flex; align-items: flex-start; margin-top: 18px; }
-  .heroActions .btn { min-width: 190px; text-align: center; }
-  .heroProof { display: flex; flex-wrap: wrap; gap: 6px 20px; margin-top: 10px;
-    font-family: var(--mono); font-size: 11px; line-height: 1.5; letter-spacing: .08em;
-    text-transform: uppercase; color: rgba(244,243,240,.78); }
-  .heroProof b { color: var(--accent); font-weight: 500; }
-  .heroProof span { position: relative; }
-  .heroProof span + span::before { content: ''; position: absolute; left: -11px; top: .45em;
-    width: 3px; height: 3px; border-radius: 50%; background: var(--accent); }
+  .heroWhere { margin-top: 22px; color: var(--ink); font-size: clamp(17px, 1.6vw, 22px); font-weight: 500;
+    letter-spacing: .12em; text-transform: uppercase; line-height: 1.3; text-shadow: 0 1px 18px rgba(0,0,0,.7); }
+  .heroWhere b { color: var(--accent); font-weight: 500; }
+  .heroActions { display: flex; align-items: flex-start; margin-top: 28px; }
+  .heroActions .btn { min-width: 210px; padding: 16px 40px; font-family: var(--font); font-size: 14px;
+    font-weight: 800; letter-spacing: .14em; text-align: center; }
   .heroContinue { position: absolute; left: 50%; bottom: max(8px, env(safe-area-inset-bottom)); z-index: 3;
     min-height: 44px; display: inline-flex; align-items: center; transform: translateX(-50%);
-    font-family: var(--mono); font-size: 11px; letter-spacing: .16em; text-transform: uppercase;
-    color: rgba(244,243,240,.82); text-decoration: none; text-shadow: 0 1px 8px rgba(0,0,0,.8);
-    animation: heroContinueBob 2.4s ease-in-out 3; }
+    font-size: 28px; font-weight: 300; line-height: 1; color: rgba(244,243,240,.82); text-decoration: none;
+    text-shadow: 0 1px 8px rgba(0,0,0,.8); animation: heroContinueBob 2.4s ease-in-out 3; }
   .heroContinue:hover { color: var(--accent); }
   @keyframes heroContinueBob {
     0%, 100% { transform: translate(-50%, 0); }
@@ -279,48 +266,32 @@
   @media (max-width: 760px) {
     .hero { min-height: 560px; }
     .heroContent { bottom: 62px; }
-    .heroContent .eyebrow { margin-bottom: 12px; font-size: 10px; letter-spacing: .16em; }
     .heroContent h1 { font-size: clamp(34px, 10.5vw, 60px); letter-spacing: -.025em; }
-    .heroThesis { margin-top: 10px; font-size: 17px; }
-    .heroLead { max-width: 39ch; margin-top: 12px; font-size: 15px; line-height: 1.42; }
-    .heroProgram { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 16px;
-      max-width: 520px; margin-top: 12px; font-size: 11px; letter-spacing: .04em; }
-    .heroProgram li { display: grid; grid-template-columns: auto 1fr; align-items: baseline; gap: 5px; white-space: normal; }
-    .heroProgram li + li::before { display: none; }
-    .heroActions { margin-top: 14px; }
-    .heroActions .btn { min-width: 0; padding: 12px 16px; }
-    .heroProof { margin-top: 8px; gap: 4px 16px; font-size: 11px; letter-spacing: .04em; }
-    .heroProof span + span::before { left: -9px; }
+    .heroLead { max-width: 39ch; margin-top: 14px; font-size: 15px; line-height: 1.42; }
+    .heroWhere { margin-top: 14px; font-size: 14px; letter-spacing: .1em; }
+    .heroActions { margin-top: 18px; }
+    .heroActions .btn { min-width: 0; padding: 14px 24px; font-size: 13px; }
   }
   @media (max-width: 420px) {
     .heroContent { left: 5vw; right: 5vw; }
     .heroActions .btn { width: 100%; }
-    .heroProof span { flex-basis: 100%; }
-    .heroProof span + span::before { display: none; }
   }
   @media (max-width: 380px) and (max-height: 640px) {
     .hero { height: 568px; min-height: 568px; }
     .heroContent { top: 80px; bottom: auto; }
-    .heroContent .eyebrow { margin-bottom: 8px; font-size: 9px; line-height: 1.45; letter-spacing: .1em; }
     .heroContent h1 { font-size: 34px; line-height: .86; }
-    .heroThesis { margin-top: 8px; font-size: 15px; }
-    .heroLead { margin-top: 8px; font-size: 13px; line-height: 1.34; }
-    .heroProgram { margin-top: 8px; gap: 5px 10px; font-size: 10px; line-height: 1.3; }
-    .heroActions { margin-top: 10px; }
-    .heroProof { margin-top: 6px; gap: 2px; font-size: 10px; line-height: 1.35; }
-    .heroContinue { font-size: 9px; }
+    .heroLead { margin-top: 10px; font-size: 13px; line-height: 1.34; }
+    .heroWhere { margin-top: 10px; font-size: 12px; }
+    .heroActions { margin-top: 12px; }
+    .heroContinue { font-size: 22px; }
   }
   @media (max-height: 540px) and (min-width: 560px) {
     .hero { height: 100svh; min-height: 375px; }
     .heroContent { top: 92px; bottom: auto; }
-    .heroContent .eyebrow { margin-bottom: 8px; font-size: 9px; }
     .heroContent h1 { max-width: none; font-size: clamp(42px, 6.4vw, 58px); line-height: .86; white-space: nowrap; }
-    .heroThesis { margin-top: 6px; font-size: 14px; }
-    .heroLead { max-width: 78ch; margin-top: 8px; font-size: 12px; line-height: 1.35; }
-    .heroProgram { margin-top: 8px; gap: 4px 0; font-size: 10px; }
-    .heroProgram li + li::before { margin: 0 8px; }
+    .heroLead { max-width: 78ch; margin-top: 10px; font-size: 12px; line-height: 1.35; }
+    .heroWhere { margin-top: 8px; font-size: 12px; }
     .heroActions { margin-top: 10px; }
-    .heroProof { margin-top: 8px; }
     .heroContinue { display: none; }
   }
 
@@ -649,7 +620,7 @@
   }
 
   /* ── speakers ── */
-  .headliners { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; margin-top: 44px; }
+  .headliners { display: grid; grid-template-columns: repeat(5, 1fr); gap: 18px; margin-top: 44px; }
   .headliners .hcard { position: relative; border: 1px solid var(--line); overflow: hidden; }
   .headliners .hcard img { width: 100%; aspect-ratio: 4/5; object-fit: cover; display: block;
     filter: grayscale(28%) contrast(1.04); transition: filter .3s, transform .5s; }
@@ -658,7 +629,10 @@
     background: linear-gradient(to top, rgba(5,5,6,.92), transparent); }
   .headliners .nm { font-weight: 800; text-transform: uppercase; font-size: clamp(15px, 1.6vw, 22px); letter-spacing: -.005em; line-height: 1.05; }
   .headliners .og { font-family: var(--mono); font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--accent); margin-top: 6px; }
-  @media (max-width: 860px) { .headliners { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 860px) { .headliners { grid-template-columns: repeat(3, 1fr); }
+    .headliners .hcard:nth-child(n+4) { display: none; } }
+  @media (max-width: 640px) { .headliners { grid-template-columns: 1fr 1fr; }
+    .headliners .hcard:nth-child(4) { display: block; } }
   .alsoline { margin-top: 34px; color: var(--dim); font-size: 15px; line-height: 1.8; max-width: 900px; }
   .alsoline b { color: var(--ink); font-weight: 600; }
   .followline { margin-top: 18px; font-family: var(--mono); font-size: 11px; letter-spacing: .18em;
@@ -927,15 +901,12 @@
     <div class="heroVeil"></div>
   </div>
   <div class="heroContent">
-    <div class="eyebrow" data-copy="hero.eyebrow"></div>
     <h1 data-copy="hero.headline"></h1>
-    <p class="heroThesis" data-copy="hero.thesis"></p>
     <p class="heroLead" data-copy="hero.lead"></p>
-    <ul class="heroProgram" aria-label="Program at a glance" data-copy="hero.program"></ul>
+    <p class="heroWhere" data-copy="hero.where"></p>
     <div class="heroActions" data-copy="hero.buttons"></div>
-    <div class="heroProof" aria-label="Featured people and venue" data-copy="hero.proof"></div>
   </div>
-  <a class="heroContinue" href="#pillars" data-copy="hero.scrollHint"></a>
+  <a class="heroContinue" href="#pillars" aria-label="Scroll to the next section" data-copy="hero.scrollHint"></a>
 </section>
 
 <!-- ═══ INTRO + PILLARS: ACCELERATE / INSPIRE / LIVE ═══ -->
@@ -994,6 +965,8 @@
   <div class="headliners">
     <div class="hcard rv"><img src="img/aubrey.jpg" alt="Aubrey de Grey" loading="lazy" decoding="async" />
       <div class="meta"><div class="nm" data-copy="speakers.name"></div><div class="og" data-copy="speakers.org"></div></div></div>
+    <div class="hcard rv"><img src="img/kennedy.jpg" alt="Brian Kennedy" loading="lazy" decoding="async" />
+      <div class="meta"><div class="nm" data-copy="speakers.name5"></div><div class="og" data-copy="speakers.org5"></div></div></div>
     <div class="hcard rv"><img src="img/hayano.jpg" alt="Motoshi Hayano" loading="lazy" decoding="async" />
       <div class="meta"><div class="nm" data-copy="speakers.name2"></div><div class="og" data-copy="speakers.org2"></div></div></div>
     <div class="hcard rv"><img src="img/yuki.jpg" alt="Yuki Hanyu" loading="lazy" decoding="async" />
