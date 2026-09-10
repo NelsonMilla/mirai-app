@@ -245,6 +245,18 @@
   .heroContent h1 { font-weight: 900; text-transform: uppercase; letter-spacing: -.015em;
     font-size: clamp(58px, 8.2vw, 118px); line-height: .88; color: var(--ink); max-width: none; }
   .heroContent h1 span { display: block; }
+  /* Rotating word: accent color, block cursor at the end of the line. The
+     cursor is solid while typing/deleting and blinks only while a word holds. */
+  .heroRot, .heroDot { font-style: normal; }
+  .heroRot { color: var(--accent); }
+  .heroDot { transition: opacity .2s; }
+  .heroLine::after { content: ''; display: inline-block; width: .42em; height: .72em; margin-left: .08em;
+    vertical-align: -.03em; background: var(--accent); box-shadow: 0 0 18px rgba(155,232,240,.45);
+    animation: heroCaret 1.06s steps(1, end) infinite; }
+  .heroLine.typing::after { animation: none; }
+  .heroLine.typing .heroDot { opacity: 0; }
+  @keyframes heroCaret { 0%, 55% { opacity: 1; } 56%, 100% { opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) { .heroLine::after { display: none; } }
   .heroLead { max-width: 68ch; margin-top: 22px; color: rgba(244,243,240,.92);
     font-size: clamp(16px, 1.45vw, 19px); line-height: 1.5; text-shadow: 0 1px 18px rgba(0,0,0,.7); }
   .heroWhere { margin-top: 22px; color: var(--ink); font-size: clamp(17px, 1.6vw, 22px); font-weight: 500;
@@ -323,6 +335,10 @@
     letter-spacing: -.035em; line-height: .92; margin-left: -.06em; color: var(--accent); white-space: nowrap; }
   .msl-payoff--shift { margin-left: clamp(.75rem, 12vw, 12rem); }
   @media (max-width: 380px) { .msl-payoff { white-space: normal; letter-spacing: -.02em; } }
+  /* Below ~1180px the shifted payoff line would run past the viewport edge and
+     be clipped by the section; let it wrap inside the column instead. */
+  @media (max-width: 1180px) { .msl-payoff.msl-payoff--shift { white-space: normal;
+    max-width: calc(100% - clamp(.75rem, 12vw, 12rem)); } }
   /* Moji-mado: after the ink entrance, the payoff lines drain and the
      Fuji-dawn plate floods the letterforms (background-clip: text). The
      image is declared only in the .in state so it never loads above the
@@ -418,7 +434,7 @@
       font-size: clamp(38px, 13.5vw, 64px); }
     .knt-band span { font-size: clamp(48px, 20vw, 90px); }
     .knt-list, .knt-p1 .knt-list, .knt-p3 .knt-list { margin-left: 0; max-width: none; }
-    .knt-row, .knt-p2 .knt-row { display: flex; flex-direction: column; margin-top: 16px; }
+    .knt-row, .knt-p2 .knt-row { display: flex; flex-direction: column; align-items: stretch; margin-top: 16px; }
     .knt-chips, .knt-p2 .knt-chips { order: 2; gap: 14px; padding-top: 20px; justify-content: flex-start; }
     .knt-row .knt-list, .knt-p2 .knt-row .knt-list { order: 1; }
     .knt-chip, .knt-p2 .knt-chip { width: 47%; }
@@ -1312,6 +1328,43 @@
 </footer>
 
 <script>applyCopy();
+/* Hero word cycle: backspace "frontier tech" and retype the next word from
+   data-words. Accelerating delete, decelerating type with a little jitter,
+   a light scramble on alternate letters, 2.4s hold. Pauses when the tab is
+   hidden or the hero is scrolled away. Off under prefers-reduced-motion. */
+(function () {
+  var el = document.querySelector('.heroRot');
+  if (!el || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var line = el.parentNode, h1 = el.closest('h1');
+  h1.setAttribute('aria-label', h1.textContent.trim());
+  var words = el.getAttribute('data-words').split('|');
+  var pool = words.join('').replace(/\s/g, '');
+  var wi = 0, n = words[0].length, del = true, inView = true, timer = 0;
+  function ease(t) { return 1 - Math.pow(1 - t, 3); }
+  function go(ms) { clearTimeout(timer); timer = setTimeout(tick, ms); }
+  function tick() {
+    if (document.hidden || !inView) { timer = null; return; }
+    var w = words[wi % words.length];
+    if (del) {
+      n--; el.textContent = w.slice(0, n); line.classList.add('typing');
+      if (n === 0) { del = false; wi++; go(220); }
+      else go(26 + 29 * (n / w.length));
+      return;
+    }
+    n++;
+    var shown = w.slice(0, n);
+    if (n < w.length && n % 2 === 0 && w[n - 1] !== ' ') {
+      el.textContent = shown.slice(0, -1) + pool[Math.floor(Math.random() * pool.length)];
+      setTimeout(function () { el.textContent = shown; }, 34);
+    } else el.textContent = shown;
+    if (n === w.length) { del = true; line.classList.remove('typing'); go(2400); }
+    else go(92 - 46 * ease(n / w.length) + Math.random() * 26 + (n === 1 ? 90 : 0));
+  }
+  function resume() { if (timer === null) go(220); }
+  document.addEventListener('visibilitychange', resume);
+  new IntersectionObserver(function (e) { inView = e[0].isIntersecting; resume(); }).observe(h1);
+  (document.fonts ? document.fonts.ready : Promise.resolve()).then(function () { go(1600); });
+})();
 /* Split pillar titles into letters for the staggered rise (runs after
    copy hydration; titles stay plain strings in copy.js). */
 document.querySelectorAll('.knt-title').forEach(function (h) {
