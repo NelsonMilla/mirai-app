@@ -30,7 +30,9 @@ window.MIRAI_COPY = {
 
   /* ─── HERO OFFER ─────────────────────────── */
   hero: {
-    headline: `<span>Live the future</span> <span>of frontier tech.</span>`,
+    /* The <i class="heroRot"> word is retyped by the hero script in index.html.
+       data-words is the cycle; the first entry must match the static text. */
+    headline: `<span>Live the future</span> <span class="heroLine">of <i class="heroRot" data-words="frontier tech|longevity|biotech|gene therapy|AI medicine|augmentation">frontier tech</i><i class="heroDot">.</i></span>`,
     lead: `Cell and gene therapy, AI-designed drugs, N-of-1 medicine, brain-computer interfaces, radical life extension, human augmentation.`,
     where: `Kobe, Japan &ndash; <b>October 1&ndash;31, 2026</b>`,
     buttons: `<a class="btn accent" href="https://luma.com/an4zotn9" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="hero_primary" data-analytics-target="tickets">Get Tickets</a>`,
