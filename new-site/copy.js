@@ -36,6 +36,8 @@ window.MIRAI_COPY = {
     lead: `Cell and gene therapy, AI-designed drugs, N-of-1 medicine, brain-computer interfaces, radical life extension, human augmentation.`,
     where: `Kobe, Japan &ndash; <b>October 1&ndash;31, 2026</b>`,
     buttons: `<a class="btn accent" href="https://luma.com/an4zotn9" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="hero_primary" data-analytics-target="tickets">Get Tickets</a>`,
+    /* Japanese readers: one small link to /jp/, the Japan-resident ticket (Peatix). */
+    jpLink: `<a class="heroJp" href="/jp/" lang="ja" hreflang="ja" data-analytics-action="site_navigation" data-analytics-location="hero" data-analytics-target="japan">日本語ページはこちら <span aria-hidden="true">&rarr;</span></a>`,
     scrollHint: `&darr;`,
   },
 
@@ -140,6 +142,7 @@ window.MIRAI_COPY = {
     line: `Across the two weekends: <b>Aubrey de Grey</b>, <b>Motoshi Hayano</b>, and 41 more.`,
     link: `Meet the speakers ↑`,
     pricingLink: `See all pricing →`,
+    jpLink: `日本居住者向け参加枠 →`,
   },
 
   /* ─── SPEAKERS ─────────────────────────── */
@@ -258,6 +261,7 @@ window.MIRAI_COPY = {
     buttons2: `<a class="btn accent" href="https://luma.com/an4zotn9" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="apply" data-analytics-target="tickets">Get Tickets</a> <a class="btn" href="https://luma.com/an4zotn9" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="apply" data-analytics-target="residency">Come Live Japan</a> <a class="btn ghost" href="#">Sponsor the City</a>`,
     footnote: `Tickets &amp; PopUp on Luma · Applications reviewed on a rolling basis · <a href="/pricing/" data-analytics-action="site_navigation" data-analytics-location="apply" data-analytics-target="pricing">See pricing →</a>`,
     footnote2: `Sponsors reach 300 residents and 55 speakers`,
+    footnote3: `Residents of Japan: a Japan-resident ticket is sold separately on Peatix through the <a href="/jp/" hreflang="ja" data-analytics-action="site_navigation" data-analytics-location="apply" data-analytics-target="japan">Japanese page</a> · That pricing is exclusive to residents of Japan · <a href="/jp/" lang="ja" hreflang="ja" data-analytics-action="site_navigation" data-analytics-location="apply" data-analytics-target="japan">日本語ページ →</a>`,
   },
 
   /* ─── FOOTER ─────────────────────────── */
@@ -270,7 +274,7 @@ window.MIRAI_COPY = {
     statLabel4: `Sec`,
     countdownLabel: `<span id="cdtext">Until the city opens</span> · <a href="mirai_oct1.ics" style="color:var(--accent); text-decoration:none">Add to calendar</a>`,
     jst: `Kobe right now · <b id="jst">—</b> JST`,
-    links: `<a href="#">The Group Chat →</a> <a href="https://luma.com/an4zotn9" target="_blank" rel="noopener" data-analytics-action="site_navigation" data-analytics-location="footer" data-analytics-target="luma_listing">Follow on Luma →</a> <a href="#">The Build Server →</a> <a href="#">Sponsor the City →</a>`,
+    links: `<a href="#">The Group Chat →</a> <a href="https://luma.com/an4zotn9" target="_blank" rel="noopener" data-analytics-action="site_navigation" data-analytics-location="footer" data-analytics-target="luma_listing">Follow on Luma →</a> <a href="#">The Build Server →</a> <a href="#">Sponsor the City →</a> <a href="/jp/" lang="ja" hreflang="ja" data-analytics-action="site_navigation" data-analytics-location="footer" data-analytics-target="japan">日本語ページ →</a>`,
     block: `Stills: Kobe Tourism Bureau · Hideyuki Kamon (CC BY-SA) · art comments (CC BY)`,
   },
 
