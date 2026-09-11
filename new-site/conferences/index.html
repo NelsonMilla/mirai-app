@@ -15,7 +15,7 @@
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="theme-color" content="#050506" />
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23050506'/%3E%3Ctext x='50' y='72' font-size='62' font-family='Georgia' font-weight='bold' fill='%239be8f0' text-anchor='middle'%3E未%3C/text%3E%3C/svg%3E" />
-<link rel="preload" href="/img/harbor-golden-hour.webp" as="image" fetchpriority="high" />
+<link rel="preload" href="/img/harbor-golden-hour.webp" as="image" imagesrcset="/img/harbor-golden-hour-640.webp 640w, /img/harbor-golden-hour.webp 1024w" imagesizes="100vw" fetchpriority="high" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link rel="preconnect" href="https://api.fontshare.com" />
@@ -99,8 +99,7 @@ a { color: inherit; }
 
 /* ── the single content column ─────────────────────────────────────── */
 .wrap { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 var(--gut); }
-main > section { padding: var(--top) 0 var(--bot); scroll-margin-top: calc(var(--bar) + 16px); }
-main > section[data-track-section] { scroll-margin-top: calc(var(--bar) + 16px); }
+main > section { padding: var(--top) 0 var(--bot); }
 
 /* ── one type scale ────────────────────────────────────────────────── */
 h1, h2, h3 { text-transform: uppercase; }
@@ -124,7 +123,7 @@ b, strong { color: var(--bone); font-weight: 700; }
 /* footnote superscripts — only where a note names a real instrument */
 sup.fn { font-family: var(--mono); font-size: clamp(9px, .46em, 11px); font-weight: 400;
   letter-spacing: 0; line-height: 0; vertical-align: super; }
-sup.fn a { display: inline-block; margin: -9px -3px; padding: 9px 4px; color: var(--cyan); text-decoration: none; }
+sup.fn a { display: inline-block; margin: -18px -10px; padding: 18px 10px; line-height: 1; color: var(--cyan); text-decoration: none; }
 sup.fn a:hover { text-decoration: underline; }
 
 /* ── buttons ───────────────────────────────────────────────────────── */
@@ -169,7 +168,7 @@ html.past-hero .pbar { transform: none; visibility: visible;
   transition: transform .52s cubic-bezier(.16,1,.3,1), visibility 0s; }
 .pbar-in { display: flex; align-items: center; gap: 20px; height: var(--bar);
   padding: 0 4vw; }
-.pbar-home { flex: 0 0 auto; color: var(--bone); font-size: 15px; font-weight: 800;
+.pbar-home { flex: 0 0 auto; display: inline-flex; align-items: center; min-height: 44px; color: var(--bone); font-size: 15px; font-weight: 800;
   letter-spacing: .06em; text-decoration: none; text-transform: uppercase; line-height: 1; }
 .pbar-home span { color: var(--cyan); }
 .pbar-nav { display: flex; flex: 1 1 auto; justify-content: center; gap: 2px; }
@@ -183,7 +182,7 @@ html.past-hero .pbar { transform: none; visibility: visible;
   height: 24px; padding-right: 18px; border-right: 1px solid var(--line-2);
   color: var(--bone); font-family: var(--mono);
   font-size: 12px; font-weight: 500; letter-spacing: .1em; }
-.pbar .btn { flex: 0 0 auto; min-height: 40px; padding: 10px 18px; font-size: 10px; letter-spacing: .16em; }
+.pbar .btn { flex: 0 0 auto; min-height: 44px; padding: 12px 18px; font-size: 10px; letter-spacing: .16em; }
 /* staged contents: exit state first (fast, no delay), enter state under .past-hero */
 .pbar-home, .pbar-nav a, .pbar-price, .pbar .btn { opacity: 0; transform: translateY(-10px);
   transition: opacity .18s ease, transform .18s ease, color .2s ease; }
@@ -199,7 +198,7 @@ html.past-hero .pbar-nav a:nth-child(5) { --sd: 340ms; }
 html.past-hero .pbar-nav a:nth-child(6) { --sd: 380ms; }
 html.past-hero .pbar-price { --sd: 200ms; }
 html.past-hero .pbar .btn { --sd: 320ms; }
-@media (max-width: 760px) {
+@media (max-width: 980px) {
   .pbar-nav { display: none; }
   /* with the nav gone the price takes the slack, so the button still ends
      flush with the bar's right gutter */
@@ -458,7 +457,7 @@ html.stepper.jsd .ruler i { transition: transform .12s linear; }
    no filter, no recolor; MIC's black canvas is melted with screen blending only. */
 .sup-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
   gap: 24px 30px; padding: 26px 0 8px; border-top: 1px solid var(--line); }
-.sup-row a { display: flex; align-items: center; text-decoration: none; }
+.sup-row a { display: flex; align-items: center; text-decoration: none; padding: 12px 0; margin: -12px 0; }
 .sup-more { color: var(--faint); font-family: var(--mono); font-size: 11px; letter-spacing: .18em; text-transform: uppercase; white-space: nowrap; }
 @media (max-width: 980px) { .sup-row { justify-content: flex-start; gap: 24px 36px; } }
 .sup-row .lg { display: block; width: auto; object-fit: contain; opacity: .88; transition: opacity .25s ease; }
@@ -613,7 +612,7 @@ html.wj-js #why_japan .wj-reel::-webkit-scrollbar { display: none; }
 #why_japan .wj-ctl { display: none; flex: 0 0 auto; gap: 8px; }
 html.wj-js #why_japan .wj-ctl { display: flex; }
 #why_japan .wj-nav { display: inline-flex; align-items: center; justify-content: center;
-  width: 40px; height: 40px; padding: 0; border: 1px solid var(--line-2); border-radius: 0;
+  width: 44px; height: 44px; padding: 0; border: 1px solid var(--line-2); border-radius: 0;
   background: transparent; color: var(--bone); cursor: pointer;
   transition: border-color .2s ease, color .2s ease, opacity .2s ease; }
 #why_japan .wj-nav:hover:not(:disabled) { border-color: var(--bone); color: var(--cyan); }
@@ -645,7 +644,7 @@ html.wj-js #why_japan .wj-ctl { display: flex; }
   #why_japan .wj-head { grid-template-columns: 1fr; }
   #why_japan .wj-lead { margin-top: 22px; font-size: 15.5px; }
   #why_japan .wj-reel { padding-right: 32px; }
-  #why_japan .wj-read p { font-size: 13.5px; }
+  #why_japan .wj-read p { font-size: 14px; }
   #why_japan .wj-card--w .wj-read p { font-size: 14px; }
   #why_japan .wj-read .fig { font-size: 42px; }
   #why_japan .wj-led-r .fig { font-size: 24px; }
@@ -802,7 +801,7 @@ html.wj-js #why_japan .wj-ctl { display: flex; }
 .mrow .i { flex: 0 0 22px; color: var(--faint); font-family: var(--mono); font-size: 10px;
   font-variant-numeric: tabular-nums; }
 .mrow .n { flex: 1 1 auto; min-width: 0; font-weight: 700; line-height: 1.25; }
-.mrow .n em { display: block; margin-top: 3px; color: var(--dim); font-size: 12.5px;
+.mrow .n em { display: block; margin-top: 3px; color: var(--dim); font-size: 13.5px;
   font-style: normal; font-weight: 400; line-height: 1.35; }
 .mrow .s { flex: 0 0 auto; min-width: 62px; color: var(--cyan); font-family: var(--mono);
   font-size: 10px; letter-spacing: .1em; text-align: right; }
@@ -830,7 +829,7 @@ details.more[open] > summary { margin-bottom: 6px; }
   filter: saturate(.52) contrast(1.05) brightness(.7); transition: filter .4s ease; }
 .strip figure:hover img { filter: saturate(.9) contrast(1) brightness(.88); }
 .strip figcaption { position: absolute; left: 0; right: 0; bottom: 0; padding: 34px 14px 13px;
-  background: linear-gradient(0deg, rgba(5,5,6,.92) 0%, rgba(5,5,6,0) 100%);
+  background: linear-gradient(0deg, rgba(5,5,6,.94) 0%, rgba(5,5,6,.86) 45%, rgba(5,5,6,0) 100%);
   color: var(--bone); font-family: var(--mono); font-size: 11px; letter-spacing: .18em;
   text-transform: uppercase; }
 @media (max-width: 760px) {
@@ -937,6 +936,7 @@ details.more[open] > summary { margin-bottom: 6px; }
   #offer .acts { max-width: 460px; }
 }
 @media (max-width: 700px) {
+  #offer .sheet caption { grid-column: 1 / -1; display: block; width: 100%; white-space: nowrap; }
   #offer { --top: 68px; --bot: 64px; }
   #offer .hd { margin-bottom: 30px; }
   .card { grid-template-columns: minmax(0, 1fr); }
@@ -1039,7 +1039,7 @@ details.more[open] > summary { margin-bottom: 6px; }
 
 <!-- ══ 01 HERO ════════════════════════════════════════════════════════ -->
 <header id="hero" data-track-section="hero" data-track-position="1">
-  <div class="hero-bg"><img src="/img/harbor-golden-hour.webp" width="1024" height="683" alt="Kobe harbour at golden hour, the Port Island cluster across the water" fetchpriority="high" decoding="async"></div>
+  <div class="hero-bg"><img srcset="/img/harbor-golden-hour-640.webp 640w, /img/harbor-golden-hour.webp 1024w" sizes="100vw" src="/img/harbor-golden-hour.webp" width="1024" height="683" alt="Kobe harbour at golden hour, the Port Island cluster across the water" fetchpriority="high" decoding="async"></div>
   <div class="wrap">
     <p class="lbl lbl--cyan dates"><span>Summit&nbsp;I 17–18 Oct</span><i>·</i><span>Summit&nbsp;II 24–25 Oct</span><i class="s2">·</i><b class="brk" aria-hidden="true"></b><span>Finale 26 Oct</span></p>
     <h1>Japan is the best global ecosystem for frontier biotech.</h1>
@@ -1071,7 +1071,7 @@ details.more[open] > summary { margin-bottom: 6px; }
             <div class="ruler" aria-hidden="true"><i></i></div>
 
             <article class="cell reason">
-              <div class="plate"><img src="/img/summit-lab.webp" width="900" height="1350" alt="A researcher working inside a laminar-flow cabinet" decoding="async"></div>
+              <div class="plate"><img srcset="/img/summit-lab-450.webp 450w, /img/summit-lab.webp 900w" sizes="(min-width: 900px) 480px, 100vw" src="/img/summit-lab.webp" width="900" height="1350" alt="A researcher working inside a laminar-flow cabinet" loading="lazy" decoding="async" style="object-position:22% 30%"></div>
               <div class="reason-b">
                 <span class="fig num">6–12</span>
                 <span class="lbl">Months to first revenue</span>
@@ -1080,7 +1080,7 @@ details.more[open] > summary { margin-bottom: 6px; }
             </article>
 
             <article class="cell reason">
-              <div class="plate"><img src="/img/pillar-lab-robot.webp" width="960" height="540" alt="An automated sample-handling robot in a Japanese research institute" loading="lazy" decoding="async"></div>
+              <div class="plate"><img srcset="/img/pillar-lab-robot-450.webp 450w, /img/pillar-lab-robot.webp 960w" sizes="(min-width: 900px) 480px, 100vw" src="/img/pillar-lab-robot.webp" width="960" height="540" alt="An automated sample-handling robot in a Japanese research institute" loading="lazy" decoding="async"></div>
               <div class="reason-b">
                 <span class="fig num">2</span>
                 <span class="lbl">Agencies, one dataset</span>
@@ -1089,7 +1089,7 @@ details.more[open] > summary { margin-bottom: 6px; }
             </article>
 
             <article class="cell reason">
-              <div class="plate"><img src="/img/pillar-portisland-aerial.webp" width="960" height="640" alt="Port Island from the air, the Kobe Biomedical Innovation Cluster on reclaimed land" loading="lazy" decoding="async"></div>
+              <div class="plate"><img srcset="/img/pillar-portisland-aerial-640.webp 640w, /img/pillar-portisland-aerial.webp 960w" sizes="(min-width: 900px) 480px, 100vw" src="/img/pillar-portisland-aerial.webp" width="960" height="640" alt="Port Island from the air, the Kobe Biomedical Innovation Cluster on reclaimed land" loading="lazy" decoding="async"></div>
               <div class="reason-b">
                 <span class="fig num">17</span>
                 <span class="lbl">National strategic sectors</span>
@@ -1098,7 +1098,7 @@ details.more[open] > summary { margin-bottom: 6px; }
             </article>
 
             <article class="cell reason">
-              <div class="plate"><img src="/img/aubrey.webp" width="768" height="710" alt="Aubrey de Grey, headline speaker at Summit I" loading="lazy" decoding="async"></div>
+              <div class="plate"><img srcset="/img/aubrey-480.webp 480w, /img/aubrey.webp 768w" sizes="(min-width: 900px) 480px, 100vw" src="/img/aubrey.webp" width="768" height="710" alt="Aubrey de Grey, headline speaker at Summit I" loading="lazy" decoding="async"></div>
               <div class="reason-b">
                 <span class="fig num">55</span>
                 <span class="lbl">Confirmed speakers</span>
@@ -1125,7 +1125,7 @@ details.more[open] > summary { margin-bottom: 6px; }
 <!-- ══ 03 STATEMENT + SUPPORTERS ══════════════════════════════════════ -->
 <section id="statement" data-track-section="statement" data-track-position="3">
   <div class="bleed">
-    <img class="bg" src="/img/kobe-venus-bridge-twilight.webp" width="1600" height="765" alt="Kobe at twilight from the Venus Bridge, the bay and the city lights below" loading="lazy" decoding="async">
+    <img class="bg" srcset="/img/kobe-venus-bridge-twilight-960.webp 960w, /img/kobe-venus-bridge-twilight.webp 1600w" sizes="100vw" src="/img/kobe-venus-bridge-twilight.webp" width="1600" height="765" alt="Kobe at twilight from the Venus Bridge, the bay and the city lights below" loading="lazy" decoding="async">
     <div class="wrap">
       <p class="statement">Two summit weekends and a demo day, <em>in Kobe this October.</em></p>
       <p class="lead">Mirai Tech City connects US, EU and Japanese companies, scientists, investors and legislators, on Port Island, for a month.</p>
@@ -1168,7 +1168,7 @@ details.more[open] > summary { margin-bottom: 6px; }
     <!-- 1 · Nobel science — wide -->
     <article class="wj-card wj-card--w" style="--i:0">
       <div class="wj-plate">
-        <img src="/img/summit-pathologist.jpg" width="900" height="1350" alt="A researcher silhouetted at a microscope, lit from behind" loading="lazy" decoding="async" style="object-position:55% 32%">
+        <img srcset="/img/summit-pathologist-600.webp 600w, /img/summit-pathologist.jpg 900w" sizes="(min-width: 900px) min(50vw, 720px), 84vw" src="/img/summit-pathologist.jpg" width="900" height="1350" alt="A researcher silhouetted at a microscope, lit from behind" loading="lazy" decoding="async" style="object-position:55% 32%">
       </div>
       <div class="wj-read">
         <span class="lbl">Research base</span>
@@ -1184,7 +1184,7 @@ details.more[open] > summary { margin-bottom: 6px; }
     <!-- 2 · iPS cells — wide -->
     <article class="wj-card wj-card--w" style="--i:1">
       <div class="wj-plate">
-        <img src="/img/summit-lab.webp" width="900" height="1350" alt="A scientist at a laminar flow hood, handling culture vessels" loading="lazy" decoding="async" style="object-position:42% 46%">
+        <img srcset="/img/summit-lab-450.webp 450w, /img/summit-lab.webp 900w" sizes="(min-width: 900px) min(50vw, 720px), 84vw" src="/img/summit-lab.webp" width="900" height="1350" alt="A scientist at a laminar flow hood, handling culture vessels" loading="lazy" decoding="async" style="object-position:42% 46%">
       </div>
       <div class="wj-read">
         <span class="lbl">Where the field began</span>
@@ -1200,7 +1200,7 @@ details.more[open] > summary { margin-bottom: 6px; }
     <!-- 3 · one national database -->
     <article class="wj-card wj-card--n" style="--i:2">
       <div class="wj-plate">
-        <img src="/img/pillar-lab-robot.webp" width="960" height="540" alt="A robotic arm moving sample plates in an automated laboratory" loading="lazy" decoding="async">
+        <img srcset="/img/pillar-lab-robot-450.webp 450w, /img/pillar-lab-robot.webp 960w" sizes="(min-width: 900px) min(33vw, 480px), 84vw" src="/img/pillar-lab-robot.webp" width="960" height="540" alt="A robotic arm moving sample plates in an automated laboratory" loading="lazy" decoding="async">
       </div>
       <div class="wj-read">
         <span class="lbl">Patient follow-up</span>
@@ -1212,7 +1212,7 @@ details.more[open] > summary { margin-bottom: 6px; }
     <!-- 4 · health market -->
     <article class="wj-card wj-card--n" style="--i:3">
       <div class="wj-plate">
-        <img src="/img/kansai-osaka-night-1280.webp" width="1280" height="1920" alt="Kansai at night from above, the city lit to the horizon" loading="lazy" decoding="async" style="object-position:50% 58%">
+        <img srcset="/img/kansai-osaka-night-640.webp 640w, /img/kansai-osaka-night-1280.webp 1280w" sizes="(min-width: 900px) min(33vw, 480px), 84vw" src="/img/kansai-osaka-night-1280.webp" width="1280" height="1920" alt="Kansai at night from above, the city lit to the horizon" loading="lazy" decoding="async" style="object-position:50% 58%">
       </div>
       <div class="wj-read">
         <span class="lbl">Health market, per year</span>
@@ -1224,7 +1224,7 @@ details.more[open] > summary { margin-bottom: 6px; }
     <!-- 5 · AMED -->
     <article class="wj-card wj-card--n" style="--i:4">
       <div class="wj-plate">
-        <img src="/img/pillar-portisland-aerial.webp" width="960" height="640" alt="Kobe's port islands from the air, engineered land in Osaka Bay" loading="lazy" decoding="async">
+        <img srcset="/img/pillar-portisland-aerial-640.webp 640w, /img/pillar-portisland-aerial.webp 960w" sizes="(min-width: 900px) min(33vw, 480px), 84vw" src="/img/pillar-portisland-aerial.webp" width="960" height="640" alt="Kobe's port islands from the air, engineered land in Osaka Bay" loading="lazy" decoding="async">
       </div>
       <div class="wj-read">
         <span class="lbl">AMED grants match registered VC</span>
@@ -1471,8 +1471,8 @@ details.more[open] > summary { margin-bottom: 6px; }
   <div class="wrap">
     <div class="hd"><h2>Two weekends. Fifty-five speakers.</h2></div>
     <div class="faces">
-      <figure><div class="im"><img src="/img/aubrey.webp" width="768" height="710" alt="Aubrey de Grey" loading="lazy" decoding="async"></div><figcaption>Aubrey de Grey<small>LEV Foundation</small></figcaption></figure>
-      <figure><div class="im"><img src="/img/kennedy.webp" width="400" height="400" alt="Brian Kennedy" loading="lazy" decoding="async"></div><figcaption>Brian Kennedy<small>NUS Centre for Healthy Longevity</small></figcaption></figure>
+      <figure><div class="im"><img srcset="/img/aubrey-480.webp 480w, /img/aubrey.webp 768w" sizes="(min-width: 760px) 20vw, 50vw" src="/img/aubrey.webp" width="768" height="710" alt="Aubrey de Grey" loading="lazy" decoding="async"></div><figcaption>Aubrey de Grey<small>LEV Foundation</small></figcaption></figure>
+      <figure><div class="im"><img src="/img/kennedy.webp" width="400" height="400" alt="Brian Kennedy" loading="lazy" decoding="async" style="object-position:center 38%"></div><figcaption>Brian Kennedy<small>NUS Centre for Healthy Longevity</small></figcaption></figure>
       <figure><div class="im"><img src="/img/hayano.webp" width="600" height="750" alt="Motoshi Hayano" loading="lazy" decoding="async"></div><figcaption>Motoshi Hayano<small>Keio University</small></figcaption></figure>
       <figure><div class="im"><img src="/img/yuki.webp" width="480" height="480" alt="Yuki Hanyu" loading="lazy" decoding="async"></div><figcaption>Yuki Hanyu<small>IntegriCulture</small></figcaption></figure>
       <figure><div class="im"><img src="/img/adam.webp" width="800" height="1118" alt="Adam Gries" loading="lazy" decoding="async"></div><figcaption>Adam Gries<small>Vitalist Bay</small></figcaption></figure>
@@ -1553,7 +1553,7 @@ details.more[open] > summary { margin-bottom: 6px; }
       <p class="lead">A room in Sannomiya from <b>October 16 to 28</b>. Breakfast from local producers at the MedTech Innovation Center, cluster tours, izakaya nights, onsens, Rokko, and the week between the weekends to work.</p>
     </div>
     <div class="strip">
-      <figure><img src="/img/harbor-golden-hour.webp" width="1024" height="683" alt="Kobe harbour at golden hour" loading="lazy" decoding="async"><figcaption>Harbour</figcaption></figure>
+      <figure><img srcset="/img/harbor-golden-hour-640.webp 640w, /img/harbor-golden-hour.webp 1024w" sizes="(min-width: 760px) 20vw, 50vw" src="/img/harbor-golden-hour.webp" width="1024" height="683" alt="Kobe harbour at golden hour" loading="lazy" decoding="async"><figcaption>Harbour</figcaption></figure>
       <figure><img src="/img/izakaya-counter-640.webp" srcset="/img/izakaya-counter-640.webp 640w, /img/izakaya-counter.webp 1024w" sizes="(max-width: 760px) 50vw, 230px" width="640" height="400" alt="An izakaya counter seat in Kobe" loading="lazy" decoding="async"><figcaption>Izakaya</figcaption></figure>
       <figure><img src="/img/lanterns-640.webp" srcset="/img/lanterns-640.webp 640w, /img/lanterns.webp 1024w" sizes="(max-width: 760px) 50vw, 230px" width="640" height="427" alt="Paper lanterns lit at night in Kobe" loading="lazy" decoding="async"><figcaption>Lanterns</figcaption></figure>
       <figure><img src="/img/port-tower-night-640.webp" srcset="/img/port-tower-night-640.webp 640w, /img/port-tower-night.webp 1023w" sizes="(max-width: 760px) 50vw, 230px" width="640" height="427" alt="Kobe Port Tower at night" loading="lazy" decoding="async"><figcaption>Port Tower</figcaption></figure>
@@ -1966,7 +1966,7 @@ details.more[open] > summary { margin-bottom: 6px; }
       thumb.style.width = w + '%';
       thumb.style.left = (p * (100 - w)) + '%';
       prev.disabled = x <= 1;
-      next.disabled = x >= m - 1;
+      next.disabled = x >= m - 40;
     }
 
     function go(to) {
