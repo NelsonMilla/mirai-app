@@ -8,7 +8,7 @@ Allow: /
 Sitemap: https://mirai-tech-city.vercel.app/sitemap.xml
 
 # LLM & AI Agent Instructions (https://llmstxt.org/)
-LLMs-txt: https://mirai-tech-city.vercel.app/llms.txt
+# LLMs-txt: https://mirai-tech-city.vercel.app/llms.txt
 
 # Explicit AI Search Crawlers
 User-agent: GPTBot
