@@ -11,7 +11,7 @@ Single static `index.html` — no framework, no build step. Deploys anywhere
   reduced-motion, data-saver, and slow connections stay poster-only.
 - Summit I Oct 17–18 · Summit II Oct 24–25 · Fashion Show Oct 26 (Monday).
 - All ticket/residency CTAs → https://luma.com/an4zotn9
-- `/jp/` sells the Japan-resident ticket on Peatix (https://peatix.com/event/5144953);
+- `/jp/` sells the Japan-resident ticket on Peatix (https://miraitechcity2026.peatix.com/);
   that price is for residents of Japan only. The landing page links to `/jp/` from
   the nav (日本語), the hero, the summits bar, the apply fine print (with the
   English residents-only disclaimer), and the footer.
