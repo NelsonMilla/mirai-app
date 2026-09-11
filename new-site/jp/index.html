@@ -101,6 +101,7 @@
   .jp-page__hero-offer strong { color: var(--ink); }
   .jp-page__hero-offer .jp-page__btn { width: 100%; margin-top: 26px; }
   .jp-page__hero-offer p.jp-page__ticket-note { margin-top: 13px; color: rgba(244,243,240,.74); font-size: 11px; line-height: 1.6; }
+  .jp-page__hero-offer p.jp-page__ticket-note a { color: inherit; text-underline-offset: 3px; }
   .jp-page__ticket-note { margin-top: 13px; color: var(--faint); font-family: var(--mono); font-size: 9px;
     letter-spacing: .08em; line-height: 1.6; text-align: center; text-transform: uppercase; }
   .jp-page__hero-credit { position: absolute; right: 4vw; bottom: 16px; color: rgba(244,243,240,.42); font-family: var(--mono);
@@ -325,19 +326,13 @@
   .jp-page__price-compare-highlight dt { color: var(--ink); font-weight: 700; }
   .jp-page__price-compare-highlight dd { color: var(--accent); font-size: 18px; font-weight: 700; }
   .jp-page__price-note { margin-top: 12px; color: var(--dim); font-size: 14px; line-height: 1.6; }
-  .jp-page__ticket-contact { display: inline-flex; min-height: 44px; align-items: center; justify-content: center; padding: 10px 16px;
-    border: 1px solid rgba(244,243,240,.34); border-radius: 3px; color: var(--ink); font-family: var(--mono); font-size: 10px;
-    letter-spacing: .12em; line-height: 1.4; text-align: center; text-decoration: none; text-transform: uppercase; transition: border-color .2s ease, background-color .2s ease; }
-  .jp-page__ticket-contact:hover { border-color: var(--accent); background: rgba(var(--accent-rgb),.04); }
-  .jp-page__ticket-evidence { width: 100%; margin-top: 18px; }
 
   html[lang="ja"] .jp-page__ticket { font-family: 'Noto Sans JP', sans-serif; font-feature-settings: 'palt' 0; }
   html[lang="ja"] .jp-page__ticket .jp-page__eyebrow,
   html[lang="ja"] .jp-page__ticket-status time,
   html[lang="ja"] .jp-page__eligibility dt,
   html[lang="ja"] .jp-page__ticket-current h4,
-  html[lang="ja"] .jp-page__ticket .jp-page__btn,
-  html[lang="ja"] .jp-page__ticket-contact { font-family: 'Noto Sans JP', sans-serif; font-size: 12px; letter-spacing: .04em; text-transform: none; }
+  html[lang="ja"] .jp-page__ticket .jp-page__btn { font-family: 'Noto Sans JP', sans-serif; font-size: 12px; letter-spacing: .04em; text-transform: none; }
   html[lang="ja"] .jp-page__ticket-copy h2,
   html[lang="ja"] .jp-page__purchase-card h3 { max-width: none; letter-spacing: .02em; line-break: strict; line-height: 1.2;
     overflow-wrap: anywhere; text-transform: none; word-break: normal; }
@@ -388,11 +383,6 @@
   .jp-page__close-copy p { max-width: 48ch; margin-top: 25px; color: rgba(244,243,240,.76); font-size: 18px; line-height: 1.65; }
   .jp-page__close-action { display: grid; gap: 12px; }
   .jp-page__close-action .jp-page__btn { width: 100%; }
-  .jp-page__close-evidence { display: inline-flex; min-height: 48px; align-items: center; justify-content: center; padding: 12px 18px;
-    border: 1px solid rgba(244,243,240,.36); border-radius: 3px; color: var(--ink); font-family: var(--mono); font-size: 11px;
-    font-weight: 500; letter-spacing: .12em; text-align: center; text-decoration: none; text-transform: uppercase;
-    transition: border-color .2s ease, background-color .2s ease; }
-  .jp-page__close-evidence:hover { border-color: var(--accent); background: rgba(var(--accent-rgb),.06); }
   .jp-page__close-action p { color: rgba(244,243,240,.8); font-family: var(--mono); font-size: 13px;
     letter-spacing: .025em; line-height: 1.65; text-align: left; }
   .jp-page__close-status { padding-bottom: 2px; }
@@ -402,7 +392,6 @@
   html[lang="ja"] .jp-page__footer { font-family: 'Noto Sans JP', sans-serif; font-feature-settings: 'palt' 0; }
   html[lang="ja"] .jp-page__close .jp-page__eyebrow,
   html[lang="ja"] .jp-page__close .jp-page__btn,
-  html[lang="ja"] .jp-page__close-evidence,
   html[lang="ja"] .jp-page__close-action p,
   html[lang="ja"] .jp-page__footer strong,
   html[lang="ja"] .jp-page__footer p,
@@ -531,12 +520,12 @@
 </style>
 </head>
 <body data-analytics-offer="japan_resident_ticket">
-<a class="jp-page__skip" href="#ticket">参加枠の情報へ</a>
+<a class="jp-page__skip" href="#ticket">チケット情報へ</a>
 
 <header class="jp-page__nav">
   <a class="jp-page__logo" href="/" data-analytics-action="site_navigation" data-analytics-target="full_city" data-analytics-location="nav">Mirai <span>Tech City</span></a>
   <p class="jp-page__nav-meta">神戸｜2026年10月1日–31日</p>
-  <a class="jp-page__btn" href="#ticket" data-analytics-action="site_navigation" data-analytics-target="japan_resident_access_status" data-analytics-location="nav">参加枠の最新情報</a>
+  <a class="jp-page__btn" href="https://peatix.com/event/5144953" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-target="japan_resident" data-analytics-location="nav">Peatixで申し込む</a>
 </header>
 
 <main>
@@ -549,14 +538,14 @@
         <div class="jp-page__eyebrow">神戸｜2026年10月1日–31日</div>
         <h1 id="jp-title"><span class="jp-page__hero-title-line">世界の</span><span class="jp-page__hero-title-line">バイオテックが</span><span class="jp-page__hero-title-line jp-page__hero-title-accent">神戸に集う。</span></h1>
         <p class="jp-page__hero-lead">人の健康の未来を切り拓く研究者、起業家、投資家、ビルダーと、<strong>日本にいながら出会う。</strong></p>
-        <a class="jp-page__btn jp-page__hero-primary" href="#ticket" data-analytics-action="site_navigation" data-analytics-target="japan_resident_access_status" data-analytics-location="hero_mobile">参加枠の最新情報を見る</a>
+        <a class="jp-page__btn jp-page__hero-primary" href="#ticket" data-analytics-action="site_navigation" data-analytics-target="japan_resident_access_status" data-analytics-location="hero_mobile">チケットを見る</a>
       </div>
       <aside class="jp-page__hero-offer" aria-labelledby="hero-ticket-title">
         <div class="jp-page__eyebrow">日本を拠点に活動する方へ</div>
         <h2 id="hero-ticket-title">2つのサミット。神戸で過ごす1か月。</h2>
         <p>2週末のサミット、フロンティア・ヒューマン ファッションショー＆デモデイ、そして10月を通じたMiraiコミュニティプログラムをご紹介します。</p>
-        <a class="jp-page__btn" href="#ticket" data-analytics-action="site_navigation" data-analytics-target="japan_resident_access_status" data-analytics-location="hero">日本居住者向け参加枠を見る</a>
-        <p class="jp-page__ticket-note">料金と含まれる内容は以下に掲載</p>
+        <a class="jp-page__btn" href="https://peatix.com/event/5144953" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-target="japan_resident" data-analytics-location="hero">Peatixでチケットを購入 <span aria-hidden="true">↗</span></a>
+        <p class="jp-page__ticket-note">日本居住者限定｜料金と含まれる内容は<a href="#ticket">以下に掲載</a></p>
       </aside>
     </div>
     <div class="jp-page__hero-credit">神戸港｜Miraiは2026年10月1日開幕</div>
@@ -673,10 +662,10 @@
         <div class="jp-page__purchase-card">
           <div class="jp-page__eyebrow">参加費</div>
           <h3 id="purchase-title">日本居住者向け参加枠でお申し込みください。</h3>
-          <p>お申し込み方法、学生・KBIC・神戸大学向けの無料参加枠の対象条件は、Miraiチームへお問い合わせください。</p>
+          <p>チケットはPeatixで販売しています。日本にお住まいの方限定です。学生・KBIC・神戸大学向けの無料参加枠の対象条件は、Miraiチームへお問い合わせください。</p>
           <div class="jp-page__ticket-primary">
-            <a class="jp-page__btn" href="mailto:team@miraitech.city?subject=%E6%97%A5%E6%9C%AC%E5%B1%85%E4%BD%8F%E8%80%85%E5%90%91%E3%81%91%E5%8F%82%E5%8A%A0%E6%9E%A0%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6" data-analytics-action="alternative_offer" data-analytics-target="japan_resident_access_email" data-analytics-location="ticket">Miraiチームにメールする <span aria-hidden="true">→</span></a>
-            <p class="jp-page__ticket-email">メール：<a href="mailto:team@miraitech.city?subject=%E6%97%A5%E6%9C%AC%E5%B1%85%E4%BD%8F%E8%80%85%E5%90%91%E3%81%91%E5%8F%82%E5%8A%A0%E6%9E%A0%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6">team@miraitech.city</a></p>
+            <a class="jp-page__btn" href="https://peatix.com/event/5144953" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-target="japan_resident" data-analytics-location="ticket">Peatixでチケットを購入 <span aria-hidden="true">↗</span></a>
+            <p class="jp-page__ticket-email">無料参加枠のお問い合わせ：<a href="mailto:team@miraitech.city?subject=%E6%97%A5%E6%9C%AC%E5%B1%85%E4%BD%8F%E8%80%85%E5%90%91%E3%81%91%E5%8F%82%E5%8A%A0%E6%9E%A0%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6" data-analytics-action="alternative_offer" data-analytics-target="japan_resident_access_email" data-analytics-location="ticket">team@miraitech.city</a></p>
           </div>
           <div class="jp-page__ticket-current" role="note" aria-labelledby="ticket-current-title">
             <h4 id="ticket-current-title">料金の比較</h4>
@@ -689,7 +678,6 @@
             <p class="jp-page__general-label">参加枠に含まれるもの</p>
             <p class="jp-page__general-inclusions">2つのサミット、フロンティア・ヒューマン ファッションショー、デモデイ、1か月間のフルアクセス、コワーキング、ツアーおよびサイドイベント。一般チケットと同じ内容です。</p>
           </div>
-          <a class="jp-page__ticket-contact jp-page__ticket-evidence" href="https://luma.com/an4zotn9?utm_source=japan-page-ticket&amp;utm_campaign=japan-resident-ticket" target="_blank" rel="noopener" hreflang="en" aria-label="Lumaの現在の掲載内容を新しいタブで見る" data-analytics-action="site_navigation" data-analytics-target="current_luma_listing" data-analytics-location="ticket">Lumaの現在の掲載内容を見る <span aria-hidden="true">↗</span></a>
         </div>
       </aside>
     </div>
@@ -720,9 +708,8 @@
         <p>この10月、日本のバイオテックを担う研究者、起業家、プロダクトチーム、事業者が、ポートアイランドで展開する1か月のプログラムを通じて世界の参加者と出会います。</p>
       </div>
       <div class="jp-page__close-action">
-        <p class="jp-page__close-status"><strong>日本居住者向け参加枠。</strong><span lang="en">US$199</span> で、2つのサミット、ファッションショー、デモデイを含む1か月のプログラム全体にご参加いただけます。お申し込みはメールでお問い合わせください。</p>
-        <a class="jp-page__btn" href="mailto:team@miraitech.city?subject=%E6%97%A5%E6%9C%AC%E5%B1%85%E4%BD%8F%E8%80%85%E5%90%91%E3%81%91%E5%8F%82%E5%8A%A0%E6%9E%A0%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6" aria-label="日本居住者向け参加枠についてMiraiチームへメールで問い合わせる" data-analytics-action="alternative_offer" data-analytics-target="japan_resident_access_email" data-analytics-location="final_offer">参加枠をメールで問い合わせる <span aria-hidden="true">→</span></a>
-        <a class="jp-page__close-evidence" href="https://luma.com/an4zotn9?utm_source=japan-page-close&amp;utm_campaign=japan-resident-access" target="_blank" rel="noopener" hreflang="en" aria-label="Lumaの現在の掲載内容を新しいタブで見る" data-analytics-action="site_navigation" data-analytics-target="current_luma_listing" data-analytics-location="final_offer">Lumaの現在の掲載内容を見る <span aria-hidden="true">↗</span></a>
+        <p class="jp-page__close-status"><strong>日本居住者向け参加枠。</strong><span lang="en">US$199</span> で、2つのサミット、ファッションショー、デモデイを含む1か月のプログラム全体にご参加いただけます。お申し込みはPeatixから。</p>
+        <a class="jp-page__btn" href="https://peatix.com/event/5144953" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-target="japan_resident" data-analytics-location="final_offer">Peatixでチケットを購入 <span aria-hidden="true">↗</span></a>
       </div>
     </div>
   </section>
@@ -731,11 +718,11 @@
 <footer class="jp-page__footer">
   <div><strong>Mirai <span>Tech City</span></strong><p>神戸、日本｜2026年10月1日–31日</p></div>
   <nav class="jp-page__footer-links" aria-label="フッターナビゲーション">
+    <a href="https://peatix.com/event/5144953" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-target="japan_resident" data-analytics-location="footer">Peatixでチケットを購入 ↗</a>
     <a href="mailto:team@miraitech.city?subject=%E6%97%A5%E6%9C%AC%E5%B1%85%E4%BD%8F%E8%80%85%E5%90%91%E3%81%91%E5%8F%82%E5%8A%A0%E6%9E%A0%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6" aria-label="日本居住者向け参加枠についてMiraiチームのteam@miraitech.cityへメールする" data-analytics-action="alternative_offer" data-analytics-target="japan_resident_access_email" data-analytics-location="footer">team@miraitech.city →</a>
     <a href="/" data-analytics-action="site_navigation" data-analytics-target="full_city" data-analytics-location="footer">Mirai Tech City全体を見る →</a>
   </nav>
 </footer>
 
-<script id="luma-checkout" src="https://embed.lu.ma/checkout-button.js"></script>
 </body>
 </html>

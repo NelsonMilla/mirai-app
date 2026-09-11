@@ -1,5 +1,6 @@
 /* Shared site nav — the single source of truth for the top bar on every
    English site page (/, /experience/, /conferences/, /pricing/, /startups/).
+   The last link points Japanese readers to /jp/ (Japan-resident ticket on Peatix).
    Use it like this, at the top of <body>, with /nav.css linked in <head>:
      <script src="/nav.js"></script>
    The script is synchronous and inserts the nav right where it sits, so
@@ -13,7 +14,8 @@
     { href: '/experience/', label: 'The Experience', target: 'experience' },
     { href: '/conferences/', label: 'Summits', target: 'conferences' },
     { href: '/pricing/', label: 'Pricing', target: 'pricing' },
-    { href: '/startups/', label: 'For Startups', target: 'startups' }
+    { href: '/startups/', label: 'For Startups', target: 'startups' },
+    { href: '/jp/', label: '日本語', target: 'japan', lang: 'ja' }
   ];
   var cta = {
     label: script.getAttribute('data-cta-label') || 'Get Tickets',
@@ -28,8 +30,9 @@
     '<div class="nd-pill"><div class="nd-links">' +
     links.map(function (l) {
       var current = path.indexOf(l.href) === 0 ? ' aria-current="page"' : '';
+      var lang = l.lang ? ' lang="' + l.lang + '" hreflang="' + l.lang + '"' : '';
       return '<a class="nd-link" href="' + l.href + '" data-analytics-action="site_navigation" ' +
-        'data-analytics-location="nav" data-analytics-target="' + l.target + '"' + current + '>' +
+        'data-analytics-location="nav" data-analytics-target="' + l.target + '"' + current + lang + '>' +
         '<span class="nd-lbl">' + esc(l.label) + '</span></a>';
     }).join('') +
     '</div>' +

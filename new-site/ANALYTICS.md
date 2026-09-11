@@ -123,7 +123,7 @@ refuse to record.
 That context is the difference between knowing that checkout intent fell and
 knowing that it fell among visitors who never reached the price. Two events also
 carry their own extras: `Checkout Opened` adds `checkout_target` (tickets,
-residency, summit_hotel, fashion_show) and `is_first_checkout`, and
+residency, summit_hotel, fashion_show, japan_resident — the Peatix ticket on `/jp/`) and `is_first_checkout`, and
 `Section Viewed` adds `seconds_to_view`.
 
 Vercel counts only the first `Checkout Opened` per page load, so its funnel stays

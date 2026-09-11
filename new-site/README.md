@@ -11,6 +11,10 @@ Single static `index.html` — no framework, no build step. Deploys anywhere
   reduced-motion, data-saver, and slow connections stay poster-only.
 - Summit I Oct 17–18 · Summit II Oct 24–25 · Fashion Show Oct 26 (Monday).
 - All ticket/residency CTAs → https://luma.com/an4zotn9
+- `/jp/` sells the Japan-resident ticket on Peatix (https://peatix.com/event/5144953);
+  that price is for residents of Japan only. The landing page links to `/jp/` from
+  the nav (日本語), the hero, the summits bar, the apply fine print (with the
+  English residents-only disclaimer), and the footer.
 - `/summit-bundle/` is the dedicated $2,500 Summit Weekends + Hotel offer page,
   increasing to $4,000 after August 20.
 - The public landing-page placement is controlled by
@@ -30,7 +34,7 @@ Single static `index.html` — no framework, no build step. Deploys anywhere
 - Fonts: Switzer (Fontshare) + IBM Plex Mono. Speaker photos + Kobe stills
   copied into `img/` from `legacy-site/public/images` (comic-style avatars intentionally not used).
 - Nav: the top bar on the site pages (`/`, `/experience/`, `/conferences/`, `/pricing/`,
-  `/startups/`) is one shared component — `/nav.js` inserts the markup where the
+  `/startups/`, plus a 日本語 link to `/jp/`) is one shared component — `/nav.js` inserts the markup where the
   `<script src="/nav.js">` tag sits at the top of `<body>`, `/nav.css` styles it. Edit
   the links in `nav.js` once and every page follows. A page may swap the CTA with
   `data-cta-label` / `data-cta-href` / `data-cta-target` on the script tag (see
