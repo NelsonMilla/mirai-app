@@ -1,0 +1,771 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Citizens · Interactive Map · Mirai Tech City · Kobe 2026</title>
+<meta name="description" content="The five venues of Mirai Tech City on one map: breakfast and labs at the Medtech Innovation Center, the summits at Kobe University's Integrated Research Center and the Portopia Hotel, the cowork space, and the Fashion Show at Orbis Hall. With dates and Google Maps links. Kobe, October 1–31, 2026." />
+<link rel="canonical" href="https://mirai-tech-city.vercel.app/citizens/" />
+<meta property="og:title" content="Interactive Map · Mirai Tech City" />
+<meta property="og:description" content="Every venue for the month on one map, with dates and directions." />
+<meta property="og:url" content="https://mirai-tech-city.vercel.app/citizens/" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Interactive Map · Mirai Tech City" />
+<meta name="robots" content="noindex, nofollow" />
+<meta name="theme-color" content="#050506" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23050506'/%3E%3Ctext x='50' y='72' font-size='62' font-family='Georgia' font-weight='bold' fill='%239be8f0' text-anchor='middle'%3E未%3C/text%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="preconnect" href="https://api.fontshare.com" />
+<link rel="preconnect" href="https://cdn.fontshare.com" crossorigin />
+<link href="https://api.fontshare.com/v2/css?f[]=switzer@400,500,700,800,900&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+<link rel="stylesheet" href="/citizens/nav.css" />
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.24.0/dist/maplibre-gl.css" integrity="sha256-qx5w1Z7EBGW65+cDDaLzzPKBM/1QLmK9WY7vut/XpzI=" crossorigin="" />
+<script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/posthog.js"></script>
+<script defer src="/analytics.js"></script>
+<style>
+  :root {
+    --bg: #050506; --ink: #f4f3f0; --dim: rgba(244,243,240,.62); --faint: rgba(244,243,240,.45);
+    --line: rgba(244,243,240,.14); --accent: #9be8f0; --accent-rgb: 155,232,240;
+    --font: 'Switzer', 'Inter', -apple-system, sans-serif; --mono: 'IBM Plex Mono', monospace;
+    --hud: rgba(5,5,6,.9); --dockW: 292px; --panelW: 376px; --gap: 14px;
+    --ease: cubic-bezier(.2,.7,.2,1);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; overflow: hidden; }
+  html { background: var(--bg); }
+  body { min-width: 320px; height: 100dvh; position: relative; background: var(--bg); color: var(--ink);
+    font-family: var(--font); -webkit-font-smoothing: antialiased; }
+  ::selection { background: var(--accent); color: #000; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  a { color: inherit; }
+  .num { font-variant-numeric: tabular-nums; }
+  button { font: inherit; color: inherit; }
+
+  /* ---------- the map: full viewport, everything else floats above it ---------- */
+  #map { position: absolute; inset: 0; z-index: 0; background: var(--bg); }
+  .leaflet-container { font-family: var(--font); background: var(--bg); }
+  /* Fallback only (no WebGL): OSM's light raster tiles, pushed to a dark cyan-tinted terrain. The vector map is styled dark natively. */
+  body.raster .leaflet-tile-pane { filter: invert(1) hue-rotate(180deg) grayscale(1) brightness(.8) contrast(1.15) sepia(.55) hue-rotate(140deg) saturate(1.1); }
+  /* fx pane sits above tiles (200) and below markers (600): fine grid + scanlines + vignette, glued to the viewport by JS */
+  .leaflet-fx-pane { pointer-events: none; }
+  .fx { pointer-events: none;
+    background:
+      radial-gradient(ellipse at center, rgba(5,5,6,0) 50%, rgba(5,5,6,.6) 100%),
+      repeating-linear-gradient(0deg, rgba(0,0,0,.14) 0 1px, transparent 1px 3px),
+      repeating-linear-gradient(90deg, rgba(var(--accent-rgb),.055) 0 1px, transparent 1px 64px),
+      repeating-linear-gradient(0deg, rgba(var(--accent-rgb),.055) 0 1px, transparent 1px 64px); }
+
+  .leaflet-control-zoom a { background: var(--hud) !important; color: var(--ink) !important; border-color: var(--line) !important;
+    font-family: var(--mono) !important; font-weight: 400 !important; }
+  .leaflet-control-zoom a:hover { color: var(--accent) !important; }
+  .leaflet-bar { border: 1px solid var(--line) !important; border-radius: 2px !important; box-shadow: none !important; }
+  .leaflet-bar a:first-child, .leaflet-bar a:last-child { border-radius: 0 !important; }
+  .leaflet-control-attribution { background: var(--hud) !important; color: var(--faint) !important;
+    font-family: var(--mono); font-size: 9px !important; letter-spacing: .02em; border-top: 1px solid var(--line); border-right: 1px solid var(--line); }
+  .leaflet-control-attribution a { color: var(--dim) !important; }
+  .leaflet-bottom.leaflet-right { margin-bottom: var(--gap); margin-right: var(--gap); }
+  .leaflet-container .leaflet-control-attribution { margin: 0; }
+
+  /* pins: a ringed disc with the venue number; the selected one pulses */
+  .pin { width: 32px; height: 32px; cursor: pointer; }
+  .pin .pc { position: absolute; inset: 3px; border-radius: 50%; display: grid; place-items: center;
+    background: var(--bg); border: 1.5px solid var(--accent); color: var(--accent);
+    font-family: var(--mono); font-size: 11px; font-weight: 500; box-shadow: 0 0 0 3px rgba(5,5,6,.8);
+    transition: transform .2s var(--ease), background .2s, color .2s; }
+  .pin .pr { position: absolute; inset: -8px; border-radius: 50%; border: 1px solid rgba(var(--accent-rgb),.7); opacity: 0; }
+  .pin:hover .pc { transform: scale(1.1); }
+  .pin.active { z-index: 1000 !important; }
+  .pin.active .pc { background: var(--accent); color: #04191c; transform: scale(1.12); }
+  .pin.active .pr { opacity: 1; animation: ping 1.7s ease-out infinite; }
+  @keyframes ping { 0% { transform: scale(.55); opacity: .95; } 100% { transform: scale(1.8); opacity: 0; } }
+  .leaflet-tooltip.tip { background: var(--hud); border: 1px solid rgba(var(--accent-rgb),.55); border-radius: 2px; color: var(--ink);
+    font: 700 11px/1.15 var(--font); text-transform: uppercase; letter-spacing: .04em; padding: 7px 10px; box-shadow: none;
+    white-space: nowrap; }
+  .leaflet-tooltip-top.tip::before { border-top-color: rgba(var(--accent-rgb),.55); }
+
+  /* ---------- HUD ---------- */
+  .hud { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+  .hud .bar, .hud .chip, .hud .dock, .hud .me, .hud .meBtn, .hud .detail, .hud .drawer, .hud .scrim.open, .hud .readout, .hud .hint { pointer-events: auto; }
+  .panel { position: relative; background: var(--hud); border: 1px solid var(--line); }
+  .panel::before, .panel::after { content: ''; position: absolute; width: 9px; height: 9px; pointer-events: none; }
+  .panel::before { top: -1px; left: -1px; border-top: 1px solid var(--accent); border-left: 1px solid var(--accent); }
+  .panel::after { bottom: -1px; right: -1px; border-bottom: 1px solid var(--accent); border-right: 1px solid var(--accent); }
+
+  .left { position: absolute; top: var(--gap); left: var(--gap); bottom: 64px; width: var(--dockW);
+    display: flex; flex-direction: column; gap: 8px; }
+  .chip { padding: 12px 14px 13px; }
+  .chip .row { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+  .logo { font-weight: 800; letter-spacing: .06em; font-size: 12px; text-transform: uppercase; text-decoration: none; }
+  .logo span { color: var(--accent); }
+  .tag { font-family: var(--mono); font-size: 9px; letter-spacing: .22em; text-transform: uppercase; color: var(--accent);
+    border: 1px solid rgba(var(--accent-rgb), .3); border-radius: 2px; padding: 4px 8px; }
+  .eyebrow { margin-top: 10px; font-family: var(--mono); font-size: 9.5px; letter-spacing: .26em; text-transform: uppercase; color: var(--accent); }
+  h1 { margin-top: 4px; font-weight: 900; text-transform: uppercase; letter-spacing: -.015em; font-size: 26px; line-height: .95; }
+  h1 .tick { color: var(--accent); }
+
+  .dock { display: flex; flex-direction: column; gap: 4px; min-height: 0; overflow: auto; scrollbar-width: none; }
+  .dock::-webkit-scrollbar { display: none; }
+  .v { display: grid; grid-template-columns: 22px minmax(0,1fr) auto; gap: 10px; align-items: center; text-align: left;
+    padding: 9px 10px 9px 9px; background: var(--hud); border: 1px solid var(--line); cursor: pointer;
+    transition: border-color .2s, background .2s; }
+  .v:hover { border-color: rgba(var(--accent-rgb), .5); }
+  .v .n { width: 22px; height: 22px; display: grid; place-items: center; border: 1px solid var(--accent); color: var(--accent);
+    font-family: var(--mono); font-size: 10px; transition: background .2s, color .2s; }
+  .v .nm { font-weight: 700; font-size: 11.5px; text-transform: uppercase; letter-spacing: .02em; line-height: 1.2; }
+  .v .wh { font-family: var(--mono); font-size: 9px; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); white-space: nowrap; }
+  .base { display: inline-block; margin-left: 6px; padding: 2px 6px; vertical-align: 1px; border: 1px solid rgba(var(--accent-rgb), .55);
+    border-radius: 2px; background: rgba(var(--accent-rgb), .12); color: var(--accent); font: 500 8.5px/1.3 var(--mono); letter-spacing: .18em;
+    text-transform: uppercase; white-space: nowrap; }
+  .pHead .base { margin: 6px 0 0; font-size: 9px; }
+  .pin.isBase .pc { background: var(--accent); color: #04191c; }
+  .pin .pb { position: absolute; top: 33px; left: 50%; transform: translateX(-50%); padding: 3px 6px; background: var(--hud);
+    border: 1px solid rgba(var(--accent-rgb), .55); border-radius: 2px; color: var(--accent); font: 500 8px/1 var(--mono);
+    letter-spacing: .16em; text-transform: uppercase; white-space: nowrap; pointer-events: none; }
+  .v[aria-pressed="true"] { border-color: var(--accent); background: rgba(var(--accent-rgb), .08); }
+  .v[aria-pressed="true"] .n { background: var(--accent); color: #04191c; }
+
+  /* you: a name kept in this browser, and a live pin once you share your location */
+  .me { padding: 10px; display: flex; flex-direction: column; gap: 7px; }
+  .me .lbl { font-family: var(--mono); font-size: 9px; letter-spacing: .22em; text-transform: uppercase; color: var(--faint); }
+  .me .row2 { display: flex; gap: 6px; }
+  .me input { flex: 1 1 auto; min-width: 0; width: 100%; padding: 8px 10px; background: rgba(244,243,240,.04); border: 1px solid var(--line);
+    border-radius: 2px; color: var(--ink); font: 700 12px/1.2 var(--font); text-transform: uppercase; letter-spacing: .04em; }
+  .me input::placeholder { color: var(--faint); font-weight: 400; text-transform: none; letter-spacing: 0; }
+  .me input:focus { outline: none; border-color: var(--accent); }
+  .me .btn { flex: 1 1 auto; text-align: center; }
+  .me .stop { flex: 0 0 auto; display: none; }
+  .me.live .stop { display: inline-block; }
+  .me.live .share { border-color: var(--accent); color: var(--accent); }
+  .me .st { font-family: var(--mono); font-size: 9px; letter-spacing: .14em; text-transform: uppercase; color: var(--faint); min-height: 12px; }
+  .me.live .st { color: var(--accent); }
+  .meBtn { display: none; }
+  .meP { width: 44px; height: 60px; }
+  .meP .ring { position: absolute; left: 4px; top: 6px; width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(var(--accent-rgb),.8);
+    animation: ping 2s ease-out infinite; }
+  .meP svg { position: absolute; left: 4px; top: 2px; width: 36px; height: 40px; filter: drop-shadow(0 4px 8px rgba(0,0,0,.7));
+    animation: bob 1.6s ease-in-out infinite; }
+  .meP .nmTag { position: absolute; top: 46px; left: 50%; transform: translateX(-50%); padding: 4px 7px; background: var(--hud);
+    border: 1px solid rgba(var(--accent-rgb),.55); border-radius: 2px; color: var(--accent); font: 700 10px/1 var(--font);
+    text-transform: uppercase; letter-spacing: .06em; white-space: nowrap; }
+  @keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+
+  .bar { position: absolute; top: var(--gap); right: var(--gap); display: flex; gap: 6px; }
+  .btn { padding: 9px 12px; border: 1px solid var(--line); border-radius: 2px; background: var(--hud); color: var(--ink);
+    font-family: var(--mono); font-size: 9.5px; letter-spacing: .18em; text-transform: uppercase; cursor: pointer; transition: border-color .2s, color .2s; }
+  .btn:hover { border-color: var(--accent); }
+  .btn[aria-expanded="true"] { border-color: var(--accent); color: var(--accent); }
+  .btn.go { background: var(--accent); border-color: var(--accent); color: #04191c; font-weight: 500; text-decoration: none; }
+  .btn.go:hover { background: #c3f1f6; }
+
+  /* detail: slides in from the right edge when a venue is selected */
+  .detail { position: absolute; top: 56px; right: var(--gap); width: var(--panelW); max-height: calc(100dvh - 56px - 110px);
+    overflow: auto; padding: 18px 18px 16px; visibility: hidden; opacity: 0; transform: translateX(calc(100% + 24px));
+    transition: transform .4s var(--ease), opacity .3s, visibility 0s .4s; }
+  .detail.open { visibility: visible; opacity: 1; transform: none; transition: transform .4s var(--ease), opacity .3s; }
+  .detail article { display: none; }
+  .detail article.on { display: block; }
+  .x { position: absolute; top: 8px; right: 8px; width: 30px; height: 30px; border: 1px solid transparent; background: none;
+    color: var(--dim); font-family: var(--mono); font-size: 13px; cursor: pointer; border-radius: 2px; }
+  .x:hover { color: var(--accent); border-color: var(--line); }
+  .pHead { display: flex; gap: 12px; align-items: flex-start; padding-right: 30px; }
+  .pNum { flex: 0 0 auto; width: 26px; height: 26px; display: grid; place-items: center; background: var(--accent); color: #04191c;
+    font-family: var(--mono); font-size: 11px; font-weight: 500; }
+  .pName { font-weight: 800; font-size: 17px; letter-spacing: .01em; text-transform: uppercase; line-height: 1.12; }
+  .pSub { margin-top: 5px; font-family: var(--mono); font-size: 9.5px; letter-spacing: .18em; text-transform: uppercase; color: var(--dim); line-height: 1.6; }
+  .pEvents { margin: 14px 0 0; list-style: none; border-top: 1px solid var(--line); }
+  .pEvents li { display: grid; grid-template-columns: minmax(96px, auto) 1fr; gap: 12px; padding: 8px 0;
+    border-bottom: 1px solid var(--line); font-size: 13.5px; line-height: 1.45; }
+  .pEvents .when { font-family: var(--mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); padding-top: 2px; white-space: nowrap; }
+  .pEvents .what { color: var(--ink); }
+  .pEvents .what small { display: block; color: var(--faint); font-size: 12px; margin-top: 2px; }
+  .pAddr { margin-top: 12px; font-size: 12.5px; line-height: 1.55; color: var(--dim); }
+  .pAddr span[lang="ja"] { display: block; color: var(--faint); font-size: 12px; }
+  .pLinks { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 8px; }
+  .pLinks a { display: inline-block; padding: 9px 12px; border: 1px solid var(--line); border-radius: 2px;
+    font-family: var(--mono); font-size: 9.5px; letter-spacing: .18em; text-transform: uppercase; color: var(--ink); text-decoration: none; transition: border-color .2s; }
+  .pLinks a:hover { border-color: var(--accent); }
+  .pLinks a.go { background: var(--accent); border-color: var(--accent); color: #04191c; font-weight: 500; }
+  .pLinks a.go:hover { background: #c3f1f6; }
+
+  /* readout + hint, bottom edge */
+  .readout { position: absolute; left: var(--gap); bottom: 30px; padding: 5px 9px; background: var(--hud); border: 1px solid var(--line);
+    font-family: var(--mono); font-size: 9.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--faint); }
+  .readout b { font-weight: 400; color: var(--dim); }
+  .hint { position: absolute; left: 50%; bottom: var(--gap); transform: translateX(-50%); padding: 6px 10px; background: var(--hud);
+    border: 1px solid var(--line); color: var(--faint); font-family: var(--mono); font-size: 9px; letter-spacing: .16em; text-transform: uppercase;
+    white-space: nowrap; transition: opacity .3s; }
+  body.armed .hint { opacity: 0; pointer-events: none; }
+  @media (hover: none) { .hint { display: none; } }
+
+  /* dates drawer */
+  .scrim { position: absolute; inset: 0; background: rgba(5,5,6,.5); opacity: 0; visibility: hidden; transition: opacity .3s, visibility 0s .3s; }
+  .scrim.open { opacity: 1; visibility: visible; transition: opacity .3s; }
+  .drawer { position: absolute; top: 0; right: 0; bottom: 0; width: min(460px, 100%); background: rgba(5,5,6,.96); border-left: 1px solid var(--line);
+    padding: 22px 24px 28px; overflow: auto; display: flex; flex-direction: column; visibility: hidden; transform: translateX(100%);
+    transition: transform .4s var(--ease), visibility 0s .4s; }
+  .drawer.open { visibility: visible; transform: none; transition: transform .4s var(--ease); }
+  .drawer .head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+  .drawer h2 { font-weight: 800; text-transform: uppercase; letter-spacing: -.01em; font-size: 34px; line-height: 1; }
+  .drawer .x { position: static; }
+  .drawer p { margin-top: 10px; font-size: 14px; color: var(--dim); }
+  .dList { margin-top: 20px; list-style: none; border-top: 1px solid var(--line); }
+  .dList li { display: grid; grid-template-columns: 1fr; gap: 3px; padding: 12px 0; border-bottom: 1px solid var(--line); font-size: 14px; }
+  .dList .d { font-family: var(--mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); }
+  .dList .w { color: var(--ink); }
+  .dList .w small { color: var(--faint); font-size: 12.5px; }
+  .dList a { font-family: var(--mono); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--dim); text-decoration: none; }
+  .dList a:hover { color: var(--accent); }
+  .dList a::before { content: attr(data-n) " · "; color: var(--accent); }
+  .fine { margin-top: 26px; font-family: var(--mono); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--faint); line-height: 2.1; }
+  .fine a { color: var(--accent); text-decoration: none; }
+  footer { margin-top: auto; padding-top: 22px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 8px 22px; align-items: baseline;
+    font-family: var(--mono); font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--faint); }
+  footer b { color: var(--dim); font-weight: 400; }
+  footer a { color: var(--accent); text-decoration: none; }
+  .fine + footer { margin-top: 24px; }
+
+  /* ---------- phone: dock becomes a swipeable strip along the bottom ---------- */
+  @media (max-width: 760px) {
+    :root { --gap: 10px; --stripH: 96px; }
+    .left { position: static; width: auto; }
+    .chip { position: absolute; top: var(--gap); left: var(--gap); max-width: calc(100vw - 168px); padding: 9px 11px 10px; }
+    .chip .tag { display: none; }
+    .bar { flex-wrap: wrap; justify-content: flex-end; }
+    .eyebrow { margin-top: 6px; font-size: 8.5px; letter-spacing: .2em; }
+    h1 { font-size: 20px; margin-top: 3px; }
+    .dock { position: absolute; left: 0; right: 0; bottom: 0; top: auto; flex-direction: row; gap: 8px; overflow-x: auto; overflow-y: hidden;
+      padding: 8px 12px calc(12px + env(safe-area-inset-bottom)); scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; }
+    .v { flex: 0 0 250px; scroll-snap-align: center; min-height: 64px; grid-template-columns: 22px minmax(0,1fr); grid-template-rows: auto auto;
+      column-gap: 10px; row-gap: 3px; align-items: start; }
+    .v .n { grid-row: 1 / span 2; }
+    .v .wh { grid-column: 2; }
+    .v .wh { font-size: 8.5px; }
+    .detail { top: auto; left: var(--gap); right: var(--gap); bottom: calc(var(--stripH) + 8px); width: auto; max-height: 46dvh;
+      padding: 16px 16px 14px; transform: translateY(24px); }
+    .detail.open { transform: none; }
+    .readout, .leaflet-control-zoom { display: none; }
+    .meBtn { display: grid; place-items: center; position: absolute; right: var(--gap); bottom: calc(var(--stripH) + 10px);
+      width: 44px; height: 44px; padding: 0; border-radius: 50%; }
+    .meBtn.on { border-color: var(--accent); color: var(--accent); }
+    .me { position: absolute; left: var(--gap); right: var(--gap); bottom: calc(var(--stripH) + 62px); display: none; }
+    .me.open { display: flex; }
+    body.detailOpen .meBtn, body.detailOpen .me { display: none; }
+    .leaflet-bottom.leaflet-left { bottom: var(--stripH); }
+    .drawer { width: 100%; border-left: 0; padding: 18px 18px 24px; }
+    .drawer h2 { font-size: 30px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pin .pc, .v, .btn, .detail, .scrim, .drawer, .pLinks a, .hint { transition: none; }
+    .pin.active .pr { animation: none; transform: scale(1); }
+    .meP .ring, .meP svg { animation: none; }
+  }
+</style>
+</head>
+<body data-analytics-offer="citizens">
+
+<script src="/citizens/nav.js" data-screen="map" data-title="Interactive Map"></script>
+
+<div id="map" role="region" aria-label="Map of the five venues" data-track-section="map" data-track-position="2"></div>
+
+<div class="hud">
+
+  <div class="left">
+    <!-- The title now lives in the shared header (/citizens/nav.js). The map script still measures ".chip" to keep
+         fly-to targets below the top chrome on phones, so this invisible spacer stands in for it, sized to the header. -->
+    <div class="chip" aria-hidden="true" style="position:absolute;top:0;left:0;height:var(--mtc-nav-h);width:1px;padding:0;border:0;visibility:hidden;pointer-events:none"></div>
+
+    <section class="me panel" id="me" aria-label="You on the map">
+      <label class="lbl" for="meName">Your name</label>
+      <input id="meName" type="text" maxlength="24" autocomplete="nickname" placeholder="Shown on your pin" />
+      <div class="row2">
+        <button class="btn share" type="button" id="meShare">Share my location</button>
+        <button class="btn stop" type="button" id="meStop">Stop</button>
+      </div>
+      <p class="st" id="meSt" aria-live="polite">Location off</p>
+    </section>
+    <button class="btn meBtn" type="button" id="meBtn" aria-label="You on the map" aria-expanded="false" aria-controls="me">
+      <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="5.5" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="9" cy="9" r="1.6" fill="currentColor"/><path d="M9 0v3.5M9 14.5V18M0 9h3.5M14.5 9H18" stroke="currentColor" stroke-width="1.5"/></svg>
+    </button>
+
+    <nav class="dock" id="dock" aria-label="Venues">
+      <button class="v" type="button" data-id="mic" data-lat="34.6601917" data-lng="135.2167036" aria-pressed="false">
+        <span class="n num" aria-hidden="true">1</span>
+        <span class="nm">Medtech Innovation Center (MIC) <em class="base">Mirai Base</em></span>
+        <span class="wh num">Oct 1–31</span>
+      </button>
+      <button class="v" type="button" data-id="irc" data-lat="34.6543396" data-lng="135.2213202" aria-pressed="false">
+        <span class="n num" aria-hidden="true">2</span>
+        <span class="nm">Integrated Research Center, Convention Hall</span>
+        <span class="wh num">Oct 17–18 · 24</span>
+      </button>
+      <button class="v" type="button" data-id="portopia" data-lat="34.6652515" data-lng="135.213701" aria-pressed="false">
+        <span class="n num" aria-hidden="true">3</span>
+        <span class="nm">Kobe Portopia Hotel</span>
+        <span class="wh num">Oct 25</span>
+      </button>
+      <button class="v" type="button" data-id="cowork" data-lat="34.6595296" data-lng="135.2154635" aria-pressed="false">
+        <span class="n num" aria-hidden="true">4</span>
+        <span class="nm">Cowork &amp; community space</span>
+        <span class="wh num">Oct 1–31</span>
+      </button>
+      <button class="v" type="button" data-id="orbis" data-lat="34.6881619" data-lng="135.2701558" aria-pressed="false">
+        <span class="n num" aria-hidden="true">5</span>
+        <span class="nm">Orbis Hall, Kobe Fashion Museum</span>
+        <span class="wh num">Oct 26</span>
+      </button>
+    </nav>
+  </div>
+
+  <div class="bar">
+    <button class="btn" type="button" id="datesBtn" aria-expanded="false" aria-controls="dates">Dates</button>
+    <button class="btn" type="button" id="showAll">Show all</button>
+  </div>
+
+  <aside class="detail panel" id="detail" aria-label="Selected venue">
+    <button class="x" type="button" id="closeDetail" aria-label="Close">✕</button>
+
+    <article data-id="mic">
+      <div class="pHead">
+        <span class="pNum num" aria-hidden="true">1</span>
+        <div>
+          <p class="pName">Medtech Innovation Center (MIC)</p>
+          <p class="pSub">Kobe University · Port Island</p>
+          <em class="base">Mirai Base</em>
+        </div>
+      </div>
+      <ul class="pEvents num">
+        <li><span class="when">Oct 1–31</span><span class="what">Registration office <small>Mirai Base. Start here.</small></span></li>
+        <li><span class="when">Oct 1–31</span><span class="what">Breakfast, every day</span></li>
+        <li><span class="when">Oct 4 · eve</span><span class="what">Opening night</span></li>
+        <li><span class="when">Oct 1 → Dec 31</span><span class="what">CellHaus labs <small>Residency only</small></span></li>
+      </ul>
+      <p class="pAddr">1-5-1 Minatojima Minamimachi, Chuo Ward, Kobe, Hyogo 650-0047 <span lang="ja">〒650-0047 兵庫県神戸市中央区港島南町1丁目5-1 メドテックイノベーションセンター</span></p>
+      <div class="pLinks">
+        <a class="go" href="https://maps.app.goo.gl/yCvzk921vKz2NZfW7" target="_blank" rel="noopener" data-analytics-action="site_navigation" data-analytics-location="citizens_place" data-analytics-target="google_maps">Google Maps</a>
+        <a href="https://www.med.kobe-u.ac.jp/mic/en/" target="_blank" rel="noopener" data-analytics-action="site_navigation" data-analytics-location="citizens_place" data-analytics-target="venue_site">Website</a>
+      </div>
+    </article>
+
+    <article data-id="irc">
+      <div class="pHead">
+        <span class="pNum num" aria-hidden="true">2</span>
+        <div>
+          <p class="pName">Integrated Research Center, Convention Hall</p>
+          <p class="pSub">Kobe University · Togo Kenkyu Kyoten · Port Island</p>
+        </div>
+      </div>
+      <ul class="pEvents num">
+        <li><span class="when">Oct 17–18</span><span class="what">Summit I</span></li>
+        <li><span class="when">Oct 24</span><span class="what">Summit II, day 1</span></li>
+      </ul>
+      <p class="pAddr">7-1-48 Minatojima Minamimachi, Chuo Ward, Kobe, Hyogo 650-0047 <span lang="ja">〒650-0047 兵庫県神戸市中央区港島南町7丁目1-48 神戸大学統合研究拠点</span></p>
+      <div class="pLinks">
+        <a class="go" href="https://maps.app.goo.gl/mXhV3fUvzCiEUmVL7" target="_blank" rel="noopener" data-analytics-action="site_navigation" data-analytics-location="citizens_place" data-analytics-target="google_maps">Google Maps</a>
+        <a href="https://www.kobe-u.ac.jp/ja/about/outline/facilities/kuirc/outline/" target="_blank" rel="noopener" hreflang="ja" data-analytics-action="site_navigation" data-analytics-location="citizens_place" data-analytics-target="venue_site">Website (JA)</a>
+      </div>
+    </article>
+
+    <article data-id="portopia">
+      <div class="pHead">
+        <span class="pNum num" aria-hidden="true">3</span>
+        <div>
+          <p class="pName">Kobe Portopia Hotel</p>
+          <p class="pSub">Partner hotel · Port Island</p>
+        </div>
+      </div>
+      <ul class="pEvents num">
+        <li><span class="when">Oct 25</span><span class="what">Summit II, day 2</span></li>
+      </ul>
+      <p class="pAddr">6-10-1 Minatojima Nakamachi, Chuo Ward, Kobe, Hyogo 650-0046 <span lang="ja">〒650-0046 兵庫県神戸市中央区港島中町6丁目10-1 神戸ポートピアホテル</span></p>
+      <div class="pLinks">
+        <a class="go" href="https://maps.app.goo.gl/NeYYqzKuSwQXHqYP6" target="_blank" rel="noopener" data-analytics-action="site_navigation" data-analytics-location="citizens_place" data-analytics-target="google_maps">Google Maps</a>
+        <a href="https://www.portopia.co.jp/" target="_blank" rel="noopener" data-analytics-action="site_navigation" data-analytics-location="citizens_place" data-analytics-target="venue_site">Website</a>
+      </div>
+    </article>
+
+    <article data-id="cowork">
+      <div class="pHead">
+        <span class="pNum num" aria-hidden="true">4</span>
+        <div>
+          <p class="pName">Cowork &amp; community space</p>
+          <p class="pSub">Shimin Byoin Mae Building, 4F · Port Island</p>
+        </div>
+      </div>
+      <ul class="pEvents num">
+        <li><span class="when">Oct 1–31</span><span class="what">Cowork and community space, open all month</span></li>
+      </ul>
+      <p class="pAddr">2-1-11 Minatojima Minamimachi, Chuo Ward, Kobe, Hyogo 650-0047 · 4th floor <span lang="ja">〒650-0047 兵庫県神戸市中央区港島南町2丁目1-11 市民病院前ビル 4F</span></p>
+      <div class="pLinks">
+        <a class="go" href="https://maps.app.goo.gl/ic9Ls5zDtyRmMqus8" target="_blank" rel="noopener" data-analytics-action="site_navigation" data-analytics-location="citizens_place" data-analytics-target="google_maps">Google Maps</a>
+      </div>
+    </article>
+
+    <article data-id="orbis">
+      <div class="pHead">
+        <span class="pNum num" aria-hidden="true">5</span>
+        <div>
+          <p class="pName">Orbis Hall, Kobe Fashion Museum</p>
+          <p class="pSub">5th floor · Rokko Island · the building is shaped like a UFO</p>
+        </div>
+      </div>
+      <ul class="pEvents num">
+        <li><span class="when">Oct 26 · 3–6 PM</span><span class="what">Frontier Human Fashion Show + Demo Day</span></li>
+      </ul>
+      <p class="pAddr">2-9-1 Koyocho-naka, Higashinada Ward, Kobe, Hyogo 658-0032 · 5th floor <span lang="ja">〒658-0032 兵庫県神戸市東灘区向洋町中2丁目9-1 神戸ファッション美術館 5F</span></p>
+      <div class="pLinks">
+        <a class="go" href="https://maps.app.goo.gl/m9ahz6a3E3kzkFQH8" target="_blank" rel="noopener" data-analytics-action="site_navigation" data-analytics-location="citizens_place" data-analytics-target="google_maps">Google Maps</a>
+        <a href="https://www.fashionmuseum.jp/rent/orbishall.html" target="_blank" rel="noopener" hreflang="ja" data-analytics-action="site_navigation" data-analytics-location="citizens_place" data-analytics-target="venue_site">Website (JA)</a>
+        <a href="/fashion-show/" data-analytics-action="site_navigation" data-analytics-location="citizens_place" data-analytics-target="fashion_show">About the show</a>
+      </div>
+    </article>
+  </aside>
+
+  <p class="readout num" id="readout" aria-hidden="true"></p>
+  <p class="hint" id="hint">Click the map to zoom with the wheel</p>
+
+  <div class="scrim" id="scrim"></div>
+  <aside class="drawer" id="dates" aria-label="Dates" data-track-section="dates" data-track-position="3">
+    <div class="head">
+      <h2>Dates</h2>
+      <button class="x" type="button" id="closeDates" aria-label="Close">✕</button>
+    </div>
+    <p>Everything on the map in date order. Times are Japan Standard Time.</p>
+    <ul class="dList num">
+      <li><span class="d">Oct 1–31</span><span class="w">Registration office <small>· Mirai Base</small></span><a href="#mic" data-place="mic" data-n="1">Medtech Innovation Center</a></li>
+      <li><span class="d">Oct 1–31</span><span class="w">Breakfast, every day</span><a href="#mic" data-place="mic" data-n="1">Medtech Innovation Center</a></li>
+      <li><span class="d">Oct 1–31</span><span class="w">Cowork and community space, open all month</span><a href="#cowork" data-place="cowork" data-n="4">Shimin Byoin Mae Building, 4F</a></li>
+      <li><span class="d">Oct 4 · evening</span><span class="w">Opening night</span><a href="#mic" data-place="mic" data-n="1">Medtech Innovation Center</a></li>
+      <li><span class="d">Oct 17–18</span><span class="w">Summit I</span><a href="#irc" data-place="irc" data-n="2">Integrated Research Center</a></li>
+      <li><span class="d">Oct 24</span><span class="w">Summit II, day 1</span><a href="#irc" data-place="irc" data-n="2">Integrated Research Center</a></li>
+      <li><span class="d">Oct 25</span><span class="w">Summit II, day 2</span><a href="#portopia" data-place="portopia" data-n="3">Kobe Portopia Hotel</a></li>
+      <li><span class="d">Oct 26 · 3–6 PM</span><span class="w">Frontier Human Fashion Show + Demo Day</span><a href="#orbis" data-place="orbis" data-n="5">Orbis Hall, Kobe Fashion Museum</a></li>
+      <li><span class="d">Oct 1 → Dec 31</span><span class="w">CellHaus labs <small>· residency only</small></span><a href="#mic" data-place="mic" data-n="1">Medtech Innovation Center</a></li>
+    </ul>
+    <p class="fine" data-track-section="fine" data-track-position="4">
+      Map: <a href="https://openfreemap.org" target="_blank" rel="noopener">OpenFreeMap</a> &middot; &copy; <a href="https://www.openmaptiles.org/" target="_blank" rel="noopener">OpenMapTiles</a> &middot; &copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors ·
+      Questions: <a href="mailto:team@miraitech.city">team@miraitech.city</a>
+    </p>
+    <footer>
+      <b>Mirai Tech City</b> <span>Kobe · Oct 1–31 2026</span>
+      <a href="/experience/" data-analytics-action="site_navigation" data-analytics-location="footer" data-analytics-target="experience">What a month here is like →</a>
+      <a href="/conferences/" data-analytics-action="site_navigation" data-analytics-location="footer" data-analytics-target="conferences">The summits →</a>
+      <a href="/" data-analytics-action="site_navigation" data-analytics-location="footer" data-analytics-target="home">Main site →</a>
+    </footer>
+  </aside>
+
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script src="https://unpkg.com/maplibre-gl@5.24.0/dist/maplibre-gl.js" integrity="sha256-RamwepGJzlYFTGIKlHzPQeKR5YyV6bYVM7dAqqZe5cs=" crossorigin=""></script>
+<script src="https://unpkg.com/@maplibre/maplibre-gl-leaflet@0.1.4/leaflet-maplibre-gl.js" integrity="sha256-Hmz4yz61/ZCYeaob82o4P7UGyaWy27+rq85lopTdH8s=" crossorigin=""></script>
+<script>
+(function () {
+  var venues = Array.prototype.slice.call(document.querySelectorAll('.v'));
+  var arts = {};
+  Array.prototype.forEach.call(document.querySelectorAll('.detail article'), function (a) { arts[a.dataset.id] = a; });
+  var dock = document.getElementById('dock'), chip = document.querySelector('.chip'), detail = document.getElementById('detail');
+  var drawer = document.getElementById('dates'), scrim = document.getElementById('scrim'), datesBtn = document.getElementById('datesBtn');
+  var readout = document.getElementById('readout');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var phone = window.matchMedia('(max-width: 760px)');
+  var markers = {}, map = null, active = null, bounds = [];
+
+  function measureStrip() { if (phone.matches) document.documentElement.style.setProperty('--stripH', dock.offsetHeight + 'px'); }
+  measureStrip();
+  window.addEventListener('resize', measureStrip);
+
+  function byId(id) { for (var i = 0; i < venues.length; i++) if (venues[i].dataset.id === id) return venues[i]; return null; }
+
+  // How much of the viewport the HUD covers, so the map centres things in the free area (untransformed boxes).
+  function insets() {
+    var W = window.innerWidth, H = window.innerHeight, open = detail.classList.contains('open');
+    if (phone.matches) {
+      var b = H - dock.offsetTop;
+      if (open) b = Math.max(b, H - detail.offsetTop);
+      return { top: chip.offsetTop + chip.offsetHeight, right: 0, bottom: b, left: 0 };
+    }
+    return { top: 24, right: open ? W - detail.offsetLeft : 0, bottom: 0, left: dock.offsetLeft + dock.offsetWidth };
+  }
+  function focusOn(ll, z) {
+    var ins = insets();
+    var p = map.project(ll, z).add([(ins.right - ins.left) / 2, (ins.bottom - ins.top) / 2]);
+    var c = map.unproject(p, z);
+    if (reduce) map.setView(c, z, { animate: false }); else map.flyTo(c, z, { duration: .9 });
+  }
+
+  function clear() {
+    if (!active) return;
+    active.setAttribute('aria-pressed', 'false');
+    var m = markers[active.dataset.id];
+    if (m) { var el = m.getElement(); if (el) el.classList.remove('active'); m.unbindTooltip(); }
+    arts[active.dataset.id].classList.remove('on');
+    detail.classList.remove('open');
+    document.body.classList.remove('detailOpen');
+    active = null;
+  }
+
+  function select(id, opts) {
+    opts = opts || {};
+    var btn = byId(id);
+    if (!btn) return;
+    if (active && active !== btn) clear();
+    active = btn;
+    btn.setAttribute('aria-pressed', 'true');
+    Object.keys(arts).forEach(function (k) { arts[k].classList.toggle('on', k === id); });
+    detail.classList.add('open');
+    document.body.classList.add('detailOpen');
+    detail.scrollTop = 0;
+    if (phone.matches) {
+      dock.scrollTo({ left: btn.offsetLeft - (dock.clientWidth - btn.offsetWidth) / 2, behavior: reduce ? 'auto' : 'smooth' });
+    }
+    if (!map) return;
+    var m = markers[id];
+    Object.keys(markers).forEach(function (k) { var el = markers[k].getElement(); if (el) el.classList.toggle('active', k === id); });
+    m.unbindTooltip();
+    m.bindTooltip(btn.querySelector('.nm').firstChild.textContent.trim(), { permanent: true, direction: 'top', offset: [0, -14], className: 'tip', interactive: false });
+    if (opts.fly) focusOn(m.getLatLng(), Math.max(map.getZoom(), 15));
+  }
+
+  function openDates() {
+    drawer.classList.add('open'); scrim.classList.add('open');
+    datesBtn.setAttribute('aria-expanded', 'true');
+    // The drawer is still off-screen when focus lands, and a plain focus() scrolls the whole page sideways to reveal it.
+    document.getElementById('closeDates').focus({ preventScroll: true });
+    window.scrollTo(0, 0);
+  }
+  function closeDates(refocus) {
+    drawer.classList.remove('open'); scrim.classList.remove('open');
+    datesBtn.setAttribute('aria-expanded', 'false');
+    if (refocus) datesBtn.focus({ preventScroll: true });
+  }
+
+  venues.forEach(function (btn) {
+    btn.addEventListener('click', function () { select(btn.dataset.id, { fly: true }); });
+  });
+  document.getElementById('closeDetail').addEventListener('click', function () {
+    var b = active; clear(); if (b) b.focus();
+  });
+  datesBtn.addEventListener('click', function () { drawer.classList.contains('open') ? closeDates(true) : openDates(); });
+  document.getElementById('closeDates').addEventListener('click', function () { closeDates(true); });
+  scrim.addEventListener('click', function () { closeDates(false); });
+  Array.prototype.forEach.call(document.querySelectorAll('a[data-place]'), function (a) {
+    a.addEventListener('click', function (e) {
+      e.preventDefault();
+      closeDates(false);
+      select(a.dataset.place, { fly: true });
+    });
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Escape') return;
+    if (drawer.classList.contains('open')) closeDates(true);
+    else if (active) { var b = active; clear(); b.focus(); }
+  });
+
+  if (!window.L) return; // the dock and details still work without the map
+
+  // The play area: Kobe to Kyoto, south past Osaka and Sakai. You can't pan past it or zoom out beyond it.
+  var AREA = L.latLngBounds([[34.45, 135.05], [35.10, 135.85]]);
+  map = L.map('map', { scrollWheelZoom: false, zoomControl: false, attributionControl: false, zoomSnap: .5, maxZoom: 19,
+    maxBounds: AREA, maxBoundsViscosity: 1 });
+  function lockZoom() { map.setMinZoom(map.getBoundsZoom(AREA, false)); }
+  map.on('resize', lockZoom);
+  window.mtcMap = map;
+  // The terrain: OpenFreeMap vector tiles drawn with our own style — land, water, buildings, roads, rail,
+  // and only three kinds of text: city names, island names, and train stations, in English.
+  var NAME = ['coalesce', ['get', 'name:en'], ['get', 'name:latin'], ['get', 'name']];
+  var LINE = 'rgba(244,243,240,';
+  var STYLE = {
+    version: 8,
+    glyphs: 'https://tiles.openfreemap.org/fonts/{fontstack}/{range}.pbf',
+    sources: { ofm: { type: 'vector', url: 'https://tiles.openfreemap.org/planet' } },
+    layers: [
+      { id: 'land', type: 'background', paint: { 'background-color': '#0d0f12' } },
+      { id: 'green', type: 'fill', source: 'ofm', 'source-layer': 'landcover',
+        filter: ['match', ['get', 'class'], ['wood', 'grass', 'farmland'], true, false], paint: { 'fill-color': '#0f1412' } },
+      { id: 'park', type: 'fill', source: 'ofm', 'source-layer': 'park', paint: { 'fill-color': '#101613' } },
+      { id: 'water', type: 'fill', source: 'ofm', 'source-layer': 'water', paint: { 'fill-color': '#050506' } },
+      { id: 'waterway', type: 'line', source: 'ofm', 'source-layer': 'waterway', paint: { 'line-color': '#050506', 'line-width': 1 } },
+      { id: 'runway', type: 'line', source: 'ofm', 'source-layer': 'aeroway', filter: ['match', ['get', 'class'], ['runway', 'taxiway'], true, false],
+        paint: { 'line-color': LINE + '.16)', 'line-width': ['interpolate', ['linear'], ['zoom'], 11, 1, 15, 8] } },
+      { id: 'building', type: 'fill', source: 'ofm', 'source-layer': 'building', minzoom: 13,
+        paint: { 'fill-color': '#181b1f', 'fill-outline-color': '#0d0f12', 'fill-opacity': ['interpolate', ['linear'], ['zoom'], 13, .4, 15, 1] } },
+      { id: 'road-minor', type: 'line', source: 'ofm', 'source-layer': 'transportation', minzoom: 13,
+        filter: ['match', ['get', 'class'], ['minor', 'service', 'raceway'], true, false],
+        paint: { 'line-color': LINE + '.12)', 'line-width': ['interpolate', ['linear'], ['zoom'], 13, .5, 17, 3] } },
+      { id: 'road-mid', type: 'line', source: 'ofm', 'source-layer': 'transportation', minzoom: 10,
+        filter: ['match', ['get', 'class'], ['secondary', 'tertiary'], true, false],
+        paint: { 'line-color': LINE + '.22)', 'line-width': ['interpolate', ['linear'], ['zoom'], 10, .5, 16, 4] } },
+      { id: 'road-major', type: 'line', source: 'ofm', 'source-layer': 'transportation',
+        filter: ['match', ['get', 'class'], ['motorway', 'trunk', 'primary'], true, false],
+        paint: { 'line-color': LINE + '.36)', 'line-width': ['interpolate', ['linear'], ['zoom'], 8, .5, 12, 1.4, 16, 6] } },
+      { id: 'ferry', type: 'line', source: 'ofm', 'source-layer': 'transportation', filter: ['==', ['get', 'class'], 'ferry'],
+        paint: { 'line-color': LINE + '.18)', 'line-width': 1, 'line-dasharray': [2, 4] } },
+      { id: 'rail', type: 'line', source: 'ofm', 'source-layer': 'transportation',
+        filter: ['match', ['get', 'class'], ['rail', 'transit'], true, false],
+        paint: { 'line-color': 'rgba(155,232,240,.55)', 'line-width': ['interpolate', ['linear'], ['zoom'], 9, .6, 14, 1.4, 17, 2.5], 'line-dasharray': [4, 2] } },
+      { id: 'station-dot', type: 'circle', source: 'ofm', 'source-layer': 'poi', minzoom: 12,
+        filter: ['all', ['==', ['get', 'class'], 'railway'], ['match', ['get', 'subclass'], ['station', 'subway', 'light_rail', 'monorail', 'halt', 'tram_stop'], true, false]],
+        paint: { 'circle-radius': 3, 'circle-color': '#9be8f0', 'circle-stroke-color': '#050506', 'circle-stroke-width': 1.5 } },
+      { id: 'station', type: 'symbol', source: 'ofm', 'source-layer': 'poi', minzoom: 13,
+        filter: ['all', ['==', ['get', 'class'], 'railway'], ['match', ['get', 'subclass'], ['station', 'subway', 'light_rail', 'monorail', 'halt', 'tram_stop'], true, false]],
+        layout: { 'text-field': NAME, 'text-font': ['Noto Sans Regular'], 'text-size': 10, 'text-anchor': 'top', 'text-offset': [0, .7],
+          'text-letter-spacing': .08, 'text-transform': 'uppercase' },
+        paint: { 'text-color': 'rgba(155,232,240,.85)', 'text-halo-color': '#050506', 'text-halo-width': 1.4 } },
+      { id: 'island', type: 'symbol', source: 'ofm', 'source-layer': 'place', filter: ['==', ['get', 'class'], 'island'],
+        layout: { 'text-field': NAME, 'text-font': ['Noto Sans Regular'], 'text-size': 11, 'text-letter-spacing': .35, 'text-transform': 'uppercase' },
+        paint: { 'text-color': 'rgba(155,232,240,.5)', 'text-halo-color': '#050506', 'text-halo-width': 1.2 } },
+      { id: 'city', type: 'symbol', source: 'ofm', 'source-layer': 'place',
+        filter: ['any', ['==', ['get', 'class'], 'city'], ['all', ['==', ['get', 'class'], 'town'], ['>=', ['zoom'], 11.5]]],
+        layout: { 'text-field': NAME, 'text-font': ['Noto Sans Regular'], 'text-size': ['interpolate', ['linear'], ['zoom'], 8, 11, 14, 15],
+          'text-letter-spacing': .18, 'text-transform': 'uppercase' },
+        paint: { 'text-color': 'rgba(244,243,240,.55)', 'text-halo-color': '#050506', 'text-halo-width': 1.4 } }
+    ]
+  };
+  var haveGL = false;
+  try { var cv = document.createElement('canvas'); haveGL = !!(window.maplibregl && L.maplibreGL && (cv.getContext('webgl2') || cv.getContext('webgl'))); } catch (e) {}
+  if (haveGL) {
+    L.maplibreGL({ style: STYLE, interactive: false, attributionControl: false }).addTo(map);
+  } else {
+    document.body.classList.add('raster');
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19 }).addTo(map);
+  }
+  L.control.attribution({ position: 'bottomleft', prefix: false })
+    .addAttribution('<a href="https://openfreemap.org">OpenFreeMap</a> &copy; <a href="https://www.openmaptiles.org/">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors').addTo(map);
+  L.control.zoom({ position: 'bottomright' }).addTo(map);
+
+  // Grid / scanline / vignette layer between tiles and pins, kept glued to the viewport while the map pans.
+  map.createPane('fx');
+  map.getPane('fx').style.zIndex = 350;
+  var fx = L.DomUtil.create('div', 'fx', map.getPane('fx'));
+  function fixFx() {
+    var s = map.getSize();
+    fx.style.width = s.x + 'px'; fx.style.height = s.y + 'px';
+    L.DomUtil.setPosition(fx, map.containerPointToLayerPoint([0, 0]));
+  }
+  map.on('move zoom viewreset resize', fixFx);
+
+  venues.forEach(function (btn, i) {
+    var ll = [parseFloat(btn.dataset.lat), parseFloat(btn.dataset.lng)];
+    var name = btn.querySelector('.nm').firstChild.textContent.trim();
+    var isBase = !!btn.querySelector('.base');
+    var m = L.marker(ll, {
+      icon: L.divIcon({ className: 'pin' + (isBase ? ' isBase' : ''), iconSize: [32, 32],
+        html: '<span class="pc num">' + btn.querySelector('.n').textContent + '</span><span class="pr"></span>' + (isBase ? '<span class="pb">Mirai Base</span>' : '') }),
+      title: name, alt: name, keyboard: true, riseOnHover: true, zIndexOffset: (venues.length - i) * 10
+    }).addTo(map);
+    m.on('click', function () { select(btn.dataset.id, { fly: true }); }); // Leaflet turns Enter on a focused pin into a click
+    markers[btn.dataset.id] = m;
+    bounds.push(ll);
+  });
+
+  function showAll() {
+    clear();
+    var ins = insets();
+    map.fitBounds(bounds, { paddingTopLeft: [ins.left + 32, ins.top + 32], paddingBottomRight: [ins.right + 32, ins.bottom + 32], animate: !reduce });
+  }
+  document.getElementById('showAll').addEventListener('click', showAll);
+
+  function updateReadout() {
+    var c = map.getCenter();
+    readout.innerHTML = '<b>' + c.lat.toFixed(4) + ' N</b> · <b>' + c.lng.toFixed(4) + ' E</b> · Z ' + map.getZoom().toFixed(1);
+  }
+  map.on('move zoom', updateReadout);
+
+  // Wheel zoom only after the visitor commits to the map with a click or focus.
+  function arm() { map.scrollWheelZoom.enable(); document.body.classList.add('armed'); }
+  map.on('click focus', arm);
+
+  map.fitBounds(bounds, { paddingTopLeft: [insets().left + 32, 56], paddingBottomRight: [32, insets().bottom + 32], animate: false });
+  lockZoom(); fixFx(); updateReadout();
+
+  // ---- you on the map: name kept in localStorage, live pin via the browser's geolocation. No server involved.
+  var me = document.getElementById('me'), meName = document.getElementById('meName'), meShare = document.getElementById('meShare'),
+      meStop = document.getElementById('meStop'), meSt = document.getElementById('meSt'), meBtn = document.getElementById('meBtn');
+  var store = {
+    get: function (k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
+    set: function (k, v) { try { v === null ? localStorage.removeItem(k) : localStorage.setItem(k, v); } catch (e) {} }
+  };
+  var watchId = null, meMarker = null, meRing = null, mePos = null, meFirst = true;
+  // The daruma gets his second eye on October 1 (JST), like the one on the main site.
+  var todayJST = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Tokyo', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date());
+  var bothEyes = todayJST >= '2026-10-01';
+  function label() { return meName.value.trim() || 'You'; }
+  function darumaHtml() {
+    var eye2 = bothEyes ? '<circle cx="22.5" cy="18" r="2.6" fill="#050506"/>' : '<circle cx="22.5" cy="18" r="2.6" fill="none" stroke="#050506" stroke-width="1.4"/>';
+    return '<span class="ring"></span>' +
+      '<svg viewBox="0 0 36 40" aria-hidden="true">' +
+      '<path d="M18 2C8 2 3 12 3 22c0 9 6 16 15 16s15-7 15-16C33 12 28 2 18 2z" fill="#d8322b" stroke="#050506" stroke-width="1.5"/>' +
+      '<path d="M18 8c-6 0-9 5-9 11 0 5 4 9 9 9s9-4 9-9c0-6-3-11-9-11z" fill="#f4e3c8" stroke="#050506" stroke-width="1.2"/>' +
+      '<circle cx="13.5" cy="18" r="2.6" fill="#050506"/>' + eye2 +
+      '<path d="M14 24c2 2 6 2 8 0" stroke="#050506" stroke-width="1.3" fill="none" stroke-linecap="round"/>' +
+      '</svg><span class="nmTag"></span>';
+  }
+  function setStatus(t, live) {
+    meSt.textContent = t;
+    me.classList.toggle('live', !!live);
+    meShare.textContent = live ? 'Center on me' : 'Share my location';
+    meBtn.classList.toggle('on', !!live);
+  }
+  function centerMe() {
+    if (!mePos || !AREA.contains(mePos)) return;
+    focusOn(L.latLng(mePos), Math.max(map.getZoom(), 15));
+  }
+  function onPos(p) {
+    mePos = [p.coords.latitude, p.coords.longitude];
+    var acc = Math.round(p.coords.accuracy || 0);
+    if (!meMarker) {
+      meMarker = L.marker(mePos, { icon: L.divIcon({ className: 'meP', html: darumaHtml(), iconSize: [44, 60], iconAnchor: [22, 42] }),
+        zIndexOffset: 2000, keyboard: false, interactive: false, title: label() }).addTo(map);
+      meRing = L.circle(mePos, { radius: acc, color: '#9be8f0', weight: 1, opacity: .35, fillOpacity: .06, interactive: false }).addTo(map);
+    } else {
+      meMarker.setLatLng(mePos); meRing.setLatLng(mePos).setRadius(acc);
+    }
+    meMarker.getElement().querySelector('.nmTag').textContent = label();
+    store.set('mtc_share', '1');
+    if (!AREA.contains(mePos)) { setStatus('You are outside the map area', true); return; }
+    setStatus('On the map · ±' + acc + ' m', true);
+    if (meFirst) { meFirst = false; centerMe(); }
+  }
+  function stop() {
+    if (watchId !== null) navigator.geolocation.clearWatch(watchId);
+    watchId = null; meFirst = true;
+    if (meMarker) { map.removeLayer(meMarker); map.removeLayer(meRing); meMarker = meRing = null; }
+    store.set('mtc_share', null);
+    setStatus('Location off', false);
+  }
+  function onErr(e) {
+    stop();
+    setStatus(e.code === 1 ? 'Location blocked in your browser' : 'Could not get your location', false);
+  }
+  function start() {
+    if (!navigator.geolocation) { setStatus('Location not available in this browser', false); return; }
+    setStatus('Locating…', false);
+    watchId = navigator.geolocation.watchPosition(onPos, onErr, { enableHighAccuracy: true, maximumAge: 10000, timeout: 20000 });
+  }
+  meName.value = store.get('mtc_name') || '';
+  meName.addEventListener('input', function () {
+    store.set('mtc_name', meName.value.trim() || null);
+    if (meMarker) meMarker.getElement().querySelector('.nmTag').textContent = label();
+  });
+  meShare.addEventListener('click', function () { watchId === null ? start() : centerMe(); });
+  meStop.addEventListener('click', stop);
+  meBtn.addEventListener('click', function () {
+    var open = me.classList.toggle('open');
+    meBtn.setAttribute('aria-expanded', String(open));
+    if (open) meName.focus();
+  });
+  if (store.get('mtc_share') === '1') start(); // shared before in this browser: pick up where they left off
+
+  var hash = location.hash.replace('#', '');
+  if (hash && byId(hash)) select(hash, { fly: true });
+})();
+</script>
+
+</body>
+</html>

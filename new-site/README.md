@@ -31,6 +31,29 @@ Single static `index.html` — no framework, no build step. Deploys anywhere
   `experience/index.html`, no build step. `experience/experience.js` is the
   retired field-guide content registry — kept on disk, no longer loaded
   (the old field-guide page lives in git history).
+- `/citizens/` is the venue map for accepted citizens: a full-viewport Leaflet 1.9.4
+  map (unpkg, SRI-pinned) drawing OpenFreeMap vector tiles through MapLibre GL 5 +
+  maplibre-gl-leaflet with an inline dark style (only city/island names and train
+  stations are labelled, in English; OSM raster tiles are the no-WebGL fallback) with a HUD: the
+  five venues (MIC, Integrated Research Center, Portopia Hotel, the cowork space, Orbis
+  Hall) with dates, addresses, and Google Maps links, a Dates drawer, and a "you" panel
+  (name kept in localStorage, live daruma pin via browser geolocation, no server). Zoom
+  and panning are locked to the Kobe–Kyoto area. Standalone page sent to ticket holders:
+  no shared nav, `noindex`, not in the sitemap. `/citizens/quests/` is the quest
+  screen: three stamp-rally sheets (one on screen at a time, tabs + swipe) rendered
+  from `citizens/data/quests.json`; progress in localStorage `mtc_quests`; code-word
+  quests store only SHA-256 hashes of the uppercase word. `/citizens/links/` is the
+  links screen: physical-object cards (ticket stubs, IC cards, envelopes, a red
+  emergency card) rendered from `citizens/data/links.json`; groups collapse
+  (`mtc_links_closed`), any link can be pinned into "My links" (`mtc_pins`); phone
+  numbers are shown, never dialled. Every citizens screen loads the shared header
+  `/citizens/nav.css` + `/citizens/nav.js` (`<script src="/citizens/nav.js" data-screen="…"
+  data-title="…">` at the top of `<body>`): a title row and five fixed tab buttons (Map,
+  Quests, Links, Today, Directory; the last two "Soon"), keys 1–5 jump and [ ] cycle; a cyan
+  iris grows out of the pressed tab and shrinks back into it on the next screen (≤240ms each way); it
+  hides while `#big`/`#dates` are open and offsets the map HUD via `--mtc-nav-h`.
+  `citizens/_v/`, `citizens/quests/_v/`, `citizens/links/_v/` and `citizens/_nav/` hold
+  the design-round variants — delete before deploying.
 - Fonts: Switzer (Fontshare) + IBM Plex Mono. Speaker photos + Kobe stills
   copied into `img/` from `legacy-site/public/images` (comic-style avatars intentionally not used).
 - Nav: the top bar on the site pages (`/`, `/experience/`, `/conferences/`, `/pricing/`,

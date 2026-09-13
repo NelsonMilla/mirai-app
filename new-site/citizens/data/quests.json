@@ -1,0 +1,258 @@
+{
+ "version": 1,
+ "note": "Edit this file to change quests. 'code' quests unlock with a code word given in person; the file holds only its SHA-256 hash of the uppercase word. 'auto' quests complete themselves when the named localStorage key exists.",
+ "groups": [
+  {
+   "id": "day1",
+   "title": "Day one",
+   "blurb": "Do these first. They take one morning."
+  },
+  {
+   "id": "month",
+   "title": "Any week",
+   "blurb": "Pick them off whenever. Most are better with a group from the chat."
+  },
+  {
+   "id": "summits",
+   "title": "The big days",
+   "blurb": "The three dated events. Codes are given at the door."
+  }
+ ],
+ "quests": [
+  {
+   "id": "register",
+   "group": "day1",
+   "title": "Register at Mirai Base",
+   "venue": "mic",
+   "when": "Oct 1–31",
+   "steps": [
+    "Go to the Medtech Innovation Center on Port Island. That is Mirai Base.",
+    "Find the registration desk. It is in the same room as breakfast.",
+    "Ask the team for the day-one code word and enter it here."
+   ],
+   "verify": "code",
+   "codeHash": "531fe4d47cc8a7637d7bb1d8ecfe7905d26a63c6be5665b674f77d3c4cb5fff2"
+  },
+  {
+   "id": "name",
+   "group": "day1",
+   "title": "Put your name on the map",
+   "venue": null,
+   "when": "Oct 1–31",
+   "steps": [
+    "Open the map.",
+    "Type your name under \"Your name\".",
+    "Press \"Share my location\" and allow it. Your pin appears where you stand."
+   ],
+   "verify": "auto",
+   "autoKey": "mtc_name",
+   "link": {
+    "label": "Open the map",
+    "href": "/citizens/"
+   }
+  },
+  {
+   "id": "breakfast",
+   "group": "day1",
+   "title": "Have breakfast at Mirai Base",
+   "venue": "mic",
+   "when": "Every day",
+   "steps": [
+    "Breakfast is served every morning at the Medtech Innovation Center.",
+    "Sit with someone you have not met."
+   ],
+   "verify": "check"
+  },
+  {
+   "id": "desk",
+   "group": "day1",
+   "title": "Find your cowork desk",
+   "venue": "cowork",
+   "when": "Oct 1–31",
+   "steps": [
+    "Go to the Shimin Byoin Mae Building, 4th floor.",
+    "Pick a desk. The space is open all month."
+   ],
+   "verify": "check"
+  },
+  {
+   "id": "transit",
+   "group": "day1",
+   "title": "Get an IC card for the Port Liner",
+   "venue": null,
+   "when": "Day one",
+   "steps": [
+    "Buy an ICOCA card at a JR ticket machine in Sannomiya station.",
+    "Top it up at any machine. It works on the Port Liner, trains, buses, and in convenience stores.",
+    "Tap in and out at the gates."
+   ],
+   "verify": "check"
+  },
+  {
+   "id": "chat",
+   "group": "day1",
+   "title": "Join the city chat",
+   "venue": null,
+   "when": "Day one",
+   "steps": [
+    "Open the chat link and introduce yourself: name, track, what you are building.",
+    "Dinner groups form in the chat by six every evening."
+   ],
+   "verify": "check",
+   "link": null
+  },
+  {
+   "id": "opening",
+   "group": "day1",
+   "title": "Come to opening night",
+   "venue": "mic",
+   "when": "Oct 4 · evening",
+   "steps": [
+    "Opening night is at the Medtech Innovation Center on the evening of October 4.",
+    "Bring the people from your house."
+   ],
+   "verify": "check"
+  },
+  {
+   "id": "labtour",
+   "group": "month",
+   "title": "Take a lab tour",
+   "venue": null,
+   "when": "Oct 5–16",
+   "steps": [
+    "Lab tours run through KBIC on Port Island and out to Kyoto and Osaka between October 5 and 16.",
+    "Sign up for one in the chat when the list is posted."
+   ],
+   "verify": "check"
+  },
+  {
+   "id": "hackathon",
+   "group": "month",
+   "title": "Show up for the hackathon kickoff",
+   "venue": null,
+   "when": "Oct 9",
+   "steps": [
+    "The Longevity × Bio Hackathon with Nucleate Japan starts on October 9.",
+    "Form a team or join one. Teams pitch investors at Demo Day."
+   ],
+   "verify": "check"
+  },
+  {
+   "id": "market",
+   "group": "month",
+   "title": "Go to the Saturday farmers market",
+   "venue": null,
+   "when": "Saturdays",
+   "steps": [
+    "The farmers market is in central Kobe on Saturday mornings.",
+    "Buy breakfast there instead of at Mirai Base."
+   ],
+   "verify": "check"
+  },
+  {
+   "id": "onsen",
+   "group": "month",
+   "title": "Go to an onsen",
+   "venue": null,
+   "when": "Any evening",
+   "steps": [
+    "Arima Onsen is the famous one near Kobe.",
+    "Go with a group from the chat. Tattoos: check the rules of the bath first."
+   ],
+   "verify": "check"
+  },
+  {
+   "id": "rokko",
+   "group": "month",
+   "title": "Climb Mount Rokko",
+   "venue": null,
+   "when": "Any morning",
+   "steps": [
+    "The trailheads are on the north side of the city.",
+    "Go early. Some residents run it before breakfast."
+   ],
+   "verify": "check"
+  },
+  {
+   "id": "cross",
+   "group": "month",
+   "title": "Have lunch with someone from another track",
+   "venue": null,
+   "when": "Any day",
+   "steps": [
+    "Devices, therapies, or builders: find someone working on the other thing.",
+    "A set lunch in Kobe is under ¥1,000."
+   ],
+   "verify": "check"
+  },
+  {
+   "id": "summit1",
+   "group": "summits",
+   "title": "Attend Summit I",
+   "venue": "irc",
+   "when": "Oct 17–18",
+   "steps": [
+    "Summit I is at the Integrated Research Center, Convention Hall, on October 17 and 18.",
+    "Get the code word at the door."
+   ],
+   "verify": "code",
+   "codeHash": "10506a073fae9cedc521ae88bdc5110e7d1aae297bcbe89dfcdaa62cbcb4dc6e"
+  },
+  {
+   "id": "summit2",
+   "group": "summits",
+   "title": "Attend Summit II",
+   "venue": "irc",
+   "when": "Oct 24–25",
+   "steps": [
+    "Day 1 is at the Integrated Research Center on October 24.",
+    "Day 2 is at the Kobe Portopia Hotel on October 25.",
+    "Get the code word at the door."
+   ],
+   "verify": "code",
+   "codeHash": "38419c805de31fd98713e3d9f2322c2b88ca4e7b286b2f16dddc03bf68dfe820"
+  },
+  {
+   "id": "show",
+   "group": "summits",
+   "title": "Be at the Fashion Show and Demo Day",
+   "venue": "orbis",
+   "when": "Oct 26 · 3–6 PM",
+   "steps": [
+    "Orbis Hall is on the 5th floor of the Kobe Fashion Museum on Rokko Island.",
+    "Doors are on October 26 from 3 to 6 PM.",
+    "Get the code word at the door."
+   ],
+   "verify": "code",
+   "codeHash": "0abf8efecd85c49ab697823882a1adf12dd6797e194431937957a1076bec044c"
+  }
+ ],
+ "venues": {
+  "mic": {
+   "name": "Medtech Innovation Center (MIC)",
+   "tag": "Mirai Base",
+   "map": "/citizens/#mic",
+   "gmaps": "https://maps.app.goo.gl/yCvzk921vKz2NZfW7"
+  },
+  "irc": {
+   "name": "Integrated Research Center, Convention Hall",
+   "map": "/citizens/#irc",
+   "gmaps": "https://maps.app.goo.gl/mXhV3fUvzCiEUmVL7"
+  },
+  "portopia": {
+   "name": "Kobe Portopia Hotel",
+   "map": "/citizens/#portopia",
+   "gmaps": "https://maps.app.goo.gl/NeYYqzKuSwQXHqYP6"
+  },
+  "cowork": {
+   "name": "Cowork & community space, Shimin Byoin Mae Building 4F",
+   "map": "/citizens/#cowork",
+   "gmaps": "https://maps.app.goo.gl/ic9Ls5zDtyRmMqus8"
+  },
+  "orbis": {
+   "name": "Orbis Hall, Kobe Fashion Museum",
+   "map": "/citizens/#orbis",
+   "gmaps": "https://maps.app.goo.gl/m9ahz6a3E3kzkFQH8"
+  }
+ }
+}

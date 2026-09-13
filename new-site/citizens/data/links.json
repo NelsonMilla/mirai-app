@@ -1,0 +1,266 @@
+{
+ "version": 1,
+ "note": "Edit this file to change the Links screen. Entry types: link (href), tel (number), mail (address), card (something to show or copy: Japanese address for a taxi driver), soon (no link yet).",
+ "groups": [
+  {
+   "id": "now",
+   "title": "Every day",
+   "blurb": "The things you open most."
+  },
+  {
+   "id": "arrive",
+   "title": "Getting around",
+   "blurb": "Trains, cards, and where things are."
+  },
+  {
+   "id": "taxi",
+   "title": "Show the driver",
+   "blurb": "Tap a card, hold the phone up. Addresses in Japanese."
+  },
+  {
+   "id": "help",
+   "title": "Help",
+   "blurb": "Numbers that work anywhere in Japan, and us."
+  },
+  {
+   "id": "event",
+   "title": "The event",
+   "blurb": "Pages about the month itself."
+  }
+ ],
+ "items": [
+  {
+   "id": "chat",
+   "group": "now",
+   "type": "soon",
+   "title": "City chat",
+   "desc": "Where dinner groups form by six. Link coming."
+  },
+  {
+   "id": "map",
+   "group": "now",
+   "type": "link",
+   "title": "Interactive map",
+   "desc": "The five venues, your pin, the dates.",
+   "href": "/citizens/"
+  },
+  {
+   "id": "quests",
+   "group": "now",
+   "type": "link",
+   "title": "Quests",
+   "desc": "Sixteen things to do this month, stamped as you go.",
+   "href": "/citizens/quests/"
+  },
+  {
+   "id": "breakfast",
+   "group": "now",
+   "type": "link",
+   "title": "Breakfast at Mirai Base",
+   "desc": "Every morning at the Medtech Innovation Center.",
+   "href": "/citizens/#mic"
+  },
+  {
+   "id": "cowork",
+   "group": "now",
+   "type": "link",
+   "title": "Cowork space",
+   "desc": "Shimin Byoin Mae Building, 4F. Open all month.",
+   "href": "/citizens/#cowork"
+  },
+  {
+   "id": "tickets",
+   "group": "now",
+   "type": "link",
+   "title": "Your ticket on Luma",
+   "desc": "Your order, the calendar, the check-in code.",
+   "href": "https://luma.com/an4zotn9"
+  },
+  {
+   "id": "portliner",
+   "group": "arrive",
+   "type": "link",
+   "title": "Port Liner",
+   "desc": "The train to Port Island from Sannomiya. Kobe New Transit, in English.",
+   "href": "https://www.knt-liner.co.jp/en/"
+  },
+  {
+   "id": "icoca",
+   "group": "arrive",
+   "type": "link",
+   "title": "IC card (ICOCA)",
+   "desc": "Buy at a JR ticket machine. Works on the Port Liner, trains, buses, and in shops.",
+   "href": "https://www.westjr.co.jp/global/en/"
+  },
+  {
+   "id": "kobe",
+   "group": "arrive",
+   "type": "link",
+   "title": "Kobe city guide",
+   "desc": "The official visitor site, in English.",
+   "href": "https://www.feel-kobe.jp/en/"
+  },
+  {
+   "id": "gmaps-mic",
+   "group": "arrive",
+   "type": "link",
+   "title": "Mirai Base on Google Maps",
+   "desc": "Medtech Innovation Center, 1-5-1 Minatojima Minamimachi.",
+   "href": "https://maps.app.goo.gl/yCvzk921vKz2NZfW7"
+  },
+  {
+   "id": "gmaps-irc",
+   "group": "arrive",
+   "type": "link",
+   "title": "Summit venue on Google Maps",
+   "desc": "Integrated Research Center, Convention Hall.",
+   "href": "https://maps.app.goo.gl/mXhV3fUvzCiEUmVL7"
+  },
+  {
+   "id": "gmaps-orbis",
+   "group": "arrive",
+   "type": "link",
+   "title": "Orbis Hall on Google Maps",
+   "desc": "Kobe Fashion Museum, 5F, Rokko Island.",
+   "href": "https://maps.app.goo.gl/m9ahz6a3E3kzkFQH8"
+  },
+  {
+   "id": "taxi-mic",
+   "group": "taxi",
+   "type": "card",
+   "title": "Mirai Base",
+   "desc": "Medtech Innovation Center",
+   "ja": "神戸大学 メドテックイノベーションセンター",
+   "addr": "〒650-0047 兵庫県神戸市中央区港島南町1丁目5-1",
+   "en": "1-5-1 Minatojima Minamimachi, Chuo Ward, Kobe 650-0047"
+  },
+  {
+   "id": "taxi-cowork",
+   "group": "taxi",
+   "type": "card",
+   "title": "Cowork space",
+   "desc": "Shimin Byoin Mae Building, 4F",
+   "ja": "市民病院前ビル 4階",
+   "addr": "〒650-0047 兵庫県神戸市中央区港島南町2丁目1-11",
+   "en": "2-1-11 Minatojima Minamimachi, Chuo Ward, Kobe 650-0047"
+  },
+  {
+   "id": "taxi-irc",
+   "group": "taxi",
+   "type": "card",
+   "title": "Summit venue",
+   "desc": "Integrated Research Center",
+   "ja": "神戸大学 統合研究拠点 コンベンションホール",
+   "addr": "〒650-0047 兵庫県神戸市中央区港島南町7丁目1-48",
+   "en": "7-1-48 Minatojima Minamimachi, Chuo Ward, Kobe 650-0047"
+  },
+  {
+   "id": "taxi-portopia",
+   "group": "taxi",
+   "type": "card",
+   "title": "Portopia Hotel",
+   "desc": "Summit II, day 2",
+   "ja": "神戸ポートピアホテル",
+   "addr": "〒650-0046 兵庫県神戸市中央区港島中町6丁目10-1",
+   "en": "6-10-1 Minatojima Nakamachi, Chuo Ward, Kobe 650-0046"
+  },
+  {
+   "id": "taxi-orbis",
+   "group": "taxi",
+   "type": "card",
+   "title": "Orbis Hall",
+   "desc": "Kobe Fashion Museum, 5F",
+   "ja": "神戸ファッション美術館 オルビスホール",
+   "addr": "〒658-0032 兵庫県神戸市東灘区向洋町中2丁目9-1",
+   "en": "2-9-1 Koyocho-naka, Higashinada Ward, Kobe 658-0032"
+  },
+  {
+   "id": "police",
+   "group": "help",
+   "type": "tel",
+   "title": "Police",
+   "desc": "Emergency. Free from any phone.",
+   "number": "110"
+  },
+  {
+   "id": "fire",
+   "group": "help",
+   "type": "tel",
+   "title": "Ambulance and fire",
+   "desc": "Emergency. Free from any phone.",
+   "number": "119"
+  },
+  {
+   "id": "jnto",
+   "group": "help",
+   "type": "tel",
+   "title": "Japan Visitor Hotline",
+   "desc": "24 hours, in English. Run by the national tourism office.",
+   "number": "050-3816-2787"
+  },
+  {
+   "id": "team",
+   "group": "help",
+   "type": "mail",
+   "title": "The Mirai team",
+   "desc": "Anything about the month.",
+   "address": "team@miraitech.city"
+  },
+  {
+   "id": "call",
+   "group": "help",
+   "type": "link",
+   "title": "Book a call with Nelson",
+   "desc": "Fifteen minutes on Calendly.",
+   "href": "https://calendly.com/nelson-frontierhumans/mtc-acceleration-sprint?utm_source=citizens"
+  },
+  {
+   "id": "site",
+   "group": "event",
+   "type": "link",
+   "title": "Main site",
+   "desc": "mirai-tech-city.vercel.app",
+   "href": "/"
+  },
+  {
+   "id": "experience",
+   "group": "event",
+   "type": "link",
+   "title": "What a month here is like",
+   "desc": "Daily rhythm, week by week, the people.",
+   "href": "/experience/"
+  },
+  {
+   "id": "summits",
+   "group": "event",
+   "type": "link",
+   "title": "The summits",
+   "desc": "Speakers and program for both weekends.",
+   "href": "/conferences/"
+  },
+  {
+   "id": "show",
+   "group": "event",
+   "type": "link",
+   "title": "The Fashion Show",
+   "desc": "October 26, 3–6 PM, Orbis Hall.",
+   "href": "/fashion-show/"
+  },
+  {
+   "id": "mic-site",
+   "group": "event",
+   "type": "link",
+   "title": "Medtech Innovation Center",
+   "desc": "Kobe University, in English.",
+   "href": "https://www.med.kobe-u.ac.jp/mic/en/"
+  },
+  {
+   "id": "portopia-site",
+   "group": "event",
+   "type": "link",
+   "title": "Kobe Portopia Hotel",
+   "desc": "The partner hotel.",
+   "href": "https://www.portopia.co.jp/"
+  }
+ ]
+}

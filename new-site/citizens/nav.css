@@ -1,0 +1,105 @@
+/* Citizens nav — the shared header of every citizens screen (/citizens/, /quests/, /links/, …).
+   Two rows, fixed to the top: a title row (logo, Citizens tag, the screen's name, the dates) and a strip
+   of five equal tab buttons — Map, Quests, Links, Today, Directory — the current one filled cyan.
+   Keys: 1–5 jump, [ and ] cycle. Markup comes from nav.js in this folder (variant "iris from the tab"), which sets body.has-mtc-nav.
+   Not the public site nav (/nav.css). Self-contained: every colour has a fallback. */
+
+:root { --mtc-title-h: 50px; --mtc-tabs-h: 58px; --mtc-nav-h: calc(var(--mtc-title-h) + var(--mtc-tabs-h) + env(safe-area-inset-top, 0px)); }
+
+body.has-mtc-nav { padding-top: var(--mtc-nav-h); }
+
+.mtc-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 30; height: var(--mtc-nav-h);
+  padding-top: env(safe-area-inset-top, 0px); display: flex; flex-direction: column;
+  background: rgba(5,5,6,.86); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line, rgba(244,243,240,.14));
+  font-family: var(--mono, 'IBM Plex Mono', monospace); font-size: 12px; letter-spacing: .16em; text-transform: uppercase; line-height: 1;
+  transition: transform .2s cubic-bezier(.2,.7,.2,1), opacity .2s; }
+.mtc-nav.mtc-hidden { transform: translateY(-100%); opacity: 0; pointer-events: none; }
+
+/* ---- row 1: the title ---- */
+.mtc-title { height: var(--mtc-title-h); display: flex; align-items: center; gap: 12px; padding: 0 16px;
+  border-bottom: 1px solid var(--line, rgba(244,243,240,.14)); }
+.mtc-logo { font-family: var(--font, 'Switzer', sans-serif); font-weight: 800; letter-spacing: .06em; font-size: 12px; text-transform: uppercase;
+  text-decoration: none; color: var(--ink, #f4f3f0); }
+.mtc-logo span { color: var(--accent, #9be8f0); }
+.mtc-tag { font-size: 9px; letter-spacing: .22em; color: var(--accent, #9be8f0); border: 1px solid rgba(155,232,240,.3); border-radius: 2px; padding: 4px 8px; }
+.mtc-h1 { margin: 0 0 0 4px; padding-left: 16px; border-left: 1px solid var(--line, rgba(244,243,240,.14));
+  font-family: var(--font, 'Switzer', sans-serif); font-weight: 900; font-size: 19px; letter-spacing: -.01em; text-transform: uppercase; line-height: 1;
+  color: var(--ink, #f4f3f0); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+.mtc-h1 i { font-style: normal; color: var(--accent, #9be8f0); }
+.mtc-eyebrow { margin-left: auto; font-size: 9.5px; letter-spacing: .26em; color: var(--accent, #9be8f0); white-space: nowrap; }
+
+/* ---- row 2: five equal tab buttons, with the shoulder hints at the ends ---- */
+.mtc-tabs { height: var(--mtc-tabs-h); display: flex; align-items: stretch; padding: 7px 8px; gap: 6px; }
+.mtc-br { flex: 0 0 22px; display: grid; place-items: center; color: var(--faint, rgba(244,243,240,.45)); font-size: 14px; user-select: none; }
+.mtc-tab { position: relative; flex: 1 1 0; min-width: 0; display: flex; align-items: center; justify-content: center; gap: 9px; padding: 0 8px;
+  border: 1px solid var(--line, rgba(244,243,240,.14)); border-radius: 2px; background: rgba(244,243,240,.025);
+  color: var(--dim, rgba(244,243,240,.62)); text-decoration: none; white-space: nowrap; overflow: hidden;
+  transition: color .15s, background-color .15s, border-color .15s, transform .12s; }
+.mtc-n { color: var(--faint, rgba(244,243,240,.45)); }
+.mtc-l { font-weight: 500; }
+.mtc-s { color: var(--faint, rgba(244,243,240,.45)); font-size: 8.5px; letter-spacing: .12em; }
+a.mtc-tab:hover, a.mtc-tab:focus-visible { color: var(--ink, #f4f3f0); border-color: rgba(155,232,240,.55); background: rgba(155,232,240,.06); }
+a.mtc-tab:not([aria-current]):hover .mtc-n, a.mtc-tab:not([aria-current]):focus-visible .mtc-n { color: var(--accent, #9be8f0); }
+a.mtc-tab:active { transform: scale(.97); }
+.mtc-tab:focus-visible { outline: 2px solid var(--accent, #9be8f0); outline-offset: 2px; }
+/* the one signal: the current screen is the filled button, with the suite's corner brackets */
+.mtc-tab[aria-current="page"], .mtc-tab[aria-current="page"]:hover { background: var(--accent, #9be8f0); border-color: var(--accent, #9be8f0); color: #04191c; }
+.mtc-tab[aria-current="page"] .mtc-n { color: rgba(4,25,28,.7); }
+.mtc-tab[aria-current="page"]::before, .mtc-tab[aria-current="page"]::after { content: ''; position: absolute; width: 7px; height: 7px; pointer-events: none; }
+.mtc-tab[aria-current="page"]::before { top: 2px; left: 2px; border-top: 1.5px solid #04191c; border-left: 1.5px solid #04191c; }
+.mtc-tab[aria-current="page"]::after { bottom: 2px; right: 2px; border-bottom: 1.5px solid #04191c; border-right: 1.5px solid #04191c; }
+/* not built yet: dashed, dimmed, says Soon, not a link */
+.mtc-tab.mtc-soon { border-style: dashed; background: transparent; color: var(--faint, rgba(244,243,240,.45)); cursor: default; }
+.mtc-tab.mtc-soon .mtc-n { color: rgba(244,243,240,.3); }
+
+/* phones: the title row keeps logo + screen name; the tabs stack number over name */
+@media (max-width: 600px) {
+  :root { --mtc-title-h: 46px; --mtc-tabs-h: 60px; }
+  .mtc-title { padding: 0 12px; gap: 10px; }
+  .mtc-tag, .mtc-eyebrow { display: none; }
+  .mtc-h1 { font-size: 17px; margin-left: 0; padding-left: 12px; }
+  .mtc-tabs { padding: 6px 6px; gap: 4px; }
+  .mtc-nav { font-size: 10px; letter-spacing: .1em; }
+  .mtc-br { flex-basis: 14px; font-size: 12px; }
+  .mtc-tab { display: grid; grid-template-columns: auto auto; grid-template-rows: auto auto; justify-content: center; align-content: center;
+    column-gap: 4px; row-gap: 4px; padding: 0 3px; }
+  .mtc-n { grid-row: 1; font-size: 9px; }
+  .mtc-s { grid-row: 1; font-size: 8px; letter-spacing: .08em; }
+  .mtc-l { grid-row: 2; grid-column: 1 / -1; text-align: center; }
+}
+
+/* the screen change, "iris from the tab": a cyan disc grows out of the pressed tab until it covers the viewport
+   (≤240ms), the next screen loads, and the disc shrinks back into that tab (≤240ms). The disc is a scaled round
+   element (compositor-only), sized and placed by nav.js; the label (number + name) sits at the viewport centre. */
+.mtc-tab.mtc-pressed, .mtc-tab.mtc-pressed:hover { background: var(--accent, #9be8f0); border-color: var(--accent, #9be8f0); color: #04191c; transition: none; } /* at once, no 150ms fade */
+.mtc-tab.mtc-pressed .mtc-n { color: rgba(4,25,28,.7); }
+.mtc-iris { position: fixed; inset: 0; z-index: 40; pointer-events: none; overflow: hidden; }
+.mtc-iris-disc { position: absolute; border-radius: 50%; background: var(--accent, #9be8f0); will-change: transform; }
+.mtc-iris-label { position: absolute; left: 0; right: 0; top: 50%; transform: translateY(-50%); text-align: center; opacity: 0;
+  font-family: var(--font, 'Switzer', sans-serif); font-weight: 900; font-size: clamp(34px, 7vw, 88px); letter-spacing: -.02em;
+  text-transform: uppercase; line-height: 1; color: #04191c; white-space: nowrap; }
+.mtc-iris-n { font-family: var(--mono, 'IBM Plex Mono', monospace); font-weight: 500; font-size: .42em; letter-spacing: .1em; vertical-align: .32em; margin-right: .1em; }
+.mtc-iris-out .mtc-iris-disc { transform: scale(0); animation: mtcIrisGrow .24s cubic-bezier(.4,0,.6,1) forwards; }
+.mtc-iris-out .mtc-iris-label { animation: mtcIrisLabelIn .09s .15s linear forwards; } /* the last frames only */
+.mtc-iris-in .mtc-iris-disc { animation: mtcIrisShrink .24s cubic-bezier(.4,0,.6,1) forwards; }
+.mtc-iris-in .mtc-iris-label { opacity: 1; animation: mtcIrisLabelOut .08s linear forwards; }
+@keyframes mtcIrisGrow   { from { transform: scale(0); } to { transform: scale(1); } }
+@keyframes mtcIrisShrink { from { transform: scale(1); } to { transform: scale(0); } }
+@keyframes mtcIrisLabelIn  { from { opacity: 0; } to { opacity: 1; } }
+@keyframes mtcIrisLabelOut { from { opacity: 1; } to { opacity: 0; } }
+
+/* ---- the map screen: its HUD is pinned to the viewport edges, so the top-anchored pieces move down by the
+   header height. Selectors are the map's own classes (citizens/index.html); the map JS is untouched. The Dates
+   drawer is not offset: the header hides while it is open. ---- */
+body.has-mtc-nav .hud .left, body.has-mtc-nav .hud .bar { top: calc(var(--gap, 14px) + var(--mtc-nav-h)); }
+body.has-mtc-nav .hud .detail { top: calc(56px + var(--mtc-nav-h)); max-height: calc(100dvh - 166px - var(--mtc-nav-h)); }
+@media (max-width: 760px) {
+  body.has-mtc-nav .hud .detail { top: auto; max-height: 46dvh; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mtc-nav, .mtc-tab { transition: none; }
+  .mtc-iris { display: none; }
+  .mtc-iris-disc, .mtc-iris-label { animation: none; }
+}
