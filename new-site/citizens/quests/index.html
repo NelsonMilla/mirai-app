@@ -1,0 +1,481 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Quests · Citizens · Mirai Tech City · Kobe 2026</title>
+<meta name="robots" content="noindex, nofollow" />
+<meta name="theme-color" content="#050506" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23050506'/%3E%3Ctext x='50' y='72' font-size='62' font-family='Georgia' font-weight='bold' fill='%239be8f0' text-anchor='middle'%3E未%3C/text%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="preconnect" href="https://api.fontshare.com" />
+<link rel="preconnect" href="https://cdn.fontshare.com" crossorigin />
+<link href="https://api.fontshare.com/v2/css?f[]=switzer@400,500,700,800,900&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/posthog.js"></script>
+<script defer src="/analytics.js"></script>
+<link rel="stylesheet" href="/citizens/nav.css" />
+<style>
+  :root {
+    --bg: #050506; --ink: #f4f3f0; --dim: rgba(244,243,240,.62); --faint: rgba(244,243,240,.45);
+    --line: rgba(244,243,240,.14); --accent: #9be8f0; --accent-rgb: 155,232,240;
+    --font: 'Switzer', 'Inter', -apple-system, sans-serif; --mono: 'IBM Plex Mono', monospace;
+    --hud: rgba(5,5,6,.9); --paper: #0b0c0f; --paper-2: #101216;
+    --red: #d8322b; --red-rgb: 216,50,43;
+    --ease: cubic-bezier(.2,.7,.2,1); --gap: 14px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { background: var(--bg); }
+  body { min-width: 320px; min-height: 100dvh; background: var(--bg); color: var(--ink); font-family: var(--font);
+    -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+  ::selection { background: var(--accent); color: #000; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  a { color: inherit; }
+  button { font: inherit; color: inherit; }
+  .num { font-variant-numeric: tabular-nums; }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+  /* the same corner-bracket panel as the map, used only for the header chip and the open card */
+  .panel { position: relative; background: var(--hud); border: 1px solid var(--line); }
+  .panel::before, .panel::after { content: ''; position: absolute; width: 9px; height: 9px; pointer-events: none; }
+  .panel::before { top: -1px; left: -1px; border-top: 1px solid var(--accent); border-left: 1px solid var(--accent); }
+  .panel::after { bottom: -1px; right: -1px; border-bottom: 1px solid var(--accent); border-right: 1px solid var(--accent); }
+
+  .wrap { max-width: 1180px; margin: 0 auto; padding: var(--gap) var(--gap) 60px; }
+
+  /* ---------- top: chip, greeting, total ---------- */
+  .top { display: grid; grid-template-columns: auto 1fr auto; gap: 14px; align-items: start; }
+  .chip { padding: 12px 14px 13px; }
+  .chip .row { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+  .logo { font-weight: 800; letter-spacing: .06em; font-size: 12px; text-transform: uppercase; text-decoration: none; }
+  .logo span { color: var(--accent); }
+  .tag { font-family: var(--mono); font-size: 9px; letter-spacing: .22em; text-transform: uppercase; color: var(--accent);
+    border: 1px solid rgba(var(--accent-rgb), .3); border-radius: 2px; padding: 4px 8px; }
+  .eyebrow { margin-top: 10px; font-family: var(--mono); font-size: 9.5px; letter-spacing: .26em; text-transform: uppercase; color: var(--accent); }
+  h1 { margin-top: 4px; font-weight: 900; text-transform: uppercase; letter-spacing: -.015em; font-size: 26px; line-height: .95; }
+  h1 .tick { color: var(--accent); }
+  .bar { display: flex; gap: 6px; justify-content: flex-end; }
+  .btn { display: inline-block; padding: 9px 12px; border: 1px solid var(--line); border-radius: 2px; background: var(--hud); color: var(--ink);
+    font-family: var(--mono); font-size: 9.5px; letter-spacing: .18em; text-transform: uppercase; cursor: pointer; text-decoration: none;
+    transition: border-color .2s, color .2s; }
+  .btn:hover { border-color: var(--accent); }
+  .btn.go { background: var(--accent); border-color: var(--accent); color: #04191c; font-weight: 500; }
+  .btn.go:hover { background: #c3f1f6; }
+
+  .intro { grid-column: 1 / -1; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 12px 24px;
+    margin-top: 26px; padding-bottom: 16px; border-bottom: 1px solid var(--line); }
+  .hello { font-size: 15px; line-height: 1.5; color: var(--dim); max-width: 60ch; }
+  .hello b { color: var(--ink); font-weight: 700; }
+  .total { display: flex; align-items: baseline; gap: 8px; font-family: var(--mono); font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--dim); }
+  .total b { font-family: var(--font); font-weight: 900; font-size: 44px; line-height: .9; letter-spacing: -.02em; color: var(--ink); }
+  .total .lbl { color: var(--faint); }
+
+  /* ---------- the three sheets: one on screen at a time, tabs above, swipe or arrows between ---------- */
+  .tabs { display: flex; gap: 6px; margin-top: 26px; }
+  .tab { flex: 1 1 0; min-width: 0; display: grid; grid-template-columns: auto 1fr; grid-template-rows: auto auto; gap: 4px 12px; align-items: center;
+    text-align: left; padding: 11px 14px; background: var(--hud); border: 1px solid var(--line); cursor: pointer; transition: border-color .2s, background .2s; }
+  .tab:hover { border-color: rgba(var(--accent-rgb), .5); }
+  .tab[aria-selected="true"] { border-color: var(--accent); background: rgba(var(--accent-rgb), .06); box-shadow: inset 0 -2px 0 var(--accent); }
+  .tab .no { grid-row: 1 / span 2; font-family: var(--mono); font-size: 9.5px; letter-spacing: .22em; text-transform: uppercase; color: var(--accent); }
+  .tab h2 { font-weight: 800; text-transform: uppercase; letter-spacing: -.01em; font-size: 17px; line-height: 1; }
+  .gp { display: flex; align-items: center; gap: 10px; font-family: var(--mono); font-size: 10px; letter-spacing: .16em; text-transform: uppercase;
+    color: var(--dim); white-space: nowrap; }
+  .track { margin-top: 12px; display: flex; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; scrollbar-width: none;
+    -webkit-overflow-scrolling: touch; }
+  .track::-webkit-scrollbar { display: none; }
+  .sheet { flex: 0 0 100%; min-width: 0; scroll-snap-align: start; }
+  .blurb { padding: 4px 0 10px; font-size: 13.5px; color: var(--dim); }
+  .gp .dots { display: flex; gap: 4px; }
+  .gp .dots i { width: 8px; height: 8px; border-radius: 50%; border: 1px solid var(--line); }
+  .gp .dots i.on { background: var(--red); border-color: var(--red); }
+
+  /* the sheet itself: perforated grid of cards, faint paper grain */
+  .grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border: 1px solid var(--line);
+    background: var(--paper);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .96 0 0 0 0 .95 0 0 0 0 .94 0 0 0 .07 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E"); }
+  .card { position: relative; min-width: 0; min-height: 216px; padding: 14px 14px 16px; text-align: left; background: transparent; border: 0;
+    border-right: 1px dashed var(--line); border-bottom: 1px dashed var(--line); cursor: pointer;
+    display: flex; flex-direction: column; gap: 6px; transition: background .2s; }
+  .card:hover, .card[aria-expanded="true"] { background: rgba(var(--accent-rgb), .045); }
+  .card:focus-visible { outline-offset: -3px; z-index: 1; }
+  .card .head { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
+  .card .n { font-weight: 900; font-size: 30px; line-height: .9; letter-spacing: -.02em; color: var(--faint); }
+  .card .wh { font-family: var(--mono); font-size: 9px; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); text-align: right; padding-top: 3px; }
+  .card .t { font-weight: 800; font-size: 14.5px; line-height: 1.15; text-transform: uppercase; letter-spacing: .01em; }
+  .card .slot { margin-top: auto; align-self: center; }
+  .card.done .n { color: var(--ink); }
+
+  /* the stamp slot: an empty dotted ring, a keyhole for code quests, the red hanko once done */
+  .slot { position: relative; width: 84px; height: 84px; display: grid; place-items: center; }
+  .slot .ring { position: absolute; inset: 0; border-radius: 50%; border: 1px dashed rgba(244,243,240,.28); }
+  .slot .lock { color: var(--faint); width: 22px; height: 22px; }
+  .slot .stamp { position: absolute; inset: -4px; width: auto; height: auto; transform: rotate(-11deg); opacity: 0; visibility: hidden; }
+  .done .slot .stamp { opacity: .96; visibility: visible; }
+  .done .slot .ring, .done .slot .lock { opacity: 0; }
+  .stamp { filter: url(#ink); color: var(--red); }
+  .stamp .k { font-family: 'Hiragino Mincho ProN', 'Yu Mincho', 'Noto Serif JP', Georgia, serif; font-weight: 700; }
+  .stamp .m { font-family: var(--mono); letter-spacing: .3em; }
+  .just .slot .stamp { animation: stampDown .42s cubic-bezier(.2,.9,.2,1) both; }
+  .just .slot .ring { animation: ringOut .42s ease-out both; }
+  @keyframes stampDown { 0% { transform: rotate(-16deg) scale(2.4); opacity: 0; } 55% { transform: rotate(-11deg) scale(.92); opacity: 1; } 100% { transform: rotate(-11deg) scale(1); opacity: .96; } }
+  @keyframes ringOut { 0% { transform: scale(1); opacity: 1; } 100% { transform: scale(1.5); opacity: 0; } }
+  .just.card { animation: thud .32s ease-out both; }
+  @keyframes thud { 0% { transform: none; } 45% { transform: translateY(2px) scale(.985); } 100% { transform: none; } }
+
+  /* ---------- the open card: a flipped-up card in the middle on desktop, a bottom sheet on phones ---------- */
+  .scrim { position: fixed; inset: 0; z-index: 20; background: rgba(5,5,6,.66); opacity: 0; visibility: hidden; transition: opacity .3s, visibility 0s .3s; }
+  .scrim.open { opacity: 1; visibility: visible; transition: opacity .3s; }
+  .open-card { position: fixed; z-index: 21; left: 50%; top: 50%; width: min(560px, calc(100vw - 28px)); max-height: calc(100dvh - 40px); overflow: auto;
+    padding: 20px 20px 22px; visibility: hidden; opacity: 0; transform: translate(-50%, -50%) perspective(1400px) rotateY(-92deg);
+    transform-origin: 50% 50%; transition: transform .45s var(--ease), opacity .25s, visibility 0s .45s;
+    background: var(--paper-2); }
+  .open-card.open { visibility: visible; opacity: 1; transform: translate(-50%, -50%) perspective(1400px) rotateY(0); transition: transform .45s var(--ease), opacity .25s; }
+  .x { position: absolute; top: 8px; right: 8px; width: 30px; height: 30px; border: 1px solid transparent; background: none;
+    color: var(--dim); font-family: var(--mono); font-size: 13px; cursor: pointer; border-radius: 2px; }
+  .x:hover { color: var(--accent); border-color: var(--line); }
+  .oc-head { display: grid; grid-template-columns: 1fr auto; gap: 14px; align-items: start; padding-right: 26px; }
+  .oc-head .no { font-family: var(--mono); font-size: 9.5px; letter-spacing: .26em; text-transform: uppercase; color: var(--accent); }
+  .oc-head .t { margin-top: 6px; font-weight: 800; font-size: 22px; letter-spacing: 0; text-transform: uppercase; line-height: 1.08; }
+  .oc-head .wh { margin-top: 6px; font-family: var(--mono); font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--dim); }
+  .oc-head .slot { width: 96px; height: 96px; }
+  .steps { margin: 16px 0 0; list-style: none; counter-reset: s; border-top: 1px solid var(--line); }
+  .steps li { counter-increment: s; display: grid; grid-template-columns: 26px 1fr; gap: 10px; padding: 9px 0; border-bottom: 1px solid var(--line); font-size: 14px; line-height: 1.5; }
+  .steps li::before { content: counter(s, decimal-leading-zero); font-family: var(--mono); font-size: 10px; letter-spacing: .1em; color: var(--accent); padding-top: 4px; }
+  .steps .coming { display: block; margin-top: 2px; font-family: var(--mono); font-size: 9.5px; letter-spacing: .16em; text-transform: uppercase; color: var(--faint); }
+  .place { margin-top: 12px; font-size: 13px; line-height: 1.5; color: var(--dim); }
+  .place b { display: block; font-family: var(--mono); font-size: 9px; letter-spacing: .22em; text-transform: uppercase; color: var(--faint); font-weight: 400; margin-bottom: 3px; }
+  .links { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 8px; }
+  .verify { margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; }
+  .verify .lbl { flex: 1 0 100%; font-family: var(--mono); font-size: 9px; letter-spacing: .22em; text-transform: uppercase; color: var(--faint); }
+  .verify input { flex: 1 1 160px; min-width: 0; padding: 9px 10px; background: rgba(244,243,240,.04); border: 1px solid var(--line); border-radius: 2px;
+    color: var(--ink); font: 700 13px/1.2 var(--font); text-transform: uppercase; letter-spacing: .06em; }
+  .verify input::placeholder { color: var(--faint); font-weight: 400; text-transform: none; letter-spacing: 0; }
+  .verify input:focus { outline: none; border-color: var(--accent); }
+  .verify .msg { flex: 1 0 100%; min-height: 14px; font-family: var(--mono); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--dim); }
+  .verify .msg.bad { color: var(--red); }
+  .verify .msg.ok { color: var(--accent); }
+
+  footer { margin-top: 44px; padding-top: 18px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 8px 22px; align-items: baseline;
+    font-family: var(--mono); font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--faint); }
+  footer b { color: var(--dim); font-weight: 400; }
+  footer a { color: var(--accent); text-decoration: none; }
+
+  .loading { padding: 40px 0; font-family: var(--mono); font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--faint); }
+
+  @media (max-width: 980px) { .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  @media (max-width: 760px) {
+    :root { --gap: 10px; }
+    .top { grid-template-columns: 1fr auto; }
+    .top > div:empty { display: none; }
+    .chip { justify-self: start; }
+    .chip .tag { display: none; }
+    h1 { font-size: 22px; }
+    .intro { margin-top: 18px; }
+    .total b { font-size: 36px; }
+    .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .card { padding: 12px 12px 14px; }
+    .card .n { font-size: 26px; }
+    .card .t { font-size: 13.5px; }
+    .tabs { gap: 4px; }
+    .tab { padding: 9px 8px; gap: 3px 8px; }
+    .tab .no { font-size: 8px; letter-spacing: .12em; }
+    .tab h2 { font-size: 12px; }
+    .gp { font-size: 8.5px; gap: 6px; }
+    .tab .gp > span:last-child { display: none; } /* dots only; the count is clipped at this width */
+    .tab .no { white-space: nowrap; }
+    .gp .dots { gap: 3px; }
+    .gp .dots i { width: 6px; height: 6px; }
+    .card { min-height: 150px; }
+    .slot { width: 56px; height: 56px; }
+    .open-card { left: 0; right: 0; top: auto; bottom: 0; width: auto; max-height: 86dvh; border-bottom: 0; padding-bottom: calc(22px + env(safe-area-inset-bottom));
+      transform: translateY(100%); transition: transform .4s var(--ease), visibility 0s .4s; }
+    .open-card.open { transform: none; transition: transform .4s var(--ease); }
+    .open-card::after { display: none; }
+    .oc-head .slot { width: 80px; height: 80px; }
+    .oc-head .t { font-size: 19px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .card, .btn, .scrim, .open-card, .x { transition: none; }
+    .just .slot .stamp, .just .slot .ring, .just.card { animation: none; }
+  }
+</style>
+</head>
+<body data-analytics-offer="citizens">
+
+<script src="/citizens/nav.js" data-screen="quests" data-title="Quests"></script>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <filter id="ink" x="-6%" y="-6%" width="112%" height="112%">
+      <feTurbulence type="fractalNoise" baseFrequency=".055" numOctaves="3" seed="7" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="2.2" xChannelSelector="R" yChannelSelector="G" result="d"/>
+      <feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="2" seed="3" result="g"/>
+      <feColorMatrix in="g" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -1.6 1.55" result="a"/>
+      <feComposite in="d" in2="a" operator="in"/>
+    </filter>
+    <symbol id="key" viewBox="0 0 24 24">
+      <circle cx="12" cy="9" r="4.5" fill="none" stroke="currentColor" stroke-width="1.5"/>
+      <path d="M10.5 12.5 9 20h6l-1.5-7.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+    </symbol>
+  </defs>
+</svg>
+
+<div class="wrap">
+  <div class="top">
+    <div class="intro">
+      <p class="hello" id="hello"></p>
+      <p class="total num" aria-live="polite"><b id="totalN">0</b> <span>of <span id="totalAll">16</span></span> <span class="lbl">stamped</span></p>
+    </div>
+  </div>
+
+  <div class="tabs" id="tabs" role="tablist" aria-label="Quest sheets"></div>
+  <main id="sheets" class="track" aria-label="Quest sheets"><p class="loading">Loading quests…</p></main>
+
+  <footer>
+    <b>Mirai Tech City</b> <span>Kobe · Oct 1–31 2026</span>
+    <a href="/citizens/">Map →</a>
+  </footer>
+</div>
+
+<div class="scrim" id="scrim"></div>
+<aside class="open-card panel" id="oc" role="dialog" aria-modal="true" aria-labelledby="ocTitle" aria-hidden="true">
+  <button class="x" type="button" id="ocClose" aria-label="Close">✕</button>
+  <div id="ocBody"></div>
+</aside>
+
+<script>
+(function () {
+  var KEY = 'mtc_quests';
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var store = {
+    get: function (k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
+    set: function (k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+  };
+  function load() { try { var o = JSON.parse(store.get(KEY) || '{}'); return o && typeof o === 'object' ? o : {}; } catch (e) { return {}; } }
+  function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  function pad(n) { return (n < 10 ? '0' : '') + n; }
+
+  var data = null, state = load(), cards = [], openId = null;
+  var sheets = document.getElementById('sheets'), tabsEl = document.getElementById('tabs'), oc = document.getElementById('oc'), ocBody = document.getElementById('ocBody'),
+      scrim = document.getElementById('scrim'), phone = window.matchMedia('(max-width: 760px)');
+
+  function save() { store.set(KEY, JSON.stringify(state)); }
+  function isDone(id) { return !!(state[id] && state[id].done); }
+  function quest(id) { for (var i = 0; i < data.quests.length; i++) if (data.quests[i].id === id) return data.quests[i]; return null; }
+  function numOf(id) { for (var i = 0; i < data.quests.length; i++) if (data.quests[i].id === id) return i + 1; return 0; }
+
+  function slotHtml(q) {
+    return '<span class="slot" aria-hidden="true"><span class="ring"></span>' +
+      (q.verify === 'code' ? '<svg class="lock"><use href="#key"/></svg>' : '') +
+      '<svg class="stamp" viewBox="0 0 100 100">' +
+        '<circle cx="50" cy="50" r="46" fill="none" stroke="currentColor" stroke-width="3.2"/>' +
+        '<circle cx="50" cy="50" r="39.5" fill="none" stroke="currentColor" stroke-width="1.1"/>' +
+        '<text class="k" x="50" y="63" font-size="40" text-anchor="middle" fill="currentColor">未</text>' +
+        '<text class="m" x="50" y="21" font-size="7" text-anchor="middle" fill="currentColor">MTC · KOBE</text>' +
+        '<text class="m" x="50" y="88" font-size="7" text-anchor="middle" fill="currentColor">NO. ' + pad(numOf(q.id)) + '</text></svg></span>';
+  }
+
+  function render() {
+    var name = (store.get('mtc_name') || '').trim();
+    document.getElementById('hello').innerHTML = 'Hello, <b>' + esc(name || 'Citizen') + '</b>. ' +
+      'Open a card for its instructions. When a quest is done, stamp it. Some cards need a code word given in person.';
+    document.getElementById('totalAll').textContent = data.quests.length;
+    var html = '', tabs = '';
+    data.groups.forEach(function (g, gi) {
+      var qs = data.quests.filter(function (q) { return q.group === g.id; });
+      tabs += '<button class="tab" type="button" role="tab" id="tab-' + esc(g.id) + '" aria-selected="false" aria-controls="sheet-' + esc(g.id) + '" data-i="' + gi + '">' +
+        '<span class="no">Sheet ' + pad(gi + 1) + '</span><h2>' + esc(g.title) + '</h2><span class="gp num" data-gp="' + esc(g.id) + '"></span></button>';
+      html += '<section class="sheet" id="sheet-' + esc(g.id) + '" role="tabpanel" aria-labelledby="tab-' + esc(g.id) + '" data-i="' + gi + '">' +
+        '<p class="blurb">' + esc(g.blurb) + '</p>' +
+        '<div class="grid" role="list">';
+      qs.forEach(function (q) {
+        html += '<button class="card" type="button" role="listitem" data-id="' + esc(q.id) + '" aria-expanded="false">' +
+          '<span class="head"><span class="n num">' + pad(numOf(q.id)) + '</span><span class="wh num">' + esc(q.when) + '</span></span>' +
+          '<span class="t">' + esc(q.title) + '</span>' + slotHtml(q) +
+          '<span class="sr" data-st></span></button>';
+      });
+      html += '</div></section>';
+    });
+    tabsEl.innerHTML = tabs;
+    sheets.innerHTML = html;
+    cards = Array.prototype.slice.call(sheets.querySelectorAll('.card'));
+    cards.forEach(function (c) {
+      c.addEventListener('click', function () { openId === c.dataset.id ? close(true) : open(c.dataset.id); });
+      c.addEventListener('focus', function () { goSheet(+c.closest('.sheet').dataset.i); });
+    });
+    Array.prototype.forEach.call(tabsEl.querySelectorAll('.tab'), function (t) { t.addEventListener('click', function () { goSheet(+t.dataset.i); }); });
+    setTab(0);
+    paint();
+  }
+
+  // ---- one sheet at a time: the track scroll-snaps, tabs mirror it
+  var cur = 0;
+  function setTab(i) {
+    cur = i;
+    Array.prototype.forEach.call(tabsEl.querySelectorAll('.tab'), function (t, j) { t.setAttribute('aria-selected', String(j === i)); });
+  }
+  function goSheet(i, instant) {
+    i = Math.max(0, Math.min(data.groups.length - 1, i));
+    setTab(i);
+    sheets.scrollTo({ left: i * sheets.clientWidth, behavior: instant || reduce ? 'auto' : 'smooth' });
+  }
+  sheets.addEventListener('scroll', function () {
+    var i = Math.round(sheets.scrollLeft / sheets.clientWidth);
+    if (i !== cur) setTab(i);
+  }, { passive: true });
+  window.addEventListener('resize', function () { sheets.scrollTo({ left: cur * sheets.clientWidth, behavior: 'auto' }); });
+
+  function paint() {
+    var n = 0;
+    cards.forEach(function (c) {
+      var d = isDone(c.dataset.id); if (d) n++;
+      c.classList.toggle('done', d);
+      c.querySelector('[data-st]').textContent = d ? 'Done' : 'Not done';
+    });
+    document.getElementById('totalN').textContent = n;
+    data.groups.forEach(function (g) {
+      var qs = data.quests.filter(function (q) { return q.group === g.id; });
+      var k = qs.filter(function (q) { return isDone(q.id); }).length;
+      var el = tabsEl.querySelector('[data-gp="' + g.id + '"]');
+      el.innerHTML = '<span class="dots" aria-hidden="true">' + qs.map(function (q) { return '<i class="' + (isDone(q.id) ? 'on' : '') + '"></i>'; }).join('') + '</span>' +
+        '<span>' + k + ' of ' + qs.length + '</span>';
+    });
+  }
+
+  function setDone(id, on) {
+    if (on) state[id] = { done: true, at: new Date().toISOString() }; else delete state[id];
+    save(); paint();
+    var c = cardOf(id);
+    if (on && c && !reduce) { c.classList.remove('just'); void c.offsetWidth; c.classList.add('just'); }
+    if (openId === id) fill(id, true);
+  }
+  function cardOf(id) { for (var i = 0; i < cards.length; i++) if (cards[i].dataset.id === id) return cards[i]; return null; }
+
+  // ---- the open card
+  function fill(id, keepMsg) {
+    var q = quest(id), v = q.venue ? data.venues[q.venue] : null, done = isDone(id);
+    var h = '<div class="oc-head"><div><p class="no">Quest ' + pad(numOf(id)) + ' · ' + (done ? 'Done' : 'Not done') + '</p>' +
+      '<p class="t" id="ocTitle">' + esc(q.title) + '</p><p class="wh num">' + esc(q.when) + '</p></div>' +
+      '<div class="' + (done ? 'done' : '') + '">' + slotHtml(q) + '</div></div>';
+    h += '<ol class="steps">';
+    q.steps.forEach(function (s, i) {
+      var last = i === q.steps.length - 1 && 'link' in q;
+      h += '<li><span>' + esc(s);
+      if (last && q.link) h += ' <a href="' + esc(q.link.href) + '">' + esc(q.link.label) + ' →</a>';
+      if (last && q.link === null) h += '<span class="coming">Link coming</span>';
+      h += '</span></li>';
+    });
+    h += '</ol>';
+    if (v) {
+      h += '<p class="place"><b>Where</b>' + esc(v.name) + (v.tag ? ' · ' + esc(v.tag) : '') + '</p>' +
+        '<div class="links"><a class="btn" href="' + esc(v.map) + '">Open on the map</a>' +
+        '<a class="btn" href="' + esc(v.gmaps) + '" target="_blank" rel="noopener" data-analytics-action="site_navigation" data-analytics-location="citizens_quest" data-analytics-target="google_maps">Google Maps</a></div>';
+    }
+    h += '<div class="verify">';
+    if (q.verify === 'check') {
+      h += done ? '<button class="btn" type="button" data-act="undo">Remove the stamp</button>'
+               : '<button class="btn go" type="button" data-act="done">Stamp this card</button>';
+    } else if (q.verify === 'code') {
+      if (done) h += '<p class="msg ok">Code word accepted. This stamp stays.</p>';
+      else h += '<label class="lbl" for="code">Code word</label><input id="code" type="text" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="Given in person" />' +
+        '<button class="btn go" type="button" data-act="code">Check</button><p class="msg" id="codeMsg" aria-live="polite"></p>';
+    } else if (q.verify === 'auto') {
+      h += '<p class="msg ' + (done ? 'ok' : '') + '">' + (done ? 'Done. Your name is on the map.' : 'Stamps itself once your name is on the map.') + '</p>';
+    }
+    h += '</div>';
+    ocBody.innerHTML = h;
+    var b = ocBody.querySelector('[data-act]');
+    if (b) b.addEventListener('click', function () {
+      if (b.dataset.act === 'done') setDone(id, true);
+      else if (b.dataset.act === 'undo') setDone(id, false);
+      else check(id);
+    });
+    var inp = ocBody.querySelector('#code');
+    if (inp) inp.addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); check(id); } });
+  }
+
+  function sha256(s) {
+    return crypto.subtle.digest('SHA-256', new TextEncoder().encode(s)).then(function (buf) {
+      return Array.prototype.map.call(new Uint8Array(buf), function (b) { return ('0' + b.toString(16)).slice(-2); }).join('');
+    });
+  }
+  function check(id) {
+    var q = quest(id), inp = ocBody.querySelector('#code'), msg = ocBody.querySelector('#codeMsg');
+    var w = (inp.value || '').trim().toUpperCase();
+    if (!w) { msg.className = 'msg'; msg.textContent = 'Type the code word first.'; inp.focus(); return; }
+    sha256(w).then(function (hex) {
+      if (hex === q.codeHash) { setDone(id, true); }
+      else { msg.className = 'msg bad'; msg.textContent = "That's not it."; inp.select(); }
+    });
+  }
+
+  var lastFocus = null;
+  function open(id) {
+    var qq = quest(id); if (qq) { var gi = data.groups.map(function (g) { return g.id; }).indexOf(qq.group); if (gi >= 0 && gi !== cur) goSheet(gi, true); }
+    var c = cardOf(id); if (!c) return;
+    if (openId) { var p = cardOf(openId); if (p) p.setAttribute('aria-expanded', 'false'); }
+    openId = id; lastFocus = c;
+    c.setAttribute('aria-expanded', 'true');
+    fill(id);
+    oc.classList.add('open'); scrim.classList.add('open'); oc.setAttribute('aria-hidden', 'false');
+    oc.scrollTop = 0;
+    document.getElementById('ocClose').focus();
+  }
+  function close(refocus) {
+    if (!openId) return;
+    var c = cardOf(openId); if (c) c.setAttribute('aria-expanded', 'false');
+    openId = null;
+    oc.classList.remove('open'); scrim.classList.remove('open'); oc.setAttribute('aria-hidden', 'true');
+    if (refocus && lastFocus) lastFocus.focus();
+  }
+  document.getElementById('ocClose').addEventListener('click', function () { close(true); });
+  scrim.addEventListener('click', function () { close(false); });
+
+  // ---- keyboard: arrows move between cards (also while a card is open), Enter opens, Esc closes
+  function cols() {
+    var g = sheets.querySelector('.grid'); if (!g) return 1;
+    return getComputedStyle(g).gridTemplateColumns.split(' ').length || 1;
+  }
+  document.addEventListener('keydown', function (e) {
+    var t = e.target, typing = t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA');
+    if (e.key === 'Escape') { if (openId) { e.preventDefault(); close(true); } return; }
+    if (typing) return;
+    var k = e.key;
+    if (k !== 'ArrowLeft' && k !== 'ArrowRight' && k !== 'ArrowUp' && k !== 'ArrowDown') return;
+    if (!cards.length) return;
+    var i = openId ? cards.indexOf(cardOf(openId)) : cards.indexOf(document.activeElement);
+    if (i < 0) {
+      if (k === 'ArrowLeft' || k === 'ArrowRight') { e.preventDefault(); goSheet(cur + (k === 'ArrowRight' ? 1 : -1)); }
+      return;
+    } else {
+      var d = k === 'ArrowLeft' ? -1 : k === 'ArrowRight' ? 1 : k === 'ArrowUp' ? -cols() : cols();
+      i = Math.max(0, Math.min(cards.length - 1, i + d));
+    }
+    e.preventDefault();
+    if (openId) { open(cards[i].dataset.id); cards[i].scrollIntoView({ block: 'nearest' }); }
+    else cards[i].focus();
+  });
+
+  // ---- boot
+  fetch('/citizens/data/quests.json').then(function (r) { return r.json(); }).then(function (json) {
+    data = json;
+    // auto quests: done as soon as the named key exists in this browser
+    data.quests.forEach(function (q) {
+      if (q.verify === 'auto' && q.autoKey && store.get(q.autoKey) && !isDone(q.id)) state[q.id] = { done: true, at: new Date().toISOString() };
+    });
+    save();
+    render();
+    var hash = location.hash.replace('#', '');
+    if (hash && quest(hash)) open(hash);
+  }).catch(function () {
+    sheets.innerHTML = '<p class="loading">Could not load the quests. Reload the page.</p>';
+  });
+})();
+</script>
+
+</body>
+</html>

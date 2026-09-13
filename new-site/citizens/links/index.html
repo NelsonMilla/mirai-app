@@ -1,0 +1,440 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Links · Citizens · Mirai Tech City · Kobe 2026</title>
+<meta name="robots" content="noindex, nofollow" />
+<meta name="theme-color" content="#050506" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23050506'/%3E%3Ctext x='50' y='72' font-size='62' font-family='Georgia' font-weight='bold' fill='%239be8f0' text-anchor='middle'%3E未%3C/text%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="preconnect" href="https://api.fontshare.com" />
+<link rel="preconnect" href="https://cdn.fontshare.com" crossorigin />
+<link href="https://api.fontshare.com/v2/css?f[]=switzer@400,500,700,800,900&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/posthog.js"></script>
+<script defer src="/analytics.js"></script>
+<link rel="stylesheet" href="/citizens/nav.css" />
+<style>
+  :root {
+    --bg: #050506; --ink: #f4f3f0; --dim: rgba(244,243,240,.62); --faint: rgba(244,243,240,.45);
+    --line: rgba(244,243,240,.14); --accent: #9be8f0; --accent-rgb: 155,232,240;
+    --font: 'Switzer', 'Inter', -apple-system, sans-serif; --mono: 'IBM Plex Mono', monospace;
+    --jp: 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Noto Sans JP', 'Switzer', sans-serif;
+    --hud: rgba(5,5,6,.9); --paper: #0b0c0f; --paper-2: #101216; --paper-3: #15181d;
+    --red: #d8322b; --red-rgb: 216,50,43;
+    --ease: cubic-bezier(.2,.7,.2,1); --gap: 14px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { background: var(--bg); }
+  body { min-width: 320px; min-height: 100dvh; background: var(--bg); color: var(--ink); font-family: var(--font);
+    -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+  ::selection { background: var(--accent); color: #000; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  a { color: inherit; }
+  button { font: inherit; color: inherit; }
+  .num { font-variant-numeric: tabular-nums; }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+  /* the same corner-bracket panel as the map and the quests: header chip, menu, and the open card */
+  .panel { position: relative; background: var(--hud); border: 1px solid var(--line); }
+  .panel::before, .panel::after { content: ''; position: absolute; width: 9px; height: 9px; pointer-events: none; }
+  .panel::before { top: -1px; left: -1px; border-top: 1px solid var(--accent); border-left: 1px solid var(--accent); }
+  .panel::after { bottom: -1px; right: -1px; border-bottom: 1px solid var(--accent); border-right: 1px solid var(--accent); }
+
+  .wrap { max-width: 1180px; margin: 0 auto; padding: var(--gap) var(--gap) 60px; }
+
+  /* ---------- top: the lead line (the title lives in the shared header, /citizens/nav.js) ---------- */
+  .top { display: grid; grid-template-columns: auto 1fr auto; gap: 14px; align-items: start; }
+  .chip { padding: 12px 14px 13px; }
+  .chip .row { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+  .logo { font-weight: 800; letter-spacing: .06em; font-size: 12px; text-transform: uppercase; text-decoration: none; }
+  .logo span { color: var(--accent); }
+  .tag { font-family: var(--mono); font-size: 9px; letter-spacing: .22em; text-transform: uppercase; color: var(--accent);
+    border: 1px solid rgba(var(--accent-rgb), .3); border-radius: 2px; padding: 4px 8px; }
+  .eyebrow { margin-top: 10px; font-family: var(--mono); font-size: 9.5px; letter-spacing: .26em; text-transform: uppercase; color: var(--accent); }
+  h1 { margin-top: 4px; font-weight: 900; text-transform: uppercase; letter-spacing: -.015em; font-size: 26px; line-height: .95; }
+  h1 .tick { color: var(--accent); }
+  .btn { display: inline-block; padding: 9px 12px; border: 1px solid var(--line); border-radius: 2px; background: var(--hud); color: var(--ink);
+    font-family: var(--mono); font-size: 9.5px; letter-spacing: .18em; text-transform: uppercase; cursor: pointer; text-decoration: none;
+    transition: border-color .2s, color .2s; }
+  .btn:hover { border-color: var(--accent); }
+  .btn.go { background: var(--accent); border-color: var(--accent); color: #04191c; font-weight: 500; }
+  .btn.go:hover { background: #c3f1f6; }
+
+  .lead { grid-column: 1 / -1; margin-top: 18px; font-size: 14px; line-height: 1.5; color: var(--dim); max-width: 60ch; }
+
+  /* ---------- the emergency card: pinned at the top, red, both numbers, the biggest object ---------- */
+  .emg { margin-top: 16px; position: relative; border-radius: 10px; overflow: hidden;
+    background: linear-gradient(135deg, #e14a41 0%, var(--red) 45%, #a8231c 100%);
+    color: var(--ink); display: grid; grid-template-columns: 1fr 1fr; box-shadow: 0 1px 0 rgba(255,255,255,.18) inset; }
+  .emg::before { content: ''; position: absolute; inset: 0; pointer-events: none;
+    background: repeating-linear-gradient(0deg, rgba(0,0,0,.06) 0 1px, transparent 1px 3px); }
+  .emg .pin { position: absolute; left: 50%; top: 8px; width: 14px; height: 14px; margin-left: -7px; border-radius: 50%;
+    background: var(--bg); box-shadow: inset 0 0 0 3px #0a0a0c, 0 0 0 1px rgba(255,255,255,.35); z-index: 2; }
+  .emg .stripe { position: absolute; top: 0; left: 0; right: 0; height: 22px; display: flex; align-items: center; justify-content: space-between;
+    padding: 0 12px; font-family: var(--mono); font-size: 8.5px; letter-spacing: .26em; text-transform: uppercase; color: rgba(255,255,255,.72); }
+  .emg .half { position: relative; display: block; padding: 36px 22px 22px; color: inherit; }
+  .emg .half + .half { border-left: 1px solid rgba(255,255,255,.28); }
+  .emg .t { font-family: var(--mono); font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.85); }
+  .emg .n { display: block; margin-top: 4px; font-weight: 900; font-size: clamp(56px, 8vw, 96px); line-height: .9; letter-spacing: -.03em; color: #fff; }
+  .emg .d { margin-top: 8px; font-size: 13px; color: rgba(255,255,255,.85); }
+
+  /* ---------- groups: a hand-stamped label, then a loose row of objects that overlap and straighten on hover ---------- */
+  .group { margin-top: 36px; }
+  .ghead { display: flex; align-items: center; gap: 14px; width: 100%; padding: 4px 0; background: none; border: 0; border-bottom: 1px solid var(--line);
+    text-align: left; cursor: pointer; }
+  .ghead:focus-visible { outline-offset: 4px; }
+  .stamp { display: inline-block; padding: 7px 12px 8px; border: 2px solid var(--accent); border-radius: 3px; color: var(--accent);
+    font-weight: 800; font-size: 14px; letter-spacing: .04em; text-transform: uppercase; line-height: 1; transform: rotate(-1.6deg); filter: url(#ink); }
+  .group:nth-of-type(even) .stamp { transform: rotate(1.2deg); }
+  .group.mine .stamp { background: var(--accent); color: #04191c; }
+  .blurb { flex: 1 1 auto; min-width: 0; font-size: 13px; color: var(--dim); padding: 8px 0; }
+  .gcount { font-family: var(--mono); font-size: 9.5px; letter-spacing: .18em; text-transform: uppercase; color: var(--faint); white-space: nowrap; }
+  .tog { flex: 0 0 auto; width: 30px; height: 30px; display: grid; place-items: center; border: 1px solid var(--line); border-radius: 2px; color: var(--dim);
+    transition: transform .25s var(--ease), border-color .2s; }
+  .tog svg { width: 12px; height: 12px; }
+  .ghead:hover .tog { border-color: var(--accent); color: var(--accent); }
+  .group.closed .tog { transform: rotate(-90deg); }
+  .group.closed .objs, .group.closed .empty { display: none; }
+  .objs { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; padding-top: 16px; align-items: stretch; }
+  .empty { padding: 18px 0 4px; font-size: 13px; color: var(--faint); }
+  .slot { position: relative; display: flex; }
+  .slot > .obj { flex: 1 1 auto; }
+  .pinb { position: absolute; top: 8px; right: 8px; z-index: 3; width: 30px; height: 30px; display: grid; place-items: center; border: 1px solid var(--line);
+    border-radius: 2px; background: var(--hud); color: var(--faint); cursor: pointer; transition: color .2s, border-color .2s, background .2s; }
+  .pinb svg { width: 13px; height: 13px; }
+  .pinb:hover { color: var(--accent); border-color: var(--accent); }
+  .slot.pinned .pinb { color: #04191c; background: var(--accent); border-color: var(--accent); }
+  .env, .key, .ic { padding-right: 46px; }
+  .slot .stub .body { padding-right: 44px; }
+  .slot:has(.stub) .pinb { right: 50px; }  /* clear the tear-off tab */
+  .ic .jp { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+  .obj { position: relative; display: block; text-align: left; text-decoration: none; color: inherit; cursor: pointer; border: 0;
+    background: var(--paper-2); transition: transform .25s var(--ease), border-color .2s, background .2s, box-shadow .2s; }
+  a.obj:hover, button.obj:hover, .obj:focus-visible { transform: translateY(-3px); }
+  .obj:focus-visible { outline-offset: 3px; }
+  .obj .l, .obj .t, .obj .d, .obj .n, .obj .addr, .obj .note, .stub .body { display: block; }
+  .obj .t { font-weight: 800; font-size: 15px; line-height: 1.12; text-transform: uppercase; letter-spacing: .01em; }
+  .obj .d { margin-top: 5px; font-size: 12.5px; line-height: 1.4; color: var(--dim); }
+  .obj .l { font-family: var(--mono); font-size: 8.5px; letter-spacing: .2em; text-transform: uppercase; color: var(--faint); }
+
+  /* ticket stub: perforated end, the domain printed like a venue line, a tear-off tab with an arrow */
+  .stub { width: auto; min-height: 104px; display: grid; grid-template-columns: 1fr 42px; border: 1px solid var(--line); border-radius: 4px; }
+  .stub:hover, .stub:focus-visible { border-color: rgba(var(--accent-rgb), .55); }
+  .stub .body { padding: 12px 12px 13px; min-width: 0; }
+  .stub .l { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .stub .t { margin-top: 5px; }
+  .stub .tab { position: relative; border-left: 2px dashed var(--bg); background: var(--paper-3); display: grid; place-items: center;
+    color: var(--accent); font-family: var(--mono); font-size: 16px; border-radius: 0 4px 4px 0; }
+  .stub .tab::before, .stub .tab::after { content: ''; position: absolute; left: -8px; width: 14px; height: 14px; border-radius: 50%; background: var(--bg); }
+  .stub .tab::before { top: -8px; } .stub .tab::after { bottom: -8px; }
+  .stub .tab span { transition: transform .25s var(--ease); }
+  .stub:hover .tab span, .stub:focus-visible .tab span { transform: translate(2px, -1px); }
+  .stub.in .t::after { content: ''; }
+
+  /* soon: a blank greyed stub */
+  .stub.soon { cursor: default; border-style: dashed; background: transparent; color: var(--dim); }
+  .stub.soon .tab { background: transparent; color: var(--faint); border-left-style: dashed; }
+  .stub.soon:hover { border-color: var(--line); }
+  .stub.soon .note { margin-top: 7px; font-family: var(--mono); font-size: 9px; letter-spacing: .18em; text-transform: uppercase; color: var(--faint); }
+
+  /* dial pad key: a keycap with the number big */
+  .key { width: auto; min-height: 104px; padding: 12px 14px 14px; border: 1px solid var(--line); border-radius: 8px; cursor: default;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.08), 0 3px 0 #000, 0 4px 0 rgba(244,243,240,.1); }
+  .key .n { display: block; margin-top: 6px; font-weight: 900; font-size: 30px; line-height: 1; letter-spacing: -.02em; color: var(--accent); user-select: all; }
+  .key .d { margin-top: 8px; }
+
+  /* envelope: a flap drawn in hairlines, the address printed on the front */
+  .env { width: auto; min-height: 104px; padding: 46px 14px 14px; border: 1px solid var(--line); border-radius: 3px; overflow: hidden; }
+  .env::before { content: ''; position: absolute; left: 0; right: 0; top: 0; height: 40px; pointer-events: none;
+    background:
+      linear-gradient(to bottom right, transparent calc(50% - .5px), var(--line) calc(50% - .5px), var(--line) calc(50% + .5px), transparent calc(50% + .5px)) left top / 50% 100% no-repeat,
+      linear-gradient(to bottom left, transparent calc(50% - .5px), var(--line) calc(50% - .5px), var(--line) calc(50% + .5px), transparent calc(50% + .5px)) right top / 50% 100% no-repeat; }
+  .env::after { content: ''; position: absolute; left: 0; right: 0; top: 0; height: 40px; pointer-events: none; background: rgba(var(--accent-rgb), .04);
+    clip-path: polygon(0 0, 100% 0, 50% 100%); }
+  .env:hover, .env:focus-visible { border-color: rgba(var(--accent-rgb), .55); }
+  .env .addr { margin-top: 8px; font-family: var(--mono); font-size: 12px; color: var(--accent); letter-spacing: .02em; word-break: break-all; }
+
+  /* IC card: plastic, rounded, a chip, the venue name on the front; tapping flips it to the Japanese side */
+  .ic { width: auto; min-height: 150px; padding: 14px 16px; border-radius: 10px; border: 1px solid rgba(var(--accent-rgb), .28);
+    background: linear-gradient(120deg, #131a1e 0%, var(--paper-2) 55%, #0d1013 100%);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.08); display: flex; flex-direction: column; }
+  .ic::before { content: ''; position: absolute; inset: 0; border-radius: 10px; pointer-events: none;
+    background: linear-gradient(115deg, transparent 30%, rgba(var(--accent-rgb), .07) 45%, transparent 60%); }
+  .ic:hover, .ic:focus-visible { border-color: var(--accent); }
+  .ic .chipbox { width: 30px; height: 22px; border: 1px solid rgba(var(--accent-rgb), .7); border-radius: 4px; position: relative; }
+  .ic .chipbox::before { content: ''; position: absolute; left: 9px; right: 9px; top: 0; bottom: 0; border-left: 1px solid rgba(var(--accent-rgb), .5); border-right: 1px solid rgba(var(--accent-rgb), .5); }
+  .ic .chipbox::after { content: ''; position: absolute; left: 0; right: 0; top: 7px; bottom: 7px; border-top: 1px solid rgba(var(--accent-rgb), .5); border-bottom: 1px solid rgba(var(--accent-rgb), .5); }
+  .ic .hd { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
+  .ic .t { margin-top: auto; font-size: 18px; }
+  .ic .d { margin-top: 3px; }
+  .ic .jp { font-family: var(--jp); font-size: 11px; color: var(--faint); letter-spacing: .06em; }
+  .slot .ic .hd { padding-right: 34px; } /* keep the Japanese name clear of the pin */
+
+  /* ---------- the flipped card: the full-screen Japanese side ---------- */
+  .scrim { position: fixed; inset: 0; z-index: 20; background: rgba(5,5,6,.78); opacity: 0; visibility: hidden; transition: opacity .3s, visibility 0s .3s; }
+  .scrim.open { opacity: 1; visibility: visible; transition: opacity .3s; }
+  .big { position: fixed; z-index: 21; inset: 12px; overflow: auto; display: flex; flex-direction: column; padding: 22px 24px calc(22px + env(safe-area-inset-bottom));
+    background: linear-gradient(120deg, #131a1e 0%, var(--paper-2) 55%, #0d1013 100%); border: 1px solid var(--accent); border-radius: 14px;
+    visibility: hidden; opacity: 0; transform: perspective(1600px) rotateY(-90deg); transform-origin: 50% 50%;
+    transition: transform .5s var(--ease), opacity .25s, visibility 0s .5s; }
+  .big.open { visibility: visible; opacity: 1; transform: none; transition: transform .5s var(--ease), opacity .25s; }
+  .big .hd { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+  .big .x { width: 44px; height: 44px; border: 1px solid var(--line); background: var(--hud); color: var(--ink); font-family: var(--mono); font-size: 16px; cursor: pointer; border-radius: 3px; }
+  .big .x:hover { border-color: var(--accent); color: var(--accent); }
+  .big .lbl { font-family: var(--mono); font-size: 10px; letter-spacing: .22em; text-transform: uppercase; color: var(--accent); }
+  .big .txt { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 18px; padding: 20px 0; user-select: text; -webkit-user-select: text; }
+  .big .ja { font-family: var(--jp); font-weight: 800; font-size: clamp(34px, 7vw, 84px); line-height: 1.15; color: var(--ink); line-break: strict; }
+  .big .ad { font-family: var(--jp); font-weight: 700; font-size: clamp(26px, 5vw, 60px); line-height: 1.25; color: var(--ink); line-break: strict; }
+  .big .en { font-size: 15px; color: var(--dim); }
+  .big .ft { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between; border-top: 1px solid var(--line); padding-top: 14px; }
+  .big .ft .btn { padding: 14px 20px; font-size: 11px; }
+  .big .ft .msg { font-family: var(--mono); font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--faint); }
+
+  footer { margin-top: 44px; padding-top: 18px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 8px 22px; align-items: baseline;
+    font-family: var(--mono); font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--faint); }
+  footer b { color: var(--dim); font-weight: 400; }
+  footer a { color: var(--accent); text-decoration: none; }
+  .loading { padding: 40px 0; font-family: var(--mono); font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--faint); }
+
+  @media (max-width: 760px) {
+    :root { --gap: 10px; }
+    .top { grid-template-columns: 1fr; }
+    .chip { justify-self: stretch; }
+    h1 { font-size: 22px; }
+    .lead { margin-top: 12px; font-size: 13px; }
+    .emg { margin-top: 12px; }
+    .emg .half { padding: 30px 12px 16px; }
+    .emg .n { font-size: clamp(50px, 15vw, 64px); }
+    .emg .d { font-size: 12px; }
+    .group { margin-top: 28px; }
+    .ghead { gap: 10px; }
+    .blurb { display: none; }
+    .objs { grid-template-columns: 1fr; gap: 10px; padding-top: 12px; }
+    .ic { min-height: 118px; }
+    .big { inset: 8px; padding: 16px 16px calc(16px + env(safe-area-inset-bottom)); }
+    .big .ft .btn { flex: 1 1 100%; text-align: center; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .obj, .btn, .scrim, .big, .stub .tab span, .tog, .pinb { transition: none; }
+    .big { transform: none; }
+  }
+</style>
+</head>
+<body data-analytics-offer="citizens">
+
+<script src="/citizens/nav.js" data-screen="links" data-title="Links"></script>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <filter id="ink" x="-6%" y="-6%" width="112%" height="112%">
+      <feTurbulence type="fractalNoise" baseFrequency=".055" numOctaves="3" seed="7" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="2.2" xChannelSelector="R" yChannelSelector="G" result="d"/>
+      <feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="2" seed="3" result="g"/>
+      <feColorMatrix in="g" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -1.6 1.55" result="a"/>
+      <feComposite in="d" in2="a" operator="in"/>
+    </filter>
+    <symbol id="pinIcon" viewBox="0 0 24 24">
+      <path d="M14.5 3 21 9.5l-3.2.6-3 3 .4 5.4L12 21.7l-3.8-3.8-4.9 4.9-1.1-1.1 4.9-4.9L3.3 12l3.2-3.2 5.4.4 3-3z" fill="currentColor"/>
+    </symbol>
+    <symbol id="chev" viewBox="0 0 12 12"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+  </defs>
+</svg>
+
+<div class="wrap">
+  <div class="top">
+    <p class="lead" id="lead"></p>
+  </div>
+
+  <main id="main"><p class="loading">Loading links…</p></main>
+
+  <footer>
+    <b>Mirai Tech City</b> · Kobe · Oct 1–31 2026
+    <a href="/citizens/">Map →</a>
+    <a href="/citizens/quests/">Quests →</a>
+  </footer>
+</div>
+
+<div class="scrim" id="scrim"></div>
+<section class="big" id="big" role="dialog" aria-modal="true" aria-labelledby="bigTitle" aria-hidden="true">
+  <div class="hd"><p class="lbl" id="bigTitle"></p><button class="x" type="button" id="bigClose" aria-label="Close">✕</button></div>
+  <div class="txt"><p class="ja" id="bigJa"></p><p class="ad" id="bigAddr"></p><p class="en" id="bigEn"></p></div>
+  <div class="ft"><span class="msg" id="bigMsg" aria-live="polite"></span><button class="btn go" type="button" id="bigCopy">Copy</button></div>
+</section>
+
+<script>
+(function () {
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  function host(href) { try { var u = new URL(href, location.href); return u.origin === location.origin ? u.pathname + u.hash : u.hostname.replace(/^www\./, ''); } catch (e) { return href; } }
+  function external(href) { return /^https?:\/\//i.test(href); }
+  function an(id) { return ' data-analytics-action="site_navigation" data-analytics-location="citizens_links" data-analytics-target="' + esc(id) + '"'; }
+
+  // Pins and collapsed groups live in this browser only.
+  var store = {
+    get: function (k, d) { try { var v = JSON.parse(localStorage.getItem(k)); return Array.isArray(v) ? v : d; } catch (e) { return d; } },
+    set: function (k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
+  };
+  var pins = store.get('mtc_pins', []), closed = store.get('mtc_links_closed', []);
+  function pinned(id) { return pins.indexOf(id) >= 0; }
+
+  var data = null, items = [], openCard = null, lastFocus = null;
+  var main = document.getElementById('main'), big = document.getElementById('big'), scrim = document.getElementById('scrim');
+
+  function objHtml(it) {
+    if (it.type === 'link') {
+      var ext = external(it.href);
+      return '<a class="obj stub' + (ext ? '' : ' in') + '" href="' + esc(it.href) + '"' + (ext ? ' target="_blank" rel="noopener"' : '') + an(it.id) + '>' +
+        '<span class="body"><span class="l">' + esc(host(it.href)) + '</span><span class="t">' + esc(it.title) + '</span><span class="d">' + esc(it.desc) + '</span></span>' +
+        '<span class="tab" aria-hidden="true"><span>' + (ext ? '↗' : '→') + '</span></span></a>';
+    }
+    if (it.type === 'soon') {
+      return '<div class="obj stub soon">' +
+        '<span class="body"><span class="t">' + esc(it.title) + '</span><span class="d">' + esc(it.desc) + '</span><span class="note">Link coming</span></span>' +
+        '<span class="tab" aria-hidden="true"><span>·</span></span></div>';
+    }
+    if (it.type === 'tel') { // shown, not dialled: a mis-tap should never place a call
+      return '<div class="obj key num"><span class="l">' + esc(it.title) + '</span><span class="n">' + esc(it.number) + '</span><span class="d">' + esc(it.desc) + '</span></div>';
+    }
+    if (it.type === 'mail') {
+      return '<a class="obj env" href="mailto:' + esc(it.address) + '"' + an(it.id) + '>' +
+        '<span class="t">' + esc(it.title) + '</span><span class="d">' + esc(it.desc) + '</span><span class="addr">' + esc(it.address) + '</span></a>';
+    }
+    if (it.type === 'card') {
+      return '<button class="obj ic" type="button" data-id="' + esc(it.id) + '" aria-haspopup="dialog">' +
+        '<span class="hd"><span class="chipbox" aria-hidden="true"></span><span class="jp" lang="ja">' + esc(it.ja) + '</span></span>' +
+        '<span class="t">' + esc(it.title) + '</span><span class="d">' + esc(it.desc) + '</span></button>';
+    }
+    return '';
+  }
+  function slotHtml(it) {
+    var on = pinned(it.id);
+    return '<div class="slot' + (on ? ' pinned' : '') + '" data-id="' + esc(it.id) + '">' + objHtml(it) +
+      '<button class="pinb" type="button" data-pin="' + esc(it.id) + '" aria-pressed="' + on + '" aria-label="' + (on ? 'Unpin ' : 'Pin ') + esc(it.title) + '" title="' + (on ? 'Unpin' : 'Pin') + '">' +
+      '<svg aria-hidden="true"><use href="#pinIcon"/></svg></button></div>';
+  }
+  function groupHtml(id, title, blurb, its, extra) {
+    var isClosed = closed.indexOf(id) >= 0;
+    return '<section class="group' + (isClosed ? ' closed' : '') + (extra || '') + '" data-group="' + esc(id) + '" aria-labelledby="g-' + esc(id) + '">' +
+      '<button class="ghead" type="button" aria-expanded="' + !isClosed + '" aria-controls="objs-' + esc(id) + '">' +
+      '<h2 class="stamp" id="g-' + esc(id) + '">' + esc(title) + '</h2><span class="blurb">' + esc(blurb) + '</span>' +
+      '<span class="gcount num">' + its.length + '</span><span class="tog" aria-hidden="true"><svg><use href="#chev"/></svg></span></button>' +
+      (its.length ? '<div class="objs" id="objs-' + esc(id) + '">' + its.map(slotHtml).join('') + '</div>'
+                  : '<p class="empty" id="objs-' + esc(id) + '">Nothing pinned yet. Tap the pin on any link to keep it here.</p>') +
+      '</section>';
+  }
+
+  // Japan's three-digit emergency numbers go on the red card at the top; every other item stays in its group.
+  function isEmergency(it) { return it.type === 'tel' && /^\d{3}$/.test(it.number); }
+
+  function render() {
+    var emg = data.items.filter(isEmergency);
+    var h = '';
+    if (emg.length) {
+      h += '<div class="emg" id="emg"><span class="pin" aria-hidden="true"></span><span class="stripe" aria-hidden="true"><span>Kobe</span><span>2026</span></span>';
+      emg.forEach(function (it) {
+        h += '<div class="half num"><span class="t">' + esc(it.title) + '</span><span class="n">' + esc(it.number) + '</span><span class="d">' + esc(it.desc) + '</span></div>';
+      });
+      h += '</div>';
+    }
+    var mine = pins.map(itemOf).filter(Boolean);
+    h += groupHtml('mine', 'My links', 'The links you pinned.', mine, ' mine');
+    data.groups.forEach(function (g) {
+      var its = data.items.filter(function (it) { return it.group === g.id && !isEmergency(it); });
+      if (its.length) h += groupHtml(g.id, g.title, g.blurb, its);
+    });
+    main.innerHTML = h;
+    items = Array.prototype.slice.call(main.querySelectorAll('a.obj, button.obj'));
+    Array.prototype.forEach.call(main.querySelectorAll('button.ic'), function (b) { b.addEventListener('click', function () { open(b.dataset.id); }); });
+    Array.prototype.forEach.call(main.querySelectorAll('.pinb'), function (b) { b.addEventListener('click', function () { togglePin(b.dataset.pin); }); });
+    Array.prototype.forEach.call(main.querySelectorAll('.ghead'), function (b) { b.addEventListener('click', function () { toggleGroup(b.parentNode); }); });
+    document.getElementById('lead').textContent = data.groups.length + ' groups, ' + data.items.length + ' links. Pin the ones you use and they stay at the top. Tap a card to show it to a driver.';
+  }
+
+  function togglePin(id) {
+    var i = pins.indexOf(id);
+    if (i >= 0) pins.splice(i, 1); else pins.push(id);
+    store.set('mtc_pins', pins);
+    var y = window.scrollY;
+    render();
+    window.scrollTo(0, y);
+    var back = main.querySelector('.group:not(.mine) .pinb[data-pin="' + id + '"]');
+    if (back) back.focus({ preventScroll: true });
+  }
+  function toggleGroup(sec) {
+    var id = sec.dataset.group, isClosed = sec.classList.toggle('closed');
+    sec.querySelector('.ghead').setAttribute('aria-expanded', String(!isClosed));
+    var i = closed.indexOf(id);
+    if (isClosed && i < 0) closed.push(id); else if (!isClosed && i >= 0) closed.splice(i, 1);
+    store.set('mtc_links_closed', closed);
+  }
+
+  function itemOf(id) { for (var i = 0; i < data.items.length; i++) if (data.items[i].id === id) return data.items[i]; return null; }
+  function open(id) {
+    var it = itemOf(id); if (!it) return;
+    openCard = id; lastFocus = document.activeElement;
+    document.getElementById('bigTitle').textContent = it.title + ' · ' + it.desc;
+    document.getElementById('bigJa').textContent = it.ja;
+    document.getElementById('bigAddr').textContent = it.addr;
+    document.getElementById('bigEn').textContent = it.en;
+    document.getElementById('bigMsg').textContent = '';
+    document.getElementById('bigCopy').textContent = 'Copy';
+    big.classList.add('open'); scrim.classList.add('open'); big.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    document.getElementById('bigClose').focus({ preventScroll: true });
+  }
+  function close(refocus) {
+    if (!openCard) return;
+    openCard = null;
+    big.classList.remove('open'); scrim.classList.remove('open'); big.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    if (refocus && lastFocus && lastFocus.focus) lastFocus.focus({ preventScroll: true });
+  }
+  document.getElementById('bigClose').addEventListener('click', function () { close(true); });
+  scrim.addEventListener('click', function () { close(false); });
+  document.getElementById('bigCopy').addEventListener('click', function () {
+    var it = itemOf(openCard); if (!it) return;
+    var btn = this, msg = document.getElementById('bigMsg');
+    var text = it.ja + '\n' + it.addr;
+    var p = navigator.clipboard && navigator.clipboard.writeText ? navigator.clipboard.writeText(text) : Promise.reject();
+    p.then(function () { btn.textContent = 'Copied'; msg.textContent = 'Japanese name and address copied'; })
+     .catch(function () { msg.textContent = 'Could not copy. Select the text instead.'; });
+  });
+
+  // keyboard: arrows move between objects in reading order, Enter is the native activate, Esc closes the open card
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') { if (openCard) { e.preventDefault(); close(true); } return; }
+    if (openCard) return;
+    var k = e.key;
+    if (k !== 'ArrowLeft' && k !== 'ArrowRight' && k !== 'ArrowUp' && k !== 'ArrowDown' && k !== 'Home' && k !== 'End') return;
+    if (!items.length) return;
+    var i = items.indexOf(document.activeElement), n;
+    if (k === 'Home') n = 0;
+    else if (k === 'End') n = items.length - 1;
+    else if (i < 0) n = 0;
+    else n = Math.max(0, Math.min(items.length - 1, i + ((k === 'ArrowRight' || k === 'ArrowDown') ? 1 : -1)));
+    e.preventDefault();
+    items[n].focus();
+    items[n].scrollIntoView({ block: 'nearest', behavior: reduce ? 'auto' : 'smooth' });
+  });
+
+  fetch('/citizens/data/links.json').then(function (r) { return r.json(); }).then(function (json) {
+    data = json;
+    render();
+    var hash = location.hash.replace('#', '');
+    var it = hash && itemOf(hash);
+    if (it && it.type === 'card') open(hash);
+  }).catch(function () {
+    main.innerHTML = '<p class="loading">Could not load the links. Reload the page.</p>';
+  });
+})();
+</script>
+
+</body>
+</html>
