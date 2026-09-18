@@ -56,6 +56,14 @@ Rule for every slice: the PR pastes the full `npm run smoke` output and it must 
 
 ## 2. Slices (tracer bullets, each shippable alone)
 
+**Status 2026-09-18.** Stacked PRs, merge in order and retarget each to `main`:
+[#67](https://github.com/NelsonMilla/mirai-app/pull/67) suite fix →
+[#68](https://github.com/NelsonMilla/mirai-app/pull/68) slice 1 →
+[#69](https://github.com/NelsonMilla/mirai-app/pull/69) slice 2 →
+[#70](https://github.com/NelsonMilla/mirai-app/pull/70) slice 4 code (unit-tested, integration run pending keys).
+Slice 3 (Stripe dashboard) and the Luma/Vercel setup are Nelson's; the checklist is in #70. Slice 5 waits for the Payment Link URLs.
+
+
 ### Slice 1 — Retire the bundle everywhere (AFK, no dependencies, ship first)
 
 Removes an offer that is no longer sold. Pure deletion plus a redirect, so it is the lowest-risk change and the most urgent.
