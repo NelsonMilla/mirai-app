@@ -15,16 +15,10 @@ Single static `index.html` — no framework, no build step. Deploys anywhere
   that price is for residents of Japan only. The landing page links to `/jp/` from
   the nav (日本語), the hero, the summits bar, the apply fine print (with the
   English residents-only disclaimer), and the footer.
-- `/summit-bundle/` is the dedicated $2,500 Summit Weekends + Hotel offer page,
-  increasing to $4,000 after August 20.
-- The public landing-page placement is controlled by
-  `window.MIRAI_FLAGS.showSummitPackage` near the top of `index.html`. It is
-  intentionally `false` until the hotel agreement is confirmed; the dedicated
-  `/summit-bundle/` route remains available for internal review.
-  The landing page carries a compact version after the dates section. Both use
-  a full-size Luma checkout in a new tab with the hotel ticket preselected
-  (`ttype-0BjQv0xV4yY5P0l`) and access coupon `SFSH`. The site moves to standard
-  pricing after Aug 20 JST.
+- The $2,500 Summit Weekends + Hotel package (`/summit-bundle/`, the landing-page
+  card, the `/conferences/` offer, Luma ticket type `ttype-…` with coupon `SFSH`) was
+  retired on Sep 18 2026. `vercel.json` 301s `/summit-bundle/` to `/pricing/`; the
+  analytics spec fails if any deployed file mentions it again.
 - `/experience/` is the attendee-facing "what a month here is like" page
   (daily rhythm, week-by-week arc, joinable programs, people, apply path),
   built from the Mirai Tech Source of Truth spreadsheet. Self-contained
@@ -61,8 +55,8 @@ Single static `index.html` — no framework, no build step. Deploys anywhere
   `<script src="/nav.js">` tag sits at the top of `<body>`, `/nav.css` styles it. Edit
   the links in `nav.js` once and every page follows. A page may swap the CTA with
   `data-cta-label` / `data-cta-href` / `data-cta-target` on the script tag (see
-  `startups/`). `/summit-bundle/`, `/jp/` and `/fashion-show/` keep their own headers
-  (offer page with Luma embed checkout, Japanese page, co-branded event page).
+  `startups/`). `/jp/` and `/fashion-show/` keep their own headers
+  (Japanese page, co-branded event page).
 - Analytics: every page loads `/posthog.js` (PostHog: autocapture, heatmaps,
   session replay, funnels) then `/analytics.js` (the shared event taxonomy,
   dispatched to both PostHog and Vercel Web Analytics). Section reach and
