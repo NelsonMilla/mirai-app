@@ -20,6 +20,7 @@ const PAGES = [
   'startups/index.html',
   'fashion-show/index.html',
   'citizens/index.html',
+  'stay/index.html',
 ];
 
 test('every listed page still exists on disk', () => {
@@ -136,6 +137,23 @@ async function capturePostHogEvents(page: Page) {
 const posthogEvents = (page: Page) => page.evaluate(() => (
   window as typeof window & { posthogEvents: [string, Record<string, unknown>][] }
 ).posthogEvents);
+
+test('the stay page tells summit buyers they are confirmed and pass buyers they are in review', async ({ page }) => {
+  await page.route('**/_vercel/**', (route) =>
+    route.fulfill({ status: 200, contentType: 'application/javascript', body: '' }),
+  );
+  const html = readFileSync(join(siteRoot, 'stay/index.html'), 'utf8');
+  expect(html).toContain('<meta name="robots" content="noindex, nofollow" />');
+  expect(readFileSync(join(siteRoot, 'sitemap.xml'), 'utf8')).not.toContain('/stay/');
+
+  await page.goto('http://localhost:4321/stay/?session_id=cs_test_summit');
+  await expect(page.locator('h1:visible')).toHaveText('Your ticket is confirmed.');
+
+  // The $1,200 pass is authorised, not charged, until the booking is reviewed.
+  await page.goto('http://localhost:4321/stay/?session_id=cs_test_pass&pass=everything');
+  await expect(page.locator('h1:visible')).toHaveText('Your booking is in review.');
+  await expect(page.locator('.lede:visible')).toContainText('held, not charged');
+});
 
 test('the landing page reports section reach across the whole page', async ({ page }) => {
   await capturePostHogEvents(page);

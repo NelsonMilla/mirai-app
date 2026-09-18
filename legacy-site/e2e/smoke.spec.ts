@@ -17,7 +17,7 @@
  */
 import { test, expect, type Page } from '@playwright/test';
 
-const PAGES = ['/', '/experience/', '/startups/', '/pricing/', '/conferences/', '/jp/'];
+const PAGES = ['/', '/experience/', '/startups/', '/pricing/', '/conferences/', '/jp/', '/stay/'];
 
 /** Every page at phone and desktop; the landing page also at tablet and MacBook widths. */
 const RUNS = [
@@ -106,6 +106,22 @@ for (const run of RUNS) {
 
     await page.goto(run.path);
     await expect(page.locator('h1').first()).toBeVisible();
+
+    // The shared nav is position:fixed. A page that does not pad for it
+    // renders its eyebrow and heading underneath the bar (shipped on /stay/
+    // and /pricing/ at phone width, Sep 2026). Pages with their own header
+    // have no .topbar and skip this.
+    const navClearance = await page.evaluate(() => {
+      const bar = document.querySelector('.topbar');
+      const first = [...document.querySelectorAll('.eyebrow, h1')]
+        .find((el) => el.getClientRects().length > 0);
+      if (!bar || !first) return null;
+      return { barBottom: bar.getBoundingClientRect().bottom, firstTop: first.getBoundingClientRect().top };
+    });
+    if (navClearance) {
+      expect(navClearance.firstTop, 'first heading must clear the fixed nav')
+        .toBeGreaterThanOrEqual(navClearance.barBottom);
+    }
 
     const onLoad = await horizontalOverflow(page);
     expect(onLoad.scrollW, 'no horizontal overflow on load').toBeLessThanOrEqual(onLoad.vw);
