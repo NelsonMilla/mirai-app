@@ -1,5 +1,5 @@
 import { expect, test, type Page } from '@playwright/test';
-import { existsSync, readFileSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 
 const siteRoot = join(process.cwd(), '..', 'new-site');
@@ -15,7 +15,6 @@ const PAGES = [
   'index.html',
   'experience/index.html',
   'jp/index.html',
-  'summit-bundle/index.html',
   'pricing/index.html',
   'conferences/index.html',
   'startups/index.html',
@@ -26,6 +25,32 @@ const PAGES = [
 test('every listed page still exists on disk', () => {
   const missing = PAGES.filter((page) => !existsSync(join(siteRoot, page)));
   expect(missing, 'retired pages must be removed from PAGES').toEqual([]);
+});
+
+// The Summit + Hotel package was retired on 2026-09-18. Nothing on the live
+// site may still sell, link, or describe it: cached deep links must find no
+// offer, and copy must not promise hotel nights. Sweeps every text file that
+// deploys, skipping the design-round draft folders.
+const SKIP_DIRS = new Set(['_v', '_nav', 'img', '.posthog-wizard-cache', 'node_modules']);
+// .md is skipped: README and ANALYTICS may narrate the retirement.
+const TEXT_EXT = /\.(html|js|txt|xml|yml|json)$/;
+function deployedTextFiles(dir: string): string[] {
+  return readdirSync(dir).flatMap((name) => {
+    const full = join(dir, name);
+    if (statSync(full).isDirectory()) return SKIP_DIRS.has(name) ? [] : deployedTextFiles(full);
+    // vercel.json holds the 301 for the old URL, so it must name it.
+    if (name === 'vercel.json') return [];
+    return TEXT_EXT.test(name) ? [full] : [];
+  });
+}
+
+test('no deployed file still mentions the retired summit + hotel package', () => {
+  const retired = /summit-bundle|SFSH|ttype-0BjQv0xV4yY5P0l|hotel package|showSummitPackage|packageSpots|summit_hotel|summit-hotel/i;
+  const offenders = deployedTextFiles(siteRoot).flatMap((file) => {
+    const lines = readFileSync(file, 'utf8').split('\n');
+    return lines.flatMap((line, i) => (retired.test(line) ? [`${file.slice(siteRoot.length + 1)}:${i + 1}`] : []));
+  });
+  expect(offenders).toEqual([]);
 });
 
 test('every standalone page loads the shared analytics tracker', () => {

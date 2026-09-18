@@ -101,23 +101,6 @@ window.MIRAI_COPY = {
     footLink: `<a class="hkb-link" href="/conferences/" data-analytics-action="site_navigation" data-analytics-location="whyjapan" data-analytics-target="conferences">Why Japan? <em>»</em></a>`,
   },
 
-  /* ─── SUMMIT + HOTEL PACKAGE ─────────────────────────── */
-  package: {
-    eyebrow: `Launch price · {spots} of {spotsTotal} spots left`,
-    name: `Both Weekends + Hotel`,
-    headline: `Or take both weekends,<br/>hotel included.`,
-    promise: `Both summit weekends, the week between them, and a room in Sannomiya for the whole run.`,
-    fact: `<b>Summit I</b><span>October 17–18</span><i>$900</i>`,
-    fact2: `<b>Summit II</b><span>October 24–25</span><i>$900</i>`,
-    subtotal: `<span>Two weekends only</span><i>$1,800</i>`,
-    fact3: `<b>+ Hotel</b><span>October 16–28 · Sannomiya · 12 nights</span>`,
-    fact4: `<b>+ Finale</b><span>Frontier Human Fashion Show &amp; Demo Day · October 26</span>`,
-    price: `$2,500<span>Launch price · $4,000 once these {spotsTotal} are gone</span>`,
-    button: `Get My Package — $2,500`,
-    friction: `Only {spotsTotal} at this price · Then $4,000 · Breakfast included`,
-    detailsLink: `<a class="bundle-feature__details" href="/summit-bundle/" data-analytics-action="alternative_offer" data-analytics-location="summit_package" data-analytics-target="summit_hotel">See everything included →</a>`,
-  },
-
   /* ─── SUMMITS ─────────────────────────── */
   summits: {
     eyebrow: `The Longevity Biomedical Summit`,
@@ -241,14 +224,14 @@ window.MIRAI_COPY = {
     a2: `Port Island, home to KBIC (Kobe Biomedical Innovation Cluster). A purpose-built biomedical district with lab infrastructure, connected to central Kobe via the Port Liner monorail.`,
     q3: `Do I have to stay the whole month?`,
     a3: SHOW_FASHION
-      ? `No. The city runs October 1–31, but summit tickets stand alone — come for one weekend (Oct 17–18 or Oct 24–26), take both with the hotel package, or apply for the PopUp and stay the month.`
-      : `No. The city runs October 1–31, but summit tickets stand alone — come for one weekend (Oct 17–18 or Oct 24–25), take both with the hotel package, or apply for the PopUp and stay the month.`,
+      ? `No. The city runs October 1–31, but summit tickets stand alone — come for one weekend (Oct 17–18 or Oct 24–26), or take everything and stay the month.`
+      : `No. The city runs October 1–31, but summit tickets stand alone — come for one weekend (Oct 17–18 or Oct 24–25), or take everything and stay the month.`,
     q4: `Where do I stay?`,
-    a4: `Our partner hotel, the Portopia, is a short walk from KBIC, and the community hacker houses — The Sanctuary, Biopunk House, Aevitas, and ZuCity Japan — host residents across the city. The Both Weekends + Hotel package includes 12 nights in Sannomiya.`,
+    a4: `Our partner hotel, the Portopia, is a short walk from KBIC, and the community hacker houses — The Sanctuary, Biopunk House, Aevitas, and ZuCity Japan — host residents across the city. Accommodation is booked separately; we point you to the options after you get your ticket.`,
     q5: `What is the Frontier Human Fashion Show?`,
     a5: `A live demo day reimagined as a runway show. Device residents showcase their prototypes on models, blending medical technology with fashion. Think CES meets Tokyo Fashion Week.`,
     q6: `How do tickets and applications work?`,
-    a6: `Summit tickets and the hotel package are on Luma. The month-long PopUp is <b>$1,200</b> and application-only — we review on a rolling basis, and accepted teams receive next steps by email.`,
+    a6: `Summit tickets are on Luma. The month-long PopUp is <b>$1,200</b> and application-only — we review on a rolling basis, and accepted teams receive next steps by email.`,
   },
 
   /* ─── APPLY ─────────────────────────── */
@@ -280,15 +263,6 @@ window.MIRAI_COPY = {
 
   /* ─── STRINGS THE PAGE SCRIPT USES ───────────────────── */
   js: {
-    /* Summit + Hotel package is limited by SPOTS, not by a date.
-       Update packageSpotsLeft as they sell. {spots} and {spotsTotal}
-       in any string above are replaced with these numbers.
-       At 0 the page falls back to the standard-price copy below. */
-    packageSpotsTotal:  10,
-    packageSpotsLeft:   9,
-    packageSoldOutLabel: `Launch price gone · $4,000`,
-    packageSoldOutPrice: `$4,000<span>All {spotsTotal} launch spots taken</span>`,
-    packageSoldOutCta:   `Get My Package — $4,000`,
     placeholderLink:   `Opening soon`,
     countdownOpen:     `The city is open`,
   },
@@ -299,9 +273,7 @@ window.applyCopy = function () {
   document.querySelectorAll('[data-copy]').forEach(function (el) {
     var v = el.getAttribute('data-copy').split('.')
       .reduce(function (o, k) { return o && o[k]; }, window.MIRAI_COPY);
-    if (typeof v === 'string') el.innerHTML = v
-      .replace(/\{spots\}/g, window.MIRAI_COPY.js.packageSpotsLeft)
-      .replace(/\{spotsTotal\}/g, window.MIRAI_COPY.js.packageSpotsTotal);
+    if (typeof v === 'string') el.innerHTML = v;
     else console.warn('[copy] missing key:', el.getAttribute('data-copy'));
   });
 };

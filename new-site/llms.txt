@@ -28,6 +28,5 @@
 
 ## Navigation & Links
 - [Main Landing Page](https://mirai-tech-city.vercel.app/): Main event overview and schedule.
-- [Summit + Hotel Package](https://mirai-tech-city.vercel.app/summit-bundle/): Combined Summit Weekends + Hotel package.
 - [Japanese Landing Page](https://mirai-tech-city.vercel.app/jp/): Japanese language overview.
 - [Ticket Registration](https://luma.com/an4zotn9): Official Luma registration link for Summits and Residency.

@@ -38,13 +38,11 @@
 <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
 <script defer src="/_vercel/insights/script.js"></script>
 <script>
-  // Launch control: change to true when the Summit + Hotel package is ready for the public landing page.
   // showFashionShow — false hides the fashion show everywhere EXCEPT the agenda finale row: the section,
-  // the FAQ item, the package ledger line ([data-fashion] elements), and the copy variants in copy.js.
+  // the FAQ item ([data-fashion] elements), and the copy variants in copy.js.
   // To bring it back: flip to true AND restore "Fashion Show Oct 26" in the two meta descriptions above
   // plus the Frontier Human Fashion Show subEvent in the JSON-LD below.
-  window.MIRAI_FLAGS = Object.freeze({ showSummitPackage: true, showFashionShow: false });
-  if (!window.MIRAI_FLAGS.showSummitPackage) document.documentElement.classList.add('package-promo-hidden');
+  window.MIRAI_FLAGS = Object.freeze({ showFashionShow: false });
   if (!window.MIRAI_FLAGS.showFashionShow) document.documentElement.classList.add('fashion-hidden');
   // Kobe University logo use approval #3182: usage window ends Dec 15 2026.
   // The [data-kobe-permit] block self-hides on Dec 15 JST — do NOT remove this
@@ -190,9 +188,6 @@
      URL bar retracts, and an unset html background flashes white. */
   html { background: var(--bg); }
   body { background: var(--bg); color: var(--ink); font-family: var(--font); overflow-x: hidden; }
-  .package-promo-fallback { display: none !important; }
-  html.package-promo-hidden [data-package-promo] { display: none !important; }
-  html.package-promo-hidden .package-promo-fallback { display: inline-block !important; }
   html.fashion-hidden [data-fashion] { display: none !important; }
   ::selection { background: var(--accent); color: #000; }
   :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
@@ -541,65 +536,6 @@
   .resline:hover em { text-decoration: underline; text-underline-offset: 6px; }
   @media (max-width: 860px) {
     .resline { white-space: normal; font-size: clamp(19px, 3.4vw, 30px); line-height: 1.4; }
-  }
-
-  /* ── summit + hotel package ── */
-  .bundle-feature__promise { max-width: 58ch; color: var(--dim); font-size: 16px; line-height: 1.65; }
-  .bundle-feature__promise strong { color: var(--ink); font-weight: 650; }
-  .bundle-feature__price { font-size: clamp(38px, 4.5vw, 58px); line-height: .9; font-weight: 850; letter-spacing: -.025em;
-    font-variant-numeric: tabular-nums; }
-  .bundle-feature__price span { display: block; margin-top: 10px; font-family: var(--mono); font-size: 9px; font-weight: 400;
-    letter-spacing: .18em; text-transform: uppercase; color: var(--faint); }
-  .bundle-feature__checkout { min-width: 250px; min-height: 50px; display: inline-flex; align-items: center; justify-content: center; text-align: center; }
-  .bundle-feature__friction { margin-top: 16px; font-family: var(--mono); font-size: 10px; line-height: 1.6;
-    letter-spacing: .13em; text-transform: uppercase; color: var(--faint); }
-  .bundle-feature__links { display: flex; gap: 22px; margin-top: 16px; align-items: center; flex-wrap: wrap; }
-  .bundle-feature__details { font-family: var(--mono); font-size: 10px; letter-spacing: .18em; text-transform: uppercase;
-    color: var(--accent); text-underline-offset: 4px; }
-
-  /* ── bundle card: third card in the summits grid ── */
-  .summit .card.pkg { grid-column: 1 / -1; gap: 0; padding: 32px 36px 30px;
-    border-color: rgba(var(--accent-rgb), .5);
-    background: linear-gradient(135deg, rgba(var(--accent-rgb),.09), rgba(var(--accent-rgb),.015) 62%); }
-  .pkg-top { display: flex; justify-content: space-between; align-items: baseline; gap: 18px; flex-wrap: wrap; }
-  .pkg-top .num { color: var(--accent); }
-  .pkg-top .eyebrow { margin: 0; }
-  .pkg-grid { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1.08fr);
-    gap: 24px 48px; margin-top: 20px; align-items: start; }
-  .pkg-pitch { display: flex; flex-direction: column; height: 100%; }
-  .pkg-pitch h3 { font-size: clamp(24px, 2.3vw, 34px); line-height: 1.04; text-transform: uppercase;
-    font-weight: 900; letter-spacing: -.01em; margin-bottom: 12px; }
-  .pkg-pitch .bundle-feature__promise { font-size: 15px; }
-  .pkg-foot { margin-top: auto; padding-top: 20px; }
-  .pkg-foot .bundle-feature__friction { margin-top: 0; }
-  .pkg-ledger { border-top: 1px solid var(--line); }
-  .pkg-ledger > div { display: grid; grid-template-columns: 104px minmax(0,1fr) auto; gap: 4px 14px;
-    align-items: baseline; padding: 9px 0; border-bottom: 1px solid var(--line);
-    font-size: 13px; line-height: 1.4; color: var(--dim); }
-  .pkg-ledger b { font-family: var(--mono); font-size: 10px; font-weight: 400; letter-spacing: .16em;
-    text-transform: uppercase; color: var(--accent); }
-  .pkg-ledger i { font-style: normal; font-variant-numeric: tabular-nums; color: var(--ink); }
-  .pkg-ledger .pkg-sub { grid-template-columns: minmax(0,1fr) auto; font-family: var(--mono);
-    font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--faint); }
-  .pkg-ledger .pkg-sub i { color: var(--faint); font-size: 13px; letter-spacing: 0; }
-  .pkg-ledger .pkg-add b { color: var(--ink); }
-  .pkg-buy .bundle-feature__price { margin-top: 18px; font-size: clamp(34px, 3.4vw, 46px); }
-  .pkg-buy .bundle-feature__checkout { margin-top: 16px; width: 100%; min-width: 0; }
-  @media (max-width: 860px) {
-    .summit .card.pkg { padding: 24px 20px 20px; }
-    .pkg-top { gap: 4px 14px; }
-    .pkg-top .eyebrow { font-size: 9px; letter-spacing: .14em; }
-    .pkg-grid { grid-template-columns: 1fr; gap: 12px; }
-    .pkg-pitch h3 { margin-bottom: 8px; }
-    .pkg-pitch .bundle-feature__promise { font-size: 14px; line-height: 1.5; }
-    /* friction + details drop below the CTA so the pitch runs straight into the ledger */
-    .pkg-pitch { display: contents; }
-    .pkg-foot { order: 3; margin-top: 0; padding-top: 16px; }
-    .pkg-foot .bundle-feature__friction { font-size: 9px; line-height: 1.5; }
-    .pkg-ledger > div { grid-template-columns: 88px minmax(0,1fr) auto; gap: 12px; padding: 6px 0; font-size: 12px; }
-    .pkg-ledger .pkg-sub { grid-template-columns: minmax(0,1fr) auto; }
-    .pkg-buy .bundle-feature__price { margin-top: 14px; }
-    .pkg-buy .bundle-feature__checkout { margin-top: 12px; }
   }
 
   /* ── summits ── */
@@ -1154,34 +1090,6 @@
       <div data-copy="summits.block2"></div>
       <div class="fine" data-copy="summits.footnote2"></div>
     </div>
-    <div class="card pkg rv" id="summit-package" data-package-promo data-track-section="summit_package" data-track-position="6">
-      <div class="pkg-top">
-        <div class="num" data-copy="package.name"></div>
-        <div class="eyebrow" data-copy="package.eyebrow"></div>
-      </div>
-      <div class="pkg-grid">
-        <div class="pkg-pitch">
-          <h3 data-copy="package.headline"></h3>
-          <p class="bundle-feature__promise" data-copy="package.promise"></p>
-          <div class="pkg-foot">
-            <p class="bundle-feature__friction" data-copy="package.friction"></p>
-            <div class="bundle-feature__links" data-copy="package.detailsLink"></div>
-          </div>
-        </div>
-        <div class="pkg-buy">
-          <div class="pkg-ledger">
-            <div data-copy="package.fact"></div>
-            <div data-copy="package.fact2"></div>
-            <div class="pkg-sub" data-copy="package.subtotal"></div>
-            <div class="pkg-add" data-copy="package.fact3"></div>
-            <div class="pkg-add" data-fashion data-copy="package.fact4"></div>
-          </div>
-          <div class="bundle-feature__price" data-copy="package.price"></div>
-          <a class="btn accent bundle-feature__checkout bundle-checkout" href="https://luma.com/an4zotn9?coupon=SFSH&amp;utm_source=mirai-site&amp;utm_campaign=summit-hotel-package" data-luma-action="checkout" data-luma-event-id="evt-OUCqVyqoZI5Jeg4" data-luma-ticket-type="ttype-0BjQv0xV4yY5P0l" data-luma-coupon="SFSH" data-luma-utm-source="mirai-site" data-analytics-action="checkout" data-analytics-location="summit_package" data-analytics-target="summit_hotel" data-copy="package.button"></a>
-        </div>
-      </div>
-    </div>
-  </div>
   <div class="voicesbar rv">
     <div class="faces">
       <img src="img/aubrey.jpg" alt="Aubrey de Grey" loading="lazy" decoding="async" /><img src="img/hayano.jpg" alt="Motoshi Hayano" loading="lazy" decoding="async" /><img src="img/yuki.jpg" alt="Yuki Hanyu" loading="lazy" decoding="async" /><img src="img/adam.jpg" alt="Adam Gries" loading="lazy" decoding="async" />
@@ -1196,7 +1104,7 @@
 <hr class="rule" />
 
 <!-- ═══ FASHION SHOW ═══ -->
-<section class="fashion" id="fashion" data-fashion data-track-section="fashion" data-track-position="7">
+<section class="fashion" id="fashion" data-fashion data-track-section="fashion" data-track-position="6">
   <video muted loop playsinline preload="none" loading="lazy" poster="augment_poster.jpg" aria-hidden="true">
     <source data-src="augment.mp4" type="video/mp4" /></video>
   <div class="veil"></div>
@@ -1211,7 +1119,7 @@
 </section>
 
 <!-- ═══ JAPAN STRIP ═══ -->
-<section class="stripwrap" aria-label="One evening in Kobe" data-track-section="kobe_evening" data-track-position="8">
+<section class="stripwrap" aria-label="One evening in Kobe" data-track-section="kobe_evening" data-track-position="7">
   <div class="cap mono rv" data-copy="kobe.caption"></div>
   <div class="strip">
     <figure><img src="img/harbor-golden-hour.jpg" alt="Kobe harbor at golden hour" loading="lazy" /><figcaption data-copy="kobe.caption2"></figcaption></figure>
@@ -1223,7 +1131,7 @@
 </section>
 
 <!-- ═══ AGENDA · DAY RAIL (the stashed "Full Program" section lives in ../retreat/full-program-section.html) ═══ -->
-<section id="agenda" data-track-section="agenda" data-track-position="9">
+<section id="agenda" data-track-section="agenda" data-track-position="8">
   <div class="eyebrow rv" data-copy="agenda.eyebrow"></div>
   <h2 class="big rv" data-copy="agenda.headline"></h2>
 
@@ -1271,7 +1179,7 @@
 
 
 <!-- ═══ FAQ · TICKET STUBS ═══ -->
-<section id="faq" data-track-section="faq" data-track-position="10">
+<section id="faq" data-track-section="faq" data-track-position="9">
   <div class="fq-grid">
     <header class="fq-head rv">
       <div class="eyebrow" data-copy="faq.eyebrow"></div>
@@ -1394,48 +1302,8 @@ document.querySelectorAll('.knt-title').forEach(function (h) {
   }).join('') + '</span>';
 });</script>
 
-<script id="luma-checkout"></script>
 <script>
   const noMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  // The package keeps a normal Luma href as its resilient fallback. Load the
-  // enhanced overlay only when the package is near view or a pointer/focus
-  // indicates intent, so its script and stylesheet do not compete with LCP.
-  const lumaScript = document.getElementById('luma-checkout');
-  function loadLumaCheckout() {
-    if (lumaScript.src) return;
-    lumaScript.src = 'https://embed.lu.ma/checkout-button.js';
-    lumaScript.async = true;
-  }
-  document.querySelectorAll('[data-luma-action="checkout"]').forEach(link => {
-    link.addEventListener('pointerenter', loadLumaCheckout, { once: true });
-    link.addEventListener('focus', loadLumaCheckout, { once: true });
-  });
-  const packageSection = document.getElementById('summit-package');
-  if (packageSection) {
-    const lumaObserver = new IntersectionObserver(entries => {
-      if (!entries.some(entry => entry.isIntersecting)) return;
-      loadLumaCheckout();
-      lumaObserver.disconnect();
-    }, { rootMargin: '600px 0px' });
-    lumaObserver.observe(packageSection);
-  }
-
-  // summit + hotel package is capped by spots, not by a date: set
-  // MIRAI_COPY.js.packageSpotsLeft in copy.js. At 0 it falls back to standard pricing.
-  if (MIRAI_COPY.js.packageSpotsLeft <= 0) {
-    const offerLabel = document.querySelector('#summit-package .eyebrow');
-    const offerPrice = document.querySelector('.bundle-feature__price');
-    const total = MIRAI_COPY.js.packageSpotsTotal;
-    if (offerLabel) offerLabel.textContent = MIRAI_COPY.js.packageSoldOutLabel;
-    if (offerPrice) offerPrice.innerHTML =
-      MIRAI_COPY.js.packageSoldOutPrice.replace(/\{spotsTotal\}/g, total);
-    document.querySelectorAll('.bundle-checkout').forEach(a => {
-      a.textContent = MIRAI_COPY.js.packageSoldOutCta;
-      a.href = 'https://luma.com/an4zotn9?coupon=SFSH&utm_source=post-hotel-package&utm_campaign=post-hotel-package';
-      a.dataset.lumaUtmSource = 'post-hotel-package';
-    });
-  }
 
   // early-bird window closes Aug 31 (JST): page self-heals to standard pricing
   const EB_END = new Date('2026-09-01T00:00:00+09:00').getTime();
