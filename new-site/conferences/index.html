@@ -777,7 +777,7 @@ html.wj-js #why_japan .wj-ctl { display: flex; }
 }
 
 /* ── 07 speakers ───────────────────────────────────────────────────── */
-#speakers { padding-top: 100px; padding-bottom: 96px; }
+#speakers, #founders { padding-top: 100px; padding-bottom: 96px; }
 .faces { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px;
   margin-top: var(--gap); }
 .faces figure { border: 1px solid var(--line); background: var(--near); }
@@ -978,6 +978,10 @@ details.more[open] > summary { margin-bottom: 6px; }
 .notes li a { display: inline-block; margin: -15px -6px; padding: 15px 10px; color: var(--cyan);
   text-decoration: none; }
 .notes li a:hover { text-decoration: underline; }
+.notes .credit { margin: 10px 0 0; padding: 3px 6px; color: var(--faint); font-family: var(--mono);
+  font-size: 11px; line-height: 1.75; }
+.notes .credit a { color: var(--cyan); text-decoration: none; }
+.notes .credit a:hover { text-decoration: underline; }
 @media (max-width: 760px) { .notes ol { columns: 1; } }
 .foot { background: var(--near); padding: 56px 0 48px; }
 .foot .wrap { display: flex; flex-wrap: wrap; gap: 10px 26px; justify-content: space-between;
@@ -990,7 +994,7 @@ details.more[open] > summary { margin-bottom: 6px; }
 /* ── responsive rhythm ─────────────────────────────────────────────── */
 @media (max-width: 900px) {
   :root { --top: 84px; --bot: 78px; --gap: 44px; }
-  #speakers { padding-top: 84px; padding-bottom: 78px; }
+  #speakers, #founders { padding-top: 84px; padding-bottom: 78px; }
 }
 @media (max-width: 600px) {
   :root { --top: 76px; --bot: 70px; --gap: 40px; --gut: 22px; }
@@ -1053,7 +1057,7 @@ details.more[open] > summary { margin-bottom: 6px; }
       <a class="ctamod-alt" href="mailto:team@miraitech.city?subject=Mirai%20Summits%20package" data-analytics-action="alternative_offer" data-analytics-location="hero" data-analytics-target="email">Email us</a>
     </div>
     <div class="proof">
-      <div><b class="num">55</b><span>Confirmed speakers</span></div>
+      <div><b class="num">56</b><span>Confirmed speakers</span></div>
       <div><b class="num">370</b><span>Organisations on Port Island</span></div>
       <div><b class="num">12</b><span>Nights in Sannomiya</span></div>
     </div>
@@ -1100,7 +1104,7 @@ details.more[open] > summary { margin-bottom: 6px; }
             <article class="cell reason">
               <div class="plate"><img srcset="/img/aubrey-480.webp 480w, /img/aubrey.webp 768w" sizes="(min-width: 900px) 480px, 100vw" src="/img/aubrey.webp" width="768" height="710" alt="Aubrey de Grey, headline speaker at Summit I" loading="lazy" decoding="async"></div>
               <div class="reason-b">
-                <span class="fig num">55</span>
+                <span class="fig num">56</span>
                 <span class="lbl">Confirmed speakers</span>
                 <p>Two summit weekends and a finale, all inside the cluster on Port Island.</p>
               </div>
@@ -1469,75 +1473,47 @@ details.more[open] > summary { margin-bottom: 6px; }
 <!-- ══ 07 SPEAKERS ════════════════════════════════════════════════════ -->
 <section id="speakers" data-track-section="speakers" data-track-position="7">
   <div class="wrap">
-    <div class="hd"><h2>Two weekends. Fifty-five speakers.</h2></div>
+    <div class="hd">
+      <span class="lbl lbl--cyan">Speakers · Science</span>
+      <h2>The scientists and communicators.</h2>
+      <p class="lead">Twenty-three researchers, clinicians and science communicators across two summit weekends.</p>
+    </div>
     <div class="faces">
       <figure><div class="im"><img srcset="/img/aubrey-480.webp 480w, /img/aubrey.webp 768w" sizes="(min-width: 760px) 20vw, 50vw" src="/img/aubrey.webp" width="768" height="710" alt="Aubrey de Grey" loading="lazy" decoding="async"></div><figcaption>Aubrey de Grey<small>LEV Foundation</small></figcaption></figure>
       <figure><div class="im"><img src="/img/kennedy.webp" width="400" height="400" alt="Brian Kennedy" loading="lazy" decoding="async" style="object-position:center 38%"></div><figcaption>Brian Kennedy<small>NUS Centre for Healthy Longevity</small></figcaption></figure>
       <figure><div class="im"><img src="/img/hayano.webp" width="600" height="750" alt="Motoshi Hayano" loading="lazy" decoding="async"></div><figcaption>Motoshi Hayano<small>Keio University</small></figcaption></figure>
-      <figure><div class="im"><img src="/img/yuki.webp" width="480" height="480" alt="Yuki Hanyu" loading="lazy" decoding="async"></div><figcaption>Yuki Hanyu<small>IntegriCulture</small></figcaption></figure>
-      <figure><div class="im"><img src="/img/adam.webp" width="800" height="1118" alt="Adam Gries" loading="lazy" decoding="async"></div><figcaption>Adam Gries<small>Vitalist Bay</small></figcaption></figure>
+      <figure><div class="im"><img src="/img/sheekey.webp" width="220" height="264" alt="Eleanor Sheekey" loading="lazy" decoding="async"></div><figcaption>Eleanor Sheekey<small>RIKEN Kobe / Sheekey Science Show</small></figcaption></figure>
+      <figure><div class="im"><img src="/img/cordeiro.webp" width="800" height="800" alt="José Cordeiro" loading="lazy" decoding="async"></div><figcaption>José Cordeiro<small>International Longevity Summit</small></figcaption></figure>
     </div>
 
     <div class="mani">
       <div class="mani-h">
-        <b>The other fifty</b>
+        <b>The other eighteen</b>
         <span class="lbl mani-key"><i>S1</i> Oct 17–18 &nbsp; <i>S2</i> Oct 24–25 &nbsp; <i>F</i> Finale Oct 26 &nbsp; <i>Online</i> joins remotely &nbsp; <i>—</i> session to be announced</span>
       </div>
       <div class="mani-g">
-        <div class="mrow"><span class="i">06</span><span class="n">Marian Goodell<em>CEO, Burning Man Project</em></span><span class="s">S2</span></div>
-        <div class="mrow"><span class="i">07</span><span class="n">José Cordeiro<em>International Longevity Summit</em></span><span class="s">S1 · S2</span></div>
-        <div class="mrow"><span class="i">08</span><span class="n">Eleanor Sheekey<em>RIKEN Kobe / Sheekey Science Show</em></span><span class="s">S1 · S2 · F</span></div>
-        <div class="mrow"><span class="i">09</span><span class="n">Mac Davis<em>Minicircle</em></span><span class="s">S2</span></div>
-        <div class="mrow"><span class="i">10</span><span class="n">Yuri Deigin<em>YouthBio Therapeutics</em></span><span class="s">S1</span></div>
-        <div class="mrow"><span class="i">11</span><span class="n">Laurence Ion<em>VitaDAO / Vitalia</em></span><span class="s">S2</span></div>
-        <div class="mrow"><span class="i">12</span><span class="n">Sebastian Brunemeier<em>Healthspan Capital / Cambrian</em></span><span class="s">S2</span></div>
-        <div class="mrow"><span class="i">13</span><span class="n">Patri Friedman<em>Pronomos Capital</em></span><span class="s">S2 · Online</span></div>
-        <div class="mrow"><span class="i">14</span><span class="n">Natalie S. Coles de Grey<em>Human Longevity Inc &amp; LEV Foundation</em></span><span class="s">S2</span></div>
+        <div class="mrow"><span class="i">06</span><span class="n">Natalie S. Coles de Grey<em>Human Longevity Inc &amp; LEV Foundation</em></span><span class="s">S2</span></div>
+        <div class="mrow"><span class="i">07</span><span class="n">Walter Marion Patterson<em>CSO, Minicircle</em></span><span class="s">S2 · F</span></div>
+        <div class="mrow"><span class="i">08</span><span class="n">Prof. Stuart Reid<em>University of Strathclyde</em></span><span class="s">S2</span></div>
+        <div class="mrow"><span class="i">09</span><span class="n">Prof. Takahiro Yasuda<em>Kobe University</em></span><span class="s">S1</span></div>
+        <div class="mrow"><span class="i">10</span><span class="n">Keiko Kobayashi<em>Kobe Biomedical Innovation Cluster (FBRI)</em></span><span class="s">S1</span></div>
+        <div class="mrow"><span class="i">11</span><span class="n">Muneaki Goto<em>Reskilling initiative</em></span><span class="s">S2</span></div>
+        <div class="mrow"><span class="i">12</span><span class="n">Ada Cyborg<em>Transhumanist AI / BCI artist</em></span><span class="s">F</span></div>
+        <div class="mrow"><span class="i">13</span><span class="n">Elen Capri<em>Wellness &amp; longevity creator</em></span><span class="s">F</span></div>
+        <div class="mrow"><span class="i">14</span><span class="n">Jordan Lasker<em>Researcher / writer</em></span><span class="s">S2</span></div>
       </div>
       <details class="more" data-track-faq="speakers" data-track-position="7">
-        <summary><span class="c">Show all 55 confirmed speakers</span><span class="o">Show fewer</span></summary>
+        <summary><span class="c">Show all 23</span><span class="o">Show fewer</span></summary>
         <div class="mani-g">
-          <div class="mrow"><span class="i">15</span><span class="n">Walter Marion Patterson<em>CSO, Minicircle</em></span><span class="s">S2 · F</span></div>
-          <div class="mrow"><span class="i">16</span><span class="n">Matt Scholz<em>Oisin Bio</em></span><span class="s">S2</span></div>
-          <div class="mrow"><span class="i">17</span><span class="n">Todd Porter<em>EDGEof / Venture Cafe Tokyo</em></span><span class="s">S2</span></div>
-          <div class="mrow"><span class="i">18</span><span class="n">Josh Mann<em>COO, The LARTA Agency</em></span><span class="s">S2</span></div>
-          <div class="mrow"><span class="i">19</span><span class="n">Florian<em>Antler</em></span><span class="s">S2</span></div>
-          <div class="mrow"><span class="i">20</span><span class="n">Prof. Stuart Reid<em>University of Strathclyde</em></span><span class="s">S2</span></div>
-          <div class="mrow"><span class="i">21</span><span class="n">Rob Claar<em>CEO, HekaBio</em></span><span class="s">S1</span></div>
-          <div class="mrow"><span class="i">22</span><span class="n">Prof. Takahiro Yasuda<em>Kobe University</em></span><span class="s">S1</span></div>
-          <div class="mrow"><span class="i">23</span><span class="n">Keiko Kobayashi<em>Kobe Biomedical Innovation Cluster (FBRI)</em></span><span class="s">S1</span></div>
-          <div class="mrow"><span class="i">24</span><span class="n">Rodney Kelly<em>MEDISO</em></span><span class="s">S2</span></div>
-          <div class="mrow"><span class="i">25</span><span class="n">Ian Huyett<em>Granite Bio Innovation</em></span><span class="s">S1</span></div>
-          <div class="mrow"><span class="i">26</span><span class="n">Sandeep Casi<em>Investor</em></span><span class="s">S2</span></div>
-          <div class="mrow"><span class="i">27</span><span class="n">Keita Masui<em>ASAGI Labs</em></span><span class="s">S2</span></div>
-          <div class="mrow"><span class="i">28</span><span class="n">Muneaki Goto<em>Reskilling initiative</em></span><span class="s">S2</span></div>
-          <div class="mrow"><span class="i">29</span><span class="n">Devinder Sodhi<em>Learning Layer Labs</em></span><span class="s">S1</span></div>
-          <div class="mrow"><span class="i">30</span><span class="n">Sumit Jamuar<em>XPRIZE Brain Trust</em></span><span class="s">S2</span></div>
-          <div class="mrow"><span class="i">31</span><span class="n">Daniel Burger<em>Eightsix Science</em></span><span class="s">S2</span></div>
-          <div class="mrow"><span class="i">32</span><span class="n">Juliette Humer<em>Muse Bio</em></span><span class="s">S1</span></div>
-          <div class="mrow"><span class="i">33</span><span class="n">Jeffrey Tibbetts<em>Symbiont Labs</em></span><span class="s">S1</span></div>
-          <div class="mrow"><span class="i">34</span><span class="n">Ada Cyborg<em>Transhumanist AI / BCI artist</em></span><span class="s">F</span></div>
-          <div class="mrow"><span class="i">35</span><span class="n">Elen Capri<em>Wellness &amp; longevity creator</em></span><span class="s">F</span></div>
-          <div class="mrow"><span class="i">36</span><span class="n">Jordan Lasker<em>Researcher / writer</em></span><span class="s">S2</span></div>
-          <div class="mrow"><span class="i">37</span><span class="n">Nathan Cheng<em>Longevity Biotech Fellowship</em></span><span class="s">F</span></div>
-          <div class="mrow"><span class="i">38</span><span class="n">Felix Oen<em>Co-founder &amp; CEO</em></span><span class="s">S1</span></div>
-          <div class="mrow"><span class="i">39</span><span class="n">Brandon Possin<em>ZōVillage</em></span><span class="s">S1</span></div>
-          <div class="mrow"><span class="i">40</span><span class="n">Bilal Kharouni<em>Ekei Labs</em></span><span class="s">S1</span></div>
-          <div class="mrow"><span class="i">41</span><span class="n">Alice Gilman<em>R3 Bio</em></span><span class="s">S1</span></div>
-          <div class="mrow"><span class="i">42</span><span class="n">Julie Ying Baron<em>LiveBeyond</em></span><span class="s">S2</span></div>
-          <div class="mrow"><span class="i">43</span><span class="n">Irit Rappley<em>Co-founder &amp; CEO, NNP Labs</em></span><span class="s">S2</span></div>
-          <div class="mrow"><span class="i">44</span><span class="n">Czar Gonzalez<em>HEIRITAGE EcoCultural</em></span><span class="s">S2</span></div>
-          <div class="mrow"><span class="i">45</span><span class="n">Iris Jiang<em>Stellar Science Foundation</em></span><span class="s">S1</span></div>
-          <div class="mrow"><span class="i">46</span><span class="n">Louise Hecker, PhD<em>Baylor College of Medicine</em></span><span class="s">S1</span></div>
-          <div class="mrow"><span class="i">47</span><span class="n">Kosuke Kato, PhD<em>Baylor College of Medicine</em></span><span class="s">S1</span></div>
-          <div class="mrow"><span class="i">48</span><span class="n">Tomonari Abe<em>ABE YOANDO</em></span><span class="s">S1</span></div>
-          <div class="mrow"><span class="i">49</span><span class="n">Kentaroh Takagaki<em>Eighteen Six</em></span><span class="s" aria-label="Session to be announced"></span></div>
-          <div class="mrow"><span class="i">50</span><span class="n">Masataka Watanabe<em>Eighteen Six</em></span><span class="s" aria-label="Session to be announced"></span></div>
-          <div class="mrow"><span class="i">51</span><span class="n">Kaarthik Abhinav Balakrishnan<em>Eighteen Six</em></span><span class="s" aria-label="Session to be announced"></span></div>
-          <div class="mrow"><span class="i">52</span><span class="n">Prof. Takashi Aoi<em>Kobe University Graduate School of Medicine</em></span><span class="s">S1</span></div>
-          <div class="mrow"><span class="i">53</span><span class="n">Yoshihiro Muragaki<em>Faculty of Advanced Techno-Surgery (FATS)</em></span><span class="s">S1 · S2</span></div>
-          <div class="mrow"><span class="i">54</span><span class="n">Masanori Miyanishi, MD PhD<em>Kobe University Graduate School of Medicine</em></span><span class="s">S1</span></div>
-          <div class="mrow"><span class="i">55</span><span class="n">Paul Yang<em>Governance Partners</em></span><span class="s">S2</span></div>
+          <div class="mrow"><span class="i">15</span><span class="n">Iris Jiang<em>Stellar Science Foundation</em></span><span class="s">S1</span></div>
+          <div class="mrow"><span class="i">16</span><span class="n">Louise Hecker, PhD<em>Baylor College of Medicine</em></span><span class="s">S1</span></div>
+          <div class="mrow"><span class="i">17</span><span class="n">Kosuke Kato, PhD<em>Baylor College of Medicine</em></span><span class="s">S1</span></div>
+          <div class="mrow"><span class="i">18</span><span class="n">Kentaroh Takagaki<em>Eighteen Six</em></span><span class="s" aria-label="Session to be announced"></span></div>
+          <div class="mrow"><span class="i">19</span><span class="n">Masataka Watanabe<em>Eighteen Six</em></span><span class="s" aria-label="Session to be announced"></span></div>
+          <div class="mrow"><span class="i">20</span><span class="n">Kaarthik Abhinav Balakrishnan<em>Eighteen Six</em></span><span class="s" aria-label="Session to be announced"></span></div>
+          <div class="mrow"><span class="i">21</span><span class="n">Prof. Takashi Aoi<em>Kobe University Graduate School of Medicine</em></span><span class="s">S1</span></div>
+          <div class="mrow"><span class="i">22</span><span class="n">Yoshihiro Muragaki<em>Faculty of Advanced Techno-Surgery (FATS)</em></span><span class="s">S1 · S2</span></div>
+          <div class="mrow"><span class="i">23</span><span class="n">Masanori Miyanishi, MD PhD<em>Kobe University Graduate School of Medicine</em></span><span class="s">S1</span></div>
         </div>
       </details>
     </div>
@@ -1682,8 +1658,68 @@ details.more[open] > summary { margin-bottom: 6px; }
   </div>
 </section>
 
-<!-- ══ 10 CLOSING ═════════════════════════════════════════════════════ -->
-<section id="closing" data-track-section="closing" data-track-position="10">
+<!-- ══ 10 FOUNDERS ════════════════════════════════════════════════════ -->
+<section id="founders" data-track-section="founders" data-track-position="10">
+  <div class="wrap">
+    <div class="hd">
+      <span class="lbl lbl--cyan">Speakers · Companies</span>
+      <h2>The founders and investors.</h2>
+      <p class="lead">Thirty-three founders, operators and investors building or funding frontier biotech.</p>
+    </div>
+    <div class="faces">
+      <figure><div class="im"><img src="/img/betts-lacroix.webp" width="768" height="807" alt="Joe Betts-LaCroix" loading="lazy" decoding="async"></div><figcaption>Joe Betts-LaCroix<small>CEO, Retro Biosciences</small></figcaption></figure>
+      <figure><div class="im"><img src="/img/yuki.webp" width="480" height="480" alt="Yuki Hanyu" loading="lazy" decoding="async"></div><figcaption>Yuki Hanyu<small>IntegriCulture</small></figcaption></figure>
+      <figure><div class="im"><img src="/img/adam.webp" width="800" height="1118" alt="Adam Gries" loading="lazy" decoding="async"></div><figcaption>Adam Gries<small>Vitalist Bay</small></figcaption></figure>
+      <figure><div class="im"><img src="/img/deigin.webp" width="500" height="500" alt="Yuri Deigin" loading="lazy" decoding="async"></div><figcaption>Yuri Deigin<small>YouthBio Therapeutics</small></figcaption></figure>
+      <figure><div class="im"><img src="/img/davis.webp" width="768" height="768" alt="Mac Davis" loading="lazy" decoding="async"></div><figcaption>Mac Davis<small>Minicircle</small></figcaption></figure>
+    </div>
+
+    <div class="mani">
+      <div class="mani-h">
+        <b>The other twenty-eight</b>
+        <span class="lbl mani-key"><i>S1</i> Oct 17–18 &nbsp; <i>S2</i> Oct 24–25 &nbsp; <i>F</i> Finale Oct 26 &nbsp; <i>Online</i> joins remotely &nbsp; <i>—</i> session to be announced</span>
+      </div>
+      <div class="mani-g">
+        <div class="mrow"><span class="i">06</span><span class="n">Marian Goodell<em>CEO, Burning Man Project</em></span><span class="s">S2</span></div>
+        <div class="mrow"><span class="i">07</span><span class="n">Laurence Ion<em>VitaDAO / Vitalia</em></span><span class="s">S2</span></div>
+        <div class="mrow"><span class="i">08</span><span class="n">Sebastian Brunemeier<em>Healthspan Capital / Cambrian</em></span><span class="s">S2</span></div>
+        <div class="mrow"><span class="i">09</span><span class="n">Patri Friedman<em>Pronomos Capital</em></span><span class="s">S2 · Online</span></div>
+        <div class="mrow"><span class="i">10</span><span class="n">Matt Scholz<em>Oisin Bio</em></span><span class="s">S2</span></div>
+        <div class="mrow"><span class="i">11</span><span class="n">Todd Porter<em>EDGEof / Venture Cafe Tokyo</em></span><span class="s">S2</span></div>
+        <div class="mrow"><span class="i">12</span><span class="n">Josh Mann<em>COO, The LARTA Agency</em></span><span class="s">S2</span></div>
+        <div class="mrow"><span class="i">13</span><span class="n">Florian<em>Antler</em></span><span class="s">S2</span></div>
+        <div class="mrow"><span class="i">14</span><span class="n">Rob Claar<em>CEO, HekaBio</em></span><span class="s">S1</span></div>
+      </div>
+      <details class="more" data-track-faq="founders">
+        <summary><span class="c">Show all 33</span><span class="o">Show fewer</span></summary>
+        <div class="mani-g">
+          <div class="mrow"><span class="i">15</span><span class="n">Rodney Kelly<em>MEDISO</em></span><span class="s">S2</span></div>
+          <div class="mrow"><span class="i">16</span><span class="n">Ian Huyett<em>Granite Bio Innovation</em></span><span class="s">S1</span></div>
+          <div class="mrow"><span class="i">17</span><span class="n">Sandeep Casi<em>Investor</em></span><span class="s">S2</span></div>
+          <div class="mrow"><span class="i">18</span><span class="n">Keita Masui<em>ASAGI Labs</em></span><span class="s">S2</span></div>
+          <div class="mrow"><span class="i">19</span><span class="n">Devinder Sodhi<em>Learning Layer Labs</em></span><span class="s">S1</span></div>
+          <div class="mrow"><span class="i">20</span><span class="n">Sumit Jamuar<em>XPRIZE Brain Trust</em></span><span class="s">S2</span></div>
+          <div class="mrow"><span class="i">21</span><span class="n">Daniel Burger<em>Eightsix Science</em></span><span class="s">S2</span></div>
+          <div class="mrow"><span class="i">22</span><span class="n">Juliette Humer<em>Muse Bio</em></span><span class="s">S1</span></div>
+          <div class="mrow"><span class="i">23</span><span class="n">Jeffrey Tibbetts<em>Symbiont Labs</em></span><span class="s">S1</span></div>
+          <div class="mrow"><span class="i">24</span><span class="n">Nathan Cheng<em>Longevity Biotech Fellowship</em></span><span class="s">F</span></div>
+          <div class="mrow"><span class="i">25</span><span class="n">Felix Oen<em>Co-founder &amp; CEO</em></span><span class="s">S1</span></div>
+          <div class="mrow"><span class="i">26</span><span class="n">Brandon Possin<em>ZōVillage</em></span><span class="s">S1</span></div>
+          <div class="mrow"><span class="i">27</span><span class="n">Bilal Kharouni<em>Ekei Labs</em></span><span class="s">S1</span></div>
+          <div class="mrow"><span class="i">28</span><span class="n">Alice Gilman<em>R3 Bio</em></span><span class="s">S1</span></div>
+          <div class="mrow"><span class="i">29</span><span class="n">Julie Ying Baron<em>LiveBeyond</em></span><span class="s">S2</span></div>
+          <div class="mrow"><span class="i">30</span><span class="n">Irit Rappley<em>Co-founder &amp; CEO, NNP Labs</em></span><span class="s">S2</span></div>
+          <div class="mrow"><span class="i">31</span><span class="n">Czar Gonzalez<em>HEIRITAGE EcoCultural</em></span><span class="s">S2</span></div>
+          <div class="mrow"><span class="i">32</span><span class="n">Tomonari Abe<em>ABE YOANDO</em></span><span class="s">S1</span></div>
+          <div class="mrow"><span class="i">33</span><span class="n">Paul Yang<em>Governance Partners</em></span><span class="s">S2</span></div>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 11 CLOSING ═════════════════════════════════════════════════════ -->
+<section id="closing" data-track-section="closing" data-track-position="11">
   <div class="wrap">
     <div class="frame">
       <img class="bg" src="/img/port-tower-night.webp" width="1023" height="681" alt="Kobe Port Tower lit above the night harbour" loading="lazy" decoding="async">
@@ -1717,6 +1753,7 @@ details.more[open] > summary { margin-bottom: 6px; }
       <li id="fn6">AMED matching-fund programme: non-dilutive grants matched against registered venture capital. <a href="#fnref6" aria-label="Back to reference 6">Back</a></li>
       <li id="fn7">MHLW national health insurance: 70–90% of a patient's cost is covered, with a monthly cap. <a href="#fnref7" aria-label="Back to reference 7">Back</a></li>
     </ol>
+    <p class="credit">Photo of José Cordeiro by José Luis Cordeiro, <a href="https://creativecommons.org/licenses/by/3.0/" target="_blank" rel="noopener">CC BY 3.0</a>, via <a href="https://commons.wikimedia.org/wiki/File:Jos%C3%A9_Luis_Cordeiro_2019.png" target="_blank" rel="noopener">Wikimedia Commons</a>.</p>
   </div>
 </section>
 
