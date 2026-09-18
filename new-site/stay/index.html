@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Where to Stay · Mirai Tech City · Kobe 2026</title>
+<meta name="description" content="After your ticket: where to sleep in Kobe for Mirai Tech City, October 2026, and how to get to Port Island." />
+<meta name="robots" content="noindex, nofollow" />
+<meta name="theme-color" content="#050506" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23050506'/%3E%3Ctext x='50' y='72' font-size='62' font-family='serif' text-anchor='middle' fill='%239be8f0'%3E未%3C/text%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="preconnect" href="https://api.fontshare.com" />
+<link rel="preconnect" href="https://cdn.fontshare.com" crossorigin />
+<link href="https://api.fontshare.com/v2/css?f[]=switzer@400,500,700,800,900&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/posthog.js"></script>
+<script defer src="/analytics.js"></script>
+<link rel="stylesheet" href="/nav.css" />
+<script>
+  // The $1,200 pass is reviewed before the card is charged. Its Stripe Payment
+  // Link redirects here with ?pass=everything; summit tickets arrive without it.
+  // Decided in <head> so the page never flashes the wrong heading.
+  if (new URLSearchParams(location.search).get('pass') === 'everything') {
+    document.documentElement.classList.add('review');
+  }
+</script>
+<style>
+  :root {
+    --bg: #050506; --ink: #f4f3f0; --dim: rgba(244,243,240,.62); --faint: rgba(244,243,240,.45);
+    --line: rgba(244,243,240,.14); --accent: #9be8f0; --accent-rgb: 155,232,240;
+    --font: 'Switzer', 'Inter', -apple-system, sans-serif; --mono: 'IBM Plex Mono', monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; background: var(--bg); }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body { min-width: 320px; overflow-x: hidden; background: var(--bg); color: var(--ink);
+    font-family: var(--font); -webkit-font-smoothing: antialiased; }
+  ::selection { background: var(--accent); color: #000; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  a { color: inherit; }
+  .num { font-variant-numeric: tabular-nums; }
+
+  .btn { display: inline-block; padding: 13px 22px; border: 1px solid var(--line); border-radius: 2px;
+    font-family: var(--mono); font-size: 11px; letter-spacing: .18em; text-transform: uppercase;
+    color: var(--ink); text-decoration: none; transition: border-color .2s, background .2s, color .2s; }
+  .btn:hover { border-color: var(--accent); }
+  .btn.accent { background: var(--accent); border-color: var(--accent); color: #04191c; font-weight: 500; }
+  .btn.accent:hover { background: #c3f1f6; }
+
+  /* The shared nav is fixed: one row on desktop, two rows under 700px. */
+  .wrap { max-width: 1280px; margin: 0 auto; padding: 112px 6vw 0; }
+  .eyebrow { font-family: var(--mono); font-size: 10px; letter-spacing: .26em; text-transform: uppercase; color: var(--accent); }
+  h1 { margin-top: 14px; font-weight: 900; text-transform: uppercase; letter-spacing: -.015em;
+    font-size: clamp(38px, 6vw, 84px); line-height: .95; text-wrap: balance; }
+  h1 .tick { color: var(--accent); }
+  .lede { margin-top: 18px; max-width: 60ch; font-size: 16px; line-height: 1.6; color: var(--dim); text-wrap: pretty; }
+  .lede b { color: var(--ink); }
+  .acts { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
+
+  /* Confirmed vs. in-review heading: only one of each pair is rendered. */
+  .review-only { display: none; }
+  html.review .confirmed { display: none; }
+  html.review .review-only { display: block; }
+
+  h2 { font-weight: 800; text-transform: uppercase; letter-spacing: -.01em;
+    font-size: clamp(28px, 4vw, 52px); line-height: .98; }
+  .section { max-width: 1280px; margin: 0 auto; padding: 72px 6vw 0; }
+  .section .eyebrow { margin-bottom: 12px; }
+  .section > p { margin-top: 14px; max-width: 60ch; font-size: 15px; line-height: 1.65; color: var(--dim); }
+
+  .cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; margin-top: 32px; }
+  .card { display: flex; flex-direction: column; border: 1px solid var(--line); padding: 26px 24px 24px; }
+  .card h3 { font-size: 22px; font-weight: 800; text-transform: uppercase; letter-spacing: -.01em; line-height: 1.05; }
+  .card .tag { margin-top: 8px; font-family: var(--mono); font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--faint); }
+  .card p { margin-top: 14px; font-size: 14px; line-height: 1.6; color: var(--dim); }
+  .card ul { margin-top: 12px; padding-left: 0; list-style: none; font-size: 14px; line-height: 1.7; color: var(--dim); }
+  .card li::before { content: '→ '; color: var(--accent); }
+  .card .links { display: flex; flex-direction: column; gap: 8px; margin-top: auto; padding-top: 22px; }
+  .card .links a { font-family: var(--mono); font-size: 11px; letter-spacing: .16em; text-transform: uppercase;
+    color: var(--accent); text-decoration: none; }
+  .card .links a:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+  .steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; margin-top: 32px; }
+  .step { border-top: 1px solid var(--line); padding-top: 18px; }
+  .step b { display: block; font-family: var(--mono); font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--accent); }
+  .step p { margin-top: 10px; font-size: 14px; line-height: 1.6; color: var(--dim); }
+
+  .fine { max-width: 1280px; margin: 56px auto 0; padding: 0 6vw; font-family: var(--mono);
+    font-size: 10px; line-height: 1.9; letter-spacing: .08em; text-transform: uppercase; color: var(--faint); }
+  .fine a { color: var(--accent); text-decoration: none; }
+  footer { max-width: 1280px; margin: 72px auto 0; padding: 26px 6vw 40px; border-top: 1px solid var(--line);
+    display: flex; flex-wrap: wrap; gap: 10px 28px; font-family: var(--mono); font-size: 10px;
+    letter-spacing: .16em; text-transform: uppercase; color: var(--faint); }
+  footer b { color: var(--dim); font-weight: 400; }
+  footer a { color: var(--accent); text-decoration: none; }
+
+  @media (max-width: 900px) {
+    .cards, .steps { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 700px) {
+    .wrap { padding-top: 150px; }
+    .section { padding-top: 56px; }
+  }
+</style>
+</head>
+<body data-analytics-offer="stay">
+
+<script src="/nav.js"></script>
+
+<header class="wrap" data-track-section="hero" data-track-position="1">
+  <p class="eyebrow">Kobe · Port Island · October 1–31, 2026</p>
+  <h1 class="confirmed">Your ticket is confirmed<span class="tick">.</span></h1>
+  <h1 class="review-only">Your booking is in review<span class="tick">.</span></h1>
+  <p class="lede confirmed">Your ticket email with the QR code is on its way from Luma. Add the dates to your calendar, then sort out where you sleep below.</p>
+  <p class="lede review-only"><b>Your card is held, not charged.</b> We confirm your spot within 7 days. Then your card is charged and the ticket email with the QR code follows from Luma. If we cannot accept you, the hold is released and nothing is charged.</p>
+  <div class="acts">
+    <a class="btn accent" href="/mirai_oct1.ics" download data-analytics-action="site_navigation" data-analytics-location="stay_hero" data-analytics-target="calendar">Add to calendar</a>
+    <a class="btn" href="/experience/" data-analytics-action="site_navigation" data-analytics-location="stay_hero" data-analytics-target="experience">What a month here is like</a>
+  </div>
+</header>
+
+<section class="section" data-track-section="sleep" data-track-position="2" aria-labelledby="sleep-h">
+  <p class="eyebrow">Where to sleep</p>
+  <h2 id="sleep-h">Three ways to stay.</h2>
+  <p>Accommodation is booked and paid directly with the place you stay. We do not take hotel payments. Sannomiya is the city centre; Port Island, where the summits and the cowork are, is about 10 minutes away on the Port Liner.</p>
+  <div class="cards">
+    <article class="card">
+      <h3>Portopia Hotel</h3>
+      <p class="tag">Port Island · walk to KBIC</p>
+      <p>Our partner hotel, a short walk from the summit venues and the cowork. Book on their site. Email us for the Mirai rate before you book.</p>
+      <div class="links">
+        <a href="https://www.portopia.co.jp/en/" target="_blank" rel="noopener" data-analytics-action="site_navigation" data-analytics-location="stay_sleep" data-analytics-target="portopia">Portopia Hotel →</a>
+        <a href="mailto:team@miraitech.city?subject=Portopia%20rate" data-analytics-action="site_navigation" data-analytics-location="stay_sleep" data-analytics-target="email_rate">Email us for the rate →</a>
+      </div>
+    </article>
+    <article class="card">
+      <h3>Community houses</h3>
+      <p class="tag">Shared houses · closest to daily life</p>
+      <p>Hacker houses run by the community. Shared rooms, shared kitchens, and the people you will be working next to.</p>
+      <ul>
+        <li>The Sanctuary</li>
+        <li>Biopunk House</li>
+        <li>Aevitas</li>
+        <li>ZuCity Japan</li>
+      </ul>
+      <div class="links">
+        <a href="https://aevitashouse.bio/" target="_blank" rel="noopener" data-analytics-action="site_navigation" data-analytics-location="stay_sleep" data-analytics-target="aevitas">Aevitas →</a>
+        <a href="https://zucity.org/en/market-homes" target="_blank" rel="noopener" data-analytics-action="site_navigation" data-analytics-location="stay_sleep" data-analytics-target="zucity">ZuCity Japan →</a>
+        <a href="mailto:team@miraitech.city?subject=Community%20house" data-analytics-action="site_navigation" data-analytics-location="stay_sleep" data-analytics-target="email_house">Ask for an introduction →</a>
+      </div>
+    </article>
+    <article class="card">
+      <h3>Book it yourself</h3>
+      <p class="tag">Sannomiya or Port Island · your dates</p>
+      <p>Search for your own dates. Sannomiya has the most choice and the nightlife; Port Island is quieter and walking distance to everything in the programme.</p>
+      <div class="links">
+        <a href="https://www.airbnb.com/s/Kobe--Japan/homes?checkin=2026-10-01&amp;checkout=2026-10-31" target="_blank" rel="noopener" data-analytics-action="site_navigation" data-analytics-location="stay_sleep" data-analytics-target="airbnb">Airbnb, Kobe, October →</a>
+        <a href="https://www.booking.com/searchresults.html?ss=Kobe%2C+Japan&amp;checkin=2026-10-01&amp;checkout=2026-10-31" target="_blank" rel="noopener" data-analytics-action="site_navigation" data-analytics-location="stay_sleep" data-analytics-target="booking">Booking.com, Kobe, October →</a>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="section" data-track-section="getting_there" data-track-position="3" aria-labelledby="there-h">
+  <p class="eyebrow">Getting there</p>
+  <h2 id="there-h">Port Island is easy to reach.</h2>
+  <div class="steps">
+    <div class="step">
+      <b>From Kansai Airport (KIX)</b>
+      <p>The Bay Shuttle ferry crosses to Kobe Airport in about 30 minutes. From Kobe Airport the Port Liner runs straight through Port Island to Sannomiya.</p>
+    </div>
+    <div class="step">
+      <b>From Osaka or Kyoto</b>
+      <p>Trains to Sannomiya take about 20 minutes from Osaka and an hour from Kyoto. Change to the Port Liner at Sannomiya.</p>
+    </div>
+    <div class="step">
+      <b>On Port Island</b>
+      <p>The summit venues, the cowork, and the Portopia are within a short walk of each other. The venue map has every address.</p>
+    </div>
+  </div>
+  <div class="acts">
+    <a class="btn" href="/citizens/" data-analytics-action="site_navigation" data-analytics-location="stay_there" data-analytics-target="citizens_map">Open the venue map</a>
+  </div>
+</section>
+
+<p class="fine" data-track-section="fine" data-track-position="4">
+  Questions: <a href="mailto:team@miraitech.city">team@miraitech.city</a> · Accommodation is booked and paid with the provider, not with Mirai Tech City · Residents of Japan hold a Peatix ticket; everything on this page applies to you too.
+</p>
+
+<footer>
+  <b>Mirai Tech City</b> <span>Kobe · Oct 1–31 2026</span>
+  <a href="/pricing/" data-analytics-action="site_navigation" data-analytics-location="footer" data-analytics-target="pricing">What it costs →</a>
+  <a href="/" data-analytics-action="site_navigation" data-analytics-location="footer" data-analytics-target="home">Main site →</a>
+</footer>
+
+</body>
+</html>
