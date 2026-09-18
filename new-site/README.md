@@ -63,6 +63,20 @@ Single static `index.html` — no framework, no build step. Deploys anywhere
   `data-cta-label` / `data-cta-href` / `data-cta-target` on the script tag (see
   `startups/`). `/jp/` and `/fashion-show/` keep their own headers
   (Japanese page, co-branded event page).
+- Ticket issuance: `api/stripe-webhook.js` is the one Vercel function in this
+  folder (`package.json` exists for its `stripe` dependency; there is still no
+  build step, the HTML deploys as-is). Stripe sends `payment_intent.succeeded`
+  there; the handler (`lib/webhook.js`, pure mapping in `lib/fulfil.js`) finds
+  the Checkout Session, maps its price ids to Luma ticket types and calls Luma
+  Add Guests, so Luma stays the attendee list and QR scanner. A Luma failure
+  returns 500 and Stripe retries for three days. Payments with no Mirai price
+  (the sponsor pricing table shares the account) pass through untouched. Env
+  vars are listed in `.env.example`; set them in Vercel per environment (test
+  keys on Preview, live on Production) and register the webhook endpoint for
+  `payment_intent.succeeded` on each. Locally: `npm test` (node:test, no keys
+  needed) and the `new-site-vercel` launch config (`vercel dev` on port 4330,
+  the python server on 4321 cannot run functions) with `stripe listen
+  --forward-to localhost:4330/api/stripe-webhook`.
 - Analytics: every page loads `/posthog.js` (PostHog: autocapture, heatmaps,
   session replay, funnels) then `/analytics.js` (the shared event taxonomy,
   dispatched to both PostHog and Vercel Web Analytics). Section reach and
