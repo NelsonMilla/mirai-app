@@ -79,6 +79,10 @@ npm run build
 npm run smoke   # Playwright cross-viewport smoke test (see e2e/smoke.spec.ts)
 ```
 
-The smoke test scrolls the landing page at multiple viewports and asserts
-every section reveals, nothing overflows horizontally, and the console is
-clean. It exists because these exact bugs shipped before.
+The smoke test drives the live static site (`../new-site`, served on port
+4321, not this Next app): each public page at phone and desktop widths, the
+landing page also at tablet and MacBook widths. It asserts every reveal block
+reveals and paints, nothing overflows horizontally, and the console is clean.
+`e2e/analytics.spec.ts` checks the analytics taxonomy on the same pages. Both
+exist because these exact bugs shipped before; when a visual bug is fixed, add
+the assertion that would have caught it in the same PR.
