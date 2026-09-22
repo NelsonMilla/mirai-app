@@ -37,11 +37,14 @@ Single static `index.html` — no framework, no build step. Deploys anywhere
   retired on Sep 18 2026. `vercel.json` 301s `/summit-bundle/` to `/pricing/`; the
   analytics spec fails if any deployed file mentions it again.
 - `/stay/` is the post-purchase page: Stripe Payment Links redirect here after a
-  ticket is bought (`?session_id=…`, plus `&pass=everything` for the $1,200 pass,
-  which shows an "in review" heading because that payment is authorised, not
-  charged, until the booking is approved). Where to sleep (Portopia, community
-  houses, book-it-yourself search links) and how to reach Port Island. Public,
-  `noindex`, not in the sitemap. Accommodation is never sold or paid here.
+  ticket is bought (`?session_id=…&pass=<sku>`; `pass=everything` switches the
+  status line to "Booking in review", since that payment is authorised, not
+  charged, until approved). The page is one question, "Where will you sleep in
+  October?", with four rows (Portopia, a community house, a place you book
+  yourself, decide later) that open their details in place; the pick lives in
+  the URL hash so a reload keeps it. Accommodation is never sold or paid here.
+  Public, `noindex`, not in the sitemap. Getting-there notes and the calendar
+  file sit below the question.
 - `/experience/` is the attendee-facing "what a month here is like" page
   (daily rhythm, week-by-week arc, joinable programs, people, apply path),
   built from the Mirai Tech Source of Truth spreadsheet. Self-contained

@@ -139,7 +139,7 @@ const posthogEvents = (page: Page) => page.evaluate(() => (
   window as typeof window & { posthogEvents: [string, Record<string, unknown>][] }
 ).posthogEvents);
 
-test('the stay page tells summit buyers they are confirmed and pass buyers they are in review', async ({ page }) => {
+test('the stay page asks where you will sleep, and says confirmed or in review by mode', async ({ page }) => {
   await page.route('**/_vercel/**', (route) =>
     route.fulfill({ status: 200, contentType: 'application/javascript', body: '' }),
   );
@@ -149,22 +149,34 @@ test('the stay page tells summit buyers they are confirmed and pass buyers they 
 
   await capturePostHogEvents(page);
   await page.goto('http://localhost:4321/stay/?session_id=cs_test_summit&pass=summit_1');
-  await expect(page.locator('h1:visible')).toHaveText('Your ticket is confirmed.');
+  await expect(page.locator('h1')).toHaveText('Where will you sleep in October?');
+  await expect(page.locator('.status:visible')).toContainText('Ticket confirmed.');
 
   // Stripe lands the buyer here; that arrival is the purchase event, once per
   // session id even across a reload.
   const purchases = async () => (await posthogEvents(page)).filter(([name]) => name === 'Purchase Completed');
   await expect.poll(async () => (await purchases()).length).toBe(1);
   expect((await purchases())[0][1]).toMatchObject({ offer: 'summit_1', session_id: 'cs_test_summit' });
+
+  // The question is the page: details are closed until a row is picked, one
+  // open at a time, and the pick survives a reload through the URL hash.
+  await expect(page.locator('#hotel')).toBeHidden();
+  await page.locator('.row[data-choice="hotel"]').click();
+  await expect(page.locator('#hotel')).toBeVisible();
+  await expect(page.locator('.row[data-choice="hotel"] .mark')).toHaveText('Chosen');
+  await page.locator('.row[data-choice="own"]').click();
+  await expect(page.locator('#hotel')).toBeHidden();
+  await expect(page.locator('#own')).toBeVisible();
+  await expect(page).toHaveURL(/pass=summit_1#own$/);
   await page.reload();
-  await expect(page.locator('h1:visible')).toHaveText('Your ticket is confirmed.');
+  await expect(page.locator('#own')).toBeVisible();
   await page.waitForTimeout(500);
   expect((await purchases()).length, 'no duplicate purchase on reload').toBe(0);
 
   // The $1,200 pass is authorised, not charged, until the booking is reviewed.
   await page.goto('http://localhost:4321/stay/?session_id=cs_test_pass&pass=everything');
-  await expect(page.locator('h1:visible')).toHaveText('Your booking is in review.');
-  await expect(page.locator('.lede:visible')).toContainText('held, not charged');
+  await expect(page.locator('.status:visible')).toContainText('Booking in review.');
+  await expect(page.locator('.lede')).toContainText('cancel until we confirm');
 });
 
 test('the landing page reports section reach across the whole page', async ({ page }) => {

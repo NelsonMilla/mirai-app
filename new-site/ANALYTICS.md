@@ -17,11 +17,15 @@ for Stripe Payment Links; generic "Get Tickets" buttons and the nav CTA are
 Completed` fires on `/stay/` when Stripe redirects a paid buyer there
 (`offer` = the `pass` query value, `session_id`), once per session id; for the
 $1,200 pass it means an authorised booking, not a settled charge. `/stay/` is the post-purchase
-page (offer `stay`): sections `hero`, `sleep`, `getting_there`, `fine`; every outbound
-link is a `Site Navigation Clicked` with location `stay_hero` / `stay_sleep` /
-`stay_there` and the destination as target (portopia, aevitas, zucity, airbnb,
-booking, calendar, citizens_map, email_rate, email_house; zucity retired Sep 22 2026). `/jp/` shares the taxonomy but sells no ticket directly; its
-outcome is an email enquiry, not a checkout.
+page (offer `stay`): sections `hero`, `sleep`, `getting_there`, `fine`. The page is
+one question, "Where will you sleep in October?", with four rows; a row pick is a
+`Site Navigation Clicked` with location `stay_choice` and destination `hotel` /
+`house` / `own` / `later` (if `later` exceeds a third of picks the question comes
+too early). Every outbound link inside a row is a `Site Navigation Clicked` with
+location `stay_sleep` / `stay_hero` / `stay_there` and the destination as target
+(portopia, email_rate, aevitas, email_house, airbnb, booking, calendar,
+email_self, citizens_map, experience). The success metric for the page is the
+share of `/stay/` views with at least one `stay_sleep` click.
 
 ## Deployment checklist
 
