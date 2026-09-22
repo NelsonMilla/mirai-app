@@ -20,7 +20,7 @@ $1,200 pass it means an authorised booking, not a settled charge. `/stay/` is th
 page (offer `stay`): sections `hero`, `sleep`, `getting_there`, `fine`; every outbound
 link is a `Site Navigation Clicked` with location `stay_hero` / `stay_sleep` /
 `stay_there` and the destination as target (portopia, aevitas, zucity, airbnb,
-booking, calendar, citizens_map, email_rate, email_house). `/jp/` shares the taxonomy but sells no ticket directly; its
+booking, calendar, citizens_map, email_rate, email_house; zucity retired Sep 22 2026). `/jp/` shares the taxonomy but sells no ticket directly; its
 outcome is an email enquiry, not a checkout.
 
 ## Deployment checklist
