@@ -3,7 +3,6 @@
 
   const ENGAGED_VISIT_MS = 5000;
   const SECTION_DWELL_MS = 800;
-  const LUMA_ORIGIN = 'https://luma.com';
   const experiment = () => window.MIRAI_ACTIVE_EXPERIMENT || null;
 
   // Section reach doubles as the "how far did they read" context attached to
@@ -188,18 +187,23 @@
     });
   };
 
+  // Stripe redirects a paid buyer to /stay/?session_id=…&pass=<sku>. One
+  // Purchase Completed per session id, remembered across reloads. The $1,200
+  // pass arrives here with its card only authorised; the capture happens in
+  // Stripe later, so this counts bookings, not settled revenue.
   const initPurchaseTracking = () => {
-    let purchaseTracked = false;
-    window.addEventListener('message', (event) => {
-      if (purchaseTracked || event.origin !== LUMA_ORIGIN || event.data?.type !== 'luma:purchase') return;
-      purchaseTracked = true;
-
-      const purchaseValue = Number(event.data.value);
-      track('Purchase Completed', {
-        offer: offer(),
-        value: Number.isFinite(purchaseValue) ? purchaseValue : null,
-      });
-    });
+    if (!location.pathname.startsWith('/stay')) return;
+    const params = new URLSearchParams(location.search);
+    const sessionId = params.get('session_id');
+    if (!sessionId) return;
+    const key = `mirai_purchase_${sessionId}`;
+    try {
+      if (sessionStorage.getItem(key)) return;
+      sessionStorage.setItem(key, '1');
+    } catch {
+      // Storage blocked: better a duplicate on reload than a missed purchase.
+    }
+    track('Purchase Completed', { offer: params.get('pass') || offer(), session_id: sessionId });
   };
 
   const init = () => {

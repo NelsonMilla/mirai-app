@@ -35,7 +35,7 @@ window.MIRAI_COPY = {
     headline: `<span>Live the future</span> <span class="heroLine">of <i class="heroRot" data-words="frontier tech|longevity|biotech|gene therapy|AI medicine|augmentation">frontier tech</i><i class="heroDot">.</i></span>`,
     lead: `Cell and gene therapy, AI-designed drugs, N-of-1 medicine, brain-computer interfaces, radical life extension, human augmentation.`,
     where: `Kobe, Japan &ndash; <b>October 1&ndash;31, 2026</b>`,
-    buttons: `<a class="btn accent" href="https://luma.com/an4zotn9" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="hero_primary" data-analytics-target="tickets">Get Tickets</a>`,
+    buttons: `<a class="btn accent" href="/pricing/" data-analytics-action="site_navigation" data-analytics-location="hero_primary" data-analytics-target="pricing">Get Tickets</a>`,
     /* Japanese readers: one small link to /jp/, the Japan-resident ticket (Peatix). */
     jpLink: `<a class="heroJp" href="/jp/" lang="ja" hreflang="ja" data-analytics-action="site_navigation" data-analytics-location="hero" data-analytics-target="japan">日本語ページはこちら <span aria-hidden="true">&rarr;</span></a>`,
     scrollHint: `&darr;`,
@@ -111,7 +111,7 @@ window.MIRAI_COPY = {
     body: `Why the next decade of longevity biomedicine runs through Japan: regenerative medicine, devices, and accelerated regulatory paths.`,
     topics: ``,
     priceRow: `<span class="priceVal">$900</span><span class="priceKey"></span>`,
-    block: `<a class="btn ghost" href="https://luma.com/an4zotn9" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="summit_1" data-analytics-target="summit_pass">Get My Ticket</a>`,
+    block: `<a class="btn ghost" href="https://buy.stripe.com/test_8x2aEZ88AevHbTN5Su3Nm00" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="summit_1" data-analytics-target="summit_1">Get My Ticket</a>`,
     footnote: `Hotel & Transportation not included`,
     label2: SHOW_FASHION ? `SUMMIT — 02 + FASHION SHOW` : `SUMMIT — 02`,
     date2: SHOW_FASHION ? `October 24–26` : `October 24–25`,
@@ -120,7 +120,7 @@ window.MIRAI_COPY = {
     topics2: ``,
     tieIn: ``,
     priceRow2: `<span class="priceVal">$900</span><span class="priceKey"></span>`,
-    block2: `<a class="btn ghost" href="https://luma.com/an4zotn9" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="summit_2" data-analytics-target="summit_pass">Get My Ticket</a>`,
+    block2: `<a class="btn ghost" href="https://buy.stripe.com/test_00w14p3SkevH7Dx94G3Nm01" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="summit_2" data-analytics-target="summit_2">Get My Ticket</a>`,
     footnote2: `Hotel & Transportation not included`,
     line: `Across the two weekends: <b>Aubrey de Grey</b>, <b>Motoshi Hayano</b>, and 41 more.`,
     link: `Meet the speakers ↑`,
@@ -207,7 +207,7 @@ window.MIRAI_COPY = {
       ? `Devices become couture. <a href="#fashion" style="color:var(--accent); text-decoration:none" data-analytics-action="site_navigation" data-analytics-location="agenda" data-analytics-target="fashion">See the show ↑</a>`
       : `Devices become couture.`,
     ctaNote: `Oct 17–26 · Kobe`,
-    cta: `<a class="btn accent" href="https://luma.com/an4zotn9" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="agenda" data-analytics-target="tickets">Get Tickets</a>`,
+    cta: `<a class="btn accent" href="/pricing/" data-analytics-action="site_navigation" data-analytics-location="agenda" data-analytics-target="pricing">Get Tickets</a>`,
   },
 
   /* ─── FAQ ─────────────────────────── */
@@ -231,7 +231,7 @@ window.MIRAI_COPY = {
     q5: `What is the Frontier Human Fashion Show?`,
     a5: `A live demo day reimagined as a runway show. Device residents showcase their prototypes on models, blending medical technology with fashion. Think CES meets Tokyo Fashion Week.`,
     q6: `How do tickets and applications work?`,
-    a6: `Summit tickets are on Luma. The month-long PopUp is <b>$1,200</b> and application-only — we review on a rolling basis, and accepted teams receive next steps by email.`,
+    a6: `Summit tickets and the month-long PopUp (<b>$1,200</b>) check out on Stripe. PopUp bookings are reviewed within 7 days; your card is only charged once we confirm your spot. Accommodation is booked separately.`,
   },
 
   /* ─── APPLY ─────────────────────────── */
@@ -241,8 +241,8 @@ window.MIRAI_COPY = {
     buttons: SHOW_FASHION
       ? `Tickets for the Summits &amp; Fashion Show. Applications for the PopUp.`
       : `Tickets for the Summits. Applications for the PopUp.`,
-    buttons2: `<a class="btn accent" href="https://luma.com/an4zotn9" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="apply" data-analytics-target="tickets">Get Tickets</a> <a class="btn" href="https://luma.com/an4zotn9" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="apply" data-analytics-target="residency">Come Live Japan</a> <a class="btn ghost" href="#">Sponsor the City</a>`,
-    footnote: `Tickets &amp; PopUp on Luma · Applications reviewed on a rolling basis · <a href="/pricing/" data-analytics-action="site_navigation" data-analytics-location="apply" data-analytics-target="pricing">See pricing →</a>`,
+    buttons2: `<a class="btn accent" href="https://book.stripe.com/test_dRmfZj3Sk3R3f5ZcgS3Nm02" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="apply" data-analytics-target="everything">Come Live Japan — $1,200</a> <a class="btn" href="/pricing/" data-analytics-action="site_navigation" data-analytics-location="apply" data-analytics-target="pricing">Get Tickets</a> <a class="btn ghost" href="#">Sponsor the City</a>`,
+    footnote: `Tickets &amp; PopUp check out on Stripe · PopUp bookings confirmed within 7 days, card charged once confirmed · <a href="/pricing/" data-analytics-action="site_navigation" data-analytics-location="apply" data-analytics-target="pricing">See pricing →</a>`,
     footnote2: `Sponsors reach 300 residents and 55 speakers`,
     footnote3: `Residents of Japan: a Japan-resident ticket is sold separately on Peatix through the <a href="/jp/" hreflang="ja" data-analytics-action="site_navigation" data-analytics-location="apply" data-analytics-target="japan">Japanese page</a> · That pricing is exclusive to residents of Japan · <a href="/jp/" lang="ja" hreflang="ja" data-analytics-action="site_navigation" data-analytics-location="apply" data-analytics-target="japan">日本語ページ →</a>`,
   },
