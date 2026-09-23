@@ -39,6 +39,21 @@
         "new-site"
       ],
       "port": 4325
+    },
+    {
+      "name": "new-site-vercel",
+      "runtimeExecutable": "/opt/homebrew/bin/vercel",
+      "runtimeArgs": [
+        "dev",
+        "--listen",
+        "4330",
+        "--cwd",
+        "new-site"
+      ],
+      "env": {
+        "PATH": "/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin"
+      },
+      "port": 4330
     }
   ]
 }
