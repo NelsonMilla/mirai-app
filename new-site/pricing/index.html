@@ -51,7 +51,9 @@
   .btn.accent { background: var(--accent); border-color: var(--accent); color: #04191c; font-weight: 500; }
   .btn.accent:hover { background: #c3f1f6; }
 
-  .wrap { max-width: 1280px; margin: 0 auto; padding: 56px 6vw 0; }
+  /* The shared nav is fixed: one row on desktop, two rows under 700px. */
+  .wrap { max-width: 1280px; margin: 0 auto; padding: 112px 6vw 0; }
+  @media (max-width: 700px) { .wrap { padding-top: 150px; } }
   .eyebrow { font-family: var(--mono); font-size: 10px; letter-spacing: .26em; text-transform: uppercase; color: var(--accent); }
   h1 { margin-top: 14px; font-weight: 900; text-transform: uppercase; letter-spacing: -.015em;
     font-size: clamp(38px, 6vw, 84px); line-height: .95; text-wrap: balance; }

@@ -11,7 +11,11 @@ one event taxonomy to both:
   funnel/trend analysis. This is the diagnostic view.
 
 The conversion funnel below applies to `/` and `/experience/` (`/early-bird/` retired
-Sep 1 2026, `/summit-bundle/` retired Sep 18 2026). `/jp/` shares the taxonomy but sells no ticket directly; its
+Sep 1 2026, `/summit-bundle/` retired Sep 18 2026). `/stay/` is the post-purchase
+page (offer `stay`): sections `hero`, `sleep`, `getting_there`, `fine`; every outbound
+link is a `Site Navigation Clicked` with location `stay_hero` / `stay_sleep` /
+`stay_there` and the destination as target (portopia, aevitas, zucity, airbnb,
+booking, calendar, citizens_map, email_rate, email_house). `/jp/` shares the taxonomy but sells no ticket directly; its
 outcome is an email enquiry, not a checkout.
 
 ## Deployment checklist
