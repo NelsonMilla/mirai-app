@@ -10,7 +10,24 @@ Single static `index.html` — no framework, no build step. Deploys anywhere
   muted loop only after the poster renders and the browser is idle; mobile,
   reduced-motion, data-saver, and slow connections stay poster-only.
 - Summit I Oct 17–18 · Summit II Oct 24–25 · Fashion Show Oct 26 (Monday).
-- All ticket/residency CTAs → https://luma.com/an4zotn9
+- Ticket CTAs go to Stripe Payment Links (cutover Sep 22 2026). Generic "Get
+  Tickets" buttons and the nav CTA go to `/pricing/`, where each ticket has its
+  own link; summit cards, the PopUp/"Everything" buttons and `/conferences/`
+  link straight to the ticket. **The links currently on the site are TEST MODE**
+  (`buy.stripe.com/test_…`, `book.stripe.com/test_…`, Frontier Humans account):
+  only Stripe test cards work. Before the first real sale, create the same three
+  links in live mode and swap the three URLs everywhere (`grep -rn "stripe.com/test_"
+  new-site --exclude-dir=_v` lists every spot). Test-mode objects (Sep 22 2026):
+  Summit I `price_…`/`plink_…` → `buy.stripe.com/test_8x2aEZ88AevHbTN5Su3Nm00`,
+  Summit II → `buy.stripe.com/test_00w14p3SkevH7Dx94G3Nm01`,
+  Everything → `book.stripe.com/test_dRmfZj3Sk3R3f5ZcgS3Nm02` (manual capture:
+  the card is authorised, Stripe's Uncaptured list is the review queue, Capture
+  approves, Cancel releases; holds expire after 7 days). Promo code `MIRAI20`
+  (20% off, ticket products only, 50 uses). Every link redirects to
+  `/stay/?session_id={CHECKOUT_SESSION_ID}&pass=<sku>`; Luma tickets are issued
+  by hand from the Stripe payments list until the webhook is wired up.
+- The Luma listing link in the footers (`luma.com/an4zotn9`) stays as the event
+  page; the retired `/fashion-show/` still points at its own Luma event.
 - `/jp/` sells the Japan-resident ticket on Peatix (https://miraitechcity2026.peatix.com/);
   that price is for residents of Japan only. The landing page links to `/jp/` from
   the nav (日本語), the hero, the summits bar, the apply fine print (with the

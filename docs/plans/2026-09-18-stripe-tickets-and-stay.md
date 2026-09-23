@@ -61,7 +61,7 @@ Rule for every slice: the PR pastes the full `npm run smoke` output and it must 
 [#68](https://github.com/NelsonMilla/mirai-app/pull/68) slice 1 →
 [#69](https://github.com/NelsonMilla/mirai-app/pull/69) slice 2 →
 [#70](https://github.com/NelsonMilla/mirai-app/pull/70) slice 4 code (unit-tested, integration run pending keys).
-Slice 3 (Stripe dashboard) and the Luma/Vercel setup are Nelson's; the checklist is in #70. Slice 5 waits for the Payment Link URLs.
+Update 2026-09-22: Luma package ticket and coupon hidden by Nelson. Slice 3 done in Stripe **test mode** (Frontier Humans account, not the sandbox profile): 3 products/prices, promo `MIRAI20`, 3 Payment Links (Everything = manual capture + hold text). Slice 5 cutover is PR #74 on top of #71. The webhook (#70) stays unwired: Luma tickets are issued by hand from Stripe's payments list until real volume justifies it. Before the first real sale: recreate the three links in live mode and swap the URLs (README lists them).
 
 
 ### Slice 1 — Retire the bundle everywhere (AFK, no dependencies, ship first)

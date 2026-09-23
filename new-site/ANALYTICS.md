@@ -11,7 +11,12 @@ one event taxonomy to both:
   funnel/trend analysis. This is the diagnostic view.
 
 The conversion funnel below applies to `/` and `/experience/` (`/early-bird/` retired
-Sep 1 2026, `/summit-bundle/` retired Sep 18 2026). `/stay/` is the post-purchase
+Sep 1 2026, `/summit-bundle/` retired Sep 18 2026). Since Sep 22 2026 checkout leaves
+for Stripe Payment Links; generic "Get Tickets" buttons and the nav CTA are
+`Site Navigation Clicked` to `pricing`, the chooser, not checkouts. `Purchase
+Completed` fires on `/stay/` when Stripe redirects a paid buyer there
+(`offer` = the `pass` query value, `session_id`), once per session id; for the
+$1,200 pass it means an authorised booking, not a settled charge. `/stay/` is the post-purchase
 page (offer `stay`): sections `hero`, `sleep`, `getting_there`, `fine`; every outbound
 link is a `Site Navigation Clicked` with location `stay_hero` / `stay_sleep` /
 `stay_there` and the destination as target (portopia, aevitas, zucity, airbnb,
@@ -126,8 +131,8 @@ refuse to record.
 
 That context is the difference between knowing that checkout intent fell and
 knowing that it fell among visitors who never reached the price. Two events also
-carry their own extras: `Checkout Opened` adds `checkout_target` (tickets,
-residency, fashion_show, japan_resident — the Peatix ticket on `/jp/`) and `is_first_checkout`, and
+carry their own extras: `Checkout Opened` adds `checkout_target` (summit_1,
+summit_2, everything, fashion_show, japan_resident — the Peatix ticket on `/jp/`) and `is_first_checkout`, and
 `Section Viewed` adds `seconds_to_view`.
 
 Vercel counts only the first `Checkout Opened` per page load, so its funnel stays
