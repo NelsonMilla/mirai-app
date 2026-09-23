@@ -29,11 +29,19 @@ const RUNS = [
   { path: '/', width: 1440, height: 900 },
 ];
 
-/** Console errors and uncaught exceptions are both failures. */
+/**
+ * Console errors and uncaught exceptions are both failures, except a resource
+ * that failed to load from a third-party host (fonts, embeds): that is the
+ * network on the test machine, not the page, and it made the suite red on
+ * a slow connection in Sep 2026.
+ */
 function collectConsoleFailures(page: Page): string[] {
   const failures: string[] = [];
   page.on('console', (msg) => {
-    if (msg.type() === 'error') failures.push(`[error] ${msg.text()}`);
+    if (msg.type() !== 'error') return;
+    const thirdParty = /^Failed to load resource/.test(msg.text())
+      && !/^https?:\/\/localhost/.test(msg.location().url ?? '');
+    if (!thirdParty) failures.push(`[error] ${msg.text()}`);
   });
   page.on('pageerror', (err) => failures.push(`[pageerror] ${err.message}`));
   return failures;
@@ -104,7 +112,9 @@ for (const run of RUNS) {
     await stubHostingOnlyScripts(page);
     const consoleFailures = collectConsoleFailures(page);
 
-    await page.goto(run.path);
+    // DOM ready is enough: waiting for `load` lets a slow font or embed host
+    // time the test out.
+    await page.goto(run.path, { waitUntil: 'domcontentloaded' });
     await expect(page.locator('h1').first()).toBeVisible();
 
     // The shared nav is position:fixed. A page that does not pad for it

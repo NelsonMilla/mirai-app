@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Where to Stay · Mirai Tech City · Kobe 2026</title>
+<title>Where Will You Sleep · Mirai Tech City · Kobe 2026</title>
 <meta name="description" content="After your ticket: where to sleep in Kobe for Mirai Tech City, October 2026, and how to get to Port Island." />
 <meta name="robots" content="noindex, nofollow" />
 <meta name="theme-color" content="#050506" />
@@ -26,6 +26,8 @@
   if (new URLSearchParams(location.search).get('pass') === 'everything') {
     document.documentElement.classList.add('review');
   }
+  // With JS the details open one at a time; without it they are all visible.
+  document.documentElement.classList.add('js');
 </script>
 <style>
   :root {
@@ -60,28 +62,56 @@
   .lede b { color: var(--ink); }
   .acts { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
 
-  /* Confirmed vs. in-review heading: only one of each pair is rendered. */
+  /* Confirmed vs. in-review status line: only one of each pair is rendered. */
   .review-only { display: none; }
   html.review .confirmed { display: none; }
   html.review .review-only { display: block; }
+  html.review span.review-only { display: inline; }
+
+  /* One line of status. The tick is the only mark of "done"; the question is the page. */
+  .status { font-family: var(--mono); font-size: 11px; letter-spacing: .18em; text-transform: uppercase;
+    line-height: 1.8; color: var(--dim); }
+  .status .tick { color: var(--accent); }
+  .status b { color: var(--ink); font-weight: 400; }
+  .wrap h1 { margin-top: 28px; }
+
+  /* The choice: four full-width rows, hairline-ruled. */
+  .choice { list-style: none; margin-top: 36px; border-top: 1px solid var(--line); }
+  .choice li { border-bottom: 1px solid var(--line); }
+  .row { display: grid; grid-template-columns: 2.2em 1fr auto; align-items: baseline; gap: 0 18px;
+    width: 100%; padding: 22px 0; background: none; border: 0; color: var(--ink); text-align: left;
+    font-family: var(--font); cursor: pointer; }
+  .row .n { font-family: var(--mono); font-size: 11px; letter-spacing: .18em; color: var(--faint); }
+  .row .t { font-size: clamp(20px, 2.6vw, 30px); font-weight: 800; text-transform: uppercase;
+    letter-spacing: -.01em; line-height: 1.05; }
+  .row .s { grid-column: 2; margin-top: 6px; font-size: 14px; line-height: 1.5; color: var(--dim); }
+  .row .mark { grid-column: 3; grid-row: 1; font-family: var(--mono); font-size: 11px; letter-spacing: .18em;
+    text-transform: uppercase; color: var(--faint); }
+  .row:hover .t, .row:hover .mark { color: var(--accent); }
+  html.js .row[aria-expanded="true"] .n, html.js .row[aria-expanded="true"] .t,
+  html.js .row[aria-expanded="true"] .mark { color: var(--accent); }
+  html:not(.js) .row { cursor: default; }
+  html:not(.js) .row .mark { display: none; }
+
+  /* Details open in place under the row. Without JS every panel is visible. */
+  .panel { padding: 0 0 30px 2.2em; scroll-margin-top: 120px; }
+  html.js .panel { display: none; }
+  html.js .panel.open { display: block; }
+  .panel p { max-width: 60ch; font-size: 15px; line-height: 1.65; color: var(--dim); }
+  .panel p b { color: var(--ink); font-weight: 500; }
+  .panel ul { margin-top: 12px; padding-left: 0; list-style: none; font-size: 15px; line-height: 1.7; color: var(--dim); }
+  .panel li::before { content: '→ '; color: var(--accent); }
+  .panel .links { display: flex; flex-wrap: wrap; gap: 10px 28px; margin-top: 20px; }
+  .panel .links a { font-family: var(--mono); font-size: 11px; letter-spacing: .16em; text-transform: uppercase;
+    color: var(--accent); text-decoration: none; }
+  .panel .links a:hover { text-decoration: underline; text-underline-offset: 4px; }
+  .panel .acts { margin-top: 20px; }
 
   h2 { font-weight: 800; text-transform: uppercase; letter-spacing: -.01em;
     font-size: clamp(28px, 4vw, 52px); line-height: .98; }
   .section { max-width: 1280px; margin: 0 auto; padding: 72px 6vw 0; }
   .section .eyebrow { margin-bottom: 12px; }
   .section > p { margin-top: 14px; max-width: 60ch; font-size: 15px; line-height: 1.65; color: var(--dim); }
-
-  .cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; margin-top: 32px; }
-  .card { display: flex; flex-direction: column; border: 1px solid var(--line); padding: 26px 24px 24px; }
-  .card h3 { font-size: 22px; font-weight: 800; text-transform: uppercase; letter-spacing: -.01em; line-height: 1.05; }
-  .card .tag { margin-top: 8px; font-family: var(--mono); font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--faint); }
-  .card p { margin-top: 14px; font-size: 14px; line-height: 1.6; color: var(--dim); }
-  .card ul { margin-top: 12px; padding-left: 0; list-style: none; font-size: 14px; line-height: 1.7; color: var(--dim); }
-  .card li::before { content: '→ '; color: var(--accent); }
-  .card .links { display: flex; flex-direction: column; gap: 8px; margin-top: auto; padding-top: 22px; }
-  .card .links a { font-family: var(--mono); font-size: 11px; letter-spacing: .16em; text-transform: uppercase;
-    color: var(--accent); text-decoration: none; }
-  .card .links a:hover { text-decoration: underline; text-underline-offset: 4px; }
 
   .steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; margin-top: 32px; }
   .step { border-top: 1px solid var(--line); padding-top: 18px; }
@@ -98,11 +128,14 @@
   footer a { color: var(--accent); text-decoration: none; }
 
   @media (max-width: 900px) {
-    .cards, .steps { grid-template-columns: 1fr; }
+    .steps { grid-template-columns: 1fr; }
   }
   @media (max-width: 700px) {
     .wrap { padding-top: 150px; }
     .section { padding-top: 56px; }
+    .row { grid-template-columns: 1.8em 1fr; gap: 0 12px; padding: 18px 0; }
+    .row .mark { grid-column: 2; grid-row: 3; margin-top: 10px; }
+    .panel { padding-left: 0; }
   }
 </style>
 </head>
@@ -111,58 +144,82 @@
 <script src="/nav.js"></script>
 
 <header class="wrap" data-track-section="hero" data-track-position="1">
-  <p class="eyebrow">Kobe · Port Island · October 1–31, 2026</p>
-  <h1 class="confirmed">Your ticket is confirmed<span class="tick">.</span></h1>
-  <h1 class="review-only">Your booking is in review<span class="tick">.</span></h1>
-  <p class="lede confirmed">Your ticket email with the QR code is on its way from Luma. Add the dates to your calendar, then sort out where you sleep below.</p>
-  <p class="lede review-only"><b>Your card is held, not charged.</b> We confirm your spot within 7 days. Then your card is charged and the ticket email with the QR code follows from Luma. If we cannot accept you, the hold is released and nothing is charged.</p>
-  <div class="acts">
-    <a class="btn accent" href="/mirai_oct1.ics" download data-analytics-action="site_navigation" data-analytics-location="stay_hero" data-analytics-target="calendar">Add to calendar</a>
-    <a class="btn" href="/experience/" data-analytics-action="site_navigation" data-analytics-location="stay_hero" data-analytics-target="experience">What a month here is like</a>
-  </div>
-</header>
+  <p class="status confirmed"><span class="tick">✓</span> <b>Ticket confirmed.</b> Your QR code is on its way by email from Luma.</p>
+  <p class="status review-only"><b>Booking in review.</b> Your card is held, not charged. We confirm within 7 days, then send your ticket.</p>
+  <h1 id="choice-h">Where will you sleep in October<span class="tick">?</span></h1>
+  <p class="lede">We do not book rooms. You do, directly with the place. Pick one: <span class="review-only">Choose something you can cancel until we confirm you.</span></p>
 
-<section class="section" data-track-section="sleep" data-track-position="2" aria-labelledby="sleep-h">
-  <p class="eyebrow">Where to sleep</p>
-  <h2 id="sleep-h">Three ways to stay.</h2>
-  <p>Accommodation is booked and paid directly with the place you stay. We do not take hotel payments. Sannomiya is the city centre; Port Island, where the summits and the cowork are, is about 10 minutes away on the Port Liner.</p>
-  <div class="cards">
-    <article class="card">
-      <h3>Portopia Hotel</h3>
-      <p class="tag">Port Island · walk to KBIC</p>
-      <p>Our partner hotel, a short walk from the summit venues and the cowork. Book on their site. Email us for the Mirai rate before you book.</p>
-      <div class="links">
-        <a href="https://www.portopia.co.jp/en/" target="_blank" rel="noopener" data-analytics-action="site_navigation" data-analytics-location="stay_sleep" data-analytics-target="portopia">Portopia Hotel →</a>
-        <a href="mailto:team@miraitech.city?subject=Portopia%20rate" data-analytics-action="site_navigation" data-analytics-location="stay_sleep" data-analytics-target="email_rate">Email us for the rate →</a>
+  <ul class="choice" aria-labelledby="choice-h" data-track-section="sleep" data-track-position="2">
+    <li>
+      <button class="row" type="button" aria-expanded="false" aria-controls="hotel" data-choice="hotel"
+        data-analytics-action="site_navigation" data-analytics-location="stay_choice" data-analytics-target="hotel">
+        <span class="n">01</span>
+        <span class="t">At the Portopia Hotel</span>
+        <span class="mark">Open</span>
+        <span class="s">Port Island, a walk from the venues</span>
+      </button>
+      <div class="panel" id="hotel">
+        <p>Our partner hotel, a short walk from the summit venues and the cowork. Book on their site. Email us for the Mirai rate before you book.</p>
+        <div class="links">
+          <a href="https://www.portopia.co.jp/en/" target="_blank" rel="noopener" data-analytics-action="site_navigation" data-analytics-location="stay_sleep" data-analytics-target="portopia">Portopia Hotel →</a>
+          <a href="mailto:team@miraitech.city?subject=Portopia%20rate" data-analytics-action="site_navigation" data-analytics-location="stay_sleep" data-analytics-target="email_rate">Email us for the rate →</a>
+        </div>
       </div>
-    </article>
-    <article class="card">
-      <h3>Community houses</h3>
-      <p class="tag">Shared houses · closest to daily life</p>
-      <p>Hacker houses run by the community. Shared rooms, shared kitchens, and the people you will be working next to.</p>
-      <ul>
-        <li>The Sanctuary</li>
-        <li>Biopunk House</li>
-        <li>Aevitas</li>
-        <li>ZuCity Japan</li>
-      </ul>
-      <div class="links">
-        <a href="https://aevitashouse.bio/" target="_blank" rel="noopener" data-analytics-action="site_navigation" data-analytics-location="stay_sleep" data-analytics-target="aevitas">Aevitas →</a>
-        <a href="https://zucity.org/en/market-homes" target="_blank" rel="noopener" data-analytics-action="site_navigation" data-analytics-location="stay_sleep" data-analytics-target="zucity">ZuCity Japan →</a>
-        <a href="mailto:team@miraitech.city?subject=Community%20house" data-analytics-action="site_navigation" data-analytics-location="stay_sleep" data-analytics-target="email_house">Ask for an introduction →</a>
+    </li>
+    <li>
+      <button class="row" type="button" aria-expanded="false" aria-controls="house" data-choice="house"
+        data-analytics-action="site_navigation" data-analytics-location="stay_choice" data-analytics-target="house">
+        <span class="n">02</span>
+        <span class="t">In a community house</span>
+        <span class="mark">Open</span>
+        <span class="s">The Sanctuary, Biopunk House, Aevitas</span>
+      </button>
+      <div class="panel" id="house">
+        <p>Hacker houses run by the community. Shared rooms, shared kitchens, and the people you will be working next to.</p>
+        <ul>
+          <li>The Sanctuary</li>
+          <li>Biopunk House</li>
+          <li>Aevitas</li>
+        </ul>
+        <div class="links">
+          <a href="https://aevitashouse.bio/" target="_blank" rel="noopener" data-analytics-action="site_navigation" data-analytics-location="stay_sleep" data-analytics-target="aevitas">Aevitas →</a>
+          <a href="mailto:team@miraitech.city?subject=Community%20house" data-analytics-action="site_navigation" data-analytics-location="stay_sleep" data-analytics-target="email_house">Ask for an introduction →</a>
+        </div>
       </div>
-    </article>
-    <article class="card">
-      <h3>Book it yourself</h3>
-      <p class="tag">Sannomiya or Port Island · your dates</p>
-      <p>Search for your own dates. Sannomiya has the most choice and the nightlife; Port Island is quieter and walking distance to everything in the programme.</p>
-      <div class="links">
-        <a href="https://www.airbnb.com/s/Kobe--Japan/homes?checkin=2026-10-01&amp;checkout=2026-10-31" target="_blank" rel="noopener" data-analytics-action="site_navigation" data-analytics-location="stay_sleep" data-analytics-target="airbnb">Airbnb, Kobe, October →</a>
-        <a href="https://www.booking.com/searchresults.html?ss=Kobe%2C+Japan&amp;checkin=2026-10-01&amp;checkout=2026-10-31" target="_blank" rel="noopener" data-analytics-action="site_navigation" data-analytics-location="stay_sleep" data-analytics-target="booking">Booking.com, Kobe, October →</a>
+    </li>
+    <li>
+      <button class="row" type="button" aria-expanded="false" aria-controls="own" data-choice="own"
+        data-analytics-action="site_navigation" data-analytics-location="stay_choice" data-analytics-target="own">
+        <span class="n">03</span>
+        <span class="t">A place I book myself</span>
+        <span class="mark">Open</span>
+        <span class="s">Airbnb or Booking.com, Sannomiya or Port Island</span>
+      </button>
+      <div class="panel" id="own">
+        <p>Search for your own dates. Sannomiya is the city centre, with the most choice and the nightlife. Port Island is quieter and walking distance to everything in the programme. They are about 10 minutes apart on the Port Liner.</p>
+        <div class="links">
+          <a href="https://www.airbnb.com/s/Kobe--Japan/homes?checkin=2026-10-01&amp;checkout=2026-10-31" target="_blank" rel="noopener" data-analytics-action="site_navigation" data-analytics-location="stay_sleep" data-analytics-target="airbnb">Airbnb, Kobe, October →</a>
+          <a href="https://www.booking.com/searchresults.html?ss=Kobe%2C+Japan&amp;checkin=2026-10-01&amp;checkout=2026-10-31" target="_blank" rel="noopener" data-analytics-action="site_navigation" data-analytics-location="stay_sleep" data-analytics-target="booking">Booking.com, Kobe, October →</a>
+        </div>
       </div>
-    </article>
-  </div>
-</section>
+    </li>
+    <li>
+      <button class="row" type="button" aria-expanded="false" aria-controls="later" data-choice="later"
+        data-analytics-action="site_navigation" data-analytics-location="stay_choice" data-analytics-target="later">
+        <span class="n">04</span>
+        <span class="t">I'll decide later</span>
+        <span class="mark">Open</span>
+      </button>
+      <div class="panel" id="later">
+        <p><b>The month starts October 1 and Port Island rooms are limited.</b> This page stays at mirai-tech-city.vercel.app/stay. Put the dates in your calendar, or send yourself the link.</p>
+        <div class="acts">
+          <a class="btn accent" href="/mirai_oct1.ics" download data-analytics-action="site_navigation" data-analytics-location="stay_hero" data-analytics-target="calendar">Add to calendar</a>
+          <a class="btn" href="mailto:?subject=Where%20to%20stay%20for%20Mirai%20Tech%20City&amp;body=Book%20a%20room%20for%20October%3A%20https%3A%2F%2Fmirai-tech-city.vercel.app%2Fstay%2F" data-analytics-action="site_navigation" data-analytics-location="stay_hero" data-analytics-target="email_self">Email this page to yourself</a>
+        </div>
+      </div>
+    </li>
+  </ul>
+</header>
 
 <section class="section" data-track-section="getting_there" data-track-position="3" aria-labelledby="there-h">
   <p class="eyebrow">Getting there</p>
@@ -183,6 +240,8 @@
   </div>
   <div class="acts">
     <a class="btn" href="/citizens/" data-analytics-action="site_navigation" data-analytics-location="stay_there" data-analytics-target="citizens_map">Open the venue map</a>
+    <a class="btn accent" href="/mirai_oct1.ics" download data-analytics-action="site_navigation" data-analytics-location="stay_hero" data-analytics-target="calendar">Add to calendar</a>
+    <a class="btn" href="/experience/" data-analytics-action="site_navigation" data-analytics-location="stay_hero" data-analytics-target="experience">What a month here is like</a>
   </div>
 </section>
 
@@ -195,6 +254,35 @@
   <a href="/pricing/" data-analytics-action="site_navigation" data-analytics-location="footer" data-analytics-target="pricing">What it costs →</a>
   <a href="/" data-analytics-action="site_navigation" data-analytics-location="footer" data-analytics-target="home">Main site →</a>
 </footer>
+
+<script>
+  // One panel open at a time. #hotel, #house and #own live in the URL so a
+  // reload or the back button keeps the choice; "later" clears it.
+  (function () {
+    var rows = document.querySelectorAll('.row[data-choice]');
+    var keep = { hotel: 1, house: 1, own: 1 };
+    function open(id, push) {
+      rows.forEach(function (row) {
+        var on = row.dataset.choice === id;
+        row.setAttribute('aria-expanded', on ? 'true' : 'false');
+        row.querySelector('.mark').textContent = on ? 'Chosen' : 'Open';
+        document.getElementById(row.dataset.choice).classList.toggle('open', on);
+      });
+      if (push) {
+        var url = location.pathname + location.search + (keep[id] ? '#' + id : '');
+        history.replaceState(null, '', url);
+      }
+    }
+    rows.forEach(function (row) {
+      row.addEventListener('click', function () {
+        var id = row.dataset.choice;
+        open(row.getAttribute('aria-expanded') === 'true' ? null : id, true);
+      });
+    });
+    var initial = location.hash.slice(1);
+    if (keep[initial]) open(initial, false);
+  })();
+</script>
 
 </body>
 </html>
