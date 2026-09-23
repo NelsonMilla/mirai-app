@@ -1,31 +1,22 @@
 import { defineConfig } from '@playwright/test';
 
+// Both specs drive the live static site in ../new-site on port 4321. The Next
+// app in this folder is not deployed, so it is no longer started for tests.
 export default defineConfig({
   testDir: './e2e',
-  timeout: 120_000,
+  timeout: 60_000,
   expect: { timeout: 15_000 },
   fullyParallel: false,
-  // One retry absorbs next-dev cold-compile jank on first page loads.
-  retries: 1,
+  retries: 0,
   reporter: [['list']],
   use: {
-    baseURL: 'http://localhost:3000',
+    baseURL: 'http://localhost:4321',
     trace: 'retain-on-failure',
   },
-  webServer: [
-    {
-      command: 'npm run dev',
-      url: 'http://localhost:3000',
-      reuseExistingServer: true,
-      timeout: 60_000,
-    },
-    // The standalone new-site deployment is plain static files; analytics.spec.ts
-    // drives the real pages to check the conversion funnel end to end.
-    {
-      command: 'python3 -m http.server 4321 -d ../new-site',
-      url: 'http://localhost:4321/',
-      reuseExistingServer: true,
-      timeout: 30_000,
-    },
-  ],
+  webServer: {
+    command: 'python3 -m http.server 4321 -d ../new-site',
+    url: 'http://localhost:4321/',
+    reuseExistingServer: true,
+    timeout: 30_000,
+  },
 });
