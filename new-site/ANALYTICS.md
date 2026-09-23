@@ -10,9 +10,22 @@ one event taxonomy to both:
   full property payloads, plus autocapture, heatmaps, session replay, and
   funnel/trend analysis. This is the diagnostic view.
 
-The conversion funnel below applies to `/`, `/summit-bundle/`, (`/early-bird/` retired Sep 1 2026),
-and `/experience/`. `/jp/` shares the taxonomy but sells no ticket directly; its
-outcome is an email enquiry, not a checkout.
+The conversion funnel below applies to `/` and `/experience/` (`/early-bird/` retired
+Sep 1 2026, `/summit-bundle/` retired Sep 18 2026). Since Sep 22 2026 checkout leaves
+for Stripe Payment Links; generic "Get Tickets" buttons and the nav CTA are
+`Site Navigation Clicked` to `pricing`, the chooser, not checkouts. `Purchase
+Completed` fires on `/stay/` when Stripe redirects a paid buyer there
+(`offer` = the `pass` query value, `session_id`), once per session id; for the
+$1,200 pass it means an authorised booking, not a settled charge. `/stay/` is the post-purchase
+page (offer `stay`): sections `hero`, `sleep`, `getting_there`, `fine`. The page is
+one question, "Where will you sleep in October?", with four rows; a row pick is a
+`Site Navigation Clicked` with location `stay_choice` and destination `hotel` /
+`house` / `own` / `later` (if `later` exceeds a third of picks the question comes
+too early). Every outbound link inside a row is a `Site Navigation Clicked` with
+location `stay_sleep` / `stay_hero` / `stay_there` and the destination as target
+(portopia, email_rate, aevitas, email_house, airbnb, booking, calendar,
+email_self, citizens_map, experience). The success metric for the page is the
+share of `/stay/` views with at least one `stay_sleep` click.
 
 ## Deployment checklist
 
@@ -122,8 +135,8 @@ refuse to record.
 
 That context is the difference between knowing that checkout intent fell and
 knowing that it fell among visitors who never reached the price. Two events also
-carry their own extras: `Checkout Opened` adds `checkout_target` (tickets,
-residency, summit_hotel, fashion_show, japan_resident — the Peatix ticket on `/jp/`) and `is_first_checkout`, and
+carry their own extras: `Checkout Opened` adds `checkout_target` (summit_1,
+summit_2, everything, fashion_show, japan_resident — the Peatix ticket on `/jp/`) and `is_first_checkout`, and
 `Section Viewed` adds `seconds_to_view`.
 
 Vercel counts only the first `Checkout Opened` per page load, so its funnel stays
@@ -212,7 +225,7 @@ then collect a baseline before changing copy or layout.
 3. Form one causal hypothesis per change: audience, problem, proposed change,
    expected metric movement, and guardrail.
 4. Change the earliest content boundary associated with the loss. For example,
-   weak `package_contents` reach suggests hero/value-proposition work; strong
+   weak mid-page section reach suggests hero/value-proposition work; strong
    final-offer reach with weak checkout intent suggests price, trust, or CTA work.
 5. Ship a single controlled experiment, keep allocation stable, and decide the
    sample size and minimum detectable lift before launch. Do not stop early after
@@ -220,44 +233,14 @@ then collect a baseline before changing copy or layout.
 6. Promote the winner, remove the flag, annotate the change date, and monitor the
    primary metric plus guardrails for regression.
 
-## Active A/B test: Summit hero framing
+## Retired A/B test (page removed Sep 18 2026): Summit hero framing
 
-The test is active as soon as this deployment reaches production.
-
-- **Experiment:** `summit_hero_framing_v1`
-- **Route:** `/summit-bundle/` only
-- **Allocation:** stable 50/50
-- **Control:** “Two summit weekends, hotel included” and the current package
-  explanation
-- **Variant (`founder_value`):** “One booking. The full Kobe run.” with explicit
-  `$1,500` launch savings, 12 nights, both summits, and founder/investor-oriented
-  convenience framing
-- **Primary metric:** `Purchase Completed` / `Experiment Assigned`, by variant
-- **Secondary metric:** `Checkout Opened` / `Experiment Assigned`, by variant
-- **Diagnostics:** section reach, first CTA location, FAQ demand, and
-  checkout-to-purchase completion
-- **Guardrails:** bounce rate, mobile section reach, checkout completion, and no
-  page-layout or performance regression
-
-Only the hero message changes. Price, package contents, scarcity, imagery, CTA,
-and Luma checkout are identical, isolating the framing hypothesis.
-
-Assignment happens synchronously in the document head before the page renders,
-so there is no control-to-variant flash. A first-party cookie stores only the
-two-value assignment for 90 days; it contains no identifier or personal data.
-Add this experiment cookie to the site's privacy/cookie disclosure and review
-whether consent is required for the outreach jurisdictions in scope.
-
-For QA, use `/summit-bundle/?summit_hero=control` or
-`/summit-bundle/?summit_hero=founder_value`. Forced views do not emit custom
-analytics events, so internal testing does not contaminate the experiment.
-
-Because the reachable audience is small, record the expected outreach volume,
-baseline purchase rate, minimum worthwhile lift, and stopping date before the
-send. Do not call a winner from a handful of purchases. If the test cannot reach
-the required sample, report the result as directional and combine it with direct
-feedback from qualified founders/investors rather than claiming statistical
-certainty.
+`summit_hero_framing_v1` ran on `/summit-bundle/` (control "Two summit weekends,
+hotel included" vs `founder_value` "One booking. The full Kobe run."), primary
+metric `Purchase Completed` / `Experiment Assigned`. The package and its page were
+retired on Sep 18 2026 before the test reached a decision; treat any recorded
+result as directional. The experiment plumbing in `analytics.js` / `posthog.js`
+stays for the next test; no page assigns a variant today.
 
 ## Retired A/B test (page removed Sep 1 2026): Early Bird hero framing
 

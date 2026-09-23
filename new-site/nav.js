@@ -1,6 +1,7 @@
 /* Shared site nav — the single source of truth for the top bar on every
    English site page (/, /experience/, /conferences/, /pricing/, /startups/).
    The last link points Japanese readers to /jp/ (Japan-resident ticket on Peatix).
+   The default CTA goes to /pricing/, where each ticket has its own Stripe link.
    Use it like this, at the top of <body>, with /nav.css linked in <head>:
      <script src="/nav.js"></script>
    The script is synchronous and inserts the nav right where it sits, so
@@ -19,9 +20,11 @@
   ];
   var cta = {
     label: script.getAttribute('data-cta-label') || 'Get Tickets',
-    href: script.getAttribute('data-cta-href') || 'https://luma.com/an4zotn9',
-    target: script.getAttribute('data-cta-target') || 'tickets'
+    href: script.getAttribute('data-cta-href') || '/pricing/',
+    target: script.getAttribute('data-cta-target') || 'pricing'
   };
+  // An external CTA is a checkout (Stripe); an internal one is navigation.
+  var external = /^https?:/.test(cta.href);
   function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;'); }
   var onHome = path === '/' || path === '/index.html';
   var html =
@@ -36,8 +39,8 @@
         '<span class="nd-lbl">' + esc(l.label) + '</span></a>';
     }).join('') +
     '</div>' +
-    '<a class="nd-cta" href="' + esc(cta.href) + '" target="_blank" rel="noopener" ' +
-    'data-analytics-action="checkout" data-analytics-location="nav" data-analytics-target="' + esc(cta.target) + '">' +
+    '<a class="nd-cta" href="' + esc(cta.href) + '"' + (external ? ' target="_blank" rel="noopener"' : '') + ' ' +
+    'data-analytics-action="' + (external ? 'checkout' : 'site_navigation') + '" data-analytics-location="nav" data-analytics-target="' + esc(cta.target) + '">' +
     esc(cta.label) + '</a>' +
     '</div></nav></div>';
   script.insertAdjacentHTML('afterend', html);

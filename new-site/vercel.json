@@ -1,0 +1,6 @@
+{
+  "redirects": [
+    { "source": "/summit-bundle", "destination": "/pricing/", "permanent": true },
+    { "source": "/summit-bundle/", "destination": "/pricing/", "permanent": true }
+  ]
+}

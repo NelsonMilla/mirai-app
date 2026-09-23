@@ -1,5 +1,5 @@
 import { expect, test, type Page } from '@playwright/test';
-import { existsSync, readFileSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 
 const siteRoot = join(process.cwd(), '..', 'new-site');
@@ -15,17 +15,43 @@ const PAGES = [
   'index.html',
   'experience/index.html',
   'jp/index.html',
-  'summit-bundle/index.html',
   'pricing/index.html',
   'conferences/index.html',
   'startups/index.html',
   'fashion-show/index.html',
   'citizens/index.html',
+  'stay/index.html',
 ];
 
 test('every listed page still exists on disk', () => {
   const missing = PAGES.filter((page) => !existsSync(join(siteRoot, page)));
   expect(missing, 'retired pages must be removed from PAGES').toEqual([]);
+});
+
+// The Summit + Hotel package was retired on 2026-09-18. Nothing on the live
+// site may still sell, link, or describe it: cached deep links must find no
+// offer, and copy must not promise hotel nights. Sweeps every text file that
+// deploys, skipping the design-round draft folders.
+const SKIP_DIRS = new Set(['_v', '_nav', 'img', '.posthog-wizard-cache', 'node_modules']);
+// .md is skipped: README and ANALYTICS may narrate the retirement.
+const TEXT_EXT = /\.(html|js|txt|xml|yml|json)$/;
+function deployedTextFiles(dir: string): string[] {
+  return readdirSync(dir).flatMap((name) => {
+    const full = join(dir, name);
+    if (statSync(full).isDirectory()) return SKIP_DIRS.has(name) ? [] : deployedTextFiles(full);
+    // vercel.json holds the 301 for the old URL, so it must name it.
+    if (name === 'vercel.json') return [];
+    return TEXT_EXT.test(name) ? [full] : [];
+  });
+}
+
+test('no deployed file still mentions the retired summit + hotel package', () => {
+  const retired = /summit-bundle|SFSH|ttype-0BjQv0xV4yY5P0l|hotel package|showSummitPackage|packageSpots|summit_hotel|summit-hotel/i;
+  const offenders = deployedTextFiles(siteRoot).flatMap((file) => {
+    const lines = readFileSync(file, 'utf8').split('\n');
+    return lines.flatMap((line, i) => (retired.test(line) ? [`${file.slice(siteRoot.length + 1)}:${i + 1}`] : []));
+  });
+  expect(offenders).toEqual([]);
 });
 
 test('every standalone page loads the shared analytics tracker', () => {
@@ -72,12 +98,13 @@ test('every standalone page loads the PostHog bridge before the tracker', () => 
   }
 });
 
-// Every paid conversion on this site starts by leaving for Luma. An unmarked
-// Luma link is a hole in the funnel, so the markup itself is the assertion.
-test('every Luma link on a landing page is instrumented', () => {
+// Every paid conversion on this site starts by leaving for Stripe (tickets) or
+// Luma (the listing, the fashion show). An unmarked checkout link is a hole in
+// the funnel, so the markup itself is the assertion.
+test('every checkout link on a landing page is instrumented', () => {
   for (const page of PAGES) {
     const html = readFileSync(join(siteRoot, page), 'utf8');
-    const unmarked = (html.match(/<a[^>]*luma\.com[^>]*>/g) ?? [])
+    const unmarked = (html.match(/<a[^>]*(?:luma\.com|stripe\.com)[^>]*>/g) ?? [])
       .filter((anchor) => !anchor.includes('data-analytics-action'));
     expect(unmarked, page).toEqual([]);
   }
@@ -112,6 +139,46 @@ const posthogEvents = (page: Page) => page.evaluate(() => (
   window as typeof window & { posthogEvents: [string, Record<string, unknown>][] }
 ).posthogEvents);
 
+test('the stay page asks where you will sleep, and says confirmed or in review by mode', async ({ page }) => {
+  await page.route('**/_vercel/**', (route) =>
+    route.fulfill({ status: 200, contentType: 'application/javascript', body: '' }),
+  );
+  const html = readFileSync(join(siteRoot, 'stay/index.html'), 'utf8');
+  expect(html).toContain('<meta name="robots" content="noindex, nofollow" />');
+  expect(readFileSync(join(siteRoot, 'sitemap.xml'), 'utf8')).not.toContain('/stay/');
+
+  await capturePostHogEvents(page);
+  await page.goto('http://localhost:4321/stay/?session_id=cs_test_summit&pass=summit_1');
+  await expect(page.locator('h1')).toHaveText('Where will you sleep in October?');
+  await expect(page.locator('.status:visible')).toContainText('Ticket confirmed.');
+
+  // Stripe lands the buyer here; that arrival is the purchase event, once per
+  // session id even across a reload.
+  const purchases = async () => (await posthogEvents(page)).filter(([name]) => name === 'Purchase Completed');
+  await expect.poll(async () => (await purchases()).length).toBe(1);
+  expect((await purchases())[0][1]).toMatchObject({ offer: 'summit_1', session_id: 'cs_test_summit' });
+
+  // The question is the page: details are closed until a row is picked, one
+  // open at a time, and the pick survives a reload through the URL hash.
+  await expect(page.locator('#hotel')).toBeHidden();
+  await page.locator('.row[data-choice="hotel"]').click();
+  await expect(page.locator('#hotel')).toBeVisible();
+  await expect(page.locator('.row[data-choice="hotel"] .mark')).toHaveText('Chosen');
+  await page.locator('.row[data-choice="own"]').click();
+  await expect(page.locator('#hotel')).toBeHidden();
+  await expect(page.locator('#own')).toBeVisible();
+  await expect(page).toHaveURL(/pass=summit_1#own$/);
+  await page.reload();
+  await expect(page.locator('#own')).toBeVisible();
+  await page.waitForTimeout(500);
+  expect((await purchases()).length, 'no duplicate purchase on reload').toBe(0);
+
+  // The $1,200 pass is authorised, not charged, until the booking is reviewed.
+  await page.goto('http://localhost:4321/stay/?session_id=cs_test_pass&pass=everything');
+  await expect(page.locator('.status:visible')).toContainText('Booking in review.');
+  await expect(page.locator('.lede')).toContainText('cancel until we confirm');
+});
+
 test('the landing page reports section reach across the whole page', async ({ page }) => {
   await capturePostHogEvents(page);
   await page.setViewportSize({ width: 1280, height: 800 });
@@ -131,7 +198,7 @@ test('the landing page reports section reach across the whole page', async ({ pa
   expect(checkout?.[1]).toMatchObject({
     offer: 'mirai_city',
     location: 'apply',
-    checkout_target: 'tickets',
+    checkout_target: 'everything',
     is_first_checkout: true,
   });
   expect(Number(checkout?.[1].sections_viewed)).toBeGreaterThan(0);
@@ -150,11 +217,11 @@ test('the mobile landing hero stays static, direct, and scrollable', async ({ pa
   // structure are asserted here: brand in the shared nav, one ticket CTA in
   // the nav and one in the hero, both pointing at the live checkout.
   await expect(page.locator('nav .nd-logo')).toContainText('Mirai');
-  await expect(page.locator('nav .nd-cta')).toHaveAttribute('href', 'https://luma.com/an4zotn9');
+  await expect(page.locator('nav .nd-cta')).toHaveAttribute('href', '/pricing/');
   await expect(page.locator('.hero h1')).not.toBeEmpty();
   await expect(page.locator('.heroActions a')).toHaveCount(1);
   await expect(page.locator('[data-analytics-location="hero_primary"]'))
-    .toHaveAttribute('href', 'https://luma.com/an4zotn9');
+    .toHaveAttribute('href', '/pricing/');
 
   const mobileState = await page.evaluate(() => ({
     heroVideoSource: (document.querySelector('.heroVideo') as HTMLVideoElement).currentSrc,
