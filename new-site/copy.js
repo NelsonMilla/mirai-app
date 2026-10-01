@@ -140,8 +140,6 @@ window.MIRAI_COPY = {
     org3: `Cellular Agriculture`,
     name4: `Adam Gries`,
     org4: `Vitalist Bay`,
-    name5: `Brian Kennedy`,
-    org5: `NUS Centre for Healthy Longevity`,
     alsoLine: `Also in the arena: <b>José Cordeiro</b>, <b>Todd Porter</b>, <b>Josh Mann</b>, <b>Patri Friedman</b>, <b>Ian Huyett</b>, <b>Sandeep Casi</b>, <b>Sebastian Brunemeier</b>, <b>Rob Claar</b>, <b>Natalie Coles</b>, <b>Devinder Sodhi</b>, <b>Sumit Jamuar</b>, <b>Keita Masui</b>, <b>Muneaki Goto</b>, <b>Takahiro Yasuda</b>, <b>Yuri Deigin</b>, <b>Laurence Ion</b>, <b>Rodney Kelly</b>, <b>Eleanor Sheekey</b>, <b>Stuart Reid</b>, <b>Mac Davis</b>, <b>Daniel Burger</b>, <b>Juliette Humer</b>, <b>Jeffrey Tibbetts</b>, <b>Ada Cyborg</b>, <b>Elen Capri</b>, <b>Cremieux</b>, <b>Nathan Cheng</b>, <b>Keiko Kobayashi</b>, <b>Felix OENS</b>, <b>Brandon Possin</b>, <b>Bilal Kharouni</b>, <b>Alice Gilman</b>, <b>Julie Ying Baron</b>, <b>Irit Rappley, PhD</b>, <b>Walter Patterson</b>, <b>Czar Gonzalez</b>, <b>Takashi Aoi</b>, <b>Yoshihiro Muragaki</b>, <b>Masanori Miyanishi</b>, <b>Paul Yang</b>, <b>Pedro Henrich</b>, <b>Nelson Milla</b>.`,
     followLine: `55 confirmed · more announced through September · <a href="#doors">Follow along ↓</a>`,
   },
