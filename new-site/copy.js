@@ -111,7 +111,7 @@ window.MIRAI_COPY = {
     body: `Why the next decade of longevity biomedicine runs through Japan: regenerative medicine, devices, and accelerated regulatory paths.`,
     topics: ``,
     priceRow: `<span class="priceVal">$900</span><span class="priceKey"></span>`,
-    block: `<a class="btn ghost" href="https://buy.stripe.com/test_8x2aEZ88AevHbTN5Su3Nm00" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="summit_1" data-analytics-target="summit_1">Get My Ticket</a>`,
+    block: `<a class="btn ghost" href="https://buy.stripe.com/dRmdRb1Kc9bn7Dx80C3Nm05" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="summit_1" data-analytics-target="summit_1">Get My Ticket</a>`,
     footnote: `Hotel & Transportation not included`,
     label2: SHOW_FASHION ? `SUMMIT — 02 + FASHION SHOW` : `SUMMIT — 02`,
     date2: SHOW_FASHION ? `October 24–26` : `October 24–25`,
@@ -120,7 +120,7 @@ window.MIRAI_COPY = {
     topics2: ``,
     tieIn: ``,
     priceRow2: `<span class="priceVal">$900</span><span class="priceKey"></span>`,
-    block2: `<a class="btn ghost" href="https://buy.stripe.com/test_00w14p3SkevH7Dx94G3Nm01" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="summit_2" data-analytics-target="summit_2">Get My Ticket</a>`,
+    block2: `<a class="btn ghost" href="https://buy.stripe.com/00wcN774wbjv8HBdkW3Nm06" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="summit_2" data-analytics-target="summit_2">Get My Ticket</a>`,
     footnote2: `Hotel & Transportation not included`,
     line: `Across the two weekends: <b>Aubrey de Grey</b>, <b>Motoshi Hayano</b>, and 41 more.`,
     link: `Meet the speakers ↑`,
@@ -241,7 +241,7 @@ window.MIRAI_COPY = {
     buttons: SHOW_FASHION
       ? `Tickets for the Summits &amp; Fashion Show. Applications for the PopUp.`
       : `Tickets for the Summits. Applications for the PopUp.`,
-    buttons2: `<a class="btn accent" href="https://book.stripe.com/test_dRmfZj3Sk3R3f5ZcgS3Nm02" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="apply" data-analytics-target="everything">Come Live Japan — $1,200</a> <a class="btn" href="/pricing/" data-analytics-action="site_navigation" data-analytics-location="apply" data-analytics-target="pricing">Get Tickets</a> <a class="btn ghost" href="#">Sponsor the City</a>`,
+    buttons2: `<a class="btn accent" href="https://book.stripe.com/bJe9AVewY4V7cXR80C3Nm07" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="apply" data-analytics-target="everything">Come Live Japan — $1,200</a> <a class="btn" href="/pricing/" data-analytics-action="site_navigation" data-analytics-location="apply" data-analytics-target="pricing">Get Tickets</a> <a class="btn ghost" href="#">Sponsor the City</a>`,
     footnote: `Tickets &amp; PopUp check out on Stripe · PopUp bookings confirmed within 7 days, card charged once confirmed · <a href="/pricing/" data-analytics-action="site_navigation" data-analytics-location="apply" data-analytics-target="pricing">See pricing →</a>`,
     footnote2: `Sponsors reach 300 residents and 55 speakers`,
     footnote3: `Residents of Japan: a Japan-resident ticket is sold separately on Peatix through the <a href="/jp/" hreflang="ja" data-analytics-action="site_navigation" data-analytics-location="apply" data-analytics-target="japan">Japanese page</a> · That pricing is exclusive to residents of Japan · <a href="/jp/" lang="ja" hreflang="ja" data-analytics-action="site_navigation" data-analytics-location="apply" data-analytics-target="japan">日本語ページ →</a>`,
