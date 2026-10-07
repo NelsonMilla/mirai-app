@@ -158,10 +158,10 @@ test('the shipped snapshot builds today\'s 55 speakers', () => {
   assert.deepEqual(featured('startups'), ['Aubrey de Grey', 'Motoshi Hayano', 'Yuki Hanyu', 'Adam Gries']);
   assert.deepEqual(featured('jp'), ['Aubrey de Grey', 'José Cordeiro', 'Yuki Hanyu', 'Adam Gries']);
   const g = plain(S.groups(m));
-  assert.equal(g.scientists.length, 23);
-  assert.equal(g.founders.length, 32);
-  assert.equal(g.scientists.filter(s => s.showOn.includes('conferences')).length, 5);
-  assert.equal(g.founders.filter(s => s.showOn.includes('conferences')).length, 4);
+  assert.equal(g.scientists.length, 22);
+  assert.equal(g.founders.length, 33);
+  assert.equal(g.scientists.filter(s => s.showOn.includes('conferences')).length, 4);
+  assert.equal(g.founders.filter(s => s.showOn.includes('conferences')).length, 5);
   assert.equal(featured('conferences').length, 9);
   const by = (name) => plain(m.speakers).find(s => s.name === name);
   assert.deepEqual([by('Marian Goodell').photo, by('Marian Goodell').initials], ['', 'MG']);
