@@ -50,8 +50,11 @@
   if (Date.now() >= new Date('2026-12-15T00:00:00+09:00').getTime()) document.documentElement.classList.add('kobe-permit-over');
 </script>
 <script src="copy.js"></script>
+<script src="sheet.js"></script>
 <script src="agenda-data.js"></script>
 <script src="agenda.js"></script>
+<script src="speakers-data.js"></script>
+<script src="speakers.js"></script>
 <script defer src="/posthog.js"></script>
 <script defer src="/analytics.js"></script>
 <script type="application/ld+json">
@@ -593,6 +596,10 @@
     .headliners .hcard:nth-child(4) { display: block; } }
   .alsoline { margin-top: 34px; color: var(--dim); font-size: 15px; line-height: 1.8; max-width: 900px; }
   .alsoline b { color: var(--ink); font-weight: 600; }
+  /* Speaker without a photo: initials in the photo's 4:5 box. */
+  .headliners .spk-initials { width: 100%; aspect-ratio: 4/5; display: flex; align-items: center; justify-content: center;
+    background: rgba(244,243,240,.04); font-family: var(--mono); font-size: clamp(24px, 3vw, 40px);
+    letter-spacing: .12em; color: var(--faint); }
   .followline { margin-top: 18px; font-family: var(--mono); font-size: 11px; letter-spacing: .18em;
     text-transform: uppercase; }
   .followline a, .voicesbar a.more, footer .cdlabel a { display: inline-block; padding: 8px 2px; }
@@ -924,17 +931,8 @@
 <section id="speakers" data-track-section="proof" data-track-position="3">
   <div class="eyebrow rv" data-copy="speakers.eyebrow"></div>
   <h2 class="big rv" data-copy="speakers.headline"></h2>
-  <div class="headliners">
-    <div class="hcard rv"><img src="img/aubrey.jpg" alt="Aubrey de Grey" loading="lazy" decoding="async" />
-      <div class="meta"><div class="nm" data-copy="speakers.name"></div><div class="og" data-copy="speakers.org"></div></div></div>
-    <div class="hcard rv"><img src="img/hayano.jpg" alt="Motoshi Hayano" loading="lazy" decoding="async" />
-      <div class="meta"><div class="nm" data-copy="speakers.name2"></div><div class="og" data-copy="speakers.org2"></div></div></div>
-    <div class="hcard rv"><img src="img/yuki.jpg" alt="Yuki Hanyu" loading="lazy" decoding="async" />
-      <div class="meta"><div class="nm" data-copy="speakers.name3"></div><div class="og" data-copy="speakers.org3"></div></div></div>
-    <div class="hcard rv"><img src="img/adam.jpg" alt="Adam Gries" loading="lazy" decoding="async" />
-      <div class="meta"><div class="nm" data-copy="speakers.name4"></div><div class="og" data-copy="speakers.org4"></div></div></div>
-  </div>
-  <p class="alsoline rv" data-copy="speakers.alsoLine"></p>
+  <div class="headliners" data-speakers="landing-cards"></div>
+  <p class="alsoline rv" data-speakers="landing-also"></p>
   <div class="followline rv" data-copy="speakers.followLine"></div>
 
   <!-- Major partners · The two Kobe logos carry use approval #3182 (window: Aug 19 – Dec 15 2026)
@@ -1215,6 +1213,50 @@
 
 <script>applyCopy();
 window.MiraiAgenda.load({ url: window.MIRAI_AGENDA_SHEET_CSV, snapshot: window.MIRAI_AGENDA_SNAPSHOT, rail: document.getElementById('agendaRail') });
+/* Speakers: photo cards and the "Also in the arena" line render from the
+   sheet's Speakers tab (snapshot first, sheet second; text via textContent).
+   Cards built after the page's reveal observer ran reveal through their own
+   observer, or at once when the cards were already revealed (as agenda.js). */
+(function () {
+  var S = window.MiraiSpeakers;
+  var cards = document.querySelector('[data-speakers="landing-cards"]');
+  var also = document.querySelector('[data-speakers="landing-also"]');
+  var revealer = null;
+  function el(tag, cls, text) {
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text != null) n.textContent = text;
+    return n;
+  }
+  function reveal(card, now) {
+    if (now || !('IntersectionObserver' in window)) { card.classList.add('in'); return; }
+    revealer = revealer || new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); revealer.unobserve(e.target); } });
+    }, { threshold: .12 });
+    revealer.observe(card);
+  }
+  function render(model) {
+    var shown = !!cards.querySelector('.rv.in');
+    cards.textContent = '';
+    S.featured(model, 'landing').forEach(function (s) {
+      var card = el('div', 'hcard rv'), meta = el('div', 'meta');
+      card.appendChild(S.photoEl(s, { alt: s.name }));
+      meta.appendChild(el('div', 'nm', s.name));
+      meta.appendChild(el('div', 'og', s.affiliation));
+      card.appendChild(meta);
+      cards.appendChild(card);
+      reveal(card, shown);
+    });
+    also.textContent = 'Also in the arena: ';
+    S.others(model, 'landing').forEach(function (s, i) {
+      if (i) also.appendChild(document.createTextNode(', '));
+      also.appendChild(el('b', null, s.name));
+    });
+    also.appendChild(document.createTextNode('.'));
+    S.fillCounts(model, document);
+  }
+  S.load({ url: window.MIRAI_SPEAKERS_SHEET_CSV, snapshot: window.MIRAI_SPEAKERS_SNAPSHOT, render: render });
+})();
 /* Hero word cycle: backspace "frontier tech" and retype the next word from
    data-words. Accelerating delete, decelerating type with a little jitter,
    a light scramble on alternate letters, 2.4s hold. Pauses when the tab is

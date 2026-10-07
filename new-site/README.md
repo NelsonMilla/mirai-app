@@ -16,6 +16,16 @@ Single static `index.html` — no framework, no build step. Deploys anywhere
   the page if the fetch fails or times out. `npm run agenda:snapshot` refreshes
   the snapshot from the sheet. The agenda owner's guide (columns, making the
   sheet public) is `AGENDA.md`.
+- Speakers come from the same sheet's `Speakers` tab, one row per speaker, row
+  order = display order. `speakers.js` (on top of the shared CSV helper
+  `sheet.js`) builds the model; the landing page, `/conferences/`,
+  `/experience/`, `/startups/` and `/jp/` each render their cards, lists and
+  `data-speakers-count` numbers from it, picking photo cards by the `Show on`
+  column. Photos are `img/speakers/first_last.jpeg` (name lowercased, accents
+  dropped, other characters → `_`); a `Photo` cell overrides the path, `none`
+  shows an initials tile, and a missing file falls back to the tile. The
+  snapshot rows in `speakers-data.js` paint first and stay if the fetch fails;
+  `npm run speakers:snapshot` refreshes them. Runbook: `AGENDA.md`.
 - Ticket CTAs go to Stripe Payment Links (cutover Sep 22 2026). Generic "Get
   Tickets" buttons and the nav CTA go to `/pricing/`, where each ticket has its
   own link; summit cards, the PopUp/"Everything" buttons and `/conferences/`
