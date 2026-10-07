@@ -4,10 +4,10 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>What It Costs · Mirai Tech City · Kobe 2026</title>
-<meta name="description" content="Every way into Mirai Tech City, priced side by side: the $1,200 month-long PopUp and $900 summit weekend tickets. Accommodation is booked separately. Prices in USD." />
+<meta name="description" content="Every way into Mirai Tech City, priced side by side: the $1,200 full-experience PopUp (arrive any day through October 31) and $900 summit weekend tickets. Residents of Japan: a ¥16,000 5-day ticket on Peatix. Accommodation is booked separately." />
 <link rel="canonical" href="https://mirai-tech-city.vercel.app/pricing/" />
 <meta property="og:title" content="What It Costs · Mirai Tech City" />
-<meta property="og:description" content="The $1,200 month-long PopUp and $900 summit weekends, side by side. Accommodation is booked separately." />
+<meta property="og:description" content="The $1,200 full-experience PopUp (arrive any day through October 31) and $900 summit weekends, side by side. Accommodation is booked separately." />
 <meta property="og:url" content="https://mirai-tech-city.vercel.app/pricing/" />
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="What It Costs · Mirai Tech City" />
@@ -60,6 +60,112 @@
   h1 .tick { color: var(--accent); }
   .lede { margin-top: 18px; max-width: 60ch; font-size: 16px; line-height: 1.6; color: var(--dim); text-wrap: pretty; }
   .lede b { color: var(--ink); }
+
+  /* ---------- the gate: two doors before any price ---------- */
+  .gate { max-width: 1280px; margin: 0 auto; padding: 40px 6vw 0; }
+  .gate-bar { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 18px;
+    padding: 0 2px 12px; font-family: var(--mono); font-size: 9.5px; letter-spacing: .26em;
+    text-transform: uppercase; color: var(--faint); }
+  .gate-bar b { color: var(--accent); font-weight: 400; }
+  .doors { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .door { position: relative; display: flex; flex-direction: column; min-height: 264px; width: 100%;
+    padding: 24px 28px 22px; text-align: left; border: 1px solid var(--line); border-radius: 0;
+    background: #08090c; color: var(--ink); font: inherit; cursor: pointer;
+    appearance: none; -webkit-appearance: none;
+    transition: border-color .25s, background .25s; }
+  .door::before { content: ""; position: absolute; left: -1px; top: -1px; bottom: -1px; width: 3px;
+    background: transparent; transition: background .25s; }
+  .door:hover, .door:focus-visible { border-color: rgba(var(--accent-rgb), .6); background: #0a0c10; }
+  .door:hover::before, .door.is-open::before { background: var(--accent); }
+  .door.is-open { border-color: rgba(var(--accent-rgb), .6); background: rgba(var(--accent-rgb), .05); }
+  .door-eyebrow { display: flex; justify-content: space-between; gap: 12px 18px; flex-wrap: wrap;
+    font-family: var(--mono); font-size: 9.5px; letter-spacing: .24em; text-transform: uppercase; color: var(--faint); }
+  .door-eyebrow b { color: var(--accent); font-weight: 400; }
+  .door-title { margin-top: auto; padding-top: 48px; font-weight: 900; line-height: 1; letter-spacing: -.015em;
+    font-size: clamp(26px, 3.1vw, 42px); text-transform: uppercase; text-wrap: balance; }
+  .door-title .ja { display: block; text-transform: none; letter-spacing: .02em; }
+  .door-title .en { display: block; margin-top: 10px; font-size: .5em; font-weight: 600; letter-spacing: .01em;
+    text-transform: none; color: var(--dim); }
+  .door-line { margin-top: 20px; padding-top: 14px; border-top: 1px solid var(--line);
+    display: flex; justify-content: space-between; align-items: center; gap: 12px;
+    font-family: var(--mono); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--dim); }
+  .door-line .num { color: var(--ink); }
+  .door-arrow { flex: 0 0 auto; font-size: 22px; line-height: 1; color: var(--accent);
+    display: inline-block; transition: transform .25s; }
+  .door--abroad:hover .door-arrow { transform: translateY(4px); }
+  .door--jp:hover .door-arrow { transform: translateX(4px); }
+  .door--jp.is-open .door-arrow { transform: rotate(90deg); }
+
+  /* Japan-resident fare panel: collapsed by default, animates open */
+  .jpWrap { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .45s cubic-bezier(.2,.7,.2,1); }
+  .jpWrap.is-open { grid-template-rows: 1fr; }
+  .jpWrap > div { overflow: hidden; min-height: 0; }
+  .jpPanel { margin-top: 16px; border: 1px solid rgba(var(--accent-rgb), .5); border-left: 3px solid var(--accent);
+    background: #08090c; box-shadow: 0 0 44px rgba(var(--accent-rgb), .08);
+    opacity: 0; transform: translateY(-8px); visibility: hidden;
+    transition: opacity .3s, transform .3s, visibility 0s .45s; }
+  .jpWrap.is-open .jpPanel { opacity: 1; transform: none; visibility: visible;
+    transition: opacity .35s .12s, transform .35s .12s, visibility 0s; }
+  .jpBar { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 18px;
+    padding: 12px 22px; border-bottom: 1px solid var(--line); background: #0a0b0d;
+    font-family: var(--mono); font-size: 9.5px; letter-spacing: .26em; text-transform: uppercase; color: var(--faint); }
+  .jpBar b { color: var(--accent); font-weight: 400; }
+  .jpGrid { display: grid; gap: 22px 28px; padding: 28px 22px 26px; align-items: start;
+    grid-template-columns: minmax(150px, .7fr) minmax(262px, 1.15fr) minmax(220px, 1.3fr) minmax(190px, .85fr); }
+  .jpLabel { font-family: var(--mono); font-size: 9px; letter-spacing: .24em; text-transform: uppercase; color: var(--faint); }
+  .jpPrice { margin-top: 10px; font-weight: 900; font-size: clamp(36px, 3.6vw, 52px); line-height: 1;
+    letter-spacing: -.01em; color: var(--accent); }
+  .jpUnit { margin-top: 8px; font-family: var(--mono); font-size: 10px; letter-spacing: .16em;
+    text-transform: uppercase; color: var(--dim); line-height: 1.8; }
+  .jpDays { margin-top: 10px; display: flex; flex-wrap: wrap; align-items: stretch; gap: 6px; }
+  .jpDay { width: 42px; padding: 7px 0 6px; border: 1px solid rgba(var(--accent-rgb), .5);
+    background: rgba(var(--accent-rgb), .06); text-align: center; }
+  .jpDay b { display: block; font-size: 18px; font-weight: 800; line-height: 1; }
+  .jpDay span { display: block; margin-top: 4px; font-family: var(--mono); font-size: 8px; letter-spacing: .18em;
+    text-transform: uppercase; color: var(--faint); }
+  .jpDay--gap { width: 14px; border: 0; background: none; align-self: center; font-family: var(--mono);
+    font-size: 10px; color: var(--faint); padding: 0; }
+  .jpDates { margin-top: 9px; font-family: var(--mono); font-size: 10px; letter-spacing: .13em;
+    text-transform: uppercase; color: var(--ink); line-height: 1.8; }
+  .jpIn { margin-top: 10px; font-family: var(--mono); font-size: 11.5px; line-height: 1.8; letter-spacing: .02em; color: var(--dim); }
+  .jpIn p { margin: 0; }
+  .jpIn .ja { color: var(--ink); }
+  .jpOut { margin-top: 8px; font-family: var(--mono); font-size: 9.5px; letter-spacing: .08em; text-transform: uppercase;
+    color: rgba(240,160,160,.8); line-height: 1.9; }
+  .jpOut .x { color: #f0a0a0; font-weight: 500; margin-right: 4px; }
+  .jpCta { display: flex; flex-direction: column; gap: 9px; align-items: stretch; text-align: center; }
+  .jpCta .btn { display: block; text-align: center; padding: 14px 10px; font-size: 12px; letter-spacing: .12em; }
+  .jpDeadline { margin-top: 2px; padding: 9px 10px; border: 1px solid var(--line); font-family: var(--mono);
+    font-size: 9.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink); line-height: 1.8;
+    font-variant-numeric: tabular-nums; }
+  .jpDeadline b { color: var(--accent); font-weight: 400; }
+  .jpNoteSm { font-family: var(--mono); font-size: 8.5px; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--faint); line-height: 1.8; }
+
+  /* while the Japan door is open, the global fares step back */
+  body.jp-open .v3x-board, body.jp-open .math, body.jp-open .tblWrap { opacity: .42; transition: opacity .4s; }
+  body.jp-open .v3x-board:hover, body.jp-open .math:hover, body.jp-open .tblWrap:hover { opacity: 1; }
+  .v3x-board, .math, .tblWrap { transition: opacity .4s; }
+  #fares { scroll-margin-top: 88px; }
+
+  @media (max-width: 1080px) {
+    .jpGrid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); padding: 24px 18px; }
+    .jpGrid > .jpCol--price { grid-column: 1; }
+    .jpGrid > .jpCol--dates { grid-column: 2; }
+    .jpGrid > .jpCol--in, .jpGrid > .jpCta { grid-column: 1 / -1; }
+  }
+  @media (max-width: 760px) {
+    .doors { grid-template-columns: 1fr; }
+    .door { min-height: 0; padding: 20px 20px 18px; }
+    .door-title { padding-top: 30px; font-size: clamp(26px, 8vw, 34px); }
+  }
+  @media (max-width: 560px) {
+    .jpGrid { grid-template-columns: 1fr; }
+    .jpGrid > .jpCol--price, .jpGrid > .jpCol--dates { grid-column: 1; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .door, .door::before, .door-arrow, .jpWrap, .jpPanel, .v3x-board, .math, .tblWrap { transition: none; }
+  }
 
   /* cards */
   .cards { max-width: 1280px; margin: 0 auto; padding: 48px 6vw 0; display: grid;
@@ -134,10 +240,66 @@
 <header class="wrap" data-track-section="hero" data-track-position="1">
   <p class="eyebrow">Kobe · Port Island · October 1–31, 2026</p>
   <h1>What it costs<span class="tick">.</span></h1>
-  <p class="lede">Two ways into Mirai Tech City, side by side. <b>Every full-month ticket is $1,200. Accommodation is booked separately.</b> Tickets and the PopUp check out on Stripe. Transportation is not included.</p>
+  <p class="lede">Two tickets, side by side. <b>The PopUp is $1,200 and gets you into everything through October 31 — arrive any day. Accommodation is booked separately.</b> Residents of Japan have their own 5-day ticket on Peatix. Transportation is not included.</p>
 </header>
 
-<section class="v3x-board" data-track-section="cards" data-track-position="2" aria-label="The two offers, as a fare board">
+<section class="gate" data-track-section="gate" data-track-position="2" aria-label="Choose your door: coming from abroad, or living in Japan">
+  <div class="gate-bar"><span><b>Mirai Tech City</b> · Entry</span><span>Choose your door · 入口をお選びください</span></div>
+  <div class="doors">
+    <button type="button" class="door door--abroad" id="doorAbroad" data-analytics-action="site_navigation" data-analytics-location="pricing_gate" data-analytics-target="abroad">
+      <span class="door-eyebrow"><span><b>Gate A</b> · From abroad</span><span lang="ja">海外から</span></span>
+      <span class="door-title">I&rsquo;m coming from abroad</span>
+      <span class="door-line"><span>Prices in <span class="num">USD</span> &middot; Stripe</span><span class="door-arrow" aria-hidden="true">&darr;</span></span>
+    </button>
+    <button type="button" class="door door--jp" id="doorJp" aria-expanded="false" aria-controls="jpPanel" data-analytics-action="site_navigation" data-analytics-location="pricing_gate" data-analytics-target="japan_resident">
+      <span class="door-eyebrow"><span><b>Gate B</b> · <span lang="ja">日本在住</span></span><span>Residents of Japan</span></span>
+      <span class="door-title"><span class="ja" lang="ja">日本に住んでいます</span><span class="en">I live in Japan</span></span>
+      <span class="door-line"><span><span class="num">&yen;16,000</span> &middot; <span lang="ja">5日間</span> &middot; Peatix</span><span class="door-arrow" aria-hidden="true">&rarr;</span></span>
+    </button>
+  </div>
+
+  <div class="jpWrap" id="jpWrap">
+    <div>
+      <div class="jpPanel" id="jpPanel" role="region" aria-label="Japan-resident ticket">
+        <div class="jpBar"><span><b lang="ja">日本在住者向けチケット</b> &middot; Japan-resident ticket</span><span>Peatix &middot; <span lang="ja">料金は円</span> &middot; Residency, not nationality</span></div>
+        <div class="jpGrid">
+          <div class="jpCol--price">
+            <p class="jpLabel"><span lang="ja">料金</span> &middot; Fare</p>
+            <p class="jpPrice num">&yen;16,000</p>
+            <p class="jpUnit"><span lang="ja">5日間 &middot; 1枚</span><br />5 days &middot; one ticket</p>
+          </div>
+          <div class="jpCol--dates">
+            <p class="jpLabel"><span lang="ja">日程</span> &middot; Dates &middot; <span lang="ja">10月</span> / Oct</p>
+            <div class="jpDays num" role="list" aria-label="October 17, 18, 24, 25 and 26">
+              <div class="jpDay" role="listitem"><b>17</b><span>Sat</span></div>
+              <div class="jpDay" role="listitem"><b>18</b><span>Sun</span></div>
+              <div class="jpDay--gap" aria-hidden="true">+</div>
+              <div class="jpDay" role="listitem"><b>24</b><span>Sat</span></div>
+              <div class="jpDay" role="listitem"><b>25</b><span>Sun</span></div>
+              <div class="jpDay" role="listitem"><b>26</b><span>Mon</span></div>
+            </div>
+            <p class="jpDates"><span lang="ja">両サミット週末</span> &middot; both summit weekends</p>
+          </div>
+          <div class="jpCol--in">
+            <p class="jpLabel"><span lang="ja">含まれるもの</span> &middot; What&rsquo;s in</p>
+            <div class="jpIn">
+              <p class="ja" lang="ja">サミットI（10/17–18）&middot; サミットII（10/24–26）&middot; Demo Day &amp; Fashion Showcase（10/26）</p>
+              <p>Summit I &middot; Summit II &middot; Longevity Lifestyle - Demo Day and Fashion Showcase &middot; talks &amp; panels &middot; 55 confirmed speakers</p>
+              <p class="jpOut"><span class="x" aria-hidden="true">&#10005;</span><span lang="ja">宿泊・交通費は含まれません</span> &nbsp; <span class="x" aria-hidden="true">&#10005;</span>No weekday programming</p>
+            </div>
+          </div>
+          <div class="jpCta">
+            <a class="btn accent" href="https://miraitechcity2026.peatix.com/" target="_blank" rel="noopener" hreflang="ja" lang="ja" data-analytics-action="checkout" data-analytics-location="pricing_japan_gate" data-analytics-target="japan_resident">Peatixで申し込む &rarr;</a>
+            <p class="jpDeadline"><span lang="ja">販売期限</span> <b>2026.10.26</b><br />On sale through Oct 26, 2026</p>
+            <p class="jpNoteSm"><span lang="ja">日本在住の方限定</span> &middot; residents of Japan only</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="v3x-board" id="fares" data-track-section="cards" data-track-position="3" aria-label="The two offers, as a fare board">
 <style>
   .v3x-board { max-width: 1280px; margin: 0 auto; padding: 48px 6vw 0; }
   .v3x-frame { border: 1px solid var(--line); background: #08090c; }
@@ -204,17 +366,17 @@
     <div class="v3x-svc">
       <span class="v3x-flag">Featured</span>
       <p class="v3x-name">The PopUp</p>
-      <p class="v3x-tag">The whole month</p>
+      <p class="v3x-tag">The full experience &middot; arrive any day</p>
     </div>
     <div class="v3x-fare">
       <p class="v3x-price num">$1,200</p>
     </div>
     <div class="v3x-cover">
-      <svg class="v3x-strip" viewBox="0 0 306 38" role="img" aria-label="October timeline: covers October 1 to 31, the whole month"><rect x="0" y="10" width="6" height="10" fill="var(--accent)"/><rect x="10" y="10" width="6" height="10" fill="var(--accent)"/><rect x="20" y="10" width="6" height="10" fill="var(--accent)"/><rect x="30" y="10" width="6" height="10" fill="var(--accent)"/><rect x="40" y="10" width="6" height="10" fill="var(--accent)"/><rect x="50" y="10" width="6" height="10" fill="var(--accent)"/><rect x="60" y="10" width="6" height="10" fill="var(--accent)"/><rect x="70" y="10" width="6" height="10" fill="var(--accent)"/><rect x="80" y="10" width="6" height="10" fill="var(--accent)"/><rect x="90" y="10" width="6" height="10" fill="var(--accent)"/><rect x="100" y="10" width="6" height="10" fill="var(--accent)"/><rect x="110" y="10" width="6" height="10" fill="var(--accent)"/><rect x="120" y="10" width="6" height="10" fill="var(--accent)"/><rect x="130" y="10" width="6" height="10" fill="var(--accent)"/><rect x="140" y="10" width="6" height="10" fill="var(--accent)"/><rect x="150" y="10" width="6" height="10" fill="var(--accent)"/><rect x="160" y="6" width="6" height="14" fill="var(--accent)"/><rect x="170" y="6" width="6" height="14" fill="var(--accent)"/><rect x="180" y="10" width="6" height="10" fill="var(--accent)"/><rect x="190" y="10" width="6" height="10" fill="var(--accent)"/><rect x="200" y="10" width="6" height="10" fill="var(--accent)"/><rect x="210" y="10" width="6" height="10" fill="var(--accent)"/><rect x="220" y="10" width="6" height="10" fill="var(--accent)"/><rect x="230" y="6" width="6" height="14" fill="var(--accent)"/><rect x="240" y="6" width="6" height="14" fill="var(--accent)"/><rect x="250" y="6" width="6" height="14" fill="var(--accent)"/><rect x="260" y="10" width="6" height="10" fill="var(--accent)"/><rect x="270" y="10" width="6" height="10" fill="var(--accent)"/><rect x="280" y="10" width="6" height="10" fill="var(--accent)"/><rect x="290" y="10" width="6" height="10" fill="var(--accent)"/><rect x="300" y="10" width="6" height="10" fill="var(--accent)"/><text x="0" y="35">1</text><text x="160" y="35">17</text><text x="230" y="35">24</text><text x="306" y="35" text-anchor="end">31</text></svg>
-      <p class="v3x-dates num">Oct 1&ndash;31 &middot; 31 days</p>
+      <svg class="v3x-strip" viewBox="0 0 306 38" role="img" aria-label="October timeline: valid any day through October 31"><rect x="0" y="10" width="6" height="10" fill="var(--accent)"/><rect x="10" y="10" width="6" height="10" fill="var(--accent)"/><rect x="20" y="10" width="6" height="10" fill="var(--accent)"/><rect x="30" y="10" width="6" height="10" fill="var(--accent)"/><rect x="40" y="10" width="6" height="10" fill="var(--accent)"/><rect x="50" y="10" width="6" height="10" fill="var(--accent)"/><rect x="60" y="10" width="6" height="10" fill="var(--accent)"/><rect x="70" y="10" width="6" height="10" fill="var(--accent)"/><rect x="80" y="10" width="6" height="10" fill="var(--accent)"/><rect x="90" y="10" width="6" height="10" fill="var(--accent)"/><rect x="100" y="10" width="6" height="10" fill="var(--accent)"/><rect x="110" y="10" width="6" height="10" fill="var(--accent)"/><rect x="120" y="10" width="6" height="10" fill="var(--accent)"/><rect x="130" y="10" width="6" height="10" fill="var(--accent)"/><rect x="140" y="10" width="6" height="10" fill="var(--accent)"/><rect x="150" y="10" width="6" height="10" fill="var(--accent)"/><rect x="160" y="6" width="6" height="14" fill="var(--accent)"/><rect x="170" y="6" width="6" height="14" fill="var(--accent)"/><rect x="180" y="10" width="6" height="10" fill="var(--accent)"/><rect x="190" y="10" width="6" height="10" fill="var(--accent)"/><rect x="200" y="10" width="6" height="10" fill="var(--accent)"/><rect x="210" y="10" width="6" height="10" fill="var(--accent)"/><rect x="220" y="10" width="6" height="10" fill="var(--accent)"/><rect x="230" y="6" width="6" height="14" fill="var(--accent)"/><rect x="240" y="6" width="6" height="14" fill="var(--accent)"/><rect x="250" y="6" width="6" height="14" fill="var(--accent)"/><rect x="260" y="10" width="6" height="10" fill="var(--accent)"/><rect x="270" y="10" width="6" height="10" fill="var(--accent)"/><rect x="280" y="10" width="6" height="10" fill="var(--accent)"/><rect x="290" y="10" width="6" height="10" fill="var(--accent)"/><rect x="300" y="10" width="6" height="10" fill="var(--accent)"/><text x="0" y="35">1</text><text x="160" y="35">17</text><text x="230" y="35">24</text><text x="306" y="35" text-anchor="end">31</text></svg>
+      <p class="v3x-dates num">Any day through Oct 31 &middot; stay as long as you like</p>
     </div>
     <div class="v3x-in">
-      Both summits &middot; Demo Day &amp; Fashion Show &middot; the month&rsquo;s programming &middot; cowork &amp; 300 residents
+      Both summits &middot; Longevity Lifestyle - Demo Day and Fashion Showcase &middot; every day of programming while you&rsquo;re here &middot; cowork
       <p class="v3x-sub">Lab tours &middot; workshops &middot; hackathon</p>
       <p class="v3x-out"><span class="x" aria-hidden="true">&#10005;</span>Accommodation not included &mdash; booked separately</p>
     </div>
@@ -233,8 +395,8 @@
       <p class="v3x-unit num">per weekend</p>
     </div>
     <div class="v3x-cover">
-      <svg class="v3x-strip" viewBox="0 0 306 38" role="img" aria-label="October timeline: covers October 17 to 18 or October 24 to 25, one weekend of your choice"><rect x="0" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="10" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="20" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="30" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="40" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="50" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="60" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="70" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="80" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="90" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="100" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="110" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="120" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="130" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="140" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="150" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="160" y="6" width="6" height="14" fill="var(--accent)"/><rect x="170" y="6" width="6" height="14" fill="var(--accent)"/><rect x="180" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="190" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="200" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="210" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="220" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="230" y="6" width="6" height="14" fill="var(--accent)" opacity=".45"/><rect x="240" y="6" width="6" height="14" fill="var(--accent)" opacity=".45"/><rect x="250" y="6" width="6" height="14" fill="rgba(244,243,240,.28)"/><rect x="260" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="270" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="280" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="290" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="300" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><text x="0" y="35">1</text><text x="160" y="35">17</text><text x="230" y="35">24</text><text x="306" y="35" text-anchor="end">31</text><text x="203" y="17" text-anchor="middle" class="v3x-or">or</text></svg>
-      <p class="v3x-dates num">Oct 17&ndash;18 or Oct 24&ndash;25</p>
+      <svg class="v3x-strip" viewBox="0 0 306 38" role="img" aria-label="October timeline: covers October 17 to 18 or October 24 to 26, one weekend of your choice"><rect x="0" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="10" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="20" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="30" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="40" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="50" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="60" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="70" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="80" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="90" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="100" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="110" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="120" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="130" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="140" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="150" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="160" y="6" width="6" height="14" fill="var(--accent)"/><rect x="170" y="6" width="6" height="14" fill="var(--accent)"/><rect x="180" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="190" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="200" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="210" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="220" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="230" y="6" width="6" height="14" fill="var(--accent)" opacity=".45"/><rect x="240" y="6" width="6" height="14" fill="var(--accent)" opacity=".45"/><rect x="250" y="6" width="6" height="14" fill="var(--accent)" opacity=".45"/><rect x="260" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="270" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="280" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="290" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><rect x="300" y="10" width="6" height="10" fill="rgba(244,243,240,.14)"/><text x="0" y="35">1</text><text x="160" y="35">17</text><text x="230" y="35">24</text><text x="306" y="35" text-anchor="end">31</text><text x="203" y="17" text-anchor="middle" class="v3x-or">or</text></svg>
+      <p class="v3x-dates num">Oct 17&ndash;18 or Oct 24&ndash;26</p>
     </div>
     <div class="v3x-in">
       One summit weekend of talks &amp; panels &middot; 55 confirmed speakers across the two weekends
@@ -242,18 +404,18 @@
     </div>
     <div class="v3x-cta">
       <a class="btn" href="https://buy.stripe.com/test_8x2aEZ88AevHbTN5Su3Nm00" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="pricing_ticket" data-analytics-target="summit_1">Summit I &middot; Oct 17&ndash;18</a>
-      <a class="btn" href="https://buy.stripe.com/test_00w14p3SkevH7Dx94G3Nm01" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="pricing_ticket" data-analytics-target="summit_2">Summit II &middot; Oct 24&ndash;25</a>
+      <a class="btn" href="https://buy.stripe.com/test_00w14p3SkevH7Dx94G3Nm01" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="pricing_ticket" data-analytics-target="summit_2">Summit II &middot; Oct 24&ndash;26</a>
       <p class="v3x-note">No application needed</p>
     </div>
   </div>
 </div>
 </section>
 
-<div class="math num" data-track-section="math" data-track-position="3">
-  <div class="inner"><b>The arithmetic:</b> <span>Both weekends bought separately — <b>$1,800</b></span> <span class="hot">The whole month — $1,200</span></div>
+<div class="math num" data-track-section="math" data-track-position="4">
+  <div class="inner"><b>The arithmetic:</b> <span>Both weekends bought separately — <b>$1,800</b></span> <span class="hot">The full experience — $1,200</span></div>
 </div>
 
-<section class="tblWrap" data-track-section="table" data-track-position="4" aria-label="Side-by-side comparison">
+<section class="tblWrap" data-track-section="table" data-track-position="5" aria-label="Side-by-side comparison">
   <div class="tblScroll">
     <table>
       <thead>
@@ -261,11 +423,11 @@
       </thead>
       <tbody class="num">
         <tr><th scope="row">Price</th><td class="y">$1,200</td><td>$900 / weekend</td></tr>
-        <tr><th scope="row">Dates covered</th><td>Oct 1–31</td><td>One weekend</td></tr>
+        <tr><th scope="row">Dates covered</th><td>Any day through Oct 31</td><td>One weekend</td></tr>
         <tr><th scope="row">Summit I · Oct 17–18</th><td><span class="y">●</span></td><td><span class="y">●</span> if chosen</td></tr>
-        <tr><th scope="row">Summit II · Oct 24–25</th><td><span class="y">●</span></td><td><span class="y">●</span> if chosen</td></tr>
-        <tr><th scope="row">Demo Day + Fashion Show · Oct 26</th><td><span class="y">●</span></td><td><span class="n">— outside the weekend</span></td></tr>
-        <tr><th scope="row">Weekday programming — tours, workshops, hackathon</th><td><span class="y">●</span> all month</td><td><span class="n">—</span></td></tr>
+        <tr><th scope="row">Summit II · Oct 24–26</th><td><span class="y">●</span></td><td><span class="y">●</span> if chosen</td></tr>
+        <tr><th scope="row">Summit II - Longevity Lifestyle - Demo Day and Fashion Showcase · Oct 26</th><td><span class="y">●</span></td><td><span class="y">●</span> if chosen</td></tr>
+        <tr><th scope="row">Weekday programming — tours, workshops, hackathon</th><td><span class="y">●</span> every day you&rsquo;re here</td><td><span class="n">—</span></td></tr>
         <tr><th scope="row">Accommodation</th><td><span class="n">— booked separately</span></td><td><span class="n">— booked separately</span></td></tr>
         <tr><th scope="row">Application</th><td>None · booking confirmed within 7 days</td><td>None</td></tr>
       </tbody>
@@ -273,17 +435,17 @@
   </div>
 </section>
 
-<section class="spon" data-track-section="sponsored" data-track-position="5" aria-label="Sponsored places">
+<section class="spon" data-track-section="sponsored" data-track-position="6" aria-label="Sponsored places">
   <div class="inner">
     <div>
-      <h2>If you can&rsquo;t cover your own fare.</h2>
-      <p>Some places in the city are sponsored. If you&rsquo;re a researcher, founder, or artist who should be here and the price is the only thing stopping you, book a call and tell us what you&rsquo;re working on.</p>
+      <h2>If you can&rsquo;t pay for a ticket.</h2>
+      <p>A few tickets are paid for by sponsors. They go to researchers, founders and artists who should be in Kobe but can&rsquo;t afford the ticket. Book a call, tell us what you work on, and we&rsquo;ll tell you whether a sponsor can cover you.</p>
     </div>
     <a class="btn" href="https://calendly.com/nelson-frontierhumans/mtc-acceleration-sprint?utm_source=mirai-site&amp;utm_campaign=pricing-sponsorship" target="_blank" rel="noopener" data-analytics-action="site_navigation" data-analytics-location="pricing_sponsored" data-analytics-target="calendly">Book a Call</a>
   </div>
 </section>
 
-<p class="fine" data-track-section="fine" data-track-position="6">
+<p class="fine" data-track-section="fine" data-track-position="7">
   Prices in USD · Tickets &amp; PopUp check out on <b>Stripe</b> · Accommodation &amp; transportation are not included in any ticket ·
   Accommodation is booked separately: community hacker houses, the Portopia, or a place of your own ·
   Day-to-day Kobe is affordable — a good lunch under &yen;1,000 · Questions: <a href="mailto:team@miraitech.city">team@miraitech.city</a> ·
@@ -295,6 +457,45 @@
   <a href="/experience/" data-analytics-action="site_navigation" data-analytics-location="footer" data-analytics-target="experience">What a month here is like →</a>
   <a href="/" data-analytics-action="site_navigation" data-analytics-location="footer" data-analytics-target="home">Main site →</a>
 </footer>
+
+<script>
+(function () {
+  var doorAbroad = document.getElementById('doorAbroad');
+  var doorJp = document.getElementById('doorJp');
+  var wrap = document.getElementById('jpWrap');
+  var fares = document.getElementById('fares');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function setJp(open) {
+    wrap.classList.toggle('is-open', open);
+    doorJp.classList.toggle('is-open', open);
+    doorJp.setAttribute('aria-expanded', open ? 'true' : 'false');
+    document.body.classList.toggle('jp-open', open);
+    if (open) doorAbroad.classList.remove('is-open');
+  }
+
+  doorJp.addEventListener('click', function () {
+    setJp(!wrap.classList.contains('is-open'));
+  });
+
+  doorAbroad.addEventListener('click', function () {
+    var wasOpen = wrap.classList.contains('is-open');
+    setJp(false);
+    doorAbroad.classList.add('is-open');
+    var go = function () { fares.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' }); };
+    // If the Japan panel was open, let it finish collapsing so the target doesn't move mid-scroll.
+    if (wasOpen && !reduce) setTimeout(go, 480); else go();
+  });
+
+  function wantsJp() {
+    return new URLSearchParams(location.search).get('from') === 'jp' || location.hash === '#jp';
+  }
+  if (wantsJp()) setJp(true);
+  window.addEventListener('hashchange', function () {
+    if (location.hash === '#jp') { setJp(true); doorJp.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' }); }
+  });
+})();
+</script>
 
 </body>
 </html>
