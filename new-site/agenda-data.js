@@ -2,7 +2,7 @@
    The rail paints from these rows first, then swaps in the live sheet.
    The sheet CSV URL below is the one place to point the site at a sheet;
    keep it a single-quoted assignment on its own line (the script reads it). */
-window.MIRAI_AGENDA_SHEET_CSV = '';
+window.MIRAI_AGENDA_SHEET_CSV = 'https://docs.google.com/spreadsheets/d/1KVHJxp5W5VirLNMh6UQftPhF4iE9F247pQq5EZ8q-fI/gviz/tq?tqx=out:csv&gid=0';
 window.MIRAI_AGENDA_SNAPSHOT = [
   { "block": "Summit I", "date": "Oct 17–18", "blocktitle": "The Science & Tech Augmenting Life", "title": "Japan's Longevity Imperative", "subtitle": "What Japan learned — and what it needs from the world.", "link": "", "publish": "" },
   { "block": "Summit I", "date": "", "blocktitle": "", "title": "KBIC as a Global Laboratory for Longevity", "subtitle": "", "link": "", "publish": "" },

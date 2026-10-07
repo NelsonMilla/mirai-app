@@ -7,16 +7,27 @@ Google Sheet each time someone opens the site. You edit the sheet; the site show
 change on the next page load. No engineer and no deploy needed. A copy of the agenda
 also ships inside the site, so visitors still see an agenda if Google is slow or down.
 
-## Set up the sheet once
+## The sheet
 
-1. Create a new Google Sheet.
-2. File → Import → Upload `agenda-template.csv` (in this folder). Choose "Replace current sheet".
-3. Rename the tab at the bottom to `Agenda` (exact spelling).
-4. Share → General access → "Anyone with the link" → Viewer.
-5. Copy the spreadsheet ID from the address bar: the long part between `/d/` and `/edit`.
-6. The CSV address is
-   `https://docs.google.com/spreadsheets/d/<ID>/gviz/tq?tqx=out:csv&sheet=Agenda`
-7. Send that address to an engineer. They paste it into `agenda-data.js` once.
+The sheet is "Mirai Agenda" in Nelson's Google Drive (created Oct 7 2026):
+https://docs.google.com/spreadsheets/d/1KVHJxp5W5VirLNMh6UQftPhF4iE9F247pQq5EZ8q-fI/edit
+
+The site reads the first tab, whatever it is called. Its CSV address is already in
+`agenda-data.js`.
+
+One step still has to be done by hand in Google Sheets, once: Share → General access →
+"Anyone with the link" → Viewer. Until that is set, Google refuses the site's request
+and visitors see the built-in copy of the agenda.
+
+### If the sheet is ever replaced
+
+1. Create a new Google Sheet. File → Import → Upload `agenda-template.csv` (in this
+   folder), "Replace current sheet". Keep the agenda on the first tab.
+2. Share → General access → "Anyone with the link" → Viewer.
+3. Copy the spreadsheet ID from the address bar: the long part between `/d/` and `/edit`.
+4. The CSV address is
+   `https://docs.google.com/spreadsheets/d/<ID>/gviz/tq?tqx=out:csv&gid=0`
+5. Send that address to an engineer. They paste it into `agenda-data.js` once.
 
 ## The columns
 
@@ -56,9 +67,9 @@ delete the row or set Publish to FALSE. To reorder, move the rows.
 - Check the header row spelling: Block, Date, Block title, Title, Subtitle, Link,
   Publish. Capital letters and extra spaces do not matter; other spelling does.
 - A row with an empty Title is skipped. So is a row with an empty Block.
-- If the sheet cannot be read (not shared, renamed tab, Google down), the site shows
-  the built-in copy of the agenda instead. If your edits never appear, check the
-  sharing setting and the tab name first.
+- If the sheet cannot be read (not shared, first tab deleted, Google down), the site
+  shows the built-in copy of the agenda instead. If your edits never appear, check the
+  sharing setting first, then that the agenda is still on the first tab.
 
 ## For engineers
 

@@ -89,7 +89,7 @@ test('an empty sheet, or a header with no rows, yields zero stops', () => {
 
 test('the shipped snapshot builds today\'s rail: 5 + 4 sessions and the finale', () => {
   const w = load('agenda-data.js');
-  assert.equal(w.MIRAI_AGENDA_SHEET_CSV, '');
+  assert.match(w.MIRAI_AGENDA_SHEET_CSV, /^https:\/\/docs\.google\.com\/spreadsheets\/d\/[^/]+\/gviz\/tq\?tqx=out:csv&gid=\d+$/);
   const { stops } = buildModel(w.MIRAI_AGENDA_SNAPSHOT);
   assert.deepEqual(stops.map(s => [s.code, s.tag, s.date, s.sessions.length, s.finale]), [
     ['STN·01', 'Summit I', 'Oct 17–18', 5, false],
