@@ -13,17 +13,17 @@ Single static `index.html` — no framework, no build step. Deploys anywhere
 - Ticket CTAs go to Stripe Payment Links (cutover Sep 22 2026). Generic "Get
   Tickets" buttons and the nav CTA go to `/pricing/`, where each ticket has its
   own link; summit cards, the PopUp/"Everything" buttons and `/conferences/`
-  link straight to the ticket. **The links currently on the site are TEST MODE**
-  (`buy.stripe.com/test_…`, `book.stripe.com/test_…`, Frontier Humans account):
-  only Stripe test cards work. Before the first real sale, create the same three
-  links in live mode and swap the three URLs everywhere (`grep -rn "stripe.com/test_"
-  new-site --exclude-dir=_v` lists every spot). Test-mode objects (Sep 22 2026):
-  Summit I `price_…`/`plink_…` → `buy.stripe.com/test_8x2aEZ88AevHbTN5Su3Nm00`,
-  Summit II → `buy.stripe.com/test_00w14p3SkevH7Dx94G3Nm01`,
-  Everything → `book.stripe.com/test_dRmfZj3Sk3R3f5ZcgS3Nm02` (manual capture:
-  the card is authorised, Stripe's Uncaptured list is the review queue, Capture
-  approves, Cancel releases; holds expire after 7 days). Promo code `MIRAI20`
-  (20% off, ticket products only, 50 uses). Every link redirects to
+  link straight to the ticket. **The links on the site are LIVE** (Frontier
+  Humans account, created Oct 7 2026; the Sep 22 test-mode links are retired).
+  Live objects: Summit I `prod_VOgb1Pgj6XqYFL` / `price_1UNtEaRb1gm4eopX2Jg3A3T8`
+  → `buy.stripe.com/dRmdRb1Kc9bn7Dx80C3Nm05`, Summit II `prod_VOgbHpJfsMu4C8` /
+  `price_1UNtEbRb1gm4eopXCxxrmQZg` → `buy.stripe.com/00wcN774wbjv8HBdkW3Nm06`,
+  Everything `prod_VOgbq13iwrj2Ko` / `price_1UNtEcRb1gm4eopXF6hssNBV` →
+  `book.stripe.com/bJe9AVewY4V7cXR80C3Nm07` (manual capture: the card is
+  authorised, Stripe's Uncaptured list is the review queue, Capture approves,
+  Cancel releases; holds expire after 7 days). Promo code `MIRAI20` (20% off,
+  ticket products only, 50 uses). To change a link, swap the URL everywhere
+  (`grep -rn "stripe.com/" new-site --exclude-dir=_v` lists every spot). Every link redirects to
   `/stay/?session_id={CHECKOUT_SESSION_ID}&pass=<sku>`; Luma tickets are issued
   by hand from the Stripe payments list until the webhook is wired up.
 - The Luma listing link in the footers (`luma.com/an4zotn9`) stays as the event
