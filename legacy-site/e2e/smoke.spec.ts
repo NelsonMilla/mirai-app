@@ -147,3 +147,80 @@ for (const run of RUNS) {
     expect(consoleFailures, 'console must be clean').toEqual([]);
   });
 }
+
+/**
+ * The landing agenda rail is built at load from a public Google Sheet, with a
+ * snapshot in agenda-data.js painted first and kept when the sheet fails.
+ * agenda-data.js is served with a test sheet URL (the real one may be empty)
+ * and the sheet itself is a fixture, so this never touches Google.
+ */
+const AGENDA_SHEET_URL = 'https://docs.google.com/spreadsheets/d/test/gviz/tq?tqx=out:csv&sheet=Agenda';
+const AGENDA_FIXTURE = [
+  'Block,Date,Block title,Title,Subtitle,Link,Publish',
+  'Summit I,Oct 17–18,"Fixture block, one",Fixture session A & B,Fixture subtitle,,TRUE',
+  'Summit I,,,Fixture draft session,,,FALSE',
+  'Summit I,,,Fixture session C,,,',
+  'Finale,Oct 26,,Fixture finale title,Fixture finale subtitle,#fashion,TRUE',
+].join('\r\n');
+
+test('the landing agenda rail renders from the sheet and falls back to the snapshot', async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 800 });
+  await stubHostingOnlyScripts(page);
+  const consoleFailures = collectConsoleFailures(page);
+
+  await page.route('**/agenda-data.js', async (route) => {
+    const response = await route.fetch();
+    const body = (await response.text()).replace(
+      /window\.MIRAI_AGENDA_SHEET_CSV = '[^']*';/,
+      `window.MIRAI_AGENDA_SHEET_CSV = '${AGENDA_SHEET_URL}';`,
+    );
+    await route.fulfill({ response, body });
+  });
+  let sheetUp = true;
+  await page.route('**/docs.google.com/spreadsheets/**', (route) =>
+    sheetUp
+      ? route.fulfill({
+          status: 200,
+          contentType: 'text/csv; charset=utf-8',
+          headers: { 'access-control-allow-origin': '*' },
+          body: AGENDA_FIXTURE,
+        })
+      : route.abort(),
+  );
+
+  // (a) The sheet replaces the snapshot: two blocks, the draft row hidden.
+  await page.goto('/', { waitUntil: 'domcontentloaded' });
+  const rail = page.locator('#agendaRail');
+  await expect(rail.locator('.ag-stop')).toHaveCount(2);
+  await expect(rail.locator('.ag-sessions li')).toHaveCount(2);
+  await expect(rail.locator('.ag-stop').nth(1)).toHaveClass(/(^|\s)ag-stop--finale(\s|$)/);
+  await expect(rail.locator('.ag-stop--finale .ag-finale-title')).toHaveText('Fixture finale title');
+  await expect(rail).toContainText('Fixture session A & B');
+  await expect(page.locator('body')).not.toContainText('Fixture draft session');
+
+  // Stops added after load still reveal when scrolled into view.
+  const stops = rail.locator('.ag-stop');
+  for (let i = 0; i < 2; i++) {
+    await stops.nth(i).scrollIntoViewIfNeeded();
+    await expect(stops.nth(i)).toHaveClass(/(^|\s)in(\s|$)/);
+    await expect(stops.nth(i)).toHaveCSS('opacity', '1');
+  }
+
+  // (b) The sheet is unreachable: the snapshot stays (3 stops, 9 sessions, finale).
+  // The loader's one console.warn is expected; wait for it so the counts are
+  // read after the failed fetch, not before it.
+  sheetUp = false;
+  const warned = page.waitForEvent('console', (msg) => msg.type() === 'warning' && msg.text().includes('[agenda]'));
+  await page.reload({ waitUntil: 'domcontentloaded' });
+  await warned;
+  await expect(rail.locator('.ag-stop')).toHaveCount(3);
+  await expect(rail.locator('.ag-sessions li')).toHaveCount(9);
+  await expect(rail.locator('.ag-stop--finale')).toHaveCount(1);
+  for (let i = 0; i < 3; i++) {
+    await stops.nth(i).scrollIntoViewIfNeeded();
+    await expect(stops.nth(i)).toHaveClass(/(^|\s)in(\s|$)/);
+    await expect(stops.nth(i)).toHaveCSS('opacity', '1');
+  }
+
+  expect(consoleFailures, 'console must be clean').toEqual([]);
+});

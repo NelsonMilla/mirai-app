@@ -5,7 +5,8 @@
   "description": "Static site plus one Vercel function: Stripe webhook that issues Luma tickets.",
   "engines": { "node": ">=20" },
   "scripts": {
-    "test": "node --test \"test/**/*.test.js\""
+    "test": "node --test \"test/**/*.test.js\"",
+    "agenda:snapshot": "node scripts/agenda-snapshot.mjs"
   },
   "dependencies": {
     "stripe": "^22.6.2"
