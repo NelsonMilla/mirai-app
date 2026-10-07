@@ -6,7 +6,8 @@
   "engines": { "node": ">=20" },
   "scripts": {
     "test": "node --test \"test/**/*.test.js\"",
-    "agenda:snapshot": "node scripts/agenda-snapshot.mjs"
+    "agenda:snapshot": "node scripts/sheet-snapshot.mjs --file agenda-data.js",
+    "speakers:snapshot": "node scripts/sheet-snapshot.mjs --file speakers-data.js"
   },
   "dependencies": {
     "stripe": "^22.6.2"

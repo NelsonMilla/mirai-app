@@ -1,4 +1,7 @@
-# Agenda sheet — how to edit the landing-page agenda
+# Agenda and speakers sheet — how to edit the agenda and the speaker lists
+
+The first part of this guide covers the agenda. The speaker lists are further down,
+under [Speakers](#speakers).
 
 ## What this is
 
@@ -78,3 +81,158 @@ delete the row or set Publish to FALSE. To reorder, move the rows.
   the sheet and rewrites `agenda-data.js`. Commit and deploy the result.
 - Unit tests: `npm test` from `new-site/`.
 - Smoke test: `legacy-site/e2e/smoke.spec.ts` (the "agenda rail" test).
+
+---
+
+# Speakers
+
+## What this is
+
+Every page that lists speakers (the landing page, /conferences/, /experience/,
+/startups/ and /jp/) reads the list from a tab called `Speakers` in the same "Mirai
+Agenda" spreadsheet. Fix a speaker's affiliation once and all five pages agree. Add a
+speaker by adding a row. The "55 speakers" numbers on the pages are counted from the
+sheet, so they always match the list. Like the agenda, a copy of the list ships inside
+the site, so visitors still see speakers if Google is slow or down.
+
+## The tab
+
+The site looks for a tab named exactly `Speakers` (capital S, no spaces). Any other
+name and the site shows its built-in copy instead. The tab exists (Oct 7 2026).
+
+If it is ever lost, or the spreadsheet is replaced, recreate it:
+
+1. Open the "Mirai Agenda" spreadsheet (link above).
+2. File → Import → Upload `speakers-template.csv` (in this folder) → "Insert new
+   sheet(s)". Google adds a new tab next to the agenda.
+3. Rename the new tab to `Speakers` (double-click the tab name).
+4. Leave the agenda tab where it is.
+
+The sharing setting is the same one the agenda uses: "Anyone with the link" → Viewer.
+
+## The columns
+
+| Column | What it means | Required | Example |
+|---|---|---|---|
+| Display name | The name exactly as shown, when it needs a title or suffix. Leave empty to use First name + Last name | No | Prof. Stuart Reid |
+| First name | First name | Yes | Stuart |
+| Last name | Last name. Leave empty for people with one name | No | Reid |
+| Affiliation | Shown under the name on every page | No | University of Strathclyde |
+| Talk | The talk title. Shown only on /conferences/, when someone clicks the name | No | Why bodies age |
+| Bio | A short bio. Shown only on /conferences/, when someone clicks the name | No | Stuart leads… |
+| Sessions | Which sessions they speak at: S1, S2, F, Online | No | S1, S2 |
+| Group | Scientists or Founders. Decides which half of /conferences/ lists them | Yes | Scientists |
+| Show on | Pages where this person gets a photo card | No | landing, conferences |
+| Photo | Leave empty to use the standard photo file (see Photos below), or `none` | No | none |
+| Name JP | The name in Japanese, for /jp/ | No | オーブリー・デグレイ |
+| Role JP | The role in Japanese, for /jp/ | No | プレジデント兼最高科学責任者 |
+| Focus JP | One line on their work in Japanese, for /jp/ | No | マウスを用いた若返り研究 |
+| Publish | TRUE shows the row, FALSE hides it | No (blank shows it) | TRUE |
+
+Publish also accepts yes / no, 1 / 0, and hidden.
+
+## Rules
+
+- **Row order is display order, everywhere.** Cards, numbered lists and the "Also in…"
+  sentences all follow the order of the rows. Move a row to move the person.
+- **Show on** takes any of these words, separated by commas:
+  - `landing`: a photo card in the Speakers section of the landing page. Everyone else
+    who is published is named in the "Also in the arena" sentence under the cards.
+  - `conferences`: a photo card at the top of their group on /conferences/. Everyone
+    else in the group is a numbered row under the cards.
+  - `experience`: a photo card on /experience/. Everyone else is named under "Also in
+    the city".
+  - `startups`: a photo card on /startups/.
+  - `jp`: a photo card on /jp/, using the Japanese columns.
+
+  The layouts were designed for the number of cards each page has today: 4 on the
+  landing page, 5 on /experience/, 4 on /startups/, 4 on /jp/, and on /conferences/ 5
+  scientists and 4 founders. More or fewer still works, but check the page after.
+- **Sessions**: S1 is Summit I, S2 is Summit II, F is the Finale, Online is online.
+  Separate them with commas or spaces. They show on /conferences/ as `S1 · S2`. Empty
+  shows a dash. Other words are ignored.
+- **Group**: anything starting with "sci" (Scientists, science, SCI) puts the person in
+  the scientists half of /conferences/. Anything else, including empty, puts them with
+  the founders. The "The other eighteen" headings are counted for you.
+- **Name JP**: when empty, /jp/ shows the name in Latin letters. Role JP is shown as
+  `Role JP｜Affiliation`. Focus JP is shown only when filled in.
+- Cells are shown as plain text. HTML will not work; `&` and `<` show as typed.
+- Publish FALSE hides a row from the site but NOT from the sheet's public CSV. Keep
+  unannounced speakers out of the sheet entirely, not just unpublished.
+
+## Photos
+
+Photos live in the site itself, in the folder `new-site/img/speakers/`. Each file is
+named after the person: first name and last name, lowercase, accents removed, every
+space or other character replaced by an underscore, ending in `.jpeg`.
+
+| Name in the sheet | File |
+|---|---|
+| Aubrey de Grey | `aubrey_de_grey.jpeg` |
+| José Cordeiro | `jose_cordeiro.jpeg` |
+| Stuart Reid (Display name "Prof. Stuart Reid") | `stuart_reid.jpeg` |
+| Florian (no last name) | `florian.jpeg` |
+
+The Display name is never used for the file name; only First name and Last name are.
+
+To add or change a photo, put the file in `new-site/img/speakers/` with that name and
+deploy, then make sure the person's Photo cell is empty. A new photo needs a deploy; a
+sheet edit does not.
+
+The Photo column:
+
+- Empty: use the file named as above.
+- A path starting with `/`, such as `/img/aubrey.webp`: use that file from the site.
+  Today's photos are set this way, because the existing files have other names. When
+  a proper `first_last.jpeg` is uploaded, clear the cell.
+- `none`: no photo. The card shows the person's initials instead.
+- Anything else (a web link, a Google Drive link) is treated as `none`. Photos must be
+  files on the site.
+
+If the file is missing, the card shows the initials instead of a broken image.
+
+## Standing editorial rules
+
+- **Joe Betts-LaCroix is never placed next to Aubrey de Grey or anyone from LEV
+  Foundation** (for example Natalie S. Coles de Grey). That means not in adjacent rows
+  and not in adjacent cards, on any page. Because row order is display order, check
+  the rows above and below his before saving, and check again after moving anyone.
+- **Marian Goodell has no photo.** Her Photo cell stays `none`. Never upload a file for
+  her.
+
+## Editing
+
+Same as the agenda: change the cells, reload the site, allow a minute or two for
+Google's cache. To add a speaker, add a row. To remove one, delete the row or set
+Publish to FALSE. To reorder, move the rows.
+
+## If something looks wrong
+
+- Check the header row spelling: Display name, First name, Last name, Affiliation,
+  Talk, Bio, Sessions, Group, Show on, Photo, Name JP, Role JP, Focus JP, Publish.
+  Capital letters and extra spaces do not matter; other spelling does.
+- A row with an empty First name is skipped.
+- Edits never appear: check the tab is still named exactly `Speakers`, then the
+  sharing setting. If the tab cannot be read, every page shows the built-in copy.
+- Someone is missing from a page: check Publish, then the spelling of the page word in
+  Show on (`landing`, `conferences`, `experience`, `startups`, `jp`).
+- Someone is in the wrong half of /conferences/: check Group starts with "sci" for
+  scientists.
+- Initials instead of a photo: the Photo cell says `none` or something not starting
+  with `/`, or the file name does not match. Check the spelling, the `.jpeg` ending
+  (not `.jpg`), that accents were dropped, and that the file was deployed.
+- The speaker count looks wrong: it counts every published row. A hidden or deleted
+  row is not counted.
+
+## For engineers
+
+- The sheet address lives in `speakers-data.js` (`window.MIRAI_SPEAKERS_SHEET_CSV`).
+  It addresses the tab by name (`&sheet=Speakers`).
+- Refresh the built-in copy: run `npm run speakers:snapshot` from `new-site/`. It
+  fetches the tab and rewrites `speakers-data.js`. Commit and deploy the result.
+  `npm run agenda:snapshot` does the same for the agenda; both run
+  `scripts/sheet-snapshot.mjs --file <data file>`.
+- Unit tests: `npm test` from `new-site/`.
+- Smoke tests: `legacy-site/e2e/smoke.spec.ts` (the "speakers" tests, one per page).
+  From `legacy-site/`: `npx playwright test e2e/smoke.spec.ts -g speakers`. Set
+  `NEW_SITE_PORT` to run against a server on another port (default 4321).
