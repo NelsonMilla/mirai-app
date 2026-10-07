@@ -10,6 +10,12 @@ Single static `index.html` — no framework, no build step. Deploys anywhere
   muted loop only after the poster renders and the browser is idle; mobile,
   reduced-motion, data-saver, and slow connections stay poster-only.
 - Summit I Oct 17–18 · Summit II Oct 24–25 · Fashion Show Oct 26 (Monday).
+- The landing-page agenda rail (`#agendaRail`) is rendered by `agenda.js` from a
+  public Google Sheet, one row per session; the sheet's CSV export URL is set in
+  `agenda-data.js`. The snapshot rows in `agenda-data.js` paint first and stay on
+  the page if the fetch fails or times out. `npm run agenda:snapshot` refreshes
+  the snapshot from the sheet. The agenda owner's guide (columns, making the
+  sheet public) is `AGENDA.md`.
 - Ticket CTAs go to Stripe Payment Links (cutover Sep 22 2026). Generic "Get
   Tickets" buttons and the nav CTA go to `/pricing/`, where each ticket has its
   own link; summit cards, the PopUp/"Everything" buttons and `/conferences/`

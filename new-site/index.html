@@ -50,6 +50,8 @@
   if (Date.now() >= new Date('2026-12-15T00:00:00+09:00').getTime()) document.documentElement.classList.add('kobe-permit-over');
 </script>
 <script src="copy.js"></script>
+<script src="agenda-data.js"></script>
+<script src="agenda.js"></script>
 <script defer src="/posthog.js"></script>
 <script defer src="/analytics.js"></script>
 <script type="application/ld+json">
@@ -1121,46 +1123,12 @@
   </div>
 </section>
 
-<!-- ═══ AGENDA · DAY RAIL (the stashed "Full Program" section lives in ../retreat/full-program-section.html) ═══ -->
+<!-- ═══ AGENDA · DAY RAIL (rail rendered from the Google Sheet by agenda.js, snapshot in agenda-data.js; the stashed "Full Program" section lives in ../retreat/full-program-section.html) ═══ -->
 <section id="agenda" data-track-section="agenda" data-track-position="8">
   <div class="eyebrow rv" data-copy="agenda.eyebrow"></div>
   <h2 class="big rv" data-copy="agenda.headline"></h2>
 
-  <div class="ag-rail">
-    <div class="ag-stop rv">
-      <div class="ag-date mono" data-copy="agenda.stn1"></div>
-      <div class="ag-tag mono" data-copy="agenda.tag1"></div>
-      <div class="ag-title" data-copy="agenda.summit1"></div>
-      <ul class="ag-sessions">
-        <li><span class="ag-num mono">01</span><span class="ag-t"><span data-copy="agenda.t1"></span><span class="ag-sub" data-copy="agenda.p1"></span></span></li>
-        <li><span class="ag-num mono">02</span><span class="ag-t" data-copy="agenda.t2"></span></li>
-        <li><span class="ag-num mono">03</span><span class="ag-t" data-copy="agenda.t3"></span></li>
-        <li><span class="ag-num mono">04</span><span class="ag-t"><span data-copy="agenda.t4"></span><span class="ag-sub" data-copy="agenda.p4"></span></span></li>
-        <li><span class="ag-num mono">05</span><span class="ag-t" data-copy="agenda.t5"></span></li>
-      </ul>
-    </div>
-
-    <div class="ag-stop rv">
-      <div class="ag-date mono" data-copy="agenda.stn2"></div>
-      <div class="ag-tag mono" data-copy="agenda.tag2"></div>
-      <div class="ag-title" data-copy="agenda.summit2"></div>
-      <ul class="ag-sessions">
-        <li><span class="ag-num mono">01</span><span class="ag-t"><span data-copy="agenda.t6"></span><span class="ag-sub" data-copy="agenda.p6"></span></span></li>
-        <li><span class="ag-num mono">02</span><span class="ag-t"><span data-copy="agenda.t7"></span><span class="ag-sub" data-copy="agenda.p7"></span></span></li>
-        <li><span class="ag-num mono">03</span><span class="ag-t"><span data-copy="agenda.t8"></span><span class="ag-sub" data-copy="agenda.p8"></span></span></li>
-        <li><span class="ag-num mono">04</span><span class="ag-t" data-copy="agenda.t9"></span></li>
-      </ul>
-    </div>
-
-    <div class="ag-stop ag-stop--finale rv">
-      <div class="ag-date mono" data-copy="agenda.stn3"></div>
-      <div class="ag-finale">
-        <div class="ag-tag mono" data-copy="agenda.tag3"></div>
-        <div class="ag-finale-title" data-copy="agenda.t10"></div>
-        <div class="ag-finale-sub mono" data-copy="agenda.p10"></div>
-      </div>
-    </div>
-  </div>
+  <div class="ag-rail" id="agendaRail"></div>
 
   <div class="ag-cta rv">
     <div class="ag-note mono" data-copy="agenda.ctaNote"></div>
@@ -1246,6 +1214,7 @@
 </footer>
 
 <script>applyCopy();
+window.MiraiAgenda.load({ url: window.MIRAI_AGENDA_SHEET_CSV, snapshot: window.MIRAI_AGENDA_SNAPSHOT, rail: document.getElementById('agendaRail') });
 /* Hero word cycle: backspace "frontier tech" and retype the next word from
    data-words. Accelerating delete, decelerating type with a little jitter,
    a light scramble on alternate letters, 2.4s hold. Pauses when the tab is

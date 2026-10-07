@@ -171,39 +171,14 @@ window.MIRAI_COPY = {
   },
 
   /* ─── AGENDA ───────────────────────────
-     Session themes are audited event-deck copy (they mirror the
-     summit chapters in ../legacy-site/src/lib/constants.ts). The stashed
+     Only the section chrome lives here. The sessions (blocks, dates,
+     titles, subtitles) now come from the public Google Sheet, rendered
+     by agenda.js with the shipped snapshot in agenda-data.js. The stashed
      "Full Program" section this replaced lives in
      ../retreat/full-program-section.html for the Retreat page. */
   agenda: {
     eyebrow: `The Agenda · Oct 17–26`,
     headline: `Nine sessions<br/>and a runway.`,
-    stn1: `<span class="ag-code">STN·01</span>Oct 17–18`,
-    tag1: `Summit I`,
-    summit1: `The Science &amp; Tech Augmenting&nbsp;Life`,
-    t1: `Japan's Longevity Imperative`,
-    p1: `What Japan learned — and what it needs from the world.`,
-    t2: `KBIC as a Global Laboratory for Longevity`,
-    t3: `Bioengineering, MedTech, Biostasis, Replacement &amp; Augmentation`,
-    t4: `Women's Health`,
-    p4: `The next trillion-dollar market.`,
-    t5: `AI &times; Longevity Bio`,
-    stn2: `<span class="ag-code">STN·02</span>Oct 24–25`,
-    tag2: `Summit II`,
-    summit2: `From East to West: Bridging the Longevity&nbsp;Gap`,
-    t6: `Longevity Trends &amp; Supercentenarians`,
-    p6: `Impact, and the bottlenecks holding the field back.`,
-    t7: `The Stakeholders`,
-    p7: `Investment, R&amp;D, entrepreneurship — and regulation as an acceleration mechanism.`,
-    t8: `Japan's Model`,
-    p8: `Conditional approval generating real-world evidence.`,
-    t9: `Visions for the Future of Longevity`,
-    stn3: `<span class="ag-code">STN·03</span>Oct 26`,
-    tag3: `Finale`,
-    t10: `The Frontier Human Fashion Show &amp; Demo&nbsp;Day`,
-    p10: SHOW_FASHION
-      ? `Devices become couture. <a href="#fashion" style="color:var(--accent); text-decoration:none" data-analytics-action="site_navigation" data-analytics-location="agenda" data-analytics-target="fashion">See the show ↑</a>`
-      : `Devices become couture.`,
     ctaNote: `Oct 17–26 · Kobe`,
     cta: `<a class="btn accent" href="/pricing/" data-analytics-action="site_navigation" data-analytics-location="agenda" data-analytics-target="pricing">Get Tickets</a>`,
   },
