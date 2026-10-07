@@ -1,47 +1,11 @@
 /* Agenda rail from a public Google Sheet (see docs/agenda-sheet-prd.md).
-   Pure core (parseCsv, rowsFromCsv, buildModel) runs in Node for tests;
-   render and load touch the DOM only when called. Sheet text never goes
+   Needs sheet.js loaded first (CSV parser and fetch). Pure core (buildModel)
+   runs in Node for tests; render and load touch the DOM only when called. Sheet text never goes
    in as HTML: every string lands via textContent. */
 (function (window) {
   'use strict';
 
-  // RFC 4180-ish: quoted fields, "" escapes, commas/newlines inside quotes, CRLF, BOM.
-  function parseCsv(text) {
-    const s = String(text || '').replace(/^﻿/, '');
-    const rows = [];
-    let row = [], field = '', quoted = false;
-    const endRow = () => {
-      row.push(field);
-      if (row.some(f => f !== '')) rows.push(row);
-      row = []; field = '';
-    };
-    for (let i = 0; i < s.length; i++) {
-      const c = s[i];
-      if (quoted) {
-        if (c === '"' && s[i + 1] === '"') { field += '"'; i++; }
-        else if (c === '"') quoted = false;
-        else field += c;
-      } else if (c === '"') quoted = true;
-      else if (c === ',') { row.push(field); field = ''; }
-      else if (c === '\n') endRow();
-      else if (c === '\r') { if (s[i + 1] === '\n') i++; endRow(); }
-      else field += c;
-    }
-    if (field !== '' || row.length) endRow();
-    return rows;
-  }
-
-  // First row is the header; "Block title " → "blocktitle".
-  function rowsFromCsv(text) {
-    const [head, ...body] = parseCsv(text);
-    if (!head) return [];
-    const keys = head.map(h => h.toLowerCase().replace(/\s+/g, ''));
-    return body.map(cells => {
-      const o = {};
-      keys.forEach((k, i) => { if (k) o[k] = cells[i] == null ? '' : cells[i]; });
-      return o;
-    });
-  }
+  const { parseCsv, rowsFromCsv } = window.MiraiSheet;
 
   const str = v => (v == null ? '' : String(v)).trim();
   const HIDDEN = ['false', 'no', '0', 'hidden'];
@@ -151,20 +115,12 @@
     const warn = reason => { console.warn('[agenda] sheet unavailable, showing snapshot', reason); return 'snapshot'; };
     try { render(buildModel(snapshot), rail); } catch (e) { console.warn('[agenda] snapshot render failed', e); }
     if (typeof url !== 'string' || !url) return Promise.resolve('snapshot');
-    let timer;
-    return Promise.resolve().then(() => {
-      const ctl = new AbortController();
-      timer = setTimeout(() => ctl.abort(), 6000);
-      return fetch(url, { cache: 'no-store', signal: ctl.signal });
-    }).then(res => {
-      if (!res.ok) throw new Error('HTTP ' + res.status);
-      return res.text();
-    }).then(text => {
-      const model = buildModel(rowsFromCsv(text));
+    return window.MiraiSheet.fetchCsv(url, { timeout: 6000 }).then(rows => {
+      const model = buildModel(rows);
       if (!model.stops.length) return warn('no published sessions');
       render(model, rail);
       return 'sheet';
-    }).catch(warn).finally(() => clearTimeout(timer));
+    }).catch(warn);
   }
 
   window.MiraiAgenda = { parseCsv, rowsFromCsv, buildModel, render, load };

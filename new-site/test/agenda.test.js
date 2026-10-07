@@ -10,7 +10,8 @@ const load = (file, w = {}) => {
 };
 // vm objects come from another realm; clone so deepStrictEqual compares plain values.
 const plain = (fn) => (...a) => JSON.parse(JSON.stringify(fn(...a)));
-const api = load('agenda.js').MiraiAgenda;
+// agenda.js takes its parser from sheet.js, which the page loads first.
+const api = load('agenda.js', load('sheet.js')).MiraiAgenda;
 const [parseCsv, rowsFromCsv, buildModel] = [api.parseCsv, api.rowsFromCsv, api.buildModel].map(plain);
 const model = (csv) => buildModel(rowsFromCsv(csv));
 const HEAD = 'Block,Date,Block title,Title,Subtitle,Link,Publish\n';
