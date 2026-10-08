@@ -65,7 +65,11 @@ async function main() {
   console.log(`Wrote ${events.length} events to ${OUT_PATH}`);
 }
 
-main().catch((err) => {
-  console.error(`sola-snapshot failed: ${err.message}`);
-  process.exitCode = 1;
-});
+// Only run when executed directly (npm run today:snapshot). The unit test imports pickEvents
+// from this file and must not refetch So.La or rewrite the snapshot as a side effect.
+if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+  main().catch((err) => {
+    console.error(`sola-snapshot failed: ${err.message}`);
+    process.exitCode = 1;
+  });
+}
