@@ -111,7 +111,7 @@ window.MIRAI_COPY = {
     body: `Why the next decade of longevity biomedicine runs through Japan: regenerative medicine, devices, and accelerated regulatory paths.`,
     topics: ``,
     priceRow: `<span class="priceVal">$900</span><span class="priceKey"></span>`,
-    block: `<a class="btn ghost" href="https://buy.stripe.com/test_8x2aEZ88AevHbTN5Su3Nm00" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="summit_1" data-analytics-target="summit_1">Get My Ticket</a>`,
+    block: `<a class="btn ghost" href="https://buy.stripe.com/dRmdRb1Kc9bn7Dx80C3Nm05" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="summit_1" data-analytics-target="summit_1">Get My Ticket</a>`,
     footnote: `Hotel & Transportation not included`,
     label2: SHOW_FASHION ? `SUMMIT — 02 + FASHION SHOW` : `SUMMIT — 02`,
     date2: SHOW_FASHION ? `October 24–26` : `October 24–25`,
@@ -120,7 +120,7 @@ window.MIRAI_COPY = {
     topics2: ``,
     tieIn: ``,
     priceRow2: `<span class="priceVal">$900</span><span class="priceKey"></span>`,
-    block2: `<a class="btn ghost" href="https://buy.stripe.com/test_00w14p3SkevH7Dx94G3Nm01" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="summit_2" data-analytics-target="summit_2">Get My Ticket</a>`,
+    block2: `<a class="btn ghost" href="https://buy.stripe.com/00wcN774wbjv8HBdkW3Nm06" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="summit_2" data-analytics-target="summit_2">Get My Ticket</a>`,
     footnote2: `Hotel & Transportation not included`,
     line: `Across the two weekends: <b>Aubrey de Grey</b>, <b>Motoshi Hayano</b>, and 41 more.`,
     link: `Meet the speakers ↑`,
@@ -129,19 +129,13 @@ window.MIRAI_COPY = {
   },
 
   /* ─── SPEAKERS ─────────────────────────── */
+  /* The cards and the "Also in the arena" names come from the Speakers
+     tab of the agenda sheet (speakers.js); the count span is filled
+     with the number of published speakers. */
   speakers: {
-    eyebrow: `55 Confirmed Speakers`,
+    eyebrow: `<span data-speakers-count>55</span> Confirmed Speakers`,
     headline: `Speakers &amp; Residents`,
-    name: `Aubrey de Grey`,
-    org: `LEV Foundation`,
-    name2: `Motoshi Hayano`,
-    org2: `Asagi Labs`,
-    name3: `Yuki Hanyu`,
-    org3: `Cellular Agriculture`,
-    name4: `Adam Gries`,
-    org4: `Vitalist Bay`,
-    alsoLine: `Also in the arena: <b>José Cordeiro</b>, <b>Todd Porter</b>, <b>Josh Mann</b>, <b>Patri Friedman</b>, <b>Ian Huyett</b>, <b>Sandeep Casi</b>, <b>Sebastian Brunemeier</b>, <b>Rob Claar</b>, <b>Natalie Coles</b>, <b>Devinder Sodhi</b>, <b>Sumit Jamuar</b>, <b>Keita Masui</b>, <b>Muneaki Goto</b>, <b>Takahiro Yasuda</b>, <b>Yuri Deigin</b>, <b>Laurence Ion</b>, <b>Rodney Kelly</b>, <b>Eleanor Sheekey</b>, <b>Stuart Reid</b>, <b>Mac Davis</b>, <b>Daniel Burger</b>, <b>Juliette Humer</b>, <b>Jeffrey Tibbetts</b>, <b>Ada Cyborg</b>, <b>Elen Capri</b>, <b>Cremieux</b>, <b>Nathan Cheng</b>, <b>Keiko Kobayashi</b>, <b>Felix OENS</b>, <b>Brandon Possin</b>, <b>Bilal Kharouni</b>, <b>Alice Gilman</b>, <b>Julie Ying Baron</b>, <b>Irit Rappley, PhD</b>, <b>Walter Patterson</b>, <b>Czar Gonzalez</b>, <b>Takashi Aoi</b>, <b>Yoshihiro Muragaki</b>, <b>Masanori Miyanishi</b>, <b>Paul Yang</b>, <b>Pedro Henrich</b>, <b>Nelson Milla</b>.`,
-    followLine: `55 confirmed · more announced through September · <a href="#doors">Follow along ↓</a>`,
+    followLine: `<span data-speakers-count>55</span> confirmed · more announced through September · <a href="#doors">Follow along ↓</a>`,
   },
 
   /* ─── FASHION SHOW ─────────────────────────── */
@@ -171,40 +165,15 @@ window.MIRAI_COPY = {
   },
 
   /* ─── AGENDA ───────────────────────────
-     Session themes are audited event-deck copy (they mirror the
-     summit chapters in ../legacy-site/src/lib/constants.ts). The stashed
+     Only the section chrome lives here. The sessions (blocks, dates,
+     titles, subtitles) now come from the public Google Sheet, rendered
+     by agenda.js with the shipped snapshot in agenda-data.js. The stashed
      "Full Program" section this replaced lives in
      ../retreat/full-program-section.html for the Retreat page. */
   agenda: {
     eyebrow: `The Agenda · Oct 17–26`,
     headline: `Nine sessions<br/>and a runway.`,
-    stn1: `<span class="ag-code">STN·01</span>Oct 17–18`,
-    tag1: `Summit I`,
-    summit1: `The Science &amp; Tech Augmenting&nbsp;Life`,
-    t1: `Japan's Longevity Imperative`,
-    p1: `What Japan learned — and what it needs from the world.`,
-    t2: `KBIC as a Global Laboratory for Longevity`,
-    t3: `Bioengineering, MedTech, Biostasis, Replacement &amp; Augmentation`,
-    t4: `Women's Health`,
-    p4: `The next trillion-dollar market.`,
-    t5: `AI &times; Longevity Bio`,
-    stn2: `<span class="ag-code">STN·02</span>Oct 24–25`,
-    tag2: `Summit II`,
-    summit2: `From East to West: Bridging the Longevity&nbsp;Gap`,
-    t6: `Longevity Trends &amp; Supercentenarians`,
-    p6: `Impact, and the bottlenecks holding the field back.`,
-    t7: `The Stakeholders`,
-    p7: `Investment, R&amp;D, entrepreneurship — and regulation as an acceleration mechanism.`,
-    t8: `Japan's Model`,
-    p8: `Conditional approval generating real-world evidence.`,
-    t9: `Visions for the Future of Longevity`,
-    stn3: `<span class="ag-code">STN·03</span>Oct 26`,
-    tag3: `Finale`,
-    t10: `The Frontier Human Fashion Show &amp; Demo&nbsp;Day`,
-    p10: SHOW_FASHION
-      ? `Devices become couture. <a href="#fashion" style="color:var(--accent); text-decoration:none" data-analytics-action="site_navigation" data-analytics-location="agenda" data-analytics-target="fashion">See the show ↑</a>`
-      : `Devices become couture.`,
-    ctaNote: `Oct 17–26 · Kobe`,
+    ctaNote: `Oct 17–26 · Kobe · <a href="/program/" style="color:var(--accent); text-decoration:none" data-analytics-action="site_navigation" data-analytics-location="agenda" data-analytics-target="program">Full program →</a>`,
     cta: `<a class="btn accent" href="/pricing/" data-analytics-action="site_navigation" data-analytics-location="agenda" data-analytics-target="pricing">Get Tickets</a>`,
   },
 
@@ -239,7 +208,7 @@ window.MIRAI_COPY = {
     buttons: SHOW_FASHION
       ? `Tickets for the Summits &amp; Fashion Show. Applications for the PopUp.`
       : `Tickets for the Summits. Applications for the PopUp.`,
-    buttons2: `<a class="btn accent" href="https://book.stripe.com/test_dRmfZj3Sk3R3f5ZcgS3Nm02" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="apply" data-analytics-target="everything">Come Live Japan — $1,200</a> <a class="btn" href="/pricing/" data-analytics-action="site_navigation" data-analytics-location="apply" data-analytics-target="pricing">Get Tickets</a> <a class="btn ghost" href="#">Sponsor the City</a>`,
+    buttons2: `<a class="btn accent" href="https://book.stripe.com/bJe9AVewY4V7cXR80C3Nm07" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="apply" data-analytics-target="everything">Come Live Japan — $1,200</a> <a class="btn" href="/pricing/" data-analytics-action="site_navigation" data-analytics-location="apply" data-analytics-target="pricing">Get Tickets</a> <a class="btn ghost" href="#">Sponsor the City</a>`,
     footnote: `Tickets &amp; PopUp check out on Stripe · PopUp bookings confirmed within 7 days, card charged once confirmed · <a href="/pricing/" data-analytics-action="site_navigation" data-analytics-location="apply" data-analytics-target="pricing">See pricing →</a>`,
     footnote2: `Sponsors reach 300 residents and 55 speakers`,
     footnote3: `Residents of Japan: a Japan-resident ticket is sold separately on Peatix through the <a href="/jp/" hreflang="ja" data-analytics-action="site_navigation" data-analytics-location="apply" data-analytics-target="japan">Japanese page</a> · That pricing is exclusive to residents of Japan · <a href="/jp/" lang="ja" hreflang="ja" data-analytics-action="site_navigation" data-analytics-location="apply" data-analytics-target="japan">日本語ページ →</a>`,

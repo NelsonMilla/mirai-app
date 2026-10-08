@@ -1,0 +1,1077 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>The program · Mirai Tech City · Kobe, October 2026</title>
+<meta name="description" content="Every speaker, with a bio, and the day-by-day agenda for Summit I, Summit II and the Demo Day in Kobe, 17 to 26 October 2026. All times JST." />
+<link rel="canonical" href="https://mirai-tech-city.vercel.app/program/" />
+<meta property="og:site_name" content="Mirai Tech City" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="The program · Mirai Tech City · Kobe, October 2026" />
+<meta property="og:description" content="Every speaker, with a bio, and the day-by-day agenda for Summit I, Summit II and the Demo Day in Kobe, 17 to 26 October 2026. All times JST." />
+<meta property="og:image" content="https://mirai-tech-city.vercel.app/img/harbor-golden-hour.jpg" />
+<meta property="og:url" content="https://mirai-tech-city.vercel.app/program/" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="theme-color" content="#050506" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23050506'/%3E%3Ctext x='50' y='72' font-size='62' font-family='Georgia' font-weight='bold' fill='%239be8f0' text-anchor='middle'%3E未%3C/text%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="preconnect" href="https://api.fontshare.com" />
+<link rel="preconnect" href="https://cdn.fontshare.com" crossorigin />
+<link href="https://api.fontshare.com/v2/css?f[]=switzer@400,700,800,900&display=swap" rel="stylesheet" media="print" onload="this.onload=null;this.media='all'" />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" media="print" onload="this.onload=null;this.media='all'" />
+<noscript>
+  <link href="https://api.fontshare.com/v2/css?f[]=switzer@400,700,800,900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</noscript>
+<script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/posthog.js"></script>
+<script defer src="/analytics.js"></script>
+<link rel="stylesheet" href="/nav.css" />
+<style>
+/* ══════════════════════════════════════════════════════════════════════
+   Mirai Tech City · The program
+   The wall of every speaker is the first screen; a section bar docks under
+   the shared nav for the rest of the page (Speakers, and the agenda's day
+   switcher). CSS runs in page order: tokens → primitives → wall → section
+   bar → live strip → roster → speaker panel → agenda → footer.
+   ══════════════════════════════════════════════════════════════════════ */
+
+@font-face {
+  font-family: 'Switzer-fallback';
+  src: local('Arial'), local('Helvetica Neue');
+  size-adjust: 97.6%;
+  ascent-override: 100%;
+  descent-override: 25%;
+  line-gap-override: 0%;
+}
+
+:root {
+  --void: #050506;
+  --near: #0b0b0e;
+  --bone: #f4f3f0;
+  --cyan: #9be8f0;
+  /* the shared nav reads these three token names */
+  --accent: #9be8f0;
+  --ink: #f4f3f0;
+  --dim: rgba(244,243,240,.68);
+  --faint: rgba(244,243,240,.52);
+  --line: rgba(244,243,240,.14);
+  --line-2: rgba(244,243,240,.26);
+  --font: 'Switzer', 'Switzer-fallback', 'Inter', -apple-system, sans-serif;
+  --mono: 'IBM Plex Mono', ui-monospace, monospace;
+  --nav: 86px;          /* the shared fixed nav */
+  --row: 58px;          /* one row of the section bar */
+  --bar: 60px;          /* the whole section bar docked under the nav */
+  --top: 104px;         /* section top padding */
+  --bot: 96px;          /* section bottom padding */
+  --gap: 48px;          /* headline block → content */
+  --gut: 24px;          /* gutters */
+}
+@media (max-width: 700px) { :root { --nav: 124px; --row: 44px; --bar: 90px; --top: 72px; --bot: 64px; --gap: 32px; --gut: 16px; } }
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { background: var(--void); scroll-padding-top: calc(var(--nav) + var(--bar) + 16px); }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+body { min-width: 320px; overflow-x: hidden; background: var(--void); color: var(--bone);
+  font-family: var(--font); font-size: 16.5px; line-height: 1.55;
+  -webkit-font-smoothing: antialiased; }
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+button, input { font: inherit; color: inherit; }
+::selection { background: var(--cyan); color: #000; }
+:focus-visible { outline: 2px solid var(--cyan); outline-offset: 3px; border-radius: 2px; }
+
+.skip { position: absolute; left: -9999px; top: 0; z-index: 90; }
+.skip:focus { left: 12px; top: 12px; display: inline-flex; align-items: center; min-height: 44px;
+  padding: 12px 18px; background: var(--cyan); color: #0a0a0c; font-family: var(--mono);
+  font-size: 11px; letter-spacing: .2em; text-transform: uppercase; text-decoration: none; }
+
+/* ── the single content column ─────────────────────────────────────── */
+.wrap { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 var(--gut); }
+main > section { padding: var(--top) 0 var(--bot); }
+
+/* ── one type scale ────────────────────────────────────────────────── */
+h1, h2, h3, h4 { text-transform: uppercase; }
+h1 { font-size: clamp(34px, 4.4vw, 64px); font-weight: 900; line-height: .92; letter-spacing: -.024em; }
+h2 { font-size: clamp(34px, 5vw, 76px); font-weight: 800; line-height: .94; letter-spacing: -.022em; text-wrap: balance; }
+h3 { font-size: clamp(18px, 1.5vw, 22px); font-weight: 800; line-height: 1.1; letter-spacing: -.01em; }
+p { max-width: 62ch; color: var(--dim); }
+.lbl { display: block; color: var(--faint); font-family: var(--mono); font-size: 11px;
+  font-weight: 400; letter-spacing: .18em; line-height: 1.5; text-transform: uppercase; }
+.lbl--cyan { color: var(--cyan); }
+.num { font-variant-numeric: tabular-nums lining-nums; font-feature-settings: 'tnum' 1, 'lnum' 1; }
+.hd { margin-bottom: var(--gap); }
+.hd .lbl { margin-bottom: 18px; }
+.grid { display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); }
+.cell { background: var(--void); }
+
+/* ── 01 the wall: every speaker, edge to edge, is the first screen ── */
+#wall { position: relative; min-height: 100vh; min-height: 100svh; padding: 0; overflow: hidden; background: var(--void); }
+.w-grid { display: grid; grid-template-columns: repeat(var(--cols, 10), minmax(0, 1fr)); gap: 1px;
+  background: rgba(155,232,240,.2); border-bottom: 1px solid rgba(155,232,240,.2); }
+.w-t { position: relative; display: block; min-width: 0; aspect-ratio: 1; padding: 0; border: 0; border-radius: 0;
+  background: var(--near); cursor: pointer; }
+.w-t img, .w-t .spk-initials { width: 100%; height: 100%; aspect-ratio: 1; object-fit: cover; object-position: center 22%; }
+.w-t img { filter: grayscale(1) contrast(1.06) brightness(.84); transition: filter .3s ease; }
+.w-t .spk-initials { background: var(--near); font-size: clamp(16px, 1.9vw, 28px); }
+.w-t::after { content: ''; position: absolute; inset: 0; pointer-events: none; }
+.w-t:hover, .w-t:focus-visible, .w-t.is-open { z-index: 3; }
+.w-t:hover img, .w-t:focus-visible img, .w-t.is-open img { filter: none; }
+.w-t:hover::after, .w-t.is-open::after { box-shadow: inset 0 0 0 1px var(--cyan); }
+.w-t:focus-visible { outline: 2px solid var(--cyan); outline-offset: -2px; border-radius: 0; }
+.w-n { position: absolute; left: 4px; bottom: 4px; padding: 3px 6px; border: 1px solid rgba(155,232,240,.5);
+  background: var(--void); color: var(--bone); font-family: var(--mono); font-size: 10px; letter-spacing: .08em;
+  line-height: 1.3; text-transform: uppercase; white-space: nowrap; opacity: 0; pointer-events: none; }
+.w-t[data-edge] .w-n { left: auto; right: 4px; }
+.w-t:hover .w-n, .w-t:focus-visible .w-n { opacity: 1; }
+.w-f { display: block; aspect-ratio: 1; background: var(--void); }
+/* the veil: type never sits on raw portraits */
+.w-over { position: absolute; z-index: 4; top: 0; left: 0; right: 0; height: 100vh; height: 100svh;
+  display: flex; align-items: flex-end; pointer-events: none;
+  background:
+    linear-gradient(to bottom, rgba(5,5,6,.6), rgba(5,5,6,0) 150px),
+    radial-gradient(110% 78% at 0% 100%, rgba(5,5,6,.96) 0%, rgba(5,5,6,.88) 32%, rgba(5,5,6,.35) 58%, rgba(5,5,6,0) 74%); }
+.w-lock { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 var(--gut) 84px; }
+.w-lock h1 .lbl { margin-bottom: 18px; letter-spacing: .24em; }
+.w-big { display: block; font-size: clamp(60px, 9.4vw, 132px); font-weight: 900; line-height: .9; letter-spacing: -.03em; }
+.w-sub { margin-top: 16px; font-size: clamp(17px, 1.7vw, 24px); font-weight: 500; line-height: 1.3; color: var(--bone); max-width: 40ch; }
+.w-line { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 14px; max-width: none; margin-top: 20px;
+  color: var(--bone); font-size: clamp(16px, 1.45vw, 20px); font-weight: 700; line-height: 1.35; }
+.w-down { pointer-events: auto; display: inline-grid; place-items: center; width: 44px; height: 44px;
+  border: 1px solid rgba(155,232,240,.4); border-radius: 2px; color: var(--cyan); font-family: var(--mono);
+  font-size: 16px; font-weight: 400; text-decoration: none; }
+.w-down:hover { border-color: var(--cyan); }
+.w-down span { display: block; }
+@media (prefers-reduced-motion: no-preference) {
+  .w-down span { animation: w-nudge 1.8s ease-in-out infinite; }
+  @keyframes w-nudge { 0%, 100% { transform: translateY(-3px); } 50% { transform: translateY(4px); } }
+}
+@media (prefers-reduced-motion: reduce) { .w-t img { transition: none; } }
+
+/* ── the section bar: docks under the nav for the rest of the page ─── */
+.pg-bar { position: sticky; top: var(--nav); z-index: 40; background: var(--void);
+  border-bottom: 1px solid var(--line-2); }
+/* once docked, a void strip fills the band behind the nav so the page
+   never scrolls through it */
+.pg-bar::before { content: ""; position: absolute; left: 0; right: 0; bottom: 100%;
+  height: var(--nav); background: var(--void); visibility: hidden; }
+.pg-bar.is-stuck::before { visibility: visible; }
+.pg-bar-in { display: flex; align-items: stretch; }
+.pg-sec { display: inline-flex; align-items: center; min-height: var(--row); padding: 0 18px 0 0;
+  color: var(--faint); font-family: var(--mono); font-size: 11px; letter-spacing: .18em; line-height: 1.35;
+  text-decoration: none; text-transform: uppercase; white-space: nowrap; box-shadow: inset 0 -2px 0 transparent; }
+.pg-sec:hover { color: var(--bone); }
+.pg-sec.is-here { color: var(--bone); box-shadow: inset 0 -2px 0 var(--cyan); }
+.pg-sec:focus-visible { outline-offset: -4px; }
+.pg-sec--agenda { margin-left: auto; padding: 0 18px; }
+.pg-days { display: flex; flex: 0 1 640px; min-width: 0; }
+.pg-day-btn { flex: 1 1 0; min-width: 0; min-height: var(--row); padding: 0 12px;
+  border: 0; border-left: 1px solid var(--line); background: transparent; color: var(--faint);
+  font-family: var(--mono); font-size: 11px; letter-spacing: .16em; line-height: 1.35;
+  text-align: left; text-transform: uppercase; white-space: nowrap; cursor: pointer;
+  box-shadow: inset 0 -2px 0 transparent; }
+.pg-day-btn:last-child { border-right: 1px solid var(--line); }
+.pg-day-btn:hover { color: var(--bone); }
+/* the chosen day is always bone; it takes the cyan mark while the agenda is in view */
+.pg-day-btn[aria-pressed="true"] { color: var(--bone); box-shadow: inset 0 -2px 0 var(--line-2); }
+.pg-bar[data-in="agenda"] .pg-day-btn[aria-pressed="true"] { box-shadow: inset 0 -2px 0 var(--cyan); }
+.pg-day-btn:focus-visible { outline-offset: -4px; }
+
+/* ── 02 the live strip: now and next, or first up, on one line ─────── */
+#live { padding: 0; border-bottom: 1px solid var(--line); }
+.e-strip { display: flex; align-items: center; gap: 10px 28px; min-height: 68px; padding: 12px 0; }
+.e-live { display: flex; flex: 1 1 auto; align-items: center; gap: 10px 28px; min-width: 0; }
+.e-seg { display: flex; flex: 1 1 0; align-items: center; gap: 8px 16px; min-width: 0; }
+.e-seg + .e-seg { padding-left: 28px; border-left: 1px solid var(--line); }
+.e-seg.is-now { box-shadow: inset 0 -2px 0 rgba(155,232,240,.5); }
+.c-tag { display: flex; flex: none; align-items: center; gap: 10px; }
+.c-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--cyan); }
+@media (prefers-reduced-motion: no-preference) {
+  .c-dot { animation: c-beat 2.4s ease-in-out infinite; }
+  @keyframes c-beat { 50% { opacity: .25; } }
+}
+.e-at { flex: none; color: var(--bone); font-family: var(--mono); font-size: 12px; letter-spacing: .06em; white-space: nowrap; }
+.e-ttl { flex: 0 1 auto; min-width: 0; overflow: hidden; color: var(--bone); font-size: 15px; font-weight: 700;
+  line-height: 1.3; text-overflow: ellipsis; white-space: nowrap; }
+.e-ttl.is-tbc { color: var(--faint); font-weight: 400; }
+.e-room { flex: 0 2 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.e-ppl { display: flex; flex: none; gap: 4px; list-style: none; }
+.e-ppl .th { display: block; width: 30px; height: 30px; overflow: hidden; border: 1px solid var(--line); background: var(--near); }
+.e-ppl .th img, .e-ppl .th .spk-initials { width: 100%; height: 100%; aspect-ratio: 1; object-fit: cover;
+  object-position: center 20%; font-size: 11px; }
+button.c-p { display: block; padding: 0; border: 0; background: transparent; cursor: pointer; }
+button.c-p:hover .th, button.c-p.is-open .th { border-color: var(--cyan); }
+.e-count { flex: none; white-space: nowrap; }
+.e-count[hidden] { display: none; }
+#live .spk-panel { margin: 0 0 24px; }
+
+/* ── 03 roster ─────────────────────────────────────────────────────── */
+#roster { padding-top: 40px; }
+.c-tools { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 16px; padding: 18px 0;
+  border-top: 1px solid var(--line-2); border-bottom: 1px solid var(--line); }
+.c-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.c-chip { min-height: 44px; padding: 0 16px; border: 1px solid rgba(155,232,240,.3); border-radius: 2px;
+  background: transparent; color: var(--cyan); font-family: var(--mono); font-size: 11px;
+  letter-spacing: .16em; text-transform: uppercase; cursor: pointer; }
+.c-chip:hover { border-color: var(--cyan); }
+.c-chip[aria-pressed="true"] { background: var(--cyan); border-color: var(--cyan); color: #0a0a0c; }
+.c-find { display: flex; align-items: center; gap: 12px; flex: 1 1 260px; max-width: 420px; margin-left: auto; }
+.c-find label { flex: none; }
+.c-find input { flex: 1 1 auto; min-width: 0; min-height: 44px; padding: 0 14px; border: 1px solid var(--line-2);
+  border-radius: 3px; background: var(--near); font-size: 15px; }
+.c-find input::placeholder { color: var(--faint); }
+.c-find input:focus { border-color: var(--cyan); outline: none; }
+.c-shown { margin: 16px 0 18px; }
+.c-none { padding: 40px 0; font-size: 17px; }
+.c-none[hidden] { display: none; }
+.c-none button { margin-left: 6px; padding: 0; border: 0; background: none; color: var(--cyan);
+  text-decoration: underline; text-underline-offset: 4px; cursor: pointer; }
+
+.c-roster { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 10px; }
+.c-roster figure { min-width: 0; border: 1px solid var(--line); background: var(--near); cursor: pointer; }
+.c-roster figure[hidden] { display: none; }
+.c-roster .im { aspect-ratio: 4 / 5; overflow: hidden; }
+.c-roster .im img, .c-roster .im .spk-initials { width: 100%; height: 100%; aspect-ratio: 4 / 5; object-fit: cover;
+  object-position: center 20%; }
+.c-roster img { filter: grayscale(.28) contrast(1.02); transition: filter .35s ease, transform .5s ease; }
+.c-roster figure:hover img, .c-roster figure.is-open img { filter: none; transform: scale(1.025); }
+.c-roster figure.is-open { border-color: rgba(155,232,240,.5); }
+.c-roster figcaption { padding: 11px 12px 13px; font-size: 14px; font-weight: 800; line-height: 1.2;
+  text-transform: uppercase; overflow-wrap: anywhere; }
+.c-roster figcaption small { display: -webkit-box; margin-top: 6px; overflow: hidden; color: var(--faint);
+  font-family: var(--mono); font-size: 10px; font-weight: 400; letter-spacing: .08em; line-height: 1.45;
+  text-transform: none; -webkit-line-clamp: 3; -webkit-box-orient: vertical; }
+.c-roster figcaption .s { display: block; margin-top: 8px; color: var(--cyan); font-family: var(--mono);
+  font-size: 10px; font-weight: 400; letter-spacing: .1em; }
+.c-roster figcaption .s:empty::before { content: '—'; color: var(--faint); }
+.c-roster > .spk-panel { grid-column: 1 / -1; margin: 4px 0; }
+
+/* ── the speaker panel (same rules as /conferences/) ───────────────── */
+.spk-initials { display: grid; place-items: center; width: 100%; height: 100%; aspect-ratio: 5 / 6;
+  background: var(--void); color: var(--faint); font-size: clamp(28px, 3.4vw, 44px); font-weight: 800;
+  letter-spacing: -.02em; line-height: 1; }
+.spk-panel { position: relative; display: grid; grid-template-columns: 220px minmax(0, 1fr);
+  margin-top: 28px; border: 1px solid var(--line); border-top-color: rgba(155,232,240,.5);
+  background: var(--near); }
+.spk-panel[hidden] { display: none; }
+.spk-ph { overflow: hidden; border-right: 1px solid var(--line); background: var(--void); }
+.spk-ph img { width: 100%; aspect-ratio: 5 / 6; object-fit: cover; object-position: center 20%; }
+.spk-ph .spk-initials { height: auto; }
+.spk-tx { min-width: 0; padding: 26px 28px 30px; }
+.spk-tx h3 { padding-right: 96px; font-size: clamp(22px, 2.2vw, 30px); }
+.spk-tx h3:focus { outline: none; }
+.spk-aff { margin-top: 8px; font-size: 15px; line-height: 1.45; }
+.spk-ses { margin-top: 14px; color: var(--cyan); font-family: var(--mono); font-size: 11px;
+  letter-spacing: .14em; text-transform: uppercase; }
+.spk-ses.is-tba { color: var(--faint); }
+.spk-talk { margin-top: 22px; padding-top: 16px; border-top: 1px solid var(--line); }
+.spk-talk .lbl { margin-bottom: 6px; }
+.spk-talk p { color: var(--bone); font-size: 17px; font-weight: 700; line-height: 1.35; }
+.spk-bio { margin-top: 14px; font-size: 15px; line-height: 1.65; max-width: 68ch; }
+.spk-x { position: absolute; top: 14px; right: 14px; min-height: 44px; padding: 0 16px;
+  border: 1px solid var(--line-2); border-radius: 3px; background: transparent; color: var(--bone);
+  font-family: var(--mono); font-size: 10px; letter-spacing: .2em; text-transform: uppercase; cursor: pointer; }
+.spk-x:hover { border-color: var(--bone); }
+/* where the speaker is on stage, one line per session */
+.spk-slots { margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--line); }
+.spk-slots p { max-width: 70ch; color: var(--bone); font-size: 15px; line-height: 1.5; }
+.spk-slots p + p { margin-top: 6px; }
+@media (max-width: 640px) {
+  .spk-panel { grid-template-columns: 1fr; }
+  .spk-ph { width: 112px; margin: 20px 0 0 20px; border: 1px solid var(--line); }
+  .spk-tx { padding: 18px 20px 24px; }
+  .spk-tx h3 { padding-right: 0; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .spk-panel { transition: opacity .2s ease, transform .24s cubic-bezier(.16,1,.3,1); }
+  .spk-panel.is-enter { opacity: 0; transform: translateY(6px); transition: none; }
+}
+@media (prefers-reduced-motion: reduce) { .c-roster img { transition: none; } }
+
+/* ── 04 agenda: one day at a time, chosen in the section bar ───────── */
+#agenda .hd { margin-bottom: 40px; }
+.pg-day[hidden] { display: none; }
+.pg-day-hd { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between;
+  gap: 12px 32px; padding-bottom: 22px; border-bottom: 1px solid var(--line-2); }
+.pg-day-hd h3 { font-size: clamp(26px, 3.2vw, 44px); line-height: 1; }
+.pg-venue { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 18px; max-width: none;
+  font-size: 15px; }
+.pg-venue a { display: inline-flex; align-items: center; min-height: 44px; margin: -12px 0;
+  color: var(--cyan); font-family: var(--mono); font-size: 11px; letter-spacing: .18em;
+  text-decoration: none; text-transform: uppercase; }
+.pg-venue a:hover { text-decoration: underline; }
+
+.pg-slots { list-style: none; }
+.pg-slot { display: grid; grid-template-columns: 15ch minmax(0, 1fr); gap: 0 32px;
+  padding: 20px 0 22px; border-bottom: 1px solid var(--line); }
+.pg-time { padding-top: 2px; color: var(--dim); font-family: var(--mono); font-size: 12px;
+  letter-spacing: .06em; white-space: nowrap; }
+.pg-block { display: block; margin-bottom: 7px; color: var(--faint); font-family: var(--mono);
+  font-size: 10.5px; letter-spacing: .16em; line-height: 1.5; text-transform: uppercase; }
+.pg-title { max-width: 60ch; color: var(--bone); font-size: 18px; font-weight: 700; line-height: 1.3; }
+.pg-title.is-tbc { color: var(--faint); font-weight: 400; }
+.pg-who { list-style: none; margin-top: 10px; }
+.pg-who li { margin-top: 3px; font-size: 15px; line-height: 1.45; }
+.pg-name { color: var(--bone); font-weight: 700; }
+button.pg-name { display: inline; margin: -6px -4px; padding: 6px 4px; border: 0; background: transparent;
+  font-size: inherit; line-height: inherit; text-align: left; cursor: pointer;
+  text-decoration: underline; text-decoration-color: var(--line-2); text-underline-offset: 4px; }
+button.pg-name:hover, button.pg-name.is-open { color: var(--cyan); text-decoration-color: currentColor; }
+.pg-aff { color: var(--dim); }
+.pg-notes { margin-top: 8px; font-size: 15px; }
+/* kinds: the keynote carries the one accent mark, breaks recede */
+.pg-slot.is-keynote .pg-block { color: var(--cyan); }
+.pg-slot.is-keynote .pg-block::before { content: ""; display: inline-block; width: 5px; height: 5px;
+  margin-right: 9px; border-radius: 50%; background: var(--cyan); vertical-align: 2px; }
+.pg-slot.is-break { padding: 13px 0 14px; }
+.pg-slot.is-break .pg-time, .pg-slot.is-break .pg-block { color: var(--faint); }
+.pg-slot.is-break .pg-title { color: var(--faint); font-size: 15px; font-weight: 400; }
+/* during the event, the session on stage now */
+.pg-slot.is-now { padding-left: 12px; box-shadow: inset 2px 0 0 var(--cyan); }
+.pg-slot > .spk-panel { grid-column: 1 / -1; margin: 18px 0 4px; }
+
+.pg-pitches { margin-top: 56px; }
+.pg-pitches h4, .pg-awards h4 { padding-bottom: 14px; border-bottom: 1px solid var(--line-2);
+  font-size: clamp(18px, 1.5vw, 22px); font-weight: 800; line-height: 1.1; letter-spacing: -.01em; }
+.pg-pitches ol { list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 32px; }
+.pg-pitches li { padding: 16px 0 18px; border-bottom: 1px solid var(--line); }
+.pg-pitches li b { display: block; color: var(--bone); font-size: 17px; font-weight: 700; line-height: 1.3; }
+.pg-pitches li p { margin-top: 4px; font-size: 15px; }
+.pg-awards { margin-top: 56px; }
+.pg-awards[hidden] { display: none; }
+.pg-awards .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 22px; }
+.pg-awards .cell { padding: 22px 22px 26px; }
+.pg-awards .cell .lbl { margin-bottom: 10px; color: var(--cyan); }
+.pg-awards .cell p, .pg-awards .cell li { font-size: 15px; line-height: 1.5; color: var(--dim); }
+.pg-awards .cell ul { list-style: none; }
+.pg-awards .cell li + li { margin-top: 8px; }
+
+/* ── footer ────────────────────────────────────────────────────────── */
+.foot { background: var(--near); padding: 56px 0 48px; }
+.foot .wrap { display: flex; flex-wrap: wrap; gap: 10px 26px; justify-content: space-between;
+  color: var(--faint); font-family: var(--mono); font-size: 10px; letter-spacing: .16em;
+  text-transform: uppercase; }
+.foot a { display: inline-block; margin: -15px -8px; padding: 15px 8px; color: var(--cyan); text-decoration: none; }
+.foot a:hover { text-decoration: underline; }
+
+/* ── responsive rhythm ─────────────────────────────────────────────── */
+@media (max-width: 980px) {
+  .c-roster { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .e-room { display: none; }
+  .pg-awards .grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 700px) {
+  .w-over { background:
+    linear-gradient(to bottom, rgba(5,5,6,.55), rgba(5,5,6,0) 150px),
+    linear-gradient(to top, rgba(5,5,6,.97) 0%, rgba(5,5,6,.9) 26%, rgba(5,5,6,.45) 46%, rgba(5,5,6,0) 62%); }
+  .w-lock { padding-bottom: 92px; }
+  .w-line { margin-top: 14px; font-size: 16px; }
+  .w-n { left: 2px; bottom: 2px; padding: 2px 4px; letter-spacing: .04em; }
+  .w-t[data-edge] .w-n { right: 2px; }
+  /* the bar wraps: Speakers · Agenda, then the five days */
+  .pg-bar-in { flex-wrap: wrap; }
+  .pg-sec { padding: 0 14px 0 0; }
+  .pg-sec--agenda { margin-left: 0; padding: 0 14px; border-left: 1px solid var(--line); }
+  .pg-days { flex: 1 1 100%; border-top: 1px solid var(--line); }
+  .pg-day-btn { padding: 0 4px; font-size: 10px; letter-spacing: .08em; text-align: center; }
+  .e-strip { flex-wrap: wrap; align-items: flex-start; padding: 16px 0; }
+  .e-live { flex-direction: column; align-items: stretch; gap: 14px; width: 100%; }
+  .e-seg { flex-wrap: wrap; }
+  .e-seg + .e-seg { padding: 14px 0 0; border-left: 0; border-top: 1px solid var(--line); }
+  .e-seg.is-now { box-shadow: none; }
+  .e-ttl { flex-basis: 100%; white-space: normal; }
+  .c-roster { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .c-find { flex-basis: 100%; max-width: none; margin-left: 0; }
+  .pg-slot { grid-template-columns: 1fr; padding: 16px 0 18px; }
+  .pg-slot.is-now { padding-left: 10px; }
+  .pg-time { margin-bottom: 6px; padding-top: 0; }
+  .pg-title { font-size: 17px; }
+  .pg-pitches ol { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body data-analytics-offer="program">
+
+<script src="/nav.js"></script>
+<a class="skip" href="#roster">Skip to the speakers</a>
+
+<main>
+
+<!-- ══ 01 THE WALL ════════════════════════════════════════════════════ -->
+<section id="wall" data-track-section="program_wall" data-track-position="1" aria-labelledby="wall-h">
+  <div class="w-grid" data-c="wall" role="group" aria-label="Every speaker. Choose one to read about them."></div>
+  <div class="w-over">
+    <div class="w-lock">
+      <h1 id="wall-h"><span class="lbl lbl--cyan">The program · Oct 17–26 · Kobe</span>
+        <span class="w-big num"><span data-speakers-count>72</span> speakers.</span></h1>
+      <p class="w-sub">Through two summits and a demo day</p>
+      <p class="w-line"><a class="w-down" href="#roster" aria-label="Scroll down to every speaker"><span aria-hidden="true">↓</span></a></p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SECTION BAR: docks under the nav; the agenda's day switcher ═══ -->
+<nav class="pg-bar" aria-label="On this page">
+  <div class="wrap pg-bar-in">
+    <a class="pg-sec" href="#roster" data-sec="roster">Speakers</a>
+    <a class="pg-sec pg-sec--agenda" href="#agenda" data-sec="agenda">Agenda</a>
+    <div class="pg-days" data-program="days" role="group" aria-label="Agenda days"></div>
+  </div>
+</nav>
+
+<!-- ══ 02 LIVE STRIP ══════════════════════════════════════════════════ -->
+<section id="live" data-track-section="program_live" data-track-position="2" aria-label="Now and next">
+  <div class="wrap">
+    <div class="e-strip">
+      <div class="e-live" data-c="live" aria-live="polite">
+        <noscript><p>Now and next need JavaScript. The full agenda is below.</p></noscript>
+      </div>
+      <p class="lbl lbl--cyan e-count num" data-c="countdown"></p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 03 ROSTER ══════════════════════════════════════════════════════ -->
+<section id="roster" data-track-section="roster" data-track-position="3" aria-labelledby="roster-h">
+  <div class="wrap">
+    <div class="hd">
+      <span class="lbl lbl--cyan">Summit I, Summit II and the Demo Day</span>
+      <h2 id="roster-h">All <span data-speakers-count>72</span> speakers</h2>
+    </div>
+    <div class="c-tools">
+      <div class="c-chips" role="group" aria-label="Show speakers by event">
+        <button type="button" class="c-chip" data-chip="S1" aria-pressed="false">Summit I</button>
+        <button type="button" class="c-chip" data-chip="S2" aria-pressed="false">Summit II</button>
+        <button type="button" class="c-chip" data-chip="F" aria-pressed="false">Demo Day</button>
+      </div>
+      <div class="c-find">
+        <label class="lbl" for="c-q">Find</label>
+        <input id="c-q" type="search" autocomplete="off" spellcheck="false" placeholder="Name or organisation" />
+      </div>
+    </div>
+    <p class="lbl c-shown num" data-c="shown" aria-live="polite"></p>
+    <p class="c-none" data-c="none" hidden>No one matches. <button type="button" data-c="clear">Clear the filters</button></p>
+    <div class="c-roster" data-program="roster"></div>
+    <div class="spk-panel" id="spk-panel-program" role="region" aria-labelledby="spk-panel-program-h" hidden></div>
+  </div>
+</section>
+
+<!-- ══ 04 AGENDA ══════════════════════════════════════════════════════ -->
+<section id="agenda" data-track-section="agenda" data-track-position="4" aria-labelledby="agenda-h">
+  <div class="wrap">
+    <div class="hd">
+      <span class="lbl lbl--cyan">Five days, three venues · all times JST</span>
+      <h2 id="agenda-h">Agenda</h2>
+    </div>
+    <div data-program="agenda">
+      <noscript><p>The agenda needs JavaScript to load.</p></noscript>
+    </div>
+  </div>
+
+  <!-- Static, placed under Monday 26 October by the script. Copy from the programme booklet; claims to be reviewed. -->
+  <aside class="pg-awards" data-program-day="monday_26_october" aria-labelledby="pg-awards-h" hidden>
+    <h4 id="pg-awards-h">Demo Day awards</h4>
+    <div class="grid">
+      <div class="cell">
+        <span class="lbl">First prize</span>
+        <ul>
+          <li>A ticket to the next Vitalist Bay</li>
+          <li>Priority review for the Meet the Drapers Japan 2027 cohort</li>
+        </ul>
+      </div>
+      <div class="cell">
+        <span class="lbl">Antler Japan residency</span>
+        <p>Six weeks of mentoring, access to USD 850,000 in perks, and a chance of investment.</p>
+      </div>
+      <div class="cell">
+        <span class="lbl">Japan Landing Award</span>
+        <p>Presented by GlobalDeal, Official Market-Entry Execution Partner. A hands-on engagement to take the winner into the Japanese market: entry strategy, the right partners and first customers, and regulatory navigation.</p>
+      </div>
+    </div>
+  </aside>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <span><a href="https://www.miraitech.city/" target="_blank" rel="noopener" data-analytics-action="site_navigation" data-analytics-location="footer" data-analytics-target="mirai_city">Mirai Tech City</a> · Kobe Biomedical Innovation Cluster, Port Island</span>
+    <span>Kobe · Japan Standard Time</span>
+  </div>
+</footer>
+
+<script src="/sheet.js"></script>
+<script src="/speakers-data.js"></script>
+<script src="/speakers-photos.js"></script>
+<script src="/speakers.js"></script>
+<script src="/program-data.js"></script>
+<script src="/program.js"></script>
+<script src="/speaker-panel.js"></script>
+<script>
+/* ── the program from the sheet (docs/program-page-prd.md) ────────────
+      The first screen is every published speaker as a small square tile,
+      sized so the wall overfills the viewport. Under it a section bar docks
+      below the nav: Speakers, and the agenda's day switcher. The live strip
+      reads the device clock against the agenda in JST. The roster carries
+      chips by event and a find box; the agenda shows one day at a time.
+      Snapshots paint now, each sheet repaints when it answers; agenda names
+      link to the speakers model by MiraiProgram.speakerKey. One speaker
+      panel serves the wall, the strip, the roster and the agenda. Sheet
+      text goes in as text nodes only. */
+(function () {
+  'use strict';
+  var S = window.MiraiSpeakers, G = window.MiraiProgram, P = window.MiraiSpeakerPanel;
+  if (!S || !G || !P) return;
+  function $(s) { return document.querySelector(s); }
+  var state = { speakers: null, program: null, chips: {} };
+  var main = $('main'), wall = $('[data-c="wall"]'), liveBox = $('[data-c="live"]'), countBox = $('[data-c="countdown"]');
+  var rosterSec = $('#roster'), roster = $('[data-program="roster"]'), shown = $('[data-c="shown"]'), none = $('[data-c="none"]');
+  var input = $('#c-q'), panelEl = $('#spk-panel-program'), home = panelEl.parentNode;
+  var bar = $('.pg-bar'), daysBox = $('[data-program="days"]');
+  var agendaSec = $('#agenda'), agendaBox = $('[data-program="agenda"]');
+  var statics = [].slice.call(document.querySelectorAll('[data-program-day]'));
+  var panel = P.attach({ root: main, panel: panelEl });
+  var mq = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)');
+  var EAGER = 48, openId = null, liveKey = '', active = null;
+
+  function el(tag, cls, text) {
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text != null) n.textContent = text;
+    return n;
+  }
+  function fill(box, nodes) { box.textContent = ''; nodes.forEach(function (n) { box.appendChild(n); }); }
+  function norm(s) { return String(s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase(); }
+  function byId() {
+    var m = {};
+    ((state.speakers && state.speakers.speakers) || []).forEach(function (sp) { m[sp.id] = sp; });
+    return m;
+  }
+  /* small tiles read the 256px thumbnails; other photo paths are used as they are */
+  function thumb(sp) {
+    var src = sp.photo || '';
+    if (src.indexOf('/img/speakers/') !== 0) return sp;
+    var t = {};
+    Object.keys(sp).forEach(function (k) { t[k] = sp[k]; });
+    t.photo = '/img/speakers/thumb/' + src.slice('/img/speakers/'.length);
+    return t;
+  }
+  function topInset() { return parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0; }
+  /* smooth unless reduced motion, or when the target section is already on screen */
+  function go(sec, target, instant) {
+    var r = sec.getBoundingClientRect(), seen = r.top < window.innerHeight && r.bottom > topInset();
+    target.scrollIntoView({ block: 'start', behavior: instant || seen || (mq && mq.matches) ? 'instant' : 'smooth' });
+  }
+  function toAgenda(instant) { go(agendaSec, agendaSec.querySelector('.hd'), instant); }
+
+  /* ids from the current speakers model, by the same lenient key the core uses */
+  function relink(program, speakers) {
+    var index = {};
+    ((speakers && speakers.speakers) || []).forEach(function (s) {
+      [s.name, [s.first, s.last].filter(Boolean).join(' ')].forEach(function (n) {
+        var k = G.speakerKey(n);
+        if (k && !index[k]) index[k] = s.id;
+      });
+    });
+    program.days.forEach(function (d) {
+      d.slots.forEach(function (sl) {
+        sl.speakers.forEach(function (p) { p.id = index[G.speakerKey(p.name)] || null; });
+      });
+    });
+    return program;
+  }
+
+  /* ── time: "Saturday 17 October" + "11:35" is 2026, JST ── */
+  var MONTHS = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
+  function dayUTC(d) {
+    var m = /(\d{1,2})\s+([A-Za-z]+)/.exec(d.label), mo = m ? MONTHS.indexOf(m[2].toLowerCase()) : -1;
+    return mo < 0 ? NaN : Date.UTC(2026, mo, +m[1]);
+  }
+  function at(d, hm) {
+    var t = /^(\d{1,2}):(\d{2})$/.exec(hm || '');
+    return t ? dayUTC(d) + ((+t[1] - 9) * 60 + +t[2]) * 60e3 : NaN;
+  }
+  function jstToday(now) {
+    var j = new Date(now + 9 * 3600e3);
+    return Date.UTC(j.getUTCFullYear(), j.getUTCMonth(), j.getUTCDate());
+  }
+  function timeline(program) {
+    var out = [];
+    program.days.forEach(function (d) {
+      d.slots.forEach(function (s, i) {
+        var a = at(d, s.start), b = at(d, s.end);
+        if (s.kind === 'pitch' || isNaN(a)) return;
+        out.push({ day: d, slot: s, k: d.id + '|' + i, a: a, b: isNaN(b) ? a + 20 * 60e3 : b });
+      });
+    });
+    return out.sort(function (x, y) { return x.a - y.a; });
+  }
+  /* mode: before | live | between | after, with the slots that matter */
+  function where(now) {
+    var tl = timeline(state.program), cur = null, next = null;
+    if (!tl.length) return null;
+    if (now < tl[0].a) return { mode: 'before', next: tl[0] };
+    if (now >= tl[tl.length - 1].b) return { mode: 'after' };
+    tl.forEach(function (x) { if (x.a <= now && now < x.b) cur = x; if (!next && x.a > now) next = x; });
+    var today = tl.filter(function (x) { return dayUTC(x.day) === jstToday(now); });
+    var inDay = today.length && now >= today[0].a && now < Math.max.apply(null, today.map(function (x) { return x.b; }));
+    return inDay ? { mode: 'live', cur: cur, next: next } : { mode: 'between', next: next };
+  }
+
+  /* ── live strip: one compact line per segment ── */
+  function people(list) {
+    var ul = el('ul', 'e-ppl'), map = byId();
+    list.forEach(function (p) {
+      var sp = p.id && map[p.id];
+      if (!sp) return;
+      var li = el('li'), b = el('button', 'c-p'), th = el('span', 'th');
+      b.type = 'button';
+      b.setAttribute('data-speaker', sp.id);
+      b.setAttribute('aria-label', p.name);
+      b.title = p.name;
+      th.appendChild(S.photoEl(thumb(sp), { alt: '' }));
+      b.appendChild(th);
+      li.appendChild(b);
+      ul.appendChild(li);
+    });
+    return ul;
+  }
+  function tag(text, beat) {
+    var t = el('span', 'lbl lbl--cyan c-tag');
+    if (beat) { var d = el('span', 'c-dot'); d.setAttribute('aria-hidden', 'true'); t.appendChild(d); }
+    t.appendChild(document.createTextNode(text));
+    return t;
+  }
+  function seg(label, x, opts) {
+    var c = el('div', 'e-seg' + (opts.now ? ' is-now' : ''));
+    c.appendChild(tag(label, opts.now));
+    if (!x) {
+      c.appendChild(el('span', 'e-ttl is-tbc', opts.now ? 'Between sessions' : 'Nothing more today'));
+      return c;
+    }
+    var time = [x.slot.start, x.slot.end].filter(Boolean).join('–');
+    c.appendChild(el('span', 'e-at num', opts.day ? x.day.label + ', ' + x.slot.start : time));
+    var ti = el('span', 'e-ttl' + (x.slot.tbc ? ' is-tbc' : ''), x.slot.title || 'Title to be confirmed');
+    ti.title = ti.textContent;
+    c.appendChild(ti);
+    var room = x.slot.block || x.day.venue;
+    if (room) c.appendChild(el('span', 'lbl e-room', room));
+    if (x.slot.speakers.length) c.appendChild(people(x.slot.speakers));
+    return c;
+  }
+  function paintLive() {
+    if (!state.program) return;
+    var now = Date.now(), w = where(now);
+    if (!w) return;
+    var key = [w.mode, w.cur && w.cur.k, w.next && w.next.k, jstToday(now), !!state.speakers].join('/');
+    if (key === liveKey) return;
+    liveKey = key;
+    var cells = [], line = '';
+    if (w.mode === 'live') {
+      cells = [seg('Now', w.cur, { now: true }), seg('Next', w.next && dayUTC(w.next.day) === jstToday(now) ? w.next : null, {})];
+      var n = state.program.days.indexOf(w.cur ? w.cur.day : w.next.day) + 1;
+      line = 'Day ' + n + ' of ' + state.program.days.length;
+    } else if (w.mode === 'after') {
+      var c = el('div', 'e-seg');
+      c.appendChild(tag('The program has ended', false));
+      cells = [c];
+    } else {
+      cells = [seg(w.mode === 'before' ? 'First up' : 'Next up', w.next, { day: true })];
+      var days = Math.round((dayUTC(w.next.day) - jstToday(now)) / 864e5);
+      line = days > 1 ? 'Starts in ' + days + ' days' : days === 1 ? 'Starts tomorrow' : 'Starts today';
+    }
+    if (liveBox.parentNode.parentNode.contains(panelEl)) park();
+    fill(liveBox, cells);
+    countBox.textContent = line;
+    countBox.hidden = !line;
+    [].forEach.call(agendaBox.querySelectorAll('.pg-slot.is-now'), function (n) { n.classList.remove('is-now'); });
+    if (w.mode === 'live' && w.cur) {
+      var li = agendaBox.querySelector('[data-k="' + w.cur.k + '"]');
+      if (li) li.classList.add('is-now');
+    }
+    panel.refresh(byId());
+    if (openId && !panelEl.hidden) addSlots(openId);
+  }
+
+  /* ── the wall: columns chosen so the tiles overfill the first screen ── */
+  var wallW = 0, wallH = 0;
+  function wallCols(n) {
+    var W = wall.clientWidth || document.documentElement.clientWidth, H = window.innerHeight;
+    var cols = Math.max(1, Math.floor(W / (W < 700 ? 70 : 96)));
+    while (cols > 1 && Math.ceil(n / cols) * (W / cols) < H * 1.12) cols--;
+    wallW = W; wallH = H;
+    return cols;
+  }
+  function tile(sp, i) {
+    var b = el('button', 'w-t'), n = el('span', 'w-n', sp.name), ph = S.photoEl(thumb(sp), { alt: '' });
+    b.type = 'button';
+    b.setAttribute('data-speaker', sp.id);
+    b.setAttribute('aria-label', sp.affiliation ? sp.name + ', ' + sp.affiliation : sp.name);
+    if (ph.tagName === 'IMG' && i < EAGER) ph.setAttribute('loading', 'eager');
+    n.setAttribute('aria-hidden', 'true');
+    b.appendChild(ph);
+    b.appendChild(n);
+    return b;
+  }
+  /* initials tiles spaced evenly through the portraits, each group in sheet order */
+  function spread(list) {
+    var ph = list.filter(function (sp) { return sp.photo; }), no = list.filter(function (sp) { return !sp.photo; });
+    var n = list.length, m = no.length, out = [], used = 0;
+    for (var k = 0; k < n; k++) {
+      if (used < m && Math.floor((k + 1) * m / n) > used) out.push(no[used++]);
+      else out.push(ph.length ? ph.shift() : no[used++]);
+    }
+    return out;
+  }
+  function layoutWall(rebuild) {
+    var list = (state.speakers && state.speakers.speakers) || [], cols = wallCols(list.length);
+    if (rebuild) fill(wall, spread(list).map(tile));
+    wall.style.setProperty('--cols', cols);
+    [].forEach.call(wall.querySelectorAll('.w-f'), function (f) { wall.removeChild(f); });
+    for (var k = (cols - list.length % cols) % cols; k > 0; k--) {
+      var f = el('span', 'w-f');
+      f.setAttribute('aria-hidden', 'true');
+      wall.appendChild(f);
+    }
+    [].forEach.call(wall.querySelectorAll('.w-t'), function (t, i) {
+      if (i % cols >= cols - 2 && cols > 3) t.setAttribute('data-edge', 'r'); else t.removeAttribute('data-edge');
+    });
+  }
+
+  /* ── roster ── */
+  function card(sp) {
+    var f = el('figure'), im = el('div', 'im'), cap = el('figcaption', null, sp.name);
+    f.setAttribute('data-speaker', sp.id);
+    f.setAttribute('data-ses', (sp.sessions || []).join(' '));
+    f.setAttribute('data-hay', norm(sp.name + ' ' + (sp.affiliation || '')));
+    f.setAttribute('aria-label', sp.affiliation ? sp.name + ', ' + sp.affiliation : sp.name);
+    im.appendChild(S.photoEl(sp, { alt: '' }));
+    if (sp.affiliation) cap.appendChild(el('small', null, sp.affiliation));
+    var s = el('span', 's', sp.sessionsLabel);
+    if (!sp.sessionsLabel) s.setAttribute('aria-label', 'Session to be announced');
+    cap.appendChild(s);
+    f.appendChild(im);
+    f.appendChild(cap);
+    return f;
+  }
+  function applyFilter() {
+    var on = Object.keys(state.chips).filter(function (k) { return state.chips[k]; });
+    var q = norm(input.value).trim(), n = 0, figs = roster.querySelectorAll('figure');
+    if (!panelEl.hidden && panelEl.parentNode === roster) { panel.close(); openId = null; }
+    [].forEach.call(figs, function (f) {
+      var ses = f.getAttribute('data-ses').split(' ');
+      var ok = (!on.length || on.some(function (k) { return ses.indexOf(k) >= 0; })) &&
+        (!q || f.getAttribute('data-hay').indexOf(q) >= 0);
+      f.hidden = !ok;
+      if (ok) n++;
+    });
+    shown.textContent = n === figs.length ? 'Showing all ' + n : 'Showing ' + n + ' of ' + figs.length;
+    none.hidden = n > 0;
+  }
+  $('.c-chips').addEventListener('click', function (e) {
+    var b = e.target.closest('.c-chip');
+    if (!b) return;
+    var k = b.getAttribute('data-chip'), on = !state.chips[k];
+    state.chips[k] = on;
+    b.setAttribute('aria-pressed', on ? 'true' : 'false');
+    applyFilter();
+  });
+  input.addEventListener('input', applyFilter);
+  $('[data-c="clear"]').addEventListener('click', function () {
+    state.chips = {};
+    [].forEach.call(document.querySelectorAll('.c-chip'), function (b) { b.setAttribute('aria-pressed', 'false'); });
+    input.value = '';
+    applyFilter();
+    input.focus();
+  });
+
+  /* ── the panel: opens where it was asked for, then lists the speaker's slots ── */
+  function park() {
+    if (!panelEl.hidden) panel.close();
+    openId = null;
+    home.appendChild(panelEl);
+  }
+  function place(o) {
+    if (wall.contains(o)) {
+      var c = roster.querySelector('figure[data-speaker="' + o.getAttribute('data-speaker') + '"]');
+      if (c && !c.hidden) o = c; else { roster.insertBefore(panelEl, roster.firstChild); return; }
+    }
+    if (roster.contains(o)) {
+      roster.appendChild(panelEl);
+      var top = o.offsetTop, last = o;
+      [].forEach.call(roster.querySelectorAll('figure:not([hidden])'), function (f) { if (f.offsetTop === top) last = f; });
+      roster.insertBefore(panelEl, last.nextSibling);
+    } else if (o.closest('.pg-slot')) {
+      o.closest('.pg-slot').appendChild(panelEl);
+    } else {
+      liveBox.parentNode.parentNode.appendChild(panelEl);
+    }
+  }
+  function addSlots(id) {
+    var tx = panelEl.querySelector('.spk-tx'), old = tx && tx.querySelector('.spk-slots'), lines = [];
+    if (!tx || !state.program) return;
+    if (old) tx.removeChild(old);
+    state.program.days.forEach(function (d) {
+      d.slots.forEach(function (s) {
+        if (!s.speakers.some(function (p) { return p.id === id; })) return;
+        var time = [s.start, s.end].filter(Boolean).join('–');
+        lines.push('Speaking: ' + [d.short + (time ? ' ' + time : ''), s.block || s.kind, s.title || 'Title to be confirmed'].join(' · '));
+      });
+    });
+    if (!lines.length) return;
+    var box = el('div', 'spk-slots'), ses = tx.querySelector('.spk-ses');
+    lines.forEach(function (t) { box.appendChild(el('p', 'num', t)); });
+    tx.insertBefore(box, ses ? ses.nextSibling : null);
+  }
+  document.addEventListener('click', function (e) {
+    var o = e.target.closest && e.target.closest('[data-speaker]');
+    if (!o || !main.contains(o)) return;
+    e.stopPropagation();
+    var id = o.getAttribute('data-speaker');
+    if (!panelEl.hidden && openId === id) { panel.close(); openId = null; return; }
+    place(o);
+    panel.open(id, o);
+    openId = panelEl.hidden ? null : id;
+    if (openId) addSlots(id);
+  }, true);
+  var raf = 0;
+  window.addEventListener('resize', function () {
+    cancelAnimationFrame(raf);
+    raf = requestAnimationFrame(function () {
+      var W = wall.clientWidth, H = window.innerHeight;
+      if (W !== wallW || Math.abs(H - wallH) > 150) layoutWall(false);
+      if (panelEl.hidden || panelEl.parentNode !== roster || !openId) return;
+      var o = roster.querySelector('[data-speaker="' + openId + '"]');
+      if (o) place(o);
+    });
+  });
+
+  /* ── agenda: one section per day, the bar's buttons pick which one shows ── */
+  function slotEl(sl, i, d) {
+    var li = el('li', 'pg-slot is-' + sl.kind), body = el('div', 'pg-body');
+    var time = [sl.start, sl.end].filter(Boolean).join('–');
+    li.setAttribute('data-k', d.id + '|' + i);
+    li.appendChild(el('span', 'pg-time num', time));
+    if (sl.block) body.appendChild(el('span', 'pg-block', sl.block));
+    body.appendChild(el('p', 'pg-title' + (sl.tbc ? ' is-tbc' : ''), sl.title || 'Title to be confirmed'));
+    if (sl.speakers.length) {
+      var who = el('ul', 'pg-who');
+      sl.speakers.forEach(function (p) {
+        var item = el('li'), name;
+        if (p.id) {
+          name = el('button', 'pg-name', p.name);
+          name.type = 'button';
+          name.setAttribute('data-speaker', p.id);
+        } else {
+          name = el('span', 'pg-name', p.name);
+        }
+        item.appendChild(name);
+        if (p.affiliation) { item.appendChild(document.createTextNode(' ')); item.appendChild(el('span', 'pg-aff', p.affiliation)); }
+        who.appendChild(item);
+      });
+      body.appendChild(who);
+    }
+    if (sl.notes) body.appendChild(el('p', 'pg-notes', sl.notes));
+    li.appendChild(body);
+    return li;
+  }
+
+  function dayEl(d) {
+    var sec = el('section', 'pg-day'), hd = el('div', 'pg-day-hd'), h = el('h3', null, d.label);
+    sec.id = 'day-' + d.id;
+    sec.setAttribute('data-program', 'day');
+    sec.setAttribute('aria-labelledby', sec.id + '-h');
+    h.id = sec.id + '-h';
+    hd.appendChild(h);
+    if (d.venue || d.venueLink) {
+      var v = el('p', 'pg-venue');
+      if (d.venue) v.appendChild(el('span', null, d.venue));
+      if (d.venueLink) {
+        var a = el('a', null, 'Map ↗');
+        a.href = d.venueLink;
+        a.target = '_blank';
+        a.rel = 'noopener';
+        a.setAttribute('aria-label', 'Map' + (d.venue ? ' of ' + d.venue : ' of the venue') + ', ' + d.label);
+        a.setAttribute('data-analytics-action', 'site_navigation');
+        a.setAttribute('data-analytics-location', 'program');
+        a.setAttribute('data-analytics-target', 'venue_map');
+        v.appendChild(a);
+      }
+      hd.appendChild(v);
+    }
+    sec.appendChild(hd);
+    var ol = el('ol', 'pg-slots'), pitches = [];
+    d.slots.forEach(function (s, i) { if (s.kind === 'pitch') pitches.push(s); else ol.appendChild(slotEl(s, i, d)); });
+    sec.appendChild(ol);
+    if (pitches.length) {
+      var box = el('div', 'pg-pitches'), list = el('ol'), hid = sec.id + '-pitches';
+      box.setAttribute('data-program', 'pitches');
+      box.setAttribute('role', 'group');
+      box.setAttribute('aria-labelledby', hid);
+      var ph = el('h4', null, pitches[0].block || 'Demo Day pitches');
+      ph.id = hid;
+      box.appendChild(ph);
+      pitches.forEach(function (s) {
+        var li = el('li');
+        li.appendChild(el('b', null, s.title));
+        if (s.notes) li.appendChild(el('p', null, s.notes));
+        list.appendChild(li);
+      });
+      box.appendChild(list);
+      sec.appendChild(box);
+    }
+    statics.forEach(function (n) {
+      if (n.getAttribute('data-program-day') === d.id) { sec.appendChild(n); n.hidden = false; }
+    });
+    return sec;
+  }
+
+  function buttonEl(d) {
+    var b = el('button', 'pg-day-btn', d.short.split(' ').slice(0, 2).join(' '));
+    b.type = 'button';
+    b.title = d.label;
+    b.setAttribute('data-day', d.id);
+    b.setAttribute('aria-controls', 'day-' + d.id);
+    return b;
+  }
+
+  function select(id, user) {
+    var btns = daysBox.querySelectorAll('.pg-day-btn'), sec = id && document.getElementById('day-' + id);
+    if (!btns.length) return;
+    if (!sec || !agendaBox.contains(sec)) id = btns[0].getAttribute('data-day');
+    if (id !== active && agendaBox.contains(panelEl)) park();
+    active = id;
+    [].forEach.call(btns, function (b) {
+      var on = b.getAttribute('data-day') === id;
+      b.setAttribute('aria-pressed', on ? 'true' : 'false');
+      b.tabIndex = on ? 0 : -1;
+    });
+    [].forEach.call(agendaBox.querySelectorAll('[data-program="day"]'), function (s) { s.hidden = s.id !== 'day-' + id; });
+    if (!user) return;
+    if (history.replaceState) history.replaceState(null, '', '#day-' + id); else location.hash = 'day-' + id;
+    toAgenda(false);
+  }
+
+  function fromHash() {
+    var m = /^#day-(.+)$/.exec(location.hash);
+    return m ? decodeURIComponent(m[1]) : null;
+  }
+
+  function paintProgram() {
+    if (!state.program) return;
+    var program = relink(state.program, state.speakers);
+    var w = where(Date.now()), now = w && (w.mode === 'live' || w.mode === 'between') && (w.cur || w.next);
+    if (agendaBox.contains(panelEl)) park();
+    statics.forEach(function (n) { n.hidden = true; agendaSec.appendChild(n); });
+    fill(daysBox, program.days.map(buttonEl));
+    fill(agendaBox, program.days.map(dayEl));
+    select(active || fromHash() || (now && now.day.id), false);
+    liveKey = '';
+    paintLive();
+  }
+
+  daysBox.addEventListener('click', function (e) {
+    var b = e.target.closest('.pg-day-btn');
+    if (b) select(b.getAttribute('data-day'), true);
+  });
+  daysBox.addEventListener('keydown', function (e) {
+    var btns = [].slice.call(daysBox.querySelectorAll('.pg-day-btn')), i = btns.indexOf(e.target), j;
+    if (i < 0) return;
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') j = (i + 1) % btns.length;
+    else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') j = (i - 1 + btns.length) % btns.length;
+    else if (e.key === 'Home') j = 0;
+    else if (e.key === 'End') j = btns.length - 1;
+    else return;
+    e.preventDefault();
+    btns[j].focus();
+    select(btns[j].getAttribute('data-day'), true);
+  });
+  window.addEventListener('hashchange', function () {
+    var id = fromHash();
+    if (id) { select(id, false); toAgenda(false); }
+  });
+
+  /* ── the section bar: Speakers / Agenda jump without touching the day hash ── */
+  bar.addEventListener('click', function (e) {
+    var a = e.target.closest('.pg-sec');
+    if (!a) return;
+    e.preventDefault();
+    if (a.getAttribute('data-sec') === 'agenda') toAgenda(false); else go(rosterSec, rosterSec, false);
+  });
+  /* docked when its top reaches the nav's bottom */
+  var stuck = false;
+  function dock() {
+    var s = bar.getBoundingClientRect().top <= parseFloat(getComputedStyle(bar).top) + 0.5;
+    if (s !== stuck) { stuck = s; bar.classList.toggle('is-stuck', s); }
+  }
+  window.addEventListener('scroll', dock, { passive: true });
+  window.addEventListener('resize', dock);
+  dock();
+  /* which section is in view: a thin band across the middle of the screen */
+  if (window.IntersectionObserver) {
+    var inView = {}, io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) { inView[en.target.id] = en.isIntersecting; });
+      var here = inView.agenda ? 'agenda' : inView.roster ? 'roster' : '';
+      bar.setAttribute('data-in', here);
+      [].forEach.call(bar.querySelectorAll('.pg-sec'), function (a) {
+        var on = a.getAttribute('data-sec') === here;
+        a.classList.toggle('is-here', on);
+        if (on) a.setAttribute('aria-current', 'location'); else a.removeAttribute('aria-current');
+      });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    io.observe(rosterSec);
+    io.observe(agendaSec);
+  }
+
+  S.load({
+    url: window.MIRAI_SPEAKERS_SHEET_CSV,
+    snapshot: window.MIRAI_SPEAKERS_SNAPSHOT,
+    render: function (model) {
+      state.speakers = model;
+      if (roster.contains(panelEl)) park();
+      layoutWall(true);
+      fill(roster, model.speakers.map(card));
+      S.fillCounts(model, document);
+      applyFilter();
+      paintProgram();
+      panel.refresh(byId());
+    }
+  });
+
+  G.load({
+    url: window.MIRAI_PROGRAM_SHEET_CSV,
+    snapshot: window.MIRAI_PROGRAM_SNAPSHOT,
+    speakersModel: state.speakers,
+    render: function (model) {
+      state.program = model;
+      paintProgram();
+    }
+  });
+
+  /* a #day-<id> link lands on the agenda; it stays anchored while the sheets
+     and fonts settle the layout above, until the visitor scrolls or acts */
+  if (fromHash() && fromHash() === active) {
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    var land = function () { toAgenda(true); };
+    land();
+    if (window.ResizeObserver) {
+      var ro = new ResizeObserver(land), evs = ['wheel', 'touchstart', 'keydown', 'mousedown'];
+      var stop = function () {
+        ro.disconnect();
+        evs.forEach(function (t) { window.removeEventListener(t, stop, true); });
+      };
+      ro.observe(main);
+      evs.forEach(function (t) { window.addEventListener(t, stop, { capture: true, passive: true }); });
+      setTimeout(stop, 8000);
+    }
+  }
+
+  setInterval(paintLive, 30000);
+})();
+</script>
+</body>
+</html>

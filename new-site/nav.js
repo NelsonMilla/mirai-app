@@ -1,5 +1,6 @@
 /* Shared site nav — the single source of truth for the top bar on every
-   English site page (/, /experience/, /conferences/, /pricing/, /startups/).
+   English site page (/, /program/, /conferences/, /pricing/, /startups/, /stay/, /experience/).
+   Links: Program, Summits, Pricing, For Startups, Citizens (the on-the-ground map).
    The last link points Japanese readers to /jp/ (Japan-resident ticket on Peatix).
    The default CTA goes to /pricing/, where each ticket has its own Stripe link.
    Use it like this, at the top of <body>, with /nav.css linked in <head>:
@@ -12,10 +13,11 @@
   if (!script) return;
   var path = location.pathname;
   var links = [
-    { href: '/experience/', label: 'The Experience', target: 'experience' },
+    { href: '/program/', label: 'Program', target: 'program' },
     { href: '/conferences/', label: 'Summits', target: 'conferences' },
     { href: '/pricing/', label: 'Pricing', target: 'pricing' },
     { href: '/startups/', label: 'For Startups', target: 'startups' },
+    { href: '/citizens/', label: 'Citizens', target: 'citizens' },
     { href: '/jp/', label: '日本語', target: 'japan', lang: 'ja' }
   ];
   var cta = {

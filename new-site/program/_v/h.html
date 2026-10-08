@@ -1,0 +1,851 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Program · variant H</title>
+<meta name="robots" content="noindex" />
+<meta name="description" content="The full timetable for Summit I (17–18 October), Summit II (24–25 October) and the Demo Day (26 October) in Kobe, with every speaker. All times JST." />
+<link rel="canonical" href="https://mirai-tech-city.vercel.app/program/" />
+<meta property="og:site_name" content="Mirai Tech City" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="The program · Mirai Tech City · Kobe, October 2026" />
+<meta property="og:description" content="The full timetable for Summit I (17–18 October), Summit II (24–25 October) and the Demo Day (26 October) in Kobe, with every speaker. All times JST." />
+<meta property="og:image" content="https://mirai-tech-city.vercel.app/img/harbor-golden-hour.jpg" />
+<meta property="og:url" content="https://mirai-tech-city.vercel.app/program/" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="theme-color" content="#050506" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23050506'/%3E%3Ctext x='50' y='72' font-size='62' font-family='Georgia' font-weight='bold' fill='%239be8f0' text-anchor='middle'%3E未%3C/text%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="preconnect" href="https://api.fontshare.com" />
+<link rel="preconnect" href="https://cdn.fontshare.com" crossorigin />
+<link href="https://api.fontshare.com/v2/css?f[]=switzer@400,700,800,900&display=swap" rel="stylesheet" media="print" onload="this.onload=null;this.media='all'" />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" media="print" onload="this.onload=null;this.media='all'" />
+<noscript>
+  <link href="https://api.fontshare.com/v2/css?f[]=switzer@400,700,800,900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</noscript>
+<script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/posthog.js"></script>
+<script defer src="/analytics.js"></script>
+<link rel="stylesheet" href="/nav.css" />
+<style>
+<style>
+/* ══════════════════════════════════════════════════════════════════════
+   Mirai Tech City · The program · variant H, the faces are the timetable
+   Order: tokens → primitives → lockup → sticky day index (live line, find)
+   → day sections (portrait rows, rules, pitches, awards) → speaker panel
+   (copied from /program/) → footer → variant badge.
+   ══════════════════════════════════════════════════════════════════════ */
+
+@font-face {
+  font-family: 'Switzer-fallback';
+  src: local('Arial'), local('Helvetica Neue');
+  size-adjust: 97.6%;
+  ascent-override: 100%;
+  descent-override: 25%;
+  line-gap-override: 0%;
+}
+
+:root {
+  --void: #050506;
+  --near: #0b0b0e;
+  --bone: #f4f3f0;
+  --cyan: #9be8f0;
+  --dim: rgba(244,243,240,.68);
+  --faint: rgba(244,243,240,.52);
+  --line: rgba(244,243,240,.14);
+  --line-2: rgba(244,243,240,.26);
+  --font: 'Switzer', 'Switzer-fallback', 'Inter', -apple-system, sans-serif;
+  --mono: 'IBM Plex Mono', ui-monospace, monospace;
+  --nav: 86px;
+  --idx: 56px;
+  --bot: 96px;
+  --gut: 24px;
+  --face: 112px;
+  --face-s: 64px;
+}
+@media (max-width: 700px) { :root { --nav: 124px; --idx: 92px; --bot: 64px; --gut: 16px; --face: 77px; --face-s: 48px; } }
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { background: var(--void); scroll-padding-top: calc(var(--nav) + var(--idx) + 12px); }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+body { min-width: 320px; overflow-x: hidden; background: var(--void); color: var(--bone);
+  font-family: var(--font); font-size: 16.5px; line-height: 1.55;
+  -webkit-font-smoothing: antialiased; }
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+button, input { font: inherit; color: inherit; }
+::selection { background: var(--cyan); color: #000; }
+:focus-visible { outline: 2px solid var(--cyan); outline-offset: 3px; border-radius: 2px; }
+
+.skip { position: absolute; left: -9999px; top: 0; z-index: 90; }
+.skip:focus { left: 12px; top: 12px; display: inline-flex; align-items: center; min-height: 44px;
+  padding: 12px 18px; background: var(--cyan); color: #0a0a0c; font-family: var(--mono);
+  font-size: 11px; letter-spacing: .2em; text-transform: uppercase; text-decoration: none; }
+
+.wrap { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 var(--gut); }
+h1, h2, h3 { text-transform: uppercase; }
+p { max-width: 62ch; color: var(--dim); }
+.lbl { display: block; color: var(--faint); font-family: var(--mono); font-size: 11px;
+  font-weight: 400; letter-spacing: .18em; line-height: 1.5; text-transform: uppercase; }
+.lbl--cyan { color: var(--cyan); }
+.num { font-variant-numeric: tabular-nums lining-nums; font-feature-settings: 'tnum' 1, 'lnum' 1; }
+.grid { display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); }
+.cell { background: var(--void); }
+.vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* ── 01 lockup: compact, the faces start right under it ────────────── */
+#top { padding: calc(var(--nav) + 28px) 0 0; }
+.h-lock { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 14px 40px; padding-bottom: 22px; }
+.h-lock .lbl { margin-bottom: 10px; }
+.h-lock h1 { font-size: clamp(40px, 5vw, 72px); font-weight: 900; line-height: .92; letter-spacing: -.024em; }
+.h-say { color: var(--bone); font-size: clamp(17px, 1.5vw, 21px); font-weight: 700; line-height: 1.3; letter-spacing: -.005em; max-width: 46ch; }
+.h-say .ar { color: var(--cyan); }
+.h-jump { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 14px; }
+.h-jump .lbl { margin: 0 6px 0 0; }
+.h-chip { display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px; border: 1px solid rgba(155,232,240,.3);
+  border-radius: 2px; color: var(--cyan); font-family: var(--mono); font-size: 11px; letter-spacing: .16em;
+  text-decoration: none; text-transform: uppercase; }
+.h-chip:hover { border-color: var(--cyan); }
+
+/* ── 02 sticky day index: five days, the live line, the find box ───── */
+.h-bar { position: sticky; top: var(--nav); z-index: 40; background: var(--void);
+  border-top: 1px solid var(--line-2); border-bottom: 1px solid var(--line); }
+.h-bar .wrap { display: flex; flex-wrap: wrap; align-items: center; gap: 0 20px; min-height: 54px; }
+.h-ixnav { flex: none; }
+.h-ix { display: flex; list-style: none; margin-left: -12px; }
+.h-ix a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 12px; color: var(--dim);
+  font-family: var(--mono); font-size: 11px; letter-spacing: .14em; text-decoration: none; text-transform: uppercase;
+  white-space: nowrap; }
+.h-ix a span { padding: 3px 0; border-bottom: 1px solid transparent; }
+.h-ix a:hover { color: var(--bone); }
+.h-ix a[aria-current] { color: var(--cyan); }
+.h-ix a[aria-current] span { border-bottom-color: var(--cyan); }
+.h-ix a.is-empty { opacity: .3; }
+.h-live { display: flex; align-items: center; gap: 9px; flex: 1 1 auto; min-width: 0; min-height: 44px;
+  color: var(--cyan); font-family: var(--mono); font-size: 11px; letter-spacing: .12em; text-decoration: none;
+  text-transform: uppercase; }
+.h-live span:last-child { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.h-live:hover span:last-child { text-decoration: underline; text-underline-offset: 4px; }
+.c-dot { flex: none; width: 7px; height: 7px; border-radius: 50%; background: var(--cyan); }
+.c-dot[hidden] { display: none; }
+@media (prefers-reduced-motion: no-preference) {
+  .c-dot { animation: c-beat 2.4s ease-in-out infinite; }
+  @keyframes c-beat { 50% { opacity: .25; } }
+}
+.h-find { display: flex; align-items: center; gap: 10px; flex: 0 1 300px; min-width: 0; margin-left: auto; }
+.h-find label { flex: none; }
+.h-find input { flex: 1 1 auto; min-width: 0; min-height: 40px; padding: 0 12px; border: 1px solid var(--line-2);
+  border-radius: 3px; background: var(--near); font-size: 15px; }
+.h-find input::placeholder { color: var(--faint); }
+.h-find input:focus { border-color: var(--cyan); outline: none; }
+.h-status { flex-basis: 100%; padding: 0 0 10px; text-align: right; }
+.h-status:empty { display: none; }
+
+/* ── 03 the days: portraits in speaking order ───────────────────────── */
+#days { padding: 20px 0 var(--bot); }
+.h-day { padding-top: 22px; }
+.h-day + .h-day { margin-top: 48px; }
+.h-day[hidden] { display: none; }
+.h-dhead { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 6px 28px;
+  padding-bottom: 14px; border-bottom: 1px solid var(--line-2); }
+.h-dhead .lbl { margin-bottom: 6px; }
+.h-dhead h2 { font-size: clamp(28px, 3.4vw, 50px); font-weight: 800; line-height: .94; letter-spacing: -.022em; }
+.h-venue { max-width: 46ch; font-size: 14px; line-height: 1.45; text-align: right; }
+.h-venue a { margin-left: 8px; color: var(--cyan); font-family: var(--mono); font-size: 11px; letter-spacing: .16em;
+  text-decoration: none; text-transform: uppercase; white-space: nowrap; }
+.h-venue a:hover { text-decoration: underline; }
+
+.h-rows { list-style: none; }
+.h-row { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 0 24px; padding: 14px 0;
+  border-bottom: 1px solid var(--line); }
+@media (prefers-reduced-motion: no-preference) { .h-row, .h-pitch { transition: opacity .2s ease; } }
+.h-faces { display: flex; gap: 8px; align-items: flex-start; }
+.h-face { flex: none; display: block; width: var(--face); aspect-ratio: 4 / 5; overflow: hidden; padding: 0;
+  border: 1px solid var(--line); border-radius: 0; background: var(--near); cursor: pointer; }
+.h-face.is-none { cursor: default; }
+.h-faces.is-many .h-face { width: var(--face-s); }
+.h-face img, .h-face .spk-initials { width: 100%; height: 100%; aspect-ratio: 4 / 5; object-fit: cover;
+  object-position: center 20%; font-size: 22px; }
+.h-faces.is-many .h-face .spk-initials { font-size: 15px; }
+.h-face img { filter: grayscale(.28) contrast(1.02); transition: filter .35s ease, transform .5s ease; }
+.h-face:hover img, .h-face.is-open img { filter: none; transform: scale(1.025); }
+.h-face.is-open { border-color: rgba(155,232,240,.6); }
+.h-tx { min-width: 0; padding-top: 1px; }
+.h-t { max-width: none; color: var(--dim); font-family: var(--mono); font-size: 12px; letter-spacing: .06em; line-height: 1.5; }
+.h-row.is-keynote .h-t { color: var(--cyan); }
+.h-who { margin-top: 6px; }
+.h-who button, .h-names button { padding: 0; border: 0; background: transparent; text-align: left; cursor: pointer; }
+.h-who button:hover, .h-who button.is-open, .h-names button:hover, .h-names button.is-open { color: var(--cyan); }
+.h-who > * { color: var(--bone); font-size: clamp(22px, 2.3vw, 32px); font-weight: 800; line-height: 1; letter-spacing: -.015em; text-transform: uppercase; }
+.h-title { margin-top: 10px; max-width: 58ch; color: var(--bone); font-size: 16.5px; font-weight: 500; line-height: 1.4; }
+.h-title.is-lead { margin-top: 6px; font-size: clamp(18px, 1.6vw, 22px); font-weight: 700; line-height: 1.25; }
+.h-title.is-tbc { color: var(--faint); font-weight: 400; }
+.h-aff { margin-top: 6px; color: var(--faint); font-size: 13.5px; line-height: 1.4; }
+.h-names { list-style: none; display: flex; flex-wrap: wrap; gap: 4px 18px; margin-top: 10px; }
+.h-names li { min-width: 0; font-size: 13.5px; line-height: 1.4; color: var(--faint); }
+.h-names button, .h-names b { color: var(--bone); font-size: 14.5px; font-weight: 800; text-transform: uppercase; letter-spacing: .01em; }
+.h-notes { margin-top: 6px; font-size: 14px; }
+.h-row.is-rule { display: flex; flex-wrap: wrap; gap: 2px 18px; padding: 9px 0; color: var(--faint);
+  font-family: var(--mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; }
+.h-row.is-rule .t { flex: none; min-width: 11ch; }
+.h-row.is-rule .r { min-width: 0; color: var(--dim); }
+.h-row.is-rule.is-break .r { color: var(--faint); }
+.h-row.is-now { box-shadow: inset 2px 0 0 var(--cyan); padding-left: 12px; }
+.h-row.is-dim, .h-pitch.is-dim, .h-days.is-finding .pg-awards { opacity: .16; }
+.h-row > .spk-panel { grid-column: 1 / -1; margin: 14px 0 2px; }
+.h-none { padding: 40px 0; font-size: 17px; }
+.h-none[hidden] { display: none; }
+.h-none button { margin-left: 6px; padding: 0; border: 0; background: none; color: var(--cyan);
+  text-decoration: underline; text-underline-offset: 4px; cursor: pointer; }
+
+/* Monday: eight startups as initials tiles, then the awards */
+.h-pitches { margin-top: 28px; }
+.h-pitches h3, .pg-awards h3 { padding-bottom: 12px; border-bottom: 1px solid var(--line-2);
+  font-size: 18px; font-weight: 800; line-height: 1.1; }
+.h-pgrid { list-style: none; display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 18px 10px; margin-top: 16px; }
+.h-pitch { min-width: 0; }
+.h-pitch .tile { display: grid; place-items: center; aspect-ratio: 4 / 5; border: 1px solid var(--line); background: var(--near);
+  color: var(--faint); font-size: clamp(22px, 2.4vw, 34px); font-weight: 800; letter-spacing: -.02em; }
+.h-pitch b { display: block; margin-top: 10px; font-size: 14px; font-weight: 800; line-height: 1.2; text-transform: uppercase;
+  overflow-wrap: anywhere; }
+.h-pitch p { margin-top: 4px; font-size: 13px; line-height: 1.4; }
+.pg-awards { margin-top: 40px; }
+.pg-awards[hidden] { display: none; }
+.pg-awards .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 18px; }
+.pg-awards .cell { padding: 20px 20px 24px; }
+.pg-awards .cell .lbl { margin-bottom: 10px; color: var(--cyan); }
+.pg-awards .cell p, .pg-awards .cell li { font-size: 15px; line-height: 1.5; color: var(--dim); }
+.pg-awards .cell ul { list-style: none; }
+.pg-awards .cell li + li { margin-top: 8px; }
+
+/* ── the speaker panel (same rules as /program/) ───────────────────── */
+.spk-initials { display: grid; place-items: center; width: 100%; height: 100%; aspect-ratio: 5 / 6;
+  background: var(--void); color: var(--faint); font-size: clamp(28px, 3.4vw, 44px); font-weight: 800;
+  letter-spacing: -.02em; line-height: 1; }
+.spk-panel { position: relative; display: grid; grid-template-columns: 220px minmax(0, 1fr);
+  margin-top: 28px; border: 1px solid var(--line); border-top-color: rgba(155,232,240,.5);
+  background: var(--near); }
+.spk-panel[hidden] { display: none; }
+.spk-ph { overflow: hidden; border-right: 1px solid var(--line); background: var(--void); }
+.spk-ph img { width: 100%; aspect-ratio: 5 / 6; object-fit: cover; object-position: center 20%; }
+.spk-ph .spk-initials { height: auto; }
+.spk-tx { min-width: 0; padding: 26px 28px 30px; }
+.spk-tx h3 { padding-right: 96px; font-size: clamp(22px, 2.2vw, 30px); font-weight: 800; line-height: 1.1; }
+.spk-tx h3:focus { outline: none; }
+.spk-aff { margin-top: 8px; font-size: 15px; line-height: 1.45; }
+.spk-ses { margin-top: 14px; color: var(--cyan); font-family: var(--mono); font-size: 11px;
+  letter-spacing: .14em; text-transform: uppercase; }
+.spk-ses.is-tba { color: var(--faint); }
+.spk-talk { margin-top: 22px; padding-top: 16px; border-top: 1px solid var(--line); }
+.spk-talk .lbl { margin-bottom: 6px; }
+.spk-talk p { color: var(--bone); font-size: 17px; font-weight: 700; line-height: 1.35; }
+.spk-bio { margin-top: 14px; font-size: 15px; line-height: 1.65; max-width: 68ch; }
+.spk-x { position: absolute; top: 14px; right: 14px; min-height: 44px; padding: 0 16px;
+  border: 1px solid var(--line-2); border-radius: 3px; background: transparent; color: var(--bone);
+  font-family: var(--mono); font-size: 10px; letter-spacing: .2em; text-transform: uppercase; cursor: pointer; }
+.spk-x:hover { border-color: var(--bone); }
+.spk-slots { margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--line); }
+.spk-slots p { max-width: 70ch; color: var(--bone); font-size: 15px; line-height: 1.5; }
+.spk-slots p + p { margin-top: 6px; }
+@media (max-width: 640px) {
+  .spk-panel { grid-template-columns: 1fr; }
+  .spk-ph { width: 112px; margin: 20px 0 0 20px; border: 1px solid var(--line); }
+  .spk-tx { padding: 18px 20px 24px; }
+  .spk-tx h3 { padding-right: 0; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .spk-panel { transition: opacity .2s ease, transform .24s cubic-bezier(.16,1,.3,1); }
+  .spk-panel.is-enter { opacity: 0; transform: translateY(6px); transition: none; }
+}
+@media (prefers-reduced-motion: reduce) { .h-face img { transition: none; } }
+
+/* ── footer ────────────────────────────────────────────────────────── */
+.foot { background: var(--near); padding: 56px 0 72px; }
+.foot .wrap { display: flex; flex-wrap: wrap; gap: 10px 26px; justify-content: space-between;
+  color: var(--faint); font-family: var(--mono); font-size: 10px; letter-spacing: .16em;
+  text-transform: uppercase; }
+.foot a { display: inline-block; margin: -15px -8px; padding: 15px 8px; color: var(--cyan); text-decoration: none; }
+.foot a:hover { text-decoration: underline; }
+
+/* ── variant badge ─────────────────────────────────────────────────── */
+.c-badge { position: fixed; left: 12px; bottom: 12px; z-index: 60; max-width: calc(100vw - 24px);
+  padding: 8px 12px; border: 1px solid var(--line-2); border-radius: 3px; background: var(--void);
+  color: var(--faint); font-family: var(--mono); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; }
+.c-badge a { color: var(--cyan); }
+
+/* ── responsive rhythm ─────────────────────────────────────────────── */
+@media (max-width: 980px) {
+  .h-pgrid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .pg-awards .grid { grid-template-columns: 1fr; }
+  .h-dhead { grid-template-columns: 1fr; }
+  .h-venue { text-align: left; }
+}
+@media (max-width: 700px) {
+  #top { padding-top: calc(var(--nav) + 18px); }
+  .h-lock { grid-template-columns: 1fr; gap: 8px; padding-bottom: 16px; }
+  .h-lock .lbl { margin-bottom: 8px; font-size: 10px; }
+  .h-jump { margin-top: 10px; }
+  .h-jump > .lbl { display: none; }
+  .h-chip { padding: 0 12px; }
+  .h-bar .wrap { gap: 0 12px; min-height: 0; }
+  .h-ixnav { flex: 1 1 100%; }
+  .h-ix { margin: 0 -8px; }
+  .h-ix li { flex: 1 1 0; }
+  .h-ix a { justify-content: center; width: 100%; padding: 0 4px; font-size: 10.5px; letter-spacing: .1em; }
+  .h-live { flex: 1 1 0; min-height: 40px; font-size: 10px; letter-spacing: .08em; padding-bottom: 6px; }
+  .h-find { flex: 0 0 140px; padding-bottom: 6px; }
+  .h-find label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  .h-find input { min-height: 36px; font-size: 14px; }
+  .h-status { padding-top: 0; }
+  #days { padding-top: 8px; }
+  .h-day { padding-top: 16px; }
+  .h-day + .h-day { margin-top: 36px; }
+  .h-venue { font-size: 13px; }
+  .h-row { gap: 0 14px; padding: 12px 0; }
+  .h-row.is-g { grid-template-columns: minmax(0, 1fr); }
+  .h-faces.is-group { flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+  .h-faces.is-group .h-face { width: var(--face-s); }
+  .h-faces.is-group .h-face .spk-initials { font-size: 14px; }
+  .h-who { margin-top: 4px; }
+  .h-who > * { color: var(--bone); font-size: 20px; }
+  .h-title { margin-top: 6px; font-size: 15px; }
+  .h-title.is-lead { font-size: 17px; }
+  .h-aff { font-size: 13px; }
+  .h-row.is-now { padding-left: 10px; }
+  .h-pgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+</style>
+</head>
+<body data-analytics-offer="program">
+
+<script src="/nav.js"></script>
+<a class="skip" href="#days">Skip to the program</a>
+
+<main>
+
+<!-- ══ 01 LOCKUP ══════════════════════════════════════════════════════ -->
+<section id="top" data-track-section="program_top" data-track-position="1" aria-labelledby="top-h">
+  <div class="wrap h-lock">
+    <div>
+      <span class="lbl lbl--cyan">Kobe · 17–26 October 2026 · all times JST</span>
+      <h1 id="top-h">The program.</h1>
+    </div>
+    <div>
+      <p class="h-say num"><span data-h="count">Everyone on stage, over five days.</span> <span>Scroll down the day.</span> <span class="ar" aria-hidden="true">↓</span></p>
+      <nav class="h-jump" aria-label="Jump to an event">
+        <span class="lbl">Jump to</span>
+        <a class="h-chip" href="#days" data-part="0">Summit I</a>
+        <a class="h-chip" href="#days" data-part="1">Summit II</a>
+        <a class="h-chip" href="#days" data-part="demo">Demo Day</a>
+      </nav>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 02 STICKY DAY INDEX ════════════════════════════════════════════ -->
+<div class="h-bar" data-h="bar">
+  <div class="wrap">
+    <nav class="h-ixnav" aria-label="Days"><ol class="h-ix" data-h="index"></ol></nav>
+    <a class="h-live num" data-h="live" href="#days" aria-live="polite"><span class="c-dot" aria-hidden="true" hidden></span><span data-h="live-t"></span></a>
+    <div class="h-find" role="search">
+      <label class="lbl" for="h-q">Find</label>
+      <input id="h-q" type="search" autocomplete="off" spellcheck="false" placeholder="Name or organisation" />
+    </div>
+    <p class="lbl h-status num" data-h="status" aria-live="polite"></p>
+  </div>
+</div>
+
+<!-- ══ 03 THE DAYS ════════════════════════════════════════════════════ -->
+<section id="days" data-track-section="timetable" data-track-position="2" aria-label="Timetable by speaker">
+  <div class="wrap">
+    <div class="h-days" data-h="days">
+      <noscript><p>The timetable needs JavaScript. The summits page lists every session: <a href="/conferences/">/conferences/</a>.</p></noscript>
+    </div>
+    <p class="h-none" data-h="none" hidden>No one matches. <button type="button" data-h="clear">Clear the search</button></p>
+    <div class="spk-panel" id="spk-panel-h" role="region" aria-labelledby="spk-panel-h-h" hidden></div>
+  </div>
+
+  <!-- Static, placed under Monday 26 October by the script. Copied from /program/. -->
+  <aside class="pg-awards" data-program-day="monday_26_october" aria-labelledby="pg-awards-h" hidden>
+    <h3 id="pg-awards-h">Demo Day awards</h3>
+    <div class="grid">
+      <div class="cell">
+        <span class="lbl">First prize</span>
+        <ul>
+          <li>A ticket to the next Vitalist Bay</li>
+          <li>Priority review for the Meet the Drapers Japan 2027 cohort</li>
+        </ul>
+      </div>
+      <div class="cell">
+        <span class="lbl">Antler Japan residency</span>
+        <p>Six weeks of mentoring, access to USD 850,000 in perks, and a chance of investment.</p>
+      </div>
+      <div class="cell">
+        <span class="lbl">Japan Landing Award</span>
+        <p>Presented by GlobalDeal, Official Market-Entry Execution Partner. A hands-on engagement to take the winner into the Japanese market: entry strategy, the right partners and first customers, and regulatory navigation.</p>
+      </div>
+    </div>
+  </aside>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <span><a href="https://www.miraitech.city/" target="_blank" rel="noopener" data-analytics-action="site_navigation" data-analytics-location="footer" data-analytics-target="mirai_city">Mirai Tech City</a> · Kobe Biomedical Innovation Cluster, Port Island</span>
+    <span>Kobe · Japan Standard Time</span>
+  </div>
+</footer>
+
+<p class="c-badge">Variant H · faces timetable — <a href="/program/">current</a> · <a href="c.html">C</a> · <a href="e.html">E</a> · <a href="f.html">F</a> · <a href="g.html">G</a></p>
+
+<script src="/sheet.js"></script>
+<script src="/speakers-data.js"></script>
+<script src="/speakers-photos.js"></script>
+<script src="/speakers.js"></script>
+<script src="/program-data.js"></script>
+<script src="/program.js"></script>
+<script src="/speaker-panel.js"></script>
+<script>
+/* ── variant H: the faces are the timetable ────────────────────────────
+      Five day sections; each slot is a row of its speakers' portraits in
+      speaking order, sessions without speakers collapse to a mono rule.
+      A sticky index carries the days, a one-line now / first-up read of the
+      device clock in JST, and the find box (dims rows, hides empty days).
+      The shared speaker panel opens under the clicked row with that
+      speaker's slots. Sheet text goes in as text nodes only. */
+(function () {
+  'use strict';
+  var S = window.MiraiSpeakers, G = window.MiraiProgram, P = window.MiraiSpeakerPanel;
+  if (!S || !G || !P) return;
+  function $(s) { return document.querySelector(s); }
+  var state = { speakers: null, program: null };
+  var main = $('main'), daysBox = $('[data-h="days"]'), ix = $('[data-h="index"]'), bar = $('[data-h="bar"]');
+  var live = $('[data-h="live"]'), liveT = $('[data-h="live-t"]'), dot = live.querySelector('.c-dot');
+  var countEl = $('[data-h="count"]'), input = $('#h-q'), status = $('[data-h="status"]'), none = $('[data-h="none"]');
+  var panelEl = $('#spk-panel-h'), home = panelEl.parentNode;
+  var statics = [].slice.call(document.querySelectorAll('[data-program-day]'));
+  var panel = P.attach({ root: main, panel: panelEl });
+  var openId = null, liveKey = '', EAGER_ROWS = 5;
+  var HONOR = /^(prof|assoc|dr|phd|md|jd|frse|bagr|jr)\.?,?$/i;
+  var KIND = { open: 'Opening', keynote: 'Keynote', talk: 'Talk', panel: 'Panel' };
+
+  function el(tag, cls, text) {
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text != null) n.textContent = text;
+    return n;
+  }
+  function fill(box, nodes) { box.textContent = ''; nodes.forEach(function (n) { box.appendChild(n); }); }
+  function norm(s) { return String(s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase(); }
+  function byId() {
+    var m = {};
+    ((state.speakers && state.speakers.speakers) || []).forEach(function (sp) { m[sp.id] = sp; });
+    return m;
+  }
+  function words(n) { return (S.numberWords && S.numberWords(n)) || String(n); }
+  function tokens(name) { return String(name || '').trim().split(/\s+/).filter(function (t) { return t && !HONOR.test(t); }); }
+  function surname(name) { var t = tokens(name); return t[t.length - 1] || ''; }
+  function initials(name) {
+    var t = tokens(name);
+    return ((t[0] || '').charAt(0) + (t.length > 1 ? t[t.length - 1].charAt(0) : (t[0] || '').charAt(1))).toUpperCase();
+  }
+
+  /* ids from the current speakers model, by the same lenient key the core uses */
+  function relink(program, speakers) {
+    var index = {};
+    ((speakers && speakers.speakers) || []).forEach(function (s) {
+      [s.name, [s.first, s.last].filter(Boolean).join(' ')].forEach(function (n) {
+        var k = G.speakerKey(n);
+        if (k && !index[k]) index[k] = s.id;
+      });
+    });
+    program.days.forEach(function (d) {
+      d.slots.forEach(function (sl) {
+        sl.speakers.forEach(function (p) { p.id = index[G.speakerKey(p.name)] || null; });
+      });
+    });
+    return program;
+  }
+
+  /* ── time: "Saturday 17 October" + "11:35" is 2026, JST ── */
+  var MONTHS = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
+  function dayUTC(d) {
+    var m = /(\d{1,2})\s+([A-Za-z]+)/.exec(d.label), mo = m ? MONTHS.indexOf(m[2].toLowerCase()) : -1;
+    return mo < 0 ? NaN : Date.UTC(2026, mo, +m[1]);
+  }
+  function at(d, hm) {
+    var t = /^(\d{1,2}):(\d{2})$/.exec(hm || '');
+    return t ? dayUTC(d) + ((+t[1] - 9) * 60 + +t[2]) * 60e3 : NaN;
+  }
+  function jstToday(now) {
+    var j = new Date(now + 9 * 3600e3);
+    return Date.UTC(j.getUTCFullYear(), j.getUTCMonth(), j.getUTCDate());
+  }
+  function timeline(program) {
+    var out = [];
+    program.days.forEach(function (d) {
+      d.slots.forEach(function (s, i) {
+        var a = at(d, s.start), b = at(d, s.end);
+        if (s.kind === 'pitch' || isNaN(a)) return;
+        out.push({ day: d, slot: s, i: i, k: d.id + '|' + i, a: a, b: isNaN(b) ? a + 20 * 60e3 : b });
+      });
+    });
+    return out.sort(function (x, y) { return x.a - y.a; });
+  }
+  function where(now) {
+    var tl = timeline(state.program), cur = null, next = null;
+    if (!tl.length) return null;
+    if (now < tl[0].a) return { mode: 'before', next: tl[0] };
+    if (now >= tl[tl.length - 1].b) return { mode: 'after' };
+    tl.forEach(function (x) { if (x.a <= now && now < x.b) cur = x; if (!next && x.a > now) next = x; });
+    var today = tl.filter(function (x) { return dayUTC(x.day) === jstToday(now); });
+    var inDay = today.length && now >= today[0].a && now < Math.max.apply(null, today.map(function (x) { return x.b; }));
+    return inDay ? { mode: 'live', cur: cur, next: next } : { mode: 'between', next: next };
+  }
+
+  /* ── the live line: one mono line in the sticky index ── */
+  function brief(x) {
+    var s = x.slot, what = s.kind === 'break' ? (s.title || 'Break') : (KIND[s.kind] || 'Session');
+    var names = s.speakers.slice(0, 2).map(function (p) { return surname(p.name); });
+    if (s.speakers.length > 2) names.push('+' + (s.speakers.length - 2));
+    return s.start + ' ' + what + (names.length ? ' · ' + names.join(', ') : '');
+  }
+  function rowId(x) { return 'r-' + x.day.id + '-' + x.i; }
+  function paintLive() {
+    if (!state.program) return;
+    var now = Date.now(), w = where(now);
+    if (!w) return;
+    var key = [w.mode, w.cur && w.cur.k, w.next && w.next.k, jstToday(now)].join('/');
+    if (key === liveKey) return;
+    liveKey = key;
+    var text, target = null;
+    if (w.mode === 'live' && w.cur) { text = 'Now: ' + brief(w.cur); target = w.cur; }
+    else if (w.mode === 'live' && w.next) { text = 'Next: ' + brief(w.next); target = w.next; }
+    else if (w.mode === 'after') text = 'The program has ended';
+    else { text = (w.mode === 'before' ? 'First up: ' : 'Next: ') + w.next.day.short + ' ' + w.next.slot.start; target = w.next; }
+    liveT.textContent = text;
+    dot.hidden = w.mode !== 'live';
+    live.setAttribute('href', target ? '#' + rowId(target) : '#days');
+    [].forEach.call(daysBox.querySelectorAll('.h-row.is-now'), function (n) { n.classList.remove('is-now'); });
+    if (w.mode === 'live' && w.cur) {
+      var r = document.getElementById(rowId(w.cur));
+      if (r) r.classList.add('is-now');
+    }
+  }
+
+  /* ── which part each day belongs to: the pitch day is Demo Day, the rest
+        are summits in runs of consecutive dates ── */
+  function parts(days) {
+    var out = { byDay: {}, first: {} }, runs = [], prev = NaN;
+    days.forEach(function (d) {
+      if (d.slots.some(function (s) { return s.kind === 'pitch'; })) {
+        out.byDay[d.id] = { label: 'Demo Day', n: 1, of: 1 };
+        if (!out.first.demo) out.first.demo = d;
+        return;
+      }
+      var t = dayUTC(d);
+      if (!runs.length || !(t - prev <= 864e5)) runs.push([]);
+      runs[runs.length - 1].push(d);
+      prev = t;
+    });
+    runs.forEach(function (r, k) {
+      out.first[k] = r[0];
+      r.forEach(function (d, j) { out.byDay[d.id] = { label: 'Summit ' + (['I', 'II', 'III', 'IV'][k] || k + 1), n: j + 1, of: r.length }; });
+    });
+    return out;
+  }
+
+  /* ── a row: portraits in speaking order, then time, name, title, affiliation ── */
+  function face(p, map, eager) {
+    var sp = p.id && map[p.id], box, aff = p.affiliation || (sp && sp.affiliation);
+    if (sp) {
+      box = el('button', 'h-face');
+      box.type = 'button';
+      box.tabIndex = -1;
+      box.setAttribute('aria-hidden', 'true');
+      box.setAttribute('data-speaker', sp.id);
+      box.title = aff ? sp.name + ', ' + aff : sp.name;
+      var im = S.photoEl(sp, { alt: '' });
+      if (eager && im.tagName === 'IMG') im.setAttribute('loading', 'eager');
+      box.appendChild(im);
+    } else {
+      box = el('span', 'h-face is-none');
+      var d = el('span', 'spk-initials', initials(p.name));
+      d.setAttribute('aria-hidden', 'true');
+      box.appendChild(d);
+    }
+    return box;
+  }
+  function who(p, map) {
+    var sp = p.id && map[p.id], n;
+    if (sp) {
+      n = el('button', null, p.name);
+      n.type = 'button';
+      n.setAttribute('data-speaker', sp.id);
+    } else {
+      n = el('b', null, p.name);
+    }
+    return n;
+  }
+  function rowEl(s, i, d, map, eager) {
+    var li = el('li', 'h-row is-' + s.kind), n = s.speakers.length;
+    var time = [s.start, s.end].filter(Boolean).join('–');
+    li.id = 'r-' + d.id + '-' + i;
+    li.setAttribute('data-k', d.id + '|' + i);
+    li.setAttribute('data-hay', norm(s.speakers.map(function (p) { return p.name + ' ' + (p.affiliation || ''); }).join(' ')));
+    if (!n) {
+      li.classList.add('is-rule');
+      li.appendChild(el('span', 't num', time || '—'));
+      li.appendChild(el('span', 'r', [s.title || 'To be confirmed', s.notes].filter(Boolean).join(' · ')));
+      return li;
+    }
+    if (n > 1) li.classList.add('is-g');
+    var faces = el('div', 'h-faces' + (n > 1 ? ' is-group' : '') + (n > 2 ? ' is-many' : ''));
+    s.speakers.slice(0, 6).forEach(function (p) { faces.appendChild(face(p, map, eager)); });
+    var tx = el('div', 'h-tx');
+    tx.appendChild(el('p', 'h-t num', [time, s.block].filter(Boolean).join(' · ')));
+    var title = el('p', 'h-title' + (n > 1 ? ' is-lead' : '') + (s.tbc ? ' is-tbc' : ''), s.title || 'Title to be confirmed');
+    if (n === 1) {
+      var p = s.speakers[0], sp = p.id && map[p.id], aff = p.affiliation || (sp && sp.affiliation);
+      var wh = el('p', 'h-who');
+      wh.appendChild(who(p, map));
+      tx.appendChild(wh);
+      tx.appendChild(title);
+      if (aff) tx.appendChild(el('p', 'h-aff', aff));
+    } else {
+      tx.appendChild(title);
+      var ul = el('ul', 'h-names');
+      s.speakers.forEach(function (q) {
+        var it = el('li'), sq = q.id && map[q.id], a = q.affiliation || (sq && sq.affiliation);
+        it.appendChild(who(q, map));
+        if (a) it.appendChild(document.createTextNode(' ' + a));
+        ul.appendChild(it);
+      });
+      tx.appendChild(ul);
+    }
+    if (s.notes) tx.appendChild(el('p', 'h-notes', s.notes));
+    li.appendChild(faces);
+    li.appendChild(tx);
+    return li;
+  }
+
+  function dayEl(d, k, map, part) {
+    var sec = el('section', 'h-day'), head = el('div', 'h-dhead'), left = el('div'), hid = 'dh-' + d.id;
+    var talks = [], pitches = [];
+    sec.id = 'day-' + d.id;
+    sec.setAttribute('data-program', 'day');
+    sec.setAttribute('aria-labelledby', hid);
+    d.slots.forEach(function (s, i) { (s.kind === 'pitch' ? pitches : talks).push([s, i]); });
+    var sessions = talks.filter(function (t) { return t[0].kind !== 'break'; }).length;
+    left.appendChild(el('span', 'lbl lbl--cyan num', [part ? part.label + (part.of > 1 ? ' · day ' + part.n + ' of ' + part.of : '') : '',
+      sessions + ' sessions' + (pitches.length ? ' · ' + pitches.length + ' pitches' : '')].filter(Boolean).join(' · ')));
+    var h = el('h2', null, d.label);
+    h.id = hid;
+    left.appendChild(h);
+    head.appendChild(left);
+    if (d.venue || d.venueLink) {
+      var v = el('p', 'h-venue');
+      if (d.venue) v.appendChild(document.createTextNode(d.venue));
+      if (d.venueLink) {
+        var a = el('a', null, 'Map ↗');
+        a.href = d.venueLink;
+        a.target = '_blank';
+        a.rel = 'noopener';
+        a.setAttribute('aria-label', 'Map' + (d.venue ? ' of ' + d.venue : ' of the venue') + ', ' + d.label);
+        a.setAttribute('data-analytics-action', 'site_navigation');
+        a.setAttribute('data-analytics-location', 'program');
+        a.setAttribute('data-analytics-target', 'venue_map');
+        v.appendChild(a);
+      }
+      head.appendChild(v);
+    }
+    sec.appendChild(head);
+    var ol = el('ol', 'h-rows');
+    talks.forEach(function (t, j) { ol.appendChild(rowEl(t[0], t[1], d, map, k === 0 && j < EAGER_ROWS)); });
+    sec.appendChild(ol);
+    if (pitches.length) {
+      var box = el('div', 'h-pitches'), list = el('ol', 'h-pgrid'), pid = sec.id + '-pitches';
+      var ph = el('h3', null, (pitches[0][0].block || 'Demo Day pitches') + ' · ' + pitches.length + ' startups');
+      box.setAttribute('data-program', 'pitches');
+      box.setAttribute('role', 'group');
+      box.setAttribute('aria-labelledby', pid);
+      ph.id = pid;
+      box.appendChild(ph);
+      pitches.forEach(function (t) {
+        var s = t[0], li = el('li', 'h-pitch'), tile = el('span', 'tile', initials(s.title));
+        li.setAttribute('data-program', 'pitch');
+        li.setAttribute('data-hay', norm(s.title + ' ' + (s.notes || '')));
+        tile.setAttribute('aria-hidden', 'true');
+        li.appendChild(tile);
+        li.appendChild(el('b', null, s.title));
+        if (s.notes) li.appendChild(el('p', null, s.notes));
+        list.appendChild(li);
+      });
+      box.appendChild(list);
+      sec.appendChild(box);
+    }
+    statics.forEach(function (n) {
+      if (n.getAttribute('data-program-day') === d.id) { sec.appendChild(n); n.hidden = false; }
+    });
+    return sec;
+  }
+
+  /* ── find: dim rows whose speakers don't match, hide days with none ── */
+  function applyFind() {
+    var q = norm(input.value).trim(), total = 0;
+    daysBox.classList.toggle('is-finding', !!q);
+    [].forEach.call(daysBox.querySelectorAll('.h-day'), function (sec) {
+      var m = 0;
+      [].forEach.call(sec.querySelectorAll('.h-row, .h-pitch'), function (r) {
+        var ok = !q || r.getAttribute('data-hay').indexOf(q) >= 0;
+        r.classList.toggle('is-dim', !!q && !ok);
+        if (q && ok) m++;
+      });
+      sec.hidden = !!q && !m;
+      var a = ix.querySelector('a[href="#' + sec.id + '"]');
+      if (a) a.classList.toggle('is-empty', sec.hidden);
+      total += m;
+    });
+    status.textContent = q ? (total ? total + (total === 1 ? ' session matches' : ' sessions match') : '') : '';
+    none.hidden = !q || total > 0;
+    if (!panelEl.hidden && openId) {
+      var row = panelEl.parentNode;
+      if (row.classList && row.classList.contains('h-row') && (row.classList.contains('is-dim') || row.closest('.h-day').hidden)) { panel.close(); openId = null; }
+    }
+    spy();
+  }
+  input.addEventListener('input', applyFind);
+  input.addEventListener('keydown', function (e) {
+    if (e.key !== 'Enter') return;
+    var hit = daysBox.querySelector('.h-day:not([hidden]) .h-row:not(.is-dim), .h-day:not([hidden]) .h-pitch:not(.is-dim)');
+    if (hit && norm(input.value).trim()) { e.preventDefault(); hit.scrollIntoView({ block: 'start' }); }
+  });
+  $('[data-h="clear"]').addEventListener('click', function () { input.value = ''; applyFind(); input.focus(); });
+
+  /* ── the index: mark the day in view ── */
+  var spyRaf = 0;
+  function spy() {
+    cancelAnimationFrame(spyRaf);
+    spyRaf = requestAnimationFrame(function () {
+      var line = bar.getBoundingClientRect().bottom + 40, cur = null;
+      [].forEach.call(daysBox.querySelectorAll('.h-day:not([hidden])'), function (sec) {
+        if (!cur || sec.getBoundingClientRect().top <= line) cur = sec;
+      });
+      [].forEach.call(ix.querySelectorAll('a'), function (a) {
+        if (cur && a.getAttribute('href') === '#' + cur.id) a.setAttribute('aria-current', 'location');
+        else a.removeAttribute('aria-current');
+      });
+    });
+  }
+  window.addEventListener('scroll', spy, { passive: true });
+  function measure() {
+    var tb = document.querySelector('.topbar'), r = document.documentElement.style;
+    if (tb && tb.offsetHeight) r.setProperty('--nav', tb.offsetHeight + 'px');
+    r.setProperty('--idx', bar.offsetHeight + 'px');
+  }
+  var mRaf = 0;
+  window.addEventListener('resize', function () { cancelAnimationFrame(mRaf); mRaf = requestAnimationFrame(function () { measure(); spy(); }); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
+
+  /* ── the panel: opens under the row that asked, then lists the speaker's slots ── */
+  function park() {
+    if (!panelEl.hidden) panel.close();
+    openId = null;
+    home.appendChild(panelEl);
+  }
+  function place(o) {
+    var row = o.closest('.h-row');
+    (row || home).appendChild(panelEl);
+  }
+  function addSlots(id) {
+    var tx = panelEl.querySelector('.spk-tx'), old = tx && tx.querySelector('.spk-slots'), lines = [];
+    if (!tx || !state.program) return;
+    if (old) tx.removeChild(old);
+    state.program.days.forEach(function (d) {
+      d.slots.forEach(function (s) {
+        if (!s.speakers.some(function (p) { return p.id === id; })) return;
+        var time = [s.start, s.end].filter(Boolean).join('–');
+        lines.push('Speaking: ' + [d.short + (time ? ' ' + time : ''), s.block || s.kind, s.title || 'Title to be confirmed'].join(' · '));
+      });
+    });
+    if (!lines.length) return;
+    var box = el('div', 'spk-slots'), ses = tx.querySelector('.spk-ses');
+    lines.forEach(function (t) { box.appendChild(el('p', 'num', t)); });
+    tx.insertBefore(box, ses ? ses.nextSibling : null);
+  }
+  document.addEventListener('click', function (e) {
+    var o = e.target.closest && e.target.closest('[data-speaker]');
+    if (!o || !main.contains(o)) return;
+    e.stopPropagation();
+    var id = o.getAttribute('data-speaker');
+    if (!panelEl.hidden && openId === id && panelEl.parentNode === o.closest('.h-row')) { panel.close(); openId = null; return; }
+    place(o);
+    panel.open(id, o);
+    openId = panelEl.hidden ? null : id;
+    if (openId) addSlots(id);
+  }, true);
+
+  /* ── paint: index, days, counts ── */
+  function paint() {
+    if (!state.program) return;
+    var program = relink(state.program, state.speakers), map = byId(), pt = parts(program.days), people = {};
+    if (daysBox.contains(panelEl)) park();
+    statics.forEach(function (n) { n.hidden = true; home.parentNode.appendChild(n); });
+    fill(daysBox, program.days.map(function (d, k) { return dayEl(d, k, map, pt.byDay[d.id]); }));
+    fill(ix, program.days.map(function (d) {
+      var li = el('li'), a = el('a'), lab = el('span', 'num', d.short.replace(/\s+[A-Za-z]+$/, ''));
+      a.href = '#day-' + d.id;
+      a.setAttribute('aria-label', d.label);
+      a.appendChild(lab);
+      li.appendChild(a);
+      return li;
+    }));
+    [].forEach.call(document.querySelectorAll('[data-part]'), function (c) {
+      var d = pt.first[c.getAttribute('data-part')];
+      if (d) c.href = '#day-' + d.id;
+    });
+    program.days.forEach(function (d) {
+      d.slots.forEach(function (s) { s.speakers.forEach(function (p) { var k = p.id || G.speakerKey(p.name); if (k) people[k] = 1; }); });
+    });
+    var np = Object.keys(people).length;
+    if (np) countEl.textContent = np + ' people over ' + words(program.days.length) + ' days.';
+    applyFind();
+    liveKey = '';
+    paintLive();
+    panel.refresh(map);
+    if (openId && !panelEl.hidden) addSlots(openId);
+    measure();
+    spy();
+  }
+
+  S.load({
+    url: window.MIRAI_SPEAKERS_SHEET_CSV,
+    snapshot: window.MIRAI_SPEAKERS_SNAPSHOT,
+    render: function (model) {
+      state.speakers = model;
+      S.fillCounts(model, document);
+      paint();
+    }
+  });
+
+  G.load({
+    url: window.MIRAI_PROGRAM_SHEET_CSV,
+    snapshot: window.MIRAI_PROGRAM_SNAPSHOT,
+    speakersModel: state.speakers,
+    render: function (model) {
+      state.program = model;
+      paint();
+    }
+  });
+
+  measure();
+  setInterval(paintLive, 30000);
+})();
+</script>
+</body>
+</html>

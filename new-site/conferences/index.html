@@ -820,6 +820,49 @@ details.more[open] > summary { margin-bottom: 6px; }
   .faces { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 @media (max-width: 640px) { .mani-g { grid-template-columns: 1fr; }
   .faces { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+/* speaker panel: every face and row opens one ruled panel per group */
+.faces figure[data-speaker], .mrow[data-speaker] { cursor: pointer; }
+.faces figure.is-open { border-color: rgba(155,232,240,.5); }
+.faces figure.is-open img { filter: grayscale(0) contrast(1); }
+.mrow[data-speaker]:hover { background: rgba(155,232,240,.04); }
+.mrow[data-speaker]:focus-visible { outline-offset: -2px; }
+.mrow.is-open .n { color: var(--cyan); }
+.spk-initials { display: grid; place-items: center; width: 100%; height: 100%; aspect-ratio: 5 / 6;
+  background: var(--void); color: var(--faint); font-size: clamp(28px, 3.4vw, 44px); font-weight: 800;
+  letter-spacing: -.02em; line-height: 1; }
+.spk-panel { position: relative; display: grid; grid-template-columns: 220px minmax(0, 1fr);
+  margin-top: 28px; border: 1px solid var(--line); border-top-color: rgba(155,232,240,.5);
+  background: var(--near); }
+.spk-panel[hidden] { display: none; }
+.spk-ph { overflow: hidden; border-right: 1px solid var(--line); background: var(--void); }
+.spk-ph img { width: 100%; aspect-ratio: 5 / 6; object-fit: cover; object-position: center 20%; }
+.spk-ph .spk-initials { height: auto; }
+.spk-tx { min-width: 0; padding: 26px 28px 30px; }
+.spk-tx h3 { padding-right: 96px; font-size: clamp(22px, 2.2vw, 30px); }
+.spk-tx h3:focus { outline: none; }
+.spk-aff { margin-top: 8px; font-size: 15px; line-height: 1.45; }
+.spk-ses { margin-top: 14px; color: var(--cyan); font-family: var(--mono); font-size: 11px;
+  letter-spacing: .14em; text-transform: uppercase; }
+.spk-ses.is-tba { color: var(--faint); }
+.spk-talk { margin-top: 22px; padding-top: 16px; border-top: 1px solid var(--line); }
+.spk-talk .lbl { margin-bottom: 6px; }
+.spk-talk p { color: var(--bone); font-size: 17px; font-weight: 700; line-height: 1.35; }
+.spk-bio { margin-top: 14px; font-size: 15px; line-height: 1.65; max-width: 68ch; }
+.spk-x { position: absolute; top: 14px; right: 14px; min-height: 44px; padding: 0 16px;
+  border: 1px solid var(--line-2); border-radius: 3px; background: transparent; color: var(--bone);
+  font-family: var(--mono); font-size: 10px; letter-spacing: .2em; text-transform: uppercase; cursor: pointer; }
+.spk-x:hover { border-color: var(--bone); }
+@media (max-width: 640px) {
+  .spk-panel { grid-template-columns: 1fr; }
+  .spk-ph { width: 112px; margin: 20px 0 0 20px; border: 1px solid var(--line); }
+  .spk-tx { padding: 18px 20px 24px; }
+  .spk-tx h3 { padding-right: 0; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .mrow[data-speaker] { transition: background-color .2s ease; }
+  .spk-panel { transition: opacity .2s ease, transform .24s cubic-bezier(.16,1,.3,1); }
+  .spk-panel.is-enter { opacity: 0; transform: translateY(6px); transition: none; }
+}
 
 /* ── 08 kobe: inset strip with gutters, captions in frame ──────────── */
 .strip { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px;
@@ -897,6 +940,9 @@ details.more[open] > summary { margin-bottom: 6px; }
 .sheet caption { caption-side: top; padding: 0 0 14px; color: var(--l-faint);
   font-family: var(--mono); font-size: 10.5px; letter-spacing: .16em; text-align: left;
   text-transform: uppercase; }
+.sheet-go { float: right; margin: -14px 0 -14px 16px; padding: 14px 0; color: var(--l-ink);
+  text-decoration: none; }
+.sheet-go:hover { text-decoration: underline; }
 .sheet th, .sheet td { text-align: left; vertical-align: baseline; padding: 13px 0; }
 .sheet thead th { padding-bottom: 10px; border-bottom: 1px solid var(--l-line-2);
   color: var(--l-faint); font-family: var(--mono); font-size: 10.5px; font-weight: 400;
@@ -1035,7 +1081,7 @@ details.more[open] > summary { margin-bottom: 6px; }
       <a href="#offer">The pass</a>
     </nav>
     <span class="pbar-price num">$1,200</span>
-    <a class="btn" href="https://book.stripe.com/test_dRmfZj3Sk3R3f5ZcgS3Nm02" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="sticky" data-analytics-target="everything">Get the pass</a>
+    <a class="btn" href="https://book.stripe.com/bJe9AVewY4V7cXR80C3Nm07" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="sticky" data-analytics-target="everything">Get the pass</a>
   </div>
 </div>
 
@@ -1053,11 +1099,11 @@ details.more[open] > summary { margin-bottom: 6px; }
         <span class="ctamod-price num">$1,200</span>
         <span class="ctamod-incl">both summits &middot; the finale &middot; the whole month</span>
       </div>
-      <a class="ctamod-go" href="https://book.stripe.com/test_dRmfZj3Sk3R3f5ZcgS3Nm02" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="hero" data-analytics-target="everything">Get the pass</a>
+      <a class="ctamod-go" href="https://book.stripe.com/bJe9AVewY4V7cXR80C3Nm07" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="hero" data-analytics-target="everything">Get the pass</a>
       <a class="ctamod-alt" href="mailto:team@miraitech.city?subject=Mirai%20Summits%20pass" data-analytics-action="alternative_offer" data-analytics-location="hero" data-analytics-target="email">Email us</a>
     </div>
     <div class="proof">
-      <div><b class="num">56</b><span>Confirmed speakers</span></div>
+      <div><b class="num" data-speakers-count>56</b><span>Confirmed speakers</span></div>
       <div><b class="num">370</b><span>Organisations on Port Island</span></div>
       <div><b class="num">31</b><span>Days in October</span></div>
     </div>
@@ -1476,45 +1522,24 @@ details.more[open] > summary { margin-bottom: 6px; }
     <div class="hd">
       <span class="lbl lbl--cyan">Speakers · Science</span>
       <h2>The scientists and communicators.</h2>
-      <p class="lead">Twenty-two researchers, clinicians and science communicators across two summit weekends.</p>
+      <p class="lead"><span data-speakers-group-count="scientists">Twenty-two</span> researchers, clinicians and science communicators across two summit weekends.</p>
     </div>
-    <div class="faces">
-      <figure><div class="im"><img srcset="/img/aubrey-480.webp 480w, /img/aubrey.webp 768w" sizes="(min-width: 760px) 20vw, 50vw" src="/img/aubrey.webp" width="768" height="710" alt="Aubrey de Grey" loading="lazy" decoding="async"></div><figcaption>Aubrey de Grey<small>LEV Foundation</small></figcaption></figure>
-      <figure><div class="im"><img src="/img/hayano.webp" width="600" height="750" alt="Motoshi Hayano" loading="lazy" decoding="async"></div><figcaption>Motoshi Hayano<small>Keio University</small></figcaption></figure>
-      <figure><div class="im"><img src="/img/sheekey.webp" width="220" height="264" alt="Eleanor Sheekey" loading="lazy" decoding="async"></div><figcaption>Eleanor Sheekey<small>RIKEN Kobe / Sheekey Science Show</small></figcaption></figure>
-      <figure><div class="im"><img src="/img/cordeiro.webp" width="800" height="800" alt="José Cordeiro" loading="lazy" decoding="async"></div><figcaption>José Cordeiro<small>International Longevity Summit</small></figcaption></figure>
-    </div>
+    <div data-speakers="conferences-scientists">
+      <div class="faces"></div>
 
-    <div class="mani">
-      <div class="mani-h">
-        <b>The other eighteen</b>
-        <span class="lbl mani-key"><i>S1</i> Oct 17–18 &nbsp; <i>S2</i> Oct 24–25 &nbsp; <i>F</i> Finale Oct 26 &nbsp; <i>Online</i> joins remotely &nbsp; <i>—</i> session to be announced</span>
-      </div>
-      <div class="mani-g">
-        <div class="mrow"><span class="i">06</span><span class="n">Natalie S. Coles de Grey<em>Human Longevity Inc &amp; LEV Foundation</em></span><span class="s">S2</span></div>
-        <div class="mrow"><span class="i">07</span><span class="n">Walter Marion Patterson<em>CSO, Minicircle</em></span><span class="s">S2 · F</span></div>
-        <div class="mrow"><span class="i">08</span><span class="n">Prof. Stuart Reid<em>University of Strathclyde</em></span><span class="s">S2</span></div>
-        <div class="mrow"><span class="i">09</span><span class="n">Prof. Takahiro Yasuda<em>Kobe University</em></span><span class="s">S1</span></div>
-        <div class="mrow"><span class="i">10</span><span class="n">Keiko Kobayashi<em>Kobe Biomedical Innovation Cluster (FBRI)</em></span><span class="s">S1</span></div>
-        <div class="mrow"><span class="i">11</span><span class="n">Muneaki Goto<em>Reskilling initiative</em></span><span class="s">S2</span></div>
-        <div class="mrow"><span class="i">12</span><span class="n">Ada Cyborg<em>Transhumanist AI / BCI artist</em></span><span class="s">F</span></div>
-        <div class="mrow"><span class="i">13</span><span class="n">Elen Capri<em>Wellness &amp; longevity creator</em></span><span class="s">F</span></div>
-        <div class="mrow"><span class="i">14</span><span class="n">Jordan Lasker<em>Researcher / writer</em></span><span class="s">S2</span></div>
-      </div>
-      <details class="more" data-track-faq="speakers" data-track-position="7">
-        <summary><span class="c">Show all 23</span><span class="o">Show fewer</span></summary>
-        <div class="mani-g">
-          <div class="mrow"><span class="i">15</span><span class="n">Iris Jiang<em>Stellar Science Foundation</em></span><span class="s">S1</span></div>
-          <div class="mrow"><span class="i">16</span><span class="n">Louise Hecker, PhD<em>Baylor College of Medicine</em></span><span class="s">S1</span></div>
-          <div class="mrow"><span class="i">17</span><span class="n">Kosuke Kato, PhD<em>Baylor College of Medicine</em></span><span class="s">S1</span></div>
-          <div class="mrow"><span class="i">18</span><span class="n">Kentaroh Takagaki<em>Eighteen Six</em></span><span class="s" aria-label="Session to be announced"></span></div>
-          <div class="mrow"><span class="i">19</span><span class="n">Masataka Watanabe<em>Eighteen Six</em></span><span class="s" aria-label="Session to be announced"></span></div>
-          <div class="mrow"><span class="i">20</span><span class="n">Kaarthik Abhinav Balakrishnan<em>Eighteen Six</em></span><span class="s" aria-label="Session to be announced"></span></div>
-          <div class="mrow"><span class="i">21</span><span class="n">Prof. Takashi Aoi<em>Kobe University Graduate School of Medicine</em></span><span class="s">S1</span></div>
-          <div class="mrow"><span class="i">22</span><span class="n">Yoshihiro Muragaki<em>Faculty of Advanced Techno-Surgery (FATS)</em></span><span class="s">S1 · S2</span></div>
-          <div class="mrow"><span class="i">23</span><span class="n">Masanori Miyanishi, MD PhD<em>Kobe University Graduate School of Medicine</em></span><span class="s">S1</span></div>
+      <div class="mani">
+        <div class="mani-h">
+          <b></b>
+          <span class="lbl mani-key"><i>S1</i> Oct 17–18 &nbsp; <i>S2</i> Oct 24–25 &nbsp; <i>F</i> Finale Oct 26 &nbsp; <i>Online</i> joins remotely &nbsp; <i>—</i> session to be announced</span>
         </div>
-      </details>
+        <div class="mani-g"></div>
+        <details class="more" data-track-faq="speakers" data-track-position="7">
+          <summary><span class="c">Show all</span><span class="o">Show fewer</span></summary>
+          <div class="mani-g"></div>
+        </details>
+      </div>
+
+      <div class="spk-panel" id="spk-panel-scientists" role="region" aria-labelledby="spk-panel-scientists-h" hidden></div>
     </div>
   </div>
 </section>
@@ -1543,56 +1568,24 @@ details.more[open] > summary { margin-bottom: 6px; }
     <div class="hd">
       <span class="lbl lbl--cyan">Speakers · Companies</span>
       <h2>The founders and investors.</h2>
-      <p class="lead">Thirty-three founders, operators and investors building or funding frontier biotech.</p>
+      <p class="lead"><span data-speakers-group-count="founders">Thirty-three</span> founders, operators and investors building or funding frontier biotech.</p>
     </div>
-    <div class="faces">
-      <figure><div class="im"><img src="/img/betts-lacroix.webp" width="768" height="807" alt="Joe Betts-LaCroix" loading="lazy" decoding="async"></div><figcaption>Joe Betts-LaCroix<small>CEO, Retro Biosciences</small></figcaption></figure>
-      <figure><div class="im"><img src="/img/yuki.webp" width="480" height="480" alt="Yuki Hanyu" loading="lazy" decoding="async"></div><figcaption>Yuki Hanyu<small>IntegriCulture</small></figcaption></figure>
-      <figure><div class="im"><img src="/img/adam.webp" width="800" height="1118" alt="Adam Gries" loading="lazy" decoding="async"></div><figcaption>Adam Gries<small>Vitalist Bay</small></figcaption></figure>
-      <figure><div class="im"><img src="/img/deigin.webp" width="500" height="500" alt="Yuri Deigin" loading="lazy" decoding="async"></div><figcaption>Yuri Deigin<small>YouthBio Therapeutics</small></figcaption></figure>
-      <figure><div class="im"><img src="/img/davis.webp" width="768" height="768" alt="Mac Davis" loading="lazy" decoding="async"></div><figcaption>Mac Davis<small>Minicircle</small></figcaption></figure>
-    </div>
+    <div data-speakers="conferences-founders">
+      <div class="faces"></div>
 
-    <div class="mani">
-      <div class="mani-h">
-        <b>The other twenty-eight</b>
-        <span class="lbl mani-key"><i>S1</i> Oct 17–18 &nbsp; <i>S2</i> Oct 24–25 &nbsp; <i>F</i> Finale Oct 26 &nbsp; <i>Online</i> joins remotely &nbsp; <i>—</i> session to be announced</span>
-      </div>
-      <div class="mani-g">
-        <div class="mrow"><span class="i">06</span><span class="n">Marian Goodell<em>CEO, Burning Man Project</em></span><span class="s">S2</span></div>
-        <div class="mrow"><span class="i">07</span><span class="n">Laurence Ion<em>VitaDAO / Vitalia</em></span><span class="s">S2</span></div>
-        <div class="mrow"><span class="i">08</span><span class="n">Sebastian Brunemeier<em>Healthspan Capital / Cambrian</em></span><span class="s">S2</span></div>
-        <div class="mrow"><span class="i">09</span><span class="n">Patri Friedman<em>Pronomos Capital</em></span><span class="s">S2 · Online</span></div>
-        <div class="mrow"><span class="i">10</span><span class="n">Matt Scholz<em>Oisin Bio</em></span><span class="s">S2</span></div>
-        <div class="mrow"><span class="i">11</span><span class="n">Todd Porter<em>EDGEof / Venture Cafe Tokyo</em></span><span class="s">S2</span></div>
-        <div class="mrow"><span class="i">12</span><span class="n">Josh Mann<em>COO, The LARTA Agency</em></span><span class="s">S2</span></div>
-        <div class="mrow"><span class="i">13</span><span class="n">Florian<em>Antler</em></span><span class="s">S2</span></div>
-        <div class="mrow"><span class="i">14</span><span class="n">Rob Claar<em>CEO, HekaBio</em></span><span class="s">S1</span></div>
-      </div>
-      <details class="more" data-track-faq="founders">
-        <summary><span class="c">Show all 33</span><span class="o">Show fewer</span></summary>
-        <div class="mani-g">
-          <div class="mrow"><span class="i">15</span><span class="n">Rodney Kelly<em>MEDISO</em></span><span class="s">S2</span></div>
-          <div class="mrow"><span class="i">16</span><span class="n">Ian Huyett<em>Granite Bio Innovation</em></span><span class="s">S1</span></div>
-          <div class="mrow"><span class="i">17</span><span class="n">Sandeep Casi<em>Investor</em></span><span class="s">S2</span></div>
-          <div class="mrow"><span class="i">18</span><span class="n">Keita Masui<em>ASAGI Labs</em></span><span class="s">S2</span></div>
-          <div class="mrow"><span class="i">19</span><span class="n">Devinder Sodhi<em>Learning Layer Labs</em></span><span class="s">S1</span></div>
-          <div class="mrow"><span class="i">20</span><span class="n">Sumit Jamuar<em>XPRIZE Brain Trust</em></span><span class="s">S2</span></div>
-          <div class="mrow"><span class="i">21</span><span class="n">Daniel Burger<em>Eightsix Science</em></span><span class="s">S2</span></div>
-          <div class="mrow"><span class="i">22</span><span class="n">Juliette Humer<em>Muse Bio</em></span><span class="s">S1</span></div>
-          <div class="mrow"><span class="i">23</span><span class="n">Jeffrey Tibbetts<em>Symbiont Labs</em></span><span class="s">S1</span></div>
-          <div class="mrow"><span class="i">24</span><span class="n">Nathan Cheng<em>Longevity Biotech Fellowship</em></span><span class="s">F</span></div>
-          <div class="mrow"><span class="i">25</span><span class="n">Felix Oen<em>Co-founder &amp; CEO</em></span><span class="s">S1</span></div>
-          <div class="mrow"><span class="i">26</span><span class="n">Brandon Possin<em>ZōVillage</em></span><span class="s">S1</span></div>
-          <div class="mrow"><span class="i">27</span><span class="n">Bilal Kharouni<em>Ekei Labs</em></span><span class="s">S1</span></div>
-          <div class="mrow"><span class="i">28</span><span class="n">Alice Gilman<em>R3 Bio</em></span><span class="s">S1</span></div>
-          <div class="mrow"><span class="i">29</span><span class="n">Julie Ying Baron<em>LiveBeyond</em></span><span class="s">S2</span></div>
-          <div class="mrow"><span class="i">30</span><span class="n">Irit Rappley<em>Co-founder &amp; CEO, NNP Labs</em></span><span class="s">S2</span></div>
-          <div class="mrow"><span class="i">31</span><span class="n">Czar Gonzalez<em>HEIRITAGE EcoCultural</em></span><span class="s">S2</span></div>
-          <div class="mrow"><span class="i">32</span><span class="n">Tomonari Abe<em>ABE YOANDO</em></span><span class="s">S1</span></div>
-          <div class="mrow"><span class="i">33</span><span class="n">Paul Yang<em>Governance Partners</em></span><span class="s">S2</span></div>
+      <div class="mani">
+        <div class="mani-h">
+          <b></b>
+          <span class="lbl mani-key"><i>S1</i> Oct 17–18 &nbsp; <i>S2</i> Oct 24–25 &nbsp; <i>F</i> Finale Oct 26 &nbsp; <i>Online</i> joins remotely &nbsp; <i>—</i> session to be announced</span>
         </div>
-      </details>
+        <div class="mani-g"></div>
+        <details class="more" data-track-faq="founders">
+          <summary><span class="c">Show all</span><span class="o">Show fewer</span></summary>
+          <div class="mani-g"></div>
+        </details>
+      </div>
+
+      <div class="spk-panel" id="spk-panel-founders" role="region" aria-labelledby="spk-panel-founders-h" hidden></div>
     </div>
   </div>
 </section>
@@ -1617,7 +1610,7 @@ details.more[open] > summary { margin-bottom: 6px; }
         <span class="ask num">$1,200</span>
         <span class="ask-note">One price for all eight.</span>
         <div class="acts">
-          <a class="btn" href="https://book.stripe.com/test_dRmfZj3Sk3R3f5ZcgS3Nm02" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="offer" data-analytics-target="everything">Get the pass</a>
+          <a class="btn" href="https://book.stripe.com/bJe9AVewY4V7cXR80C3Nm07" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="offer" data-analytics-target="everything">Get the pass</a>
           <a class="btn btn--ghost" href="mailto:team@miraitech.city?subject=Mirai%20Summits%20pass" data-analytics-action="alternative_offer" data-analytics-location="offer" data-analytics-target="email">Email us</a>
         </div>
         <p class="fine">Final price. Checkout on Stripe. Bookings confirmed within 7 days; your card is charged once confirmed.</p>
@@ -1647,7 +1640,7 @@ details.more[open] > summary { margin-bottom: 6px; }
     <details class="pkg-more" data-track-faq="offer">
       <summary>What each part is, and what it costs separately<svg aria-hidden="true"><use href="#i-chev"></use></svg></summary>
       <table class="sheet">
-        <caption>The programme, in full</caption>
+        <caption>The programme, in full <a class="sheet-go" href="/program/" data-analytics-action="site_navigation" data-analytics-location="offer" data-analytics-target="program">Hour by hour →</a></caption>
         <thead>
           <tr>
             <th class="c-when" scope="col">When</th>
@@ -1723,7 +1716,7 @@ details.more[open] > summary { margin-bottom: 6px; }
         <h2>See you in Kobe.</h2>
         <p class="count" id="count">Summit I opens at 09:00 JST on 17 October 2026. Kobe runs on Japan Standard Time.</p>
         <div class="acts">
-          <a class="btn" href="https://book.stripe.com/test_dRmfZj3Sk3R3f5ZcgS3Nm02" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="closing" data-analytics-target="everything">Get the pass</a>
+          <a class="btn" href="https://book.stripe.com/bJe9AVewY4V7cXR80C3Nm07" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="closing" data-analytics-target="everything">Get the pass</a>
           <a class="btn btn--ghost" href="mailto:team@miraitech.city?subject=Mirai%20Summits%20pass" data-analytics-action="alternative_offer" data-analytics-location="closing" data-analytics-target="email">Email us</a>
         </div>
       </div>
@@ -1757,6 +1750,105 @@ details.more[open] > summary { margin-bottom: 6px; }
   </div>
 </footer>
 
+<script src="/sheet.js"></script>
+<script src="/speakers-data.js"></script>
+<script src="/speakers-photos.js"></script>
+<script src="/speakers.js"></script>
+<script src="/speaker-panel.js"></script>
+<script>
+/* ── 07 + 09 speakers from the sheet (docs/speakers-sheet-prd.md) ──────
+      Snapshot paints now, the sheet repaints when it answers. Faces are the
+      speakers shown on 'conferences'; everyone else in the group is a
+      numbered row. Every face and row opens the group's one speaker panel
+      (the shared /speaker-panel.js). Sheet text goes in as text nodes only. */
+(function () {
+  'use strict';
+  var S = window.MiraiSpeakers, P = window.MiraiSpeakerPanel;
+  if (!S || !P) return;
+  var VISIBLE = 9;
+  /* today's face photos keep their intrinsic size hints (and Aubrey his srcset) */
+  var DIMS = {
+    '/img/aubrey.webp': [768, 710, '/img/aubrey-480.webp 480w, /img/aubrey.webp 768w'],
+    '/img/hayano.webp': [600, 750], '/img/sheekey.webp': [220, 264],
+    '/img/cordeiro.webp': [800, 800], '/img/betts-lacroix.webp': [768, 807],
+    '/img/yuki.webp': [480, 480], '/img/adam.webp': [800, 1118],
+    '/img/deigin.webp': [500, 500], '/img/davis.webp': [768, 768]
+  };
+  var groups = {};
+
+  function el(tag, cls, text) {
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text != null) n.textContent = text;
+    return n;
+  }
+  function pad(i) { return i < 10 ? '0' + i : String(i); }
+  function fill(box, nodes) { box.textContent = ''; nodes.forEach(function (n) { box.appendChild(n); }); }
+
+  function face(sp) {
+    var f = el('figure'), d = DIMS[sp.photo] || [], im = el('div', 'im');
+    f.setAttribute('data-speaker', sp.id);
+    f.setAttribute('aria-label', sp.affiliation ? sp.name + ', ' + sp.affiliation : sp.name);
+    var ph = S.photoEl(sp, { alt: sp.name, width: d[0], height: d[1], sizes: d[2] && '(min-width: 760px) 20vw, 50vw' });
+    if (d[2] && ph.tagName === 'IMG') ph.setAttribute('srcset', d[2]);
+    im.appendChild(ph);
+    var cap = el('figcaption', null, sp.name);
+    cap.appendChild(el('small', null, sp.affiliation));
+    f.appendChild(im);
+    f.appendChild(cap);
+    return f;
+  }
+
+  function row(sp, i) {
+    var r = el('div', 'mrow'), n = el('span', 'n', sp.name), s = el('span', 's', sp.sessionsLabel);
+    r.setAttribute('data-speaker', sp.id);
+    n.appendChild(el('em', null, sp.affiliation));
+    if (!sp.sessionsLabel) s.setAttribute('aria-label', 'Session to be announced');
+    r.appendChild(el('span', 'i', pad(i)));
+    r.appendChild(n);
+    r.appendChild(s);
+    return r;
+  }
+
+  function renderGroup(name, list) {
+    var g = groups[name];
+    if (!g) {
+      var root = document.querySelector('[data-speakers="conferences-' + name + '"]');
+      if (!root) return;
+      g = groups[name] = { root: root, panel: P.attach({ root: root, panel: root.querySelector('.spk-panel') }) };
+    }
+    var faces = list.filter(function (s) { return s.showOn.indexOf('conferences') !== -1; });
+    var rows = list.filter(function (s) { return s.showOn.indexOf('conferences') === -1; });
+    var mani = g.root.querySelector('.mani'), grids = mani.querySelectorAll('.mani-g');
+    var more = mani.querySelector('details.more'), start = faces.length + 1;
+    fill(g.root.querySelector('.faces'), faces.map(face));
+    mani.querySelector('.mani-h b').textContent = 'The other ' + S.numberWords(rows.length);
+    /* the section lead: "Twenty-two researchers…" counts the whole group */
+    var words = S.numberWords(list.length);
+    document.querySelectorAll('[data-speakers-group-count="' + name + '"]').forEach(function (n) { n.textContent = words.charAt(0).toUpperCase() + words.slice(1); });
+    fill(grids[0], rows.slice(0, VISIBLE).map(function (sp, i) { return row(sp, start + i); }));
+    fill(grids[1], rows.slice(VISIBLE).map(function (sp, i) { return row(sp, start + VISIBLE + i); }));
+    more.querySelector('summary .c').textContent = 'Show all ' + list.length;
+    more.hidden = rows.length <= VISIBLE;
+    mani.hidden = !rows.length;
+    /* the sheet repaint keeps an open speaker open, or closes a vanished one */
+    var byId = {};
+    list.forEach(function (sp) { byId[sp.id] = sp; });
+    g.panel.refresh(byId);
+  }
+
+  S.load({
+    url: window.MIRAI_SPEAKERS_SHEET_CSV,
+    snapshot: window.MIRAI_SPEAKERS_SNAPSHOT,
+    render: function (model) {
+      var gs = S.groups(model);
+      renderGroup('scientists', gs.scientists);
+      renderGroup('founders', gs.founders);
+      S.fillCounts(model, document);
+    }
+  });
+})();
+</script>
 <script>
 (function () {
   'use strict';

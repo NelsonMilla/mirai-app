@@ -1,0 +1,673 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Program · variant A</title>
+<meta name="robots" content="noindex" />
+<meta name="description" content="The full timetable for Summit I (17–18 October), Summit II (24–25 October) and the Demo Day (26 October) in Kobe, with every speaker. All times JST." />
+<meta name="theme-color" content="#050506" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23050506'/%3E%3Ctext x='50' y='72' font-size='62' font-family='Georgia' font-weight='bold' fill='%239be8f0' text-anchor='middle'%3E未%3C/text%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="preconnect" href="https://api.fontshare.com" />
+<link rel="preconnect" href="https://cdn.fontshare.com" crossorigin />
+<link href="https://api.fontshare.com/v2/css?f[]=switzer@400,700,800,900&display=swap" rel="stylesheet" media="print" onload="this.onload=null;this.media='all'" />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" media="print" onload="this.onload=null;this.media='all'" />
+<noscript>
+  <link href="https://api.fontshare.com/v2/css?f[]=switzer@400,700,800,900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</noscript>
+<script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/posthog.js"></script>
+<script defer src="/analytics.js"></script>
+<link rel="stylesheet" href="/nav.css" />
+<style>
+/* ══════════════════════════════════════════════════════════════════════
+   Mirai Tech City · The program — variant A, "broadsheet running order"
+   One continuous scroll in date order: no switcher, nothing hidden. Each
+   day opens with viewport-scale type; the timetable is one ruled grid;
+   a thin "you are on" strip under the nav follows the reading line.
+   Tokens, type and the speaker panel as /program/.
+   ══════════════════════════════════════════════════════════════════════ */
+
+@font-face {
+  font-family: 'Switzer-fallback';
+  src: local('Arial'), local('Helvetica Neue');
+  size-adjust: 97.6%;
+  ascent-override: 100%;
+  descent-override: 25%;
+  line-gap-override: 0%;
+}
+
+:root {
+  --void: #050506;
+  --near: #0b0b0e;
+  --bone: #f4f3f0;
+  --cyan: #9be8f0;
+  --accent: #9be8f0;
+  --ink: #f4f3f0;
+  --dim: rgba(244,243,240,.68);
+  --faint: rgba(244,243,240,.52);
+  --line: rgba(244,243,240,.14);
+  --line-2: rgba(244,243,240,.26);
+  --font: 'Switzer', 'Switzer-fallback', 'Inter', -apple-system, sans-serif;
+  --mono: 'IBM Plex Mono', ui-monospace, monospace;
+  --nav: 86px;          /* measured from the shared nav by the script */
+  --strip: 36px;        /* the "you are on" strip */
+  --gut: 24px;
+  --big: min(22vw, 300px); /* the day-break type */
+}
+@media (max-width: 700px) { :root { --gut: 16px; --big: 26vw; --strip: 34px; } }
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { background: var(--void); scroll-padding-top: calc(var(--nav) + var(--strip) + 12px); }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+body { min-width: 320px; overflow-x: hidden; background: var(--void); color: var(--bone);
+  font-family: var(--font); font-size: 16.5px; line-height: 1.55;
+  -webkit-font-smoothing: antialiased; }
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+button { font: inherit; color: inherit; }
+::selection { background: var(--cyan); color: #000; }
+:focus-visible { outline: 2px solid var(--cyan); outline-offset: 3px; border-radius: 2px; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+.skip { position: absolute; left: -9999px; top: 0; z-index: 90; }
+.skip:focus { left: 12px; top: 12px; display: inline-flex; align-items: center; min-height: 44px;
+  padding: 12px 18px; background: var(--cyan); color: #0a0a0c; font-family: var(--mono);
+  font-size: 11px; letter-spacing: .2em; text-transform: uppercase; text-decoration: none; }
+
+.wrap { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 var(--gut); }
+
+h1, h2, h3 { text-transform: uppercase; }
+h1 { font-size: clamp(48px, 9.2vw, 140px); font-weight: 900; line-height: .9; letter-spacing: -.028em; }
+h3 { font-size: clamp(18px, 1.5vw, 22px); font-weight: 800; line-height: 1.1; letter-spacing: -.01em; }
+p { max-width: 62ch; color: var(--dim); }
+.lead { font-size: clamp(17px, 1.35vw, 20px); line-height: 1.5; max-width: 54ch; }
+.lbl { display: block; color: var(--faint); font-family: var(--mono); font-size: 11px;
+  font-weight: 400; letter-spacing: .18em; line-height: 1.5; text-transform: uppercase; }
+.lbl--cyan { color: var(--cyan); }
+.num { font-variant-numeric: tabular-nums lining-nums; font-feature-settings: 'tnum' 1, 'lnum' 1; }
+.grid { display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); }
+.cell { background: var(--void); }
+
+/* ── the strip: where the reading line is ──────────────────────────── */
+.bs-strip { position: fixed; top: var(--nav); left: 0; right: 0; z-index: 40; height: var(--strip);
+  background: var(--void); border-bottom: 1px solid var(--line-2); }
+.bs-strip::before { content: ""; position: absolute; left: 0; right: 0; bottom: 100%;
+  height: var(--nav); background: var(--void); }
+.bs-strip .wrap { display: flex; align-items: center; gap: 14px; height: 100%; }
+.bs-strip .lbl { flex: none; font-size: 10px; }
+.bs-here { min-width: 0; overflow: hidden; color: var(--bone); font-family: var(--mono); font-size: 11px;
+  letter-spacing: .14em; text-transform: uppercase; white-space: nowrap; text-overflow: ellipsis; }
+.bs-strip i { position: absolute; left: 0; bottom: -1px; height: 1px; width: 100%; background: var(--cyan);
+  transform-origin: 0 50%; transform: scaleX(var(--p, 0)); }
+
+/* ── masthead + contents ───────────────────────────────────────────── */
+#top { padding: calc(var(--nav) + var(--strip) + 84px) 0 0; }
+#top .lbl { margin-bottom: 20px; }
+#top .lead { margin-top: 28px; }
+.bs-toc { list-style: none; margin-top: 64px; border-top: 1px solid var(--line-2); }
+.bs-toc a { display: grid; grid-template-columns: 12ch minmax(0, 1fr) auto; gap: 0 28px; align-items: baseline;
+  padding: 14px 0; border-bottom: 1px solid var(--line); text-decoration: none; }
+.bs-toc .d { color: var(--cyan); font-family: var(--mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; }
+.bs-toc .v { color: var(--dim); font-size: 15px; }
+.bs-toc .c { color: var(--faint); font-family: var(--mono); font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; }
+.bs-toc a:hover .v { color: var(--bone); }
+
+/* ── a day: the break, then the ruled running order ────────────────── */
+.bs-day { padding-top: 120px; }
+.bs-dh { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 0 40px; align-items: end;
+  padding: 28px 0 30px; border-top: 1px solid var(--line-2); }
+.bs-big { font-size: var(--big); font-weight: 900; line-height: .8; letter-spacing: -.05em; }
+.bs-big span[aria-hidden] { display: block; }
+.bs-big b { display: block; font-weight: 900; }
+.bs-big b + b { margin-top: .04em; }
+.bs-meta { display: grid; gap: 10px; padding-bottom: .6em; justify-items: start; }
+.bs-meta p { font-size: 15px; line-height: 1.45; max-width: 34ch; }
+.bs-meta a { display: inline-flex; align-items: center; min-height: 44px; margin: -12px 0;
+  color: var(--cyan); font-family: var(--mono); font-size: 11px; letter-spacing: .18em;
+  text-decoration: none; text-transform: uppercase; }
+.bs-meta a:hover { text-decoration: underline; }
+
+.bs-cols, .bs-slot { display: grid; grid-template-columns: 12ch 17ch minmax(0, 1fr) minmax(0, 30%); gap: 0 28px; }
+.bs-cols { padding: 0 0 10px; border-bottom: 1px solid var(--line-2); }
+.bs-cols span { color: var(--faint); font-family: var(--mono); font-size: 10px; letter-spacing: .18em; text-transform: uppercase; }
+.bs-slots { list-style: none; }
+.bs-slot { padding: 18px 0 20px; border-bottom: 1px solid var(--line); }
+.bs-time { padding-top: 3px; color: var(--dim); font-family: var(--mono); font-size: 12px; letter-spacing: .06em; white-space: nowrap; }
+.bs-block { padding-top: 4px; color: var(--faint); font-family: var(--mono); font-size: 10.5px;
+  letter-spacing: .14em; line-height: 1.45; text-transform: uppercase; overflow-wrap: anywhere; }
+.bs-title { max-width: 60ch; color: var(--bone); font-size: 18px; font-weight: 700; line-height: 1.3; }
+.bs-title.is-tbc { color: var(--faint); font-weight: 400; }
+.bs-notes { margin-top: 8px; font-size: 15px; }
+.bs-who { list-style: none; font-size: 14.5px; line-height: 1.45; }
+.bs-who li + li { margin-top: 5px; }
+.bs-name { color: var(--bone); font-weight: 700; }
+button.bs-name { display: inline; margin: -6px -4px; padding: 6px 4px; border: 0; background: transparent;
+  font-size: inherit; line-height: inherit; text-align: left; cursor: pointer;
+  text-decoration: underline; text-decoration-color: var(--line-2); text-underline-offset: 4px; }
+button.bs-name:hover, button.bs-name.is-open { color: var(--cyan); text-decoration-color: currentColor; }
+.bs-aff { display: block; color: var(--dim); }
+/* keynotes: the size step and the one accent mark */
+.bs-slot.is-keynote { padding: 30px 0 34px; }
+.bs-slot.is-keynote .bs-block { color: var(--cyan); }
+.bs-slot.is-keynote .bs-block::before { content: ""; display: inline-block; width: 5px; height: 5px;
+  margin-right: 9px; border-radius: 50%; background: var(--cyan); vertical-align: 2px; }
+.bs-slot.is-keynote .bs-title { font-size: clamp(26px, 2.8vw, 40px); font-weight: 800; line-height: 1.04;
+  letter-spacing: -.02em; text-wrap: balance; }
+.bs-slot.is-keynote .bs-who { font-size: 16px; padding-top: 6px; }
+/* breaks: a thin rule with the label */
+.bs-slot.is-break { padding: 7px 0 8px; }
+.bs-slot.is-break .bs-time, .bs-slot.is-break .bs-block { padding-top: 0; color: var(--faint); font-size: 10.5px; }
+.bs-slot.is-break .bs-title { color: var(--faint); font-family: var(--mono); font-size: 10.5px; font-weight: 400;
+  letter-spacing: .14em; line-height: 1.45; text-transform: uppercase; }
+/* the speaker panel unfolds inside the row that opened it */
+.bs-slot > .spk-panel, .bs-roster > .spk-panel { grid-column: 1 / -1; }
+.bs-slot > .spk-panel { margin: 18px 0 2px; }
+
+/* Monday: the pitches as their own ruled block, then the awards */
+.bs-pitches, .bs-awards { margin-top: 72px; }
+.bs-sub { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 24px;
+  padding-bottom: 14px; border-bottom: 1px solid var(--line-2); }
+.bs-pitches ol { list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 28px; }
+.bs-pitches li { display: grid; grid-template-columns: 4ch minmax(0, 1fr); gap: 0 14px;
+  padding: 16px 0 18px; border-bottom: 1px solid var(--line); }
+.bs-pitches .n { padding-top: 3px; color: var(--faint); font-family: var(--mono); font-size: 11px; letter-spacing: .1em; }
+.bs-pitches b { display: block; color: var(--bone); font-size: 17px; font-weight: 700; line-height: 1.3; }
+.bs-pitches li p { margin-top: 4px; font-size: 15px; }
+.bs-awards[hidden] { display: none; }
+.bs-awards .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 22px; }
+.bs-awards .cell { padding: 22px 22px 26px; }
+.bs-awards .cell .lbl { margin-bottom: 10px; color: var(--cyan); }
+.bs-awards .cell p, .bs-awards .cell li { font-size: 15px; line-height: 1.5; color: var(--dim); }
+.bs-awards .cell ul { list-style: none; }
+.bs-awards .cell li + li { margin-top: 8px; }
+
+/* ── the last chapter: everyone, as a tight sheet of portraits ─────── */
+#roster { padding: 120px 0 112px; }
+.bs-key { margin-bottom: 22px; }
+.bs-key i { font-style: normal; color: var(--cyan); }
+.bs-roster { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 8px; }
+.bs-roster figure { border: 1px solid var(--line); background: var(--near); cursor: pointer; }
+.bs-roster .im { aspect-ratio: 4 / 5; overflow: hidden; }
+.bs-roster img { width: 100%; height: 100%; object-fit: cover; object-position: center 20%;
+  filter: grayscale(.92) contrast(1.04) brightness(.94); transition: filter .35s ease, transform .5s ease; }
+.bs-roster .spk-initials { aspect-ratio: 4 / 5; font-size: clamp(22px, 2.4vw, 32px); }
+.bs-roster figure:hover img, .bs-roster figure.is-open img { filter: grayscale(0) contrast(1); transform: scale(1.03); }
+.bs-roster figure.is-open { border-color: rgba(155,232,240,.5); }
+.bs-roster figcaption { padding: 9px 9px 11px; font-family: var(--mono); font-size: 10.5px; font-weight: 500;
+  letter-spacing: .06em; line-height: 1.3; text-transform: uppercase; overflow-wrap: anywhere; }
+.bs-roster figcaption small { display: block; margin-top: 5px; color: var(--faint); font-size: 9.5px;
+  font-weight: 400; letter-spacing: .04em; line-height: 1.35; text-transform: none;
+  display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden; }
+.bs-roster figcaption .s { display: block; margin-top: 6px; color: var(--cyan); font-size: 9.5px; font-weight: 400; }
+.bs-roster figcaption .s:empty::before { content: '—'; color: var(--faint); }
+
+/* ── the speaker panel (same rules as /program/) ───────────────────── */
+.spk-initials { display: grid; place-items: center; width: 100%; height: 100%; aspect-ratio: 5 / 6;
+  background: var(--void); color: var(--faint); font-size: clamp(28px, 3.4vw, 44px); font-weight: 800;
+  letter-spacing: -.02em; line-height: 1; }
+.spk-panel { position: relative; display: grid; grid-template-columns: 220px minmax(0, 1fr);
+  margin-top: 28px; border: 1px solid var(--line); border-top-color: rgba(155,232,240,.5);
+  background: var(--near); }
+.spk-panel[hidden] { display: none; }
+.spk-ph { overflow: hidden; border-right: 1px solid var(--line); background: var(--void); }
+.spk-ph img { width: 100%; aspect-ratio: 5 / 6; object-fit: cover; object-position: center 20%; }
+.spk-ph .spk-initials { height: auto; }
+.spk-tx { min-width: 0; padding: 26px 28px 30px; }
+.spk-tx h3 { padding-right: 96px; font-size: clamp(22px, 2.2vw, 30px); }
+.spk-tx h3:focus { outline: none; }
+.spk-aff { margin-top: 8px; font-size: 15px; line-height: 1.45; }
+.spk-ses { margin-top: 14px; color: var(--cyan); font-family: var(--mono); font-size: 11px;
+  letter-spacing: .14em; text-transform: uppercase; }
+.spk-ses.is-tba { color: var(--faint); }
+.spk-talk { margin-top: 22px; padding-top: 16px; border-top: 1px solid var(--line); }
+.spk-talk .lbl { margin-bottom: 6px; }
+.spk-talk p { color: var(--bone); font-size: 17px; font-weight: 700; line-height: 1.35; }
+.spk-bio { margin-top: 14px; font-size: 15px; line-height: 1.65; max-width: 68ch; }
+.spk-x { position: absolute; top: 14px; right: 14px; min-height: 44px; padding: 0 16px;
+  border: 1px solid var(--line-2); border-radius: 3px; background: transparent; color: var(--bone);
+  font-family: var(--mono); font-size: 10px; letter-spacing: .2em; text-transform: uppercase; cursor: pointer; }
+.spk-x:hover { border-color: var(--bone); }
+@media (max-width: 640px) {
+  .spk-panel { grid-template-columns: 1fr; }
+  .spk-ph { width: 112px; margin: 20px 0 0 20px; border: 1px solid var(--line); }
+  .spk-tx { padding: 18px 20px 24px; }
+  .spk-tx h3 { padding-right: 0; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .spk-panel { transition: opacity .2s ease, transform .24s cubic-bezier(.16,1,.3,1); }
+  .spk-panel.is-enter { opacity: 0; transform: translateY(6px); transition: none; }
+}
+@media (prefers-reduced-motion: reduce) { .bs-roster img { transition: none; } }
+
+/* ── footer + variant badge ────────────────────────────────────────── */
+.foot { background: var(--near); padding: 56px 0 72px; }
+.foot .wrap { display: flex; flex-wrap: wrap; gap: 10px 26px; justify-content: space-between;
+  color: var(--faint); font-family: var(--mono); font-size: 10px; letter-spacing: .16em; text-transform: uppercase; }
+.foot a { display: inline-block; margin: -15px -8px; padding: 15px 8px; color: var(--cyan); text-decoration: none; }
+.foot a:hover { text-decoration: underline; }
+.vbadge { position: fixed; left: 12px; bottom: 12px; z-index: 60; padding: 7px 10px;
+  border: 1px solid var(--line-2); border-radius: 3px; background: var(--void); color: var(--faint);
+  font-family: var(--mono); font-size: 10px; letter-spacing: .08em; }
+.vbadge a { color: var(--cyan); }
+
+/* ── responsive rhythm ─────────────────────────────────────────────── */
+@media (max-width: 1100px) { .bs-roster { grid-template-columns: repeat(6, minmax(0, 1fr)); } }
+@media (max-width: 980px) {
+  .bs-cols, .bs-slot { grid-template-columns: 12ch 15ch minmax(0, 1fr); }
+  .bs-cols span:last-child { display: none; }
+  .bs-who { grid-column: 3; margin-top: 10px; }
+  .bs-awards .grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 700px) {
+  #top { padding-top: calc(var(--nav) + var(--strip) + 48px); }
+  .bs-toc { margin-top: 44px; }
+  .bs-toc a { grid-template-columns: 1fr auto; gap: 4px 16px; }
+  .bs-toc .v { grid-column: 1 / -1; grid-row: 2; font-size: 14px; }
+  .bs-day { padding-top: 72px; }
+  .bs-dh { grid-template-columns: 1fr; gap: 18px; padding: 20px 0 22px; }
+  .bs-meta { padding-bottom: 0; }
+  .bs-cols { display: none; }
+  .bs-slots { border-top: 1px solid var(--line-2); }
+  .bs-slot { grid-template-columns: auto minmax(0, 1fr); gap: 0 14px; padding: 15px 0 17px; }
+  .bs-time, .bs-block { padding-top: 0; margin-bottom: 6px; }
+  .bs-block { align-self: baseline; }
+  .bs-main, .bs-who { grid-column: 1 / -1; }
+  .bs-title { font-size: 17px; }
+  .bs-slot.is-keynote { padding: 22px 0 24px; }
+  .bs-slot.is-keynote .bs-title { font-size: 25px; }
+  .bs-slot.is-break { padding: 7px 0 8px; }
+  .bs-slot.is-break .bs-time { margin-bottom: 0; }
+  .bs-slot.is-break .bs-block { display: none; }
+  .bs-slot.is-break .bs-main { grid-column: auto; }
+  .bs-pitches, .bs-awards { margin-top: 52px; }
+  .bs-pitches ol { grid-template-columns: 1fr; }
+  #roster { padding: 72px 0 84px; }
+  .bs-roster { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+  .bs-roster figcaption { padding: 7px 7px 9px; font-size: 9.5px; }
+  .bs-roster figcaption small, .bs-roster figcaption .s { font-size: 9px; }
+  .vbadge { left: 8px; bottom: 8px; right: 8px; font-size: 9.5px; }
+}
+</style>
+</head>
+<body data-analytics-offer="program">
+
+<script src="/nav.js"></script>
+<a class="skip" href="#day-saturday_17_october">Skip to the timetable</a>
+
+<div class="bs-strip" aria-hidden="true">
+  <div class="wrap"><span class="lbl">You are on</span><span class="bs-here" data-bs="here">The program</span></div>
+  <i></i>
+</div>
+
+<main>
+
+<!-- ══ 01 MASTHEAD ════════════════════════════════════════════════════ -->
+<section id="top" data-track-section="program_hero" data-track-position="1" data-where="The program">
+  <div class="wrap">
+    <span class="lbl lbl--cyan">The program · Oct 17–26 · Kobe</span>
+    <h1>The program.</h1>
+    <p class="lead"><span data-speakers-count>72</span> speakers across Summit I (17–18 October), Summit II (24–25 October) and the Demo Day (26 October). All times JST.</p>
+    <nav aria-label="Days"><ol class="bs-toc" data-bs="toc"></ol></nav>
+  </div>
+</section>
+
+<!-- ══ 02 TIMETABLE: every day, in order ══════════════════════════════ -->
+<div id="timetable" class="wrap" data-track-section="timetable" data-track-position="2" data-bs="timetable">
+  <noscript><p class="lead" style="padding-top:64px">The timetable needs JavaScript. The summits page lists every session: <a href="/conferences/">/conferences/</a>.</p></noscript>
+</div>
+
+<!-- Static, placed under Monday 26 October by the script. Copy from the programme booklet; claims to be reviewed. -->
+<aside class="bs-awards" data-program-day="monday_26_october" aria-labelledby="bs-awards-h" hidden>
+  <div class="bs-sub"><h3 id="bs-awards-h">Demo Day awards</h3></div>
+  <div class="grid">
+    <div class="cell">
+      <span class="lbl">First prize</span>
+      <ul>
+        <li>A ticket to the next Vitalist Bay</li>
+        <li>Priority review for the Meet the Drapers Japan 2027 cohort</li>
+      </ul>
+    </div>
+    <div class="cell">
+      <span class="lbl">Antler Japan residency</span>
+      <p>Six weeks of mentoring, access to USD 850,000 in perks, and a chance of investment.</p>
+    </div>
+    <div class="cell">
+      <span class="lbl">Japan Landing Award</span>
+      <p>Presented by GlobalDeal, Official Market-Entry Execution Partner. A hands-on engagement to take the winner into the Japanese market: entry strategy, the right partners and first customers, and regulatory navigation.</p>
+    </div>
+  </div>
+</aside>
+
+<!-- ══ 03 ROSTER: the last chapter ════════════════════════════════════ -->
+<section id="roster" data-track-section="roster" data-track-position="3" aria-labelledby="roster-h" data-where="Speakers">
+  <div class="wrap">
+    <header class="bs-dh">
+      <h2 class="bs-big" id="roster-h"><span aria-hidden="true"><b data-speakers-count>72</b></span><span class="sr">Speakers</span></h2>
+      <div class="bs-meta">
+        <span class="lbl lbl--cyan">Speakers</span>
+        <p>Everyone on the program, in one sheet. Select a portrait for the biography.</p>
+      </div>
+    </header>
+    <span class="lbl bs-key"><i>S1</i> Oct 17–18 &nbsp; <i>S2</i> Oct 24–25 &nbsp; <i>F</i> Demo Day Oct 26 &nbsp; <i>Online</i> joins remotely &nbsp; <i>—</i> session to be announced</span>
+    <div class="bs-roster" data-bs="roster"></div>
+    <div data-bs="home"><div class="spk-panel" id="spk-panel-program" role="region" aria-labelledby="spk-panel-program-h" hidden></div></div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <span><a href="https://www.miraitech.city/" target="_blank" rel="noopener" data-analytics-action="site_navigation" data-analytics-location="footer" data-analytics-target="mirai_city">Mirai Tech City</a> · Kobe Biomedical Innovation Cluster, Port Island</span>
+    <span>Kobe · Japan Standard Time</span>
+  </div>
+</footer>
+
+<div class="vbadge">Variant A · broadsheet — <a href="/program/">current</a> · <a href="b.html">B</a> · <a href="c.html">C</a> · <a href="d.html">D</a></div>
+
+<script src="/sheet.js"></script>
+<script src="/speakers-data.js"></script>
+<script src="/speakers-photos.js"></script>
+<script src="/speakers.js"></script>
+<script src="/program-data.js"></script>
+<script src="/program.js"></script>
+<script src="/speaker-panel.js"></script>
+<script>
+/* Variant A. Snapshots paint now, each sheet repaints when it answers; names
+   link to the speakers model by MiraiProgram.speakerKey. The one speaker panel
+   moves into the row (or roster row) that opened it, and goes home before
+   every repaint. Sheet text goes in as text nodes only. */
+(function () {
+  'use strict';
+  var S = window.MiraiSpeakers, G = window.MiraiProgram, P = window.MiraiSpeakerPanel;
+  if (!S || !G || !P) return;
+  var state = { speakers: null, program: null };
+  var $ = function (k) { return document.querySelector('[data-bs="' + k + '"]'); };
+  var timetable = $('timetable'), roster = $('roster'), toc = $('toc'), home = $('home'), here = $('here');
+  var panelEl = document.getElementById('spk-panel-program');
+  var statics = [].slice.call(document.querySelectorAll('[data-program-day]'));
+  var root = document.querySelector('main');
+
+  function el(tag, cls, text) {
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text != null) n.textContent = text;
+    return n;
+  }
+  function fill(box, nodes) { box.textContent = ''; nodes.forEach(function (n) { box.appendChild(n); }); }
+
+  /* the nav's real height drives the strip and the scroll inset */
+  var bar = document.querySelector('.topbar');
+  function measure() { if (bar) document.documentElement.style.setProperty('--nav', bar.offsetHeight + 'px'); }
+  measure();
+  window.addEventListener('resize', measure);
+
+  function relink(program, speakers) {
+    var index = {};
+    ((speakers && speakers.speakers) || []).forEach(function (s) {
+      [s.name, [s.first, s.last].filter(Boolean).join(' ')].forEach(function (n) {
+        var k = G.speakerKey(n);
+        if (k && !index[k]) index[k] = s.id;
+      });
+    });
+    program.days.forEach(function (d) {
+      d.slots.forEach(function (sl) {
+        sl.speakers.forEach(function (p) { p.id = index[G.speakerKey(p.name)] || null; });
+      });
+    });
+    return program;
+  }
+
+  /* ── one row of the running order ── */
+  function slotEl(d, sl) {
+    var li = el('li', 'bs-slot is-' + sl.kind), main = el('div', 'bs-main'), who = el('ul', 'bs-who');
+    li.setAttribute('data-where', d.short + ' · ' + (sl.start ? sl.start + ' ' : '') + (sl.block || sl.title || ''));
+    li.appendChild(el('span', 'bs-time num', [sl.start, sl.end].filter(Boolean).join('–')));
+    li.appendChild(el('span', 'bs-block', sl.block || ''));
+    main.appendChild(el('p', 'bs-title' + (sl.tbc ? ' is-tbc' : ''), sl.title || 'Title to be confirmed'));
+    if (sl.notes) main.appendChild(el('p', 'bs-notes', sl.notes));
+    li.appendChild(main);
+    sl.speakers.forEach(function (p) {
+      var item = el('li'), name;
+      if (p.id) {
+        name = el('button', 'bs-name', p.name);
+        name.type = 'button';
+        name.setAttribute('data-speaker', p.id);
+      } else {
+        name = el('span', 'bs-name', p.name);
+      }
+      item.appendChild(name);
+      if (p.affiliation) item.appendChild(el('span', 'bs-aff', p.affiliation));
+      who.appendChild(item);
+    });
+    if (sl.speakers.length) li.appendChild(who);
+    return li;
+  }
+
+  function dayEl(d) {
+    var sec = el('section', 'bs-day'), hd = el('header', 'bs-dh'), h = el('h2', 'bs-big');
+    var parts = d.label.split(' '), vis = el('span');
+    sec.id = 'day-' + d.id;
+    sec.setAttribute('data-program', 'day');
+    sec.setAttribute('aria-labelledby', sec.id + '-h');
+    sec.setAttribute('data-where', d.short);
+    h.id = sec.id + '-h';
+    vis.setAttribute('aria-hidden', 'true');
+    vis.appendChild(el('b', null, (parts[0] || '').slice(0, 3)));
+    vis.appendChild(el('b', 'num', parts[1] || ''));
+    h.appendChild(vis);
+    h.appendChild(el('span', 'sr', d.label));
+    hd.appendChild(h);
+
+    var talks = d.slots.filter(function (s) { return s.kind !== 'pitch'; });
+    var pitches = d.slots.filter(function (s) { return s.kind === 'pitch'; });
+    var meta = el('div', 'bs-meta'), date = el('span', 'lbl lbl--cyan', d.label);
+    date.setAttribute('aria-hidden', 'true');
+    meta.appendChild(date);
+    if (d.venue) meta.appendChild(el('p', null, d.venue));
+    if (d.venueLink) {
+      var a = el('a', null, 'Map ↗');
+      a.href = d.venueLink;
+      a.target = '_blank';
+      a.rel = 'noopener';
+      a.setAttribute('aria-label', 'Map' + (d.venue ? ' of ' + d.venue : ' of the venue') + ', ' + d.label);
+      a.setAttribute('data-analytics-action', 'site_navigation');
+      a.setAttribute('data-analytics-location', 'program');
+      a.setAttribute('data-analytics-target', 'venue_map');
+      meta.appendChild(a);
+    }
+    meta.appendChild(el('span', 'lbl', counts(talks, pitches) + ' · JST'));
+    hd.appendChild(meta);
+    sec.appendChild(hd);
+
+    var cols = el('div', 'bs-cols');
+    cols.setAttribute('aria-hidden', 'true');
+    ['Time', 'Block', 'Session', 'Speakers'].forEach(function (t) { cols.appendChild(el('span', null, t)); });
+    sec.appendChild(cols);
+    var ol = el('ol', 'bs-slots');
+    talks.forEach(function (s) { ol.appendChild(slotEl(d, s)); });
+    sec.appendChild(ol);
+
+    if (pitches.length) {
+      var box = el('div', 'bs-pitches'), sub = el('div', 'bs-sub'), list = el('ol'), hid = sec.id + '-pitches';
+      box.setAttribute('data-program', 'pitches');
+      box.setAttribute('role', 'group');
+      box.setAttribute('aria-labelledby', hid);
+      box.setAttribute('data-where', d.short + ' · ' + (pitches[0].block || 'Demo Day pitches'));
+      var ph = el('h3', null, pitches[0].block || 'Demo Day pitches');
+      ph.id = hid;
+      sub.appendChild(ph);
+      sub.appendChild(el('span', 'lbl', pitches.length + ' companies'));
+      box.appendChild(sub);
+      pitches.forEach(function (s, i) {
+        var li = el('li', 'bs-pitch'), tx = el('div');
+        li.appendChild(el('span', 'n num', (i < 9 ? '0' : '') + (i + 1)));
+        tx.appendChild(el('b', null, s.title));
+        if (s.notes) tx.appendChild(el('p', null, s.notes));
+        li.appendChild(tx);
+        list.appendChild(li);
+      });
+      box.appendChild(list);
+      sec.appendChild(box);
+    }
+    statics.forEach(function (n) {
+      if (n.getAttribute('data-program-day') === d.id) {
+        n.setAttribute('data-where', d.short + ' · Demo Day awards');
+        sec.appendChild(n);
+        n.hidden = false;
+      }
+    });
+    return sec;
+  }
+
+  function counts(talks, pitches) {
+    return talks.length + ' sessions' + (pitches.length ? ' · ' + pitches.length + ' pitches' : '');
+  }
+
+  function tocEl(d) {
+    var li = el('li'), a = el('a');
+    var talks = d.slots.filter(function (s) { return s.kind !== 'pitch'; });
+    var pitches = d.slots.filter(function (s) { return s.kind === 'pitch'; });
+    a.href = '#day-' + d.id;
+    a.appendChild(el('span', 'd', d.short));
+    a.appendChild(el('span', 'v', d.venue || ''));
+    a.appendChild(el('span', 'c', counts(talks, pitches)));
+    li.appendChild(a);
+    return li;
+  }
+
+  /* ── roster ── */
+  function card(sp) {
+    var f = el('figure'), im = el('div', 'im'), cap = el('figcaption', null, sp.name);
+    f.setAttribute('data-speaker', sp.id);
+    f.setAttribute('aria-label', sp.affiliation ? sp.name + ', ' + sp.affiliation : sp.name);
+    im.appendChild(S.photoEl(sp, { alt: '' }));
+    if (sp.affiliation) cap.appendChild(el('small', null, sp.affiliation));
+    var s = el('span', 's', sp.sessionsLabel);
+    if (!sp.sessionsLabel) s.setAttribute('aria-label', 'Session to be announced');
+    cap.appendChild(s);
+    f.appendChild(im);
+    f.appendChild(cap);
+    return f;
+  }
+
+  function byId() {
+    var m = {};
+    ((state.speakers && state.speakers.speakers) || []).forEach(function (sp) { m[sp.id] = sp; });
+    return m;
+  }
+
+  /* the panel unfolds where it was asked for: inside the timetable row, or
+     after the last portrait in the clicked portrait's row. Runs in the capture
+     phase, before the panel's own click handler opens it. */
+  root.addEventListener('click', function (e) {
+    var o = e.target.closest('[data-speaker]');
+    if (!o || o.classList.contains('is-open') || panelEl.contains(o)) return;
+    var row = o.closest('.bs-slot');
+    if (row) { row.appendChild(panelEl); return; }
+    if (o.parentNode === roster) {
+      var last = o, n = o.nextElementSibling;
+      while (n && n.tagName === 'FIGURE' && n.offsetTop === o.offsetTop) { last = n; n = n.nextElementSibling; }
+      roster.insertBefore(panelEl, last.nextSibling);
+    }
+  }, true);
+
+  var panel = P.attach({ root: root, panel: panelEl });
+
+  function goHome() { if (panelEl.parentNode !== home) home.appendChild(panelEl); }
+
+  function paintProgram() {
+    if (!state.program) return;
+    var program = relink(state.program, state.speakers);
+    goHome();
+    statics.forEach(function (n) { n.hidden = true; timetable.parentNode.insertBefore(n, timetable.nextSibling); });
+    fill(toc, program.days.map(tocEl).concat([speakersToc()]));
+    fill(timetable, program.days.map(dayEl));
+    panel.refresh(byId());
+    watch();
+  }
+
+  function speakersToc() {
+    var li = el('li'), a = el('a');
+    a.href = '#roster';
+    a.appendChild(el('span', 'd', 'Speakers'));
+    a.appendChild(el('span', 'v', 'Everyone on the program'));
+    var c = el('span', 'c', (state.speakers ? state.speakers.count : 72) + ' people');
+    a.appendChild(c);
+    li.appendChild(a);
+    return li;
+  }
+
+  /* ── the "you are on" strip: the topmost marked element in a band just
+     under the strip wins; the cyan hairline is page progress ── */
+  var io = null, live = [];
+  function watch() {
+    if (!('IntersectionObserver' in window)) return;
+    if (io) io.disconnect();
+    live = [];
+    var inset = (parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 134) + 12;
+    io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        var i = live.indexOf(en.target);
+        if (en.isIntersecting && i < 0) live.push(en.target);
+        if (!en.isIntersecting && i >= 0) live.splice(i, 1);
+      });
+      if (!live.length) return;
+      var all = targets(), top = live.slice().sort(function (a, b) { return all.indexOf(a) - all.indexOf(b); });
+      /* a slot row beats the day it sits in */
+      var pick = top.filter(function (n) { return !n.classList.contains('bs-day'); })[0] || top[0];
+      var t = pick.getAttribute('data-where');
+      if (here.textContent !== t) here.textContent = t;
+    }, { rootMargin: '-' + (inset + 1) + 'px 0px -' + Math.max(0, Math.round(window.innerHeight * 0.66) - inset) + 'px 0px' });
+    targets().forEach(function (n) { io.observe(n); });
+  }
+  var cache = null;
+  function targets() {
+    if (!cache || !cache[0] || !cache[0].isConnected) cache = [].slice.call(document.querySelectorAll('[data-where]'));
+    return cache;
+  }
+  var resizeT;
+  window.addEventListener('resize', function () { clearTimeout(resizeT); resizeT = setTimeout(function () { cache = null; watch(); }, 150); });
+
+  var strip = here.parentNode.parentNode, ticking = false;
+  function progress() {
+    ticking = false;
+    var max = document.documentElement.scrollHeight - window.innerHeight;
+    strip.style.setProperty('--p', max > 0 ? Math.min(1, window.scrollY / max).toFixed(4) : 0);
+  }
+  window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(progress); } }, { passive: true });
+  progress();
+
+  S.load({
+    url: window.MIRAI_SPEAKERS_SHEET_CSV,
+    snapshot: window.MIRAI_SPEAKERS_SNAPSHOT,
+    render: function (model) {
+      state.speakers = model;
+      goHome();
+      fill(roster, model.speakers.map(card));
+      S.fillCounts(model, document);
+      cache = null;
+      paintProgram();
+      panel.refresh(byId());
+    }
+  });
+
+  G.load({
+    url: window.MIRAI_PROGRAM_SHEET_CSV,
+    snapshot: window.MIRAI_PROGRAM_SNAPSHOT,
+    speakersModel: state.speakers,
+    render: function (model) {
+      state.program = model;
+      cache = null;
+      paintProgram();
+    }
+  });
+})();
+</script>
+</body>
+</html>
