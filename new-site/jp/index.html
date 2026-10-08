@@ -260,6 +260,9 @@
   .jp-page__face { min-width: 0; margin: 0; }
   .jp-page__face + .jp-page__face { border-left: 1px solid var(--line); }
   .jp-page__face img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; filter: grayscale(.65) brightness(.76); }
+  /* Speaker without a photo: initials in the photo's box. */
+  .jp-page__face .spk-initials { display: flex; align-items: center; justify-content: center; width: 100%; aspect-ratio: 4 / 5;
+    background: rgba(244,243,240,.04); font-family: var(--mono); font-size: clamp(24px, 3vw, 40px); letter-spacing: .12em; color: var(--faint); }
   .jp-page__face:nth-child(1) img { object-position: 51% 36%; }
   .jp-page__face:nth-child(2) img { object-position: 50% 36%; }
   .jp-page__face:nth-child(3) img { object-position: 57% 35%; }
@@ -267,6 +270,7 @@
   .jp-page__face figcaption { min-height: 150px; padding: 18px 20px 20px; border-top: 1px solid var(--line); }
   .jp-page__face h3 { font-size: 18px; font-weight: 800; line-height: 1.2; }
   .jp-page__latin { white-space: nowrap; }
+  .jp-page__face .jp-page__latin { white-space: normal; } /* affiliations come from the sheet and can be long */
   .jp-page__face-role { margin-top: 8px; color: var(--ink); font-size: 12px; font-weight: 600; line-height: 1.45; }
   .jp-page__face-focus { display: grid; gap: 4px; margin-top: 8px; color: var(--dim); font-family: var(--mono); font-size: 12px;
     letter-spacing: .045em; line-height: 1.5; text-transform: uppercase; }
@@ -493,7 +497,7 @@
     .jp-page__bridge-point { grid-template-columns: 34px minmax(0, 1fr); gap: 12px; }
     .jp-page__faces { grid-template-columns: 1fr; }
     .jp-page__face + .jp-page__face { border-top: 1px solid var(--line); border-left: 0; }
-    .jp-page__face img { aspect-ratio: 4 / 3; }
+    .jp-page__face img, .jp-page__face .spk-initials { aspect-ratio: 4 / 3; }
     .jp-page__face figcaption { min-height: 0; }
     .jp-page__eligibility > div { grid-template-columns: 1fr; gap: 7px; }
     .jp-page__purchase { padding-right: 5vw; padding-left: 5vw; }
@@ -632,16 +636,11 @@
       <div class="jp-page__speaker-summary">
         <dl class="jp-page__speaker-count">
           <div><dt><strong>15</strong></dt><dd>登壇者公開済み</dd></div>
-          <div><dt><span aria-hidden="true">/</span><strong>55</strong></dt><dd>登壇者確定</dd></div>
+          <div><dt><span aria-hidden="true">/</span><strong data-speakers-count>55</strong></dt><dd>登壇者確定</dd></div>
         </dl>
       </div>
     </header>
-    <div class="jp-page__faces" role="list">
-      <figure class="jp-page__face" role="listitem"><img src="/img/aubrey.webp" width="768" height="710" sizes="(max-width: 430px) 90vw, (max-width: 760px) 45vw, 20vw" alt="" loading="lazy" decoding="async" /><figcaption><h3>オーブリー・デグレイ</h3><p class="jp-page__face-role">プレジデント兼最高科学責任者｜<span class="jp-page__latin" lang="en">LEV Foundation</span></p><p class="jp-page__face-focus"><strong>注目分野</strong><span>マウスを用いた若返り研究</span></p></figcaption></figure>
-      <figure class="jp-page__face" role="listitem"><img src="/img/jose.webp" width="500" height="500" sizes="(max-width: 430px) 90vw, (max-width: 760px) 45vw, 20vw" alt="" loading="lazy" decoding="async" /><figcaption><h3>ホセ・ルイス・コルデイロ</h3><p class="jp-page__face-role">シニアフェロー｜<span class="jp-page__latin" lang="en">The Millennium Project</span></p><p class="jp-page__face-focus"><strong>注目分野</strong><span>未来予測｜<cite lang="en">The Death of Death</cite> 著者</span></p></figcaption></figure>
-      <figure class="jp-page__face" role="listitem"><img src="/img/yuki.webp" width="480" height="480" sizes="(max-width: 430px) 90vw, (max-width: 760px) 45vw, 20vw" alt="" loading="lazy" decoding="async" /><figcaption><h3>羽生 雄毅</h3><p class="jp-page__face-role">創業者兼CEO｜<span class="jp-page__latin" lang="en">IntegriCulture</span></p><p class="jp-page__face-focus"><strong>注目分野</strong><span>細胞農業向け細胞培養システム</span></p></figcaption></figure>
-      <figure class="jp-page__face" role="listitem"><img src="/img/adam.webp" width="800" height="1118" sizes="(max-width: 430px) 90vw, (max-width: 760px) 45vw, 20vw" alt="" loading="lazy" decoding="async" /><figcaption><h3>アダム・グリーズ</h3><p class="jp-page__face-role">創設者｜<span class="jp-page__latin" lang="en">Vitalism</span></p><p class="jp-page__face-focus"><strong>注目分野</strong><span>コミュニティイベントの企画｜コミュニティ形成</span></p></figcaption></figure>
-    </div>
+    <div class="jp-page__faces" role="list" data-speakers="jp-cards"></div>
   </section>
 
   <section class="jp-page__ticket" id="ticket" aria-labelledby="ticket-title" data-track-section="ticket" data-track-position="6">
@@ -723,5 +722,48 @@
   </nav>
 </footer>
 
+<script src="/sheet.js"></script>
+<script src="/speakers-data.js"></script>
+<script src="/speakers-photos.js"></script>
+<script src="/speakers.js"></script>
+<script>
+  /* 注目の登壇者: cards render from the sheet's Speakers tab (snapshot first,
+     sheet second; text via textContent). Name JP falls back to the Latin
+     name; the focus line appears only when Focus JP is filled. */
+  (() => {
+    const S = window.MiraiSpeakers;
+    const faces = document.querySelector('[data-speakers="jp-cards"]');
+    const el = (tag, cls, text) => {
+      const n = document.createElement(tag);
+      if (cls) n.className = cls;
+      if (text != null) n.textContent = text;
+      return n;
+    };
+    function render(model) {
+      faces.textContent = '';
+      S.featured(model, 'jp').forEach(s => {
+        const fig = el('figure', 'jp-page__face'), cap = el('figcaption');
+        fig.setAttribute('role', 'listitem');
+        fig.appendChild(S.photoEl(s, { alt: '', sizes: '(max-width: 430px) 90vw, (max-width: 760px) 45vw, 20vw' }));
+        cap.appendChild(el('h3', null, s.nameJp || s.name));
+        const role = el('p', 'jp-page__face-role', s.roleJp ? s.roleJp + '｜' : null);
+        const latin = el('span', 'jp-page__latin', s.affiliation);
+        latin.setAttribute('lang', 'en');
+        role.appendChild(latin);
+        cap.appendChild(role);
+        if (s.focusJp) {
+          const focus = el('p', 'jp-page__face-focus');
+          focus.appendChild(el('strong', null, '注目分野'));
+          focus.appendChild(el('span', null, s.focusJp));
+          cap.appendChild(focus);
+        }
+        fig.appendChild(cap);
+        faces.appendChild(fig);
+      });
+      S.fillCounts(model, document);
+    }
+    S.load({ url: window.MIRAI_SPEAKERS_SHEET_CSV, snapshot: window.MIRAI_SPEAKERS_SNAPSHOT, render });
+  })();
+</script>
 </body>
 </html>

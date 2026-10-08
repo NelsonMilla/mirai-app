@@ -1,0 +1,898 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Program · variant B</title>
+<meta name="robots" content="noindex" />
+<meta name="description" content="The full timetable for Summit I (17–18 October), Summit II (24–25 October) and the Demo Day (26 October) in Kobe, with every speaker. All times JST." />
+<meta name="theme-color" content="#050506" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23050506'/%3E%3Ctext x='50' y='72' font-size='62' font-family='Georgia' font-weight='bold' fill='%239be8f0' text-anchor='middle'%3E未%3C/text%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="preconnect" href="https://api.fontshare.com" />
+<link rel="preconnect" href="https://cdn.fontshare.com" crossorigin />
+<link href="https://api.fontshare.com/v2/css?f[]=switzer@400,700,800,900&display=swap" rel="stylesheet" media="print" onload="this.onload=null;this.media='all'" />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" media="print" onload="this.onload=null;this.media='all'" />
+<noscript>
+  <link href="https://api.fontshare.com/v2/css?f[]=switzer@400,700,800,900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</noscript>
+<script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/posthog.js"></script>
+<script defer src="/analytics.js"></script>
+<link rel="stylesheet" href="/nav.css" />
+<style>
+/* ══════════════════════════════════════════════════════════════════════
+   Mirai Tech City · The program · variant B: time grid
+   The whole programme on one calendar grid: five day columns, one shared
+   hour axis, every slot a block as tall as it lasts. A detail strip pinned
+   to the bottom of the viewport carries what the blocks cannot.
+   Order: tokens → primitives → masthead → grid → strip → pitches/awards →
+   roster table → speaker panel → footer → badge → responsive.
+   ══════════════════════════════════════════════════════════════════════ */
+
+@font-face {
+  font-family: 'Switzer-fallback';
+  src: local('Arial'), local('Helvetica Neue');
+  size-adjust: 97.6%;
+  ascent-override: 100%;
+  descent-override: 25%;
+  line-gap-override: 0%;
+}
+
+:root {
+  --void: #050506;
+  --near: #0b0b0e;
+  --bone: #f4f3f0;
+  --cyan: #9be8f0;
+  --accent: #9be8f0;
+  --ink: #f4f3f0;
+  --dim: rgba(244,243,240,.68);
+  --faint: rgba(244,243,240,.52);
+  --line: rgba(244,243,240,.14);
+  --line-2: rgba(244,243,240,.26);
+  --font: 'Switzer', 'Switzer-fallback', 'Inter', -apple-system, sans-serif;
+  --mono: 'IBM Plex Mono', ui-monospace, monospace;
+  --nav: 86px;
+  --gut: 24px;
+  --pxm: 2.6px;         /* one minute of programme */
+  --ax: 52px;           /* the hour axis */
+  --hd: 92px;           /* day column header */
+}
+@media (max-width: 700px) { :root { --nav: 124px; --gut: 16px; --ax: 44px; } }
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { background: var(--void); scroll-padding-top: calc(var(--nav) + 16px); }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+body { min-width: 320px; overflow-x: hidden; background: var(--void); color: var(--bone);
+  font-family: var(--font); font-size: 16.5px; line-height: 1.55;
+  -webkit-font-smoothing: antialiased; }
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+button { font: inherit; color: inherit; }
+::selection { background: var(--cyan); color: #000; }
+:focus-visible { outline: 2px solid var(--cyan); outline-offset: 3px; border-radius: 2px; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0);
+  clip-path: inset(50%); white-space: nowrap; }
+
+.skip { position: absolute; left: -9999px; top: 0; z-index: 90; }
+.skip:focus { left: 12px; top: 12px; display: inline-flex; align-items: center; min-height: 44px;
+  padding: 12px 18px; background: var(--cyan); color: #0a0a0c; font-family: var(--mono);
+  font-size: 11px; letter-spacing: .2em; text-transform: uppercase; text-decoration: none; }
+
+.wrap { width: 100%; max-width: 1440px; margin: 0 auto; padding: 0 var(--gut); }
+h1, h2, h3 { text-transform: uppercase; }
+p { max-width: 62ch; color: var(--dim); }
+.lbl { display: block; color: var(--faint); font-family: var(--mono); font-size: 11px;
+  font-weight: 400; letter-spacing: .18em; line-height: 1.5; text-transform: uppercase; }
+.lbl--cyan { color: var(--cyan); }
+.num { font-variant-numeric: tabular-nums lining-nums; font-feature-settings: 'tnum' 1, 'lnum' 1; }
+.grid { display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); }
+.cell { background: var(--void); }
+
+/* ── 01 masthead: one line of copy and the legend ──────────────────── */
+#top { padding: calc(var(--nav) + 56px) 0 28px; }
+#top h1 { margin-top: 16px; font-size: clamp(40px, 6.4vw, 96px); font-weight: 900; line-height: .92;
+  letter-spacing: -.026em; }
+.tg-lead { margin-top: 20px; font-size: clamp(16px, 1.25vw, 18px); line-height: 1.5; max-width: 70ch; }
+.tg-legend { display: flex; flex-wrap: wrap; gap: 8px 22px; margin-top: 22px; padding-top: 16px;
+  border-top: 1px solid var(--line); list-style: none; color: var(--faint); font-family: var(--mono);
+  font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; }
+.tg-legend li { display: inline-flex; align-items: center; gap: 9px; }
+.tg-legend i { display: inline-block; width: 22px; height: 12px; border: 1px solid var(--line-2);
+  background: var(--near); }
+.tg-legend .k-keynote { border-color: rgba(155,232,240,.55); background: rgba(155,232,240,.1); }
+.tg-legend .k-panel { border-left: 2px dashed rgba(244,243,240,.6); }
+.tg-legend .k-open { background: transparent; }
+.tg-legend .k-break { border-color: transparent;
+  background: repeating-linear-gradient(135deg, rgba(244,243,240,.16) 0 1px, transparent 1px 5px); }
+.tg-legend .tg-hint { color: var(--dim); letter-spacing: .1em; }
+
+/* ── 02 the grid ───────────────────────────────────────────────────── */
+#grid { padding: 8px 0 0; }
+.tg-pager { display: none; }
+.tg-scroll { position: relative; }
+.tg-grid { display: grid; grid-template-columns: var(--ax) repeat(var(--n, 5), minmax(0, 1fr));
+  border-bottom: 1px solid var(--line-2); }
+.tg-body { position: relative; height: calc(var(--span) * var(--pxm)); }
+
+/* the hour axis */
+.tg-axis { position: relative; z-index: 3; background: var(--void); }
+.tg-axis-hd { height: var(--hd); border-bottom: 1px solid var(--line-2); }
+.tg-tick { position: absolute; left: 0; right: 8px; top: calc(var(--t) * var(--pxm)); transform: translateY(-50%);
+  color: var(--faint); font-family: var(--mono); font-size: 10px; letter-spacing: .04em; line-height: 1;
+  text-align: right; white-space: nowrap; }
+.tg-tick.is-hour { color: var(--dim); }
+.tg-tick:first-child { transform: none; padding-top: 3px; }
+
+/* a day column */
+.tg-col { min-width: 0; border-left: 1px solid var(--line); }
+.tg-col:last-child { border-right: 1px solid var(--line); }
+.tg-col-hd { position: sticky; top: var(--nav); z-index: 4; height: var(--hd); padding: 12px 10px 10px;
+  background: var(--void); border-bottom: 1px solid var(--line-2); overflow: hidden; }
+.tg-col-hd h2 { font-size: clamp(15px, 1.3vw, 19px); font-weight: 800; line-height: 1.05; letter-spacing: -.01em;
+  white-space: nowrap; }
+.tg-venue { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden;
+  margin-top: 6px; font-size: 11.5px; line-height: 1.35; color: var(--faint); }
+.tg-venue a { color: var(--cyan); font-family: var(--mono); font-size: 10px; letter-spacing: .12em;
+  text-decoration: none; text-transform: uppercase; white-space: nowrap; }
+.tg-venue a:hover { text-decoration: underline; }
+.tg-col .tg-body {
+  background:
+    repeating-linear-gradient(to bottom, var(--line) 0 1px, transparent 1px calc(60 * var(--pxm))),
+    repeating-linear-gradient(to bottom, rgba(244,243,240,.05) 0 1px, transparent 1px calc(30 * var(--pxm))); }
+
+/* a slot: top = start, height = duration, lanes split overlaps */
+.tg-b { position: absolute; top: calc(var(--t) * var(--pxm) + 1px);
+  left: calc(4px + (100% - 8px) * var(--lane, 0) / var(--lanes, 1));
+  width: calc((100% - 8px) / var(--lanes, 1) - 2px);
+  height: calc(var(--d) * var(--pxm) - 2px);
+  display: flex; flex-direction: column; overflow: hidden; padding: 4px 6px 4px 7px;
+  border: 1px solid var(--line); border-radius: 2px; background: var(--near); cursor: pointer; }
+.tg-b:hover, .tg-b.is-active { border-color: rgba(155,232,240,.55); background-color: #0f1214; z-index: 2; }
+.tg-b:focus-visible { outline-offset: 1px; z-index: 2; }
+.tg-t { flex: none; color: var(--faint); font-family: var(--mono); font-size: 10px; letter-spacing: .04em;
+  line-height: 13px; white-space: nowrap; }
+.tg-ti { flex: none; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: var(--cl, 1);
+  overflow: hidden; color: var(--bone); font-size: 12.5px; font-weight: 700; line-height: 15px; }
+.tg-ti.is-tbc { color: var(--faint); font-weight: 400; }
+.tg-who { flex: none; margin-top: auto; overflow: hidden; color: var(--dim); font-size: 11.5px; line-height: 14px;
+  white-space: nowrap; text-overflow: ellipsis; }
+.tg-who button { margin: -4px -3px; padding: 4px 3px; border: 0; background: transparent; color: var(--dim);
+  font-size: inherit; line-height: inherit; cursor: pointer; text-decoration: underline;
+  text-decoration-color: var(--line-2); text-underline-offset: 3px; }
+.tg-who button:hover, .tg-who button.is-open { color: var(--cyan); text-decoration-color: currentColor; }
+.tg-who em { font-style: normal; color: var(--faint); font-family: var(--mono); font-size: 10px; }
+.tg-b.no-who .tg-who { display: none; }
+/* short slots: one line, time inline */
+.tg-b.is-xs { flex-direction: row; align-items: baseline; gap: 6px; padding-top: 2px; padding-bottom: 0; }
+.tg-b.is-xs .tg-ti { display: block; min-width: 0; white-space: nowrap; text-overflow: ellipsis; font-size: 11px; line-height: 13px; }
+.tg-b.is-xxs { padding-top: 0; }
+.tg-b.is-xxs .tg-t, .tg-b.is-xxs .tg-ti { font-size: 9px; line-height: 10px; }
+/* kinds */
+.tg-b.is-keynote { border-color: rgba(155,232,240,.45); background: rgba(155,232,240,.08); }
+.tg-b.is-keynote .tg-t { color: var(--cyan); }
+.tg-b.is-keynote:hover, .tg-b.is-keynote.is-active { background: rgba(155,232,240,.13); }
+.tg-b.is-panel { border-left: 2px dashed rgba(244,243,240,.6); }
+.tg-b.is-open { background: transparent; }
+.tg-b.is-break { border-color: transparent; cursor: default;
+  background: repeating-linear-gradient(135deg, rgba(244,243,240,.045) 0 1px, transparent 1px 7px); }
+.tg-b.is-break .tg-t, .tg-b.is-break .tg-ti { color: var(--faint); font-weight: 400; }
+.tg-b.is-break:hover, .tg-b.is-break.is-active { border-color: var(--line); }
+
+/* ── the detail strip, pinned to the bottom of the viewport ────────── */
+.tg-strip { position: fixed; left: 0; right: 0; bottom: 0; z-index: 70; max-height: 38vh; overflow: auto;
+  border-top: 1px solid rgba(155,232,240,.5); background: var(--near); }
+.tg-strip[hidden] { display: none; }
+/* a preview never blocks the grid under it; pinning makes it clickable */
+.tg-strip:not(.is-pinned) { pointer-events: none; }
+.tg-strip .wrap { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 24px;
+  padding-top: 14px; padding-bottom: 16px; }
+.tg-strip-meta { grid-column: 1; color: var(--cyan); font-size: 10.5px; letter-spacing: .14em; }
+.tg-strip-title { grid-column: 1; max-width: 80ch; color: var(--bone); font-size: 17px; font-weight: 700; line-height: 1.3; }
+.tg-strip-who { grid-column: 1; display: flex; flex-wrap: wrap; gap: 2px 18px; list-style: none; font-size: 14px; line-height: 1.45; }
+.tg-strip-who:empty { display: none; }
+.tg-strip-who button { margin: -6px -4px; padding: 6px 4px; border: 0; background: transparent; color: var(--bone);
+  font-weight: 700; font-size: inherit; line-height: inherit; cursor: pointer; text-decoration: underline;
+  text-decoration-color: var(--line-2); text-underline-offset: 4px; }
+.tg-strip-who button:hover, .tg-strip-who button.is-open { color: var(--cyan); text-decoration-color: currentColor; }
+.tg-strip-who b { font-weight: 700; color: var(--bone); }
+.tg-strip-who span { color: var(--dim); }
+.tg-strip-notes { grid-column: 1; font-size: 14px; }
+.tg-strip-notes:empty { display: none; }
+.tg-strip-side { grid-column: 2; grid-row: 1 / span 4; display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
+.tg-strip-state { color: var(--faint); font-family: var(--mono); font-size: 10px; letter-spacing: .14em;
+  text-transform: uppercase; white-space: nowrap; }
+.tg-strip-x { min-height: 40px; padding: 0 14px; border: 1px solid var(--line-2); border-radius: 3px;
+  background: transparent; font-family: var(--mono); font-size: 10px; letter-spacing: .2em;
+  text-transform: uppercase; cursor: pointer; }
+.tg-strip-x:hover { border-color: var(--bone); }
+.tg-strip:not(.is-pinned) .tg-strip-x { display: none; }
+
+/* ── under the grid: pitches and awards ────────────────────────────── */
+.tg-under { padding: 8px 0 96px; }
+.tg-under h3 { padding-bottom: 12px; border-bottom: 1px solid var(--line-2); font-size: clamp(17px, 1.4vw, 20px);
+  font-weight: 800; line-height: 1.1; letter-spacing: -.01em; }
+.tg-under h3 small { margin-left: 12px; color: var(--faint); font-family: var(--mono); font-size: 10.5px;
+  font-weight: 400; letter-spacing: .16em; }
+.tg-pitches { margin-top: 64px; }
+.tg-pitches ol { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 32px; list-style: none;
+  counter-reset: p; }
+.tg-pitches li { display: grid; grid-template-columns: 3ch minmax(0, 1fr); gap: 0 12px; padding: 11px 0 12px;
+  border-bottom: 1px solid var(--line); counter-increment: p; }
+.tg-pitches li::before { content: counter(p, decimal-leading-zero); color: var(--faint); font-family: var(--mono);
+  font-size: 10.5px; line-height: 22px; }
+.tg-pitches li b { color: var(--bone); font-size: 15.5px; font-weight: 700; line-height: 1.4; }
+.tg-pitches li p { grid-column: 2; font-size: 14px; line-height: 1.45; }
+.tg-awards { margin-top: 48px; }
+.tg-awards .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 18px; }
+.tg-awards .cell { padding: 18px 20px 22px; }
+.tg-awards .cell .lbl { margin-bottom: 8px; color: var(--cyan); }
+.tg-awards .cell p, .tg-awards .cell li { font-size: 14px; line-height: 1.5; color: var(--dim); }
+.tg-awards .cell ul { list-style: none; }
+.tg-awards .cell li + li { margin-top: 6px; }
+#spk-panel-grid { margin-top: 28px; }
+
+/* ── 03 roster: one row per speaker ────────────────────────────────── */
+#roster { padding: 96px 0 112px; border-top: 1px solid var(--line-2); }
+#roster h2 { margin-top: 16px; font-size: clamp(32px, 4.4vw, 64px); font-weight: 800; line-height: .94;
+  letter-spacing: -.024em; }
+.rs-key { margin-top: 18px; }
+.rs-key i { font-style: normal; color: var(--cyan); }
+.rs-layout { display: grid; grid-template-columns: minmax(0, 1fr) 380px; gap: 32px; align-items: start; margin-top: 28px; }
+.rs-table { width: 100%; border-collapse: collapse; font-size: 14px; line-height: 1.35; }
+.rs-table th { padding: 0 10px 10px 0; border-bottom: 1px solid var(--line-2); color: var(--faint);
+  font-family: var(--mono); font-size: 10px; font-weight: 400; letter-spacing: .16em; text-align: left;
+  text-transform: uppercase; white-space: nowrap; }
+.rs-table td { padding: 6px 10px 6px 0; border-bottom: 1px solid var(--line); vertical-align: middle; }
+.rs-table tbody tr { cursor: pointer; }
+.rs-table tbody tr:hover td, .rs-table tbody tr.is-open td { background: rgba(155,232,240,.04); }
+.rs-ph { width: 52px; }
+.rs-ph img, .rs-ph .spk-initials { width: 40px; height: 40px; aspect-ratio: 1; object-fit: cover; object-position: center 20%;
+  border: 1px solid var(--line); filter: grayscale(.92) contrast(1.04) brightness(.94); }
+.rs-ph .spk-initials { font-size: 13px; filter: none; }
+.rs-table tbody tr:hover .rs-ph img, .rs-table tbody tr.is-open .rs-ph img { filter: none; }
+.rs-name button { padding: 6px 0; border: 0; background: transparent; color: var(--bone); font-size: 14.5px;
+  font-weight: 700; line-height: 1.3; text-align: left; cursor: pointer; }
+.rs-name button:hover, .rs-name button.is-open { color: var(--cyan); }
+.rs-name small { display: none; }
+.rs-aff { color: var(--dim); font-size: 13.5px; }
+.rs-s { width: 34px; color: var(--cyan); font-family: var(--mono); font-size: 10.5px; letter-spacing: .08em; text-align: center; }
+.rs-s.is-off { color: var(--line-2); }
+.rs-on { width: 64px; color: var(--faint); font-family: var(--mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; }
+.rs-tba { color: var(--faint); font-family: var(--mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; text-align: center; }
+.rs-side { position: sticky; top: calc(var(--nav) + 16px); }
+.rs-hint { padding: 18px 20px; border: 1px dashed var(--line); color: var(--faint); font-family: var(--mono);
+  font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; }
+.spk-panel:not([hidden]) + .rs-hint { display: none; }
+
+/* ── the speaker panel (same rules as /conferences/) ───────────────── */
+.spk-initials { display: grid; place-items: center; width: 100%; height: 100%; aspect-ratio: 5 / 6;
+  background: var(--void); color: var(--faint); font-size: clamp(28px, 3.4vw, 44px); font-weight: 800;
+  letter-spacing: -.02em; line-height: 1; }
+.spk-panel { position: relative; display: grid; grid-template-columns: 220px minmax(0, 1fr);
+  margin-top: 28px; border: 1px solid var(--line); border-top-color: rgba(155,232,240,.5);
+  background: var(--near); }
+.spk-panel[hidden] { display: none; }
+.spk-ph { overflow: hidden; border-right: 1px solid var(--line); background: var(--void); }
+.spk-ph img { width: 100%; aspect-ratio: 5 / 6; object-fit: cover; object-position: center 20%; }
+.spk-ph .spk-initials { height: auto; }
+.spk-tx { min-width: 0; padding: 26px 28px 30px; }
+.spk-tx h3 { padding-right: 96px; font-size: clamp(22px, 2.2vw, 30px); }
+.spk-tx h3:focus { outline: none; }
+.spk-aff { margin-top: 8px; font-size: 15px; line-height: 1.45; }
+.spk-ses { margin-top: 14px; color: var(--cyan); font-family: var(--mono); font-size: 11px;
+  letter-spacing: .14em; text-transform: uppercase; }
+.spk-ses.is-tba { color: var(--faint); }
+.spk-talk { margin-top: 22px; padding-top: 16px; border-top: 1px solid var(--line); }
+.spk-talk .lbl { margin-bottom: 6px; }
+.spk-talk p { color: var(--bone); font-size: 17px; font-weight: 700; line-height: 1.35; }
+.spk-bio { margin-top: 14px; font-size: 15px; line-height: 1.65; max-width: 68ch; }
+.spk-x { position: absolute; top: 14px; right: 14px; min-height: 44px; padding: 0 16px;
+  border: 1px solid var(--line-2); border-radius: 3px; background: transparent; color: var(--bone);
+  font-family: var(--mono); font-size: 10px; letter-spacing: .2em; text-transform: uppercase; cursor: pointer; }
+.spk-x:hover { border-color: var(--bone); }
+/* the roster's panel sits in the sticky side column */
+.rs-side .spk-panel { grid-template-columns: 1fr; margin-top: 0; max-height: calc(100vh - var(--nav) - 32px); overflow: auto; }
+.rs-side .spk-ph { width: 132px; margin: 20px 0 0 20px; border: 1px solid var(--line); }
+.rs-side .spk-tx { padding: 18px 20px 24px; }
+.rs-side .spk-tx h3 { padding-right: 0; font-size: 22px; }
+@media (max-width: 640px) {
+  .spk-panel { grid-template-columns: 1fr; }
+  .spk-ph { width: 112px; margin: 20px 0 0 20px; border: 1px solid var(--line); }
+  .spk-tx { padding: 18px 20px 24px; }
+  .spk-tx h3 { padding-right: 0; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .spk-panel { transition: opacity .2s ease, transform .24s cubic-bezier(.16,1,.3,1); }
+  .spk-panel.is-enter { opacity: 0; transform: translateY(6px); transition: none; }
+  .tg-b { transition: border-color .15s ease, background-color .15s ease; }
+  .rs-ph img { transition: filter .3s ease; }
+}
+
+/* ── footer ────────────────────────────────────────────────────────── */
+.foot { background: var(--near); padding: 56px 0 72px; }
+.foot .wrap { display: flex; flex-wrap: wrap; gap: 10px 26px; justify-content: space-between;
+  color: var(--faint); font-family: var(--mono); font-size: 10px; letter-spacing: .16em;
+  text-transform: uppercase; }
+.foot a { display: inline-block; margin: -15px -8px; padding: 15px 8px; color: var(--cyan);
+  text-decoration: none; }
+.foot a:hover { text-decoration: underline; }
+
+/* ── variant badge ─────────────────────────────────────────────────── */
+.vbadge { position: fixed; left: 12px; bottom: 12px; z-index: 60; padding: 7px 10px; border: 1px solid var(--line-2);
+  border-radius: 3px; background: var(--void); color: var(--faint); font-family: var(--mono); font-size: 10px;
+  letter-spacing: .06em; }
+.vbadge a { color: var(--cyan); }
+
+/* ── responsive ────────────────────────────────────────────────────── */
+@media (max-width: 1100px) {
+  .rs-layout { grid-template-columns: minmax(0, 1fr) 320px; }
+  .rs-aff { font-size: 12.5px; }
+}
+/* phone and narrow tablet: the grid becomes a strip of day columns */
+@media (max-width: 900px) {
+  .tg-pager { position: sticky; top: var(--nav); z-index: 6; display: flex; gap: 0;
+    margin: 0 calc(var(--gut) * -1); padding: 0 var(--gut); background: var(--void);
+    border-bottom: 1px solid var(--line); }
+  .tg-pager button { flex: 1 1 0; min-width: 0; min-height: 44px; padding: 0 4px; border: 0; background: transparent;
+    color: var(--faint); font-family: var(--mono); font-size: 10px; letter-spacing: .08em; text-transform: uppercase;
+    box-shadow: inset 0 -2px 0 transparent; cursor: pointer; white-space: nowrap; }
+  .tg-pager button[aria-current="true"] { color: var(--bone); box-shadow: inset 0 -2px 0 var(--cyan); }
+  .tg-scroll { overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-left: var(--ax);
+    overscroll-behavior-x: contain; scrollbar-width: none; }
+  .tg-scroll::-webkit-scrollbar { display: none; }
+  .tg-grid { display: flex; width: max-content; }
+  .tg-axis { position: sticky; left: 0; flex: 0 0 var(--ax); }
+  .tg-col { flex: 0 0 calc(100vw - 2 * var(--gut) - var(--ax)); max-width: 420px; scroll-snap-align: start; }
+  .tg-col-hd { position: static; }
+  .rs-layout { grid-template-columns: 1fr; }
+  .rs-side { position: static; order: -1; }
+  .rs-side .spk-panel { max-height: none; }
+  .rs-hint { display: none; }
+  .tg-awards .grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 700px) {
+  #top { padding: calc(var(--nav) + 36px) 0 20px; }
+  .tg-legend { gap: 8px 16px; }
+  .tg-legend .tg-hint { flex-basis: 100%; }
+  .tg-strip { max-height: 46vh; }
+  .tg-strip .wrap { grid-template-columns: minmax(0, 1fr); }
+  .tg-strip-side { grid-column: 1; grid-row: auto; flex-direction: row; justify-content: space-between; align-items: center; }
+  .tg-pitches ol { grid-template-columns: 1fr; }
+  .rs-aff, .rs-table th.rs-aff { display: none; }
+  .rs-name small { display: block; margin-top: 1px; color: var(--faint); font-size: 12px; line-height: 1.3; }
+  .rs-name button { padding: 2px 0; }
+  .rs-s { width: 26px; }
+  .rs-on { width: 46px; font-size: 9px; letter-spacing: .06em; }
+  .vbadge { left: 8px; bottom: 8px; font-size: 9px; }
+}
+</style>
+</head>
+<body data-analytics-offer="program">
+
+<script src="/nav.js"></script>
+<a class="skip" href="#grid">Skip to the timetable</a>
+
+<main>
+
+<!-- ══ 01 MASTHEAD ════════════════════════════════════════════════════ -->
+<section id="top" data-track-section="program_hero" data-track-position="1">
+  <div class="wrap">
+    <span class="lbl lbl--cyan">The program · Oct 17–26 · Kobe</span>
+    <h1>The program.</h1>
+    <p class="tg-lead">Every session of Summit I, Summit II and the Demo Day on one grid, with <span data-speakers-count>72</span> speakers. All times JST.</p>
+    <ul class="tg-legend" aria-label="Legend">
+      <li><i aria-hidden="true"></i>Talk</li>
+      <li><i class="k-keynote" aria-hidden="true"></i>Keynote</li>
+      <li><i class="k-panel" aria-hidden="true"></i>Panel</li>
+      <li><i class="k-open" aria-hidden="true"></i>Opening and close</li>
+      <li><i class="k-break" aria-hidden="true"></i>Break</li>
+      <li class="tg-hint">Hover or tap a block for the details</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ══ 02 THE GRID ════════════════════════════════════════════════════ -->
+<section id="grid" data-track-section="timetable" data-track-position="2" aria-label="Timetable">
+  <div class="wrap">
+    <nav class="tg-pager" aria-label="Days" data-program="pager"></nav>
+    <div class="tg-scroll" data-program="scroll">
+      <div class="tg-grid" data-program="grid">
+        <noscript><p style="padding:32px 0">The timetable needs JavaScript. The summits page lists every session: <a href="/conferences/">/conferences/</a>.</p></noscript>
+      </div>
+    </div>
+    <div class="spk-panel" id="spk-panel-grid" role="region" aria-labelledby="spk-panel-grid-h" hidden></div>
+  </div>
+
+  <div class="tg-strip" id="tg-strip" role="region" aria-label="Session details" hidden>
+    <div class="wrap">
+      <span class="lbl tg-strip-meta num" data-strip="meta"></span>
+      <p class="tg-strip-title" data-strip="title"></p>
+      <ul class="tg-strip-who" data-strip="who"></ul>
+      <p class="tg-strip-notes" data-strip="notes"></p>
+      <div class="tg-strip-side">
+        <span class="tg-strip-state" data-strip="state"></span>
+        <button type="button" class="tg-strip-x">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap tg-under">
+    <div class="tg-pitches" data-program="pitches" role="group" aria-labelledby="tg-pitches-h" hidden>
+      <h3 id="tg-pitches-h"><span data-program="pitches-title">Demo Day pitches</span><small data-program="pitches-day"></small></h3>
+      <ol data-program="pitches-list"></ol>
+    </div>
+
+    <!-- Copy from the programme booklet, as on /program/; claims to be reviewed. -->
+    <aside class="tg-awards" aria-labelledby="tg-awards-h">
+      <h3 id="tg-awards-h">Demo Day awards</h3>
+      <div class="grid">
+        <div class="cell">
+          <span class="lbl">First prize</span>
+          <ul>
+            <li>A ticket to the next Vitalist Bay</li>
+            <li>Priority review for the Meet the Drapers Japan 2027 cohort</li>
+          </ul>
+        </div>
+        <div class="cell">
+          <span class="lbl">Antler Japan residency</span>
+          <p>Six weeks of mentoring, access to USD 850,000 in perks, and a chance of investment.</p>
+        </div>
+        <div class="cell">
+          <span class="lbl">Japan Landing Award</span>
+          <p>Presented by GlobalDeal, Official Market-Entry Execution Partner. A hands-on engagement to take the winner into the Japanese market: entry strategy, the right partners and first customers, and regulatory navigation.</p>
+        </div>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<!-- ══ 03 ROSTER ══════════════════════════════════════════════════════ -->
+<section id="roster" data-track-section="roster" data-track-position="3">
+  <div class="wrap">
+    <span class="lbl lbl--cyan">Speakers</span>
+    <h2>Everyone on the program.</h2>
+    <span class="lbl rs-key"><i>S1</i> Oct 17–18 &nbsp; <i>S2</i> Oct 24–25 &nbsp; <i>F</i> Demo Day Oct 26 &nbsp; <i>Online</i> joins remotely</span>
+    <div class="rs-layout">
+      <table class="rs-table">
+        <thead>
+          <tr>
+            <th class="rs-ph"><span class="sr">Portrait</span></th>
+            <th>Name</th>
+            <th class="rs-aff">Affiliation</th>
+            <th class="rs-s">S1</th>
+            <th class="rs-s">S2</th>
+            <th class="rs-s">F</th>
+            <th class="rs-on"><span class="sr">Online</span></th>
+          </tr>
+        </thead>
+        <tbody data-program="roster"></tbody>
+      </table>
+      <div class="rs-side">
+        <div class="spk-panel" id="spk-panel-roster" role="region" aria-labelledby="spk-panel-roster-h" hidden></div>
+        <p class="rs-hint">Pick a name to read the bio.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <span><a href="https://www.miraitech.city/" target="_blank" rel="noopener" data-analytics-action="site_navigation" data-analytics-location="footer" data-analytics-target="mirai_city">Mirai Tech City</a> · Kobe Biomedical Innovation Cluster, Port Island</span>
+    <span>Kobe · Japan Standard Time</span>
+  </div>
+</footer>
+
+<div class="vbadge">Variant B · time grid — <a href="/program/">current</a> · <a href="a.html">A</a> · <a href="c.html">C</a> · <a href="d.html">D</a></div>
+
+<script src="/sheet.js"></script>
+<script src="/speakers-data.js"></script>
+<script src="/speakers-photos.js"></script>
+<script src="/speakers.js"></script>
+<script src="/program-data.js"></script>
+<script src="/program.js"></script>
+<script src="/speaker-panel.js"></script>
+<script>
+/* ── the program as a time grid ──────────────────────────────────────
+      Same data contract as /program/: snapshots paint now, each sheet
+      repaints when it answers, names link to the speakers model by
+      MiraiProgram.speakerKey. Sheet text goes in as text nodes only. */
+(function () {
+  'use strict';
+  var S = window.MiraiSpeakers, G = window.MiraiProgram, P = window.MiraiSpeakerPanel;
+  if (!S || !G || !P) return;
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)');
+  var state = { speakers: null, program: null };
+  var gridSec = document.getElementById('grid');
+  var grid = document.querySelector('[data-program="grid"]');
+  var scroller = document.querySelector('[data-program="scroll"]');
+  var pager = document.querySelector('[data-program="pager"]');
+  var pitchBox = document.querySelector('[data-program="pitches"]');
+  var roster = document.querySelector('[data-program="roster"]');
+  var strip = document.getElementById('tg-strip');
+  var gridPanel = P.attach({ root: gridSec, panel: document.getElementById('spk-panel-grid') });
+  var rosterPanel = P.attach({ root: document.getElementById('roster'), panel: document.getElementById('spk-panel-roster') });
+  var slots = [];          /* index → { slot, day } for the blocks on the grid */
+  var pinned = null, active = null;
+
+  function el(tag, cls, text) {
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text != null) n.textContent = text;
+    return n;
+  }
+  function fill(box, nodes) { box.textContent = ''; nodes.forEach(function (n) { box.appendChild(n); }); }
+  function mins(t) {
+    var m = /^(\d{1,2}):(\d{2})/.exec(t || '');
+    return m ? +m[1] * 60 + +m[2] : null;
+  }
+  function hhmm(m) { return Math.floor(m / 60) + ':' + ('0' + m % 60).slice(-2); }
+  function timeOf(sl) { return [sl.start, sl.end].filter(Boolean).join('–'); }
+
+  function relink(program, speakers) {
+    var index = {};
+    ((speakers && speakers.speakers) || []).forEach(function (s) {
+      [s.name, [s.first, s.last].filter(Boolean).join(' ')].forEach(function (n) {
+        var k = G.speakerKey(n);
+        if (k && !index[k]) index[k] = s.id;
+      });
+    });
+    program.days.forEach(function (d) {
+      d.slots.forEach(function (sl) {
+        sl.speakers.forEach(function (p) { p.id = index[G.speakerKey(p.name)] || null; });
+      });
+    });
+    return program;
+  }
+
+  function nameEl(p, cls) {
+    var n;
+    if (p.id) {
+      n = el('button', cls, p.name);
+      n.type = 'button';
+      n.setAttribute('data-speaker', p.id);
+    } else {
+      n = el('b', cls, p.name);
+    }
+    return n;
+  }
+
+  /* overlapping slots in one day share the column in lanes */
+  function lanes(placed) {
+    var cluster = [], end = -1;
+    function flush() {
+      var ends = [];
+      cluster.forEach(function (p) {
+        var i = 0;
+        while (i < ends.length && ends[i] > p.s) i++;
+        ends[i] = p.e;
+        p.lane = i;
+      });
+      cluster.forEach(function (p) { p.lanes = ends.length; });
+      cluster = [];
+    }
+    placed.sort(function (a, b) { return a.s - b.s || b.e - a.e; }).forEach(function (p) {
+      if (p.s >= end) { flush(); end = p.e; } else end = Math.max(end, p.e);
+      cluster.push(p);
+    });
+    flush();
+    return placed;
+  }
+
+  /* ── the grid ── */
+  function blockEl(p, t0, pxm, i) {
+    var sl = p.sl, d = p.e - p.s, h = d * pxm - 2;
+    var b = el('div', 'tg-b is-' + sl.kind);
+    b.setAttribute('data-program', 'slot');
+    b.setAttribute('data-i', i);
+    b.style.setProperty('--t', p.s - t0);
+    b.style.setProperty('--d', d);
+    b.style.setProperty('--lane', p.lane);
+    b.style.setProperty('--lanes', p.lanes);
+    if (sl.kind !== 'break') b.tabIndex = 0;
+    var who = sl.speakers;
+    var xs = h < 34, avail = h - 8 - 13 - 14;
+    var lines = Math.max(1, Math.floor((who.length ? avail : avail + 14) / 15));
+    if (xs) b.classList.add('is-xs');
+    if (h < 16) b.classList.add('is-xxs');
+    if (xs || avail < 15) b.classList.add('no-who');
+    b.style.setProperty('--cl', lines);
+    b.appendChild(el('span', 'tg-t num', xs ? sl.start : timeOf(sl)));
+    b.appendChild(el('span', 'tg-ti' + (sl.tbc ? ' is-tbc' : ''), sl.title || 'Title to be confirmed'));
+    if (who.length) {
+      var w = el('span', 'tg-who');
+      w.appendChild(nameEl(who[0]));
+      if (who.length > 1) { w.appendChild(document.createTextNode(' ')); w.appendChild(el('em', null, '+' + (who.length - 1))); }
+      b.appendChild(w);
+      var rest = (b.classList.contains('no-who') ? who : who.slice(1)).map(function (x) { return x.name; });
+      if (rest.length) b.appendChild(el('span', 'sr', (b.classList.contains('no-who') ? 'With ' : 'Also ') + rest.join(', ')));
+    }
+    return b;
+  }
+
+  function colEl(d, t0, span, pxm) {
+    var col = el('div', 'tg-col'), hd = el('div', 'tg-col-hd'), h = el('h2'), body = el('div', 'tg-body');
+    col.id = 'day-' + d.id;
+    col.setAttribute('data-program', 'day');
+    col.setAttribute('role', 'group');
+    col.setAttribute('aria-labelledby', col.id + '-h');
+    h.id = col.id + '-h';
+    var vis = el('span', null, d.short);
+    vis.setAttribute('aria-hidden', 'true');
+    h.appendChild(vis);
+    h.appendChild(el('span', 'sr', d.label));
+    hd.appendChild(h);
+    if (d.venue || d.venueLink) {
+      var v = el('p', 'tg-venue');
+      if (d.venue) v.appendChild(document.createTextNode(d.venue + ' '));
+      if (d.venueLink) {
+        var a = el('a', null, 'Map ↗');
+        a.href = d.venueLink;
+        a.target = '_blank';
+        a.rel = 'noopener';
+        a.setAttribute('aria-label', 'Map' + (d.venue ? ' of ' + d.venue : ' of the venue') + ', ' + d.label);
+        a.setAttribute('data-analytics-action', 'site_navigation');
+        a.setAttribute('data-analytics-location', 'program');
+        a.setAttribute('data-analytics-target', 'venue_map');
+        v.appendChild(a);
+      }
+      hd.appendChild(v);
+    }
+    col.appendChild(hd);
+    var placed = [];
+    d.slots.forEach(function (sl) {
+      if (sl.kind === 'pitch') return;
+      var s = mins(sl.start);
+      if (s == null) return;
+      var e = mins(sl.end);
+      placed.push({ sl: sl, s: s, e: e != null && e > s ? e : s + 15 });
+    });
+    lanes(placed).forEach(function (p) {
+      slots.push({ slot: p.sl, day: d });
+      body.appendChild(blockEl(p, t0, pxm, slots.length - 1));
+    });
+    col.appendChild(body);
+    return col;
+  }
+
+  function axisEl(t0, t1) {
+    var ax = el('div', 'tg-axis'), body = el('div', 'tg-body');
+    ax.setAttribute('aria-hidden', 'true');
+    ax.appendChild(el('div', 'tg-axis-hd'));
+    for (var t = t0; t <= t1; t += 30) {
+      var k = el('span', 'tg-tick num' + (t % 60 ? '' : ' is-hour'), hhmm(t));
+      k.style.setProperty('--t', t - t0);
+      body.appendChild(k);
+    }
+    ax.appendChild(body);
+    return ax;
+  }
+
+  function paintGrid(program) {
+    var lo = Infinity, hi = -Infinity;
+    program.days.forEach(function (d) {
+      d.slots.forEach(function (sl) {
+        if (sl.kind === 'pitch') return;
+        var s = mins(sl.start), e = mins(sl.end);
+        if (s != null) { lo = Math.min(lo, s); hi = Math.max(hi, e != null && e > s ? e : s + 15); }
+      });
+    });
+    if (lo === Infinity) { lo = 660; hi = 1230; }
+    var t0 = Math.floor(lo / 60) * 60, t1 = Math.ceil(hi / 30) * 30;
+    var pxm = parseFloat(getComputedStyle(grid).getPropertyValue('--pxm')) || 2.6;
+    grid.style.setProperty('--span', t1 - t0);
+    grid.style.setProperty('--n', program.days.length);
+    slots = [];
+    pinned = active = null;
+    hide();
+    fill(grid, [axisEl(t0, t1)].concat(program.days.map(function (d) { return colEl(d, t0, t1 - t0, pxm); })));
+    fill(pager, program.days.map(function (d, i) {
+      var b = el('button', null, d.short.replace(/\s+\S+$/, ''));
+      b.type = 'button';
+      b.setAttribute('data-col', i);
+      b.setAttribute('aria-label', d.label);
+      return b;
+    }));
+    syncPager();
+  }
+
+  function paintPitches(program) {
+    var day = null, pitches = [];
+    program.days.forEach(function (d) {
+      var p = d.slots.filter(function (s) { return s.kind === 'pitch'; });
+      if (p.length && !day) { day = d; pitches = p; }
+    });
+    pitchBox.hidden = !pitches.length;
+    if (!pitches.length) return;
+    pitchBox.querySelector('[data-program="pitches-title"]').textContent = pitches[0].block || 'Demo Day pitches';
+    pitchBox.querySelector('[data-program="pitches-day"]').textContent = day.label;
+    fill(pitchBox.querySelector('[data-program="pitches-list"]'), pitches.map(function (s) {
+      var li = el('li');
+      li.setAttribute('data-program', 'pitch');
+      li.appendChild(el('b', null, s.title));
+      if (s.notes) li.appendChild(el('p', null, s.notes));
+      return li;
+    }));
+  }
+
+  function paintProgram() {
+    if (!state.program) return;
+    var program = relink(state.program, state.speakers);
+    paintGrid(program);
+    paintPitches(program);
+    gridPanel.refresh(byId());
+  }
+
+  /* ── the detail strip ── */
+  var q = function (k) { return strip.querySelector('[data-strip="' + k + '"]'); };
+  function show(b) {
+    var x = slots[+b.getAttribute('data-i')];
+    if (!x) return;
+    var sl = x.slot;
+    if (active && active !== b) active.classList.remove('is-active');
+    active = b;
+    b.classList.add('is-active');
+    q('meta').textContent = [x.day.short, timeOf(sl), sl.block].filter(Boolean).join(' · ');
+    q('title').textContent = sl.title || 'Title to be confirmed';
+    fill(q('who'), sl.speakers.map(function (p) {
+      var li = el('li'), n = nameEl(p);
+      if (p.id) n.setAttribute('aria-controls', 'spk-panel-grid');
+      li.appendChild(n);
+      if (p.affiliation) { li.appendChild(document.createTextNode(' ')); li.appendChild(el('span', null, p.affiliation)); }
+      return li;
+    }));
+    q('notes').textContent = sl.notes || '';
+    q('state').textContent = pinned ? 'Pinned · Esc to close' : 'Click to pin';
+    strip.classList.toggle('is-pinned', !!pinned);
+    strip.hidden = false;
+  }
+  function hide() {
+    if (active) active.classList.remove('is-active');
+    active = pinned = null;
+    strip.hidden = true;
+  }
+  function pin(b) {
+    if (pinned === b) { hide(); return; }
+    pinned = b;
+    show(b);
+  }
+
+  grid.addEventListener('mouseover', function (e) {
+    var b = e.target.closest('.tg-b');
+    if (b && !pinned) show(b);
+  });
+  grid.addEventListener('mouseleave', function () { if (!pinned) hide(); });
+  grid.addEventListener('focusin', function (e) {
+    var b = e.target.closest('.tg-b');
+    if (!b) return;
+    if (pinned && pinned !== b) pinned = null;
+    show(b);
+  });
+  grid.addEventListener('focusout', function (e) {
+    var to = e.relatedTarget;
+    if (pinned || (to && (grid.contains(to) || strip.contains(to)))) return;
+    hide();
+  });
+  grid.addEventListener('click', function (e) {
+    if (e.target.closest('[data-speaker], a')) return;
+    var b = e.target.closest('.tg-b');
+    if (b) pin(b);
+  });
+  grid.addEventListener('keydown', function (e) {
+    if ((e.key === 'Enter' || e.key === ' ') && e.target.classList.contains('tg-b')) {
+      e.preventDefault();
+      pin(e.target);
+    }
+  });
+  strip.querySelector('.tg-strip-x').addEventListener('click', function () {
+    var b = pinned;
+    hide();
+    if (b) b.focus({ preventScroll: true });
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && !strip.hidden) hide();
+  });
+  /* the strip belongs to the grid: it goes when the grid leaves the screen */
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (entries) {
+      if (!entries[0].isIntersecting) hide();
+    }).observe(scroller);
+  }
+
+  /* ── phone: the day pager drives the horizontal strip ── */
+  function cols() { return [].slice.call(grid.querySelectorAll('.tg-col')); }
+  function syncPager() {
+    var c = cols(), btns = pager.querySelectorAll('button');
+    if (!c.length) return;
+    var ax = grid.querySelector('.tg-axis').offsetWidth, x = scroller.scrollLeft, cur = 0;
+    c.forEach(function (n, i) { if (n.offsetLeft - ax <= x + 4) cur = i; });
+    [].forEach.call(btns, function (b, i) { b.setAttribute('aria-current', i === cur ? 'true' : 'false'); });
+  }
+  pager.addEventListener('click', function (e) {
+    var b = e.target.closest('button');
+    if (!b) return;
+    var c = cols()[+b.getAttribute('data-col')], ax = grid.querySelector('.tg-axis').offsetWidth;
+    if (c) scroller.scrollTo({ left: c.offsetLeft - ax, behavior: reduce && reduce.matches ? 'auto' : 'smooth' });
+  });
+  var raf = 0;
+  scroller.addEventListener('scroll', function () {
+    if (raf) return;
+    raf = requestAnimationFrame(function () { raf = 0; syncPager(); });
+  }, { passive: true });
+
+  /* ── roster table ── */
+  function row(sp) {
+    var tr = el('tr'), ph = el('td', 'rs-ph'), nm = el('td', 'rs-name'), btn = el('button', null, sp.name);
+    tr.setAttribute('data-program', 'speaker');
+    btn.type = 'button';
+    btn.setAttribute('data-speaker', sp.id);
+    ph.appendChild(S.photoEl(sp, { alt: '' }));
+    nm.appendChild(btn);
+    if (sp.affiliation) { var m = el('small', null, sp.affiliation); m.setAttribute('aria-hidden', 'true'); nm.appendChild(m); }
+    tr.appendChild(ph);
+    tr.appendChild(nm);
+    tr.appendChild(el('td', 'rs-aff', sp.affiliation || ''));
+    var ses = sp.sessions || [];
+    if (!['S1', 'S2', 'F'].some(function (k) { return ses.indexOf(k) >= 0; })) {
+      var tba = el('td', 'rs-tba', 'To be announced');
+      tba.colSpan = 3;
+      tr.appendChild(tba);
+    } else {
+      ['S1', 'S2', 'F'].forEach(function (k) {
+        var on = ses.indexOf(k) >= 0, td = el('td', 'rs-s' + (on ? '' : ' is-off'), on ? k : '·');
+        if (!on) td.setAttribute('aria-label', 'Not in ' + k);
+        tr.appendChild(td);
+      });
+    }
+    tr.appendChild(el('td', 'rs-on', ses.indexOf('Online') >= 0 ? 'Online' : ''));
+    return tr;
+  }
+  roster.addEventListener('click', function (e) {
+    if (e.target.closest('button, a')) return;
+    var tr = e.target.closest('tr'), b = tr && tr.querySelector('[data-speaker]');
+    if (b) b.click();
+  });
+  /* the row follows its button's open state */
+  new MutationObserver(function () {
+    [].forEach.call(roster.querySelectorAll('tr'), function (tr) {
+      var b = tr.querySelector('[data-speaker]');
+      tr.classList.toggle('is-open', !!(b && b.classList.contains('is-open')));
+    });
+  }).observe(roster, { subtree: true, attributes: true, attributeFilter: ['class'] });
+
+  function byId() {
+    var m = {};
+    ((state.speakers && state.speakers.speakers) || []).forEach(function (sp) { m[sp.id] = sp; });
+    return m;
+  }
+
+  S.load({
+    url: window.MIRAI_SPEAKERS_SHEET_CSV,
+    snapshot: window.MIRAI_SPEAKERS_SNAPSHOT,
+    render: function (model) {
+      state.speakers = model;
+      fill(roster, model.speakers.map(row));
+      S.fillCounts(model, document);
+      paintProgram();
+      rosterPanel.refresh(byId());
+    }
+  });
+
+  G.load({
+    url: window.MIRAI_PROGRAM_SHEET_CSV,
+    snapshot: window.MIRAI_PROGRAM_SNAPSHOT,
+    speakersModel: state.speakers,
+    render: function (model) {
+      state.program = model;
+      paintProgram();
+    }
+  });
+})();
+</script>
+</body>
+</html>

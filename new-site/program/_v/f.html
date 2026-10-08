@@ -1,0 +1,963 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Program · variant F</title>
+<meta name="robots" content="noindex" />
+<meta name="description" content="The full timetable for Summit I (17–18 October), Summit II (24–25 October) and the Demo Day (26 October) in Kobe, with every speaker. All times JST." />
+<link rel="canonical" href="https://mirai-tech-city.vercel.app/program/" />
+<meta property="og:site_name" content="Mirai Tech City" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="The program · Mirai Tech City · Kobe, October 2026" />
+<meta property="og:description" content="The full timetable for Summit I (17–18 October), Summit II (24–25 October) and the Demo Day (26 October) in Kobe, with every speaker. All times JST." />
+<meta property="og:image" content="https://mirai-tech-city.vercel.app/img/harbor-golden-hour.jpg" />
+<meta property="og:url" content="https://mirai-tech-city.vercel.app/program/" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="theme-color" content="#050506" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23050506'/%3E%3Ctext x='50' y='72' font-size='62' font-family='Georgia' font-weight='bold' fill='%239be8f0' text-anchor='middle'%3E未%3C/text%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="preconnect" href="https://api.fontshare.com" />
+<link rel="preconnect" href="https://cdn.fontshare.com" crossorigin />
+<link href="https://api.fontshare.com/v2/css?f[]=switzer@400,700,800,900&display=swap" rel="stylesheet" media="print" onload="this.onload=null;this.media='all'" />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" media="print" onload="this.onload=null;this.media='all'" />
+<noscript>
+  <link href="https://api.fontshare.com/v2/css?f[]=switzer@400,700,800,900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</noscript>
+<script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/posthog.js"></script>
+<script defer src="/analytics.js"></script>
+<link rel="stylesheet" href="/nav.css" />
+<style>
+/* ══════════════════════════════════════════════════════════════════════
+   Mirai Tech City · The program · variant F, kinetic faces
+   Order: tokens → primitives → first screen (the count, two moving
+   strips of portraits) → live strip (now / next, compact) → roster with
+   filters → speaker panel (copied from /program/) → timetable (five
+   collapsible days) → footer → variant badge.
+   ══════════════════════════════════════════════════════════════════════ */
+
+@font-face {
+  font-family: 'Switzer-fallback';
+  src: local('Arial'), local('Helvetica Neue');
+  size-adjust: 97.6%;
+  ascent-override: 100%;
+  descent-override: 25%;
+  line-gap-override: 0%;
+}
+
+:root {
+  --void: #050506;
+  --near: #0b0b0e;
+  --bone: #f4f3f0;
+  --cyan: #9be8f0;
+  --accent: #9be8f0;
+  --ink: #f4f3f0;
+  --dim: rgba(244,243,240,.68);
+  --faint: rgba(244,243,240,.52);
+  --line: rgba(244,243,240,.14);
+  --line-2: rgba(244,243,240,.26);
+  --font: 'Switzer', 'Switzer-fallback', 'Inter', -apple-system, sans-serif;
+  --mono: 'IBM Plex Mono', ui-monospace, monospace;
+  --nav: 86px;
+  --top: 104px;
+  --bot: 96px;
+  --gap: 48px;
+  --gut: 24px;
+}
+@media (max-width: 700px) { :root { --nav: 124px; --top: 72px; --bot: 64px; --gap: 32px; --gut: 16px; } }
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { background: var(--void); scroll-padding-top: calc(var(--nav) + 16px); }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+body { min-width: 320px; overflow-x: hidden; background: var(--void); color: var(--bone);
+  font-family: var(--font); font-size: 16.5px; line-height: 1.55;
+  -webkit-font-smoothing: antialiased; }
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+button, input { font: inherit; color: inherit; }
+::selection { background: var(--cyan); color: #000; }
+:focus-visible { outline: 2px solid var(--cyan); outline-offset: 3px; border-radius: 2px; }
+
+.skip { position: absolute; left: -9999px; top: 0; z-index: 90; }
+.skip:focus { left: 12px; top: 12px; display: inline-flex; align-items: center; min-height: 44px;
+  padding: 12px 18px; background: var(--cyan); color: #0a0a0c; font-family: var(--mono);
+  font-size: 11px; letter-spacing: .2em; text-transform: uppercase; text-decoration: none; }
+
+.wrap { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 var(--gut); }
+main > section { padding: var(--top) 0 var(--bot); }
+
+h1, h2, h3 { text-transform: uppercase; }
+h1 { font-size: clamp(34px, 4.4vw, 64px); font-weight: 900; line-height: .92; letter-spacing: -.024em; }
+h2 { font-size: clamp(34px, 5vw, 76px); font-weight: 800; line-height: .94; letter-spacing: -.022em; text-wrap: balance; }
+h3 { font-size: clamp(18px, 1.5vw, 22px); font-weight: 800; line-height: 1.1; letter-spacing: -.01em; }
+p { max-width: 62ch; color: var(--dim); }
+.lbl { display: block; color: var(--faint); font-family: var(--mono); font-size: 11px;
+  font-weight: 400; letter-spacing: .18em; line-height: 1.5; text-transform: uppercase; }
+.lbl--cyan { color: var(--cyan); }
+.num { font-variant-numeric: tabular-nums lining-nums; font-feature-settings: 'tnum' 1, 'lnum' 1; }
+.hd { margin-bottom: var(--gap); }
+.hd .lbl { margin-bottom: 18px; }
+.grid { display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); }
+.cell { background: var(--void); }
+
+/* ── 00 first screen: the count and a river of faces ───────────────── */
+.f-hero { position: relative; display: flex; flex-direction: column; min-height: calc(100vh + 40px);
+  min-height: calc(100svh + 40px); padding-top: calc(var(--nav) + 18px); overflow: hidden; }
+.f-head .lbl { margin-bottom: 14px; }
+.f-h1 { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 0 .42em; }
+.f-n { display: block; font-size: min(34vw, 52vh); font-size: min(34vw, 52svh); font-weight: 900; line-height: .76;
+  letter-spacing: -.055em; margin-left: -.04em; }
+.f-s { display: block; max-width: 9.5ch; padding-bottom: .1em; font-size: clamp(30px, 5.2vw, 84px); font-weight: 800;
+  line-height: .94; letter-spacing: -.02em; }
+.f-river { position: relative; margin-top: auto; padding-top: 24px; }
+.f-strip { overflow: hidden; padding: 6px 0; }
+.f-strip + .f-strip { margin-top: 6px; }
+.f-track { display: flex; width: max-content; }
+.f-set { display: flex; flex: none; }
+.f-tile { position: relative; flex: none; width: 128px; height: 160px; margin-right: 10px; padding: 0; overflow: hidden;
+  border: 1px solid var(--line); background: var(--near); cursor: pointer; }
+.f-tile img, .f-tile .spk-initials { width: 100%; height: 100%; aspect-ratio: auto; object-fit: cover;
+  object-position: center 20%; font-size: 30px; }
+.f-tile img { filter: grayscale(.28) contrast(1.02); transition: filter .35s ease, transform .5s ease; }
+.f-tile:hover img, .f-tile:focus-visible img, .f-tile.is-open img { filter: none; transform: scale(1.025); }
+.f-tile.is-open { border-color: rgba(155,232,240,.5); }
+.f-tile:focus-visible { outline-offset: -2px; }
+.f-nm { position: absolute; left: 0; right: 0; bottom: 0; padding: 26px 8px 8px; opacity: 0;
+  background: linear-gradient(transparent, rgba(5,5,6,.9) 55%); color: var(--bone); font-family: var(--mono);
+  font-size: 10px; letter-spacing: .1em; line-height: 1.35; text-align: left; text-transform: uppercase;
+  transition: opacity .2s ease; }
+.f-tile:hover .f-nm, .f-tile:focus-visible .f-nm, .f-tile.is-open .f-nm { opacity: 1; }
+.f-tile:has(.spk-initials) .f-nm { opacity: 1; background: none; color: var(--faint); }
+/* the fold: a void veil under the scroll line, faces keep going below it */
+.f-veil { position: absolute; left: 0; right: 0; top: calc(100vh - 96px); top: calc(100svh - 96px); height: 136px;
+  background: linear-gradient(rgba(5,5,6,0), rgba(5,5,6,.9) 70%, var(--void)); pointer-events: none; }
+.f-scroll { position: absolute; left: 0; right: 0; top: calc(100vh - 46px); top: calc(100svh - 46px); max-width: none; }
+.f-scroll .wrap { display: block; text-align: right; }
+.f-scroll a { display: inline-flex; align-items: center; min-height: 44px; margin-top: -12px; color: var(--cyan);
+  text-decoration: none; }
+.f-scroll a:hover { color: var(--bone); }
+.f-slot > .spk-panel { margin: 28px 0 0; }
+@media (prefers-reduced-motion: no-preference) {
+  .f-track { animation: f-run var(--dur, 110s) linear infinite; animation-delay: calc(var(--dur, 110s) * -.3);
+    will-change: transform; }
+  .f-strip.is-rev .f-track { animation-direction: reverse; }
+  .f-river:hover .f-track, .f-river:focus-within .f-track,
+  .f-hero:has(.f-slot > .spk-panel:not([hidden])) .f-track { animation-play-state: paused; }
+  @keyframes f-run { to { transform: translateX(-50%); } }
+}
+@media (prefers-reduced-motion: reduce) {
+  .f-strip { overflow-x: auto; scrollbar-width: thin; }
+  .f-set[aria-hidden] { display: none; }
+  .f-tile img, .f-nm { transition: none; }
+}
+@media (max-width: 700px) {
+  .f-hero { padding-top: calc(var(--nav) + 12px); }
+  .f-h1 { flex-direction: column; align-items: flex-start; }
+  .f-n { font-size: min(52vw, 34vh); font-size: min(52vw, 34svh); }
+  .f-s { max-width: none; margin-top: 10px; font-size: clamp(30px, 10.6vw, 44px); }
+  .f-tile { width: 96px; height: 120px; margin-right: 8px; }
+  .f-tile .spk-initials { font-size: 22px; }
+  .f-veil { top: calc(100vh - 128px); top: calc(100svh - 128px); height: 168px;
+    background: linear-gradient(rgba(5,5,6,0), rgba(5,5,6,.92) 55%, var(--void)); }
+  .f-scroll { top: calc(100vh - 92px); top: calc(100svh - 92px); }
+  .f-scroll .wrap { text-align: left; }
+}
+
+/* ── 01 the live strip: now and next, or first up ──────────────────── */
+#live { padding: 72px 0 40px; }
+.c-mast { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between;
+  gap: 10px 32px; padding-bottom: 14px; border-bottom: 1px solid var(--line-2); }
+.c-mast h2 { font-size: clamp(24px, 2.6vw, 36px); }
+.c-live { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: 20px; }
+.c-live > .cell { min-width: 0; padding: 20px 24px 22px; }
+.c-live > .cell.is-wide { grid-column: 1 / -1; display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 24px 48px; }
+.c-live .cell.is-now { background: linear-gradient(rgba(155,232,240,.045), rgba(155,232,240,.045)), var(--void); }
+.c-tag { display: flex; align-items: center; gap: 10px; }
+.c-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--cyan); }
+@media (prefers-reduced-motion: no-preference) {
+  .c-dot { animation: c-beat 2.4s ease-in-out infinite; }
+  @keyframes c-beat { 50% { opacity: .25; } }
+}
+.c-time { margin-top: 12px; color: var(--bone); font-size: clamp(28px, 3vw, 44px); font-weight: 800; line-height: .95;
+  letter-spacing: -.02em; }
+.c-time small { display: block; margin-top: 10px; color: var(--dim); font-size: clamp(16px, 1.4vw, 20px);
+  font-weight: 700; letter-spacing: 0; }
+.c-when { margin-top: 12px; color: var(--bone); font-size: clamp(24px, 2.6vw, 36px); font-weight: 800; line-height: 1;
+  letter-spacing: -.02em; text-transform: uppercase; }
+.c-ttl { margin-top: 10px; max-width: 40ch; color: var(--bone); font-size: clamp(18px, 1.6vw, 22px);
+  font-weight: 700; line-height: 1.2; letter-spacing: -.01em; }
+.c-ttl.is-tbc { color: var(--faint); font-weight: 400; }
+.c-room { margin-top: 14px; max-width: none; }
+.c-room .lbl + .lbl { margin-top: 4px; }
+.c-ppl { list-style: none; display: flex; flex-wrap: wrap; gap: 10px 22px; margin-top: 14px; }
+.c-ppl li { display: flex; align-items: center; gap: 12px; min-width: 0; }
+.c-ppl .th { flex: none; width: 44px; height: 55px; overflow: hidden; border: 1px solid var(--line); background: var(--near); }
+.c-ppl .th img, .c-ppl .th .spk-initials { width: 100%; height: 100%; object-fit: cover; object-position: center 20%;
+  aspect-ratio: auto; font-size: 14px; }
+.c-ppl .who { min-width: 0; font-size: 15px; line-height: 1.3; }
+.c-ppl .who b { display: block; color: var(--bone); font-weight: 700; }
+.c-ppl .who span { display: block; color: var(--faint); font-size: 13px; max-width: 30ch; }
+button.c-p { display: flex; align-items: center; gap: 12px; padding: 0; border: 0; background: transparent;
+  text-align: left; cursor: pointer; }
+button.c-p:hover b, button.c-p.is-open b { color: var(--cyan); }
+.c-empty { margin-top: 12px; font-size: clamp(18px, 1.6vw, 22px); font-weight: 700; line-height: 1.2; color: var(--faint); }
+.c-count { margin-top: 14px; }
+
+/* ── 02 roster, the primary surface ────────────────────────────────── */
+#roster { padding-top: 40px; }
+.c-tools { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 16px; padding: 18px 0;
+  border-top: 1px solid var(--line-2); border-bottom: 1px solid var(--line); }
+.c-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.c-chip { min-height: 44px; padding: 0 16px; border: 1px solid rgba(155,232,240,.3); border-radius: 2px;
+  background: transparent; color: var(--cyan); font-family: var(--mono); font-size: 11px;
+  letter-spacing: .16em; text-transform: uppercase; cursor: pointer; }
+.c-chip:hover { border-color: var(--cyan); }
+.c-chip[aria-pressed="true"] { background: var(--cyan); border-color: var(--cyan); color: #0a0a0c; }
+.c-find { display: flex; align-items: center; gap: 12px; flex: 1 1 260px; max-width: 420px; margin-left: auto; }
+.c-find label { flex: none; }
+.c-find input { flex: 1 1 auto; min-width: 0; min-height: 44px; padding: 0 14px; border: 1px solid var(--line-2);
+  border-radius: 3px; background: var(--near); font-size: 15px; }
+.c-find input::placeholder { color: var(--faint); }
+.c-find input:focus { border-color: var(--cyan); outline: none; }
+.c-shown { margin: 16px 0 18px; }
+.c-none { padding: 40px 0; font-size: 17px; }
+.c-none[hidden] { display: none; }
+.c-none button { margin-left: 6px; padding: 0; border: 0; background: none; color: var(--cyan);
+  text-decoration: underline; text-underline-offset: 4px; cursor: pointer; }
+
+.c-roster { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 10px; }
+.c-roster figure { min-width: 0; border: 1px solid var(--line); background: var(--near); cursor: pointer; }
+.c-roster figure[hidden] { display: none; }
+.c-roster .im { aspect-ratio: 4 / 5; overflow: hidden; }
+.c-roster .im img, .c-roster .im .spk-initials { width: 100%; height: 100%; aspect-ratio: 4 / 5; object-fit: cover;
+  object-position: center 20%; }
+.c-roster img { filter: grayscale(.28) contrast(1.02); transition: filter .35s ease, transform .5s ease; }
+.c-roster figure:hover img, .c-roster figure.is-open img { filter: none; transform: scale(1.025); }
+.c-roster figure.is-open { border-color: rgba(155,232,240,.5); }
+.c-roster figcaption { padding: 11px 12px 13px; font-size: 14px; font-weight: 800; line-height: 1.2;
+  text-transform: uppercase; overflow-wrap: anywhere; }
+.c-roster figcaption small { display: -webkit-box; margin-top: 6px; overflow: hidden; color: var(--faint);
+  font-family: var(--mono); font-size: 10px; font-weight: 400; letter-spacing: .08em; line-height: 1.45;
+  text-transform: none; -webkit-line-clamp: 3; -webkit-box-orient: vertical; }
+.c-roster figcaption .s { display: block; margin-top: 8px; color: var(--cyan); font-family: var(--mono);
+  font-size: 10px; font-weight: 400; letter-spacing: .1em; }
+.c-roster figcaption .s:empty::before { content: '—'; color: var(--faint); }
+.c-roster > .spk-panel { grid-column: 1 / -1; margin: 4px 0; }
+
+/* ── the speaker panel (same rules as /program/) ───────────────────── */
+.spk-initials { display: grid; place-items: center; width: 100%; height: 100%; aspect-ratio: 5 / 6;
+  background: var(--void); color: var(--faint); font-size: clamp(28px, 3.4vw, 44px); font-weight: 800;
+  letter-spacing: -.02em; line-height: 1; }
+.spk-panel { position: relative; display: grid; grid-template-columns: 220px minmax(0, 1fr);
+  margin-top: 28px; border: 1px solid var(--line); border-top-color: rgba(155,232,240,.5);
+  background: var(--near); }
+.spk-panel[hidden] { display: none; }
+.spk-ph { overflow: hidden; border-right: 1px solid var(--line); background: var(--void); }
+.spk-ph img { width: 100%; aspect-ratio: 5 / 6; object-fit: cover; object-position: center 20%; }
+.spk-ph .spk-initials { height: auto; }
+.spk-tx { min-width: 0; padding: 26px 28px 30px; }
+.spk-tx h3 { padding-right: 96px; font-size: clamp(22px, 2.2vw, 30px); }
+.spk-tx h3:focus { outline: none; }
+.spk-aff { margin-top: 8px; font-size: 15px; line-height: 1.45; }
+.spk-ses { margin-top: 14px; color: var(--cyan); font-family: var(--mono); font-size: 11px;
+  letter-spacing: .14em; text-transform: uppercase; }
+.spk-ses.is-tba { color: var(--faint); }
+.spk-talk { margin-top: 22px; padding-top: 16px; border-top: 1px solid var(--line); }
+.spk-talk .lbl { margin-bottom: 6px; }
+.spk-talk p { color: var(--bone); font-size: 17px; font-weight: 700; line-height: 1.35; }
+.spk-bio { margin-top: 14px; font-size: 15px; line-height: 1.65; max-width: 68ch; }
+.spk-x { position: absolute; top: 14px; right: 14px; min-height: 44px; padding: 0 16px;
+  border: 1px solid var(--line-2); border-radius: 3px; background: transparent; color: var(--bone);
+  font-family: var(--mono); font-size: 10px; letter-spacing: .2em; text-transform: uppercase; cursor: pointer; }
+.spk-x:hover { border-color: var(--bone); }
+/* this variant's addition: where the speaker is on stage */
+.spk-slots { margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--line); }
+.spk-slots p { max-width: 70ch; color: var(--bone); font-size: 15px; line-height: 1.5; }
+.spk-slots p + p { margin-top: 6px; }
+@media (max-width: 640px) {
+  .spk-panel { grid-template-columns: 1fr; }
+  .spk-ph { width: 112px; margin: 20px 0 0 20px; border: 1px solid var(--line); }
+  .spk-tx { padding: 18px 20px 24px; }
+  .spk-tx h3 { padding-right: 0; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .spk-panel { transition: opacity .2s ease, transform .24s cubic-bezier(.16,1,.3,1); }
+  .spk-panel.is-enter { opacity: 0; transform: translateY(6px); transition: none; }
+}
+@media (prefers-reduced-motion: reduce) { .c-roster img { transition: none; } }
+
+/* ── 03 timetable: five collapsible days, compact ruled lists ──────── */
+.c-day { border-top: 1px solid var(--line-2); }
+.c-day:last-of-type { border-bottom: 1px solid var(--line-2); }
+.c-day > summary { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: baseline;
+  gap: 6px 24px; padding: 22px 0; list-style: none; cursor: pointer; }
+.c-day > summary::-webkit-details-marker { display: none; }
+.c-day > summary h3 { font-size: clamp(22px, 2.6vw, 36px); }
+.c-day > summary .lbl { grid-column: 1; }
+.c-day > summary .c-mk { grid-column: 2; grid-row: 1 / span 2; align-self: center; color: var(--cyan);
+  font-family: var(--mono); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; }
+.c-day > summary .c-mk::before { content: 'Open +'; }
+.c-day[open] > summary .c-mk::before { content: 'Close −'; }
+.c-day > summary:hover h3 { color: var(--cyan); }
+.c-day-body { padding: 0 0 40px; }
+.c-venue { display: flex; flex-wrap: wrap; gap: 6px 18px; max-width: none; margin-bottom: 12px; font-size: 15px; }
+.c-venue a { color: var(--cyan); font-family: var(--mono); font-size: 11px; letter-spacing: .18em;
+  text-decoration: none; text-transform: uppercase; }
+.c-venue a:hover { text-decoration: underline; }
+.c-slots { list-style: none; }
+.c-slot { display: grid; grid-template-columns: 12ch minmax(0, 6fr) minmax(0, 5fr); gap: 4px 28px;
+  padding: 13px 0 14px; border-top: 1px solid var(--line); }
+.c-slot .t { padding-top: 2px; color: var(--dim); font-family: var(--mono); font-size: 12px; letter-spacing: .04em; white-space: nowrap; }
+.c-slot .ti { min-width: 0; color: var(--bone); font-size: 16px; font-weight: 700; line-height: 1.35; }
+.c-slot .ti small { display: block; margin-bottom: 3px; color: var(--faint); font-family: var(--mono); font-size: 10px;
+  font-weight: 400; letter-spacing: .14em; line-height: 1.5; text-transform: uppercase; }
+.c-slot .ti.is-tbc { color: var(--faint); font-weight: 400; }
+.c-slot .ti .n { display: block; margin-top: 4px; color: var(--dim); font-size: 14px; font-weight: 400; }
+.c-slot .sp { min-width: 0; font-size: 14px; line-height: 1.45; color: var(--dim); }
+.c-slot .sp > span { display: block; }
+.c-slot .sp > span + span { margin-top: 2px; }
+.c-slot .sp b, .c-slot .sp button { color: var(--bone); font-weight: 700; }
+.c-slot .sp button { margin: -4px -3px; padding: 4px 3px; border: 0; background: transparent; font-size: inherit;
+  line-height: inherit; text-align: left; cursor: pointer; text-decoration: underline;
+  text-decoration-color: var(--line-2); text-underline-offset: 4px; }
+.c-slot .sp button:hover, .c-slot .sp button.is-open { color: var(--cyan); text-decoration-color: currentColor; }
+.c-slot.is-keynote .ti small { color: var(--cyan); }
+.c-slot.is-break { padding: 9px 0 10px; }
+.c-slot.is-break .t, .c-slot.is-break .ti { color: var(--faint); font-size: 14px; font-weight: 400; }
+.c-slot.is-now { box-shadow: inset 2px 0 0 var(--cyan); padding-left: 12px; }
+.c-slot > .spk-panel { grid-column: 1 / -1; margin: 12px 0 4px; }
+
+.c-pitches { margin-top: 40px; }
+.c-pitches h4, .pg-awards h3 { padding-bottom: 12px; border-bottom: 1px solid var(--line-2);
+  font-size: 18px; font-weight: 800; line-height: 1.1; text-transform: uppercase; }
+.c-pitches ol { list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 28px; }
+.c-pitches li { padding: 12px 0 13px; border-bottom: 1px solid var(--line); }
+.c-pitches li b { display: block; color: var(--bone); font-size: 16px; font-weight: 700; line-height: 1.3; }
+.c-pitches li p { margin-top: 2px; font-size: 14px; }
+.pg-awards { margin-top: 40px; }
+.pg-awards[hidden] { display: none; }
+.pg-awards .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 18px; }
+.pg-awards .cell { padding: 20px 20px 24px; }
+.pg-awards .cell .lbl { margin-bottom: 10px; color: var(--cyan); }
+.pg-awards .cell p, .pg-awards .cell li { font-size: 15px; line-height: 1.5; color: var(--dim); }
+.pg-awards .cell ul { list-style: none; }
+.pg-awards .cell li + li { margin-top: 8px; }
+
+/* ── footer ────────────────────────────────────────────────────────── */
+.foot { background: var(--near); padding: 56px 0 72px; }
+.foot .wrap { display: flex; flex-wrap: wrap; gap: 10px 26px; justify-content: space-between;
+  color: var(--faint); font-family: var(--mono); font-size: 10px; letter-spacing: .16em;
+  text-transform: uppercase; }
+.foot a { display: inline-block; margin: -15px -8px; padding: 15px 8px; color: var(--cyan); text-decoration: none; }
+.foot a:hover { text-decoration: underline; }
+
+/* ── variant badge ─────────────────────────────────────────────────── */
+.c-badge { position: fixed; left: 12px; bottom: 12px; z-index: 60; max-width: calc(100vw - 24px);
+  padding: 8px 12px; border: 1px solid var(--line-2); border-radius: 3px; background: var(--void);
+  color: var(--faint); font-family: var(--mono); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; }
+.c-badge a { color: var(--cyan); }
+
+/* ── responsive rhythm ─────────────────────────────────────────────── */
+@media (max-width: 980px) {
+  .c-roster { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .c-live > .cell.is-wide { grid-template-columns: 1fr; }
+  .pg-awards .grid { grid-template-columns: 1fr; }
+  .c-slot { grid-template-columns: 11ch minmax(0, 1fr); }
+  .c-slot .sp { grid-column: 2; }
+}
+@media (max-width: 700px) {
+  #live { padding: 48px 0 32px; }
+  .c-live { grid-template-columns: 1fr; margin-top: 20px; }
+  .c-live > .cell { padding: 18px 16px 20px; }
+  .c-roster { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .c-find { flex-basis: 100%; max-width: none; margin-left: 0; }
+  .c-slot { grid-template-columns: 1fr; gap: 3px; }
+  .c-slot .sp { grid-column: 1; }
+  .c-slot.is-now { padding-left: 10px; }
+  .c-pitches ol { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body data-analytics-offer="program">
+
+<script src="/nav.js"></script>
+<a class="skip" href="#roster">Skip to the speakers</a>
+
+<main>
+
+<!-- ══ 00 FIRST SCREEN: THE COUNT AND THE FACES ══════════════════════ -->
+<section id="people" class="f-hero" data-track-section="program_people" data-track-position="1" aria-labelledby="people-h">
+  <div class="wrap f-head">
+    <span class="lbl lbl--cyan">The program · Kobe · 17–26 October 2026</span>
+    <h1 id="people-h" class="f-h1"><span class="f-n num" data-speakers-count>72</span> <span class="f-s">people on the program.</span></h1>
+  </div>
+  <div class="f-river" data-c="river" role="group" aria-label="Every speaker, moving portraits. Pauses on hover or focus.">
+    <div class="f-strip" data-c="strip-a"><div class="f-track"></div></div>
+    <div class="f-strip is-rev" data-c="strip-b"><div class="f-track"></div></div>
+  </div>
+  <div class="f-veil" aria-hidden="true"></div>
+  <p class="f-scroll"><span class="wrap"><a class="lbl" href="#roster">Scroll ↓ Everyone, then the timetable</a></span></p>
+  <div class="wrap f-slot" data-c="slot"></div>
+</section>
+
+<!-- ══ 01 LIVE STRIP ══════════════════════════════════════════════════ -->
+<section id="live" data-track-section="program_live" data-track-position="2" aria-labelledby="live-h">
+  <div class="wrap">
+    <div class="c-mast">
+      <h2 id="live-h">Now and next</h2>
+      <span class="lbl">All times JST</span>
+    </div>
+    <div class="c-live grid" data-c="live" aria-live="polite">
+      <noscript><div class="cell is-wide"><p>Now and next need JavaScript. The full timetable is below.</p></div></noscript>
+    </div>
+    <p class="lbl lbl--cyan c-count num" data-c="countdown"></p>
+  </div>
+</section>
+
+<!-- ══ 02 ROSTER ══════════════════════════════════════════════════════ -->
+<section id="roster" data-track-section="roster" data-track-position="3" aria-labelledby="roster-h">
+  <div class="wrap">
+    <div class="hd">
+      <span class="lbl lbl--cyan"><span data-speakers-count>72</span> speakers</span>
+      <h2 id="roster-h">Everyone on the program</h2>
+    </div>
+    <div class="c-tools">
+      <div class="c-chips" role="group" aria-label="Show speakers by event">
+        <button type="button" class="c-chip" data-chip="S1" aria-pressed="false">Summit I</button>
+        <button type="button" class="c-chip" data-chip="S2" aria-pressed="false">Summit II</button>
+        <button type="button" class="c-chip" data-chip="F" aria-pressed="false">Demo Day</button>
+      </div>
+      <div class="c-find">
+        <label class="lbl" for="c-q">Find</label>
+        <input id="c-q" type="search" autocomplete="off" spellcheck="false" placeholder="Name or organisation" />
+      </div>
+    </div>
+    <p class="lbl c-shown num" data-c="shown" aria-live="polite"></p>
+    <p class="c-none" data-c="none" hidden>No one matches. <button type="button" data-c="clear">Clear the filters</button></p>
+    <div class="c-roster" data-c="roster"></div>
+    <div class="spk-panel" id="spk-panel-c" role="region" aria-labelledby="spk-panel-c-h" hidden></div>
+  </div>
+</section>
+
+<!-- ══ 03 TIMETABLE ═══════════════════════════════════════════════════ -->
+<section id="timetable" data-track-section="timetable" data-track-position="4" aria-labelledby="tt-h">
+  <div class="wrap">
+    <div class="hd">
+      <span class="lbl lbl--cyan">Five days · all times JST</span>
+      <h2 id="tt-h">Timetable</h2>
+    </div>
+    <div data-c="timetable">
+      <noscript><p>The timetable needs JavaScript. The summits page lists every session: <a href="/conferences/">/conferences/</a>.</p></noscript>
+    </div>
+  </div>
+
+  <!-- Static, placed under Monday 26 October by the script. Copied from /program/. -->
+  <aside class="pg-awards" data-program-day="monday_26_october" aria-labelledby="pg-awards-h" hidden>
+    <h3 id="pg-awards-h">Demo Day awards</h3>
+    <div class="grid">
+      <div class="cell">
+        <span class="lbl">First prize</span>
+        <ul>
+          <li>A ticket to the next Vitalist Bay</li>
+          <li>Priority review for the Meet the Drapers Japan 2027 cohort</li>
+        </ul>
+      </div>
+      <div class="cell">
+        <span class="lbl">Antler Japan residency</span>
+        <p>Six weeks of mentoring, access to USD 850,000 in perks, and a chance of investment.</p>
+      </div>
+      <div class="cell">
+        <span class="lbl">Japan Landing Award</span>
+        <p>Presented by GlobalDeal, Official Market-Entry Execution Partner. A hands-on engagement to take the winner into the Japanese market: entry strategy, the right partners and first customers, and regulatory navigation.</p>
+      </div>
+    </div>
+  </aside>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <span><a href="https://www.miraitech.city/" target="_blank" rel="noopener" data-analytics-action="site_navigation" data-analytics-location="footer" data-analytics-target="mirai_city">Mirai Tech City</a> · Kobe Biomedical Innovation Cluster, Port Island</span>
+    <span>Kobe · Japan Standard Time</span>
+  </div>
+</footer>
+
+<p class="c-badge">Variant F · kinetic — <a href="/program/">current</a> · <a href="c.html">C</a> · <a href="e.html">E</a> · <a href="g.html">G</a> · <a href="h.html">H</a></p>
+
+<script src="/sheet.js"></script>
+<script src="/speakers-data.js"></script>
+<script src="/speakers-photos.js"></script>
+<script src="/speakers.js"></script>
+<script src="/program-data.js"></script>
+<script src="/program.js"></script>
+<script src="/speaker-panel.js"></script>
+<script>
+/* ── variant F: kinetic faces (built on variant C) ─────────────────────
+      The first screen is the count and two moving strips of portraits, every
+      speaker once; each portrait opens the shared panel under the strips.
+      The live strip reads the device clock against the timetable in JST.
+      The roster is the main surface: chips by event, a find box, the shared
+      speaker panel opening under the clicked row with that speaker's slots.
+      Five collapsible days follow. Sheet text goes in as text nodes only. */
+(function () {
+  'use strict';
+  var S = window.MiraiSpeakers, G = window.MiraiProgram, P = window.MiraiSpeakerPanel;
+  if (!S || !G || !P) return;
+  function $(s) { return document.querySelector(s); }
+  var state = { speakers: null, program: null, chips: {} };
+  var main = $('main'), liveBox = $('[data-c="live"]'), countBox = $('[data-c="countdown"]');
+  var roster = $('[data-c="roster"]'), shown = $('[data-c="shown"]'), none = $('[data-c="none"]');
+  var input = $('#c-q'), tt = $('[data-c="timetable"]'), panelEl = $('#spk-panel-c'), home = panelEl.parentNode;
+  var river = $('[data-c="river"]'), slot = $('[data-c="slot"]');
+  var strips = [$('[data-c="strip-a"]'), $('[data-c="strip-b"]')];
+  var statics = [].slice.call(document.querySelectorAll('[data-program-day]'));
+  var panel = P.attach({ root: main, panel: panelEl });
+  var openId = null, liveKey = '';
+
+  function el(tag, cls, text) {
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text != null) n.textContent = text;
+    return n;
+  }
+  function fill(box, nodes) { box.textContent = ''; nodes.forEach(function (n) { box.appendChild(n); }); }
+  function norm(s) { return String(s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase(); }
+  function byId() {
+    var m = {};
+    ((state.speakers && state.speakers.speakers) || []).forEach(function (sp) { m[sp.id] = sp; });
+    return m;
+  }
+
+  /* ids from the current speakers model, by the same lenient key the core uses */
+  function relink(program, speakers) {
+    var index = {};
+    ((speakers && speakers.speakers) || []).forEach(function (s) {
+      [s.name, [s.first, s.last].filter(Boolean).join(' ')].forEach(function (n) {
+        var k = G.speakerKey(n);
+        if (k && !index[k]) index[k] = s.id;
+      });
+    });
+    program.days.forEach(function (d) {
+      d.slots.forEach(function (sl) {
+        sl.speakers.forEach(function (p) { p.id = index[G.speakerKey(p.name)] || null; });
+      });
+    });
+    return program;
+  }
+
+  /* ── time: "Saturday 17 October" + "11:35" is 2026, JST ── */
+  var MONTHS = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
+  function dayUTC(d) {
+    var m = /(\d{1,2})\s+([A-Za-z]+)/.exec(d.label), mo = m ? MONTHS.indexOf(m[2].toLowerCase()) : -1;
+    return mo < 0 ? NaN : Date.UTC(2026, mo, +m[1]);
+  }
+  function at(d, hm) {
+    var t = /^(\d{1,2}):(\d{2})$/.exec(hm || '');
+    return t ? dayUTC(d) + ((+t[1] - 9) * 60 + +t[2]) * 60e3 : NaN;
+  }
+  function jstToday(now) {
+    var j = new Date(now + 9 * 3600e3);
+    return Date.UTC(j.getUTCFullYear(), j.getUTCMonth(), j.getUTCDate());
+  }
+  function timeline(program) {
+    var out = [];
+    program.days.forEach(function (d) {
+      d.slots.forEach(function (s, i) {
+        var a = at(d, s.start), b = at(d, s.end);
+        if (s.kind === 'pitch' || isNaN(a)) return;
+        out.push({ day: d, slot: s, k: d.id + '|' + i, a: a, b: isNaN(b) ? a + 20 * 60e3 : b });
+      });
+    });
+    return out.sort(function (x, y) { return x.a - y.a; });
+  }
+  /* mode: before | live | between | after, with the slots that matter */
+  function where(now) {
+    var tl = timeline(state.program), cur = null, next = null;
+    if (!tl.length) return null;
+    if (now < tl[0].a) return { mode: 'before', next: tl[0] };
+    if (now >= tl[tl.length - 1].b) return { mode: 'after' };
+    tl.forEach(function (x) { if (x.a <= now && now < x.b) cur = x; if (!next && x.a > now) next = x; });
+    var today = tl.filter(function (x) { return dayUTC(x.day) === jstToday(now); });
+    var inDay = today.length && now >= today[0].a && now < Math.max.apply(null, today.map(function (x) { return x.b; }));
+    return inDay ? { mode: 'live', cur: cur, next: next } : { mode: 'between', next: next };
+  }
+
+  /* ── live strip ── */
+  function people(list) {
+    var ul = el('ul', 'c-ppl'), map = byId();
+    list.forEach(function (p) {
+      var li = el('li'), sp = p.id && map[p.id], who = el('span', 'who'), box;
+      if (sp) {
+        box = el('button', 'c-p');
+        box.type = 'button';
+        box.setAttribute('data-speaker', sp.id);
+        var th = el('span', 'th');
+        th.appendChild(S.photoEl(sp, { alt: '' }));
+        box.appendChild(th);
+      } else {
+        box = el('span', 'c-p');
+      }
+      who.appendChild(el('b', null, p.name));
+      var aff = p.affiliation || (sp && sp.affiliation);
+      if (aff) who.appendChild(el('span', null, aff));
+      box.appendChild(who);
+      li.appendChild(box);
+      ul.appendChild(li);
+    });
+    return ul;
+  }
+  function room(x) {
+    var r = el('div', 'c-room');
+    if (x.slot.block) r.appendChild(el('span', 'lbl', x.slot.block));
+    if (x.day.venue) r.appendChild(el('span', 'lbl', x.day.venue));
+    return r;
+  }
+  function title(x) {
+    return el('p', 'c-ttl' + (x.slot.tbc ? ' is-tbc' : ''), x.slot.title || 'Title to be confirmed');
+  }
+  function tag(text, beat) {
+    var t = el('span', 'lbl lbl--cyan c-tag');
+    if (beat) { var d = el('span', 'c-dot'); d.setAttribute('aria-hidden', 'true'); t.appendChild(d); }
+    t.appendChild(document.createTextNode(text));
+    return t;
+  }
+  function slotCell(label, x, now) {
+    var c = el('div', 'cell' + (now ? ' is-now' : ''));
+    c.appendChild(tag(label, now));
+    if (!x) {
+      c.appendChild(el('p', 'c-empty', now ? 'Between sessions.' : 'Nothing more today.'));
+      return c;
+    }
+    var t = el('p', 'c-time num', [x.slot.start, x.slot.end].filter(Boolean).join('–'));
+    t.appendChild(el('small', null, x.day.label));
+    c.appendChild(t);
+    c.appendChild(title(x));
+    c.appendChild(room(x));
+    if (x.slot.speakers.length) c.appendChild(people(x.slot.speakers));
+    return c;
+  }
+  function wideCell(label, x) {
+    var c = el('div', 'cell is-wide'), l = el('div'), r = el('div');
+    l.appendChild(tag(label, false));
+    l.appendChild(el('p', 'c-when num', x.day.label + ', ' + x.slot.start));
+    r.appendChild(title(x));
+    r.appendChild(room(x));
+    if (x.slot.speakers.length) r.appendChild(people(x.slot.speakers));
+    c.appendChild(l);
+    c.appendChild(r);
+    return c;
+  }
+  function paintLive() {
+    if (!state.program) return;
+    var now = Date.now(), w = where(now);
+    if (!w) return;
+    var key = [w.mode, w.cur && w.cur.k, w.next && w.next.k, jstToday(now), !!state.speakers].join('/');
+    if (key === liveKey) return;
+    liveKey = key;
+    var cells = [], line = '';
+    if (w.mode === 'live') {
+      cells = [slotCell('Now', w.cur, true), slotCell('Next', w.next && dayUTC(w.next.day) === jstToday(now) ? w.next : null, false)];
+      var n = state.program.days.indexOf(w.cur ? w.cur.day : w.next.day) + 1;
+      line = 'Day ' + n + ' of ' + state.program.days.length;
+    } else if (w.mode === 'after') {
+      var c = el('div', 'cell is-wide');
+      c.appendChild(tag('The program has ended', false));
+      cells = [c];
+    } else {
+      cells = [wideCell(w.mode === 'before' ? 'First up' : 'Next up', w.next)];
+      var days = Math.round((dayUTC(w.next.day) - jstToday(now)) / 864e5);
+      line = days > 1 ? 'Starts in ' + days + ' days' : days === 1 ? 'Starts tomorrow' : 'Starts today';
+    }
+    if (panelEl.parentNode === liveBox) park();
+    fill(liveBox, cells);
+    countBox.textContent = line;
+    countBox.hidden = !line;
+    [].forEach.call(tt.querySelectorAll('.c-slot.is-now'), function (n) { n.classList.remove('is-now'); });
+    if (w.mode === 'live' && w.cur) {
+      var li = tt.querySelector('[data-k="' + w.cur.k + '"]');
+      if (li) li.classList.add('is-now');
+    }
+    panel.refresh(byId());
+    if (openId && !panelEl.hidden) addSlots(openId);
+  }
+
+  /* ── the river: two strips, every speaker once, each strip doubled for a seamless loop ── */
+  var EAGER = 12;
+  function tile(sp, i, dup) {
+    var b = el('button', 'f-tile'), im = S.photoEl(sp, { alt: '' });
+    b.type = 'button';
+    b.setAttribute('data-speaker', sp.id);
+    if (dup) { b.tabIndex = -1; } else { b.setAttribute('aria-label', sp.affiliation ? sp.name + ', ' + sp.affiliation : sp.name); }
+    if (im.tagName === 'IMG' && i < EAGER) im.setAttribute('loading', 'eager');
+    b.appendChild(im);
+    var nm = el('span', 'f-nm', sp.name);
+    nm.setAttribute('aria-hidden', 'true');
+    b.appendChild(nm);
+    return b;
+  }
+  /* faces lead; speakers without a photo are spread out so the strip reads as people */
+  function spread(list) {
+    var faces = list.filter(function (sp) { return sp.photo; }), rest = list.filter(function (sp) { return !sp.photo; });
+    if (!rest.length) return faces;
+    var out = [], every = Math.max(1, Math.floor(faces.length / rest.length));
+    faces.forEach(function (sp, i) { out.push(sp); if ((i + 1) % every === 0 && rest.length) out.push(rest.shift()); });
+    return out.concat(rest);
+  }
+  function paintRiver(list) {
+    if (slot.contains(panelEl)) park();
+    strips.forEach(function (st, k) {
+      var mine = spread(list.filter(function (sp, i) { return i % 2 === k; })), track = st.querySelector('.f-track');
+      var a = el('div', 'f-set'), b = el('div', 'f-set');
+      b.setAttribute('aria-hidden', 'true');
+      mine.forEach(function (sp, i) { a.appendChild(tile(sp, i, false)); b.appendChild(tile(sp, i, true)); });
+      fill(track, [a, b]);
+      track.style.setProperty('--dur', Math.max(40, mine.length * 3.2) + 's');
+      st.scrollLeft = 0;
+    });
+  }
+  /* after first paint, the rest of the strip photos load (same files the roster uses) */
+  function wakeRiver() {
+    [].forEach.call(river.querySelectorAll('img[loading="lazy"]'), function (im) { im.setAttribute('loading', 'eager'); });
+  }
+  if (document.readyState === 'complete') setTimeout(wakeRiver, 0); else window.addEventListener('load', wakeRiver);
+  /* focus can scroll a clipped strip; put it back when focus leaves */
+  river.addEventListener('focusout', function (e) {
+    if (river.contains(e.relatedTarget)) return;
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) strips.forEach(function (st) { st.scrollLeft = 0; });
+  });
+
+  /* ── roster ── */
+  function card(sp) {
+    var f = el('figure'), im = el('div', 'im'), cap = el('figcaption', null, sp.name);
+    f.setAttribute('data-speaker', sp.id);
+    f.setAttribute('data-ses', (sp.sessions || []).join(' '));
+    f.setAttribute('data-hay', norm(sp.name + ' ' + (sp.affiliation || '')));
+    f.setAttribute('aria-label', sp.affiliation ? sp.name + ', ' + sp.affiliation : sp.name);
+    im.appendChild(S.photoEl(sp, { alt: '' }));
+    if (sp.affiliation) cap.appendChild(el('small', null, sp.affiliation));
+    var s = el('span', 's', sp.sessionsLabel);
+    if (!sp.sessionsLabel) s.setAttribute('aria-label', 'Session to be announced');
+    cap.appendChild(s);
+    f.appendChild(im);
+    f.appendChild(cap);
+    return f;
+  }
+  function applyFilter() {
+    var on = Object.keys(state.chips).filter(function (k) { return state.chips[k]; });
+    var q = norm(input.value).trim(), n = 0, figs = roster.querySelectorAll('figure');
+    if (!panelEl.hidden && panelEl.parentNode === roster) { panel.close(); openId = null; }
+    [].forEach.call(figs, function (f) {
+      var ses = f.getAttribute('data-ses').split(' ');
+      var ok = (!on.length || on.some(function (k) { return ses.indexOf(k) >= 0; })) &&
+        (!q || f.getAttribute('data-hay').indexOf(q) >= 0);
+      f.hidden = !ok;
+      if (ok) n++;
+    });
+    shown.textContent = n === figs.length ? 'Showing all ' + n : 'Showing ' + n + ' of ' + figs.length;
+    none.hidden = n > 0;
+  }
+  $('.c-chips').addEventListener('click', function (e) {
+    var b = e.target.closest('.c-chip');
+    if (!b) return;
+    var k = b.getAttribute('data-chip'), on = !state.chips[k];
+    state.chips[k] = on;
+    b.setAttribute('aria-pressed', on ? 'true' : 'false');
+    applyFilter();
+  });
+  input.addEventListener('input', applyFilter);
+  $('[data-c="clear"]').addEventListener('click', function () {
+    state.chips = {};
+    [].forEach.call(document.querySelectorAll('.c-chip'), function (b) { b.setAttribute('aria-pressed', 'false'); });
+    input.value = '';
+    applyFilter();
+    input.focus();
+  });
+
+  /* ── the panel: opens where it was asked for, then lists the speaker's slots ── */
+  function park() {
+    if (!panelEl.hidden) panel.close();
+    openId = null;
+    home.appendChild(panelEl);
+  }
+  function place(o) {
+    if (river.contains(o)) {
+      slot.appendChild(panelEl);
+    } else if (roster.contains(o)) {
+      roster.appendChild(panelEl);
+      var top = o.offsetTop, last = o;
+      [].forEach.call(roster.querySelectorAll('figure:not([hidden])'), function (f) { if (f.offsetTop === top) last = f; });
+      roster.insertBefore(panelEl, last.nextSibling);
+    } else if (o.closest('.c-slot')) {
+      o.closest('.c-slot').appendChild(panelEl);
+    } else {
+      countBox.parentNode.insertBefore(panelEl, countBox.nextSibling);
+    }
+  }
+  function addSlots(id) {
+    var tx = panelEl.querySelector('.spk-tx'), old = tx && tx.querySelector('.spk-slots'), lines = [];
+    if (!tx || !state.program) return;
+    if (old) tx.removeChild(old);
+    state.program.days.forEach(function (d) {
+      d.slots.forEach(function (s) {
+        if (!s.speakers.some(function (p) { return p.id === id; })) return;
+        var time = [s.start, s.end].filter(Boolean).join('–');
+        lines.push('Speaking: ' + [d.short + (time ? ' ' + time : ''), s.block || s.kind, s.title || 'Title to be confirmed'].join(' · '));
+      });
+    });
+    if (!lines.length) return;
+    var box = el('div', 'spk-slots'), ses = tx.querySelector('.spk-ses');
+    lines.forEach(function (t) { box.appendChild(el('p', 'num', t)); });
+    tx.insertBefore(box, ses ? ses.nextSibling : null);
+  }
+  document.addEventListener('click', function (e) {
+    var o = e.target.closest && e.target.closest('[data-speaker]');
+    if (!o || !main.contains(o)) return;
+    e.stopPropagation();
+    var id = o.getAttribute('data-speaker');
+    if (!panelEl.hidden && openId === id) { panel.close(); openId = null; return; }
+    place(o);
+    panel.open(id, o);
+    openId = panelEl.hidden ? null : id;
+    if (openId) addSlots(id);
+  }, true);
+  var raf = 0;
+  window.addEventListener('resize', function () {
+    cancelAnimationFrame(raf);
+    raf = requestAnimationFrame(function () {
+      if (panelEl.hidden || panelEl.parentNode !== roster || !openId) return;
+      var o = roster.querySelector('[data-speaker="' + openId + '"]');
+      if (o) place(o);
+    });
+  });
+
+  /* ── timetable: five <details> ── */
+  function slotEl(s, i, d) {
+    var li = el('li', 'c-slot is-' + s.kind), ti = el('div', 'ti' + (s.tbc && s.kind !== 'break' ? ' is-tbc' : ''));
+    li.setAttribute('data-k', d.id + '|' + i);
+    li.appendChild(el('span', 't num', [s.start, s.end].filter(Boolean).join('–')));
+    if (s.block && s.kind !== 'break') ti.appendChild(el('small', null, s.block));
+    ti.appendChild(document.createTextNode(s.title || 'Title to be confirmed'));
+    if (s.notes) ti.appendChild(el('span', 'n', s.notes));
+    li.appendChild(ti);
+    if (s.speakers.length) {
+      var sp = el('div', 'sp');
+      s.speakers.forEach(function (p) {
+        var row = el('span'), name;
+        if (p.id) {
+          name = el('button', null, p.name);
+          name.type = 'button';
+          name.setAttribute('data-speaker', p.id);
+        } else {
+          name = el('b', null, p.name);
+        }
+        row.appendChild(name);
+        if (p.affiliation) row.appendChild(document.createTextNode(' ' + p.affiliation));
+        sp.appendChild(row);
+      });
+      li.appendChild(sp);
+    }
+    return li;
+  }
+  function dayEl(d, open) {
+    var det = el('details', 'c-day'), sum = el('summary'), body = el('div', 'c-day-body');
+    var talks = [], pitches = [];
+    det.id = 'day-' + d.id;
+    det.setAttribute('data-program', 'day');
+    det.open = open;
+    d.slots.forEach(function (s, i) { (s.kind === 'pitch' ? pitches : talks).push([s, i]); });
+    sum.appendChild(el('h3', null, d.label));
+    sum.appendChild(el('span', 'lbl num', talks.length + ' sessions' + (pitches.length ? ' · ' + pitches.length + ' pitches' : '')));
+    var mk = el('span', 'c-mk');
+    mk.setAttribute('aria-hidden', 'true');
+    sum.appendChild(mk);
+    det.appendChild(sum);
+    if (d.venue || d.venueLink) {
+      var v = el('p', 'c-venue');
+      if (d.venue) v.appendChild(el('span', null, d.venue));
+      if (d.venueLink) {
+        var a = el('a', null, 'Map ↗');
+        a.href = d.venueLink;
+        a.target = '_blank';
+        a.rel = 'noopener';
+        a.setAttribute('aria-label', 'Map' + (d.venue ? ' of ' + d.venue : ' of the venue') + ', ' + d.label);
+        a.setAttribute('data-analytics-action', 'site_navigation');
+        a.setAttribute('data-analytics-location', 'program');
+        a.setAttribute('data-analytics-target', 'venue_map');
+        v.appendChild(a);
+      }
+      body.appendChild(v);
+    }
+    var ol = el('ol', 'c-slots');
+    talks.forEach(function (p) { ol.appendChild(slotEl(p[0], p[1], d)); });
+    body.appendChild(ol);
+    if (pitches.length) {
+      var box = el('div', 'c-pitches'), list = el('ol'), hid = det.id + '-pitches', ph = el('h4', null, pitches[0][0].block || 'Demo Day pitches');
+      box.setAttribute('data-program', 'pitches');
+      box.setAttribute('role', 'group');
+      box.setAttribute('aria-labelledby', hid);
+      ph.id = hid;
+      box.appendChild(ph);
+      pitches.forEach(function (p) {
+        var li = el('li');
+        li.setAttribute('data-program', 'pitch');
+        li.appendChild(el('b', null, p[0].title));
+        if (p[0].notes) li.appendChild(el('p', null, p[0].notes));
+        list.appendChild(li);
+      });
+      box.appendChild(list);
+      body.appendChild(box);
+    }
+    statics.forEach(function (n) {
+      if (n.getAttribute('data-program-day') === d.id) { body.appendChild(n); n.hidden = false; }
+    });
+    det.appendChild(body);
+    return det;
+  }
+  function paintProgram() {
+    if (!state.program) return;
+    var program = relink(state.program, state.speakers), was = {}, had = false;
+    [].forEach.call(tt.querySelectorAll('details'), function (d) { had = true; was[d.id] = d.open; });
+    var w = where(Date.now()), focus = w && (w.mode === 'live' || w.mode === 'between') ? (w.cur || w.next).day.id : program.days[0] && program.days[0].id;
+    if (tt.contains(panelEl)) park();
+    statics.forEach(function (n) { n.hidden = true; tt.parentNode.parentNode.appendChild(n); });
+    fill(tt, program.days.map(function (d) { return dayEl(d, had && ('day-' + d.id) in was ? was['day-' + d.id] : d.id === focus); }));
+    liveKey = '';
+    paintLive();
+  }
+
+  S.load({
+    url: window.MIRAI_SPEAKERS_SHEET_CSV,
+    snapshot: window.MIRAI_SPEAKERS_SNAPSHOT,
+    render: function (model) {
+      state.speakers = model;
+      if (roster.contains(panelEl)) park();
+      fill(roster, model.speakers.map(card));
+      paintRiver(model.speakers);
+      S.fillCounts(model, document);
+      applyFilter();
+      paintProgram();
+      panel.refresh(byId());
+    }
+  });
+
+  G.load({
+    url: window.MIRAI_PROGRAM_SHEET_CSV,
+    snapshot: window.MIRAI_PROGRAM_SNAPSHOT,
+    speakersModel: state.speakers,
+    render: function (model) {
+      state.program = model;
+      paintProgram();
+    }
+  });
+
+  setInterval(paintLive, 30000);
+})();
+</script>
+</body>
+</html>

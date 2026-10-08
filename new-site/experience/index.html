@@ -322,6 +322,10 @@
     letter-spacing: -.005em; line-height: 1.05; }
   .hcard .og { font-family: var(--mono); font-size: 9px; letter-spacing: .14em; text-transform: uppercase;
     color: var(--accent); margin-top: 5px; }
+  /* Speaker without a photo: initials in the photo's 4:5 box. */
+  .hcard .spk-initials { width: 100%; aspect-ratio: 4/5; display: flex; align-items: center; justify-content: center;
+    background: rgba(244,243,240,.04); font-family: var(--mono); font-size: clamp(20px, 2.4vw, 32px);
+    letter-spacing: .12em; color: var(--faint); }
   .peopleIx { margin-top: 30px; border-top: 1px solid var(--line); }
   .peopleIx details.row > summary { grid-template-columns: 132px minmax(0,.9fr) minmax(0,1.1fr) 34px; }
   @media (max-width: 860px) {
@@ -1596,32 +1600,21 @@
       <h2 class="big">The people<span class="tick">.</span></h2>
       <p class="secLine"><b>300 residents live the month together.</b> Speakers come through all October.</p>
     </header>
-    <div class="headliners rv">
-      <div class="hcard"><img src="/img/aubrey.webp" alt="Aubrey de Grey" width="768" height="710" loading="lazy" decoding="async" />
-        <div class="meta"><div class="nm">Aubrey de Grey</div><div class="og">LEV Foundation</div></div></div>
-      <div class="hcard"><img src="/img/hayano.webp" alt="Motoshi Hayano" width="600" height="750" loading="lazy" decoding="async" />
-        <div class="meta"><div class="nm">Motoshi Hayano</div><div class="og">Asagi Labs</div></div></div>
-      <div class="hcard"><img src="/img/jose.webp" alt="José Cordeiro" width="500" height="500" loading="lazy" decoding="async" />
-        <div class="meta"><div class="nm">José Cordeiro</div><div class="og">Int&rsquo;l Longevity Summit</div></div></div>
-      <div class="hcard"><img src="/img/yuki.webp" alt="Yuki Hanyu" width="480" height="480" loading="lazy" decoding="async" />
-        <div class="meta"><div class="nm">Yuki Hanyu</div><div class="og">Shojinmeat Project</div></div></div>
-      <div class="hcard"><img src="/img/adam.webp" alt="Adam Gries" width="800" height="1118" loading="lazy" decoding="async" />
-        <div class="meta"><div class="nm">Adam Gries</div><div class="og">Vitalist Bay</div></div></div>
-    </div>
+    <div class="headliners rv" data-speakers="experience-cards"></div>
     <div class="peopleIx rv">
       <details class="row" data-track-faq="Also in the city" data-track-position="20">
         <summary>
-          <span class="rk num">55 total</span>
+          <span class="rk num"><span data-speakers-count>55</span> total</span>
           <span class="rt">Also in the city</span>
-          <span class="rl">Marian Goodell, Patri Friedman, Mac Davis, Laurence Ion…</span>
+          <span class="rl" data-speakers="experience-also-preview"></span>
           <span class="mk" aria-hidden="true"></span>
         </summary>
         <div class="rbody">
-          <p>Also in the city: <strong>Marian Goodell</strong> (Burning Man Project), <strong>Patri Friedman</strong> (Pronomos Capital), <strong>Sebastian Brunemeier</strong> (Healthspan Capital), <strong>Mac Davis</strong> (Minicircle), <strong>Laurence Ion</strong> (VitaDAO), <strong>Nathan Cheng</strong> (Longevity Biotech Fellowship), <strong>Eleanor Sheekey</strong> (RIKEN Kobe), <strong>Yuri Deigin</strong> (YouthBio), <strong>Rob Claar</strong> (HekaBio), and forty more — in the onsen on Sunday, and in the dinner group chat by six.</p>
+          <p data-speakers="experience-also"></p>
         </div>
       </details>
     </div>
-    <p class="followline rv"><a href="/#speakers" data-analytics-action="site_navigation" data-analytics-location="people" data-analytics-target="speakers">See all 55 speakers →</a></p>
+    <p class="followline rv"><a href="/#speakers" data-analytics-action="site_navigation" data-analytics-location="people" data-analytics-target="speakers">See all <span data-speakers-count>55</span> speakers →</a></p>
   </div>
 </section>
 
@@ -1817,6 +1810,51 @@
   const jstEl = document.getElementById('jst');
   function tick() { jstEl.textContent = JST_FMT.format(new Date()); }
   tick(); setInterval(tick, 30000);
+</script>
+
+<script src="/sheet.js"></script>
+<script src="/speakers-data.js"></script>
+<script src="/speakers-photos.js"></script>
+<script src="/speakers.js"></script>
+<script>
+  /* People: photo cards and the "Also in the city" row render from the
+     sheet's Speakers tab (snapshot first, sheet second; text via textContent).
+     The cards sit inside the .rv headliners block, so they reveal with it. */
+  (() => {
+    const S = window.MiraiSpeakers;
+    const cards = document.querySelector('[data-speakers="experience-cards"]');
+    const preview = document.querySelector('[data-speakers="experience-also-preview"]');
+    const also = document.querySelector('[data-speakers="experience-also"]');
+    const el = (tag, cls, text) => {
+      const n = document.createElement(tag);
+      if (cls) n.className = cls;
+      if (text != null) n.textContent = text;
+      return n;
+    };
+    const txt = t => document.createTextNode(t);
+    function render(model) {
+      cards.textContent = '';
+      S.featured(model, 'experience').forEach(s => {
+        const card = el('div', 'hcard'), meta = el('div', 'meta');
+        card.appendChild(S.photoEl(s, { alt: s.name }));
+        meta.appendChild(el('div', 'nm', s.name));
+        meta.appendChild(el('div', 'og', s.affiliation));
+        card.appendChild(meta);
+        cards.appendChild(card);
+      });
+      const rest = S.others(model, 'experience');
+      preview.textContent = rest.slice(0, 4).map(s => s.name).join(', ') + '…';
+      also.textContent = 'Also in the city: ';
+      rest.forEach((s, i) => {
+        if (i) also.appendChild(txt(', '));
+        also.appendChild(el('strong', null, s.name));
+        if (s.affiliation) also.appendChild(txt(' (' + s.affiliation + ')'));
+      });
+      also.appendChild(txt('.'));
+      S.fillCounts(model, document);
+    }
+    S.load({ url: window.MIRAI_SPEAKERS_SHEET_CSV, snapshot: window.MIRAI_SPEAKERS_SNAPSHOT, render });
+  })();
 </script>
 
 </body>

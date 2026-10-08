@@ -28,4 +28,5 @@
 ## Navigation & Links
 - [Main Landing Page](https://mirai-tech-city.vercel.app/): Main event overview and schedule.
 - [Japanese Landing Page](https://mirai-tech-city.vercel.app/jp/): Japanese language overview.
+- [The Program](https://mirai-tech-city.vercel.app/program/): Full timetable for the five summit days (October 17, 18, 24, 25 and 26), with venues, speakers and the Demo Day pitches. All times JST.
 - [Ticket Registration](https://luma.com/an4zotn9): Official Luma registration link for Summits and Residency.

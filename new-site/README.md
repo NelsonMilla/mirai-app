@@ -10,6 +10,32 @@ Single static `index.html` — no framework, no build step. Deploys anywhere
   muted loop only after the poster renders and the browser is idle; mobile,
   reduced-motion, data-saver, and slow connections stay poster-only.
 - Summit I Oct 17–18 · Summit II Oct 24–25 · Fashion Show Oct 26 (Monday).
+- The landing-page agenda rail (`#agendaRail`) is rendered by `agenda.js` from a
+  public Google Sheet, one row per session; the sheet's CSV export URL is set in
+  `agenda-data.js`. The snapshot rows in `agenda-data.js` paint first and stay on
+  the page if the fetch fails or times out. `npm run agenda:snapshot` refreshes
+  the snapshot from the sheet. The agenda owner's guide (columns, making the
+  sheet public) is `AGENDA.md`.
+- Speakers come from the same sheet's `Speakers` tab, one row per speaker, row
+  order = display order. `speakers.js` (on top of the shared CSV helper
+  `sheet.js`) builds the model; the landing page, `/conferences/`,
+  `/experience/`, `/startups/` and `/jp/` each render their cards, lists and
+  `data-speakers-count` numbers from it, picking photo cards by the `Show on`
+  column. Photos are `img/speakers/first_last.jpeg` (name lowercased, accents
+  dropped, other characters → `_`); a `Photo` cell overrides the path, `none`
+  shows an initials tile, and a missing file falls back to the tile. The
+  snapshot rows in `speakers-data.js` paint first and stay if the fetch fails;
+  `npm run speakers:snapshot` refreshes them. `speakers-photos.js` lists the portraits present
+  in `img/speakers/` (regenerate with `npm run photos:manifest`; `scripts/photos-thumbs.py` makes the
+  256px copies in `img/speakers/thumb/` that the /program/ wall uses); a blank Photo cell only derives
+  a file that is listed, so no page requests a missing portrait. Runbook: `AGENDA.md`.
+- `/program/` opens on a wall of every speaker's portrait, then renders the agenda, day by day, from the same sheet's
+  `Program` tab (one row per slot, plus the Demo Day pitch rows) and the speaker
+  roster from the `Speakers` tab. `program.js` builds the agenda model; speaker
+  names in a slot that match a Speakers row open the talk-and-bio panel, which is
+  shared with `/conferences/` through `speaker-panel.js`. The snapshot rows in
+  `program-data.js` paint first and stay if the fetch fails;
+  `npm run program:snapshot` refreshes them. Runbook: `AGENDA.md` (Program).
 - Ticket CTAs go to Stripe Payment Links (cutover Sep 22 2026). Generic "Get
   Tickets" buttons and the nav CTA go to `/pricing/`, where each ticket has its
   own link; summit cards, the PopUp/"Everything" buttons and `/conferences/`
@@ -76,8 +102,9 @@ Single static `index.html` — no framework, no build step. Deploys anywhere
   the design-round variants — delete before deploying.
 - Fonts: Switzer (Fontshare) + IBM Plex Mono. Speaker photos + Kobe stills
   copied into `img/` from `legacy-site/public/images` (comic-style avatars intentionally not used).
-- Nav: the top bar on the site pages (`/`, `/experience/`, `/conferences/`, `/pricing/`,
-  `/startups/`, plus a 日本語 link to `/jp/`) is one shared component — `/nav.js` inserts the markup where the
+- Nav: the top bar on the site pages (`/`, `/program/`, `/conferences/`, `/pricing/`,
+  `/startups/`, `/stay/`, `/experience/`; links Program, Summits, Pricing, For Startups,
+  Citizens for people already in Kobe, plus a 日本語 link to `/jp/`) is one shared component — `/nav.js` inserts the markup where the
   `<script src="/nav.js">` tag sits at the top of `<body>`, `/nav.css` styles it. Edit
   the links in `nav.js` once and every page follows. A page may swap the CTA with
   `data-cta-label` / `data-cta-href` / `data-cta-target` on the script tag (see

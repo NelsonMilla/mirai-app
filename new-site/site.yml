@@ -46,3 +46,6 @@ site:
     - path: "/jp/"
       title: "Mirai Tech City (Japanese)"
       type: "localized-landing"
+    - path: "/program/"
+      title: "The program"
+      type: "program"
