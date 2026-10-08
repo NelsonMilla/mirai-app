@@ -146,29 +146,30 @@ test('numberWords spells 0–99', () => {
   assert.equal(S.numberWords(100), '100');
 });
 
-test('the shipped snapshot builds today\'s 55 speakers', () => {
+test('the shipped snapshot builds the merged 72 speakers', () => {
   const w = {};
   vm.runInNewContext(src('speakers-data.js'), { window: w });
   assert.equal(w.MIRAI_SPEAKERS_SHEET_CSV, 'https://docs.google.com/spreadsheets/d/1KVHJxp5W5VirLNMh6UQftPhF4iE9F247pQq5EZ8q-fI/gviz/tq?tqx=out:csv&sheet=Speakers');
   const m = S.buildModel(w.MIRAI_SPEAKERS_SNAPSHOT);
-  assert.equal(m.count, 55);
+  assert.equal(m.count, 72);
   const featured = (page) => plain(S.featured(m, page)).map(s => s.name);
   assert.deepEqual(featured('landing'), ['Aubrey de Grey', 'Motoshi Hayano', 'Yuki Hanyu', 'Adam Gries']);
   assert.deepEqual(featured('experience'), ['Aubrey de Grey', 'Motoshi Hayano', 'José Cordeiro', 'Yuki Hanyu', 'Adam Gries']);
   assert.deepEqual(featured('startups'), ['Aubrey de Grey', 'Motoshi Hayano', 'Yuki Hanyu', 'Adam Gries']);
   assert.deepEqual(featured('jp'), ['Aubrey de Grey', 'José Cordeiro', 'Yuki Hanyu', 'Adam Gries']);
   const g = plain(S.groups(m));
-  assert.equal(g.scientists.length, 22);
-  assert.equal(g.founders.length, 33);
+  assert.equal(g.scientists.length, 27);
+  assert.equal(g.founders.length, 45);
   assert.equal(g.scientists.filter(s => s.showOn.includes('conferences')).length, 4);
   assert.equal(g.founders.filter(s => s.showOn.includes('conferences')).length, 5);
   assert.equal(featured('conferences').length, 9);
   const by = (name) => plain(m.speakers).find(s => s.name === name);
   assert.deepEqual([by('Marian Goodell').photo, by('Marian Goodell').initials], ['', 'MG']);
   assert.deepEqual([by('José Cordeiro').id, by('José Cordeiro').photo], ['jose_cordeiro', '/img/cordeiro.webp']);
-  assert.deepEqual([by('Florian').id, by('Florian').initials], ['florian', 'FL']);
-  assert.equal(by('Walter Marion Patterson').sessionsLabel, 'S2 · F');
-  assert.equal(by('Kentaroh Takagaki').sessionsLabel, '');
+  assert.deepEqual([by('Florian Geier').id, by('Florian Geier').initials], ['florian_geier', 'FG']);
+  assert.equal(by('Natalie S. Coles de Grey').photo, '/img/speakers/natalie_coles_de_grey.jpeg');
+  assert.equal(by('Walter Marion Patterson').sessionsLabel, 'S1');
+  assert.equal(by('Kentaroh Takagaki').sessionsLabel, 'S1 · S2');
   assert.ok(!JSON.stringify(w.MIRAI_SPEAKERS_SNAPSHOT).includes('&amp;'));
 });
 
