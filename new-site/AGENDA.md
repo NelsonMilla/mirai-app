@@ -250,15 +250,13 @@ The /program/ page shows the speakers and the full agenda for the five summit da
 and 26 October), slot by slot, with the venue for each day and the Demo Day pitches.
 It reads the agenda from a tab called `Program` in the same "Mirai Agenda"
 spreadsheet, and the speakers from the `Speakers` tab described above. Change a time,
-a title or a speaker in the sheet and the page follows on the next load. Like the
-agenda and the speakers, a copy of the agenda ships inside the site, so visitors
-still see it if Google is slow or down.
+a title or a speaker in the sheet and the page follows on the next load. A copy of it ships inside the site, as with the landing agenda and the speakers, so
+visitors still see it if Google is slow or down.
 
 ## The tab
 
 The site looks for a tab named exactly `Program` (capital P, no spaces). Any other
-name and the page shows its built-in copy instead. Until the tab is created, the page
-shows the built-in copy.
+name, or no tab yet, and the page shows its built-in copy instead.
 
 To create it (or recreate it if it is ever lost):
 
@@ -290,14 +288,14 @@ Publish also accepts yes / no, 1 / 0, and hidden.
 
 ## Rules
 
-- **Days appear in the order they first appear in the sheet.** Slots appear in row
-  order within their day. Move a row to move the slot.
+- Days appear in the order they first appear in the sheet, and slots in row order
+  within their day. Move a row to move the slot.
 - A Day written as weekday, number, month (`Saturday 17 October`) also gets a short
   label for the day buttons (`Sat 17 Oct`). Any other wording is used as it is.
-- **Venue and Venue link only need typing once per day**, on any row of that day. The
+- Venue and Venue link only need typing once per day, on any row of that day. The
   first filled-in value is used. The link must start with `https://`; anything else
   is ignored and the day shows no map link.
-- **Kind** takes one of these words:
+- Kind takes one of these words:
   - empty: an ordinary talk.
   - `keynote`: marked with the cyan accent.
   - `panel`: a panel or fireside. Shown with its Block text as the label.
@@ -305,7 +303,7 @@ Publish also accepts yes / no, 1 / 0, and hidden.
   - `break`: lunch, coffee, networking. Shown muted.
   - `pitch`: a Demo Day pitch. Not shown in the day's agenda; listed under "Demo Day
     pitches" after it (see Pitch rows).
-- **Speakers**: one entry per person, separated by `;`. Each entry is the name,
+- Speakers: one entry per person, separated by `;`. Each entry is the name,
   optionally followed by the affiliation in brackets:
   `Name (Affiliation); Name (Affiliation)`. For example
   `Rodney Kelly (MEDISO / HekaBio); Eleanor Sheekey (RIKEN BDR Kobe)`. Extra spaces and
@@ -314,12 +312,11 @@ Publish also accepts yes / no, 1 / 0, and hidden.
   endings such as PhD are ignored when matching, so `Prof. Takahiro Yasuda` finds the
   Takahiro Yasuda row. A name with no match is shown as plain text with its
   affiliation. To make a name clickable, spell it as in the Speakers tab.
-- **Pitch rows**: set Kind to `pitch`, put the startup's name in Title and one line
+- Pitch rows: set Kind to `pitch`, put the startup's name in Title and one line
   about it in Notes. Leave Start, End and Speakers empty. Put them under the day the
   pitches happen (Monday 26 October), Block `Demo Day pitches`.
-- **"To be confirmed"**: a Title that is empty or contains "to be confirmed" is shown
-  faint, as provisional. Replace it with the real title when it is known.
-- **Publish** FALSE hides a row from the page but NOT from the sheet's public CSV. Keep
+- A Title that is empty or contains "to be confirmed" is shown faint, as provisional. Replace it with the real title when it is known.
+- Publish FALSE hides a row from the page but not from the sheet's public CSV. Keep
   anything confidential out of the sheet entirely.
 - Cells are shown as plain text. HTML will not work; `&` and `<` show as typed.
 
