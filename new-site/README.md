@@ -26,11 +26,12 @@ Single static `index.html` — no framework, no build step. Deploys anywhere
   shows an initials tile, and a missing file falls back to the tile. The
   snapshot rows in `speakers-data.js` paint first and stay if the fetch fails;
   `npm run speakers:snapshot` refreshes them. `speakers-photos.js` lists the portraits present
-  in `img/speakers/` (regenerate with `npm run photos:manifest`); a blank Photo cell only derives
+  in `img/speakers/` (regenerate with `npm run photos:manifest`; `scripts/photos-thumbs.py` makes the
+  256px copies in `img/speakers/thumb/` that the /program/ wall uses); a blank Photo cell only derives
   a file that is listed, so no page requests a missing portrait. Runbook: `AGENDA.md`.
-- `/program/` renders the full timetable, day by day, from the same sheet's
+- `/program/` opens on a wall of every speaker's portrait, then renders the agenda, day by day, from the same sheet's
   `Program` tab (one row per slot, plus the Demo Day pitch rows) and the speaker
-  roster from the `Speakers` tab. `program.js` builds the timetable model; speaker
+  roster from the `Speakers` tab. `program.js` builds the agenda model; speaker
   names in a slot that match a Speakers row open the talk-and-bio panel, which is
   shared with `/conferences/` through `speaker-panel.js`. The snapshot rows in
   `program-data.js` paint first and stay if the fetch fails;

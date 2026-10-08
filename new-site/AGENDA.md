@@ -1,7 +1,7 @@
 # Agenda and speakers sheet — how to edit the agenda and the speaker lists
 
 The first part of this guide covers the agenda. The speaker lists are further down,
-under [Speakers](#speakers), and the timetable on /program/ after that, under
+under [Speakers](#speakers), and the agenda on /program/ after that, under
 [Program](#program).
 
 ## What this is
@@ -177,7 +177,8 @@ space or other character replaced by an underscore, ending in `.jpeg`.
 The Display name is never used for the file name; only First name and Last name are.
 
 To add or change a photo, put the file in `new-site/img/speakers/` with that name, run
-`npm run photos:manifest` from `new-site/` (it lists the files that exist, so pages never
+`python3 scripts/photos-thumbs.py` (it makes the small square copies the /program/ wall
+uses) and then `npm run photos:manifest` from `new-site/` (it lists the files that exist, so pages never
 ask for a missing one), and deploy. Make sure the person's Photo cell is empty. A new photo needs a deploy; a
 sheet edit does not.
 
@@ -245,12 +246,12 @@ Publish to FALSE. To reorder, move the rows.
 
 ## What this is
 
-The /program/ page shows the full timetable for the five summit days (17, 18, 24, 25
+The /program/ page shows the speakers and the full agenda for the five summit days (17, 18, 24, 25
 and 26 October), slot by slot, with the venue for each day and the Demo Day pitches.
-It reads the timetable from a tab called `Program` in the same "Mirai Agenda"
+It reads the agenda from a tab called `Program` in the same "Mirai Agenda"
 spreadsheet, and the speakers from the `Speakers` tab described above. Change a time,
 a title or a speaker in the sheet and the page follows on the next load. Like the
-agenda and the speakers, a copy of the timetable ships inside the site, so visitors
+agenda and the speakers, a copy of the agenda ships inside the site, so visitors
 still see it if Google is slow or down.
 
 ## The tab
@@ -302,8 +303,8 @@ Publish also accepts yes / no, 1 / 0, and hidden.
   - `panel`: a panel or fireside. Shown with its Block text as the label.
   - `open`: an opening or welcome. Shown with its Block text as the label.
   - `break`: lunch, coffee, networking. Shown muted.
-  - `pitch`: a Demo Day pitch. Not shown in the timetable; listed under "Demo Day
-    pitches" after the day's timetable (see Pitch rows).
+  - `pitch`: a Demo Day pitch. Not shown in the day's agenda; listed under "Demo Day
+    pitches" after it (see Pitch rows).
 - **Speakers**: one entry per person, separated by `;`. Each entry is the name,
   optionally followed by the affiliation in brackets:
   `Name (Affiliation); Name (Affiliation)`. For example
@@ -341,7 +342,7 @@ or set Publish to FALSE. The day re-flows by itself.
 - No map link: the Venue link does not start with `https://`.
 - A speaker's name is not clickable: it does not match a published row in the
   Speakers tab. Check the spelling of the first name and the surname.
-- A pitch shows up in the timetable instead of the pitch list: its Kind is not
+- A pitch shows up in the agenda instead of the pitch list: its Kind is not
   exactly `pitch`.
 
 ## For engineers
@@ -350,7 +351,7 @@ or set Publish to FALSE. The day re-flows by itself.
   It addresses the tab by name (`&sheet=Program`).
 - Refresh the built-in copy: run `npm run program:snapshot` from `new-site/`. It
   fetches the tab and rewrites `program-data.js`. Commit and deploy the result.
-- `program.js` builds the timetable model; `speaker-panel.js` is the talk-and-bio panel
+- `program.js` builds the agenda model; `speaker-panel.js` is the talk-and-bio panel
   shared with /conferences/.
 - Unit tests: `npm test` from `new-site/`.
 - Smoke test: `legacy-site/e2e/smoke.spec.ts` (the "program" tests). From
