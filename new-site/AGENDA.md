@@ -176,8 +176,9 @@ space or other character replaced by an underscore, ending in `.jpeg`.
 
 The Display name is never used for the file name; only First name and Last name are.
 
-To add or change a photo, put the file in `new-site/img/speakers/` with that name and
-deploy, then make sure the person's Photo cell is empty. A new photo needs a deploy; a
+To add or change a photo, put the file in `new-site/img/speakers/` with that name, run
+`npm run photos:manifest` from `new-site/` (it lists the files that exist, so pages never
+ask for a missing one), and deploy. Make sure the person's Photo cell is empty. A new photo needs a deploy; a
 sheet edit does not.
 
 The Photo column:

@@ -255,3 +255,13 @@ test('load never throws, even when render does', async () => {
   assert.equal(await Sp.load({ url: 'https://sheet.test/csv', snapshot: SNAP, render }), 'snapshot');
   assert.equal(await Sp.load(), 'snapshot');
 });
+
+test('a blank Photo cell derives a file only when the manifest lists it', () => {
+  const w = {}; const src = (f) => fs.readFileSync(new URL(`../${f}`, import.meta.url), 'utf8');
+  vm.runInNewContext(src('sheet.js') + src('speakers.js'), { window: w, console });
+  w.MIRAI_SPEAKER_PHOTOS = ['ada_lovelace'];
+  const m = w.MiraiSpeakers.buildModel([
+    { firstname: 'Ada', lastname: 'Lovelace' }, { firstname: 'Grace', lastname: 'Hopper' }, { firstname: 'Alan', lastname: 'Turing', photo: '/img/alan.webp' },
+  ]);
+  assert.deepEqual(JSON.parse(JSON.stringify(m.speakers.map(s => s.photo))), ['/img/speakers/ada_lovelace.jpeg', '', '/img/alan.webp']);
+});

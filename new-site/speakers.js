@@ -14,9 +14,13 @@
   const slug = name => name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
     .replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '');
 
-  // '' → derived file; same-site '/path' as given; 'none' or anything else → no photo.
+  // '' → derived file (only if the manifest in speakers-photos.js lists it, when present);
+  // same-site '/path' as given; 'none' or anything else → no photo.
   function photoFor(cell, id) {
-    if (!cell) return id ? '/img/speakers/' + id + '.jpeg' : '';
+    if (!cell) {
+      const have = window.MIRAI_SPEAKER_PHOTOS;
+      return id && (!have || have.indexOf(id) !== -1) ? '/img/speakers/' + id + '.jpeg' : '';
+    }
     return /^\/(?![/\\])/.test(cell) ? cell : '';
   }
 

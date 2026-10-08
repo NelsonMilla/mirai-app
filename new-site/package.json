@@ -8,7 +8,8 @@
     "test": "node --test \"test/**/*.test.js\"",
     "agenda:snapshot": "node scripts/sheet-snapshot.mjs --file agenda-data.js",
     "speakers:snapshot": "node scripts/sheet-snapshot.mjs --file speakers-data.js",
-    "program:snapshot": "node scripts/sheet-snapshot.mjs --file program-data.js"
+    "program:snapshot": "node scripts/sheet-snapshot.mjs --file program-data.js",
+    "photos:manifest": "node scripts/photos-manifest.mjs"
   },
   "dependencies": {
     "stripe": "^22.6.2"
