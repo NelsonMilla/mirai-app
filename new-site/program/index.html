@@ -1,0 +1,593 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>The program · Mirai Tech City · Kobe, October 2026</title>
+<meta name="description" content="The full timetable for Summit I (17–18 October), Summit II (24–25 October) and the Demo Day (26 October) in Kobe, with every speaker. All times JST." />
+<link rel="canonical" href="https://mirai-tech-city.vercel.app/program/" />
+<meta property="og:site_name" content="Mirai Tech City" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="The program · Mirai Tech City · Kobe, October 2026" />
+<meta property="og:description" content="The full timetable for Summit I (17–18 October), Summit II (24–25 October) and the Demo Day (26 October) in Kobe, with every speaker. All times JST." />
+<meta property="og:image" content="https://mirai-tech-city.vercel.app/img/harbor-golden-hour.jpg" />
+<meta property="og:url" content="https://mirai-tech-city.vercel.app/program/" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="theme-color" content="#050506" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23050506'/%3E%3Ctext x='50' y='72' font-size='62' font-family='Georgia' font-weight='bold' fill='%239be8f0' text-anchor='middle'%3E未%3C/text%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="preconnect" href="https://api.fontshare.com" />
+<link rel="preconnect" href="https://cdn.fontshare.com" crossorigin />
+<link href="https://api.fontshare.com/v2/css?f[]=switzer@400,700,800,900&display=swap" rel="stylesheet" media="print" onload="this.onload=null;this.media='all'" />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" media="print" onload="this.onload=null;this.media='all'" />
+<noscript>
+  <link href="https://api.fontshare.com/v2/css?f[]=switzer@400,700,800,900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</noscript>
+<script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/posthog.js"></script>
+<script defer src="/analytics.js"></script>
+<link rel="stylesheet" href="/nav.css" />
+<style>
+/* ══════════════════════════════════════════════════════════════════════
+   Mirai Tech City · The program
+   Tokens, type scale and footer as /conferences/. One alignment (left),
+   one rhythm, the shared fixed nav with the day switcher docked under it.
+   CSS runs in page order: tokens → primitives → masthead → timetable →
+   roster → speaker panel (copied from /conferences/) → footer.
+   ══════════════════════════════════════════════════════════════════════ */
+
+@font-face {
+  font-family: 'Switzer-fallback';
+  src: local('Arial'), local('Helvetica Neue');
+  size-adjust: 97.6%;
+  ascent-override: 100%;
+  descent-override: 25%;
+  line-gap-override: 0%;
+}
+
+:root {
+  --void: #050506;
+  --near: #0b0b0e;
+  --bone: #f4f3f0;
+  --cyan: #9be8f0;
+  /* the shared nav reads these three token names */
+  --accent: #9be8f0;
+  --ink: #f4f3f0;
+  --dim: rgba(244,243,240,.68);
+  --faint: rgba(244,243,240,.52);
+  --line: rgba(244,243,240,.14);
+  --line-2: rgba(244,243,240,.26);
+  --font: 'Switzer', 'Switzer-fallback', 'Inter', -apple-system, sans-serif;
+  --mono: 'IBM Plex Mono', ui-monospace, monospace;
+  --nav: 86px;          /* the shared fixed nav */
+  --days: 58px;         /* the day switcher docked under it */
+  --top: 120px;         /* section top padding */
+  --bot: 112px;         /* section bottom padding */
+  --gap: 64px;          /* headline block → content */
+  --gut: 24px;          /* gutters */
+}
+@media (max-width: 700px) { :root { --nav: 124px; --top: 84px; --bot: 78px; --gap: 40px; } }
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { background: var(--void); scroll-padding-top: calc(var(--nav) + var(--days) + 16px); }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+body { min-width: 320px; overflow-x: hidden; background: var(--void); color: var(--bone);
+  font-family: var(--font); font-size: 16.5px; line-height: 1.55;
+  -webkit-font-smoothing: antialiased; }
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+button { font: inherit; color: inherit; }
+::selection { background: var(--cyan); color: #000; }
+:focus-visible { outline: 2px solid var(--cyan); outline-offset: 3px; border-radius: 2px; }
+
+.skip { position: absolute; left: -9999px; top: 0; z-index: 90; }
+.skip:focus { left: 12px; top: 12px; display: inline-flex; align-items: center; min-height: 44px;
+  padding: 12px 18px; background: var(--cyan); color: #0a0a0c; font-family: var(--mono);
+  font-size: 11px; letter-spacing: .2em; text-transform: uppercase; text-decoration: none; }
+
+/* ── the single content column ─────────────────────────────────────── */
+.wrap { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 var(--gut); }
+main > section { padding: var(--top) 0 var(--bot); }
+
+/* ── one type scale ────────────────────────────────────────────────── */
+h1, h2, h3 { text-transform: uppercase; }
+h1 { font-size: clamp(48px, 9.2vw, 140px); font-weight: 900; line-height: .9;
+  letter-spacing: -.028em; max-width: 13ch; }
+h2 { font-size: clamp(36px, 5.6vw, 88px); font-weight: 800; line-height: .94;
+  letter-spacing: -.024em; max-width: none; text-wrap: balance; }
+h3 { font-size: clamp(18px, 1.5vw, 22px); font-weight: 800; line-height: 1.1; letter-spacing: -.01em; }
+p { max-width: 62ch; color: var(--dim); }
+.lead { font-size: clamp(17px, 1.35vw, 20px); line-height: 1.5; max-width: 54ch; }
+.lbl { display: block; color: var(--faint); font-family: var(--mono); font-size: 11px;
+  font-weight: 400; letter-spacing: .18em; line-height: 1.5; text-transform: uppercase; }
+.lbl--cyan { color: var(--cyan); }
+.num { font-variant-numeric: tabular-nums lining-nums; font-feature-settings: 'tnum' 1, 'lnum' 1; }
+.hd { margin-bottom: var(--gap); }
+.hd .lbl { margin-bottom: 20px; }
+.hd p { margin-top: 24px; }
+.grid { display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); }
+.cell { background: var(--void); }
+
+/* ── 01 masthead ───────────────────────────────────────────────────── */
+#top { padding: calc(var(--nav) + 80px) 0 72px; }
+#top h1 { max-width: none; }
+#top .lead { margin-top: 28px; }
+
+/* ── 02 timetable: the day switcher docks under the nav ────────────── */
+#timetable { padding-top: 0; }
+.pg-days { position: sticky; top: var(--nav); z-index: 40; background: var(--void);
+  border-bottom: 1px solid var(--line-2); }
+/* once docked, a void strip fills the band behind the nav so the timetable
+   never scrolls through it */
+.pg-days::before { content: ""; position: absolute; left: 0; right: 0; bottom: 100%;
+  height: var(--nav); background: var(--void); visibility: hidden; }
+.pg-days.is-stuck::before { visibility: visible; }
+.pg-days .wrap { display: flex; }
+.pg-day-btn { flex: 1 1 0; min-width: 0; min-height: var(--days); padding: 0 12px;
+  border: 0; border-left: 1px solid var(--line); background: transparent; color: var(--faint);
+  font-family: var(--mono); font-size: 11px; letter-spacing: .16em; line-height: 1.35;
+  text-align: left; text-transform: uppercase; cursor: pointer;
+  box-shadow: inset 0 -2px 0 transparent; }
+.pg-day-btn:last-child { border-right: 1px solid var(--line); }
+.pg-day-btn:hover { color: var(--bone); }
+.pg-day-btn[aria-pressed="true"] { color: var(--bone); box-shadow: inset 0 -2px 0 var(--cyan); }
+.pg-day-btn:focus-visible { outline-offset: -4px; }
+.pg-day-btn span { white-space: nowrap; }
+
+.pg-day { padding-top: 64px; }
+.pg-day[hidden] { display: none; }
+.pg-day-hd { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between;
+  gap: 12px 32px; padding-bottom: 22px; border-bottom: 1px solid var(--line-2); }
+.pg-day-hd h2 { font-size: clamp(30px, 4vw, 56px); }
+.pg-venue { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 18px; max-width: none;
+  font-size: 15px; }
+.pg-venue a { display: inline-flex; align-items: center; min-height: 44px; margin: -12px 0;
+  color: var(--cyan); font-family: var(--mono); font-size: 11px; letter-spacing: .18em;
+  text-decoration: none; text-transform: uppercase; }
+.pg-venue a:hover { text-decoration: underline; }
+
+.pg-slots { list-style: none; }
+.pg-slot { display: grid; grid-template-columns: 15ch minmax(0, 1fr); gap: 0 32px;
+  padding: 20px 0 22px; border-bottom: 1px solid var(--line); }
+.pg-time { padding-top: 2px; color: var(--dim); font-family: var(--mono); font-size: 12px;
+  letter-spacing: .06em; white-space: nowrap; }
+.pg-block { display: block; margin-bottom: 7px; color: var(--faint); font-family: var(--mono);
+  font-size: 10.5px; letter-spacing: .16em; line-height: 1.5; text-transform: uppercase; }
+.pg-title { max-width: 60ch; color: var(--bone); font-size: 18px; font-weight: 700; line-height: 1.3; }
+.pg-title.is-tbc { color: var(--faint); font-weight: 400; }
+.pg-who { list-style: none; margin-top: 10px; }
+.pg-who li { margin-top: 3px; font-size: 15px; line-height: 1.45; }
+.pg-name { color: var(--bone); font-weight: 700; }
+button.pg-name { display: inline; margin: -6px -4px; padding: 6px 4px; border: 0; background: transparent;
+  font-size: inherit; line-height: inherit; text-align: left; cursor: pointer;
+  text-decoration: underline; text-decoration-color: var(--line-2); text-underline-offset: 4px; }
+button.pg-name:hover, button.pg-name.is-open { color: var(--cyan); text-decoration-color: currentColor; }
+.pg-aff { color: var(--dim); }
+.pg-notes { margin-top: 8px; font-size: 15px; }
+/* kinds: the keynote carries the one accent mark, breaks recede */
+.pg-slot.is-keynote .pg-block { color: var(--cyan); }
+.pg-slot.is-keynote .pg-block::before { content: ""; display: inline-block; width: 5px; height: 5px;
+  margin-right: 9px; border-radius: 50%; background: var(--cyan); vertical-align: 2px; }
+.pg-slot.is-break { padding: 13px 0 14px; }
+.pg-slot.is-break .pg-time, .pg-slot.is-break .pg-block { color: var(--faint); }
+.pg-slot.is-break .pg-title { color: var(--faint); font-size: 15px; font-weight: 400; }
+
+.pg-pitches { margin-top: 56px; }
+.pg-pitches h3, .pg-awards h3 { padding-bottom: 14px; border-bottom: 1px solid var(--line-2); }
+.pg-pitches ol { list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 32px; }
+.pg-pitches li { padding: 16px 0 18px; border-bottom: 1px solid var(--line); }
+.pg-pitches li b { display: block; color: var(--bone); font-size: 17px; font-weight: 700; line-height: 1.3; }
+.pg-pitches li p { margin-top: 4px; font-size: 15px; }
+.pg-awards { margin-top: 56px; }
+.pg-awards[hidden] { display: none; }
+.pg-awards .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 22px; }
+.pg-awards .cell { padding: 22px 22px 26px; }
+.pg-awards .cell .lbl { margin-bottom: 10px; color: var(--cyan); }
+.pg-awards .cell p, .pg-awards .cell li { font-size: 15px; line-height: 1.5; color: var(--dim); }
+.pg-awards .cell ul { list-style: none; }
+.pg-awards .cell li + li { margin-top: 8px; }
+
+/* ── 03 roster ─────────────────────────────────────────────────────── */
+.pg-key i { font-style: normal; color: var(--cyan); }
+.pg-roster { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 10px;
+  margin-top: 22px; }
+.pg-roster figure { border: 1px solid var(--line); background: var(--near); cursor: pointer; }
+.pg-roster .im { aspect-ratio: 5 / 6; overflow: hidden; }
+.pg-roster img { width: 100%; height: 100%; object-fit: cover; object-position: center 20%;
+  filter: grayscale(.92) contrast(1.04) brightness(.94); transition: filter .35s ease, transform .5s ease; }
+.pg-roster figure:hover img, .pg-roster figure.is-open img { filter: grayscale(0) contrast(1); transform: scale(1.03); }
+.pg-roster figure.is-open { border-color: rgba(155,232,240,.5); }
+.pg-roster figcaption { padding: 12px 12px 14px; font-size: 13px; font-weight: 800; line-height: 1.2;
+  text-transform: uppercase; overflow-wrap: anywhere; }
+.pg-roster figcaption small { display: block; margin-top: 6px; color: var(--faint); font-family: var(--mono);
+  font-size: 10px; font-weight: 400; letter-spacing: .1em; line-height: 1.4; }
+.pg-roster figcaption .s { display: block; margin-top: 8px; color: var(--cyan); font-family: var(--mono);
+  font-size: 10px; font-weight: 400; letter-spacing: .1em; }
+.pg-roster figcaption .s:empty::before { content: '—'; color: var(--faint); }
+
+/* ── the speaker panel (same rules as /conferences/) ───────────────── */
+.spk-initials { display: grid; place-items: center; width: 100%; height: 100%; aspect-ratio: 5 / 6;
+  background: var(--void); color: var(--faint); font-size: clamp(28px, 3.4vw, 44px); font-weight: 800;
+  letter-spacing: -.02em; line-height: 1; }
+.spk-panel { position: relative; display: grid; grid-template-columns: 220px minmax(0, 1fr);
+  margin-top: 28px; border: 1px solid var(--line); border-top-color: rgba(155,232,240,.5);
+  background: var(--near); }
+.spk-panel[hidden] { display: none; }
+.spk-ph { overflow: hidden; border-right: 1px solid var(--line); background: var(--void); }
+.spk-ph img { width: 100%; aspect-ratio: 5 / 6; object-fit: cover; object-position: center 20%; }
+.spk-ph .spk-initials { height: auto; }
+.spk-tx { min-width: 0; padding: 26px 28px 30px; }
+.spk-tx h3 { padding-right: 96px; font-size: clamp(22px, 2.2vw, 30px); }
+.spk-tx h3:focus { outline: none; }
+.spk-aff { margin-top: 8px; font-size: 15px; line-height: 1.45; }
+.spk-ses { margin-top: 14px; color: var(--cyan); font-family: var(--mono); font-size: 11px;
+  letter-spacing: .14em; text-transform: uppercase; }
+.spk-ses.is-tba { color: var(--faint); }
+.spk-talk { margin-top: 22px; padding-top: 16px; border-top: 1px solid var(--line); }
+.spk-talk .lbl { margin-bottom: 6px; }
+.spk-talk p { color: var(--bone); font-size: 17px; font-weight: 700; line-height: 1.35; }
+.spk-bio { margin-top: 14px; font-size: 15px; line-height: 1.65; max-width: 68ch; }
+.spk-x { position: absolute; top: 14px; right: 14px; min-height: 44px; padding: 0 16px;
+  border: 1px solid var(--line-2); border-radius: 3px; background: transparent; color: var(--bone);
+  font-family: var(--mono); font-size: 10px; letter-spacing: .2em; text-transform: uppercase; cursor: pointer; }
+.spk-x:hover { border-color: var(--bone); }
+@media (max-width: 640px) {
+  .spk-panel { grid-template-columns: 1fr; }
+  .spk-ph { width: 112px; margin: 20px 0 0 20px; border: 1px solid var(--line); }
+  .spk-tx { padding: 18px 20px 24px; }
+  .spk-tx h3 { padding-right: 0; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .spk-panel { transition: opacity .2s ease, transform .24s cubic-bezier(.16,1,.3,1); }
+  .spk-panel.is-enter { opacity: 0; transform: translateY(6px); transition: none; }
+}
+@media (prefers-reduced-motion: reduce) { .pg-roster img { transition: none; } }
+
+/* ── footer ────────────────────────────────────────────────────────── */
+.foot { background: var(--near); padding: 56px 0 48px; }
+.foot .wrap { display: flex; flex-wrap: wrap; gap: 10px 26px; justify-content: space-between;
+  color: var(--faint); font-family: var(--mono); font-size: 10px; letter-spacing: .16em;
+  text-transform: uppercase; }
+.foot a { display: inline-block; margin: -15px -8px; padding: 15px 8px; color: var(--cyan);
+  text-decoration: none; }
+.foot a:hover { text-decoration: underline; }
+
+/* ── responsive rhythm ─────────────────────────────────────────────── */
+@media (max-width: 980px) {
+  .pg-roster { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .pg-awards .grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 700px) {
+  :root { --gut: 16px; }
+  #top { padding: calc(var(--nav) + 48px) 0 48px; }
+  .pg-day-btn { padding: 0 8px; font-size: 10px; letter-spacing: .1em; }
+  .pg-day-btn span { display: block; }
+  .pg-day { padding-top: 40px; }
+  .pg-slot { grid-template-columns: 1fr; padding: 16px 0 18px; }
+  .pg-time { margin-bottom: 6px; padding-top: 0; }
+  .pg-title { font-size: 17px; }
+  .pg-pitches ol { grid-template-columns: 1fr; }
+  .pg-roster { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+</style>
+</head>
+<body data-analytics-offer="program">
+
+<script src="/nav.js"></script>
+<a class="skip" href="#timetable">Skip to the timetable</a>
+
+<main>
+
+<!-- ══ 01 MASTHEAD ════════════════════════════════════════════════════ -->
+<section id="top" data-track-section="program_hero" data-track-position="1">
+  <div class="wrap">
+    <span class="lbl lbl--cyan">The program · Oct 17–26 · Kobe</span>
+    <h1>The program.</h1>
+    <p class="lead"><span data-speakers-count>72</span> speakers across Summit I (17–18 October), Summit II (24–25 October) and the Demo Day (26 October). All times JST.</p>
+  </div>
+</section>
+
+<!-- ══ 02 TIMETABLE ═══════════════════════════════════════════════════ -->
+<section id="timetable" data-track-section="timetable" data-track-position="2" aria-label="Timetable">
+  <nav class="pg-days" aria-label="Days">
+    <div class="wrap" data-program="days"></div>
+  </nav>
+  <div class="wrap" data-program="timetable">
+    <noscript><p class="lead" style="padding-top:64px">The timetable needs JavaScript. The summits page lists every session: <a href="/conferences/">/conferences/</a>.</p></noscript>
+  </div>
+
+  <!-- Static, placed under Monday 26 October by the script. Copy from the programme booklet; claims to be reviewed. -->
+  <aside class="pg-awards" data-program-day="monday_26_october" aria-labelledby="pg-awards-h" hidden>
+    <h3 id="pg-awards-h">Demo Day awards</h3>
+    <div class="grid">
+      <div class="cell">
+        <span class="lbl">First prize</span>
+        <ul>
+          <li>A ticket to the next Vitalist Bay</li>
+          <li>Priority review for the Meet the Drapers Japan 2027 cohort</li>
+        </ul>
+      </div>
+      <div class="cell">
+        <span class="lbl">Antler Japan residency</span>
+        <p>Six weeks of mentoring, access to USD 850,000 in perks, and a chance of investment.</p>
+      </div>
+      <div class="cell">
+        <span class="lbl">Japan Landing Award</span>
+        <p>Presented by GlobalDeal, Official Market-Entry Execution Partner. A hands-on engagement to take the winner into the Japanese market: entry strategy, the right partners and first customers, and regulatory navigation.</p>
+      </div>
+    </div>
+  </aside>
+</section>
+
+<!-- ══ 03 ROSTER ══════════════════════════════════════════════════════ -->
+<section id="roster" data-track-section="roster" data-track-position="3">
+  <div class="wrap">
+    <div class="hd">
+      <span class="lbl lbl--cyan">Speakers</span>
+      <h2>Everyone on the program.</h2>
+    </div>
+    <span class="lbl pg-key"><i>S1</i> Oct 17–18 &nbsp; <i>S2</i> Oct 24–25 &nbsp; <i>F</i> Demo Day Oct 26 &nbsp; <i>Online</i> joins remotely &nbsp; <i>—</i> session to be announced</span>
+    <div class="pg-roster" data-program="roster"></div>
+    <div class="spk-panel" id="spk-panel-program" role="region" aria-labelledby="spk-panel-program-h" hidden></div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <span><a href="https://www.miraitech.city/" target="_blank" rel="noopener" data-analytics-action="site_navigation" data-analytics-location="footer" data-analytics-target="mirai_city">Mirai Tech City</a> · Kobe Biomedical Innovation Cluster, Port Island</span>
+    <span>Kobe · Japan Standard Time</span>
+  </div>
+</footer>
+
+<script src="/sheet.js"></script>
+<script src="/speakers-data.js"></script>
+<script src="/speakers.js"></script>
+<script src="/program-data.js"></script>
+<script src="/program.js"></script>
+<script src="/speaker-panel.js"></script>
+<script>
+/* ── the program from the sheet (docs/program-page-prd.md) ────────────
+      Snapshots paint now, each sheet repaints when it answers. The timetable
+      links names to the speakers model by MiraiProgram.speakerKey, so either
+      sheet arriving re-links the other. One speaker panel serves the
+      timetable names and the roster. Sheet text goes in as text nodes only. */
+(function () {
+  'use strict';
+  var S = window.MiraiSpeakers, G = window.MiraiProgram, P = window.MiraiSpeakerPanel;
+  if (!S || !G || !P) return;
+  var state = { speakers: null, program: null };
+  var daysBox = document.querySelector('[data-program="days"]');
+  var timetable = document.querySelector('[data-program="timetable"]');
+  var roster = document.querySelector('[data-program="roster"]');
+  var statics = [].slice.call(document.querySelectorAll('[data-program-day]'));
+  var panel = P.attach({ root: document.querySelector('main'), panel: document.getElementById('spk-panel-program') });
+  var active = null;
+
+  function el(tag, cls, text) {
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text != null) n.textContent = text;
+    return n;
+  }
+  function fill(box, nodes) { box.textContent = ''; nodes.forEach(function (n) { box.appendChild(n); }); }
+
+  /* ids from the current speakers model, by the same lenient key the core uses */
+  function relink(program, speakers) {
+    var index = {};
+    ((speakers && speakers.speakers) || []).forEach(function (s) {
+      [s.name, [s.first, s.last].filter(Boolean).join(' ')].forEach(function (n) {
+        var k = G.speakerKey(n);
+        if (k && !index[k]) index[k] = s.id;
+      });
+    });
+    program.days.forEach(function (d) {
+      d.slots.forEach(function (sl) {
+        sl.speakers.forEach(function (p) { p.id = index[G.speakerKey(p.name)] || null; });
+      });
+    });
+    return program;
+  }
+
+  /* ── timetable ── */
+  function slotEl(sl) {
+    var li = el('li', 'pg-slot is-' + sl.kind), body = el('div', 'pg-body');
+    var time = [sl.start, sl.end].filter(Boolean).join('–');
+    li.appendChild(el('span', 'pg-time num', time));
+    if (sl.block) body.appendChild(el('span', 'pg-block', sl.block));
+    body.appendChild(el('p', 'pg-title' + (sl.tbc ? ' is-tbc' : ''), sl.title || 'Title to be confirmed'));
+    if (sl.speakers.length) {
+      var who = el('ul', 'pg-who');
+      sl.speakers.forEach(function (p) {
+        var item = el('li'), name;
+        if (p.id) {
+          name = el('button', 'pg-name', p.name);
+          name.type = 'button';
+          name.setAttribute('data-speaker', p.id);
+        } else {
+          name = el('span', 'pg-name', p.name);
+        }
+        item.appendChild(name);
+        if (p.affiliation) { item.appendChild(document.createTextNode(' ')); item.appendChild(el('span', 'pg-aff', p.affiliation)); }
+        who.appendChild(item);
+      });
+      body.appendChild(who);
+    }
+    if (sl.notes) body.appendChild(el('p', 'pg-notes', sl.notes));
+    li.appendChild(body);
+    return li;
+  }
+
+  function dayEl(d) {
+    var sec = el('section', 'pg-day'), hd = el('div', 'pg-day-hd'), h = el('h2', null, d.label);
+    sec.id = 'day-' + d.id;
+    sec.setAttribute('data-program', 'day');
+    sec.setAttribute('aria-labelledby', sec.id + '-h');
+    h.id = sec.id + '-h';
+    hd.appendChild(h);
+    if (d.venue || d.venueLink) {
+      var v = el('p', 'pg-venue');
+      if (d.venue) v.appendChild(el('span', null, d.venue));
+      if (d.venueLink) {
+        var a = el('a', null, 'Map ↗');
+        a.href = d.venueLink;
+        a.target = '_blank';
+        a.rel = 'noopener';
+        a.setAttribute('aria-label', 'Map' + (d.venue ? ' of ' + d.venue : ' of the venue') + ', ' + d.label);
+        a.setAttribute('data-analytics-action', 'site_navigation');
+        a.setAttribute('data-analytics-location', 'program');
+        a.setAttribute('data-analytics-target', 'venue_map');
+        v.appendChild(a);
+      }
+      hd.appendChild(v);
+    }
+    sec.appendChild(hd);
+    var talks = d.slots.filter(function (s) { return s.kind !== 'pitch'; });
+    var pitches = d.slots.filter(function (s) { return s.kind === 'pitch'; });
+    var ol = el('ol', 'pg-slots');
+    talks.forEach(function (s) { ol.appendChild(slotEl(s)); });
+    sec.appendChild(ol);
+    if (pitches.length) {
+      var box = el('div', 'pg-pitches'), list = el('ol'), hid = sec.id + '-pitches';
+      box.setAttribute('data-program', 'pitches');
+      box.setAttribute('role', 'group');
+      box.setAttribute('aria-labelledby', hid);
+      var ph = el('h3', null, pitches[0].block || 'Demo Day pitches');
+      ph.id = hid;
+      box.appendChild(ph);
+      pitches.forEach(function (s) {
+        var li = el('li');
+        li.appendChild(el('b', null, s.title));
+        if (s.notes) li.appendChild(el('p', null, s.notes));
+        list.appendChild(li);
+      });
+      box.appendChild(list);
+      sec.appendChild(box);
+    }
+    statics.forEach(function (n) {
+      if (n.getAttribute('data-program-day') === d.id) { sec.appendChild(n); n.hidden = false; }
+    });
+    return sec;
+  }
+
+  function buttonEl(d) {
+    var b = el('button', 'pg-day-btn'), parts = d.short.split(' ');
+    b.type = 'button';
+    b.setAttribute('data-day', d.id);
+    b.setAttribute('aria-controls', 'day-' + d.id);
+    b.appendChild(el('span', null, parts[0]));
+    if (parts.length > 1) { b.appendChild(document.createTextNode(' ')); b.appendChild(el('span', null, parts.slice(1).join(' '))); }
+    return b;
+  }
+
+  function select(id, user) {
+    var btns = daysBox.querySelectorAll('.pg-day-btn');
+    if (!btns.length) return;
+    if (!timetable.querySelector('#day-' + id)) id = btns[0].getAttribute('data-day');
+    active = id;
+    [].forEach.call(btns, function (b) {
+      var on = b.getAttribute('data-day') === id;
+      b.setAttribute('aria-pressed', on ? 'true' : 'false');
+      b.tabIndex = on ? 0 : -1;
+    });
+    [].forEach.call(timetable.querySelectorAll('[data-program="day"]'), function (s) { s.hidden = s.id !== 'day-' + id; });
+    if (!user) return;
+    if (history.replaceState) history.replaceState(null, '', '#day-' + id); else location.hash = 'day-' + id;
+    var sec = document.getElementById('day-' + id), inset = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0;
+    if (sec.getBoundingClientRect().top < inset) sec.scrollIntoView({ block: 'start' });
+  }
+
+  function fromHash() {
+    var m = /^#day-(.+)$/.exec(location.hash);
+    return m ? decodeURIComponent(m[1]) : null;
+  }
+
+  function paintProgram() {
+    if (!state.program) return;
+    var program = relink(state.program, state.speakers);
+    statics.forEach(function (n) { n.hidden = true; timetable.parentNode.appendChild(n); });
+    fill(daysBox, program.days.map(buttonEl));
+    fill(timetable, program.days.map(dayEl));
+    select(active || fromHash(), false);
+    panel.refresh(byId());
+  }
+
+  daysBox.addEventListener('click', function (e) {
+    var b = e.target.closest('.pg-day-btn');
+    if (b) select(b.getAttribute('data-day'), true);
+  });
+  daysBox.addEventListener('keydown', function (e) {
+    var btns = [].slice.call(daysBox.querySelectorAll('.pg-day-btn')), i = btns.indexOf(e.target), j;
+    if (i < 0) return;
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') j = (i + 1) % btns.length;
+    else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') j = (i - 1 + btns.length) % btns.length;
+    else if (e.key === 'Home') j = 0;
+    else if (e.key === 'End') j = btns.length - 1;
+    else return;
+    e.preventDefault();
+    btns[j].focus();
+    select(btns[j].getAttribute('data-day'), true);
+  });
+  window.addEventListener('hashchange', function () { var id = fromHash(); if (id) select(id, false); });
+
+  /* the switcher is docked when its top reaches the nav's bottom */
+  var bar = daysBox.parentNode, stuck = false;
+  function dock() {
+    var s = bar.getBoundingClientRect().top <= parseFloat(getComputedStyle(bar).top) + 0.5;
+    if (s !== stuck) { stuck = s; bar.classList.toggle('is-stuck', s); }
+  }
+  window.addEventListener('scroll', dock, { passive: true });
+  window.addEventListener('resize', dock);
+  dock();
+
+  /* ── roster ── */
+  function card(sp) {
+    var f = el('figure'), im = el('div', 'im'), cap = el('figcaption', null, sp.name);
+    f.setAttribute('data-speaker', sp.id);
+    f.setAttribute('aria-label', sp.affiliation ? sp.name + ', ' + sp.affiliation : sp.name);
+    im.appendChild(S.photoEl(sp, { alt: '' }));
+    if (sp.affiliation) cap.appendChild(el('small', null, sp.affiliation));
+    var s = el('span', 's', sp.sessionsLabel);
+    if (!sp.sessionsLabel) s.setAttribute('aria-label', 'Session to be announced');
+    cap.appendChild(s);
+    f.appendChild(im);
+    f.appendChild(cap);
+    return f;
+  }
+
+  function byId() {
+    var m = {};
+    ((state.speakers && state.speakers.speakers) || []).forEach(function (sp) { m[sp.id] = sp; });
+    return m;
+  }
+
+  S.load({
+    url: window.MIRAI_SPEAKERS_SHEET_CSV,
+    snapshot: window.MIRAI_SPEAKERS_SNAPSHOT,
+    render: function (model) {
+      state.speakers = model;
+      fill(roster, model.speakers.map(card));
+      S.fillCounts(model, document);
+      paintProgram();
+      panel.refresh(byId());
+    }
+  });
+
+  G.load({
+    url: window.MIRAI_PROGRAM_SHEET_CSV,
+    snapshot: window.MIRAI_PROGRAM_SNAPSHOT,
+    speakersModel: state.speakers,
+    render: function (model) {
+      state.program = model;
+      paintProgram();
+    }
+  });
+})();
+</script>
+</body>
+</html>

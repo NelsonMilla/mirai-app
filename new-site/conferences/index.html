@@ -940,6 +940,9 @@ details.more[open] > summary { margin-bottom: 6px; }
 .sheet caption { caption-side: top; padding: 0 0 14px; color: var(--l-faint);
   font-family: var(--mono); font-size: 10.5px; letter-spacing: .16em; text-align: left;
   text-transform: uppercase; }
+.sheet-go { float: right; margin: -14px 0 -14px 16px; padding: 14px 0; color: var(--l-ink);
+  text-decoration: none; }
+.sheet-go:hover { text-decoration: underline; }
 .sheet th, .sheet td { text-align: left; vertical-align: baseline; padding: 13px 0; }
 .sheet thead th { padding-bottom: 10px; border-bottom: 1px solid var(--l-line-2);
   color: var(--l-faint); font-family: var(--mono); font-size: 10.5px; font-weight: 400;
@@ -1637,7 +1640,7 @@ details.more[open] > summary { margin-bottom: 6px; }
     <details class="pkg-more" data-track-faq="offer">
       <summary>What each part is, and what it costs separately<svg aria-hidden="true"><use href="#i-chev"></use></svg></summary>
       <table class="sheet">
-        <caption>The programme, in full</caption>
+        <caption>The programme, in full <a class="sheet-go" href="/program/" data-analytics-action="site_navigation" data-analytics-location="offer" data-analytics-target="program">Hour by hour →</a></caption>
         <thead>
           <tr>
             <th class="c-when" scope="col">When</th>
@@ -1750,19 +1753,18 @@ details.more[open] > summary { margin-bottom: 6px; }
 <script src="/sheet.js"></script>
 <script src="/speakers-data.js"></script>
 <script src="/speakers.js"></script>
+<script src="/speaker-panel.js"></script>
 <script>
 /* ── 07 + 09 speakers from the sheet (docs/speakers-sheet-prd.md) ──────
       Snapshot paints now, the sheet repaints when it answers. Faces are the
       speakers shown on 'conferences'; everyone else in the group is a
-      numbered row. Every face and row opens the group's one speaker panel.
-      Sheet text goes in as text nodes only. */
+      numbered row. Every face and row opens the group's one speaker panel
+      (the shared /speaker-panel.js). Sheet text goes in as text nodes only. */
 (function () {
   'use strict';
-  var S = window.MiraiSpeakers;
-  if (!S) return;
-  var mq = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)');
+  var S = window.MiraiSpeakers, P = window.MiraiSpeakerPanel;
+  if (!S || !P) return;
   var VISIBLE = 9;
-  var BAR = 72; /* the fixed bar plus the page's scroll padding */
   /* today's face photos keep their intrinsic size hints (and Aubrey his srcset) */
   var DIMS = {
     '/img/aubrey.webp': [768, 710, '/img/aubrey-480.webp 480w, /img/aubrey.webp 768w'],
@@ -1782,17 +1784,9 @@ details.more[open] > summary { margin-bottom: 6px; }
   function pad(i) { return i < 10 ? '0' + i : String(i); }
   function fill(box, nodes) { box.textContent = ''; nodes.forEach(function (n) { box.appendChild(n); }); }
 
-  function opener(n, g, sp) {
-    n.setAttribute('role', 'button');
-    n.tabIndex = 0;
-    n.setAttribute('aria-expanded', 'false');
-    n.setAttribute('aria-controls', g.panel.id);
-    n.setAttribute('data-speaker', sp.id);
-    return n;
-  }
-
-  function face(g, sp) {
-    var f = opener(el('figure'), g, sp), d = DIMS[sp.photo] || [], im = el('div', 'im');
+  function face(sp) {
+    var f = el('figure'), d = DIMS[sp.photo] || [], im = el('div', 'im');
+    f.setAttribute('data-speaker', sp.id);
     f.setAttribute('aria-label', sp.affiliation ? sp.name + ', ' + sp.affiliation : sp.name);
     var ph = S.photoEl(sp, { alt: sp.name, width: d[0], height: d[1], sizes: d[2] && '(min-width: 760px) 20vw, 50vw' });
     if (d[2] && ph.tagName === 'IMG') ph.setAttribute('srcset', d[2]);
@@ -1804,8 +1798,9 @@ details.more[open] > summary { margin-bottom: 6px; }
     return f;
   }
 
-  function row(g, sp, i) {
-    var r = opener(el('div', 'mrow'), g, sp), n = el('span', 'n', sp.name), s = el('span', 's', sp.sessionsLabel);
+  function row(sp, i) {
+    var r = el('div', 'mrow'), n = el('span', 'n', sp.name), s = el('span', 's', sp.sessionsLabel);
+    r.setAttribute('data-speaker', sp.id);
     n.appendChild(el('em', null, sp.affiliation));
     if (!sp.sessionsLabel) s.setAttribute('aria-label', 'Session to be announced');
     r.appendChild(el('span', 'i', pad(i)));
@@ -1814,114 +1809,31 @@ details.more[open] > summary { margin-bottom: 6px; }
     return r;
   }
 
-  function panelBody(g, sp) {
-    var ph = el('div', 'spk-ph'), tx = el('div', 'spk-tx'), h = el('h3', null, sp.name);
-    ph.appendChild(S.photoEl(sp, { alt: '' }));
-    h.id = g.panel.id + '-h';
-    h.tabIndex = -1;
-    tx.appendChild(h);
-    if (sp.affiliation) tx.appendChild(el('p', 'spk-aff', sp.affiliation));
-    tx.appendChild(el('p', 'spk-ses' + (sp.sessionsLabel ? '' : ' is-tba'), sp.sessionsLabel || 'Session to be announced'));
-    if (sp.talk) {
-      var t = el('div', 'spk-talk');
-      t.appendChild(el('span', 'lbl lbl--cyan', 'Talk'));
-      t.appendChild(el('p', null, sp.talk));
-      tx.appendChild(t);
-    }
-    if (sp.bio) tx.appendChild(el('p', 'spk-bio', sp.bio));
-    var x = el('button', 'spk-x', 'Close');
-    x.type = 'button';
-    x.setAttribute('aria-label', 'Close ' + sp.name);
-    return [ph, tx, x];
-  }
-
-  function openerFor(g, id) { return id ? g.root.querySelector('[data-speaker="' + id + '"]') : null; }
-  function speaker(g, id) { for (var i = 0; i < g.list.length; i++) if (g.list[i].id === id) return g.list[i]; return null; }
-  function mark(g, o) {
-    [].forEach.call(g.root.querySelectorAll('[data-speaker]'), function (n) {
-      n.classList.toggle('is-open', n === o);
-      n.setAttribute('aria-expanded', n === o ? 'true' : 'false');
-    });
-  }
-
-  /* one open speaker per group; opening another swaps the content */
-  function show(g, o, user) {
-    var sp = speaker(g, o.getAttribute('data-speaker')), p = g.panel;
-    if (!sp) return;
-    g.openId = sp.id;
-    mark(g, o);
-    fill(p, panelBody(g, sp));
-    if (!user) return;
-    var enter = p.hidden && !(mq && mq.matches);
-    if (enter) p.classList.add('is-enter');
-    p.hidden = false;
-    if (enter) { void p.offsetWidth; p.classList.remove('is-enter'); }
-    p.querySelector('h3').focus({ preventScroll: true });
-    var r = p.getBoundingClientRect(), vh = window.innerHeight;
-    if (r.top < BAR || r.bottom > vh) {
-      p.scrollIntoView({ block: r.height > vh - BAR ? 'start' : 'nearest', behavior: mq && mq.matches ? 'auto' : 'smooth' });
-    }
-  }
-
-  function close(g) {
-    var o = openerFor(g, g.openId), had = g.panel.contains(document.activeElement);
-    g.openId = null;
-    mark(g, null);
-    g.panel.hidden = true;
-    g.panel.textContent = '';
-    /* focus goes back to the opener only when it was inside the closed panel */
-    if (had && o && o.offsetParent) o.focus();
-  }
-
-  function bind(g) {
-    g.root.addEventListener('click', function (e) {
-      if (e.target.closest('.spk-x')) { close(g); return; }
-      var o = e.target.closest('[data-speaker]');
-      if (!o) return;
-      if (o.getAttribute('data-speaker') === g.openId) close(g); else show(g, o, true);
-    });
-    g.root.addEventListener('keydown', function (e) {
-      var o = e.target;
-      if ((e.key === 'Enter' || e.key === ' ') && o.hasAttribute && o.hasAttribute('data-speaker')) {
-        e.preventDefault();
-        o.click();
-      }
-    });
-  }
-
-  document.addEventListener('keydown', function (e) {
-    if (e.key !== 'Escape') return;
-    var open = Object.keys(groups).map(function (k) { return groups[k]; }).filter(function (g) { return g.openId; });
-    var here = open.filter(function (g) { return g.root.contains(document.activeElement); });
-    (here.length ? here : open).forEach(close);
-  });
-
   function renderGroup(name, list) {
     var g = groups[name];
     if (!g) {
       var root = document.querySelector('[data-speakers="conferences-' + name + '"]');
       if (!root) return;
-      g = groups[name] = { root: root, panel: root.querySelector('.spk-panel'), openId: null, list: [] };
-      bind(g);
+      g = groups[name] = { root: root, panel: P.attach({ root: root, panel: root.querySelector('.spk-panel') }) };
     }
-    g.list = list;
     var faces = list.filter(function (s) { return s.showOn.indexOf('conferences') !== -1; });
     var rows = list.filter(function (s) { return s.showOn.indexOf('conferences') === -1; });
     var mani = g.root.querySelector('.mani'), grids = mani.querySelectorAll('.mani-g');
     var more = mani.querySelector('details.more'), start = faces.length + 1;
-    fill(g.root.querySelector('.faces'), faces.map(function (sp) { return face(g, sp); }));
+    fill(g.root.querySelector('.faces'), faces.map(face));
     mani.querySelector('.mani-h b').textContent = 'The other ' + S.numberWords(rows.length);
     /* the section lead: "Twenty-two researchers…" counts the whole group */
     var words = S.numberWords(list.length);
     document.querySelectorAll('[data-speakers-group-count="' + name + '"]').forEach(function (n) { n.textContent = words.charAt(0).toUpperCase() + words.slice(1); });
-    fill(grids[0], rows.slice(0, VISIBLE).map(function (sp, i) { return row(g, sp, start + i); }));
-    fill(grids[1], rows.slice(VISIBLE).map(function (sp, i) { return row(g, sp, start + VISIBLE + i); }));
+    fill(grids[0], rows.slice(0, VISIBLE).map(function (sp, i) { return row(sp, start + i); }));
+    fill(grids[1], rows.slice(VISIBLE).map(function (sp, i) { return row(sp, start + VISIBLE + i); }));
     more.querySelector('summary .c').textContent = 'Show all ' + list.length;
     more.hidden = rows.length <= VISIBLE;
     mani.hidden = !rows.length;
     /* the sheet repaint keeps an open speaker open, or closes a vanished one */
-    var o = openerFor(g, g.openId);
-    if (o) show(g, o, false); else if (g.openId) close(g);
+    var byId = {};
+    list.forEach(function (sp) { byId[sp.id] = sp; });
+    g.panel.refresh(byId);
   }
 
   S.load({
