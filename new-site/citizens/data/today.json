@@ -1,0 +1,115 @@
+{
+ "version": 1,
+ "note": "Edit this file to change the Today screen's brief. 'default' is shown for any day outside Oct 1-31 2026 or with no entry here; 'days' keys are YYYY-MM-DD. One plain sentence per brief: present tense, says where to be or what matters. 'note' is an optional second sentence.",
+ "default": {
+  "brief": "Mornings are for your own work, afternoons are for labs and workshops, evenings are for the city."
+ },
+ "days": {
+  "2026-10-01": {
+   "brief": "Arrive on Port Island and register at Mirai Base.",
+   "note": "Get an ICOCA card at Sannomiya station and find your cowork desk at the Shimin Byoin Mae Building."
+  },
+  "2026-10-02": {
+   "brief": "No scheduled sessions. Mirai Base is open for work from 9."
+  },
+  "2026-10-03": {
+   "brief": "No scheduled sessions. Mirai Base is open for work from 9.",
+   "note": "The Saturday farmers market in central Kobe runs this morning, if you want breakfast there instead."
+  },
+  "2026-10-04": {
+   "brief": "Come to the Mirai Tech Welcome at Mirai Base this afternoon, 3 to 4 PM."
+  },
+  "2026-10-05": {
+   "brief": "Join the morning session at Mirai Base at 9 AM.",
+   "note": "Lab tours through KBIC, Kyoto, and Osaka start running this week; sign up in the chat."
+  },
+  "2026-10-06": {
+   "brief": "Vibe Coding Night meets at the coworking space today."
+  },
+  "2026-10-07": {
+   "brief": "Join the Japan Ecosystem deep dive at 1 PM.",
+   "note": "BioJapan 2026 runs in Yokohama through October 9, for anyone who wants to make the trip."
+  },
+  "2026-10-08": {
+   "brief": "No scheduled sessions. Mirai Base is open for work from 9.",
+   "note": "BioJapan 2026 continues in Yokohama today, for anyone who traveled up for it."
+  },
+  "2026-10-09": {
+   "brief": "The Longevity x Bio Hackathon with Nucleate Japan kicks off today; form a team or join one.",
+   "note": "A lab visit to CiRA at Kyoto University runs at 2:30 PM for anyone not at the kickoff."
+  },
+  "2026-10-10": {
+   "brief": "The EAT LOCAL KOBE farmers market runs this morning at Higashi Yuenchi.",
+   "note": "A Rokko Nomad trip to Arima Onsen also runs today, 10 AM to 6 PM."
+  },
+  "2026-10-11": {
+   "brief": "No scheduled sessions. Mirai Base is open for work from 9."
+  },
+  "2026-10-12": {
+   "brief": "Join the Peptides and Safe N=1 Experimentation session at 1 PM.",
+   "note": "FabLab Kobe opens for access days today, running through the end of the month."
+  },
+  "2026-10-13": {
+   "brief": "No scheduled sessions. Mirai Base is open for work from 9.",
+   "note": "Lab tours and the hackathon are both still running this week."
+  },
+  "2026-10-14": {
+   "brief": "The LINK-J Osaka labs visit runs this afternoon, 1 to 3 PM."
+  },
+  "2026-10-15": {
+   "brief": "An Air Water Medical Center visit in Kobe runs at 10 AM.",
+   "note": "The Next Generation Longevity 2026 conference in Osaka also runs today and tomorrow, for anyone who wants to attend."
+  },
+  "2026-10-16": {
+   "brief": "The DIY Bio workshop with Shojinmeat Project runs at the coworking space, 10 AM to 1 PM.",
+   "note": "This is the last day of the lab tour window and the second day of the Next Generation Longevity conference in Osaka."
+  },
+  "2026-10-17": {
+   "brief": "Summit I, The Science and Tech Augmenting Life, runs today at the Integrated Research Center on Port Island."
+  },
+  "2026-10-18": {
+   "brief": "Summit I continues today at the Integrated Research Center on Port Island."
+  },
+  "2026-10-19": {
+   "brief": "No scheduled sessions. Mirai Base is open for work from 9.",
+   "note": "Kobe Port fireworks are scheduled sometime this week; the exact night is not posted yet."
+  },
+  "2026-10-20": {
+   "brief": "No scheduled sessions. Mirai Base is open for work from 9."
+  },
+  "2026-10-21": {
+   "brief": "The Fugaku Supercomputer Tour at RIKEN runs at 4 PM."
+  },
+  "2026-10-22": {
+   "brief": "No scheduled sessions. Mirai Base is open for work from 9."
+  },
+  "2026-10-23": {
+   "brief": "The LBF Workshop runs today on Port Island, 1 to 6:30 PM."
+  },
+  "2026-10-24": {
+   "brief": "Summit II, From East to West: Bridging the Longevity Gap, runs today at the Integrated Research Center on Port Island."
+  },
+  "2026-10-25": {
+   "brief": "Summit II continues today at the Kobe Portopia Hotel."
+  },
+  "2026-10-26": {
+   "brief": "The Frontier Human Fashion Show and hackathon Demo Day run today at Orbis Hall, 3 to 6 PM."
+  },
+  "2026-10-27": {
+   "brief": "No scheduled sessions. Mirai Base is open for work from 9."
+  },
+  "2026-10-28": {
+   "brief": "No scheduled sessions. Mirai Base is open for work from 9."
+  },
+  "2026-10-29": {
+   "brief": "No scheduled sessions. Mirai Base is open for work from 9."
+  },
+  "2026-10-30": {
+   "brief": "No scheduled sessions. Mirai Base is open for work from 9."
+  },
+  "2026-10-31": {
+   "brief": "No scheduled sessions. Mirai Base is open for work from 9.",
+   "note": "The Saturday farmers market runs this morning, and FabLab access days end today."
+  }
+ }
+}

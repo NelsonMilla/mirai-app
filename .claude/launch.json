@@ -54,6 +54,18 @@
         "PATH": "/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin"
       },
       "port": 4330
+    },
+    {
+      "name": "new-site-today",
+      "runtimeExecutable": "/opt/homebrew/bin/python3",
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "4326",
+        "-d",
+        "new-site"
+      ],
+      "port": 4326
     }
   ]
 }
