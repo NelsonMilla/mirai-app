@@ -164,11 +164,11 @@
 
   /* detail: slides in from the right edge when a venue is selected */
   .detail { position: absolute; top: 56px; right: var(--gap); width: var(--panelW); max-height: calc(100dvh - 56px - 110px);
-    overflow: auto; padding: 18px 18px 16px; visibility: hidden; opacity: 0; transform: translateX(calc(100% + 24px));
+    display: flex; flex-direction: column; overflow: hidden; padding: 18px 18px 16px; visibility: hidden; opacity: 0; transform: translateX(calc(100% + 24px));
     transition: transform .4s var(--ease), opacity .3s, visibility 0s .4s; }
   .detail.open { visibility: visible; opacity: 1; transform: none; transition: transform .4s var(--ease), opacity .3s; }
   .detail article { display: none; }
-  .detail article.on { display: block; }
+  .detail article.on { display: block; min-height: 0; overflow: auto; } /* only the text scrolls, and only on a short viewport; the card's corner brackets sit 1px outside it and must not make it scroll. Scroll style: .mtc-scroll in nav.css */
   .x { position: absolute; top: 8px; right: 8px; width: 30px; height: 30px; border: 1px solid transparent; background: none;
     color: var(--dim); font-family: var(--mono); font-size: 13px; cursor: pointer; border-radius: 2px; }
   .x:hover { color: var(--accent); border-color: var(--line); }
@@ -330,7 +330,7 @@
   <aside class="detail panel" id="detail" aria-label="Selected venue">
     <button class="x" type="button" id="closeDetail" aria-label="Close">✕</button>
 
-    <article data-id="mic">
+    <article class="mtc-scroll" data-id="mic">
       <div class="pHead">
         <span class="pNum num" aria-hidden="true">1</span>
         <div>
@@ -352,7 +352,7 @@
       </div>
     </article>
 
-    <article data-id="irc">
+    <article class="mtc-scroll" data-id="irc">
       <div class="pHead">
         <span class="pNum num" aria-hidden="true">2</span>
         <div>
@@ -371,7 +371,7 @@
       </div>
     </article>
 
-    <article data-id="portopia">
+    <article class="mtc-scroll" data-id="portopia">
       <div class="pHead">
         <span class="pNum num" aria-hidden="true">3</span>
         <div>
@@ -389,7 +389,7 @@
       </div>
     </article>
 
-    <article data-id="cowork">
+    <article class="mtc-scroll" data-id="cowork">
       <div class="pHead">
         <span class="pNum num" aria-hidden="true">4</span>
         <div>
@@ -406,7 +406,7 @@
       </div>
     </article>
 
-    <article data-id="orbis">
+    <article class="mtc-scroll" data-id="orbis">
       <div class="pHead">
         <span class="pNum num" aria-hidden="true">5</span>
         <div>
@@ -430,7 +430,7 @@
   <p class="hint" id="hint">Click the map to zoom with the wheel</p>
 
   <div class="scrim" id="scrim"></div>
-  <aside class="drawer" id="dates" aria-label="Dates" data-track-section="dates" data-track-position="3">
+  <aside class="drawer mtc-scroll" id="dates" aria-label="Dates" data-track-section="dates" data-track-position="3">
     <div class="head">
       <h2>Dates</h2>
       <button class="x" type="button" id="closeDates" aria-label="Close">✕</button>
@@ -499,6 +499,16 @@
     if (reduce) map.setView(c, z, { animate: false }); else map.flyTo(c, z, { duration: .9 });
   }
 
+  // the venue card's bottom fade: on while the open article has text below the fold
+  function moreCheck() {
+    Object.keys(arts).forEach(function (k) {
+      var a = arts[k];
+      a.classList.toggle('mtc-more', a.classList.contains('on') && a.scrollTop + a.clientHeight < a.scrollHeight - 2);
+    });
+  }
+  Object.keys(arts).forEach(function (k) { arts[k].addEventListener('scroll', moreCheck, { passive: true }); });
+  window.addEventListener('resize', function () { requestAnimationFrame(moreCheck); }); // after the new layout
+
   function clear() {
     if (!active) return;
     active.setAttribute('aria-pressed', 'false');
@@ -521,6 +531,7 @@
     detail.classList.add('open');
     document.body.classList.add('detailOpen');
     detail.scrollTop = 0;
+    moreCheck();
     if (phone.matches) {
       dock.scrollTo({ left: btn.offsetLeft - (dock.clientWidth - btn.offsetWidth) / 2, behavior: reduce ? 'auto' : 'smooth' });
     }

@@ -22,7 +22,7 @@
     { id: 'map', n: '01', label: 'Map', href: base ? base + 'map.html' : '/citizens/' },
     { id: 'quests', n: '02', label: 'Quests', href: base ? base + 'quests.html' : '/citizens/quests/' },
     { id: 'links', n: '03', label: 'Links', href: base ? base + 'links.html' : '/citizens/links/' },
-    { id: 'today', n: '04', label: 'Today' },
+    { id: 'today', n: '04', label: 'Today', href: base ? base + 'today.html' : '/citizens/today/' },
     { id: 'directory', n: '05', label: 'Directory' }
   ];
 

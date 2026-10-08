@@ -98,6 +98,16 @@ body.has-mtc-nav .hud .detail { top: calc(56px + var(--mtc-nav-h)); max-height: 
   body.has-mtc-nav .hud .detail { top: auto; max-height: 46dvh; }
 }
 
+/* ---- HUD scroll, for any citizens panel that scrolls (the map's venue card and Dates drawer, the open quest card,
+   the links address card): a 3px cyan bar with square ends on no track, brighter under the pointer. mtc-more adds a
+   fade at the bottom edge while there is more below; the screen's own script toggles it from scroll position. ---- */
+.mtc-scroll { scrollbar-width: thin; scrollbar-color: rgba(155,232,240,.55) transparent; }
+.mtc-scroll::-webkit-scrollbar { width: 3px; height: 3px; }
+.mtc-scroll::-webkit-scrollbar-track { background: transparent; }
+.mtc-scroll::-webkit-scrollbar-thumb { background: rgba(155,232,240,.55); border-radius: 0; }
+.mtc-scroll::-webkit-scrollbar-thumb:hover { background: var(--accent, #9be8f0); }
+.mtc-scroll.mtc-more { -webkit-mask-image: linear-gradient(#000 calc(100% - 36px), transparent); mask-image: linear-gradient(#000 calc(100% - 36px), transparent); }
+
 @media (prefers-reduced-motion: reduce) {
   .mtc-nav, .mtc-tab { transition: none; }
   .mtc-iris { display: none; }

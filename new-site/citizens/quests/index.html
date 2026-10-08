@@ -128,10 +128,11 @@
   /* ---------- the open card: a flipped-up card in the middle on desktop, a bottom sheet on phones ---------- */
   .scrim { position: fixed; inset: 0; z-index: 20; background: rgba(5,5,6,.66); opacity: 0; visibility: hidden; transition: opacity .3s, visibility 0s .3s; }
   .scrim.open { opacity: 1; visibility: visible; transition: opacity .3s; }
-  .open-card { position: fixed; z-index: 21; left: 50%; top: 50%; width: min(560px, calc(100vw - 28px)); max-height: calc(100dvh - 40px); overflow: auto;
+  .open-card { position: fixed; z-index: 21; left: 50%; top: calc(50% + var(--mtc-nav-h, 0px) / 2); width: min(560px, calc(100vw - 28px)); max-height: calc(100dvh - 40px - var(--mtc-nav-h, 0px)); overflow: hidden; display: flex; flex-direction: column; /* centred in the space under the fixed nav */
     padding: 20px 20px 22px; visibility: hidden; opacity: 0; transform: translate(-50%, -50%) perspective(1400px) rotateY(-92deg);
     transform-origin: 50% 50%; transition: transform .45s var(--ease), opacity .25s, visibility 0s .45s;
     background: var(--paper-2); }
+  .open-card > div { min-height: 0; overflow: auto; } /* only the text scrolls, and only on a short viewport; the card's corner brackets sit 1px outside it and must not make it scroll. Scroll style: .mtc-scroll in nav.css */
   .open-card.open { visibility: visible; opacity: 1; transform: translate(-50%, -50%) perspective(1400px) rotateY(0); transition: transform .45s var(--ease), opacity .25s; }
   .x { position: absolute; top: 8px; right: 8px; width: 30px; height: 30px; border: 1px solid transparent; background: none;
     color: var(--dim); font-family: var(--mono); font-size: 13px; cursor: pointer; border-radius: 2px; }
@@ -414,6 +415,12 @@
   }
 
   var lastFocus = null;
+  // the open card's bottom fade: on while there is text below the fold
+  function moreCheck() { ocBody.classList.toggle('mtc-more', oc.classList.contains('open') && ocBody.scrollTop + ocBody.clientHeight < ocBody.scrollHeight - 2); }
+  ocBody.classList.add('mtc-scroll');
+  ocBody.addEventListener('scroll', moreCheck, { passive: true });
+  window.addEventListener('resize', function () { requestAnimationFrame(moreCheck); });
+
   function open(id) {
     var qq = quest(id); if (qq) { var gi = data.groups.map(function (g) { return g.id; }).indexOf(qq.group); if (gi >= 0 && gi !== cur) goSheet(gi, true); }
     var c = cardOf(id); if (!c) return;
@@ -422,7 +429,7 @@
     c.setAttribute('aria-expanded', 'true');
     fill(id);
     oc.classList.add('open'); scrim.classList.add('open'); oc.setAttribute('aria-hidden', 'false');
-    oc.scrollTop = 0;
+    ocBody.scrollTop = 0; moreCheck();
     document.getElementById('ocClose').focus();
   }
   function close(refocus) {

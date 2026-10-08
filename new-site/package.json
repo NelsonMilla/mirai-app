@@ -6,6 +6,7 @@
   "engines": { "node": ">=20" },
   "scripts": {
     "test": "node --test \"test/**/*.test.js\"",
+    "today:snapshot": "node scripts/sola-snapshot.mjs"
     "agenda:snapshot": "node scripts/sheet-snapshot.mjs --file agenda-data.js",
     "speakers:snapshot": "node scripts/sheet-snapshot.mjs --file speakers-data.js",
     "program:snapshot": "node scripts/sheet-snapshot.mjs --file program-data.js",

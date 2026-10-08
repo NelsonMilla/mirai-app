@@ -92,10 +92,15 @@ Single static `index.html` — no framework, no build step. Deploys anywhere
   links screen: physical-object cards (ticket stubs, IC cards, envelopes, a red
   emergency card) rendered from `citizens/data/links.json`; groups collapse
   (`mtc_links_closed`), any link can be pinned into "My links" (`mtc_pins`); phone
-  numbers are shown, never dialled. Every citizens screen loads the shared header
+  numbers are shown, never dialled. `/citizens/today/` is the daily schedule screen:
+  it calls the So.La API live for the day's events and falls back to the saved
+  `citizens/data/sola-events.json` snapshot (refresh it with `npm run
+  today:snapshot`, which runs `scripts/sola-snapshot.mjs`) when So.La is
+  unreachable; the one-line brief at the top is written from the same events (now,
+  next, tomorrow), so it cannot drift from the list. Every citizens screen loads the shared header
   `/citizens/nav.css` + `/citizens/nav.js` (`<script src="/citizens/nav.js" data-screen="…"
   data-title="…">` at the top of `<body>`): a title row and five fixed tab buttons (Map,
-  Quests, Links, Today, Directory; the last two "Soon"), keys 1–5 jump and [ ] cycle; a cyan
+  Quests, Links, Today, Directory; Directory still "Soon"), keys 1–5 jump and [ ] cycle; a cyan
   iris grows out of the pressed tab and shrinks back into it on the next screen (≤240ms each way); it
   hides while `#big`/`#dates` are open and offsets the map HUD via `--mtc-nav-h`.
   `citizens/_v/`, `citizens/quests/_v/`, `citizens/links/_v/` and `citizens/_nav/` hold

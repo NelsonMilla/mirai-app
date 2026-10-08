@@ -1,0 +1,422 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Today · Citizens · Mirai Tech City · Kobe 2026</title>
+<meta name="robots" content="noindex, nofollow" />
+<meta name="theme-color" content="#050506" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23050506'/%3E%3Ctext x='50' y='72' font-size='62' font-family='Georgia' font-weight='bold' fill='%239be8f0' text-anchor='middle'%3E未%3C/text%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="preconnect" href="https://api.fontshare.com" />
+<link rel="preconnect" href="https://cdn.fontshare.com" crossorigin />
+<link rel="preconnect" href="https://api.sola.day" crossorigin />
+<link href="https://api.fontshare.com/v2/css?f[]=switzer@400,500,700,800,900&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/posthog.js"></script>
+<script defer src="/analytics.js"></script>
+<link rel="stylesheet" href="/citizens/nav.css" />
+<style>
+  :root {
+    --bg: #050506; --ink: #f4f3f0; --dim: rgba(244,243,240,.62); --faint: rgba(244,243,240,.45);
+    --line: rgba(244,243,240,.14); --accent: #9be8f0; --accent-rgb: 155,232,240;
+    --font: 'Switzer', 'Inter', -apple-system, sans-serif; --mono: 'IBM Plex Mono', monospace;
+    --hud: rgba(5,5,6,.9); --paper: #0b0c0f; --paper-2: #101216;
+    --ease: cubic-bezier(.2,.7,.2,1); --gap: 14px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { background: var(--bg); }
+  body { min-width: 320px; min-height: 100dvh; background: var(--bg); color: var(--ink); font-family: var(--font);
+    -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+  ::selection { background: var(--accent); color: #000; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  a { color: inherit; }
+  .num { font-variant-numeric: tabular-nums; }
+
+  /* the same corner-bracket panel as the map, the quests and the links: here it marks the next event */
+  .panel { position: relative; background: var(--hud); border: 1px solid var(--line); }
+  .panel::before, .panel::after { content: ''; position: absolute; width: 9px; height: 9px; pointer-events: none; }
+  .panel::before { top: -1px; left: -1px; border-top: 1px solid var(--accent); border-left: 1px solid var(--accent); }
+  .panel::after { bottom: -1px; right: -1px; border-bottom: 1px solid var(--accent); border-right: 1px solid var(--accent); }
+
+  .wrap { max-width: 1180px; margin: 0 auto; padding: var(--gap) var(--gap) 60px; }
+
+  .btn { display: inline-block; padding: 9px 12px; border: 1px solid var(--line); border-radius: 2px; background: var(--hud); color: var(--ink);
+    font-family: var(--mono); font-size: 9.5px; letter-spacing: .18em; text-transform: uppercase; cursor: pointer; text-decoration: none;
+    white-space: nowrap; transition: border-color .2s, color .2s; }
+  .btn:hover { border-color: var(--accent); }
+  .btn.go { background: var(--accent); border-color: var(--accent); color: #04191c; font-weight: 500; }
+  .btn.go:hover { background: #c3f1f6; }
+
+  /* ---------- top: the date, the day's line, the Kobe clock (the title lives in the shared header) ---------- */
+  .intro { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 12px 24px;
+    margin-top: 26px; padding-bottom: 16px; border-bottom: 1px solid var(--line); }
+  .day { font-weight: 900; text-transform: uppercase; letter-spacing: -.015em; font-size: 30px; line-height: .95; }
+  .hello { margin-top: 10px; font-size: 15px; line-height: 1.5; color: var(--dim); max-width: 60ch; }
+  .hello:empty { display: none; }
+  .clock { display: flex; align-items: baseline; gap: 8px; font-family: var(--mono); font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--faint); }
+  .clock b { font-family: var(--font); font-weight: 900; font-size: 44px; line-height: .9; letter-spacing: -.02em; color: var(--ink); }
+
+  /* ---------- ongoing: a thin strip for events that run longer than a day ---------- */
+  .ongoing { margin-top: 16px; display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 18px; padding: 10px 0; border-bottom: 1px solid var(--line);
+    font-size: 13px; }
+  .ongoing .lbl { font-family: var(--mono); font-size: 9.5px; letter-spacing: .22em; text-transform: uppercase; color: var(--accent); }
+  .ongoing a { text-decoration: none; color: var(--ink); }
+  .ongoing a:hover b { color: var(--accent); }
+  .ongoing b { font-weight: 700; transition: color .2s; }
+  .ongoing .when { margin-left: 6px; font-family: var(--mono); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--faint); white-space: nowrap; }
+
+  /* ---------- sections: a hand-stamped label like the links screen, then the rows ---------- */
+  .sec { margin-top: 36px; }
+  .shead { display: flex; align-items: center; gap: 14px; padding: 4px 0; border-bottom: 1px solid var(--line); }
+  .stamp { display: inline-block; padding: 7px 12px 8px; border: 2px solid var(--accent); border-radius: 3px; color: var(--accent);
+    font-weight: 800; font-size: 14px; letter-spacing: .04em; text-transform: uppercase; line-height: 1; transform: rotate(-1.6deg); filter: url(#ink); }
+  .sec:nth-of-type(even) .stamp { transform: rotate(1.2deg); }
+  .sec.next .stamp { background: var(--accent); color: #04191c; }
+  .blurb { flex: 1 1 auto; min-width: 0; font-size: 13px; color: var(--dim); padding: 8px 0; }
+  .count { font-family: var(--mono); font-size: 9.5px; letter-spacing: .18em; text-transform: uppercase; color: var(--faint); white-space: nowrap; }
+
+  /* one event: time | what and where | the two links */
+  .ev { display: grid; grid-template-columns: 150px minmax(0, 1fr) auto; gap: 6px 20px; align-items: start; padding: 16px 0; border-bottom: 1px solid var(--line); }
+  .tm { font-family: var(--mono); font-size: 12px; letter-spacing: .06em; color: var(--dim); white-space: nowrap; }
+  .tm b { display: block; font-family: var(--font); font-weight: 800; font-size: 24px; line-height: 1; letter-spacing: -.01em; color: var(--ink); margin-bottom: 4px; }
+  .tm.long b { font-size: 17px; }
+  .meta { display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: center; margin-bottom: 6px; }
+  .meta:empty { display: none; }
+  .kind { font-family: var(--mono); font-size: 9px; letter-spacing: .22em; text-transform: uppercase; color: var(--accent);
+    border: 1px solid rgba(var(--accent-rgb), .3); border-radius: 2px; padding: 3px 7px; }
+  .going { font-family: var(--mono); font-size: 9.5px; letter-spacing: .16em; text-transform: uppercase; color: var(--faint); }
+  .ev .t { font-weight: 800; font-size: 16px; line-height: 1.15; text-transform: uppercase; letter-spacing: .01em; overflow-wrap: anywhere; }
+  .ev .where { margin-top: 5px; font-size: 13px; line-height: 1.4; color: var(--dim); overflow-wrap: anywhere; }
+  .ev .where.none { color: var(--faint); }
+  .acts { display: flex; flex-wrap: wrap; gap: 6px; justify-content: flex-end; }
+  .ends { font-family: var(--mono); font-size: 9.5px; letter-spacing: .16em; text-transform: uppercase; color: var(--accent); }
+  .sec.tomorrow .ev .t { color: var(--dim); }
+
+  /* the next event: the one thing to read first */
+  .nextcard { margin-top: 16px; padding: 18px 20px 20px; }
+  .nextcard .in { font-weight: 900; font-size: 40px; line-height: .95; letter-spacing: -.02em; text-transform: uppercase; color: var(--accent); }
+  .nextcard .ev { padding: 14px 0 0; border-bottom: 0; }
+  .nextcard .ev + .ev { margin-top: 14px; border-top: 1px solid var(--line); }
+  .nextcard .ev .t { font-size: 20px; }
+
+  .loading { padding: 40px 0; font-family: var(--mono); font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--faint); }
+  .loading.err { font-family: var(--font); font-size: 15px; letter-spacing: 0; text-transform: none; color: var(--dim); }
+
+  /* ---------- calendar feed + where the schedule came from ---------- */
+  .sub { margin-top: 44px; display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; }
+  .sub .alt { font-size: 13px; color: var(--dim); }
+  .sub .alt a { color: var(--accent); text-decoration: none; }
+  .src { flex: 1 0 100%; font-family: var(--mono); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--faint); line-height: 1.6; }
+  footer { margin-top: 24px; padding-top: 18px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 8px 22px; align-items: baseline;
+    font-family: var(--mono); font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--faint); }
+  footer b { color: var(--dim); font-weight: 400; }
+  footer a { color: var(--accent); text-decoration: none; }
+
+  @media (max-width: 760px) {
+    :root { --gap: 10px; }
+    .intro { margin-top: 18px; }
+    .day { font-size: 24px; }
+    .hello { font-size: 14px; }
+    .clock b { font-size: 36px; }
+    .sec { margin-top: 28px; }
+    .shead { gap: 10px; }
+    .blurb { display: none; }
+    .ev { grid-template-columns: minmax(0, 1fr); gap: 8px; padding: 14px 0; }
+    .tm b { display: inline; font-size: 20px; margin: 0 6px 0 0; }
+    .tm.long b { font-size: 16px; }
+    .acts { justify-content: flex-start; }
+    .acts .btn { flex: 1 1 auto; text-align: center; padding: 11px 10px; }
+    .nextcard { padding: 14px 14px 16px; }
+    .nextcard .in { font-size: 32px; }
+    .nextcard .ev .t { font-size: 17px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .btn, .ongoing b { transition: none; }
+  }
+</style>
+</head>
+<body data-analytics-offer="citizens">
+
+<script src="/citizens/nav.js" data-screen="today" data-title="Today"></script>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <filter id="ink" x="-6%" y="-6%" width="112%" height="112%">
+      <feTurbulence type="fractalNoise" baseFrequency=".055" numOctaves="3" seed="7" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="2.2" xChannelSelector="R" yChannelSelector="G" result="d"/>
+      <feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="2" seed="3" result="g"/>
+      <feColorMatrix in="g" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -1.6 1.55" result="a"/>
+      <feComposite in="d" in2="a" operator="in"/>
+    </filter>
+  </defs>
+</svg>
+
+<div class="wrap">
+  <div class="intro">
+    <div>
+      <h2 class="day" id="day">Today</h2>
+      <p class="hello" id="brief"></p>
+    </div>
+    <p class="clock num"><b id="clock">--:--</b> <span>Kobe time</span></p>
+  </div>
+
+  <main id="main" aria-live="polite"><p class="loading">Loading today's schedule…</p></main>
+
+  <div class="sub">
+    <a class="btn go" href="webcal://api.sola.day/api/v1/groups/miraitechcity/calendar.ics"
+      data-analytics-action="site_navigation" data-analytics-location="citizens_today" data-analytics-target="calendar_subscribe">Subscribe in your calendar</a>
+    <a class="btn" href="https://sola.day/event/miraitechcity" target="_blank" rel="noopener"
+      data-analytics-action="site_navigation" data-analytics-location="citizens_today" data-analytics-target="sola_calendar">Full calendar on So.La ↗</a>
+    <span class="alt">If that does not open your calendar app, add this address to it:
+      <a href="https://api.sola.day/api/v1/groups/miraitechcity/calendar.ics"
+        data-analytics-action="site_navigation" data-analytics-location="citizens_today" data-analytics-target="calendar_feed">calendar feed</a>.</span>
+    <p class="src" id="src"></p>
+  </div>
+
+  <footer>
+    <b>Mirai Tech City</b> <span>Kobe · Oct 1–31 2026</span>
+    <a href="/citizens/">Map →</a>
+    <a href="/citizens/links/">Links →</a>
+  </footer>
+</div>
+
+<script>
+/* Today — the day brief for citizens: what is on in Kobe today, what is on now, what is next, and tomorrow.
+   Data: the So.La events API for the miraitechcity group (live, CORS *, 3 s timeout). If it fails, the saved
+   snapshot /citizens/data/sola-events.json (whole month, raw So.La events). The one-line brief at the top is
+   written from the same events (what is on now, else what is next, else tomorrow), so it is never out of date.
+   "Today" is the calendar day in Asia/Tokyo. RSVPs happen on So.La; this page stores nothing.
+   Testing overrides (not shown in the UI): ?date=2026-10-10 sets the day, ?time=14:30 sets the Kobe clock (JST). */
+(function () {
+  var API = 'https://api.sola.day/api/v1/events?group_id=miraitechcity&timezone=Asia/Tokyo&limit=100';
+  var DAY = 864e5; // Japan has no daylight saving, so a JST day is always 24 h
+  var TZ = 'Asia/Tokyo';
+  var fmtDay = new Intl.DateTimeFormat('en-CA', { timeZone: TZ, year: 'numeric', month: '2-digit', day: '2-digit' }); // 2026-10-10
+  var fmtHM = new Intl.DateTimeFormat('en-GB', { timeZone: TZ, hour: '2-digit', minute: '2-digit', hourCycle: 'h23' });   // 14:30
+  var fmtMD = new Intl.DateTimeFormat('en-US', { timeZone: TZ, month: 'short', day: 'numeric' });                          // Oct 10
+  var fmtLong = new Intl.DateTimeFormat('en-US', { timeZone: TZ, weekday: 'long', month: 'long', day: 'numeric' });         // Friday, October 10
+  var fmtFull = new Intl.DateTimeFormat('en-US', { timeZone: TZ, month: 'long', day: 'numeric' });                          // October 8
+
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+
+  // ---- bucket: sort one list of So.La events into the screen's sections. Pure: depends only on its arguments.
+  //      now and dayStart are epoch ms (dayStart = 00:00 JST today). Events longer than 24 h that touch today go to
+  //      "ongoing" (until they end) so they never crowd the day list; shorter ones that touch today are now / next / later / earlier
+  //      (next = every event sharing the earliest upcoming start); events that start tomorrow go to "tomorrow".
+  function bucket(events, now, dayStart) {
+    var DAYMS = 864e5, dayEnd = dayStart + DAYMS, tomorrowEnd = dayEnd + DAYMS;
+    var out = { ongoing: [], now: [], next: [], later: [], earlier: [], tomorrow: [] };
+    var seen = {};
+    events.slice().sort(function (a, b) { return Date.parse(a.start_time) - Date.parse(b.start_time) || String(a.title).localeCompare(String(b.title)); })
+      .forEach(function (e) {
+        var s = Date.parse(e.start_time), en = Date.parse(e.end_time);
+        if (isNaN(s) || seen[e.id]) return;
+        seen[e.id] = true;
+        if (isNaN(en) || en < s) en = s;
+        if (s >= dayEnd) { if (s < tomorrowEnd) out.tomorrow.push(e); return; }
+        if (en <= dayStart && en !== s) return;   // finished before today
+        if (en === s && s < dayStart) return;      // zero-length, before today
+        if (en - s > DAYMS && en > now) { out.ongoing.push(e); return; }
+        if (s <= now && now < en) out.now.push(e);
+        else if (s > now) out.later.push(e);
+        else out.earlier.push(e);
+      });
+    if (out.later.length) {
+      var first = Date.parse(out.later[0].start_time);
+      while (out.later.length && Date.parse(out.later[0].start_time) === first) out.next.push(out.later.shift());
+    }
+    return out;
+  }
+
+  // ---- the clock: real JST time, or the ?date= / ?time= overrides
+  function clock() {
+    var q = new URLSearchParams(location.search), d = q.get('date'), t = q.get('time'), real = new Date();
+    var okD = /^\d{4}-\d{2}-\d{2}$/.test(d || ''), okT = /^([01]\d|2[0-3]):[0-5]\d$/.test(t || '');
+    var day = okD ? d : fmtDay.format(real);
+    var dayStart = Date.parse(day + 'T00:00:00+09:00');
+    var now = (okD || okT) ? Date.parse(day + 'T' + (okT ? t : fmtHM.format(real)) + ':00+09:00') : real.getTime();
+    return { day: day, dayStart: dayStart, now: now, frozen: okT };
+  }
+  function shiftDay(day, n) { return fmtDay.format(new Date(Date.parse(day + 'T12:00:00+09:00') + n * DAY)); }
+
+  // ---- formatting
+  function hm(ms) { return fmtHM.format(new Date(ms)); }
+  function rel(ms) { // "in 40 min", "in 1 h 20 min"
+    var m = Math.max(1, Math.ceil(ms / 6e4));
+    if (m < 60) return 'in ' + m + ' min';
+    var h = Math.floor(m / 60), r = m % 60;
+    return 'in ' + h + ' h' + (r ? ' ' + r + ' min' : '');
+  }
+  function span(e) { // the time column: 10:00–14:00 for a day event, dates for anything longer
+    var s = Date.parse(e.start_time), en = Date.parse(e.end_time);
+    if (isNaN(en) || en <= s) return { cls: '', html: '<b>' + hm(s) + '</b>' };
+    if (en - s <= DAY) return { cls: '', html: '<b>' + hm(s) + '</b>–' + hm(en) };
+    return { cls: ' long', html: '<b>' + fmtMD.format(new Date(s)) + '</b>to ' + fmtMD.format(new Date(en)) };
+  }
+  function dates(e) {
+    var s = new Date(Date.parse(e.start_time)), en = new Date(Date.parse(e.end_time));
+    return fmtMD.format(s) + ' – ' + fmtMD.format(en);
+  }
+  function detailUrl(e) { return 'https://sola.day/event/detail/' + encodeURIComponent(e.id); }
+  function mapUrl(p) {
+    if (!p || p.latitude == null || p.longitude == null || !isFinite(+p.latitude) || !isFinite(+p.longitude)) return '';
+    return 'https://www.google.com/maps/search/?api=1&query=' + (+p.latitude) + ',' + (+p.longitude);
+  }
+  function an(target) { return ' data-analytics-action="site_navigation" data-analytics-location="citizens_today" data-analytics-target="' + esc(target) + '"'; }
+
+  function row(e, go, ends) { // ends: a label for events on now ("Ends in 40 min")
+    var t = span(e), p = e.place, map = mapUrl(p), n = +e.participant_count || 0;
+    return '<article class="ev">' +
+      '<p class="tm num' + t.cls + '">' + t.html + '</p>' +
+      '<div><p class="meta">' + (ends ? '<span class="ends num">' + ends + '</span>' : '') + (e.kind ? '<span class="kind">' + esc(e.kind) + '</span>' : '') +
+        (n > 0 ? '<span class="going num">' + n + ' going</span>' : '') + '</p>' +
+        '<h3 class="t">' + esc(String(e.title || 'Untitled event').trim()) + '</h3>' +
+        (p && p.name ? '<p class="where">' + esc(p.name) + '</p>' : '<p class="where none">No place listed yet.</p>') + '</div>' +
+      '<p class="acts"><a class="btn' + (go ? ' go' : '') + '" href="' + detailUrl(e) + '" target="_blank" rel="noopener"' + an('sola_event') + '>Details and RSVP ↗</a>' +
+        (map ? '<a class="btn" href="' + esc(map) + '" target="_blank" rel="noopener"' + an('google_maps') + '>Google Maps ↗</a>' : '') + '</p>' +
+      '</article>';
+  }
+  function section(cls, title, blurb, list, inner) {
+    return '<section class="sec ' + cls + '" aria-labelledby="h-' + cls + '"><div class="shead"><h2 class="stamp" id="h-' + cls + '">' + title + '</h2>' +
+      '<span class="blurb">' + blurb + '</span><span class="count num">' + list.length + '</span></div>' + inner + '</section>';
+  }
+
+  // ---- state + render
+  var events = null, source = null, fetchedAt = null, cur = clock();
+  var main = document.getElementById('main');
+
+  function render() {
+    cur = clock();
+    document.getElementById('day').textContent = fmtLong.format(new Date(cur.dayStart + 12 * 36e5));
+    document.getElementById('clock').textContent = hm(cur.now);
+    if (!events) return;
+
+    var k = bucket(events, cur.now, cur.dayStart), h = '';
+    document.getElementById('brief').textContent = briefOf(k, cur.now);
+    if (k.ongoing.length) {
+      h += '<div class="ongoing"><span class="lbl">Ongoing</span>' + k.ongoing.map(function (e) {
+        return '<a href="' + detailUrl(e) + '" target="_blank" rel="noopener"' + an('sola_event') + '><b>' + esc(String(e.title).trim()) + '</b>' +
+          '<span class="when num">' + dates(e) + ' ↗</span></a>';
+      }).join('') + '</div>';
+    }
+    if (k.now.length) h += section('now', 'Now', 'Happening right now.', k.now, k.now.map(function (e) { return row(e, false, 'Ends ' + rel(Date.parse(e.end_time) - cur.now)); }).join(''));
+    if (k.next.length) {
+      h += section('next', 'Next', 'The next thing that starts today.', k.next,
+        '<div class="nextcard panel"><p class="in num">Starts ' + rel(Date.parse(k.next[0].start_time) - cur.now) + '</p>' +
+        k.next.map(function (e) { return row(e, true); }).join('') + '</div>');
+    }
+    if (k.later.length) h += section('later', 'Later today', 'The rest of today, in order.', k.later, k.later.map(function (e) { return row(e); }).join(''));
+    if (k.tomorrow.length) {
+      h += section('tomorrow', 'Tomorrow', fmtLong.format(new Date(cur.dayStart + DAY + 12 * 36e5)) + '.', k.tomorrow,
+        k.tomorrow.map(function (e) { return row(e); }).join(''));
+    }
+    main.innerHTML = h;
+  }
+
+  // ---- the one-line brief, written from the buckets so it can never disagree with the list below it
+  function name(e) { return String(e.title).trim(); }
+  function at(e) { return e.place && e.place.name ? ', ' + e.place.name : ''; }
+  function long(e) { return Date.parse(e.end_time) - Date.parse(e.start_time) > DAY; }
+  function briefOf(k, now) {
+    var s;
+    if (k.now.length) {
+      var e = k.now[0];
+      s = k.now.length === 1 ? name(e) + ' is on now until ' + hm(Date.parse(e.end_time)) + at(e) + '.'
+        : k.now.length + ' things are on right now: ' + k.now.map(name).join(' and ') + '.';
+      if (k.next.length) s += ' Next: ' + name(k.next[0]) + ' at ' + hm(Date.parse(k.next[0].start_time)) + '.';
+    } else if (k.next.length) {
+      var n = k.next[0], more = k.next.length - 1 + k.later.length;
+      s = 'Next: ' + name(n) + ' at ' + hm(Date.parse(n.start_time)) + at(n) + '.';
+      if (more) s += ' Then ' + more + ' more today.';
+    } else if (k.earlier.length) {
+      s = 'Today\'s events are over. The last one finished at ' + hm(Math.max.apply(null, k.earlier.map(function (e) { return Date.parse(e.end_time) || 0; }))) + '.';
+    } else if (k.ongoing.length) {
+      s = 'Nothing starts today. ' + name(k.ongoing[0]) + ' runs ' + dates(k.ongoing[0]) + '.';
+    } else {
+      s = 'Nothing is scheduled today.';
+    }
+    if (!k.now.length && !k.next.length) {
+      var t = k.tomorrow.filter(function (e) { return !long(e); })[0];
+      if (t) s += ' Tomorrow: ' + name(t) + ' at ' + hm(Date.parse(t.start_time)) + '.';
+      else if (k.tomorrow.length) s += ' Tomorrow ' + name(k.tomorrow[0]) + ' begins.';
+      else s += ' Nothing is scheduled for tomorrow either.';
+    }
+    return s;
+  }
+
+  function setSource() {
+    var el = document.getElementById('src');
+    if (source === 'live') el.textContent = 'Schedule from So.La; last updated ' + hm(fetchedAt) + '.';
+    else if (source === 'snapshot') el.textContent = 'So.La did not answer, so this is the saved schedule from ' +
+      (isNaN(fetchedAt) ? 'earlier' : fmtFull.format(new Date(fetchedAt)) + ' at ' + hm(fetchedAt)) + '. It may be out of date.';
+    else el.textContent = '';
+  }
+
+  // ---- data: one live request covering the last 45 days through tomorrow (So.La filters by start date, so a
+  //      long event that began weeks ago is only returned by a wide range); pages followed if there are more than 100.
+  function withTimeout(ms) {
+    var ctl = typeof AbortController === 'function' ? new AbortController() : null;
+    var timer = setTimeout(function () { if (ctl) ctl.abort(); }, ms);
+    return { signal: ctl ? ctl.signal : undefined, done: function () { clearTimeout(timer); } };
+  }
+  function getJson(url, signal) {
+    return fetch(url, { signal: signal }).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); });
+  }
+  function fetchLive(day) {
+    var url = API + '&start_date=' + shiftDay(day, -45) + '&end_date=' + shiftDay(day, 1);
+    var t = withTimeout(3000), all = [];
+    function page(n) {
+      return getJson(url + '&page=' + n, t.signal).then(function (j) {
+        if (!j || !Array.isArray(j.data)) throw new Error('bad shape');
+        all = all.concat(j.data);
+        return j.meta && j.meta.next_page && n < 5 ? page(n + 1) : all;
+      });
+    }
+    return page(1).then(function (r) { t.done(); return r; }, function (err) { t.done(); throw err; });
+  }
+  function fetchSnapshot() {
+    return getJson('/citizens/data/sola-events.json').then(function (j) {
+      if (!j || !Array.isArray(j.events) || !j.events.length) throw new Error('empty snapshot');
+      return j;
+    });
+  }
+
+  var loadedDay = null;
+  function load() {
+    var day = clock().day;
+    loadedDay = day;
+    return fetchLive(day).then(function (list) {
+      events = list; source = 'live'; fetchedAt = Date.now();
+    }).catch(function () {
+      if (source === 'live' && events) return; // a later refresh failed: keep the live list we already have
+      return fetchSnapshot().then(function (j) {
+        events = j.events; source = 'snapshot'; fetchedAt = Date.parse(j.fetched_at);
+      });
+    }).then(function () {
+      setSource(); render();
+    }).catch(function () {
+      if (events) return;
+      main.innerHTML = '<p class="loading err">Could not load the schedule. Check your connection and reload the page.</p>';
+    });
+  }
+
+  render();
+  load();
+
+  // ---- keep the page current: re-sort every 30 s, fetch again every 5 min or when the day changes
+  var ticks = 0;
+  setInterval(function () {
+    if (cur.frozen) return;
+    ticks++;
+    if (clock().day !== loadedDay || ticks % 10 === 0) load(); else render();
+  }, 30000);
+})();
+</script>
+
+</body>
+</html>
