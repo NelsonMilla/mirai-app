@@ -78,7 +78,6 @@
   .sec.next .stamp { background: var(--accent); color: #04191c; }
   .blurb { flex: 1 1 auto; min-width: 0; font-size: 13px; color: var(--dim); padding: 8px 0; }
   .count { font-family: var(--mono); font-size: 9.5px; letter-spacing: .18em; text-transform: uppercase; color: var(--faint); white-space: nowrap; }
-  .empty { padding: 26px 0 4px; font-size: 15px; line-height: 1.5; color: var(--dim); max-width: 60ch; }
 
   /* one event: time | what and where | the two links */
   .ev { display: grid; grid-template-columns: 150px minmax(0, 1fr) auto; gap: 6px 20px; align-items: start; padding: 16px 0; border-bottom: 1px solid var(--line); }
@@ -187,8 +186,8 @@
 <script>
 /* Today — the day brief for citizens: what is on in Kobe today, what is on now, what is next, and tomorrow.
    Data: the So.La events API for the miraitechcity group (live, CORS *, 3 s timeout). If it fails, the saved
-   snapshot /citizens/data/sola-events.json (whole month, raw So.La events). The one-line brief at the top comes
-   from /citizens/data/today.json (days[YYYY-MM-DD].brief, else default.brief; no file, no brief).
+   snapshot /citizens/data/sola-events.json (whole month, raw So.La events). The one-line brief at the top is
+   written from the same events (what is on now, else what is next, else tomorrow), so it is never out of date.
    "Today" is the calendar day in Asia/Tokyo. RSVPs happen on So.La; this page stores nothing.
    Testing overrides (not shown in the UI): ?date=2026-10-10 sets the day, ?time=14:30 sets the Kobe clock (JST). */
 (function () {
@@ -286,18 +285,17 @@
   }
 
   // ---- state + render
-  var events = null, brief = null, source = null, fetchedAt = null, cur = clock();
+  var events = null, source = null, fetchedAt = null, cur = clock();
   var main = document.getElementById('main');
 
   function render() {
     cur = clock();
     document.getElementById('day').textContent = fmtLong.format(new Date(cur.dayStart + 12 * 36e5));
     document.getElementById('clock').textContent = hm(cur.now);
-    var b = brief && ((brief.days && brief.days[cur.day]) || brief.default);
-    document.getElementById('brief').textContent = b && b.brief ? b.brief + (b.note ? ' ' + b.note : '') : '';
     if (!events) return;
 
     var k = bucket(events, cur.now, cur.dayStart), h = '';
+    document.getElementById('brief').textContent = briefOf(k, cur.now);
     if (k.ongoing.length) {
       h += '<div class="ongoing"><span class="lbl">Ongoing</span>' + k.ongoing.map(function (e) {
         return '<a href="' + detailUrl(e) + '" target="_blank" rel="noopener"' + an('sola_event') + '><b>' + esc(String(e.title).trim()) + '</b>' +
@@ -311,19 +309,42 @@
         k.next.map(function (e) { return row(e, true); }).join('') + '</div>');
     }
     if (k.later.length) h += section('later', 'Later today', 'The rest of today, in order.', k.later, k.later.map(function (e) { return row(e); }).join(''));
-    if (!k.now.length && !k.next.length) {
-      var msg;
-      if (k.earlier.length) msg = 'Nothing else is on today. The last event finished at ' + hm(Math.max.apply(null, k.earlier.map(function (e) { return Date.parse(e.end_time) || 0; }))) + '.';
-      else if (k.ongoing.length) msg = 'Nothing else is scheduled for today.';
-      else msg = 'Nothing is scheduled for today.';
-      if (!k.tomorrow.length) msg += ' Nothing is scheduled for tomorrow either.';
-      h += '<p class="empty">' + msg + '</p>';
-    }
     if (k.tomorrow.length) {
       h += section('tomorrow', 'Tomorrow', fmtLong.format(new Date(cur.dayStart + DAY + 12 * 36e5)) + '.', k.tomorrow,
         k.tomorrow.map(function (e) { return row(e); }).join(''));
     }
     main.innerHTML = h;
+  }
+
+  // ---- the one-line brief, written from the buckets so it can never disagree with the list below it
+  function name(e) { return String(e.title).trim(); }
+  function at(e) { return e.place && e.place.name ? ', ' + e.place.name : ''; }
+  function long(e) { return Date.parse(e.end_time) - Date.parse(e.start_time) > DAY; }
+  function briefOf(k, now) {
+    var s;
+    if (k.now.length) {
+      var e = k.now[0];
+      s = k.now.length === 1 ? name(e) + ' is on now until ' + hm(Date.parse(e.end_time)) + at(e) + '.'
+        : k.now.length + ' things are on right now: ' + k.now.map(name).join(' and ') + '.';
+      if (k.next.length) s += ' Next: ' + name(k.next[0]) + ' at ' + hm(Date.parse(k.next[0].start_time)) + '.';
+    } else if (k.next.length) {
+      var n = k.next[0], more = k.next.length - 1 + k.later.length;
+      s = 'Next: ' + name(n) + ' at ' + hm(Date.parse(n.start_time)) + at(n) + '.';
+      if (more) s += ' Then ' + more + ' more today.';
+    } else if (k.earlier.length) {
+      s = 'Today\'s events are over. The last one finished at ' + hm(Math.max.apply(null, k.earlier.map(function (e) { return Date.parse(e.end_time) || 0; }))) + '.';
+    } else if (k.ongoing.length) {
+      s = 'Nothing starts today. ' + name(k.ongoing[0]) + ' runs ' + dates(k.ongoing[0]) + '.';
+    } else {
+      s = 'Nothing is scheduled today.';
+    }
+    if (!k.now.length && !k.next.length) {
+      var t = k.tomorrow.filter(function (e) { return !long(e); })[0];
+      if (t) s += ' Tomorrow: ' + name(t) + ' at ' + hm(Date.parse(t.start_time)) + '.';
+      else if (k.tomorrow.length) s += ' Tomorrow ' + name(k.tomorrow[0]) + ' begins.';
+      else s += ' Nothing is scheduled for tomorrow either.';
+    }
+    return s;
   }
 
   function setSource() {
@@ -382,7 +403,6 @@
     });
   }
 
-  getJson('/citizens/data/today.json').then(function (j) { brief = j; render(); }).catch(function () {});
   render();
   load();
 
