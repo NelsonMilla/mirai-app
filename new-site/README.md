@@ -102,8 +102,9 @@ Single static `index.html` — no framework, no build step. Deploys anywhere
   the design-round variants — delete before deploying.
 - Fonts: Switzer (Fontshare) + IBM Plex Mono. Speaker photos + Kobe stills
   copied into `img/` from `legacy-site/public/images` (comic-style avatars intentionally not used).
-- Nav: the top bar on the site pages (`/`, `/experience/`, `/conferences/`, `/pricing/`,
-  `/startups/`, plus a 日本語 link to `/jp/`) is one shared component — `/nav.js` inserts the markup where the
+- Nav: the top bar on the site pages (`/`, `/program/`, `/conferences/`, `/pricing/`,
+  `/startups/`, `/stay/`, `/experience/`; links Program, Summits, Pricing, For Startups,
+  Citizens for people already in Kobe, plus a 日本語 link to `/jp/`) is one shared component — `/nav.js` inserts the markup where the
   `<script src="/nav.js">` tag sits at the top of `<body>`, `/nav.css` styles it. Edit
   the links in `nav.js` once and every page follows. A page may swap the CTA with
   `data-cta-label` / `data-cta-href` / `data-cta-target` on the script tag (see
