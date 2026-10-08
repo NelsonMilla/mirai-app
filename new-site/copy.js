@@ -173,7 +173,7 @@ window.MIRAI_COPY = {
   agenda: {
     eyebrow: `The Agenda · Oct 17–26`,
     headline: `Nine sessions<br/>and a runway.`,
-    ctaNote: `Oct 17–26 · Kobe`,
+    ctaNote: `Oct 17–26 · Kobe · <a href="/program/" style="color:var(--accent); text-decoration:none" data-analytics-action="site_navigation" data-analytics-location="agenda" data-analytics-target="program">Full program →</a>`,
     cta: `<a class="btn accent" href="/pricing/" data-analytics-action="site_navigation" data-analytics-location="agenda" data-analytics-target="pricing">Get Tickets</a>`,
   },
 

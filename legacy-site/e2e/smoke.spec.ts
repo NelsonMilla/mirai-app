@@ -17,7 +17,7 @@
  */
 import { test, expect, type Page } from '@playwright/test';
 
-const PAGES = ['/', '/experience/', '/startups/', '/pricing/', '/conferences/', '/jp/', '/stay/'];
+const PAGES = ['/', '/experience/', '/startups/', '/pricing/', '/conferences/', '/jp/', '/stay/', '/program/'];
 
 /** Every page at phone and desktop; the landing page also at tablet and MacBook widths. */
 const RUNS = [
@@ -257,7 +257,7 @@ const SPEAKERS_FIXTURE = [
   ',Eta,Hiddenrow,Fixture Secret Lab,,,S1,Scientists,"landing, conferences, experience, startups, jp",none,,,,FALSE',
 ].join('\r\n');
 const SPEAKERS_PUBLISHED = 6;
-const SPEAKERS_SNAPSHOT_COUNT = 55;
+const SPEAKERS_SNAPSHOT_COUNT = 72;
 
 /** Serves the fixture tab (or fails it) and aborts every other sheet request. */
 async function routeSpeakersSheet(page: Page) {
@@ -318,7 +318,7 @@ test.describe('speakers', () => {
       await expect(cards.nth(i)).toHaveCSS('opacity', '1');
     }
 
-    // The sheet is unreachable: the snapshot stays (4 cards, 55 speakers).
+    // The sheet is unreachable: the snapshot stays (4 cards, 72 speakers).
     sheet.up = false;
     const warned = page.waitForEvent('console', (msg) => msg.type() === 'warning' && msg.text().includes('[speakers]'));
     await page.reload({ waitUntil: 'domcontentloaded' });
@@ -432,6 +432,148 @@ test.describe('speakers', () => {
     await page.keyboard.press('Escape');
     await expect(panel).toBeHidden();
     await expect(zeta).toHaveAttribute('aria-expanded', 'false');
+
+    expect(consoleFailures, 'console must be clean').toEqual([]);
+  });
+});
+
+/**
+ * /program/ builds the timetable from the Program tab and resolves speaker
+ * names against the Speakers tab, with program-data.js and speakers-data.js
+ * painted first and kept when the sheet fails. Both data files are served
+ * with test sheet URLs; the Program tab is a fixture layered over the
+ * speakers routing above (anything that is not sheet=Program falls through
+ * to it, so the speakers fixture is served and the agenda is aborted).
+ * The day-two Venue link is not https and must not become a map link.
+ */
+const PROGRAM_SHEET_URL = 'https://docs.google.com/spreadsheets/d/test/gviz/tq?tqx=out:csv&sheet=Program';
+const PROGRAM_FIXTURE = [
+  'Day,Venue,Venue link,Start,End,Kind,Block,Title,Speakers,Notes,Publish',
+  'Friday 1 January,Fixture Hall,https://example.com/fixture-map,09:00,09:10,open,Opening,Fixture welcome,,,TRUE',
+  'Friday 1 January,,,09:10,09:40,keynote,Keynote,Fixture keynote on <tags> & more,Alpha Fixturesci (Fixture Lab One),,TRUE',
+  'Friday 1 January,,,09:40,10:00,break,Coffee,Fixture coffee break,,,',
+  'Friday 1 January,,,10:00,10:30,,Fixture talks,,Gamma Rowsci (Fixture Institute),,TRUE',
+  'Friday 1 January,,,10:30,11:00,panel,Fixture panel block,Fixture panel title,"Dr. Zeta Founderrow (Fixture Ventures); Unknown Fixtureperson (Nowhere Institute);",,TRUE',
+  'Friday 1 January,,,11:00,11:20,,Fixture talks,Fixture draft slot,,,FALSE',
+  'Saturday 2 January,Fixture Venue Two,javascript:alert(1),14:00,14:30,,Fixture talks,Fixture day two talk,Beta Fixturesci,,TRUE',
+  'Saturday 2 January,,,,,pitch,Demo Day pitches,Fixture Startup Co,,Fixture pitch line,TRUE',
+].join('\r\n');
+const PROGRAM_SNAPSHOT_DAYS = 5;
+const PROGRAM_SNAPSHOT_SAT17_SLOTS = 22;
+
+async function routeProgramSheet(page: Page) {
+  const sheet = await routeSpeakersSheet(page);
+  await page.route('**/program-data.js', async (route) => {
+    const response = await route.fetch();
+    const body = (await response.text()).replace(
+      /window\.MIRAI_PROGRAM_SHEET_CSV = '[^']*';/,
+      `window.MIRAI_PROGRAM_SHEET_CSV = '${PROGRAM_SHEET_URL}';`,
+    );
+    await route.fulfill({ response, body });
+  });
+  await page.route('**/docs.google.com/spreadsheets/**', (route) =>
+    sheet.up && route.request().url().includes('sheet=Program')
+      ? route.fulfill({
+          status: 200,
+          contentType: 'text/csv; charset=utf-8',
+          headers: { 'access-control-allow-origin': '*' },
+          body: PROGRAM_FIXTURE,
+        })
+      : route.fallback(),
+  );
+  return sheet;
+}
+
+test.describe('program', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 800 });
+  });
+
+  test('/program/ renders days, slots and speakers from the sheet', async ({ page }) => {
+    await routeProgramSheet(page);
+    const consoleFailures = collectConsoleFailures(page);
+
+    await page.goto('/program/', { waitUntil: 'domcontentloaded' });
+    const dayButtons = page.locator('[data-program="days"] button');
+    const days = page.locator('[data-program="day"]');
+    await expect(dayButtons).toHaveCount(2);
+    await expect(days).toHaveCount(2);
+    await expect(days.nth(0)).toHaveAttribute('id', /friday_1_january/);
+    await expect(days.nth(0)).toBeVisible();
+    await expect(days.nth(1)).toBeHidden();
+    await expect(dayButtons.nth(0)).toHaveAttribute('aria-pressed', 'true');
+    await expect(days.nth(0)).toContainText('Fixture Hall');
+    await expect(days.nth(0).locator('a[href="https://example.com/fixture-map"]')).toHaveCount(1);
+
+    const day1 = days.nth(0);
+    const slots = day1.locator('.pg-slot');
+    await expect(slots).toHaveCount(5);
+    await expect(page.locator('body')).not.toContainText('Fixture draft slot');
+
+    const keynote = slots.filter({ hasText: 'Fixture keynote' });
+    await expect(keynote).toContainText('09:10');
+    await expect(keynote).toContainText('09:40');
+    await expect(keynote).toContainText('Fixture keynote on <tags> & more');
+
+    const tbc = slots.filter({ hasText: 'Gamma Rowsci' });
+    await expect(tbc).toContainText(/to be confirmed/i);
+
+    // Two speakers: the one in the Speakers tab is a button, the other plain text.
+    const panelSlot = slots.filter({ hasText: 'Fixture panel title' });
+    const zeta = panelSlot.locator('button[data-speaker]', { hasText: 'Zeta Founderrow' });
+    await expect(zeta).toHaveCount(1);
+    await expect(panelSlot).toContainText('Unknown Fixtureperson');
+    await expect(panelSlot).toContainText('Nowhere Institute');
+    await expect(panelSlot.locator('button', { hasText: 'Unknown Fixtureperson' })).toHaveCount(0);
+
+    const panel = page.locator('.spk-panel[role="region"]');
+    await zeta.click();
+    await expect(panel).toBeVisible();
+    await expect(panel).toContainText('Dr. Zeta Founderrow');
+    await expect(panel).toContainText('Fixture bio, with a comma & an <b>angle</b> bracket.');
+    await page.keyboard.press('Escape');
+    await expect(panel).toBeHidden();
+
+    // The day switcher shows day two, keeps it in the hash, and lists its pitch.
+    await dayButtons.nth(1).click();
+    await expect(days.nth(1)).toBeVisible();
+    await expect(days.nth(0)).toBeHidden();
+    await expect(dayButtons.nth(1)).toHaveAttribute('aria-pressed', 'true');
+    await expect(page).toHaveURL(/#.*saturday_2_january/);
+    await expect(days.nth(1)).toContainText('Fixture day two talk');
+    await expect(days.nth(1).getByRole('link', { name: /map/i })).toHaveCount(0);
+    const pitches = page.locator('[data-program="pitches"]');
+    await expect(pitches).toBeVisible();
+    await expect(pitches).toContainText('Fixture Startup Co');
+    await expect(pitches).toContainText('Fixture pitch line');
+
+    // The roster and the count come from the Speakers tab.
+    await expect(page.locator('[data-program="roster"] [data-speaker]')).toHaveCount(SPEAKERS_PUBLISHED);
+    await expect(page.locator('body')).not.toContainText('Hiddenrow');
+    for (const text of await page.locator('[data-speakers-count]').allTextContents()) {
+      expect(text).toBe(String(SPEAKERS_PUBLISHED));
+    }
+
+    expect(consoleFailures, 'console must be clean').toEqual([]);
+  });
+
+  test('/program/ keeps the snapshot when the sheet is unreachable', async ({ page }) => {
+    const sheet = await routeProgramSheet(page);
+    sheet.up = false;
+    const consoleFailures = collectConsoleFailures(page);
+
+    const warned = page.waitForEvent('console', (msg) => msg.type() === 'warning' && msg.text().includes('[program]'));
+    await page.goto('/program/', { waitUntil: 'domcontentloaded' });
+    await warned;
+    await expect(page.locator('[data-program="days"] button')).toHaveCount(PROGRAM_SNAPSHOT_DAYS);
+    const sat17 = page.locator('[data-program="day"]').first();
+    await expect(sat17).toHaveAttribute('id', /saturday_17_october/);
+    await expect(sat17.locator('.pg-slot')).toHaveCount(PROGRAM_SNAPSHOT_SAT17_SLOTS);
+    await expect(page.locator('[data-program="roster"] [data-speaker]')).toHaveCount(SPEAKERS_SNAPSHOT_COUNT);
+    const counts = page.locator('[data-speakers-count]');
+    expect(await counts.count()).toBeGreaterThan(0);
+    for (const text of await counts.allTextContents()) expect(text).toBe(String(SPEAKERS_SNAPSHOT_COUNT));
+    await expect(page.locator('body')).not.toContainText('Fixture');
 
     expect(consoleFailures, 'console must be clean').toEqual([]);
   });

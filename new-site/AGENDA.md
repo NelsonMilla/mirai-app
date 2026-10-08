@@ -1,7 +1,8 @@
 # Agenda and speakers sheet — how to edit the agenda and the speaker lists
 
 The first part of this guide covers the agenda. The speaker lists are further down,
-under [Speakers](#speakers).
+under [Speakers](#speakers), and the timetable on /program/ after that, under
+[Program](#program).
 
 ## What this is
 
@@ -236,3 +237,120 @@ Publish to FALSE. To reorder, move the rows.
 - Smoke tests: `legacy-site/e2e/smoke.spec.ts` (the "speakers" tests, one per page).
   From `legacy-site/`: `npx playwright test e2e/smoke.spec.ts -g speakers`. Set
   `NEW_SITE_PORT` to run against a server on another port (default 4321).
+
+---
+
+# Program
+
+## What this is
+
+The /program/ page shows the full timetable for the five summit days (17, 18, 24, 25
+and 26 October), slot by slot, with the venue for each day and the Demo Day pitches.
+It reads the timetable from a tab called `Program` in the same "Mirai Agenda"
+spreadsheet, and the speakers from the `Speakers` tab described above. Change a time,
+a title or a speaker in the sheet and the page follows on the next load. Like the
+agenda and the speakers, a copy of the timetable ships inside the site, so visitors
+still see it if Google is slow or down.
+
+## The tab
+
+The site looks for a tab named exactly `Program` (capital P, no spaces). Any other
+name and the page shows its built-in copy instead. Until the tab is created, the page
+shows the built-in copy.
+
+To create it (or recreate it if it is ever lost):
+
+1. Open the "Mirai Agenda" spreadsheet (link at the top of this guide).
+2. File → Import → Upload `program-template.csv` (in this folder) → "Insert new
+   sheet(s)". Google adds a new tab.
+3. Rename the new tab to `Program` (double-click the tab name).
+4. Leave the agenda tab first, where it is.
+
+The sharing setting is the same one the agenda uses: "Anyone with the link" → Viewer.
+
+## The columns
+
+| Column | What it means | Required | Example |
+|---|---|---|---|
+| Day | The day, written as it should appear | Yes | Saturday 17 October |
+| Venue | Where the day takes place. Type it once per day | No | Kobe Portopia Hotel |
+| Venue link | A map link for the venue. Type it once per day | No | https://maps.app.goo.gl/mXhV3fUvzCiEUmVL7 |
+| Start | Start time, 24-hour, shown as typed | No | 11:35 |
+| End | End time, 24-hour, shown as typed | No | 11:55 |
+| Kind | What sort of slot this is (see Rules). Leave empty for an ordinary talk | No | keynote |
+| Block | The running-order label shown above the title | No | Japan: The Global Laboratory |
+| Title | The session title | No (empty shows "to be confirmed") | Building in KBIC: what the cluster actually opens up |
+| Speakers | Who speaks, in the format below | No | Keiko Kobayashi (KBIC / FBRI); Prof. Takahiro Yasuda (Kobe University) |
+| Notes | One short line under the title | No | Humanised models for gene-based therapies |
+| Publish | TRUE shows the row, FALSE hides it | No (blank shows it) | TRUE |
+
+Publish also accepts yes / no, 1 / 0, and hidden.
+
+## Rules
+
+- **Days appear in the order they first appear in the sheet.** Slots appear in row
+  order within their day. Move a row to move the slot.
+- A Day written as weekday, number, month (`Saturday 17 October`) also gets a short
+  label for the day buttons (`Sat 17 Oct`). Any other wording is used as it is.
+- **Venue and Venue link only need typing once per day**, on any row of that day. The
+  first filled-in value is used. The link must start with `https://`; anything else
+  is ignored and the day shows no map link.
+- **Kind** takes one of these words:
+  - empty: an ordinary talk.
+  - `keynote`: marked with the cyan accent.
+  - `panel`: a panel or fireside. Shown with its Block text as the label.
+  - `open`: an opening or welcome. Shown with its Block text as the label.
+  - `break`: lunch, coffee, networking. Shown muted.
+  - `pitch`: a Demo Day pitch. Not shown in the timetable; listed under "Demo Day
+    pitches" after the day's timetable (see Pitch rows).
+- **Speakers**: one entry per person, separated by `;`. Each entry is the name,
+  optionally followed by the affiliation in brackets:
+  `Name (Affiliation); Name (Affiliation)`. For example
+  `Rodney Kelly (MEDISO / HekaBio); Eleanor Sheekey (RIKEN BDR Kobe)`. Extra spaces and
+  a trailing `;` do not matter. A name that matches a person in the Speakers tab
+  becomes clickable and opens their talk and bio; titles such as Prof. or Dr and
+  endings such as PhD are ignored when matching, so `Prof. Takahiro Yasuda` finds the
+  Takahiro Yasuda row. A name with no match is shown as plain text with its
+  affiliation. To make a name clickable, spell it as in the Speakers tab.
+- **Pitch rows**: set Kind to `pitch`, put the startup's name in Title and one line
+  about it in Notes. Leave Start, End and Speakers empty. Put them under the day the
+  pitches happen (Monday 26 October), Block `Demo Day pitches`.
+- **"To be confirmed"**: a Title that is empty or contains "to be confirmed" is shown
+  faint, as provisional. Replace it with the real title when it is known.
+- **Publish** FALSE hides a row from the page but NOT from the sheet's public CSV. Keep
+  anything confidential out of the sheet entirely.
+- Cells are shown as plain text. HTML will not work; `&` and `<` show as typed.
+
+## Editing
+
+Same as the agenda: change the cells, reload the page, allow a minute or two for
+Google's cache. To add a slot, add a row under its day. To remove one, delete the row
+or set Publish to FALSE. The day re-flows by itself.
+
+## If something looks wrong
+
+- Check the header row spelling: Day, Venue, Venue link, Start, End, Kind, Block,
+  Title, Speakers, Notes, Publish. Capital letters and extra spaces do not matter;
+  other spelling does.
+- A row with an empty Day is skipped.
+- Edits never appear: check the tab is named exactly `Program`, then the sharing
+  setting. If the tab cannot be read, the page shows the built-in copy.
+- A day appears twice, or in the wrong place: its Day cells are not spelled the same
+  on every row. Every row of a day needs the identical Day text.
+- No map link: the Venue link does not start with `https://`.
+- A speaker's name is not clickable: it does not match a published row in the
+  Speakers tab. Check the spelling of the first name and the surname.
+- A pitch shows up in the timetable instead of the pitch list: its Kind is not
+  exactly `pitch`.
+
+## For engineers
+
+- The sheet address lives in `program-data.js` (`window.MIRAI_PROGRAM_SHEET_CSV`).
+  It addresses the tab by name (`&sheet=Program`).
+- Refresh the built-in copy: run `npm run program:snapshot` from `new-site/`. It
+  fetches the tab and rewrites `program-data.js`. Commit and deploy the result.
+- `program.js` builds the timetable model; `speaker-panel.js` is the talk-and-bio panel
+  shared with /conferences/.
+- Unit tests: `npm test` from `new-site/`.
+- Smoke test: `legacy-site/e2e/smoke.spec.ts` (the "program" tests). From
+  `legacy-site/`: `npx playwright test e2e/smoke.spec.ts -g program`.

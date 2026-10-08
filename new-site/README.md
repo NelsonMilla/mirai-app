@@ -26,6 +26,13 @@ Single static `index.html` — no framework, no build step. Deploys anywhere
   shows an initials tile, and a missing file falls back to the tile. The
   snapshot rows in `speakers-data.js` paint first and stay if the fetch fails;
   `npm run speakers:snapshot` refreshes them. Runbook: `AGENDA.md`.
+- `/program/` renders the full timetable, day by day, from the same sheet's
+  `Program` tab (one row per slot, plus the Demo Day pitch rows) and the speaker
+  roster from the `Speakers` tab. `program.js` builds the timetable model; speaker
+  names in a slot that match a Speakers row open the talk-and-bio panel, which is
+  shared with `/conferences/` through `speaker-panel.js`. The snapshot rows in
+  `program-data.js` paint first and stay if the fetch fails;
+  `npm run program:snapshot` refreshes them. Runbook: `AGENDA.md` (Program).
 - Ticket CTAs go to Stripe Payment Links (cutover Sep 22 2026). Generic "Get
   Tickets" buttons and the nav CTA go to `/pricing/`, where each ticket has its
   own link; summit cards, the PopUp/"Everything" buttons and `/conferences/`
