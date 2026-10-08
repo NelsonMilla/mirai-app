@@ -164,11 +164,11 @@
 
   /* detail: slides in from the right edge when a venue is selected */
   .detail { position: absolute; top: 56px; right: var(--gap); width: var(--panelW); max-height: calc(100dvh - 56px - 110px);
-    overflow: auto; padding: 18px 18px 16px; visibility: hidden; opacity: 0; transform: translateX(calc(100% + 24px));
+    display: flex; flex-direction: column; overflow: hidden; padding: 18px 18px 16px; visibility: hidden; opacity: 0; transform: translateX(calc(100% + 24px));
     transition: transform .4s var(--ease), opacity .3s, visibility 0s .4s; }
   .detail.open { visibility: visible; opacity: 1; transform: none; transition: transform .4s var(--ease), opacity .3s; }
   .detail article { display: none; }
-  .detail article.on { display: block; }
+  .detail article.on { display: block; min-height: 0; overflow: auto; } /* only the text scrolls, and only on a short viewport; the card's corner brackets sit 1px outside it and must not make it scroll */
   .x { position: absolute; top: 8px; right: 8px; width: 30px; height: 30px; border: 1px solid transparent; background: none;
     color: var(--dim); font-family: var(--mono); font-size: 13px; cursor: pointer; border-radius: 2px; }
   .x:hover { color: var(--accent); border-color: var(--line); }
