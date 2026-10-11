@@ -1,0 +1,18 @@
+[
+  { "code": "1f1001-1--", "name": "Yuki Takahashi", "bio": "Designs continuous glucose sensors for cats in Osaka.", "x": "yukitakahashi", "linkedin": null, "joined": "2026-08-19" },
+  { "code": "1m02422--1", "name": "Lukas Brenner", "bio": "Builds wearable EEG rigs for sleep researchers.", "x": "lukasbrenner", "linkedin": "https://www.linkedin.com/in/lukas-brenner", "joined": "2026-08-22" },
+  { "code": "1f2110----", "name": "Priya Nair", "bio": "Writes firmware for an insulin pump startup in Bengaluru.", "x": "priyanair", "linkedin": "https://www.linkedin.com/in/priya-nair", "joined": "2026-08-25" },
+  { "code": "1m3123100-", "name": "Rafael Souza", "bio": "Runs a biotech incubator's lab space in Sao Paulo.", "x": null, "linkedin": null, "joined": "2026-08-29" },
+  { "code": "1f4135--1-", "name": "Amara Okafor", "bio": "Studies gut bacteria samples from popup city residents.", "x": "amaraokafor", "linkedin": "https://www.linkedin.com/in/amara-okafor", "joined": "2026-09-02" },
+  { "code": "1m53040222", "name": "Kwame Asante", "bio": "Builds robot hands for a lab automation startup.", "x": null, "linkedin": "https://www.linkedin.com/in/kwame-asante", "joined": "2026-09-05" },
+  { "code": "1f0251----", "name": "Elina Korhonen", "bio": "Tracks supply chains for Nordic biotech startups.", "x": "elinakorhonen", "linkedin": null, "joined": "2026-09-08" },
+  { "code": "1m1010-1--", "name": "Minho Seo", "bio": "Codes trading models for a Seoul biotech fund.", "x": "minhoseo", "linkedin": "https://www.linkedin.com/in/minho-seo", "joined": "2026-09-10" },
+  { "code": "1f31422---", "name": "Camila Reyes", "bio": "Photographs biotech labs for a Mexico City magazine.", "x": null, "linkedin": null, "joined": "2026-09-12" },
+  { "code": "1m2423--0-", "name": "Arjun Mehta", "bio": "Builds low-cost diagnostic kits for rural clinics.", "x": "arjunmehta", "linkedin": "https://www.linkedin.com/in/arjun-mehta", "joined": "2026-09-14" },
+  { "code": "1f5305-0-0", "name": "Zuri Washington", "bio": "Runs a mentoring program for first-time biotech founders.", "x": "zuriwashington", "linkedin": null, "joined": "2026-09-17" },
+  { "code": "1m4531----", "name": "Diego Fernandez", "bio": "Writes a newsletter about longevity startups in Latin America.", "x": null, "linkedin": "https://www.linkedin.com/in/diego-fernandez", "joined": "2026-09-19" },
+  { "code": "1f11501---", "name": "Charlotte Dubois", "bio": "Designs lab furniture for compact biotech spaces.", "x": "charlottedubois", "linkedin": "https://www.linkedin.com/in/charlotte-dubois", "joined": "2026-09-22" },
+  { "code": "1m0112----", "name": "Tyler Brooks", "bio": "Plans drone delivery routes for lab samples.", "x": "tylerbrooks", "linkedin": null, "joined": "2026-09-25" },
+  { "code": "1f2023--1-", "name": "Seoyeon Park", "bio": "Runs a podcast about Asian biotech founders.", "x": "seoyeonpark", "linkedin": "https://www.linkedin.com/in/seoyeon-park", "joined": "2026-09-28" },
+  { "code": "1m3044012-", "name": "Kenji Watanabe", "bio": "Maintains open source tools for protein folding models.", "x": null, "linkedin": "https://www.linkedin.com/in/kenji-watanabe", "joined": "2026-10-01" }
+]
