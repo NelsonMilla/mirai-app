@@ -616,6 +616,14 @@
   .pcTier .eyebrow { display: block; margin-bottom: 20px; }
   .pGrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
   .pGrid.seven { grid-template-columns: repeat(7, 1fr); gap: 14px; }
+  /* Community partners and the market-entry partner share one row: same tile, same level */
+  .pcPair { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; align-items: end; margin-top: 64px; }
+  .pcPair > .pcTier { margin-top: 0; }
+  .pcPair > .pcTier:first-child { grid-column: 1 / 3; }
+  .pcPair > .pcTier:first-child .pGrid { grid-template-columns: repeat(2, 1fr); }
+  .pcPair > .pcTier:last-child .pGrid { grid-template-columns: 1fr; }
+  .pcPair + .pcTier { margin-top: 64px; }
+  .gdTile .pcPlate { align-items: flex-start; padding-top: 12%; padding-bottom: 0; }
   .pcard { position: relative; display: block; border: 1px solid var(--line); overflow: hidden;
     text-decoration: none; color: inherit; background: var(--bg); }
   .pcard:focus-visible { outline: 1px solid var(--accent); outline-offset: 2px; }
@@ -624,8 +632,8 @@
   .pcPlate { position: relative; aspect-ratio: 4/5; display: flex; align-items: center; justify-content: center; padding-bottom: 22%;
     background: #0f0f10; filter: grayscale(28%) contrast(1.04); transition: filter .3s, transform .5s; }
   .pcard:hover .pcPlate, .pcard:focus-visible .pcPlate { filter: grayscale(0%); transform: scale(1.025); }
-  .pcLg { width: 55%; display: flex; align-items: center; justify-content: center; }
-  .pcLg img { display: block; width: 100%; height: auto; }
+  .pcLg { width: 55%; aspect-ratio: 1; display: flex; align-items: center; justify-content: center; }
+  .pcLg img { display: block; max-width: 100%; max-height: 100%; width: auto; height: auto; }
   .pcLg.sm { width: 40%; max-width: 120px; }
   .pcLg.wide { width: 92%; }
   .pcLg .inv { filter: grayscale(1) invert(1) brightness(1.05) contrast(1.3); mix-blend-mode: screen; }
@@ -637,10 +645,6 @@
   .pcSlot { display: block; text-align: center; font-weight: 800; text-transform: uppercase; letter-spacing: -.01em;
     line-height: 1.02; font-size: clamp(15px, 1.6vw, 24px); color: rgba(244,243,240,.92); overflow-wrap: anywhere; }
   .pcSlot small { display: block; font-size: .62em; font-weight: 700; letter-spacing: .01em; margin-top: .25em; }
-  .gdSlot { width: 55%; aspect-ratio: 1; border: 1px solid rgba(var(--accent-rgb), .35); border-radius: 3px;
-    display: flex; align-items: center; justify-content: center; }
-  .gdSlot .pcSlot { text-transform: none; overflow-wrap: normal; }
-  .gdSlot img { width: 100%; height: 100%; object-fit: contain; padding: 12%; }
   .pcNm { font-weight: 700; text-transform: uppercase; font-size: clamp(14px, 1.3vw, 18px); letter-spacing: -.005em;
     line-height: 1.08; overflow-wrap: anywhere; }
   .pcLn { margin-top: 6px; color: var(--dim); font-size: 13px; line-height: 1.45; }
@@ -649,21 +653,16 @@
   .pcMeta { position: absolute; left: 0; right: 0; bottom: 0; padding: 56px 16px 14px;
     background: linear-gradient(to top, rgba(5,5,6,.94) calc(100% - 56px), transparent); }
   /* the seven-up tier: same tile, smaller type; logos sit high so long lines never cover them */
-  .seven .pcPlate { aspect-ratio: 2/3; align-items: flex-start; padding-top: 9%; padding-bottom: 0; }
-  .seven .pcLg { width: 50%; }
-  .seven .pcMeta { padding: 40px 12px 11px; }
+  .seven .pcPlate { aspect-ratio: 1; align-items: center; padding: 0; }
+  .seven .pcLg { width: 62%; }
+  .seven .pcMeta { position: static; background: none; padding: 12px 12px 14px; }
   .seven .pcNm { font-size: 12.5px; }
   .seven .pcLn { font-size: 11.5px; }
   .seven .pcSlot { font-size: clamp(13px, 1.1vw, 17px); }
-  /* GlobalDeal: landscape, full row, the only tile whose copy sits beside the plate */
-  .pcard.gd { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; }
-  .gd .pcPlate { aspect-ratio: 1; padding-bottom: 0; border-right: 1px solid var(--line); }
-  .gd .gdSlot .pcSlot { font-size: clamp(22px, 2.6vw, 40px); }
-  .gd .pcCopy { display: flex; flex-direction: column; justify-content: center; padding: clamp(24px, 4vw, 60px); }
-  .gd .pcNm { font-size: clamp(22px, 2.4vw, 34px); }
-  .gd .pcLn { margin-top: 18px; font-size: clamp(15px, 1.2vw, 17px); line-height: 1.6; }
   @media (max-width: 980px) { .pGrid.seven { grid-template-columns: repeat(4, 1fr); } }
-  @media (max-width: 760px) { .pGrid { grid-template-columns: repeat(2, 1fr); } .pcNm { font-size: 15px; } }
+  @media (max-width: 760px) { .pGrid { grid-template-columns: repeat(2, 1fr); } .pcNm { font-size: 15px; }
+    .pcPair { grid-template-columns: 1fr; gap: 0; } .pcPair > .pcTier:first-child { grid-column: auto; }
+    .pcPair > .pcTier + .pcTier { margin-top: 52px; } .pcPair > .pcTier:last-child .pGrid { grid-template-columns: 1fr; } }
   @media (max-width: 640px) {
     .pcTier + .pcTier { margin-top: 52px; }
     .pGrid, .pGrid.seven { grid-template-columns: 1fr 1fr; gap: 12px; }
@@ -671,13 +670,10 @@
     .pcNm, .seven .pcNm { font-size: 13.5px; }
     .pcLn, .seven .pcLn { font-size: 12px; }
     .pcSlot, .seven .pcSlot { font-size: 13.5px; }
-    .pcPlate, .seven .pcPlate { align-items: flex-start; padding-top: 10%; padding-bottom: 0; }
+    .pcPlate { align-items: flex-start; padding-top: 10%; padding-bottom: 0; }
+    .seven .pcPlate { align-items: center; padding: 0; }
+    .seven .pcMeta { padding: 10px 10px 12px; }
     .pcLg { width: 56%; } .pcLg.sm { width: 40%; }
-    .pcard.gd { grid-template-columns: 1fr; }
-    .gd .pcPlate { aspect-ratio: 4/3; align-items: center; padding-top: 0; border-right: 0; border-bottom: 1px solid var(--line); }
-    .gd .gdSlot { width: 60%; } .gd .gdSlot .pcSlot { font-size: 24px; overflow-wrap: normal; }
-    .gd .pcCopy { padding: 22px 16px 26px; }
-    .gd .pcNm { font-size: 22px; } .gd .pcLn { font-size: 15px; }
   }
   html.kobe-permit-over [data-kobe-permit] { display: none !important; }
   .ecoWall { position: relative; overflow: hidden; margin-top: 28px; background: var(--bg);
@@ -980,7 +976,8 @@
        [data-kobe-permit]. Kobe logo files are used verbatim per the approval terms — never edit,
        recompress, or recolor them. KBIC is never placed under a "host" heading; LEV Foundation,
        Vitalist Bay and Vitalism Foundation are never called sponsors or hosts.
-       GlobalDeal (tier 2, [data-held="karen"]) ships only once Karen approves; its copy is hers, verbatim. -->
+       GlobalDeal sits beside the Community partners (same tile, own tier wording, [data-held="karen"]):
+       ships only once Karen approves; its copy is hers, verbatim. -->
   <div id="partners">
   <div class="pcTier rv">
     <h3 class="eyebrow" data-copy="ecosystem.summit"></h3>
@@ -1004,19 +1001,7 @@
     </div>
   </div>
 
-  <div class="pcTier rv" data-held="karen">
-    <h3 class="eyebrow" data-copy="ecosystem.marketEntry"></h3>
-    <div class="pGrid">
-      <a class="pcard gd" href="https://globaldeal.io/" target="_blank" rel="noopener">
-        <div class="pcPlate"><div class="gdSlot"><img src="img/partners/globaldeal-square-transparent.png" alt="" loading="lazy" decoding="async" /></div></div>
-        <div class="pcCopy">
-          <div class="pcNm">GlobalDeal</div>
-          <div class="pcLn">We take health and longevity companies into the Japanese market end to end: entry strategy, the right partners and first customers, regulatory navigation, and ongoing operations. Presenter of the Japan Landing Award at Demo Day.</div>
-        </div>
-      </a>
-    </div>
-  </div>
-
+  <div class="pcPair">
   <div class="pcTier rv">
     <h3 class="eyebrow" data-copy="ecosystem.community"></h3>
     <div class="pGrid">
@@ -1029,6 +1014,17 @@
         <div class="pcMeta"><div class="pcNm">GlycanAge</div><div class="pcLn">At-home test that estimates your biological age from glycans.</div></div>
       </a>
     </div>
+  </div>
+
+  <div class="pcTier rv" data-held="karen">
+    <h3 class="eyebrow" data-copy="ecosystem.marketEntry"></h3>
+    <div class="pGrid">
+      <a class="pcard gdTile" href="https://globaldeal.io/" target="_blank" rel="noopener">
+        <div class="pcPlate"><div class="pcLg sm"><img src="img/partners/globaldeal-square-transparent.png" alt="" loading="lazy" decoding="async" /></div></div>
+        <div class="pcMeta"><div class="pcNm">GlobalDeal</div><div class="pcLn">We take health and longevity companies into the Japanese market end to end: entry strategy, the right partners and first customers, regulatory navigation, and ongoing operations. Presenter of the Japan Landing Award at Demo Day.</div></div>
+      </a>
+    </div>
+  </div>
   </div>
 
   <div class="pcTier rv">
