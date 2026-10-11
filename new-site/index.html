@@ -42,8 +42,12 @@
   // the FAQ item ([data-fashion] elements), and the copy variants in copy.js.
   // To bring it back: flip to true AND restore "Fashion Show Oct 26" in the two meta descriptions above
   // plus the Frontier Human Fashion Show subEvent in the JSON-LD below.
-  window.MIRAI_FLAGS = Object.freeze({ showFashionShow: false });
+  // showGlobalDeal — false hides every [data-held="karen"] element (the GlobalDeal partner tile here,
+  // the Japan Landing Award tile on /startups/) until GlobalDeal approves. Flip to true to publish.
+  // Preview while hidden: add ?globaldeal=1 to the URL.
+  window.MIRAI_FLAGS = Object.freeze({ showFashionShow: false, showGlobalDeal: false });
   if (!window.MIRAI_FLAGS.showFashionShow) document.documentElement.classList.add('fashion-hidden');
+  if (!window.MIRAI_FLAGS.showGlobalDeal && !/[?&]globaldeal=1\b/.test(location.search)) document.documentElement.classList.add('globaldeal-hidden');
   // Kobe University logo use approval #3182: usage window ends Dec 15 2026.
   // The [data-kobe-permit] block self-hides on Dec 15 JST — do NOT remove this
   // gate or the logos without checking the approval notice first.
@@ -188,6 +192,7 @@
   html { background: var(--bg); }
   body { background: var(--bg); color: var(--ink); font-family: var(--font); overflow-x: hidden; }
   html.fashion-hidden [data-fashion] { display: none !important; }
+  html.globaldeal-hidden [data-held="karen"] { display: none !important; }
   ::selection { background: var(--accent); color: #000; }
   :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
   .skip { position: fixed; top: 12px; left: 4vw; z-index: 70; background: var(--bg); color: var(--accent);
@@ -609,8 +614,8 @@
 
   /* ── partners · four tiers of speaker-kin tiles (PM brief Oct 11 2026): logo on a plate where
      the portrait would be, name + the one line on the bottom veil (never clamped), the whole tile
-     is the link. GlobalDeal is the one tile that breaks the grid (landscape, full width) — the only
-     "Official Market-Entry Execution Partner". ── */
+     is the link. GlobalDeal is a standard tile beside the Community partners under its own tier
+     wording ("Official Market-Entry Execution Partner"), flag-hidden until approved. ── */
   #partners { margin-top: 96px; }
   .pcTier + .pcTier { margin-top: 64px; }
   .pcTier .eyebrow { display: block; margin-bottom: 20px; }
