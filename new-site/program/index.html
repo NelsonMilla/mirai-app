@@ -26,6 +26,12 @@
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
 </noscript>
 <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+<script>
+  // showGlobalDeal — false hides the Japan Landing Award tile ([data-held="karen"]) until GlobalDeal
+  // approves. Keep in step with the same flag in /index.html and /startups/. Preview: ?globaldeal=1.
+  window.MIRAI_FLAGS = Object.freeze({ showGlobalDeal: false });
+  if (!window.MIRAI_FLAGS.showGlobalDeal && !/[?&]globaldeal=1\b/.test(location.search)) document.documentElement.classList.add('globaldeal-hidden');
+</script>
 <script defer src="/_vercel/insights/script.js"></script>
 <script defer src="/posthog.js"></script>
 <script defer src="/analytics.js"></script>
@@ -55,6 +61,7 @@
   --cyan: #9be8f0;
   /* the shared nav reads these three token names */
   --accent: #9be8f0;
+  --accent-rgb: 155, 232, 240;
   --ink: #f4f3f0;
   --dim: rgba(244,243,240,.68);
   --faint: rgba(244,243,240,.52);
@@ -333,21 +340,34 @@ button.pg-name:hover, button.pg-name.is-open { color: var(--cyan); text-decorati
 .pg-slot.is-now { padding-left: 12px; box-shadow: inset 2px 0 0 var(--cyan); }
 .pg-slot > .spk-panel { grid-column: 1 / -1; margin: 18px 0 4px; }
 
-.pg-pitches { margin-top: 56px; }
-.pg-pitches h4, .pg-awards h4 { padding-bottom: 14px; border-bottom: 1px solid var(--line-2);
-  font-size: clamp(18px, 1.5vw, 22px); font-weight: 800; line-height: 1.1; letter-spacing: -.01em; }
-.pg-pitches ol { list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0 32px; }
-.pg-pitches li { padding: 16px 0 18px; border-bottom: 1px solid var(--line); }
-.pg-pitches li b { display: block; color: var(--bone); font-size: 17px; font-weight: 700; line-height: 1.3; }
-.pg-pitches li p { margin-top: 4px; font-size: 15px; }
 .pg-awards { margin-top: 56px; }
 .pg-awards[hidden] { display: none; }
-.pg-awards .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 22px; }
-.pg-awards .cell { padding: 22px 22px 26px; }
-.pg-awards .cell .lbl { margin-bottom: 10px; color: var(--cyan); }
-.pg-awards .cell p, .pg-awards .cell li { font-size: 15px; line-height: 1.5; color: var(--dim); }
-.pg-awards .cell ul { list-style: none; }
+.pg-awards h4 { padding-bottom: 14px; border-bottom: 1px solid var(--line-2);
+  font-size: clamp(18px, 1.5vw, 22px); font-weight: 800; line-height: 1.1; letter-spacing: -.01em; }
+/* Demo Day awards: the same tiles as /startups/ (logo on a plate, presenter chip, name + the full line).
+   The Japan Landing Award ships only once GlobalDeal approves — [data-held="karen"], see the flag in <head>. */
+html.globaldeal-hidden [data-held="karen"] { display: none !important; }
+.pg-awards .pGrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; margin-top: 22px; }
+.pcard { position: relative; display: block; border: 1px solid var(--line); overflow: hidden; text-decoration: none; color: inherit; background: var(--void); }
+.pcard:focus-visible { outline: 1px solid var(--cyan); outline-offset: 2px; }
+.pcPlate { position: relative; aspect-ratio: 4/3; display: flex; align-items: center; justify-content: center;
+  background: #0f0f10; filter: grayscale(28%) contrast(1.04); transition: filter .3s, transform .5s; }
+.pcard:hover .pcPlate, .pcard:focus-visible .pcPlate { filter: grayscale(0%); transform: scale(1.025); }
+.pcLg { width: 55%; aspect-ratio: 1; display: flex; align-items: center; justify-content: center; }
+.pcLg img { display: block; max-width: 100%; max-height: 100%; width: auto; height: auto; }
+.pcLg .inv { filter: grayscale(1) invert(1) brightness(1.05) contrast(1.3); mix-blend-mode: screen; }
+.pcLg .stamp { filter: brightness(0) invert(1); opacity: .9; }
+.gdSlot { width: 34%; aspect-ratio: 1; border: 1px solid rgba(var(--accent-rgb), .35); border-radius: 3px; display: flex; align-items: center; justify-content: center; }
+.gdSlot img { width: 100%; height: 100%; object-fit: contain; padding: 12%; }
+.pcChip { position: absolute; top: 12px; left: 12px; z-index: 1; max-width: calc(100% - 24px); font-family: var(--mono); font-size: 10px;
+  letter-spacing: .18em; line-height: 1.4; text-transform: uppercase; color: var(--cyan); border: 1px solid rgba(var(--accent-rgb), .3);
+  border-radius: 2px; padding: 5px 9px; background: var(--void); }
+.pcChip ~ .pcPlate { align-items: flex-end; padding-bottom: 8%; }
+.pcard.gd { border-color: rgba(var(--accent-rgb), .35); }
+.pcMeta { padding: 16px 16px 20px; }
+.pcNm { font-weight: 700; text-transform: uppercase; font-size: clamp(14px, 1.3vw, 18px); letter-spacing: -.005em; line-height: 1.08; overflow-wrap: anywhere; color: var(--bone); }
+.pcLn { margin-top: 8px; color: var(--dim); font-size: 13.5px; line-height: 1.5; }
+@media (prefers-reduced-motion: reduce) { .pcPlate { transition: none; } .pcard:hover .pcPlate, .pcard:focus-visible .pcPlate { transform: none; } }
 .pg-awards .cell li + li { margin-top: 8px; }
 
 /* ── footer ────────────────────────────────────────────────────────── */
@@ -362,7 +382,10 @@ button.pg-name:hover, button.pg-name.is-open { color: var(--cyan); text-decorati
 @media (max-width: 980px) {
   .c-roster { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   .e-room { display: none; }
-  .pg-awards .grid { grid-template-columns: 1fr; }
+  .pg-awards .pGrid { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .pcMeta { padding: 12px 12px 16px; } .pcNm { font-size: 13.5px; } .pcLn { font-size: 12px; }
+  .pcChip { top: 8px; left: 8px; font-size: 9px; letter-spacing: .12em; padding: 4px 7px; max-width: calc(100% - 16px); }
+  .gdSlot { width: 40%; }
 }
 @media (max-width: 700px) {
   .w-over { background:
@@ -390,7 +413,6 @@ button.pg-name:hover, button.pg-name.is-open { color: var(--cyan); text-decorati
   .pg-slot.is-now { padding-left: 10px; }
   .pg-time { margin-bottom: 6px; padding-top: 0; }
   .pg-title { font-size: 17px; }
-  .pg-pitches ol { grid-template-columns: 1fr; }
 }
 </style>
 </head>
@@ -472,25 +494,28 @@ button.pg-name:hover, button.pg-name.is-open { color: var(--cyan); text-decorati
     </div>
   </div>
 
-  <!-- Static, placed under Monday 26 October by the script. Copy from the programme booklet; claims to be reviewed. -->
+  <!-- Static, placed under Monday 26 October by the script. Same four award tiles as /startups/
+       (PM brief Oct 11 2026, copy verbatim). Tiles without an href wait for the partner's URL. -->
   <aside class="pg-awards" data-program-day="monday_26_october" aria-labelledby="pg-awards-h" hidden>
-    <h4 id="pg-awards-h">Demo Day awards</h4>
-    <div class="grid">
-      <div class="cell">
-        <span class="lbl">First prize</span>
-        <ul>
-          <li>A ticket to the next Vitalist Bay</li>
-          <li>Priority review for the Meet the Drapers Japan 2027 cohort</li>
-        </ul>
-      </div>
-      <div class="cell">
-        <span class="lbl">Antler Japan residency</span>
-        <p>Six weeks of mentoring, access to USD 850,000 in perks, and a chance of investment.</p>
-      </div>
-      <div class="cell">
-        <span class="lbl">Japan Landing Award</span>
-        <p>Presented by GlobalDeal, Official Market-Entry Execution Partner. A hands-on engagement to take the winner into the Japanese market: entry strategy, the right partners and first customers, and regulatory navigation.</p>
-      </div>
+    <h4 id="pg-awards-h">What you can win at Demo Day</h4>
+    <div class="pGrid">
+      <a class="pcard" data-href-todo="Meet the Drapers">
+        <div class="pcPlate"><div class="pcLg"><img src="/img/partners/meet-the-drapers-white.png" alt="" loading="lazy" decoding="async" /></div></div>
+        <div class="pcMeta"><div class="pcNm">Meet the Drapers Fast Track</div><div class="pcLn">Priority review for the Meet the Drapers 2027 Japan cohort.</div></div>
+      </a>
+      <a class="pcard" href="https://www.antler.co/" target="_blank" rel="noopener">
+        <div class="pcPlate"><div class="pcLg"><img class="stamp" src="/img/partners/antler.svg" alt="" loading="lazy" decoding="async" /></div></div>
+        <div class="pcMeta"><div class="pcNm">Antler Residency</div><div class="pcLn">One company wins a place in Antler Japan's residency: six weeks of mentoring, access to around USD 850k in perks and a chance of investment.</div></div>
+      </a>
+      <a class="pcard" href="https://vitalistbay.com/" target="_blank" rel="noopener">
+        <div class="pcPlate"><div class="pcLg"><img class="inv" src="/img/partners/vitalist-bay.png" alt="" loading="lazy" decoding="async" /></div></div>
+        <div class="pcMeta"><div class="pcNm">A Ticket to Vitalist Bay</div><div class="pcLn">A free ticket to the next Vitalist Bay for the winning company.</div></div>
+      </a>
+      <a class="pcard gd" href="https://globaldeal.io/" target="_blank" rel="noopener" data-held="karen">
+        <span class="pcChip">Presented by GlobalDeal</span>
+        <div class="pcPlate"><span class="gdSlot"><img src="/img/partners/globaldeal-square-transparent.png" alt="" loading="lazy" decoding="async" /></span></div>
+        <div class="pcMeta"><div class="pcNm">Japan Landing Award</div><div class="pcLn">Up to three Demo Day companies win a hands-on Japan market-entry engagement with GlobalDeal: partners and buyers mapped, qualified introductions, a path to a first pilot. Five-figure value, at GlobalDeal's entry fee.</div></div>
+      </a>
     </div>
   </aside>
 </section>
@@ -904,26 +929,10 @@ button.pg-name:hover, button.pg-name.is-open { color: var(--cyan); text-decorati
       hd.appendChild(v);
     }
     sec.appendChild(hd);
-    var ol = el('ol', 'pg-slots'), pitches = [];
-    d.slots.forEach(function (s, i) { if (s.kind === 'pitch') pitches.push(s); else ol.appendChild(slotEl(s, i, d)); });
+    // Pitch slots (the companies pitching) are deliberately not rendered (owner decision, Oct 11 2026).
+    var ol = el('ol', 'pg-slots');
+    d.slots.forEach(function (s, i) { if (s.kind !== 'pitch') ol.appendChild(slotEl(s, i, d)); });
     sec.appendChild(ol);
-    if (pitches.length) {
-      var box = el('div', 'pg-pitches'), list = el('ol'), hid = sec.id + '-pitches';
-      box.setAttribute('data-program', 'pitches');
-      box.setAttribute('role', 'group');
-      box.setAttribute('aria-labelledby', hid);
-      var ph = el('h4', null, pitches[0].block || 'Demo Day pitches');
-      ph.id = hid;
-      box.appendChild(ph);
-      pitches.forEach(function (s) {
-        var li = el('li');
-        li.appendChild(el('b', null, s.title));
-        if (s.notes) li.appendChild(el('p', null, s.notes));
-        list.appendChild(li);
-      });
-      box.appendChild(list);
-      sec.appendChild(box);
-    }
     statics.forEach(function (n) {
       if (n.getAttribute('data-program-day') === d.id) { sec.appendChild(n); n.hidden = false; }
     });
