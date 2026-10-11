@@ -607,41 +607,80 @@
   .followline a { color: var(--accent); text-decoration: none; }
   .followline a:hover { text-decoration: underline; text-underline-offset: 4px; }
 
-  /* ── ecosystem ── */
-  .ecoHead { margin-top: 96px; }
-  .majorPartners { display: flex; align-items: center; justify-content: center; gap: 64px; flex-wrap: wrap; margin-top: 30px; }
-  /* Hover glow sits BEHIND each logo (radial pseudo-element) so it reads the
-     same for the alpha-transparent Kobe mark and the screen-blended MIC box —
-     a drop-shadow would trace the MIC file's rectangular canvas instead. */
-  .majorPartners a { display: block; position: relative; }
-  .majorPartners a::before { content: ""; position: absolute; inset: -28px;
-    background: radial-gradient(closest-side, rgba(var(--accent-rgb),.16), transparent 70%);
-    opacity: 0; transition: opacity .3s ease; pointer-events: none; }
-  .majorPartners a:hover::before { opacity: 1; }
-  .majorPartners img { height: 118px; width: auto; display: block; }
-  /* LEV Foundation's official mark is a serif wordmark; rendered typographically
-     (as the carousel already did) since no dark-background asset exists. */
-  .levWordmark { text-align: center; color: var(--ink); text-decoration: none;
-    font-family: Georgia, 'Times New Roman', serif; }
-  .levWordmark .lev { display: block; font-size: 58px; line-height: 1; letter-spacing: .04em; }
-  .levWordmark .found { display: block; font-size: 21px; margin-top: 7px; letter-spacing: .01em; }
-  /* The MIC PNG ships white-on-solid-black; screen-blending melts its black
-     canvas into the page without altering the file (approval terms). */
-  .majorPartners .micLogo { mix-blend-mode: screen; height: 112px; }
-  /* Broken Symmetry Capital rendered typographically (the only supplied logo
-     file is a 120×120 JPG, too small for this row) — serif, same approach
-     as the LEV Foundation mark. */
-  .bscWordmark { text-align: center; color: var(--ink); text-decoration: none;
-    font-family: Georgia, 'Times New Roman', serif; }
-  .bscWordmark .bsym { display: block; font-size: 31px; line-height: 1.1; letter-spacing: .04em; }
-  .bscWordmark .bcap { display: block; font-size: 15px; margin-top: 7px;
-    letter-spacing: .42em; margin-right: -.42em; text-transform: uppercase; }
-  @media (max-width: 640px) { .majorPartners { gap: 36px; } .majorPartners img,
-    .majorPartners .micLogo { height: 76px; }
-    .levWordmark .lev { font-size: 40px; } .levWordmark .found { font-size: 15px; }
-    .bscWordmark .bsym { font-size: 22px; } .bscWordmark .bcap { font-size: 11px; margin-top: 5px; } }
+  /* ── partners · four tiers of speaker-kin tiles (PM brief Oct 11 2026): logo on a plate where
+     the portrait would be, name + the one line on the bottom veil (never clamped), the whole tile
+     is the link. GlobalDeal is the one tile that breaks the grid (landscape, full width) — the only
+     "Official Market-Entry Execution Partner". ── */
+  #partners { margin-top: 96px; }
+  .pcTier + .pcTier { margin-top: 64px; }
+  .pcTier .eyebrow { display: block; margin-bottom: 20px; }
+  .pGrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+  .pGrid.seven { grid-template-columns: repeat(7, 1fr); gap: 14px; }
+  .pcard { position: relative; display: block; border: 1px solid var(--line); overflow: hidden;
+    text-decoration: none; color: inherit; background: var(--bg); }
+  .pcard:focus-visible { outline: 1px solid var(--accent); outline-offset: 2px; }
+  /* the plate stands where the speaker's portrait would be: opaque near-void, so screen-blended
+     black logo canvases melt into it; same 28%-grayscale-to-colour + 1.025 hover as .hcard */
+  .pcPlate { position: relative; aspect-ratio: 4/5; display: flex; align-items: center; justify-content: center; padding-bottom: 22%;
+    background: #0f0f10; filter: grayscale(28%) contrast(1.04); transition: filter .3s, transform .5s; }
+  .pcard:hover .pcPlate, .pcard:focus-visible .pcPlate { filter: grayscale(0%); transform: scale(1.025); }
+  .pcLg { width: 55%; display: flex; align-items: center; justify-content: center; }
+  .pcLg img { display: block; width: 100%; height: auto; }
+  .pcLg.sm { width: 40%; max-width: 120px; }
+  .pcLg.wide { width: 92%; }
+  .pcLg .inv { filter: grayscale(1) invert(1) brightness(1.05) contrast(1.3); mix-blend-mode: screen; }
+  .pcLg .stamp { filter: brightness(0) invert(1); opacity: .9; }
+  .pcLg .mono { filter: grayscale(1) brightness(1.1) contrast(1.8); mix-blend-mode: screen; }
+  .pcLg .gray { filter: grayscale(1); }
+  .pcLg .screen { mix-blend-mode: screen; }
+  /* .pcSlot: typographic wordmark where no logo file exists yet; swap the span for an <img> when it lands */
+  .pcSlot { display: block; text-align: center; font-weight: 800; text-transform: uppercase; letter-spacing: -.01em;
+    line-height: 1.02; font-size: clamp(15px, 1.6vw, 24px); color: rgba(244,243,240,.92); overflow-wrap: anywhere; }
+  .pcSlot small { display: block; font-size: .62em; font-weight: 700; letter-spacing: .01em; margin-top: .25em; }
+  .gdSlot { width: 55%; aspect-ratio: 1; border: 1px solid rgba(var(--accent-rgb), .35); border-radius: 3px;
+    display: flex; align-items: center; justify-content: center; }
+  .gdSlot .pcSlot { text-transform: none; overflow-wrap: normal; }
+  .gdSlot img { width: 100%; height: 100%; object-fit: contain; padding: 12%; }
+  .pcNm { font-weight: 700; text-transform: uppercase; font-size: clamp(14px, 1.3vw, 18px); letter-spacing: -.005em;
+    line-height: 1.08; overflow-wrap: anywhere; }
+  .pcLn { margin-top: 6px; color: var(--dim); font-size: 13px; line-height: 1.45; }
+  @media (prefers-reduced-motion: reduce) { .pcPlate { transition: none; }
+    .pcard:hover .pcPlate, .pcard:focus-visible .pcPlate { transform: none; } }
+  .pcMeta { position: absolute; left: 0; right: 0; bottom: 0; padding: 56px 16px 14px;
+    background: linear-gradient(to top, rgba(5,5,6,.94) calc(100% - 56px), transparent); }
+  /* the seven-up tier: same tile, smaller type; logos sit high so long lines never cover them */
+  .seven .pcPlate { aspect-ratio: 2/3; align-items: flex-start; padding-top: 9%; padding-bottom: 0; }
+  .seven .pcLg { width: 50%; }
+  .seven .pcMeta { padding: 40px 12px 11px; }
+  .seven .pcNm { font-size: 12.5px; }
+  .seven .pcLn { font-size: 11.5px; }
+  .seven .pcSlot { font-size: clamp(13px, 1.1vw, 17px); }
+  /* GlobalDeal: landscape, full row, the only tile whose copy sits beside the plate */
+  .pcard.gd { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; }
+  .gd .pcPlate { aspect-ratio: 1; padding-bottom: 0; border-right: 1px solid var(--line); }
+  .gd .gdSlot .pcSlot { font-size: clamp(22px, 2.6vw, 40px); }
+  .gd .pcCopy { display: flex; flex-direction: column; justify-content: center; padding: clamp(24px, 4vw, 60px); }
+  .gd .pcNm { font-size: clamp(22px, 2.4vw, 34px); }
+  .gd .pcLn { margin-top: 18px; font-size: clamp(15px, 1.2vw, 17px); line-height: 1.6; }
+  @media (max-width: 980px) { .pGrid.seven { grid-template-columns: repeat(4, 1fr); } }
+  @media (max-width: 760px) { .pGrid { grid-template-columns: repeat(2, 1fr); } .pcNm { font-size: 15px; } }
+  @media (max-width: 640px) {
+    .pcTier + .pcTier { margin-top: 52px; }
+    .pGrid, .pGrid.seven { grid-template-columns: 1fr 1fr; gap: 12px; }
+    .pcMeta, .seven .pcMeta { padding: 40px 12px 12px; }
+    .pcNm, .seven .pcNm { font-size: 13.5px; }
+    .pcLn, .seven .pcLn { font-size: 12px; }
+    .pcSlot, .seven .pcSlot { font-size: 13.5px; }
+    .pcPlate, .seven .pcPlate { align-items: flex-start; padding-top: 10%; padding-bottom: 0; }
+    .pcLg { width: 56%; } .pcLg.sm { width: 40%; }
+    .pcard.gd { grid-template-columns: 1fr; }
+    .gd .pcPlate { aspect-ratio: 4/3; align-items: center; padding-top: 0; border-right: 0; border-bottom: 1px solid var(--line); }
+    .gd .gdSlot { width: 60%; } .gd .gdSlot .pcSlot { font-size: 24px; overflow-wrap: normal; }
+    .gd .pcCopy { padding: 22px 16px 26px; }
+    .gd .pcNm { font-size: 22px; } .gd .pcLn { font-size: 15px; }
+  }
   html.kobe-permit-over [data-kobe-permit] { display: none !important; }
-  .ecoWall { position: relative; overflow: hidden; margin-top: 34px; background: var(--bg);
+  .ecoWall { position: relative; overflow: hidden; margin-top: 28px; background: var(--bg);
     border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
   .ecoWall::before, .ecoWall::after { content: ''; position: absolute; top: 0; bottom: 0; width: 90px; z-index: 2; pointer-events: none; }
   .ecoWall::before { left: 0; background: linear-gradient(90deg, var(--bg), transparent); }
@@ -658,8 +697,6 @@
   .ecoCell.plate:hover img { filter: grayscale(1) invert(1) brightness(1.2) contrast(1.35); }
   .ecoCell.stamp:hover img { opacity: 1; }
   .ecoCell.luma:hover img { filter: grayscale(1) contrast(1.7) brightness(1.9); }
-  .ecoWord { font-weight: 700; font-size: 17px; letter-spacing: .02em; color: rgba(244,243,240,.85); white-space: nowrap; }
-  .ecoCell:hover .ecoWord { color: var(--ink); }
   @media (max-width: 760px) { .ecoSeq { gap: 44px; padding: 22px; } .ecoCell img { height: 26px; } }
   @media (prefers-reduced-motion: reduce) {
     .ecoWall::before, .ecoWall::after { display: none; }
@@ -936,53 +973,128 @@
   <p class="alsoline rv" data-speakers="landing-also"></p>
   <div class="followline rv" data-copy="speakers.followLine"></div>
 
-  <!-- Major partners · The two Kobe logos carry use approval #3182 (window: Aug 19 – Dec 15 2026)
-       and self-hide via [data-kobe-permit]; the label and LEV Foundation stay. Kobe logo files are
-       used verbatim per the approval terms — never edit, recompress, or recolor them. -->
-  <div class="eyebrow rv ecoHead" data-copy="ecosystem.majorLabel"></div>
-  <div class="majorPartners rv">
-    <a class="levWordmark" href="https://www.levf.org/" target="_blank" rel="noopener" title="LEV Foundation"><span class="lev">LEV</span><span class="found">Foundation</span></a>
-    <a data-kobe-permit href="https://www.hosp.kobe-u.ac.jp/ikoujiso/en/" target="_blank" rel="noopener" title="Kobe University"><img src="img/partners/kobe-university.png" alt="Kobe University" loading="lazy" decoding="async" /></a>
-    <a data-kobe-permit href="https://www.med.kobe-u.ac.jp/mic/en/" target="_blank" rel="noopener" title="MedTech Innovation Center, Kobe University"><img class="micLogo" src="img/partners/mic-kobe-university.png" alt="MIC — MedTech Innovation Center, Kobe University" loading="lazy" decoding="async" /></a>
-    <a class="bscWordmark" href="https://brokensymmetry.capital/" target="_blank" rel="noopener" title="Broken Symmetry Capital"><span class="bsym">Broken Symmetry</span><span class="bcap">Capital</span></a>
+  <!-- Partners · four tiers in the PM's order (brief of Oct 11 2026), as speaker-card siblings:
+       logo on the plate, name + one line on the veil, the whole tile is the link. Tiles without an
+       href wait for the partner's URL (data-href-todo); .pcSlot wordmarks wait for logo files.
+       The two Kobe logos carry use approval #3182 (window: Aug 19 – Dec 15 2026) and self-hide via
+       [data-kobe-permit]. Kobe logo files are used verbatim per the approval terms — never edit,
+       recompress, or recolor them. KBIC is never placed under a "host" heading; LEV Foundation,
+       Vitalist Bay and Vitalism Foundation are never called sponsors or hosts.
+       GlobalDeal (tier 2, [data-held="karen"]) ships only once Karen approves; its copy is hers, verbatim. -->
+  <div id="partners">
+  <div class="pcTier rv">
+    <h3 class="eyebrow" data-copy="ecosystem.summit"></h3>
+    <div class="pGrid">
+      <a class="pcard" data-href-todo="Unchain Biomedical">
+        <div class="pcPlate"><div class="pcLg sm"><img class="gray" src="img/partners/unchain-biomedical.png" alt="" loading="lazy" decoding="async" /></div></div>
+        <div class="pcMeta"><div class="pcNm">Unchain Biomedical</div><div class="pcLn">Brings regenerative therapies to patients in Japan through certified clinics.</div></div>
+      </a>
+      <a class="pcard" href="https://haus.fund/" target="_blank" rel="noopener">
+        <div class="pcPlate"><div class="pcLg"><img class="inv" src="img/partners/haus-fund.jpg" alt="" loading="lazy" decoding="async" /></div></div>
+        <div class="pcMeta"><div class="pcNm">Haus Fund</div><div class="pcLn">Early-stage biotech accelerator and fund.</div></div>
+      </a>
+      <a class="pcard" href="https://alv.vc/" target="_blank" rel="noopener">
+        <div class="pcPlate"><div class="pcLg"><img class="inv" src="img/partners/asagi-labs.jpg" alt="" loading="lazy" decoding="async" /></div></div>
+        <div class="pcMeta"><div class="pcNm">ASAGI Labs Ventures</div><div class="pcLn">Venture capital firm investing in longevity science.</div></div>
+      </a>
+      <a class="pcard" href="https://brokensymmetry.capital/" target="_blank" rel="noopener">
+        <div class="pcPlate"><div class="pcLg"><img src="img/partners/broken-symmetry-white.png" alt="" loading="lazy" decoding="async" /></div></div>
+        <div class="pcMeta"><div class="pcNm">Broken Symmetry Capital</div><div class="pcLn">Angel fund backing pre-seed and seed founders in AI, crypto and longevity biotech.</div></div>
+      </a>
+    </div>
   </div>
 
-  <div class="eyebrow rv ecoHead" data-copy="ecosystem.headline"></div>
+  <div class="pcTier rv" data-held="karen">
+    <h3 class="eyebrow" data-copy="ecosystem.marketEntry"></h3>
+    <div class="pGrid">
+      <a class="pcard gd" href="https://globaldeal.io/" target="_blank" rel="noopener">
+        <div class="pcPlate"><div class="gdSlot"><img src="img/partners/globaldeal-square-transparent.png" alt="" loading="lazy" decoding="async" /></div></div>
+        <div class="pcCopy">
+          <div class="pcNm">GlobalDeal</div>
+          <div class="pcLn">We take health and longevity companies into the Japanese market end to end: entry strategy, the right partners and first customers, regulatory navigation, and ongoing operations. Presenter of the Japan Landing Award at Demo Day.</div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <div class="pcTier rv">
+    <h3 class="eyebrow" data-copy="ecosystem.community"></h3>
+    <div class="pGrid">
+      <a class="pcard" href="https://www.portopia.co.jp/en/" target="_blank" rel="noopener">
+        <div class="pcPlate"><div class="pcLg wide"><img class="inv" src="img/partners/kobe-portopia-hotel.png" alt="" loading="lazy" decoding="async" /></div></div>
+        <div class="pcMeta"><div class="pcNm">Kobe Portopia Hotel</div><div class="pcLn">Hotel on Port Island, Kobe, with conference and event facilities.</div></div>
+      </a>
+      <a class="pcard" data-href-todo="GlycanAge">
+        <div class="pcPlate"><div class="pcLg"><img class="stamp" src="img/partners/glycanage.png" alt="" loading="lazy" decoding="async" /></div></div>
+        <div class="pcMeta"><div class="pcNm">GlycanAge</div><div class="pcLn">At-home test that estimates your biological age from glycans.</div></div>
+      </a>
+    </div>
+  </div>
+
+  <div class="pcTier rv">
+    <h3 class="eyebrow" data-copy="ecosystem.support"></h3>
+    <div class="pGrid seven">
+      <a class="pcard" href="https://www.hosp.kobe-u.ac.jp/ikoujiso/en/" target="_blank" rel="noopener" data-kobe-permit>
+        <div class="pcPlate"><div class="pcLg"><img src="img/partners/kobe-university.png" alt="" loading="lazy" decoding="async" /></div></div>
+        <div class="pcMeta"><div class="pcNm">Kobe University</div><div class="pcLn">National university in Kobe. Our summits run at its Integrated Research Center.</div></div>
+      </a>
+      <a class="pcard" href="https://www.med.kobe-u.ac.jp/mic/en/" target="_blank" rel="noopener" data-kobe-permit>
+        <div class="pcPlate"><div class="pcLg"><img class="screen" src="img/partners/mic-kobe-university.png" alt="" loading="lazy" decoding="async" /></div></div>
+        <div class="pcMeta"><div class="pcNm">MedTech Innovation Center (MIC), Kobe University</div><div class="pcLn">Kobe University's medtech hub on Port Island, and home of the Mirai residency.</div></div>
+      </a>
+      <a class="pcard" href="https://www.fbri-kobe.org/kbic/english/" target="_blank" rel="noopener">
+        <div class="pcPlate"><div class="pcLg"><img class="stamp" src="img/partners/kbic.svg" alt="" loading="lazy" decoding="async" /></div></div>
+        <div class="pcMeta"><div class="pcNm">Kobe Biomedical Innovation Cluster (KBIC)</div><div class="pcLn">Japan's biomedical cluster on Port Island: hospitals, research institutes and 370+ organisations.</div></div>
+      </a>
+      <a class="pcard" href="https://www.levf.org/" target="_blank" rel="noopener">
+        <div class="pcPlate"><div class="pcLg"><img class="inv" src="img/partners/lev-foundation.jpg" alt="" loading="lazy" decoding="async" /></div></div>
+        <div class="pcMeta"><div class="pcNm">LEV Foundation</div><div class="pcLn">Non-profit funding research to prevent and reverse age-related disease.</div></div>
+      </a>
+      <a class="pcard" href="https://www.heka.bio/" target="_blank" rel="noopener">
+        <div class="pcPlate"><div class="pcLg"><img class="stamp" src="img/partners/hekabio.png" alt="" loading="lazy" decoding="async" /></div></div>
+        <div class="pcMeta"><div class="pcNm">HekaBio</div><div class="pcLn">A platform for in-licensing, development and commercialisation of world-leading biopharma and MedTech assets in Japan and Asia-Pacific.</div></div>
+      </a>
+      <a class="pcard" data-href-todo="CIC Japan">
+        <div class="pcPlate"><div class="pcLg"><img class="stamp" src="img/partners/cic-japan.png" alt="" loading="lazy" decoding="async" /></div></div>
+        <div class="pcMeta"><div class="pcNm">CIC Japan</div><div class="pcLn">Innovation campus with offices, programmes and events for startups in Tokyo, Osaka and Fukuoka.</div></div>
+      </a>
+      <a class="pcard" data-href-todo="Minicircle">
+        <div class="pcPlate"><div class="pcLg"><img class="mono" src="img/partners/minicircle.jpg" alt="" loading="lazy" decoding="async" /></div></div>
+        <div class="pcMeta"><div class="pcNm">Minicircle</div><div class="pcLn">Non-viral gene therapy company.</div></div>
+      </a>
+    </div>
+  </div>
+  <!-- The remaining supporters keep the scrolling logo wall until their cards are built (P1). -->
   <div class="ecoWall rv" aria-label="Supporting organizations">
     <div class="ecoTrack">
       <div class="ecoSeq">
       <a class="ecoCell plate" href="https://viva.city/" target="_blank" rel="noopener" title="Viva City"><img src="img/partners/viva-city.avif" alt="Viva City" loading="lazy" decoding="async" /></a>
-      <a class="ecoCell stamp" href="https://www.fbri-kobe.org/kbic/english/" target="_blank" rel="noopener" title="KBIC"><img src="img/partners/kbic.svg" alt="KBIC" loading="lazy" decoding="async" /></a>
-      <a class="ecoCell plate" href="https://www.learninglayer.ai/" target="_blank" rel="noopener" title="Learning Layer Labs"><img src="img/partners/learning-layer-labs.jpg" alt="Learning Layer Labs" loading="lazy" decoding="async" /></a>
+      <a class="ecoCell stamp" href="https://www.learninglayer.ai/" target="_blank" rel="noopener" title="Learning Layer Labs"><img src="img/partners/learning-layer-labs-white.png" alt="Learning Layer Labs" loading="lazy" decoding="async" /></a>
       <a class="ecoCell plate" href="https://haus.fund/" target="_blank" rel="noopener" title="Biopunk"><img src="img/partners/biopunk.png" alt="Biopunk" loading="lazy" decoding="async" /></a>
       <a class="ecoCell luma" href="https://aevitashouse.bio/" target="_blank" rel="noopener" title="Aevitas"><img src="img/partners/aevitas.png" alt="Aevitas" loading="lazy" decoding="async" /></a>
       <a class="ecoCell plate" href="https://vibecodingnights.com/" target="_blank" rel="noopener" title="Vibe Coding Nights"><img src="img/partners/vibe-coding-nights.png" alt="Vibe Coding Nights" loading="lazy" decoding="async" /></a>
-      <a class="ecoCell plate" href="https://alv.vc/" target="_blank" rel="noopener" title="Asagi Labs Ventures"><img src="img/partners/asagi-labs.jpg" alt="Asagi Labs Ventures" loading="lazy" decoding="async" /></a>
       <a class="ecoCell plate" href="https://zucity.org/en/market-homes" target="_blank" rel="noopener" title="ZuCity Japan"><img src="img/partners/zucity.svg" alt="ZuCity Japan" loading="lazy" decoding="async" /></a>
-      <a class="ecoCell" href="https://ch-ange.de/" target="_blank" rel="noopener" title="CHANGE"><span class="ecoWord">CHANGE</span></a>
-      <a class="ecoCell stamp" href="https://www.heka.bio/" target="_blank" rel="noopener" title="HekaBio"><img src="img/partners/hekabio.avif" alt="HekaBio" loading="lazy" decoding="async" /></a>
-      <a class="ecoCell stamp" href="https://augmentationlab.org/" target="_blank" rel="noopener" title="Augmentation Lab"><img src="img/partners/augmentation-lab.png" alt="Augmentation Lab" loading="lazy" decoding="async" /></a>
+      <a class="ecoCell stamp" href="https://ch-ange.de/" target="_blank" rel="noopener" title="CHANGE"><img src="img/partners/change.png" alt="CHANGE" loading="lazy" decoding="async" /></a>
+      <a class="ecoCell stamp" href="https://augmentationlab.org/" target="_blank" rel="noopener" title="Augmentation Lab"><img src="img/partners/augmentation-lab-white.png" alt="Augmentation Lab" loading="lazy" decoding="async" /></a>
       <a class="ecoCell plate" href="https://vitalistbay.com/" target="_blank" rel="noopener" title="Vitalist Bay"><img src="img/partners/vitalist-bay.png" alt="Vitalist Bay" loading="lazy" decoding="async" /></a>
       <a class="ecoCell stamp" href="https://the-mu.xyz/" target="_blank" rel="noopener" title="The MU"><img src="img/partners/the-mu.png" alt="The MU" loading="lazy" decoding="async" /></a>
       <a class="ecoCell stamp" href="https://www.greyrigge.com/" target="_blank" rel="noopener" title="GreyRigge Associates"><img src="img/partners/greyrigge.png" alt="GreyRigge Associates" loading="lazy" decoding="async" /></a>
       </div>
       <div class="ecoSeq" aria-hidden="true">
       <a class="ecoCell plate" href="https://viva.city/" target="_blank" rel="noopener" title="Viva City" tabindex="-1"><img src="img/partners/viva-city.avif" alt="Viva City" loading="lazy" decoding="async" /></a>
-      <a class="ecoCell stamp" href="https://www.fbri-kobe.org/kbic/english/" target="_blank" rel="noopener" title="KBIC" tabindex="-1"><img src="img/partners/kbic.svg" alt="KBIC" loading="lazy" decoding="async" /></a>
-      <a class="ecoCell plate" href="https://www.learninglayer.ai/" target="_blank" rel="noopener" title="Learning Layer Labs" tabindex="-1"><img src="img/partners/learning-layer-labs.jpg" alt="Learning Layer Labs" loading="lazy" decoding="async" /></a>
+      <a class="ecoCell stamp" href="https://www.learninglayer.ai/" target="_blank" rel="noopener" title="Learning Layer Labs" tabindex="-1"><img src="img/partners/learning-layer-labs-white.png" alt="Learning Layer Labs" loading="lazy" decoding="async" /></a>
       <a class="ecoCell plate" href="https://haus.fund/" target="_blank" rel="noopener" title="Biopunk" tabindex="-1"><img src="img/partners/biopunk.png" alt="Biopunk" loading="lazy" decoding="async" /></a>
       <a class="ecoCell luma" href="https://aevitashouse.bio/" target="_blank" rel="noopener" title="Aevitas" tabindex="-1"><img src="img/partners/aevitas.png" alt="Aevitas" loading="lazy" decoding="async" /></a>
       <a class="ecoCell plate" href="https://vibecodingnights.com/" target="_blank" rel="noopener" title="Vibe Coding Nights" tabindex="-1"><img src="img/partners/vibe-coding-nights.png" alt="Vibe Coding Nights" loading="lazy" decoding="async" /></a>
-      <a class="ecoCell plate" href="https://alv.vc/" target="_blank" rel="noopener" title="Asagi Labs Ventures" tabindex="-1"><img src="img/partners/asagi-labs.jpg" alt="Asagi Labs Ventures" loading="lazy" decoding="async" /></a>
       <a class="ecoCell plate" href="https://zucity.org/en/market-homes" target="_blank" rel="noopener" title="ZuCity Japan" tabindex="-1"><img src="img/partners/zucity.svg" alt="ZuCity Japan" loading="lazy" decoding="async" /></a>
-      <a class="ecoCell" href="https://ch-ange.de/" target="_blank" rel="noopener" title="CHANGE" tabindex="-1"><span class="ecoWord">CHANGE</span></a>
-      <a class="ecoCell stamp" href="https://www.heka.bio/" target="_blank" rel="noopener" title="HekaBio" tabindex="-1"><img src="img/partners/hekabio.avif" alt="HekaBio" loading="lazy" decoding="async" /></a>
-      <a class="ecoCell stamp" href="https://augmentationlab.org/" target="_blank" rel="noopener" title="Augmentation Lab" tabindex="-1"><img src="img/partners/augmentation-lab.png" alt="Augmentation Lab" loading="lazy" decoding="async" /></a>
+      <a class="ecoCell stamp" href="https://ch-ange.de/" target="_blank" rel="noopener" title="CHANGE" tabindex="-1"><img src="img/partners/change.png" alt="CHANGE" loading="lazy" decoding="async" /></a>
+      <a class="ecoCell stamp" href="https://augmentationlab.org/" target="_blank" rel="noopener" title="Augmentation Lab" tabindex="-1"><img src="img/partners/augmentation-lab-white.png" alt="Augmentation Lab" loading="lazy" decoding="async" /></a>
       <a class="ecoCell plate" href="https://vitalistbay.com/" target="_blank" rel="noopener" title="Vitalist Bay" tabindex="-1"><img src="img/partners/vitalist-bay.png" alt="Vitalist Bay" loading="lazy" decoding="async" /></a>
       <a class="ecoCell stamp" href="https://the-mu.xyz/" target="_blank" rel="noopener" title="The MU" tabindex="-1"><img src="img/partners/the-mu.png" alt="The MU" loading="lazy" decoding="async" /></a>
       <a class="ecoCell stamp" href="https://www.greyrigge.com/" target="_blank" rel="noopener" title="GreyRigge Associates" tabindex="-1"><img src="img/partners/greyrigge.png" alt="GreyRigge Associates" loading="lazy" decoding="async" /></a>
       </div>
     </div>
+  </div>
   </div>
 </section>
 
