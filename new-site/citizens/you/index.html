@@ -1,0 +1,1576 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Create your citizen · Citizens · Mirai Tech City · Kobe 2026</title>
+<meta name="robots" content="noindex, nofollow" />
+<meta name="theme-color" content="#050506" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23050506'/%3E%3Ctext x='50' y='72' font-size='62' font-family='Georgia' font-weight='bold' fill='%239be8f0' text-anchor='middle'%3E未%3C/text%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="preconnect" href="https://api.fontshare.com" />
+<link rel="preconnect" href="https://cdn.fontshare.com" crossorigin />
+<link href="https://api.fontshare.com/v2/css?f[]=switzer@400,500,700,800,900&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/posthog.js"></script>
+<script defer src="/analytics.js"></script>
+<link rel="stylesheet" href="/citizens/nav.css" />
+<style>
+  :root {
+    --bg: #050506; --ink: #f4f3f0; --dim: rgba(244,243,240,.62); --faint: rgba(244,243,240,.45);
+    --line: rgba(244,243,240,.14); --accent: #9be8f0; --accent-rgb: 155,232,240;
+    --font: 'Switzer', 'Inter', -apple-system, sans-serif; --mono: 'IBM Plex Mono', monospace;
+    --hud: rgba(5,5,6,.9); --paper: #0b0c0f; --paper-2: #101216;
+    --red: #d8322b; --red-rgb: 216,50,43;
+    --ease: cubic-bezier(.2,.7,.2,1);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { background: var(--bg); }
+  body { min-width: 320px; min-height: 100dvh; background: var(--bg); color: var(--ink); font-family: var(--font);
+    -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+  ::selection { background: var(--accent); color: #000; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  a { color: inherit; }
+  button { font: inherit; color: inherit; }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+  /* same corner-bracket panel used across the citizens screens */
+  .panel { position: relative; background: var(--hud); border: 1px solid var(--line); }
+  .panel::before, .panel::after { content: ''; position: absolute; width: 9px; height: 9px; pointer-events: none; }
+  .panel::before { top: -1px; left: -1px; border-top: 1px solid var(--accent); border-left: 1px solid var(--accent); }
+  .panel::after { bottom: -1px; right: -1px; border-bottom: 1px solid var(--accent); border-right: 1px solid var(--accent); }
+
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 24px 16px 48px; }
+
+  .head { border-bottom: 1px solid var(--line); padding-bottom: 18px; }
+  .eyebrow { font-family: var(--mono); font-size: 9.5px; letter-spacing: .26em; text-transform: uppercase; color: var(--accent); }
+  h1 { margin-top: 6px; font-weight: 900; text-transform: uppercase; letter-spacing: -.015em; font-size: 28px; line-height: .98; }
+  h1 i { font-style: normal; color: var(--accent); }
+
+  .btn { display: inline-block; padding: 10px 14px; border: 1px solid var(--line); border-radius: 2px; background: var(--hud); color: var(--ink);
+    font-family: var(--mono); font-size: 9.5px; letter-spacing: .18em; text-transform: uppercase; cursor: pointer; text-decoration: none;
+    transition: border-color .2s, color .2s; }
+  .btn:hover { border-color: var(--accent); }
+  .btn.go { background: var(--accent); border-color: var(--accent); color: #04191c; font-weight: 500; }
+  .btn.go:hover { background: #c3f1f6; }
+  .btn.small { padding: 8px 12px; font-size: 9px; }
+  .btn:disabled { opacity: .4; cursor: default; }
+
+  /* ---------- layout: preview left (sticky), form right ---------- */
+  .layout { display: grid; grid-template-columns: 300px 1fr; gap: 32px; align-items: start; margin-top: 22px; }
+  .preview-col { position: sticky; top: calc(var(--mtc-nav-h, 0px) + 20px); }
+
+  .preview { padding: 24px 18px 22px; text-align: center; }
+  #avatarWrap { display: inline-block; margin: 0 auto 14px; line-height: 0; }
+  #avatar { margin: 0 auto; }
+  .pv-name { font-weight: 800; font-size: 19px; text-transform: uppercase; letter-spacing: -.01em; word-break: break-word; }
+  .pv-name.placeholder { color: var(--faint); font-weight: 500; }
+  .pv-sub { margin-top: 5px; font-family: var(--mono); font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--accent); }
+  .pv-tags { margin-top: 14px; display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; }
+  .tag { font-family: var(--mono); font-size: 9px; letter-spacing: .1em; text-transform: uppercase; color: var(--dim);
+    border: 1px solid var(--line); border-radius: 2px; padding: 4px 8px; }
+
+  /* ---------- steps progress strip ---------- */
+  .steps-nav { margin-top: 18px; }
+  .steps-nav ol { list-style: none; display: flex; flex-wrap: wrap; align-items: center; }
+  .steps-nav li { display: flex; align-items: center; }
+  .steps-nav li + li::before { content: '\00b7'; margin: 0 8px; color: var(--faint); font-family: var(--mono); }
+  .step-pill { border: 1px solid var(--line); border-radius: 2px; background: var(--hud); color: var(--faint);
+    font-family: var(--mono); font-size: 9.5px; letter-spacing: .18em; text-transform: uppercase;
+    padding: 7px 10px; cursor: pointer; transition: border-color .2s, color .2s; }
+  .step-pill:not(:disabled):hover { border-color: rgba(var(--accent-rgb), .55); color: var(--ink); }
+  .step-pill[aria-current="step"] { border-color: var(--accent); color: var(--accent); }
+  .step-pill:disabled { opacity: .4; cursor: default; }
+
+  /* ---------- step panels ---------- */
+  .step-panel { margin-top: 26px; }
+  .step-h { font-family: var(--mono); font-size: 11px; letter-spacing: .22em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; }
+  .step-hint { font-family: var(--font); font-size: 12px; line-height: 1.5; color: var(--dim); margin: -4px 0 18px; }
+
+  .roll-btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 16px; font-size: 11.5px; letter-spacing: .14em; text-align: center; margin-bottom: 6px; }
+  .roll-btn .dice { flex: 0 0 auto; }
+  .roll-hint { font-family: var(--font); font-size: 12px; color: var(--dim); margin: 0 0 18px; }
+  .shuffle-row { margin: -2px 0 26px; }
+
+  /* ---------- pickers ---------- */
+  .picker { border: 0; margin: 0 0 20px; padding: 0; }
+  .picker legend { font-family: var(--mono); font-size: 9px; letter-spacing: .22em; text-transform: uppercase; color: var(--faint); margin-bottom: 9px; padding: 0; }
+  .opts { display: flex; flex-wrap: wrap; gap: 6px; }
+  .opt { display: inline-flex; align-items: center; gap: 7px; padding: 9px 13px; border: 1px solid var(--line); border-radius: 2px;
+    background: var(--hud); color: var(--dim); font-family: var(--mono); font-size: 10.5px; letter-spacing: .07em; text-transform: uppercase;
+    cursor: pointer; transition: border-color .15s, background-color .15s, color .15s; }
+  .opt:hover { border-color: rgba(var(--accent-rgb), .55); color: var(--ink); }
+  .opt[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #04191c; font-weight: 500; }
+  .opt .dot { width: 12px; height: 12px; border-radius: 50%; border: 1px solid rgba(244,243,240,.3); flex: 0 0 auto; }
+
+  /* ---------- text fields ---------- */
+  .field { border: 0; margin: 0 0 18px; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+  .field label { font-family: var(--mono); font-size: 9px; letter-spacing: .22em; text-transform: uppercase; color: var(--faint); }
+  .field input, .field textarea { padding: 10px 12px; background: rgba(244,243,240,.04); border: 1px solid var(--line); border-radius: 2px;
+    color: var(--ink); font: 400 14px/1.4 var(--font); }
+  .field input::placeholder, .field textarea::placeholder { color: var(--faint); }
+  .field input:focus, .field textarea:focus { border-color: var(--accent); }
+  .field textarea { resize: vertical; min-height: 72px; }
+  .counter { align-self: flex-end; font-family: var(--mono); font-size: 9.5px; color: var(--faint); }
+  .err { font-family: var(--mono); font-size: 10px; letter-spacing: .06em; color: var(--red); min-height: 13px; }
+
+  /* ---------- step nav (back/next/save) ---------- */
+  .step-actions { display: flex; justify-content: space-between; gap: 10px; margin-top: 8px; }
+  .step-actions.only-next { justify-content: flex-end; }
+
+  /* ---------- review (step 4) ---------- */
+  .review { margin-bottom: 14px; }
+  .review-name { font-weight: 800; font-size: 18px; text-transform: uppercase; letter-spacing: -.01em; }
+  .review-bio { margin-top: 6px; font-size: 13px; line-height: 1.5; color: var(--dim); }
+  .review-links { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 8px; }
+  .review-links a { font-family: var(--mono); font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: var(--accent);
+    text-decoration: none; border: 1px solid var(--line); border-radius: 2px; padding: 5px 9px; }
+  .review-links a:hover { text-decoration: underline; }
+  .store-note { font-family: var(--mono); font-size: 9.5px; letter-spacing: .08em; color: var(--faint); margin: 2px 0 18px; }
+  .signin-status { font-family: var(--mono); font-size: 9.5px; letter-spacing: .08em; color: var(--faint); margin: 2px 0 18px; }
+  .linklike { background: none; border: 0; padding: 0; margin: 0; color: var(--accent); text-decoration: underline; cursor: pointer; font: inherit; }
+  .linklike:hover { color: var(--ink); }
+  .m-store-note, .m-signin-status { margin-top: 16px; }
+
+  .save-msg { margin-top: 12px; font-family: var(--mono); font-size: 10.5px; letter-spacing: .06em; color: var(--dim); }
+  .save-msg a { color: var(--accent); text-decoration: none; }
+  .save-msg a:hover { text-decoration: underline; }
+
+  /* ---------- roll flicker (shared by the desktop preview and the mobile portrait) ---------- */
+  .rolling #avatar, .rolling #mPortrait { animation: mtc-roll-flicker .13s steps(1, end) infinite; }
+  @keyframes mtc-roll-flicker { 0%, 100% { opacity: 1; } 50% { opacity: .3; } }
+
+  /* ====================================================================================
+     Mobile arcade view (<=640px), ported from _v/b.html. #desktopView / #mobileView are
+     toggled via the `hidden` attribute by the script below; only one is ever shown. While
+     the mobile view is active the body becomes a fixed-height, non-scrolling stage (the
+     two-panel slider owns its own scrolling), restored when the view switches back.
+     ==================================================================================== */
+  body.mobile-active { height: 100vh; height: 100dvh; min-height: 0; overflow: hidden; }
+  #mobileView { position: relative; width: 100%; height: 100%; overflow: hidden; }
+  #mobileView .m-panel { position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden;
+    display: flex; flex-direction: column; transition: transform .32s var(--ease); }
+  #mPanel1 { transform: translateX(0); }
+  #mPanel2 { transform: translateX(100%); overflow-y: auto; -webkit-overflow-scrolling: touch; }
+  #mobileView.show2 #mPanel1 { transform: translateX(-100%); }
+  #mobileView.show2 #mPanel2 { transform: translateX(0); }
+
+  /* ---- panel 1: arcade character select ---- */
+  #mPanel1 { align-items: stretch; justify-content: flex-start; padding: 6px 14px calc(8px + env(safe-area-inset-bottom, 0px)); }
+  .m-portrait-wrap { display: flex; justify-content: center; align-items: center; margin: 0 0 4px; touch-action: pan-y; cursor: grab; }
+  .m-portrait-wrap:active { cursor: grabbing; }
+  .m-swipe-hint { text-align: center; font-family: var(--mono); font-size: 8.5px; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--faint); margin: -2px 0 6px; }
+
+  .m-roll-btn { position: relative; display: block; margin: 0 auto 6px; padding: 8px 20px; border: 1px solid var(--accent); border-radius: 2px;
+    background: var(--accent); color: #04191c; font-family: var(--mono); font-size: 10px; font-weight: 500;
+    letter-spacing: .14em; text-transform: uppercase; cursor: pointer; transition: background-color .15s, transform .1s; }
+  .m-roll-btn:hover { background: #c3f1f6; }
+  .m-roll-btn:active { transform: scale(.97); }
+  /* invisible touch-target pad: visible size unchanged, tappable height >=40px */
+  .m-roll-btn::before { content: ''; position: absolute; inset: -5px; }
+  .m-roll-hint { text-align: center; font-family: var(--font); font-size: 10.5px; color: var(--dim); margin: 0 0 7px; }
+
+  .m-traits { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 7px; width: 100%; max-width: 340px; margin: 0 auto; }
+  .m-trait-row { grid-column: span 1; display: flex; align-items: center; gap: 4px; min-height: 33px; padding: 0 5px;
+    border: 1px solid var(--line); border-radius: 2px; background: rgba(244,243,240,.025); }
+  .m-trait-row.full { grid-column: 1 / -1; max-width: 168px; margin: 0 auto; width: 100%; }
+  .m-trait-arrow { position: relative; flex: 0 0 auto; width: 23px; height: 23px; display: flex; align-items: center; justify-content: center;
+    border: 1px solid var(--line); border-radius: 2px; background: none; color: var(--ink); font-size: 12px; line-height: 1; cursor: pointer;
+    transition: border-color .15s, color .15s; }
+  .m-trait-arrow:hover, .m-trait-arrow:focus-visible { border-color: var(--accent); color: var(--accent); }
+  .m-trait-arrow:active { transform: scale(.9); }
+  /* invisible touch-target pad: visible size unchanged; expands into this row's own centring slack
+     plus its fair half of the 4px row-gap, the max that can't collide with the row above/below */
+  .m-trait-arrow::before { content: ''; position: absolute; inset: -7px -8px; }
+  .m-trait-mid { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; align-items: center; line-height: 1.15; }
+  .m-trait-label { font-family: var(--mono); font-size: 6.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--faint);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
+  .m-trait-value { font-family: var(--mono); font-size: 9px; letter-spacing: .03em; text-transform: uppercase;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; color: var(--ink); }
+
+  .m-next-btn { position: relative; display: block; margin: 7px auto 0; padding: 9px 26px; border: 1px solid var(--line); border-radius: 2px;
+    background: var(--ink); color: #0a0a0c; font-family: var(--mono); font-size: 10px; font-weight: 500;
+    letter-spacing: .16em; text-transform: uppercase; cursor: pointer; transition: transform .1s; }
+  .m-next-btn:hover { background: #fff; }
+  .m-next-btn:active { transform: scale(.97); }
+  .m-next-btn::before { content: ''; position: absolute; inset: -4px; }
+
+  /* ---- panel 2: details form ---- */
+  .m-details-inner { max-width: 420px; margin: 0 auto; width: 100%; padding: 16px 16px 40px; }
+  .m-back-btn { position: relative; padding: 8px 12px; border: 1px solid var(--line); border-radius: 2px; background: var(--hud); color: var(--ink);
+    font-family: var(--mono); font-size: 9.5px; letter-spacing: .18em; text-transform: uppercase; cursor: pointer; }
+  .m-back-btn:hover { border-color: var(--accent); }
+  .m-back-btn::before { content: ''; position: absolute; inset: -5px; }
+  .m-details-head { margin-top: 16px; border-bottom: 1px solid var(--line); padding-bottom: 14px; }
+  #mobileView h1 { font-size: 24px; }
+
+  .m-field { margin-top: 16px; }
+  .m-field label { display: block; font-family: var(--mono); font-size: 9.5px; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--faint); margin-bottom: 6px; }
+  .m-field input, .m-field textarea { width: 100%; background: var(--hud); border: 1px solid var(--line); border-radius: 2px;
+    color: var(--ink); font-family: var(--font); font-size: 15px; padding: 10px 12px; }
+  .m-field input:focus-visible, .m-field textarea:focus-visible { border-color: var(--accent); }
+  .m-field textarea { resize: vertical; min-height: 68px; }
+  .m-field-foot { display: flex; align-items: baseline; justify-content: space-between; margin-top: 4px; }
+  .m-count { font-family: var(--mono); font-size: 9px; letter-spacing: .04em; color: var(--faint); white-space: nowrap; }
+
+  .m-save-btn { display: block; width: 100%; margin-top: 22px; padding: 13px 16px; border: 1px solid var(--accent); border-radius: 2px;
+    background: var(--accent); color: #04191c; font-family: var(--mono); font-size: 11px; font-weight: 500;
+    letter-spacing: .18em; text-transform: uppercase; cursor: pointer; transition: background-color .15s, transform .1s; }
+  .m-save-btn:hover { background: #c3f1f6; }
+  .m-save-btn:active { transform: scale(.99); }
+  .m-save-msg { margin-top: 10px; font-family: var(--mono); font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--accent); min-height: 13px; }
+  .m-save-msg a { color: inherit; text-decoration: none; }
+  .m-save-msg a:hover { text-decoration: underline; }
+
+  /* ---------- sign-in gate: shown instead of the builder when MTCDb.configured() and no session ---------- */
+  .gate-panel { max-width: 420px; margin: 24px auto 0; padding: 26px 22px; }
+  .signin-status-top { margin: 8px 0 0; }
+  .m-signin-status-top { text-align: center; margin: 0 0 10px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .btn, .opt, .step-pill { transition: none; }
+    .rolling #avatar, .rolling #mPortrait { animation: none; }
+    #mobileView, #mobileView .m-panel { transition: none; }
+    .m-roll-btn, .m-next-btn, .m-save-btn, .m-back-btn, .m-trait-arrow { transition: none; }
+  }
+</style>
+</head>
+<body data-analytics-offer="citizens">
+
+<script src="/citizens/nav.js" data-screen="directory" data-title="Create your citizen"></script>
+<script src="/citizens/avatar/avatar.js"></script>
+<script src="/citizens/avatar/config.js"></script>
+<script src="/citizens/avatar/db.js"></script>
+
+<div class="wrap" id="gateView" hidden>
+  <div class="panel gate-panel" id="gatePanel">
+    <h1 id="gateHeading" tabindex="-1">Sign in to create your citizen<i aria-hidden="true">.</i></h1>
+    <p class="step-hint">We send a six-digit code to your email. No password.</p>
+
+    <p class="step-hint" id="gateChecking">Checking your sign-in&hellip;</p>
+
+    <div id="gateStepEmail">
+      <fieldset class="field">
+        <label for="gateEmailInput">Email</label>
+        <input id="gateEmailInput" type="email" autocomplete="email" inputmode="email" disabled />
+        <p class="err" id="gateEmailErr" aria-live="polite"></p>
+      </fieldset>
+      <button type="button" class="btn go" id="gateSendBtn" disabled
+        data-analytics-action="site_navigation" data-analytics-location="citizens_you" data-analytics-target="signin_send">Send code</button>
+    </div>
+
+    <div id="gateStepCode" hidden>
+      <p class="step-hint">Enter the 6-digit code from your email.</p>
+      <fieldset class="field">
+        <label for="gateCodeInput">Code</label>
+        <input id="gateCodeInput" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="6" disabled />
+        <p class="err" id="gateCodeErr" aria-live="polite"></p>
+      </fieldset>
+      <p class="step-hint">Check your email for a six-digit code. If the email has a button instead, tap it: it brings you back here signed in.</p>
+      <button type="button" class="btn go" id="gateVerifyBtn" disabled
+        data-analytics-action="site_navigation" data-analytics-location="citizens_you" data-analytics-target="signin_verify">Verify</button>
+      <button type="button" class="btn small" id="gateResendBtn" disabled
+        data-analytics-action="site_navigation" data-analytics-location="citizens_you" data-analytics-target="signin_resend">Send a new code</button>
+    </div>
+
+    <p class="step-hint" id="gateExpiredNote" hidden aria-live="polite"></p>
+
+    <p class="store-note">
+      <a href="/citizens/directory/" data-analytics-action="site_navigation" data-analytics-location="citizens_you" data-analytics-target="gate_directory">See the directory</a>
+    </p>
+  </div>
+</div>
+
+<div class="wrap" id="desktopView">
+  <div class="head">
+    <p class="eyebrow" id="eyebrow">New citizen</p>
+    <h1 id="pageHeading" tabindex="-1">Create your citizen<i aria-hidden="true">.</i></h1>
+    <p class="signin-status signin-status-top" id="signinStatusTop" hidden>Signed in as <span id="signinEmailLabelTop"></span> &middot;
+      <button type="button" class="linklike" id="signoutBtnTop"
+        data-analytics-action="site_navigation" data-analytics-location="citizens_you" data-analytics-target="signout">Sign out</button></p>
+  </div>
+
+  <nav aria-label="Steps" class="steps-nav">
+    <ol>
+      <li><button type="button" class="step-pill" data-step="1">1 Look</button></li>
+      <li><button type="button" class="step-pill" data-step="2">2 Augments</button></li>
+      <li><button type="button" class="step-pill" data-step="3">3 About you</button></li>
+      <li><button type="button" class="step-pill" data-step="4">4 Save</button></li>
+    </ol>
+  </nav>
+
+  <form id="form" class="layout" novalidate>
+    <div class="preview-col">
+      <div class="preview panel">
+        <div id="avatarWrap" role="img" aria-label="Your citizen" tabindex="-1"><div id="avatar"></div></div>
+        <button type="button" id="rollBtn" class="btn go roll-btn"
+          data-analytics-action="site_navigation" data-analytics-location="citizens_you" data-analytics-target="roll">
+          <svg class="dice" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false">
+            <rect x="3" y="3" width="18" height="18" rx="3" fill="none" stroke="currentColor" stroke-width="2"/>
+            <circle cx="8" cy="8" r="1.6" fill="currentColor"/>
+            <circle cx="16" cy="8" r="1.6" fill="currentColor"/>
+            <circle cx="12" cy="12" r="1.6" fill="currentColor"/>
+            <circle cx="8" cy="16" r="1.6" fill="currentColor"/>
+            <circle cx="16" cy="16" r="1.6" fill="currentColor"/>
+          </svg>
+          <span>Roll a random citizen</span>
+        </button>
+        <p class="roll-hint">Rolls everything. Change any part after.</p>
+        <p class="pv-name placeholder" id="pvName">Your name</p>
+        <p class="pv-sub">Frontier Human · Citizen</p>
+        <div class="pv-tags" id="pvTags"></div>
+      </div>
+    </div>
+
+    <div class="form-col">
+
+      <section class="step-panel" id="step-look" aria-labelledby="h-look">
+        <h2 class="step-h" id="h-look" tabindex="-1">Look</h2>
+
+        <fieldset class="picker"><legend>Body</legend><div class="opts" id="opt-body"></div></fieldset>
+        <fieldset class="picker"><legend>Skin</legend><div class="opts" id="opt-skin"></div></fieldset>
+        <fieldset class="picker"><legend>Hair style</legend><div class="opts" id="opt-style"></div></fieldset>
+        <fieldset class="picker"><legend>Hair colour</legend><div class="opts" id="opt-colour"></div></fieldset>
+        <fieldset class="picker"><legend>Eyes</legend><div class="opts" id="opt-eyes"></div></fieldset>
+
+        <div class="shuffle-row">
+          <button type="button" id="shuffleLookBtn" class="btn small"
+            data-analytics-action="site_navigation" data-analytics-location="citizens_you" data-analytics-target="shuffle_look">Shuffle look</button>
+        </div>
+
+        <div class="step-actions only-next">
+          <button type="button" id="nextBtn1" class="btn go panel-primary"
+            data-analytics-action="site_navigation" data-analytics-location="citizens_you" data-analytics-target="step_next">Next</button>
+        </div>
+      </section>
+
+      <section class="step-panel" id="step-augments" hidden aria-labelledby="h-augments">
+        <h2 class="step-h" id="h-augments" tabindex="-1">Augments</h2>
+        <p class="step-hint">Optional. Pick up to four things you track or train.</p>
+
+        <fieldset class="picker"><legend>Head augment</legend><div class="opts" id="opt-head"></div></fieldset>
+        <fieldset class="picker"><legend>Eye augment</legend><div class="opts" id="opt-eyewear"></div></fieldset>
+        <fieldset class="picker"><legend>Chest augment</legend><div class="opts" id="opt-chest"></div></fieldset>
+        <fieldset class="picker"><legend>Hand augment</legend><div class="opts" id="opt-hands"></div></fieldset>
+
+        <div class="shuffle-row">
+          <button type="button" id="shuffleAugBtn" class="btn small"
+            data-analytics-action="site_navigation" data-analytics-location="citizens_you" data-analytics-target="shuffle_augments">Shuffle augments</button>
+        </div>
+
+        <div class="step-actions">
+          <button type="button" id="backBtn2" class="btn"
+            data-analytics-action="site_navigation" data-analytics-location="citizens_you" data-analytics-target="step_back">Back</button>
+          <button type="button" id="nextBtn2" class="btn go panel-primary"
+            data-analytics-action="site_navigation" data-analytics-location="citizens_you" data-analytics-target="step_next">Next</button>
+        </div>
+      </section>
+
+      <section class="step-panel" id="step-about" hidden aria-labelledby="h-about">
+        <h2 class="step-h" id="h-about" tabindex="-1">About you</h2>
+
+        <fieldset class="field">
+          <label for="fName">Name</label>
+          <input id="fName" type="text" maxlength="24" autocomplete="name" required />
+          <p class="err" id="errName"></p>
+        </fieldset>
+
+        <fieldset class="field">
+          <label for="fBio">Bio</label>
+          <textarea id="fBio" maxlength="140"></textarea>
+          <p class="counter num" id="bioCounter">0 / 140</p>
+        </fieldset>
+
+        <fieldset class="field">
+          <label for="fX">X handle</label>
+          <input id="fX" type="text" placeholder="e.g. miraitechcity" autocomplete="off" />
+          <p class="err" id="errX"></p>
+        </fieldset>
+
+        <fieldset class="field">
+          <label for="fLinkedin">LinkedIn</label>
+          <input id="fLinkedin" type="text" placeholder="linkedin.com/in/your-name" autocomplete="off" />
+          <p class="err" id="errLinkedin"></p>
+        </fieldset>
+
+        <div class="step-actions">
+          <button type="button" id="backBtn3" class="btn"
+            data-analytics-action="site_navigation" data-analytics-location="citizens_you" data-analytics-target="step_back">Back</button>
+          <button type="button" id="nextBtn3" class="btn go panel-primary"
+            data-analytics-action="site_navigation" data-analytics-location="citizens_you" data-analytics-target="step_next">Next</button>
+        </div>
+      </section>
+
+      <section class="step-panel" id="step-save" hidden aria-labelledby="h-save">
+        <h2 class="step-h" id="h-save" tabindex="-1">Save</h2>
+
+        <div class="review">
+          <p class="review-name" id="reviewName">Your name</p>
+          <p class="review-bio" id="reviewBio" hidden></p>
+          <div class="review-links" id="reviewLinks"></div>
+        </div>
+        <p class="store-note" id="storeNote">Stored on this device only for now.</p>
+        <p class="signin-status" id="signinStatus" hidden>Signed in as <span id="signinEmailLabel"></span> &middot;
+          <button type="button" class="linklike" id="signoutBtn"
+            data-analytics-action="site_navigation" data-analytics-location="citizens_you" data-analytics-target="signout">Sign out</button></p>
+
+        <div class="step-actions">
+          <button type="button" id="backBtn4" class="btn"
+            data-analytics-action="site_navigation" data-analytics-location="citizens_you" data-analytics-target="step_back">Back</button>
+          <button type="submit" id="saveBtn" class="btn go panel-primary"
+            data-analytics-action="site_navigation" data-analytics-location="citizens_you" data-analytics-target="save">Save</button>
+        </div>
+        <p class="save-msg" id="saveMsg" aria-live="polite"></p>
+      </section>
+
+    </div>
+  </form>
+</div>
+
+<div id="mobileView" hidden>
+
+  <section class="m-panel" id="mPanel1" aria-label="Build your citizen" tabindex="-1">
+    <p class="signin-status m-signin-status-top" id="mSigninStatusTop" hidden>Signed in as <span id="mSigninEmailLabelTop"></span> &middot;
+      <button type="button" class="linklike" id="mSignoutBtnTop"
+        data-analytics-action="site_navigation" data-analytics-location="citizens_you" data-analytics-target="signout">Sign out</button></p>
+    <div class="m-portrait-wrap" id="mPortraitWrap">
+      <div id="mPortrait" role="img" aria-label="Your citizen" tabindex="-1"></div>
+    </div>
+    <p class="m-swipe-hint">Swipe portrait for hair style</p>
+    <button type="button" class="m-roll-btn" id="mRollBtn"
+      data-analytics-action="site_navigation" data-analytics-location="citizens_you" data-analytics-target="roll">
+      <svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" focusable="false" style="vertical-align:-2px;margin-right:6px">
+        <rect x="3" y="3" width="18" height="18" rx="3" fill="none" stroke="currentColor" stroke-width="2"/>
+        <circle cx="8" cy="8" r="1.6" fill="currentColor"/>
+        <circle cx="16" cy="8" r="1.6" fill="currentColor"/>
+        <circle cx="12" cy="12" r="1.6" fill="currentColor"/>
+        <circle cx="8" cy="16" r="1.6" fill="currentColor"/>
+        <circle cx="16" cy="16" r="1.6" fill="currentColor"/>
+      </svg>Roll a random citizen</button>
+    <p class="m-roll-hint">Rolls everything. Change any part after.</p>
+    <div class="m-traits" id="mTraits" aria-label="Appearance"></div>
+    <button type="button" class="m-next-btn" id="mNextBtn"
+      data-analytics-action="site_navigation" data-analytics-location="citizens_you" data-analytics-target="step_next">Next <span aria-hidden="true">&rarr;</span></button>
+  </section>
+
+  <section class="m-panel" id="mPanel2" aria-label="Your details" aria-hidden="true">
+    <div class="m-details-inner">
+      <button type="button" class="m-back-btn" id="mBackBtn"
+        data-analytics-action="site_navigation" data-analytics-location="citizens_you" data-analytics-target="step_back"><span aria-hidden="true">&larr;</span> Back</button>
+      <div class="m-details-head">
+        <div class="eyebrow">Citizens · Directory</div>
+        <h1>Your <i>details</i></h1>
+      </div>
+
+      <div class="m-field">
+        <label for="mNameInput">Name</label>
+        <input id="mNameInput" type="text" maxlength="24" autocomplete="name" />
+        <div class="m-field-foot"><p class="err" id="mNameErr"></p><span class="m-count" id="mNameCount">0/24</span></div>
+      </div>
+
+      <div class="m-field">
+        <label for="mBioInput">Bio</label>
+        <textarea id="mBioInput" maxlength="140"></textarea>
+        <div class="m-field-foot"><p class="err" id="mBioErr"></p><span class="m-count" id="mBioCount">0/140</span></div>
+      </div>
+
+      <div class="m-field">
+        <label for="mXInput">X handle</label>
+        <input id="mXInput" type="text" placeholder="e.g. miraitechcity" autocomplete="off" autocapitalize="off" autocorrect="off" />
+        <div class="m-field-foot"><p class="err" id="mXErr"></p></div>
+      </div>
+
+      <div class="m-field">
+        <label for="mLiInput">LinkedIn</label>
+        <input id="mLiInput" type="text" placeholder="linkedin.com/in/your-name" autocomplete="off" autocapitalize="off" autocorrect="off" />
+        <div class="m-field-foot"><p class="err" id="mLiErr"></p></div>
+      </div>
+
+      <p class="signin-status m-signin-status" id="mSigninStatus" hidden>Signed in as <span id="mSigninEmailLabel"></span> &middot;
+        <button type="button" class="linklike" id="mSignoutBtn"
+          data-analytics-action="site_navigation" data-analytics-location="citizens_you" data-analytics-target="signout">Sign out</button></p>
+
+      <button type="button" class="m-save-btn" id="mSaveBtn"
+        data-analytics-action="site_navigation" data-analytics-location="citizens_you" data-analytics-target="save">Save citizen</button>
+      <p class="m-save-msg" id="mSaveMsg" aria-live="polite"></p>
+    </div>
+  </section>
+
+</div>
+
+<script>
+  /* Set the correct view before first paint, so nobody ever flashes the builder: when
+     MTCDb is configured the gate decides what to show once the session is known (see the
+     boot sequence below), so only the unconfigured (local-only) case picks a view here. */
+  (function () {
+    var gated = (typeof window.MTCDb !== 'undefined') && MTCDb.configured();
+    if (gated) {
+      document.getElementById('gateView').hidden = false;
+      document.getElementById('desktopView').hidden = true;
+      document.getElementById('mobileView').hidden = true;
+      return;
+    }
+    var mobile = window.matchMedia('(max-width: 640px)').matches;
+    document.getElementById('desktopView').hidden = mobile;
+    document.getElementById('mobileView').hidden = !mobile;
+    if (mobile) document.body.classList.add('mobile-active');
+  })();
+</script>
+
+<script>
+(function () {
+  var SCALE = 4; // both views render the avatar at the same scale now that the desktop fallback layout is gone
+  var AUG_SLOTS = ['head', 'eyewear', 'chest', 'hands'];
+  var LOOK_FIELDS = ['body', 'skin', 'style', 'colour', 'eyes'];
+  var STEP_HASHES = ['#look', '#augments', '#about', '#save']; // desktop's 4 steps
+  var catalog = null, state = null, existingProfile = null;
+  var takenCodes = {}; // code -> true, from /citizens/data/citizens.json; uniqueness check skipped silently if the fetch fails
+  var currentStep = 1; // desktop step
+  var mobileTraits = []; // built once catalog is loaded
+
+  var mq = window.matchMedia('(max-width: 640px)');
+  function isMobile() { return mq.matches; }
+
+  var desktopView = document.getElementById('desktopView');
+  var mobileView = document.getElementById('mobileView');
+
+  var form = document.getElementById('form');
+  var avatarEl = document.getElementById('avatar');
+  var avatarWrap = document.getElementById('avatarWrap');
+  var pvName = document.getElementById('pvName');
+  var pvTags = document.getElementById('pvTags');
+  var eyebrow = document.getElementById('eyebrow');
+  var saveBtn = document.getElementById('saveBtn');
+  var saveMsg = document.getElementById('saveMsg');
+  var fName = document.getElementById('fName');
+  var fBio = document.getElementById('fBio');
+  var fX = document.getElementById('fX');
+  var fLinkedin = document.getElementById('fLinkedin');
+  var errName = document.getElementById('errName');
+  var errX = document.getElementById('errX');
+  var errLinkedin = document.getElementById('errLinkedin');
+  var bioCounter = document.getElementById('bioCounter');
+
+  var rollBtn = document.getElementById('rollBtn');
+  var shuffleLookBtn = document.getElementById('shuffleLookBtn');
+  var shuffleAugBtn = document.getElementById('shuffleAugBtn');
+  var stepPills = Array.prototype.slice.call(document.querySelectorAll('.step-pill'));
+  var panels = { 1: document.getElementById('step-look'), 2: document.getElementById('step-augments'),
+    3: document.getElementById('step-about'), 4: document.getElementById('step-save') };
+  var reviewName = document.getElementById('reviewName');
+  var reviewBio = document.getElementById('reviewBio');
+  var reviewLinks = document.getElementById('reviewLinks');
+
+  // ---- mobile view elements
+  var mPortraitEl = document.getElementById('mPortrait');
+  var mPortraitWrap = document.getElementById('mPortraitWrap');
+  var mTraitsEl = document.getElementById('mTraits');
+  var mRollBtn = document.getElementById('mRollBtn');
+  var mNextBtn = document.getElementById('mNextBtn');
+  var mBackBtn = document.getElementById('mBackBtn');
+  var mPanel2 = document.getElementById('mPanel2');
+  var mPanel1 = document.getElementById('mPanel1');
+  var mNameInput = document.getElementById('mNameInput');
+  var mBioInput = document.getElementById('mBioInput');
+  var mXInput = document.getElementById('mXInput');
+  var mLiInput = document.getElementById('mLiInput');
+  var mNameErr = document.getElementById('mNameErr');
+  var mXErr = document.getElementById('mXErr');
+  var mLiErr = document.getElementById('mLiErr');
+  var mNameCount = document.getElementById('mNameCount');
+  var mBioCount = document.getElementById('mBioCount');
+  var mSaveBtn = document.getElementById('mSaveBtn');
+  var mSaveMsg = document.getElementById('mSaveMsg');
+
+  // ---- db auth elements (top-of-builder line + desktop step-save + mobile final panel)
+  var storeNote = document.getElementById('storeNote');
+  var signinStatus = document.getElementById('signinStatus');
+  var signinEmailLabel = document.getElementById('signinEmailLabel');
+  var signoutBtn = document.getElementById('signoutBtn');
+  var signinStatusTop = document.getElementById('signinStatusTop');
+  var signinEmailLabelTop = document.getElementById('signinEmailLabelTop');
+  var signoutBtnTop = document.getElementById('signoutBtnTop');
+  var mSigninStatus = document.getElementById('mSigninStatus');
+  var mSigninEmailLabel = document.getElementById('mSigninEmailLabel');
+  var mSignoutBtn = document.getElementById('mSignoutBtn');
+  var mSigninStatusTop = document.getElementById('mSigninStatusTop');
+  var mSigninEmailLabelTop = document.getElementById('mSigninEmailLabelTop');
+  var mSignoutBtnTop = document.getElementById('mSignoutBtnTop');
+  var pageHeading = document.getElementById('pageHeading');
+
+  // ---- sign-in gate elements (front of the page; replaces the builder until signed in)
+  var gateView = document.getElementById('gateView');
+  var gateHeading = document.getElementById('gateHeading');
+  var gateChecking = document.getElementById('gateChecking');
+  var gateStepEmail = document.getElementById('gateStepEmail');
+  var gateStepCode = document.getElementById('gateStepCode');
+  var gateEmailInput = document.getElementById('gateEmailInput');
+  var gateEmailErr = document.getElementById('gateEmailErr');
+  var gateSendBtn = document.getElementById('gateSendBtn');
+  var gateCodeInput = document.getElementById('gateCodeInput');
+  var gateCodeErr = document.getElementById('gateCodeErr');
+  var gateVerifyBtn = document.getElementById('gateVerifyBtn');
+  var gateResendBtn = document.getElementById('gateResendBtn');
+  var gateExpiredNote = document.getElementById('gateExpiredNote');
+  var gateVisible = false; // whether #gateView is the thing currently on screen
+  var isSignedIn = false; // whether we've passed the gate (or it's unconfigured) and the builder is showing
+  var authRedirectPending = false; // true while consumeAuthRedirect() is being awaited at boot
+  var resendTimer = null; // interval id for the "Send a new code" cooldown, or null when idle
+  var RESEND_COOLDOWN_SECONDS = 30;
+
+  var groupEls = {
+    body: document.getElementById('opt-body'),
+    skin: document.getElementById('opt-skin'),
+    style: document.getElementById('opt-style'),
+    colour: document.getElementById('opt-colour'),
+    eyes: document.getElementById('opt-eyes'),
+    head: document.getElementById('opt-head'),
+    eyewear: document.getElementById('opt-eyewear'),
+    chest: document.getElementById('opt-chest'),
+    hands: document.getElementById('opt-hands')
+  };
+
+  function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+
+  function bodyObj(id) { for (var i = 0; i < catalog.bodies.length; i++) if (catalog.bodies[i].id === id) return catalog.bodies[i]; return catalog.bodies[0]; }
+  function labelOf(list, id) { for (var i = 0; i < list.length; i++) if (list[i].id === id) return list[i].label; return id; }
+  function slotDef(slot) { for (var i = 0; i < catalog.augmentSlots.length; i++) if (catalog.augmentSlots[i].id === slot) return catalog.augmentSlots[i]; return null; }
+  function augOptionsOf(slot) { var d = slotDef(slot); return d ? d.options : []; }
+
+  // ---- building the option rows from catalog.json; never hard-coded
+  function buildButtons(container, items, onPick, opts) {
+    opts = opts || {};
+    container.innerHTML = '';
+    items.forEach(function (item) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'opt';
+      b.setAttribute('aria-pressed', 'false');
+      b.dataset.value = item.id === null ? '' : item.id;
+      var inner = '';
+      if (opts.swatch) inner += '<span class="dot" style="background:' + esc(item.swatch || '#888') + '" aria-hidden="true"></span>';
+      inner += '<span class="opt-label">' + esc(item.label) + '</span>';
+      b.innerHTML = inner;
+      b.addEventListener('click', function () { onPick(item.id); });
+      container.appendChild(b);
+    });
+  }
+
+  function markPressed(container, value) {
+    var v = value === null || value === undefined ? '' : value;
+    Array.prototype.forEach.call(container.querySelectorAll('.opt'), function (b) {
+      b.setAttribute('aria-pressed', String(b.dataset.value === v));
+    });
+  }
+
+  function buildStylePicker() {
+    buildButtons(groupEls.style, bodyObj(state.body).styles, function (id) { setField('style', id); });
+    markPressed(groupEls.style, state.style);
+  }
+
+  function buildPickers() {
+    buildButtons(groupEls.body, catalog.bodies, function (id) { setField('body', id); });
+    buildButtons(groupEls.skin, catalog.skins, function (id) { setField('skin', id); }, { swatch: true });
+    buildStylePicker();
+    buildButtons(groupEls.colour, catalog.colours, function (id) { setField('colour', id); }, { swatch: true });
+    buildButtons(groupEls.eyes, catalog.eyes, function (id) { setField('eyes', id); });
+    AUG_SLOTS.forEach(function (slot) {
+      var items = [{ id: null, label: 'None' }].concat(augOptionsOf(slot));
+      buildButtons(groupEls[slot], items, function (id) { setField(slot, id); });
+    });
+  }
+
+  function syncAll() {
+    markPressed(groupEls.body, state.body);
+    markPressed(groupEls.skin, state.skin);
+    markPressed(groupEls.style, state.style);
+    markPressed(groupEls.colour, state.colour);
+    markPressed(groupEls.eyes, state.eyes);
+    AUG_SLOTS.forEach(function (slot) { markPressed(groupEls[slot], state[slot]); });
+  }
+
+  // shared by the desktop pickers (click) and the mobile arrow rows (cycle) — the one place a
+  // trait value changes, so both views and the preview stay in sync no matter which UI set it.
+  function setField(field, value) {
+    state[field] = value;
+    if (field === 'body') {
+      var styles = bodyObj(value).styles, ids = styles.map(function (s) { return s.id; });
+      if (ids.indexOf(state.style) < 0) state.style = styles[0].id;
+      buildStylePicker();
+    }
+    syncAll();
+    renderAvatar();
+    renderTags();
+    syncMobileTraitValues();
+  }
+
+  // ---- preview (rendered into both the desktop avatar and the mobile portrait, always, so
+  // crossing the breakpoint never has to "catch up")
+  function describeState(s) {
+    var body = bodyObj(s.body);
+    var parts = [body.label.toLowerCase(), labelOf(catalog.skins, s.skin).toLowerCase() + ' skin',
+      labelOf(body.styles, s.style).toLowerCase() + ' hair', labelOf(catalog.colours, s.colour).toLowerCase(),
+      labelOf(catalog.eyes, s.eyes).toLowerCase() + ' eyes'];
+    var augs = AUG_SLOTS.filter(function (slot) { return s[slot]; })
+      .map(function (slot) { return labelOf(augOptionsOf(slot), s[slot]).toLowerCase(); });
+    var out = 'Your citizen: ' + parts.join(', ');
+    if (augs.length) out += ', wearing ' + augs.join(', ');
+    return out;
+  }
+
+  function renderAvatar() {
+    MTCAvatar.render(avatarEl, state, { scale: SCALE });
+    MTCAvatar.render(mPortraitEl, state, { scale: SCALE });
+    var label = describeState(state);
+    avatarWrap.setAttribute('aria-label', label);
+    mPortraitWrap.setAttribute('aria-label', label);
+  }
+
+  function renderName() {
+    var v = (state.name || '').trim();
+    pvName.textContent = v || 'Your name';
+    pvName.classList.toggle('placeholder', !v);
+  }
+
+  function renderTags() {
+    var tags = AUG_SLOTS.filter(function (slot) { return state[slot]; })
+      .map(function (slot) { return '<span class="tag">' + esc(labelOf(augOptionsOf(slot), state[slot])) + '</span>'; });
+    pvTags.innerHTML = tags.join('');
+  }
+
+  function updateCounters() {
+    bioCounter.textContent = fBio.value.length + ' / 140';
+    mBioCount.textContent = mBioInput.value.length + '/140';
+    mNameCount.textContent = mNameInput.value.length + '/24';
+  }
+
+  // pushes state.name/bio/x/linkedin into both views' fields — used on boot, on profile load,
+  // and whenever the view switches, so the newly-shown fields always match what was typed.
+  function pushTextFieldsToInputs() {
+    fName.value = state.name || ''; mNameInput.value = state.name || '';
+    fBio.value = state.bio || ''; mBioInput.value = state.bio || '';
+    fX.value = state.x || ''; mXInput.value = state.x || '';
+    fLinkedin.value = state.linkedin || ''; mLiInput.value = state.linkedin || '';
+    renderName();
+    updateCounters();
+  }
+
+  // one field, two inputs: typing in either view's field writes to state and mirrors into the
+  // other view's field (never touching the field actually being typed in).
+  function bindTextMirror(mainEl, mirrorEl, stateKey, onAfter) {
+    function handler(e) {
+      state[stateKey] = e.target.value;
+      var other = e.target === mainEl ? mirrorEl : mainEl;
+      if (other.value !== e.target.value) other.value = e.target.value;
+      if (onAfter) onAfter();
+    }
+    mainEl.addEventListener('input', handler);
+    mirrorEl.addEventListener('input', handler);
+  }
+
+  // ---- field normalisation (shared by both views)
+  function normalizeX(raw) {
+    var s = (raw || '').trim();
+    if (!s) return { ok: true, value: '' };
+    s = s.replace(/^@/, '').replace(/^(https?:\/\/)?(www\.)?(x\.com|twitter\.com)\//i, '').replace(/^@/, '').replace(/\/+$/, '');
+    if (/^[A-Za-z0-9_]{1,15}$/.test(s)) return { ok: true, value: s };
+    return { ok: false };
+  }
+
+  function normalizeLinkedin(raw) {
+    var s = (raw || '').trim();
+    if (!s) return { ok: true, value: '' };
+    s = s.replace(/^(https?:\/\/)?(www\.)?linkedin\.com\/in\//i, '').replace(/^\/+/, '').replace(/\/+$/, '');
+    s = s.split('?')[0].split('#')[0];
+    if (/^[A-Za-z0-9\-_%]{2,100}$/.test(s)) return { ok: true, value: 'https://www.linkedin.com/in/' + s };
+    return { ok: false };
+  }
+
+  // shared validation: reads from state (kept current by bindTextMirror), writes errors into
+  // both views' error elements, and normalises state + both fields in place on success.
+  function validateName() {
+    var v = (state.name || '').trim();
+    var msg = '';
+    if (!v) msg = 'Enter a name.';
+    else if (v.length > 24) msg = 'Name must be 24 characters or fewer.';
+    errName.textContent = msg;
+    mNameErr.textContent = msg;
+    return !msg;
+  }
+  function validateX() {
+    var r = normalizeX(state.x);
+    if (!r.ok) {
+      var msg = "That doesn't look like an X handle.";
+      errX.textContent = msg; mXErr.textContent = msg;
+      return null;
+    }
+    errX.textContent = ''; mXErr.textContent = '';
+    state.x = r.value; fX.value = r.value; mXInput.value = r.value;
+    return r.value;
+  }
+  function validateLinkedin() {
+    var r = normalizeLinkedin(state.linkedin);
+    if (!r.ok) {
+      var msg = 'Enter a LinkedIn profile URL or username.';
+      errLinkedin.textContent = msg; mLiErr.textContent = msg;
+      return null;
+    }
+    errLinkedin.textContent = ''; mLiErr.textContent = '';
+    state.linkedin = r.value; fLinkedin.value = r.value; mLiInput.value = r.value;
+    return r.value;
+  }
+
+  // pure check (no DOM writes) used to gate desktop step 4 — whether the About step's data is currently valid
+  function aboutIsValid() {
+    var name = (state.name || '').trim();
+    if (!name || name.length > 24) return false;
+    if (!normalizeX(state.x).ok) return false;
+    if (!normalizeLinkedin(state.linkedin).ok) return false;
+    return true;
+  }
+
+  // ---- random / unique state helpers
+  function mergeState(base, patch) {
+    var out = {}, k;
+    for (k in base) if (base.hasOwnProperty(k)) out[k] = base[k];
+    for (k in patch) if (patch.hasOwnProperty(k)) out[k] = patch[k];
+    return out;
+  }
+
+  function lookTraitsFromRandom() {
+    var r = MTCAvatar.random(), out = {};
+    LOOK_FIELDS.forEach(function (f) { out[f] = r[f]; });
+    return out;
+  }
+
+  function augTraitsFromRandom() {
+    var r = MTCAvatar.random(), out = {};
+    AUG_SLOTS.forEach(function (f) { out[f] = r[f]; });
+    return out;
+  }
+
+  function isTakenCode(code) {
+    if (existingProfile && existingProfile.code === code) return true;
+    return !!takenCodes[code];
+  }
+
+  // tries `genFn` up to 20 times for a state whose code isn't already taken; falls back to the last try
+  function uniqueState(genFn) {
+    var candidate = genFn(), tries = 1;
+    while (isTakenCode(MTCAvatar.encode(candidate)) && tries < 20) {
+      candidate = genFn();
+      tries++;
+    }
+    return candidate;
+  }
+
+  function applyState(next) {
+    state = next;
+    buildStylePicker();
+    syncAll();
+    renderAvatar();
+    renderTags();
+    syncMobileTraitValues();
+  }
+
+  function focusActivePreview() { (isMobile() ? mPortraitWrap : avatarWrap).focus(); }
+
+  // shared roll: animates both previews, respects reduced motion, focuses whichever preview is
+  // showing. A full roll keeps name/bio/x/linkedin — only the look/augments are random.
+  function playRollAnimation(next) {
+    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduced) { applyState(next); focusActivePreview(); return; }
+    avatarWrap.classList.add('rolling');
+    mPortraitWrap.classList.add('rolling');
+    var ticks = [MTCAvatar.random(), MTCAvatar.random(), MTCAvatar.random()];
+    var i = 0;
+    (function tick() {
+      if (i < ticks.length) {
+        MTCAvatar.render(avatarEl, ticks[i], { scale: SCALE });
+        MTCAvatar.render(mPortraitEl, ticks[i], { scale: SCALE });
+        i++;
+        window.setTimeout(tick, 135);
+      } else {
+        avatarWrap.classList.remove('rolling');
+        mPortraitWrap.classList.remove('rolling');
+        applyState(next);
+        focusActivePreview();
+      }
+    })();
+  }
+
+  function doRoll() {
+    playRollAnimation(uniqueState(function () { return mergeState(state, MTCAvatar.random()); }));
+  }
+
+  // ---- desktop steps
+  function hashForStep(n) { return STEP_HASHES[n - 1]; }
+  function stepForHash(h) { var i = STEP_HASHES.indexOf(h); return i >= 0 ? i + 1 : 1; }
+  function maxUnlockedStep() { return aboutIsValid() ? 4 : 3; }
+
+  function populateReview() {
+    reviewName.textContent = (state.name || '').trim() || 'Your name';
+    var bio = (state.bio || '').trim();
+    reviewBio.textContent = bio;
+    reviewBio.hidden = !bio;
+    var links = [];
+    var x = normalizeX(state.x);
+    if (x.ok && x.value) links.push('<a href="https://x.com/' + esc(x.value) + '" target="_blank" rel="noopener">@' + esc(x.value) + '</a>');
+    var li = normalizeLinkedin(state.linkedin);
+    if (li.ok && li.value) links.push('<a href="' + esc(li.value) + '" target="_blank" rel="noopener">LinkedIn</a>');
+    reviewLinks.innerHTML = links.join('');
+  }
+
+  function updateStepPills() {
+    var max = maxUnlockedStep();
+    stepPills.forEach(function (b) {
+      var n = Number(b.dataset.step);
+      var isCurrent = n === currentStep;
+      if (isCurrent) b.setAttribute('aria-current', 'step'); else b.removeAttribute('aria-current');
+      b.disabled = n > max;
+    });
+  }
+
+  function renderStep(n, opts) {
+    opts = opts || {};
+    currentStep = n;
+    for (var i = 1; i <= 4; i++) panels[i].hidden = (i !== n);
+    updateStepPills();
+    if (n === 4) populateReview();
+    if (opts.focus) {
+      var h = panels[n].querySelector('h2');
+      if (h) h.focus();
+    }
+  }
+
+  function goToHash(n) { location.hash = hashForStep(n); }
+
+  function goNext(fromStep) {
+    if (fromStep === 3) {
+      var nameOk = validateName(), xVal = validateX(), liVal = validateLinkedin();
+      if (!nameOk || xVal === null || liVal === null) return;
+    }
+    goToHash(fromStep + 1);
+  }
+
+  function goBack(fromStep) { goToHash(fromStep - 1); }
+
+  // ---- mobile panels
+  function mobilePanelForHash(h) { return (h === '#about' || h === '#save') ? 2 : 1; }
+  function hashForMobilePanel(n) { return n === 2 ? '#about' : '#look'; }
+
+  function renderMobilePanel(n, opts) {
+    opts = opts || {};
+    mobileView.classList.toggle('show2', n === 2);
+    mPanel2.setAttribute('aria-hidden', n === 2 ? 'false' : 'true');
+    mPanel1.setAttribute('aria-hidden', n === 2 ? 'true' : 'false');
+    if (n === 2 && opts.focus) {
+      var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      window.setTimeout(function () { mNameInput.focus(); }, reduced ? 0 : 320);
+    }
+  }
+
+  function goToMobilePanel(n) { location.hash = hashForMobilePanel(n); }
+
+  // ---- hash routing: dispatches to whichever view is currently showing
+  function handleHash() {
+    // never step-route while consuming an auth redirect — the hash may still be carrying
+    // Supabase's own params (#access_token=...) rather than one of our step hashes.
+    if (authRedirectPending) return;
+    if (isMobile()) {
+      renderMobilePanel(mobilePanelForHash(location.hash), { focus: true });
+      return;
+    }
+    var desired = stepForHash(location.hash);
+    if (desired === 4 && !aboutIsValid()) {
+      validateName(); validateX(); validateLinkedin();
+      desired = 3;
+      history.replaceState(null, '', hashForStep(3));
+    }
+    renderStep(desired, { focus: true });
+  }
+
+  // ---- mobile trait rows (body/skin/style/colour/eyes + the 4 augment slots), cycling through
+  // setField() so the desktop pickers, the preview and the aria-label all stay in sync.
+  function buildMobileTraits() {
+    mobileTraits = [];
+    mobileTraits.push({ key: 'body', label: 'Body', list: function () { return catalog.bodies.map(function (b) { return { id: b.id, label: b.label }; }); } });
+    mobileTraits.push({ key: 'skin', label: 'Skin', list: function () { return catalog.skins; } });
+    mobileTraits.push({ key: 'style', label: 'Hair style', list: function () { return bodyObj(state.body).styles; } });
+    mobileTraits.push({ key: 'colour', label: 'Hair colour', list: function () { return catalog.colours; } });
+    mobileTraits.push({ key: 'eyes', label: 'Eyes', list: function () { return catalog.eyes; } });
+    AUG_SLOTS.forEach(function (slot) {
+      var def = slotDef(slot);
+      mobileTraits.push({ key: slot, label: def.label, list: function () { return [{ id: null, label: 'None' }].concat(augOptionsOf(slot)); } });
+    });
+  }
+
+  function cycleTrait(key, dir) {
+    var trait = null;
+    for (var i = 0; i < mobileTraits.length; i++) if (mobileTraits[i].key === key) { trait = mobileTraits[i]; break; }
+    if (!trait) return;
+    var list = trait.list();
+    var idx = -1;
+    for (var j = 0; j < list.length; j++) if (list[j].id === state[key]) { idx = j; break; }
+    if (idx < 0) idx = 0;
+    var next = list[((idx + dir) % list.length + list.length) % list.length];
+    setField(key, next.id);
+  }
+
+  function buildMobileTraitRows() {
+    mTraitsEl.innerHTML = '';
+    mobileTraits.forEach(function (trait, i) {
+      var row = document.createElement('div');
+      row.className = 'm-trait-row' + (i === mobileTraits.length - 1 ? ' full' : '');
+      row.setAttribute('role', 'group');
+      row.setAttribute('aria-label', trait.label);
+
+      var prev = document.createElement('button');
+      prev.type = 'button';
+      prev.className = 'm-trait-arrow';
+      prev.setAttribute('aria-label', 'Previous ' + trait.label.toLowerCase());
+      prev.setAttribute('data-analytics-action', 'site_navigation');
+      prev.setAttribute('data-analytics-location', 'citizens_you');
+      prev.setAttribute('data-analytics-target', 'cycle_' + trait.key);
+      prev.innerHTML = '&larr;';
+      prev.addEventListener('click', function () { cycleTrait(trait.key, -1); });
+
+      var mid = document.createElement('div');
+      mid.className = 'm-trait-mid';
+      var lbl = document.createElement('span');
+      lbl.className = 'm-trait-label';
+      lbl.textContent = trait.label.toUpperCase();
+      var val = document.createElement('span');
+      val.className = 'm-trait-value';
+      val.id = 'mVal-' + trait.key;
+      val.setAttribute('aria-live', 'polite');
+      mid.appendChild(lbl);
+      mid.appendChild(val);
+
+      var next = document.createElement('button');
+      next.type = 'button';
+      next.className = 'm-trait-arrow';
+      next.setAttribute('aria-label', 'Next ' + trait.label.toLowerCase());
+      next.setAttribute('data-analytics-action', 'site_navigation');
+      next.setAttribute('data-analytics-location', 'citizens_you');
+      next.setAttribute('data-analytics-target', 'cycle_' + trait.key);
+      next.innerHTML = '&rarr;';
+      next.addEventListener('click', function () { cycleTrait(trait.key, 1); });
+
+      row.appendChild(prev);
+      row.appendChild(mid);
+      row.appendChild(next);
+      mTraitsEl.appendChild(row);
+    });
+  }
+
+  function syncMobileTraitValues() {
+    mobileTraits.forEach(function (trait) {
+      var list = trait.list();
+      var id = state[trait.key];
+      var opt = null;
+      for (var i = 0; i < list.length; i++) if (list[i].id === id) { opt = list[i]; break; }
+      if (!opt) opt = list[0];
+      var el = document.getElementById('mVal-' + trait.key);
+      if (el) el.textContent = opt.label.toUpperCase();
+    });
+  }
+
+  // swipe (pointer events cover touch + mouse) on the portrait always cycles hair style
+  (function () {
+    var startX = null, startY = null;
+    mPortraitWrap.addEventListener('pointerdown', function (e) { startX = e.clientX; startY = e.clientY; });
+    mPortraitWrap.addEventListener('pointerup', function (e) {
+      if (startX === null) return;
+      var dx = e.clientX - startX, dy = e.clientY - startY;
+      startX = null;
+      if (Math.abs(dx) > 30 && Math.abs(dx) > Math.abs(dy)) cycleTrait('style', dx < 0 ? 1 : -1);
+    });
+  })();
+
+  // ---- shared save: one validation pass, one profile shape, used by both views' save buttons
+  function trySave() {
+    var nameOk = validateName(), xVal = validateX(), liVal = validateLinkedin();
+    if (!nameOk || xVal === null || liVal === null) return false;
+    var profile = {
+      v: 1,
+      code: MTCAvatar.encode(state),
+      name: state.name.trim(),
+      bio: (state.bio || '').trim().slice(0, 140),
+      x: xVal,
+      linkedin: liVal,
+      createdAt: (existingProfile && existingProfile.createdAt) || new Date().toISOString()
+    };
+    MTCAvatar.saveProfile(profile);
+    existingProfile = profile;
+    state.name = profile.name; state.bio = profile.bio; state.x = profile.x; state.linkedin = profile.linkedin;
+    pushTextFieldsToInputs();
+    return true;
+  }
+
+  function afterSaveUI() {
+    var html = 'Saved. <a href="/citizens/directory/" data-analytics-action="site_navigation" data-analytics-location="citizens_you" data-analytics-target="directory">See the directory</a>';
+    saveMsg.innerHTML = html;
+    mSaveMsg.innerHTML = html;
+    saveBtn.textContent = 'Save changes';
+    eyebrow.textContent = 'Editing your citizen';
+    populateReview();
+  }
+
+  function afterSaveUIRemote(row) {
+    var no = row && row.no;
+    var html = 'Saved to the directory as No. ' + esc(String(no)) + '. ' +
+      '<a href="/citizens/directory/" data-analytics-action="site_navigation" data-analytics-location="citizens_you" data-analytics-target="directory">See the directory</a>';
+    saveMsg.innerHTML = html;
+    mSaveMsg.innerHTML = html;
+    saveBtn.textContent = 'Save changes';
+    eyebrow.textContent = 'Editing your citizen';
+    populateReview();
+  }
+
+  // ---- db: sign-in, save-to-directory, prefill (behaves exactly like today whenever
+  // window.MTCDb is absent, or MTCDb.configured() is false, or a call rejects NOT_CONFIGURED)
+  function dbConfigured() {
+    try { return typeof window.MTCDb !== 'undefined' && !!MTCDb.configured(); } catch (e) { return false; }
+  }
+
+  // Always a Promise<{email, userId} | null> — MTCDb.session() is async (it awaits supabase's
+  // getSession()), so this never hands back the pending Promise itself as if it were the session.
+  function dbSession() {
+    if (!dbConfigured()) return Promise.resolve(null);
+    return MTCDb.session().catch(function () { return null; });
+  }
+
+  function updateAuthUI() {
+    var configured = dbConfigured();
+    // Synchronous on purpose: this paints the discreet "Signed in as..." lines (top-of-builder
+    // and the final-step copy) before anything has had a chance to await. It reads the cached
+    // MTCDb.currentSession() (null until the first resolution) and this function is re-run from
+    // onAuth() whenever the real session value arrives or changes. The builder itself is only
+    // ever shown once signed in (or when unconfigured), so `sess` is true here whenever these
+    // lines are visible.
+    var sess = configured ? MTCDb.currentSession() : null;
+    var show = configured && !!sess;
+
+    storeNote.hidden = configured;
+    signinStatus.hidden = !show;
+    signinStatusTop.hidden = !show;
+    mSigninStatus.hidden = !show;
+    mSigninStatusTop.hidden = !show;
+
+    if (show) {
+      signinEmailLabel.textContent = sess.email || '';
+      signinEmailLabelTop.textContent = sess.email || '';
+      mSigninEmailLabel.textContent = sess.email || '';
+      mSigninEmailLabelTop.textContent = sess.email || '';
+    }
+  }
+
+  // Runs once at boot, after the local-only UI is already rendered. myCitizen() wins over the
+  // local profile for prefill when it resolves; the local draft is patched to match. Never blocks
+  // the UI and never throws — any failure just leaves the local-only state as-is.
+  function maybePrefillFromDb() {
+    if (!dbConfigured()) return;
+    dbSession().then(function (sess) {
+      if (!sess) return;
+      return MTCDb.myCitizen().then(function (row) {
+        if (!row) return;
+        var next = MTCAvatar.decode(row.code) || mergeState(state, {});
+        next.name = row.name || ''; next.bio = row.bio || ''; next.x = row.x || ''; next.linkedin = row.linkedin || '';
+        applyState(next);
+        existingProfile = {
+          v: 1, code: row.code, name: next.name, bio: next.bio, x: next.x, linkedin: next.linkedin,
+          createdAt: row.createdAt || (existingProfile && existingProfile.createdAt) || new Date().toISOString()
+        };
+        MTCAvatar.saveProfile(existingProfile); // also update the local draft
+        pushTextFieldsToInputs();
+        eyebrow.textContent = 'Editing your citizen';
+        saveBtn.textContent = 'Save changes';
+        populateReview();
+      });
+    }).catch(function () { /* keep the local-only state */ });
+  }
+
+  function saveRemote() {
+    MTCDb.saveCitizen({ code: existingProfile.code, name: existingProfile.name, bio: existingProfile.bio, x: existingProfile.x, linkedin: existingProfile.linkedin })
+      .then(function (row) {
+        afterSaveUIRemote(row);
+        updateAuthUI();
+      })
+      .catch(function (err) {
+        if (err && err.code === 'NOT_CONFIGURED') { afterSaveUI(); return; }
+        if (err && err.code === 'NOT_SIGNED_IN') {
+          showGateExpired('Your sign-in expired. Sign in again to save — your citizen is still saved on this device.');
+          return;
+        }
+        var msg = (err && err.message) || 'Could not save to the directory.';
+        saveMsg.textContent = msg;
+        mSaveMsg.textContent = msg;
+      });
+  }
+
+  // shared by both views' save buttons, after the local save already succeeded. The gate
+  // normally guarantees a session before the builder is even reachable, so the no-session
+  // branch here only covers a session expiring between page load and pressing Save.
+  function continueSaveWithDb() {
+    if (!dbConfigured()) { afterSaveUI(); return; }
+    dbSession().then(function (sess) {
+      if (sess) { saveRemote(); return; }
+      showGateExpired('Sign in to save to the directory — your citizen is still saved on this device.');
+    });
+  }
+
+  // ---- sign-in gate: the one sign-in implementation, used both as the front-of-page gate and
+  // to recover from a session that expired while the builder was open (Save failing, or onAuth
+  // reporting a sign-out from elsewhere). Not dismissable — no close button, no backdrop, no
+  // Escape handler.
+  function focusGateHeading() { gateHeading.focus(); }
+
+  // (re)starts the 30s "Send a new code" cooldown — called after any successful requestCode,
+  // whether that was the first send or a resend.
+  function startResendCooldown() {
+    var remaining = RESEND_COOLDOWN_SECONDS;
+    if (resendTimer) window.clearInterval(resendTimer);
+    gateResendBtn.disabled = true;
+    gateResendBtn.textContent = 'Send a new code (' + remaining + 's)';
+    resendTimer = window.setInterval(function () {
+      remaining -= 1;
+      if (remaining <= 0) {
+        window.clearInterval(resendTimer);
+        resendTimer = null;
+        gateResendBtn.disabled = false;
+        gateResendBtn.textContent = 'Send a new code';
+      } else {
+        gateResendBtn.textContent = 'Send a new code (' + remaining + 's)';
+      }
+    }, 1000);
+  }
+
+  function resetGateForm() {
+    gateEmailInput.value = '';
+    gateEmailErr.textContent = '';
+    gateCodeInput.value = '';
+    gateCodeErr.textContent = '';
+    gateStepEmail.hidden = false;
+    gateStepCode.hidden = true;
+    gateSendBtn.disabled = false; gateSendBtn.textContent = 'Send code';
+    gateVerifyBtn.disabled = false; gateVerifyBtn.textContent = 'Verify';
+    if (resendTimer) { window.clearInterval(resendTimer); resendTimer = null; }
+    gateResendBtn.disabled = false; gateResendBtn.textContent = 'Send a new code';
+  }
+
+  function setGateFormDisabled(disabled) {
+    gateEmailInput.disabled = disabled;
+    gateCodeInput.disabled = disabled;
+    gateSendBtn.disabled = disabled;
+    gateVerifyBtn.disabled = disabled;
+    if (disabled) gateResendBtn.disabled = true; // re-enabling is the cooldown's job, not this
+  }
+
+  // shows #gateView in place of the builder; focuses its heading the moment it actually
+  // appears (not on every subsequent internal state change, so it doesn't steal focus back
+  // from a field the person is already using).
+  function ensureGateShown() {
+    gateView.hidden = false;
+    desktopView.hidden = true;
+    mobileView.hidden = true;
+    document.body.classList.remove('mobile-active');
+    if (!gateVisible) { gateVisible = true; focusGateHeading(); }
+  }
+
+  function hideGate() {
+    gateVisible = false;
+    gateView.hidden = true;
+  }
+
+  // checking == resolving the session on load: the gate is visible, its form disabled, and
+  // "Checking your sign-in…" showing in place of the (still rendered) form.
+  function showGateChecking() {
+    ensureGateShown();
+    gateChecking.hidden = false;
+    gateExpiredNote.hidden = true;
+    setGateFormDisabled(true);
+  }
+
+  // no session found (on load, or after a sign-out): plain, ready-to-use gate.
+  function exitToGate() {
+    isSignedIn = false;
+    resetGateForm();
+    ensureGateShown();
+    gateChecking.hidden = true;
+    gateExpiredNote.hidden = true;
+    setGateFormDisabled(false);
+    updateAuthUI();
+  }
+
+  // a save failed because the session expired: same gate, plus a one-line explanation. The
+  // local draft this save was attempting is untouched (trySave already wrote it before the
+  // database call ran).
+  function showGateExpired(message) {
+    isSignedIn = false;
+    resetGateForm();
+    ensureGateShown();
+    gateChecking.hidden = true;
+    setGateFormDisabled(false);
+    gateExpiredNote.textContent = message;
+    gateExpiredNote.hidden = false;
+    updateAuthUI();
+  }
+
+  // picks the right desktop step / mobile panel for the current hash — shared by first boot
+  // and by entering the builder from the gate.
+  function routeInitialView() {
+    if (isMobile()) {
+      renderMobilePanel(mobilePanelForHash(location.hash), { focus: false });
+    } else {
+      var initial = stepForHash(location.hash);
+      if (initial === 4 && !aboutIsValid()) {
+        validateName(); validateX(); validateLinkedin();
+        initial = 3;
+        history.replaceState(null, '', hashForStep(3));
+      }
+      renderStep(initial, { focus: false });
+    }
+  }
+
+  // focuses whatever stands in for "the page heading" in the view that's now showing.
+  function focusBuilderHeading() {
+    if (isMobile()) mPanel1.focus(); else pageHeading.focus();
+  }
+
+  // hides the gate, shows the builder in the correct view, runs the existing db prefill
+  // (myCitizen() wins over the local draft) and focuses the heading. Idempotent, since it can
+  // be reached both from verifying a code directly and from the onAuth listener reacting to
+  // that same sign-in.
+  function enterBuilder() {
+    if (isSignedIn) { updateAuthUI(); return; }
+    isSignedIn = true;
+    hideGate();
+    applyViewVisibility();
+    routeInitialView();
+    updateAuthUI();
+    maybePrefillFromDb();
+    focusBuilderHeading();
+  }
+
+  gateSendBtn.addEventListener('click', function () {
+    var email = gateEmailInput.value.trim();
+    if (!email) { gateEmailErr.textContent = 'Enter your email.'; return; }
+    gateEmailErr.textContent = '';
+    gateSendBtn.disabled = true; gateSendBtn.textContent = 'Sending…';
+    MTCDb.requestCode(email).then(function () {
+      gateSendBtn.disabled = false; gateSendBtn.textContent = 'Send code';
+      gateStepEmail.hidden = true; gateStepCode.hidden = false;
+      gateCodeInput.focus();
+      startResendCooldown();
+    }).catch(function (err) {
+      gateSendBtn.disabled = false; gateSendBtn.textContent = 'Send code';
+      gateEmailErr.textContent = (err && err.message) || 'Could not send the code.';
+    });
+  });
+
+  gateResendBtn.addEventListener('click', function () {
+    var email = gateEmailInput.value.trim();
+    if (!email) return;
+    gateCodeErr.textContent = '';
+    gateResendBtn.disabled = true;
+    MTCDb.requestCode(email).then(function () {
+      startResendCooldown();
+    }).catch(function (err) {
+      gateResendBtn.disabled = false;
+      gateCodeErr.textContent = (err && err.message) || 'Could not send the code.';
+    });
+  });
+
+  gateVerifyBtn.addEventListener('click', function () {
+    var email = gateEmailInput.value.trim();
+    var code = gateCodeInput.value.trim();
+    if (!code) { gateCodeErr.textContent = 'Enter the code.'; return; }
+    gateCodeErr.textContent = '';
+    gateVerifyBtn.disabled = true; gateVerifyBtn.textContent = 'Verifying…';
+    MTCDb.verifyCode(email, code).then(function () {
+      gateVerifyBtn.disabled = false; gateVerifyBtn.textContent = 'Verify';
+      enterBuilder();
+    }).catch(function (err) {
+      gateVerifyBtn.disabled = false; gateVerifyBtn.textContent = 'Verify';
+      gateCodeErr.textContent = (err && err.message) || 'That code did not work.';
+    });
+  });
+
+  function doSignOut() {
+    if (!dbConfigured()) return;
+    MTCDb.signOut().then(function () { exitToGate(); }).catch(function () { updateAuthUI(); });
+  }
+  signoutBtn.addEventListener('click', doSignOut);
+  signoutBtnTop.addEventListener('click', doSignOut);
+  mSignoutBtn.addEventListener('click', doSignOut);
+  mSignoutBtnTop.addEventListener('click', doSignOut);
+
+  // ---- view switching
+  function applyViewVisibility() {
+    var mobile = isMobile();
+    desktopView.hidden = mobile;
+    mobileView.hidden = !mobile;
+    document.body.classList.toggle('mobile-active', mobile);
+  }
+
+  function onViewChange() {
+    if (dbConfigured() && !isSignedIn) return; // the gate is showing; it doesn't care about the breakpoint
+    applyViewVisibility();
+    renderAvatar();
+    syncAll();
+    renderTags();
+    syncMobileTraitValues();
+    pushTextFieldsToInputs();
+    handleHash();
+  }
+
+  // ---- events: desktop
+  rollBtn.addEventListener('click', doRoll);
+  shuffleLookBtn.addEventListener('click', function () {
+    applyState(uniqueState(function () { return mergeState(state, lookTraitsFromRandom()); }));
+  });
+  shuffleAugBtn.addEventListener('click', function () {
+    applyState(uniqueState(function () { return mergeState(state, augTraitsFromRandom()); }));
+  });
+
+  stepPills.forEach(function (b) {
+    b.addEventListener('click', function () {
+      var n = Number(b.dataset.step);
+      if (n > maxUnlockedStep()) return;
+      goToHash(n);
+    });
+  });
+
+  document.getElementById('nextBtn1').addEventListener('click', function () { goNext(1); });
+  document.getElementById('backBtn2').addEventListener('click', function () { goBack(2); });
+  document.getElementById('nextBtn2').addEventListener('click', function () { goNext(2); });
+  document.getElementById('backBtn3').addEventListener('click', function () { goBack(3); });
+  document.getElementById('nextBtn3').addEventListener('click', function () { goNext(3); });
+  document.getElementById('backBtn4').addEventListener('click', function () { goBack(4); });
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (!trySave()) { goToHash(3); return; }
+    continueSaveWithDb();
+  });
+
+  // ---- events: mobile
+  mRollBtn.addEventListener('click', doRoll);
+  mNextBtn.addEventListener('click', function () { goToMobilePanel(2); });
+  mBackBtn.addEventListener('click', function () { goToMobilePanel(1); });
+  mSaveBtn.addEventListener('click', function () {
+    if (!trySave()) { mSaveMsg.textContent = ''; return; }
+    continueSaveWithDb();
+  });
+
+  // ---- events: shared text fields (bind both views' inputs to the same state values)
+  bindTextMirror(fName, mNameInput, 'name', function () { renderName(); updateCounters(); });
+  bindTextMirror(fBio, mBioInput, 'bio', updateCounters);
+  bindTextMirror(fX, mXInput, 'x', null);
+  bindTextMirror(fLinkedin, mLiInput, 'linkedin', null);
+
+  fName.addEventListener('blur', validateName);
+  mNameInput.addEventListener('blur', validateName);
+  fX.addEventListener('blur', validateX);
+  mXInput.addEventListener('blur', validateX);
+  fLinkedin.addEventListener('blur', validateLinkedin);
+  mLiInput.addEventListener('blur', validateLinkedin);
+
+  window.addEventListener('hashchange', handleHash);
+
+  if (mq.addEventListener) mq.addEventListener('change', onViewChange);
+  else if (mq.addListener) mq.addListener(onViewChange);
+
+  // Fallback for environments where a viewport resize doesn't fire the MediaQueryList's own
+  // "change" event (some emulators/automation drivers skip it even though matches() is correct) —
+  // a plain resize listener that only acts when the mobile/desktop verdict actually flipped.
+  var lastIsMobile = isMobile();
+  window.addEventListener('resize', function () {
+    var nowMobile = isMobile();
+    if (nowMobile !== lastIsMobile) { lastIsMobile = nowMobile; onViewChange(); }
+  });
+
+  // ---- boot
+  fetch('/citizens/data/citizens.json').then(function (r) {
+    if (!r.ok) throw new Error('bad response');
+    return r.json();
+  }).then(function (list) {
+    (list || []).forEach(function (c) { if (c && c.code) takenCodes[c.code] = true; });
+  }).catch(function () { /* uniqueness check skipped silently if this fetch fails */ });
+
+  MTCAvatar.load().then(function (cat) {
+    catalog = cat;
+    existingProfile = MTCAvatar.loadProfile();
+    if (existingProfile) {
+      state = MTCAvatar.decode(existingProfile.code) || MTCAvatar.defaults();
+      state.name = existingProfile.name || '';
+      state.bio = existingProfile.bio || '';
+      state.x = existingProfile.x || '';
+      state.linkedin = existingProfile.linkedin || '';
+      eyebrow.textContent = 'Editing your citizen';
+      saveBtn.textContent = 'Save changes';
+    } else {
+      state = MTCAvatar.defaults();
+      state.name = ''; state.bio = ''; state.x = ''; state.linkedin = '';
+    }
+
+    buildPickers();
+    buildMobileTraits();
+    buildMobileTraitRows();
+
+    syncAll();
+    renderAvatar();
+    renderTags();
+    syncMobileTraitValues();
+    pushTextFieldsToInputs();
+
+    if (!dbConfigured()) {
+      // no gate: exactly today's local-only behaviour.
+      applyViewVisibility();
+      routeInitialView();
+      updateAuthUI();
+      return;
+    }
+
+    // configured: the gate stands in front of the builder until a session resolves. The early
+    // inline script right after the gate/view markup has already hidden desktopView/mobileView
+    // and shown the gate, so there's no flash of the builder; this fills in the "checking your
+    // sign-in" state, first consuming any auth redirect in the URL (a code or token the person
+    // arrived with after tapping the button in a link-style sign-in email) and only then
+    // falling back to the plain session check. onAuth covers every change after — verifying a
+    // code, signing out, or a session changing elsewhere.
+    showGateChecking();
+    authRedirectPending = true;
+    var consumed = (typeof MTCDb.consumeAuthRedirect === 'function')
+      ? MTCDb.consumeAuthRedirect() : Promise.resolve(null);
+    consumed.then(function (sess) {
+      authRedirectPending = false;
+      if (sess) { enterBuilder(); return; }
+      return MTCDb.session().then(function (s) {
+        if (s) { enterBuilder(); } else { exitToGate(); }
+      });
+    }).catch(function (err) {
+      authRedirectPending = false;
+      showGateExpired((err && err.message) || 'Could not complete sign-in from the link.');
+    });
+    try {
+      MTCDb.onAuth(function (sess) {
+        if (sess) { enterBuilder(); } else if (!authRedirectPending) { exitToGate(); }
+      });
+    } catch (e) {}
+  }).catch(function () {
+    saveMsg.textContent = 'Could not load avatar options. Please refresh the page.';
+    mSaveMsg.textContent = saveMsg.textContent;
+  });
+})();
+</script>
+
+</body>
+</html>

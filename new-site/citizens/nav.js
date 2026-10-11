@@ -23,7 +23,7 @@
     { id: 'quests', n: '02', label: 'Quests', href: base ? base + 'quests.html' : '/citizens/quests/' },
     { id: 'links', n: '03', label: 'Links', href: base ? base + 'links.html' : '/citizens/links/' },
     { id: 'today', n: '04', label: 'Today', href: base ? base + 'today.html' : '/citizens/today/' },
-    { id: 'directory', n: '05', label: 'Directory' }
+    { id: 'directory', n: '05', label: 'Directory', href: base ? base + 'directory.html' : '/citizens/directory/' }
   ];
 
   function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;'); }

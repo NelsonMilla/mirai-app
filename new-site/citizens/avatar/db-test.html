@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>MTCDb dev check</title>
+<meta name="robots" content="noindex, nofollow">
+</head><body>
+<!-- Plain dev check for MTCDb, deliberately unstyled. Not linked from anywhere. -->
+<h1>MTCDb dev check</h1>
+
+<p>Configured: <b id="configured">checking...</b></p>
+<p id="notConfiguredNote" style="display:none;color:#900;">
+  Not configured — fill in <code>config.js</code> with your Supabase project's URL and anon key
+  (see <code>config.example.js</code> and <code>supabase/README.md</code>). The sample call below
+  proves the fallback: every MTCDb method should reject with <code>.code === 'NOT_CONFIGURED'</code>.
+</p>
+
+<h2>Auth redirect</h2>
+<p>URL params at load: <pre id="urlParams" style="display:inline">(checking...)</pre></p>
+<p>consumeAuthRedirect() result: <pre id="consumeResult" style="display:inline">(pending...)</pre></p>
+
+<h2>Sign in</h2>
+<p>
+  <input id="email" type="email" placeholder="you@example.com" size="30">
+  <button id="btnSendCode">Send code</button>
+</p>
+<p>
+  <input id="code" type="text" placeholder="6-digit code" size="10">
+  <button id="btnVerify">Verify</button>
+  <button id="btnSignOut">Sign out</button>
+</p>
+
+<h2>Session</h2>
+<p>session() (awaited): <pre id="session" style="display:inline">(none)</pre></p>
+<p>currentSession() (synchronous, cached): <pre id="currentSession" style="display:inline">(not checked yet)</pre></p>
+
+<h2>Citizen actions</h2>
+<p>
+  <button id="btnList">List citizens</button>
+  <button id="btnMine">My citizen</button>
+  <button id="btnSave">Save sample citizen</button>
+  <button id="btnDelete">Delete my citizen</button>
+</p>
+
+<h2>Log</h2>
+<pre id="log"></pre>
+
+<script src="/citizens/avatar/config.js"></script>
+<script src="/citizens/avatar/db.js"></script>
+<script>
+  var logEl = document.getElementById('log');
+  function log(label, value) {
+    var line = label + ': ' + JSON.stringify(value, null, 2);
+    logEl.textContent = line + '\n\n' + logEl.textContent;
+  }
+  function logErr(label, err) {
+    log(label + ' ERROR', { message: err && err.message, code: err && err.code });
+  }
+
+  document.getElementById('urlParams').textContent = JSON.stringify({ search: location.search, hash: location.hash });
+  if (typeof MTCDb.consumeAuthRedirect === 'function') {
+    MTCDb.consumeAuthRedirect().then(function (s) {
+      document.getElementById('consumeResult').textContent = JSON.stringify(s);
+      log('consumeAuthRedirect', s);
+    }).catch(function (err) {
+      document.getElementById('consumeResult').textContent = '(rejected — see log)';
+      logErr('consumeAuthRedirect', err);
+    });
+  } else {
+    document.getElementById('consumeResult').textContent = '(MTCDb.consumeAuthRedirect not implemented)';
+  }
+
+  document.getElementById('configured').textContent = MTCDb.configured() ? 'yes' : 'no';
+  if (!MTCDb.configured()) {
+    document.getElementById('notConfiguredNote').style.display = 'block';
+    // Prove the fallback contract: this must reject with code === 'NOT_CONFIGURED'.
+    MTCDb.listCitizens().then(function (rows) {
+      log('listCitizens (unexpected success)', rows);
+    }).catch(function (err) {
+      logErr('listCitizens (expected NOT_CONFIGURED)', err);
+    });
+  }
+
+  function renderSession(s) {
+    document.getElementById('session').textContent = JSON.stringify(s, null, 2);
+  }
+  function renderCurrentSession() {
+    document.getElementById('currentSession').textContent = JSON.stringify(MTCDb.currentSession(), null, 2);
+  }
+  renderCurrentSession(); // sync read before anything has resolved — should read "null"
+  MTCDb.onAuth(function (s) { renderSession(s); renderCurrentSession(); log('onAuth fired', s); });
+
+  document.getElementById('btnSendCode').onclick = function () {
+    var email = document.getElementById('email').value;
+    MTCDb.requestCode(email).then(function () {
+      log('requestCode', 'sent to ' + email);
+    }).catch(function (err) { logErr('requestCode', err); });
+  };
+
+  document.getElementById('btnVerify').onclick = function () {
+    var email = document.getElementById('email').value;
+    var code = document.getElementById('code').value;
+    MTCDb.verifyCode(email, code).then(function (s) {
+      renderSession(s);
+      log('verifyCode', s);
+    }).catch(function (err) { logErr('verifyCode', err); });
+  };
+
+  document.getElementById('btnSignOut').onclick = function () {
+    MTCDb.signOut().then(function () {
+      renderSession(null);
+      log('signOut', 'ok');
+    }).catch(function (err) { logErr('signOut', err); });
+  };
+
+  document.getElementById('btnList').onclick = function () {
+    MTCDb.listCitizens().then(function (rows) { log('listCitizens', rows); })
+      .catch(function (err) { logErr('listCitizens', err); });
+  };
+
+  document.getElementById('btnMine').onclick = function () {
+    MTCDb.myCitizen().then(function (row) { log('myCitizen', row); })
+      .catch(function (err) { logErr('myCitizen', err); });
+  };
+
+  document.getElementById('btnSave').onclick = function () {
+    // '1m0000----' is the default build's code — see avatar/README.md for the code format.
+    MTCDb.saveCitizen({
+      code: '1m0000----',
+      name: 'Db Test',
+      bio: 'Saved from db-test.html.',
+      x: 'dbtest',
+      linkedin: ''
+    }).then(function (row) { log('saveCitizen', row); })
+      .catch(function (err) { logErr('saveCitizen', err); });
+  };
+
+  document.getElementById('btnDelete').onclick = function () {
+    MTCDb.deleteCitizen().then(function () { log('deleteCitizen', 'ok'); })
+      .catch(function (err) { logErr('deleteCitizen', err); });
+  };
+
+  MTCDb.session().then(function (s) { renderSession(s); renderCurrentSession(); }).catch(function (err) { logErr('session', err); });
+</script>
+</body></html>

@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Avatar dev check</title>
+<meta name="robots" content="noindex, nofollow">
+</head><body>
+<!-- Plain dev check for MTCAvatar, deliberately unstyled. Not linked from anywhere. -->
+<h1>MTCAvatar dev check</h1>
+
+<h2>Defaults</h2>
+<div id="defaults" style="display:flex;gap:16px;"></div>
+
+<h2>Three random citizens</h2>
+<div id="randoms" style="display:flex;gap:16px;"></div>
+
+<h2>Decoded from a hard-coded code</h2>
+<p>Code: <code id="hardcodedLabel"></code></p>
+<div id="hardcoded"></div>
+
+<h2>Encode/decode round trip (200 random states)</h2>
+<pre id="roundtrip">running...</pre>
+
+<script src="/citizens/avatar/avatar.js"></script>
+<script>
+  var HARDCODED = '1f11450-11'; // Type 2, porcelain, wild/cyan hair, wide eyes, crown, no eyewear, reactor, spark
+
+  function box(parent, label) {
+    var wrap = document.createElement('div');
+    var p = document.createElement('p');
+    p.textContent = label;
+    wrap.appendChild(p);
+    var char = document.createElement('div');
+    wrap.appendChild(char);
+    parent.appendChild(wrap);
+    return char;
+  }
+
+  // Defaults, both bodies
+  var defM = MTCAvatar.defaults();
+  var defF = MTCAvatar.defaults();
+  defF.body = 'f'; defF.style = 'bob'; // defaults() is body m; swap body + a valid Type 2 style for this slot
+  MTCAvatar.render(box(document.getElementById('defaults'), 'Type 1 default (' + MTCAvatar.encode(defM) + ')'), defM);
+  MTCAvatar.render(box(document.getElementById('defaults'), 'Type 2 default (' + MTCAvatar.encode(defF) + ')'), defF);
+
+  // Three random citizens
+  var randomsEl = document.getElementById('randoms');
+  for (var i = 0; i < 3; i++) {
+    var rs = MTCAvatar.random();
+    MTCAvatar.render(box(randomsEl, MTCAvatar.encode(rs)), rs);
+  }
+
+  // Hard-coded code
+  document.getElementById('hardcodedLabel').textContent = HARDCODED;
+  MTCAvatar.render(document.getElementById('hardcoded'), HARDCODED);
+
+  // 200-state encode/decode round trip
+  var pass = 0, fail = 0, failures = [];
+  for (var n = 0; n < 200; n++) {
+    var state = MTCAvatar.random();
+    var code = MTCAvatar.encode(state);
+    var back = MTCAvatar.decode(code);
+    var ok = back && JSON.stringify(back) === JSON.stringify(state);
+    if (ok) pass++; else { fail++; failures.push({ state: state, code: code, back: back }); }
+  }
+  var out = 'PASS: ' + pass + ' / 200\nFAIL: ' + fail + ' / 200';
+  if (failures.length) out += '\n\n' + JSON.stringify(failures, null, 2);
+  document.getElementById('roundtrip').textContent = out;
+</script>
+</body></html>

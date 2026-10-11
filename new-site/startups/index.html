@@ -27,6 +27,12 @@
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
 </noscript>
 <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+<script>
+  // showGlobalDeal — false hides the Japan Landing Award tile ([data-held="karen"]) until GlobalDeal
+  // approves. Keep in step with the same flag in /index.html. Preview while hidden: ?globaldeal=1.
+  window.MIRAI_FLAGS = Object.freeze({ showGlobalDeal: false });
+  if (!window.MIRAI_FLAGS.showGlobalDeal && !/[?&]globaldeal=1\b/.test(location.search)) document.documentElement.classList.add('globaldeal-hidden');
+</script>
 <script defer src="/_vercel/insights/script.js"></script>
 <script defer src="/posthog.js"></script>
 <script defer src="/analytics.js"></script>
@@ -575,6 +581,62 @@
   }
 
   /* ── terminus + closing ── */
+  /* ── terminus · Demo Day awards: four speaker-kin tiles (logo on a plate, chip for the presenter,
+     name + the full line below). The Japan Landing Award ships only once Karen (GlobalDeal)
+     approves — [data-held="karen"]. ── */
+  html.globaldeal-hidden [data-held="karen"] { display: none !important; }
+  .awHead { margin-top: 72px; font-weight: 800; text-transform: uppercase; letter-spacing: -.01em;
+    font-size: clamp(26px, 3.2vw, 44px); line-height: .98; }
+  /* auto-fit: three tiles fill the row while the fourth is flag-hidden */
+  .pGrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; margin-top: 28px; }
+  .pcard { position: relative; display: block; border: 1px solid var(--line); overflow: hidden;
+    text-decoration: none; color: inherit; background: var(--bg); }
+  .pcard:focus-visible { outline: 1px solid var(--accent); outline-offset: 2px; }
+  /* the plate stands where the speaker's portrait would be: opaque near-void, so screen-blended
+     black logo canvases melt into it; same 28%-grayscale-to-colour + 1.025 hover as .hcard */
+  .pcPlate { position: relative; aspect-ratio: 4/5; display: flex; align-items: center; justify-content: center;
+    background: #0f0f10; filter: grayscale(28%) contrast(1.04); transition: filter .3s, transform .5s; }
+  .pcard:hover .pcPlate, .pcard:focus-visible .pcPlate { filter: grayscale(0%); transform: scale(1.025); }
+  .pcLg { width: 55%; display: flex; align-items: center; justify-content: center; }
+  .pcLg img { display: block; width: 100%; height: auto; }
+  .pcLg.sm { width: 40%; max-width: 120px; }
+  .pcLg .inv { filter: grayscale(1) invert(1) brightness(1.05) contrast(1.3); mix-blend-mode: screen; }
+  .pcLg .stamp { filter: brightness(0) invert(1); opacity: .9; }
+  .pcLg .mono { filter: grayscale(1) contrast(1.25); mix-blend-mode: screen; }
+  .pcLg .screen { mix-blend-mode: screen; }
+  /* .pcSlot: typographic wordmark where no logo file exists yet; swap the span for an <img> when it lands */
+  .pcSlot { display: block; text-align: center; font-weight: 800; text-transform: uppercase; letter-spacing: -.01em;
+    line-height: 1.02; font-size: clamp(15px, 1.6vw, 24px); color: rgba(244,243,240,.92); overflow-wrap: anywhere; }
+  .pcSlot small { display: block; font-size: .62em; font-weight: 700; letter-spacing: .01em; margin-top: .25em; }
+  .gdSlot { width: 55%; aspect-ratio: 1; border: 1px solid rgba(var(--accent-rgb), .35); border-radius: 3px;
+    display: flex; align-items: center; justify-content: center; }
+  .gdSlot .pcSlot { text-transform: none; overflow-wrap: normal; }
+  .gdSlot img { width: 100%; height: 100%; object-fit: contain; padding: 12%; }
+  .pcNm { font-weight: 700; text-transform: uppercase; font-size: clamp(14px, 1.3vw, 18px); letter-spacing: -.005em;
+    line-height: 1.08; overflow-wrap: anywhere; }
+  .pcLn { margin-top: 6px; color: var(--dim); font-size: 13px; line-height: 1.45; }
+  @media (prefers-reduced-motion: reduce) { .pcPlate { transition: none; }
+    .pcard:hover .pcPlate, .pcard:focus-visible .pcPlate { transform: none; } }
+  /* award tiles: 4:3 plate, caption below (the award lines are long; nothing is clamped) */
+  .pcard .pcPlate { aspect-ratio: 4/3; }
+  .pcMeta { padding: 16px 16px 20px; }
+  .pcLn { margin-top: 8px; font-size: 13.5px; line-height: 1.5; }
+  .pcChip { position: absolute; top: 12px; left: 12px; z-index: 1; max-width: calc(100% - 24px);
+    font-family: var(--mono); font-size: 10px; letter-spacing: .18em; line-height: 1.4; text-transform: uppercase;
+    color: var(--accent); border: 1px solid rgba(var(--accent-rgb), .3); border-radius: 2px; padding: 5px 9px; background: var(--bg); }
+  .pcChip ~ .pcPlate { align-items: flex-end; padding-bottom: 8%; }
+  .pcard.gd .gdSlot { width: 34%; }
+  .pcard.gd .gdSlot .pcSlot { font-size: clamp(12px, 1.1vw, 16px); }
+  .pcard.gd { border-color: rgba(var(--accent-rgb), .35); }
+  @media (max-width: 640px) {
+    .pGrid { grid-template-columns: 1fr 1fr; gap: 12px; }
+    .pcMeta { padding: 12px 12px 16px; }
+    .pcNm { font-size: 13.5px; } .pcLn { font-size: 12px; }
+    .pcSlot { font-size: 13.5px; }
+    .pcLg { width: 56%; }
+    .pcChip { top: 8px; left: 8px; font-size: 9px; letter-spacing: .12em; padding: 4px 7px; max-width: calc(100% - 16px); }
+    .pcard.gd .gdSlot { width: 40%; }
+  }
   .termGrid { display: grid; grid-template-columns: 1.05fr .95fr; gap: clamp(40px, 6vw, 110px); margin-top: 64px; align-items: start; }
   .termList { list-style: none; }
   .termList li { position: relative; padding: 24px 0 24px 24px; border-bottom: 1px solid var(--line);
@@ -1082,15 +1144,38 @@ also marked inline with a TODO(verify) comment. Edit or confirm before launch:
   <div class="stn-head rv"><p class="stn-tag"><span class="code">STN 06</span>Terminus · Oct 26</p></div>
   <h2 class="big rv">Startup Demo Day</h2>
   <div class="termGrid">
-    <!-- TODO(verify): Orbis Hall venue is a draft claim; Demo Day Oct 26 itself is on the live site. -->
+    <!-- Orbis Hall confirmed in the PM brief of Oct 11 2026. -->
     <p class="stn-sub rv" style="margin-top:6px">Startup Demo Day, October 26th at Orbis Hall, alongside curated frontier-bio companies.</p>
     <ul class="termList rv">
-      <!-- Antler wording owner-confirmed 2026-08-29 (was the draft's "Earn a place at
-           Antler Japan", which oversold it). TODO(verify): Silicon Valley VC forwarding
-           is still a draft claim. -->
-      <li><b>One company will be able to join Antler.</b></li>
+      <!-- The Antler line now lives in the awards grid below (Antler Residency, PM brief
+           Oct 11 2026). TODO(verify): Silicon Valley VC forwarding is still a draft claim. -->
       <li><b>Selected companies get their deck in front of top-tier Silicon Valley VCs,</b> sent on by us after Demo Day.</li>
     </ul>
+  </div>
+
+
+  <!-- Demo Day awards (PM brief Oct 11 2026): name, one line, logo per award. Tiles without an
+       href wait for the partner's URL (data-href-todo); .pcSlot wordmarks wait for logo files.
+       No date on the Vitalist Bay card, by request. -->
+  <h3 class="awHead rv">What you can win at Demo Day</h3>
+  <div class="pGrid rv">
+    <a class="pcard" data-href-todo="Meet the Drapers">
+      <div class="pcPlate"><div class="pcLg"><img src="/img/partners/meet-the-drapers-white.png" alt="" loading="lazy" decoding="async" /></div></div>
+      <div class="pcMeta"><div class="pcNm">Meet the Drapers Fast Track</div><div class="pcLn">Priority review for the Meet the Drapers 2027 Japan cohort.</div></div>
+    </a>
+    <a class="pcard" href="https://www.antler.co/" target="_blank" rel="noopener">
+      <div class="pcPlate"><div class="pcLg"><img class="stamp" src="/img/partners/antler.svg" alt="" loading="lazy" decoding="async" /></div></div>
+      <div class="pcMeta"><div class="pcNm">Antler Residency</div><div class="pcLn">One company wins a place in Antler Japan's residency: six weeks of mentoring, access to around USD 850k in perks and a chance of investment.</div></div>
+    </a>
+    <a class="pcard" href="https://vitalistbay.com/" target="_blank" rel="noopener">
+      <div class="pcPlate"><div class="pcLg"><img class="inv" src="/img/partners/vitalist-bay.png" alt="" loading="lazy" decoding="async" /></div></div>
+      <div class="pcMeta"><div class="pcNm">A Ticket to Vitalist Bay</div><div class="pcLn">A free ticket to the next Vitalist Bay for the winning company.</div></div>
+    </a>
+    <a class="pcard gd" href="https://globaldeal.io/" target="_blank" rel="noopener" data-held="karen">
+      <span class="pcChip">Presented by GlobalDeal</span>
+      <div class="pcPlate"><span class="gdSlot"><img src="/img/partners/globaldeal-square-transparent.png" alt="" loading="lazy" decoding="async" /></span></div>
+      <div class="pcMeta"><div class="pcNm">Japan Landing Award</div><div class="pcLn">Up to three Demo Day companies win a hands-on Japan market-entry engagement with GlobalDeal: partners and buyers mapped, qualified introductions, a path to a first pilot. Five-figure value, at GlobalDeal's entry fee.</div></div>
+    </a>
   </div>
 </section>
 

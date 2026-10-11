@@ -1,0 +1,99 @@
+{
+  "version": 1,
+  "canvas": [64, 80],
+  "bodies": [
+    {
+      "id": "m",
+      "label": "Type 1",
+      "styles": [
+        { "id": "short", "label": "Short" },
+        { "id": "buzz", "label": "Buzz" },
+        { "id": "mohawk", "label": "Mohawk" },
+        { "id": "big", "label": "Big" },
+        { "id": "long", "label": "Long" },
+        { "id": "wild", "label": "Wild" }
+      ]
+    },
+    {
+      "id": "f",
+      "label": "Type 2",
+      "styles": [
+        { "id": "bob", "label": "Bob" },
+        { "id": "wild", "label": "Wild" },
+        { "id": "swept", "label": "Swept" },
+        { "id": "bun", "label": "Bun" }
+      ]
+    }
+  ],
+  "skins": [
+    { "id": "light", "label": "Light", "swatch": "#fbcbaf" },
+    { "id": "porcelain", "label": "Porcelain", "swatch": "#ffe3d2" },
+    { "id": "tan", "label": "Tan", "swatch": "#e8b58e" },
+    { "id": "olive", "label": "Olive", "swatch": "#c99a6e" },
+    { "id": "brown", "label": "Brown", "swatch": "#a26a46" },
+    { "id": "deep", "label": "Deep", "swatch": "#6b4030" }
+  ],
+  "colours": [
+    { "id": "black", "label": "Black", "swatch": "#2a242f" },
+    { "id": "brown", "label": "Brown", "swatch": "#6b4a3a" },
+    { "id": "blonde", "label": "Blonde", "swatch": "#f0d58a" },
+    { "id": "pink", "label": "Pink", "swatch": "#ff8ad1" },
+    { "id": "cyan", "label": "Cyan", "swatch": "#9be8f0" },
+    { "id": "silver", "label": "Silver", "swatch": "#e8e8ee" }
+  ],
+  "eyes": [
+    { "id": "round", "label": "Round" },
+    { "id": "happy", "label": "Happy" },
+    { "id": "narrow", "label": "Narrow" },
+    { "id": "sleepy", "label": "Sleepy" },
+    { "id": "cyborg", "label": "Cyborg" },
+    { "id": "wide", "label": "Wide" }
+  ],
+  "augmentSlots": [
+    {
+      "id": "head",
+      "label": "Head augment",
+      "options": [
+        { "id": "crown", "label": "Neural crown" },
+        { "id": "sleep_halo", "label": "Sleep halo" },
+        { "id": "antenna", "label": "Antenna" }
+      ]
+    },
+    {
+      "id": "eyewear",
+      "label": "Eye augment",
+      "options": [
+        { "id": "mono", "label": "Glucose eye" },
+        { "id": "hud", "label": "Retinal HUD" },
+        { "id": "third_eye", "label": "Third eye" }
+      ]
+    },
+    {
+      "id": "chest",
+      "label": "Chest augment",
+      "options": [
+        { "id": "core", "label": "Cold plunge" },
+        { "id": "reactor", "label": "Reactor" },
+        { "id": "harness", "label": "Pipettes" }
+      ]
+    },
+    {
+      "id": "hands",
+      "label": "Hand augment",
+      "options": [
+        { "id": "gauntlet", "label": "Grip" },
+        { "id": "spark", "label": "Spark fists" },
+        { "id": "pipette", "label": "Pipette hand" }
+      ]
+    }
+  ],
+  "layerOrder": ["behind", "skin", "hair", "eyes", "eyewear", "chest", "hands", "head"],
+  "behindRule": "when head augment is 'crown', its gear_crown.png is drawn as the first (bottom-most) layer, behind the body, instead of at the top of the stack like other head augments",
+  "filePatterns": {
+    "skin": "skin_<skin>.png",
+    "hair": "hair_<style>_<colour>.png",
+    "eyes": "eyes_<eyes>.png",
+    "gear": "gear_<option>.png",
+    "base": "/citizens/avatar/v1/<body>/"
+  }
+}
