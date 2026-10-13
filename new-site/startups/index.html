@@ -28,9 +28,9 @@
 </noscript>
 <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
 <script>
-  // showGlobalDeal — false hides the Japan Landing Award tile ([data-held="karen"]) until GlobalDeal
-  // approves. Keep in step with the same flag in /index.html. Preview while hidden: ?globaldeal=1.
-  window.MIRAI_FLAGS = Object.freeze({ showGlobalDeal: false });
+  // showGlobalDeal — true since Oct 13 2026 (approved by GlobalDeal). false hides the Japan Landing
+  // Award tile ([data-held="karen"]). Keep in step with /index.html and /program/. Preview: ?globaldeal=1.
+  window.MIRAI_FLAGS = Object.freeze({ showGlobalDeal: true });
   if (!window.MIRAI_FLAGS.showGlobalDeal && !/[?&]globaldeal=1\b/.test(location.search)) document.documentElement.classList.add('globaldeal-hidden');
 </script>
 <script defer src="/_vercel/insights/script.js"></script>
@@ -608,10 +608,6 @@
   .pcSlot { display: block; text-align: center; font-weight: 800; text-transform: uppercase; letter-spacing: -.01em;
     line-height: 1.02; font-size: clamp(15px, 1.6vw, 24px); color: rgba(244,243,240,.92); overflow-wrap: anywhere; }
   .pcSlot small { display: block; font-size: .62em; font-weight: 700; letter-spacing: .01em; margin-top: .25em; }
-  .gdSlot { width: 55%; aspect-ratio: 1; border: 1px solid rgba(var(--accent-rgb), .35); border-radius: 3px;
-    display: flex; align-items: center; justify-content: center; }
-  .gdSlot .pcSlot { text-transform: none; overflow-wrap: normal; }
-  .gdSlot img { width: 100%; height: 100%; object-fit: contain; padding: 12%; }
   .pcNm { font-weight: 700; text-transform: uppercase; font-size: clamp(14px, 1.3vw, 18px); letter-spacing: -.005em;
     line-height: 1.08; overflow-wrap: anywhere; }
   .pcLn { margin-top: 6px; color: var(--dim); font-size: 13px; line-height: 1.45; }
@@ -625,8 +621,6 @@
     font-family: var(--mono); font-size: 10px; letter-spacing: .18em; line-height: 1.4; text-transform: uppercase;
     color: var(--accent); border: 1px solid rgba(var(--accent-rgb), .3); border-radius: 2px; padding: 5px 9px; background: var(--bg); }
   .pcChip ~ .pcPlate { align-items: flex-end; padding-bottom: 8%; }
-  .pcard.gd .gdSlot { width: 34%; }
-  .pcard.gd .gdSlot .pcSlot { font-size: clamp(12px, 1.1vw, 16px); }
   .pcard.gd { border-color: rgba(var(--accent-rgb), .35); }
   @media (max-width: 640px) {
     .pGrid { grid-template-columns: 1fr 1fr; gap: 12px; }
@@ -635,7 +629,6 @@
     .pcSlot { font-size: 13.5px; }
     .pcLg { width: 56%; }
     .pcChip { top: 8px; left: 8px; font-size: 9px; letter-spacing: .12em; padding: 4px 7px; max-width: calc(100% - 16px); }
-    .pcard.gd .gdSlot { width: 40%; }
   }
   .termGrid { display: grid; grid-template-columns: 1.05fr .95fr; gap: clamp(40px, 6vw, 110px); margin-top: 64px; align-items: start; }
   .termList { list-style: none; }
@@ -1173,8 +1166,8 @@ also marked inline with a TODO(verify) comment. Edit or confirm before launch:
     </a>
     <a class="pcard gd" href="https://globaldeal.io/" target="_blank" rel="noopener" data-held="karen">
       <span class="pcChip">Presented by GlobalDeal</span>
-      <div class="pcPlate"><span class="gdSlot"><img src="/img/partners/globaldeal-square-transparent.png" alt="" loading="lazy" decoding="async" /></span></div>
-      <div class="pcMeta"><div class="pcNm">Japan Landing Award</div><div class="pcLn">Up to three Demo Day companies win a hands-on Japan market-entry engagement with GlobalDeal: partners and buyers mapped, qualified introductions, a path to a first pilot. Five-figure value, at GlobalDeal's entry fee.</div></div>
+      <div class="pcPlate"><div class="pcLg"><img class="stamp" src="/img/partners/globaldeal-main.png" alt="" loading="lazy" decoding="async" /></div></div>
+      <div class="pcMeta"><div class="pcNm">Japan Landing Award</div><div class="pcLn">Up to three companies are selected to work with GlobalDeal on their Japan market entry, on preferred terms.</div></div>
     </a>
   </div>
 </section>

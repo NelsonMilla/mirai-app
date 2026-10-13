@@ -42,10 +42,10 @@
   // the FAQ item ([data-fashion] elements), and the copy variants in copy.js.
   // To bring it back: flip to true AND restore "Fashion Show Oct 26" in the two meta descriptions above
   // plus the Frontier Human Fashion Show subEvent in the JSON-LD below.
-  // showGlobalDeal — false hides every [data-held="karen"] element (the GlobalDeal partner tile here,
-  // the Japan Landing Award tile on /startups/) until GlobalDeal approves. Flip to true to publish.
-  // Preview while hidden: add ?globaldeal=1 to the URL.
-  window.MIRAI_FLAGS = Object.freeze({ showFashionShow: false, showGlobalDeal: false });
+  // showGlobalDeal — true since Oct 13 2026 (Karen, GlobalDeal, approved the tile and the award).
+  // false hides every [data-held="karen"] element (the GlobalDeal partner tile here, the Japan
+  // Landing Award tile on /startups/ and /program/). Preview while hidden: ?globaldeal=1.
+  window.MIRAI_FLAGS = Object.freeze({ showFashionShow: false, showGlobalDeal: true });
   if (!window.MIRAI_FLAGS.showFashionShow) document.documentElement.classList.add('fashion-hidden');
   if (!window.MIRAI_FLAGS.showGlobalDeal && !/[?&]globaldeal=1\b/.test(location.search)) document.documentElement.classList.add('globaldeal-hidden');
   // Kobe University logo use approval #3182: usage window ends Dec 15 2026.
@@ -628,7 +628,8 @@
   .pcPair > .pcTier:first-child .pGrid { grid-template-columns: repeat(2, 1fr); }
   .pcPair > .pcTier:last-child .pGrid { grid-template-columns: 1fr; }
   .pcPair + .pcTier { margin-top: 64px; }
-  .gdTile .pcPlate { align-items: flex-start; padding-top: 12%; padding-bottom: 0; }
+  .gdTile .pcPlate { align-items: flex-start; padding-top: 16%; padding-bottom: 0; }
+  .gdTile .pcLg { width: 78%; aspect-ratio: auto; }
   .pcard { position: relative; display: block; border: 1px solid var(--line); overflow: hidden;
     text-decoration: none; color: inherit; background: var(--bg); }
   .pcard:focus-visible { outline: 1px solid var(--accent); outline-offset: 2px; }
@@ -667,7 +668,11 @@
   @media (max-width: 980px) { .pGrid.seven { grid-template-columns: repeat(4, 1fr); } }
   @media (max-width: 760px) { .pGrid { grid-template-columns: repeat(2, 1fr); } .pcNm { font-size: 15px; }
     .pcPair { grid-template-columns: 1fr; gap: 0; } .pcPair > .pcTier:first-child { grid-column: auto; }
-    .pcPair > .pcTier + .pcTier { margin-top: 52px; } .pcPair > .pcTier:last-child .pGrid { grid-template-columns: 1fr; } }
+    .pcPair > .pcTier + .pcTier { margin-top: 52px; } .pcPair > .pcTier:last-child .pGrid { grid-template-columns: 1fr; }
+    /* full-width GlobalDeal tile on phones: short plate, wordmark centred, copy below the plate */
+    .gdTile .pcPlate { aspect-ratio: 16/7; align-items: center; padding: 0; }
+    .gdTile .pcLg { width: 56%; }
+    .gdTile .pcMeta { position: static; background: none; padding: 14px 14px 18px; } }
   @media (max-width: 640px) {
     .pcTier + .pcTier { margin-top: 52px; }
     .pGrid, .pGrid.seven { grid-template-columns: 1fr 1fr; gap: 12px; }
@@ -1025,7 +1030,7 @@
     <h3 class="eyebrow" data-copy="ecosystem.marketEntry"></h3>
     <div class="pGrid">
       <a class="pcard gdTile" href="https://globaldeal.io/" target="_blank" rel="noopener">
-        <div class="pcPlate"><div class="pcLg sm"><img src="img/partners/globaldeal-square-transparent.png" alt="" loading="lazy" decoding="async" /></div></div>
+        <div class="pcPlate"><div class="pcLg wide"><img class="stamp" src="img/partners/globaldeal-main.png" alt="" loading="lazy" decoding="async" /></div></div>
         <div class="pcMeta"><div class="pcNm">GlobalDeal</div><div class="pcLn">We take health and longevity companies into the Japanese market end to end: entry strategy, the right partners and first customers, regulatory navigation, and ongoing operations. Presenter of the Japan Landing Award at Demo Day.</div></div>
       </a>
     </div>
