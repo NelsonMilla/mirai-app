@@ -673,7 +673,8 @@
     /* full-width GlobalDeal tile on phones: short plate, wordmark centred, copy below the plate */
     .gdTile .pcPlate { aspect-ratio: 16/7; align-items: center; padding: 0; }
     .gdTile .pcLg { width: 56%; }
-    .gdTile .pcMeta { position: static; background: none; padding: 14px 14px 18px; } }
+    .gdTile .pcMeta { position: static; background: none; padding: 14px 14px 18px; }
+    .nkTile .pcLg { width: 72%; aspect-ratio: auto; } }
   @media (max-width: 640px) {
     .pcTier + .pcTier { margin-top: 52px; }
     .pGrid, .pGrid.seven { grid-template-columns: 1fr 1fr; gap: 12px; }
@@ -1039,10 +1040,10 @@
   <div class="pcTier rv">
     <h3 class="eyebrow" data-copy="ecosystem.media"></h3>
     <div class="pGrid">
-      <!-- Nikkei: logo file to follow (data-logo="nikkei"); line and link to be confirmed by the PM. -->
-      <a class="pcard" href="https://www.nikkei.com/" target="_blank" rel="noopener">
-        <div class="pcPlate"><div class="pcLg"><span class="pcSlot" data-logo="nikkei" aria-hidden="true">Nikkei</span></div></div>
-        <div class="pcMeta"><div class="pcNm">Nikkei</div><div class="pcLn">Japan's leading business newspaper.</div></div>
+      <!-- Nikkei Longevity Project (日経ロンジェビティプロジェクト): logo from the owner, Oct 13 2026; the line is a draft for the PM. -->
+      <a class="pcard nkTile" href="https://bizgate.nikkei.com/projects/BSH14014/" target="_blank" rel="noopener">
+        <div class="pcPlate"><div class="pcLg wide"><img class="stamp" src="img/partners/nikkei-longevity-project.png" alt="" loading="lazy" decoding="async" /></div></div>
+        <div class="pcMeta"><div class="pcNm">Nikkei Longevity Project</div><div class="pcLn">Nikkei's project for a healthy longevity society.</div></div>
       </a>
     </div>
   </div>
