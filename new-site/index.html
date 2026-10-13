@@ -621,12 +621,12 @@
   .pcTier .eyebrow { display: block; margin-bottom: 20px; }
   .pGrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
   .pGrid.seven { grid-template-columns: repeat(7, 1fr); gap: 14px; }
-  /* Community partners and the market-entry partner share one row: same tile, same level */
+  /* Community partners, the market-entry partner and the media partner share one row: same tile, same level */
   .pcPair { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; align-items: end; margin-top: 64px; }
   .pcPair > .pcTier { margin-top: 0; }
   .pcPair > .pcTier:first-child { grid-column: 1 / 3; }
   .pcPair > .pcTier:first-child .pGrid { grid-template-columns: repeat(2, 1fr); }
-  .pcPair > .pcTier:last-child .pGrid { grid-template-columns: 1fr; }
+  .pcPair > .pcTier:not(:first-child) .pGrid { grid-template-columns: 1fr; }
   .pcPair + .pcTier { margin-top: 64px; }
   .gdTile .pcPlate { align-items: flex-start; padding-top: 16%; padding-bottom: 0; }
   .gdTile .pcLg { width: 78%; aspect-ratio: auto; }
@@ -668,7 +668,8 @@
   @media (max-width: 980px) { .pGrid.seven { grid-template-columns: repeat(4, 1fr); } }
   @media (max-width: 760px) { .pGrid { grid-template-columns: repeat(2, 1fr); } .pcNm { font-size: 15px; }
     .pcPair { grid-template-columns: 1fr; gap: 0; } .pcPair > .pcTier:first-child { grid-column: auto; }
-    .pcPair > .pcTier + .pcTier { margin-top: 52px; } .pcPair > .pcTier:last-child .pGrid { grid-template-columns: 1fr; }
+    .pcPair > .pcTier + .pcTier { margin-top: 52px; } .pcPair > .pcTier:not(:first-child) .pGrid { grid-template-columns: 1fr; }
+    .pcPair > .pcTier:last-child .pGrid { grid-template-columns: 1fr 1fr; }
     /* full-width GlobalDeal tile on phones: short plate, wordmark centred, copy below the plate */
     .gdTile .pcPlate { aspect-ratio: 16/7; align-items: center; padding: 0; }
     .gdTile .pcLg { width: 56%; }
@@ -1032,6 +1033,16 @@
       <a class="pcard gdTile" href="https://globaldeal.io/" target="_blank" rel="noopener">
         <div class="pcPlate"><div class="pcLg wide"><img class="stamp" src="img/partners/globaldeal-main.png" alt="" loading="lazy" decoding="async" /></div></div>
         <div class="pcMeta"><div class="pcNm">GlobalDeal</div><div class="pcLn">We take health and longevity companies into the Japanese market end to end: entry strategy, the right partners and first customers, regulatory navigation, and ongoing operations. Presenter of the Japan Landing Award at Demo Day.</div></div>
+      </a>
+    </div>
+  </div>
+  <div class="pcTier rv">
+    <h3 class="eyebrow" data-copy="ecosystem.media"></h3>
+    <div class="pGrid">
+      <!-- Nikkei: logo file to follow (data-logo="nikkei"); line and link to be confirmed by the PM. -->
+      <a class="pcard" href="https://www.nikkei.com/" target="_blank" rel="noopener">
+        <div class="pcPlate"><div class="pcLg"><span class="pcSlot" data-logo="nikkei" aria-hidden="true">Nikkei</span></div></div>
+        <div class="pcMeta"><div class="pcNm">Nikkei</div><div class="pcLn">Japan's leading business newspaper.</div></div>
       </a>
     </div>
   </div>

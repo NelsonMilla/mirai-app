@@ -153,6 +153,7 @@ window.MIRAI_COPY = {
     summit: `Summit partners`,
     marketEntry: `Official Market-Entry Execution Partner`,
     community: `Community partners`,
+    media: `Media partner`,
     support: `With the support of`,
   },
 
