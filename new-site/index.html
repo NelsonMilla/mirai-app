@@ -264,6 +264,19 @@
   .heroWhere { margin-top: 22px; color: var(--ink); font-size: clamp(17px, 1.6vw, 22px); font-weight: 500;
     letter-spacing: .12em; text-transform: uppercase; line-height: 1.3; text-shadow: 0 1px 18px rgba(0,0,0,.7); }
   .heroWhere b { color: var(--accent); font-weight: 500; }
+  /* Two summits, one line: the next one carries a live countdown (filled by the
+     footer clock script), the other reads as what follows. */
+  .heroSummits { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+  .heroSummit { display: inline-flex; align-items: baseline; gap: 10px; padding: 9px 14px; border: 1px solid rgba(244,243,240,.28);
+    font-family: var(--mono); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: rgba(244,243,240,.86);
+    text-decoration: none; transition: border-color .2s, color .2s; }
+  .heroSummit:hover, .heroSummit:focus-visible { border-color: var(--accent); color: var(--ink); }
+  .heroSummit .hsState { color: var(--faint); }
+  .heroSummit .hsCd { color: var(--accent); font-variant-numeric: tabular-nums; }
+  .heroSummit .hsCd:empty { display: none; }
+  .heroSummit.is-next { border-color: var(--accent); }
+  .heroSummit.is-next .hsState { color: var(--accent); }
+  .heroSummit.is-past { opacity: .55; }
   .heroActions { display: flex; align-items: flex-start; margin-top: 28px; }
   .heroActions .btn { min-width: 210px; padding: 16px 40px; font-family: var(--font); font-size: 14px;
     font-weight: 800; letter-spacing: .14em; text-align: center; }
@@ -287,6 +300,8 @@
     .heroContent h1 { font-size: clamp(28px, 8.6vw, 60px); letter-spacing: -.025em; }
     .heroLead { max-width: 39ch; margin-top: 14px; font-size: 15px; line-height: 1.42; }
     .heroWhere { margin-top: 14px; font-size: 14px; letter-spacing: .1em; }
+    .heroSummits { margin-top: 12px; gap: 8px; }
+    .heroSummit { padding: 8px 12px; font-size: 11px; letter-spacing: .1em; gap: 8px; }
     .heroActions { margin-top: 18px; }
     .heroActions .btn { min-width: 0; padding: 14px 24px; font-size: 13px; }
     .heroJpRow { margin-top: 8px; }
@@ -302,6 +317,8 @@
     .heroContent h1 { font-size: 34px; line-height: .86; }
     .heroLead { margin-top: 10px; font-size: 13px; line-height: 1.34; }
     .heroWhere { margin-top: 10px; font-size: 12px; }
+    .heroSummits { margin-top: 8px; gap: 6px; }
+    .heroSummit { padding: 6px 10px; font-size: 10px; }
     .heroActions { margin-top: 12px; }
     .heroJpRow { margin-top: 6px; }
     .heroContinue { font-size: 22px; }
@@ -312,6 +329,8 @@
     .heroContent h1 { max-width: none; font-size: clamp(42px, 6.4vw, 58px); line-height: .86; white-space: nowrap; }
     .heroLead { max-width: 78ch; margin-top: 10px; font-size: 12px; line-height: 1.35; }
     .heroWhere { margin-top: 8px; font-size: 12px; }
+    .heroSummits { margin-top: 8px; }
+    .heroSummit { padding: 6px 10px; font-size: 10px; }
     .heroActions { margin-top: 10px; }
     .heroJpRow { margin-top: 6px; }
     .heroContinue { display: none; }
@@ -918,6 +937,7 @@
     <h1 data-copy="hero.headline"></h1>
     <p class="heroLead" data-copy="hero.lead"></p>
     <p class="heroWhere" data-copy="hero.where"></p>
+    <div class="heroSummits" data-copy="hero.summits"></div>
     <div class="heroActions" data-copy="hero.buttons"></div>
     <p class="heroJpRow" data-copy="hero.jpLink"></p>
   </div>
@@ -1538,8 +1558,15 @@ document.querySelectorAll('.knt-title').forEach(function (h) {
     df.classList.add('wobble');
   });
 
-  // countdown to Oct 1 2026 JST + live JST clock
-  const t0 = new Date('2026-10-01T00:00:00+09:00').getTime();
+  // countdown to the next summit (JST) + live JST clock. Footer clock and the
+  // hero summit strip share it: Summit I until it starts, then Summit II.
+  const SUMMITS = [
+    { n: 1, start: new Date('2026-10-17T00:00:00+09:00').getTime(), end: new Date('2026-10-19T00:00:00+09:00').getTime(), date: '10 · 17 · 2026' },
+    { n: 2, start: new Date('2026-10-24T00:00:00+09:00').getTime(), end: new Date('2026-10-27T00:00:00+09:00').getTime(), date: '10 · 24 · 2026' },
+  ];
+  const cdText = document.getElementById('cdtext'), footDate = document.querySelector('footer .date');
+  const heroChips = [...document.querySelectorAll('.heroSummit')];
+  let shownNext = null;
   const JST_FMT = new Intl.DateTimeFormat('en-GB', {
     timeZone: 'Asia/Tokyo', weekday: 'short', hour: '2-digit', minute: '2-digit' });
   const pad = n => String(n).padStart(2, '0');
@@ -1552,13 +1579,34 @@ document.querySelectorAll('.knt-title').forEach(function (h) {
       const t = pad(ed) + 'D · ' + pad(eh) + 'H · ' + pad(em) + 'M · ' + pad(es) + 'S';
       ebClocks.forEach(el => { el.textContent = t; });
     }
-    let d = Math.max(0, t0 - Date.now());
-    if (d === 0) document.getElementById('cdtext').textContent = MIRAI_COPY.js.countdownOpen;
+    const now = Date.now();
+    const next = SUMMITS.find(x => x.start > now) || null;
+    const on = SUMMITS.find(x => x.start <= now && now < x.end) || null;
+    const state = (next && next.n) + '/' + (on && on.n);
+    if (state !== shownNext) {
+      shownNext = state;
+      const S = MIRAI_COPY.js;
+      cdText.textContent = next ? S.countdownUntil.replace('%s', S.summitName[next.n])
+        : on ? S.countdownOn.replace('%s', S.summitName[on.n]) : S.countdownOver;
+      footDate.textContent = (next || SUMMITS[SUMMITS.length - 1]).date;
+      heroChips.forEach(a => {
+        const n = +a.getAttribute('data-summit'), st = a.querySelector('.hsState');
+        const x = SUMMITS[n - 1], past = now >= x.end;
+        a.classList.toggle('is-next', !!next && n === next.n);
+        a.classList.toggle('is-past', past);
+        st.textContent = past ? S.summitDone : on && n === on.n ? S.summitOn : n === next.n ? S.summitNext : S.summitThen;
+      });
+    }
+    let d = next ? Math.max(0, next.start - now) : 0;
     const day = Math.floor(d / 864e5); d -= day * 864e5;
     const hr = Math.floor(d / 36e5); d -= hr * 36e5;
     const mn = Math.floor(d / 6e4); d -= mn * 6e4;
     const sc = Math.floor(d / 1e3);
     cd.textContent = day; ch.textContent = pad(hr); cm.textContent = pad(mn); cs.textContent = pad(sc);
+    heroChips.forEach(a => {
+      a.querySelector('.hsCd').textContent = next && +a.getAttribute('data-summit') === next.n
+        ? MIRAI_COPY.js.summitIn.replace('%s', day + 'd ' + pad(hr) + 'h ' + pad(mn) + 'm') : '';
+    });
     jst.textContent = JST_FMT.format(new Date());
   }
   tick(); setInterval(tick, 1000);

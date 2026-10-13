@@ -35,6 +35,9 @@ window.MIRAI_COPY = {
     headline: `<span>Live the future</span> <span class="heroLine">of <i class="heroRot" data-words="frontier tech|longevity|biotech|gene therapy|AI medicine|augmentation">frontier tech</i><i class="heroDot">.</i></span>`,
     lead: `Cell and gene therapy, AI-designed drugs, N-of-1 medicine, brain-computer interfaces, radical life extension, human augmentation.`,
     where: `Kobe, Japan &ndash; <b>October 1&ndash;31, 2026</b>`,
+    /* Two summit chips. The page script fills .hsState (Next / Then / Now on / Done, strings
+       under js below) and the live countdown in .hsCd of whichever summit is next. */
+    summits: `<a class="heroSummit" data-summit="1" href="#summits" data-analytics-action="site_navigation" data-analytics-location="hero" data-analytics-target="summit_1"><span class="hsState"></span><b>Summit I &middot; Oct 17&ndash;18</b><span class="hsCd"></span></a><a class="heroSummit" data-summit="2" href="#summits" data-analytics-action="site_navigation" data-analytics-location="hero" data-analytics-target="summit_2"><span class="hsState"></span><b>Summit II &middot; Oct 24&ndash;26</b><span class="hsCd"></span></a>`,
     buttons: `<a class="btn accent" href="/pricing/" data-analytics-action="site_navigation" data-analytics-location="hero_primary" data-analytics-target="pricing">Get Tickets</a>`,
     /* Japanese readers: one small link to /jp/, the Japan-resident ticket (Peatix). */
     jpLink: `<a class="heroJp" href="/jp/" lang="ja" hreflang="ja" data-analytics-action="site_navigation" data-analytics-location="hero" data-analytics-target="japan">日本語ページはこちら <span aria-hidden="true">&rarr;</span></a>`,
@@ -220,12 +223,12 @@ window.MIRAI_COPY = {
   /* ─── FOOTER ─────────────────────────── */
   footer: {
     signoff: `See you on Port Island`,
-    date: `10 · 01 · 2026`,
+    date: `10 · 17 · 2026`,
     statLabel: `Days`,
     statLabel2: `Hours`,
     statLabel3: `Min`,
     statLabel4: `Sec`,
-    countdownLabel: `<span id="cdtext">Until the city opens</span> · <a href="mirai_oct1.ics" style="color:var(--accent); text-decoration:none">Add to calendar</a>`,
+    countdownLabel: `<span id="cdtext">Until Summit I</span> · <a href="mirai_oct1.ics" style="color:var(--accent); text-decoration:none">Add to calendar</a>`,
     jst: `Kobe right now · <b id="jst">—</b> JST`,
     links: `<a href="#">The Group Chat →</a> <a href="https://luma.com/an4zotn9" target="_blank" rel="noopener" data-analytics-action="site_navigation" data-analytics-location="footer" data-analytics-target="luma_listing">Follow on Luma →</a> <a href="#">The Build Server →</a> <a href="#">Sponsor the City →</a> <a href="/jp/" lang="ja" hreflang="ja" data-analytics-action="site_navigation" data-analytics-location="footer" data-analytics-target="japan">日本語ページ →</a>`,
     block: `Stills: Kobe Tourism Bureau · Hideyuki Kamon (CC BY-SA) · art comments (CC BY)`,
@@ -234,7 +237,16 @@ window.MIRAI_COPY = {
   /* ─── STRINGS THE PAGE SCRIPT USES ───────────────────── */
   js: {
     placeholderLink:   `Opening soon`,
-    countdownOpen:     `The city is open`,
+    /* Countdown: the footer clock and hero chips count to the next summit. */
+    summitName:        { 1: `Summit I`, 2: `Summit II` },
+    countdownUntil:    `Until %s`,
+    countdownOn:       `%s is on`,
+    countdownOver:     `Both summits have happened`,
+    summitNext:        `Next`,
+    summitThen:        `Then`,
+    summitOn:          `Now on`,
+    summitDone:        `Done`,
+    summitIn:          `in %s`,
   },
 };
 
