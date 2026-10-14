@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Report a Concern · Mirai Tech City · Kobe 2026</title>
+<meta name="description" content="Tell the Mirai Tech City safety leads about something that made you uncomfortable. No name or email needed." />
+<meta name="robots" content="noindex, nofollow" />
+<meta name="theme-color" content="#050506" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23050506'/%3E%3Ctext x='50' y='72' font-size='62' font-family='serif' text-anchor='middle' fill='%239be8f0'%3E未%3C/text%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="preconnect" href="https://api.fontshare.com" />
+<link rel="preconnect" href="https://cdn.fontshare.com" crossorigin />
+<link href="https://api.fontshare.com/v2/css?f[]=switzer@400,500,700,800,900&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/posthog.js"></script>
+<script defer src="/analytics.js"></script>
+<script src="/citizens/avatar/config.js"></script>
+<link rel="stylesheet" href="/nav.css" />
+<style>
+  :root {
+    --bg: #050506; --ink: #f4f3f0; --dim: rgba(244,243,240,.62); --faint: rgba(244,243,240,.48);
+    --line: rgba(244,243,240,.14); --accent: #9be8f0; --accent-rgb: 155,232,240;
+    --font: 'Switzer', 'Inter', -apple-system, sans-serif; --mono: 'IBM Plex Mono', monospace;
+    --nav: 112px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; background: var(--bg); }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body { min-width: 320px; overflow-x: hidden; background: var(--bg); color: var(--ink);
+    font-family: var(--font); -webkit-font-smoothing: antialiased; }
+  ::selection { background: var(--accent); color: #000; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  a { color: inherit; }
+
+  .wrap { max-width: 1280px; margin: 0 auto; padding: var(--nav) 6vw 0; }
+  .doc-head { padding: 24px 0 36px; border-bottom: 1px solid var(--line); }
+  .eyebrow { font-family: var(--mono); font-size: 10px; letter-spacing: .26em; text-transform: uppercase; color: var(--accent); }
+  h1 { margin-top: 14px; font-weight: 900; text-transform: uppercase; letter-spacing: -.015em;
+    font-size: clamp(34px, 5vw, 64px); line-height: .95; text-wrap: balance; }
+  h1 .tick { color: var(--accent); }
+  .lede { margin-top: 18px; max-width: 60ch; font-size: 16px; line-height: 1.6; color: var(--dim); text-wrap: pretty; }
+  .lede b { color: var(--ink); }
+  .lede a { color: var(--accent); text-decoration: none; }
+  .lede a:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+  /* Two columns on desktop: the form, then a quiet column of other ways to reach us. */
+  .layout { display: grid; grid-template-columns: minmax(0, 640px) 1fr; gap: 0 72px; align-items: start; padding-top: 40px; }
+
+  form { display: block; }
+  .field { padding: 22px 0; border-top: 1px solid var(--line); }
+  .field:first-child { border-top: 0; padding-top: 0; }
+  label.t, .field > .t { display: block; font-size: clamp(17px, 1.6vw, 20px); font-weight: 800; text-transform: uppercase; letter-spacing: -.01em; line-height: 1.15; }
+  .field .n { font-family: var(--mono); font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--faint); margin-right: 10px; }
+  .field .hint { margin-top: 6px; font-size: 14px; line-height: 1.55; color: var(--dim); max-width: 56ch; }
+  .field .hint b { color: var(--ink); font-weight: 500; }
+  textarea, input[type="text"] { display: block; width: 100%; margin-top: 12px; padding: 14px 14px; background: transparent;
+    border: 1px solid var(--line); border-radius: 2px; color: var(--ink); font-family: var(--font); font-size: 16px; line-height: 1.5; }
+  textarea { min-height: 180px; resize: vertical; }
+  textarea:focus, input[type="text"]:focus { outline: 0; border-color: var(--accent); }
+  textarea::placeholder, input::placeholder { color: var(--faint); }
+
+  /* Radio and checkbox rows: the whole row is the target. */
+  .opts { margin-top: 12px; border: 1px solid var(--line); border-radius: 2px; }
+  .opts label { display: grid; grid-template-columns: 22px 1fr; gap: 14px; align-items: start; padding: 14px 14px; border-top: 1px solid var(--line); cursor: pointer; }
+  .opts label:first-child { border-top: 0; }
+  .opts label:hover { background: rgba(var(--accent-rgb), .04); }
+  .opts input { width: 18px; height: 18px; margin-top: 2px; accent-color: var(--accent); }
+  .opts span { font-size: 15px; line-height: 1.5; }
+  .opts span b { display: block; color: var(--ink); font-weight: 500; }
+  .opts span small { display: block; font-size: 14px; color: var(--dim); }
+  .check { display: grid; grid-template-columns: 22px 1fr; gap: 14px; align-items: start; margin-top: 12px; cursor: pointer; font-size: 15px; line-height: 1.5; color: var(--dim); }
+  .check input { width: 18px; height: 18px; margin-top: 2px; accent-color: var(--accent); }
+
+  .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+  .acts { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 24px; padding: 26px 0 0; border-top: 1px solid var(--line); }
+  .btn { display: inline-block; padding: 15px 26px; border: 1px solid var(--accent); border-radius: 2px; background: var(--accent); color: #04191c;
+    font-family: var(--mono); font-size: 11px; letter-spacing: .18em; text-transform: uppercase; font-weight: 500; cursor: pointer; }
+  .btn:hover { background: #c3f1f6; }
+  .btn[disabled] { opacity: .5; cursor: default; }
+  .acts .note { font-family: var(--mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--faint); line-height: 1.7; }
+  .err { display: none; margin-top: 16px; padding: 14px 16px; border: 1px solid var(--accent); font-size: 15px; line-height: 1.55; color: var(--ink); }
+  .err a { color: var(--accent); }
+  form.failed .err { display: block; }
+
+  /* After a successful send the form is replaced by this. */
+  .done { display: none; }
+  .done .tick { color: var(--accent); }
+  .done h2 { font-weight: 800; text-transform: uppercase; letter-spacing: -.01em; font-size: clamp(26px, 3.4vw, 44px); line-height: 1; }
+  .done p { margin-top: 16px; max-width: 56ch; font-size: 16px; line-height: 1.6; color: var(--dim); }
+  .done p b { color: var(--ink); font-weight: 500; }
+  .done a { color: var(--accent); text-decoration: none; }
+  main.sent form { display: none; }
+  main.sent .done { display: block; }
+
+  /* Side column: other ways to reach us. */
+  aside { position: sticky; top: calc(var(--nav) + 32px); }
+  aside h2 { font-family: var(--mono); font-size: 10px; letter-spacing: .26em; text-transform: uppercase; color: var(--faint); font-weight: 400; }
+  .ways { list-style: none; margin-top: 14px; border-top: 1px solid var(--line); }
+  .ways li { padding: 14px 0; border-bottom: 1px solid var(--line); font-size: 14px; line-height: 1.55; color: var(--dim); }
+  .ways b { display: block; color: var(--ink); font-weight: 500; }
+  .ways a { color: var(--accent); text-decoration: none; }
+  .ways a:hover { text-decoration: underline; text-underline-offset: 4px; }
+  .ways .big { font-size: 22px; font-weight: 900; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+
+  footer { max-width: 1280px; margin: 72px auto 0; padding: 26px 6vw 40px; border-top: 1px solid var(--line);
+    display: flex; flex-wrap: wrap; gap: 10px 28px; font-family: var(--mono); font-size: 10px;
+    letter-spacing: .16em; text-transform: uppercase; color: var(--faint); }
+  footer b { color: var(--dim); font-weight: 400; }
+  footer a { color: var(--accent); text-decoration: none; }
+
+  @media (max-width: 980px) {
+    .layout { grid-template-columns: 1fr; gap: 56px 0; }
+    aside { position: static; }
+  }
+  @media (max-width: 700px) {
+    :root { --nav: 150px; }
+    .layout { padding-top: 32px; }
+  }
+</style>
+</head>
+<body data-analytics-offer="conduct_report">
+
+<script src="/nav.js"></script>
+
+<div class="wrap">
+  <header class="doc-head" data-track-section="hero" data-track-position="1">
+    <p class="eyebrow">Code of conduct · Report</p>
+    <h1>Tell us what happened<span class="tick">.</span></h1>
+    <p class="lede">You do not need to be sure it "counts". If something made you uncomfortable, this is the place. <b>No name or email needed.</b> The safety leads read every report, several times a day. The full rules are on the <a href="/conduct/">code of conduct</a> page.</p>
+  </header>
+
+  <div class="layout">
+    <main id="main">
+      <form id="report" novalidate data-track-section="form" data-track-position="2">
+        <div class="field">
+          <label class="t" for="what"><span class="n">01</span>What happened?</label>
+          <p class="hint">In your own words. As much or as little as you want. This is the only required field.</p>
+          <textarea id="what" name="what" required maxlength="4000" placeholder="What happened, and what you would like to be different."></textarea>
+        </div>
+
+        <div class="field">
+          <label class="t" for="when_where"><span class="n">02</span>When and where?</label>
+          <p class="hint">Optional. A venue, a house, a party, the group chat, a date, a time.</p>
+          <input type="text" id="when_where" name="when_where" maxlength="300" autocomplete="off" />
+        </div>
+
+        <div class="field">
+          <label class="t" for="who"><span class="n">03</span>Who was involved?</label>
+          <p class="hint">Optional. A name, a description, or nothing at all.</p>
+          <input type="text" id="who" name="who" maxlength="300" autocomplete="off" />
+        </div>
+
+        <fieldset class="field">
+          <legend class="t"><span class="n">04</span>What do you want us to do?</legend>
+          <div class="opts">
+            <label><input type="radio" name="wants" value="act" checked /><span><b>Act on it</b><small>We decide what to do and tell you if we can reach you.</small></span></label>
+            <label><input type="radio" name="wants" value="talk" /><span><b>Talk to me first</b><small>Nothing happens until you and a safety lead have spoken. Leave a way to reach you below.</small></span></label>
+            <label><input type="radio" name="wants" value="log" /><span><b>Just record it</b><small>We keep it on file and watch for a pattern. No action now.</small></span></label>
+          </div>
+        </fieldset>
+
+        <div class="field">
+          <label class="t" for="contact"><span class="n">05</span>How can we reach you?</label>
+          <p class="hint">Optional. Email, phone, Telegram, anything. <b>Leave it empty to stay anonymous.</b></p>
+          <input type="text" id="contact" name="contact" maxlength="200" autocomplete="off" />
+          <label class="check"><input type="checkbox" name="on_behalf" value="1" /><span>I am reporting for someone else, or something I saw happen to a stranger.</span></label>
+        </div>
+
+        <div class="hp" aria-hidden="true"><label>Website <input type="text" name="website" tabindex="-1" autocomplete="off" /></label></div>
+
+        <div class="acts">
+          <button class="btn" type="submit" id="send">Send report</button>
+          <p class="note">Stored on our own database. Read by the safety leads only.</p>
+        </div>
+        <p class="err" id="err" role="alert"></p>
+      </form>
+
+      <div class="done" id="done" data-track-section="done" data-track-position="3">
+        <h2><span class="tick">✓</span> Received.</h2>
+        <p>Thank you. The safety leads will read this within hours. <b>If you left a way to reach you, we will use it.</b> If you did not, you can still write to <a href="mailto:nelson@miraitech.city?subject=Conduct">nelson@miraitech.city</a> at any time.</p>
+        <p>If you are in danger right now: police <a href="tel:110">110</a>, ambulance and fire <a href="tel:119">119</a>. Both work from any phone in Japan.</p>
+        <p><a href="/conduct/">Back to the code of conduct</a></p>
+      </div>
+    </main>
+
+    <aside data-track-section="ways" data-track-position="4">
+      <h2>Other ways to reach us</h2>
+      <ul class="ways">
+        <li><b>Right now, in person</b>Any member of the Mirai Tech City team or a volunteer. They will stay with you and get a safety lead.</li>
+        <li><b>Chief safety lead</b>Nelson Milla · <a href="mailto:nelson@miraitech.city?subject=Conduct">nelson@miraitech.city</a> · <a href="https://t.me/NelsonMilla" target="_blank" rel="noopener">@NelsonMilla</a> on Telegram</li>
+        <li><b>Emergency</b><span class="big"><a href="tel:110">110</a></span> police · <span class="big"><a href="tel:119">119</a></span> ambulance and fire</li>
+      </ul>
+    </aside>
+  </div>
+</div>
+
+<footer>
+  <b>Mirai Tech City</b> <span>Kobe · Oct 1–31 2026</span>
+  <a href="/conduct/" data-analytics-action="site_navigation" data-analytics-location="footer" data-analytics-target="conduct">Code of Conduct →</a>
+  <a href="/" data-analytics-action="site_navigation" data-analytics-location="footer" data-analytics-target="home">Main site →</a>
+</footer>
+
+<script>
+  // Inserts one row into public.conduct_reports through Supabase's REST API with the
+  // public anon key. RLS allows insert only; nobody can read rows back with this key.
+  (function () {
+    var form = document.getElementById('report'), main = document.getElementById('main');
+    var btn = document.getElementById('send'), err = document.getElementById('err');
+    var cfg = window.MTC_SUPABASE || {};
+
+    function fail(msg) {
+      form.classList.add('failed');
+      err.innerHTML = msg + ' You can also email <a href="mailto:nelson@miraitech.city?subject=Conduct">nelson@miraitech.city</a> directly.';
+      btn.disabled = false; btn.textContent = 'Send report';
+    }
+    function clean(v, max) { v = (v || '').trim(); return v ? v.slice(0, max) : null; }
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      form.classList.remove('failed');
+      if (form.website.value) { main.classList.add('sent'); return; }
+      var what = clean(form.what.value, 4000);
+      if (!what) { form.what.focus(); return fail('Write at least a few words about what happened.'); }
+      if (!cfg.url || !cfg.anonKey) return fail('The form is not connected yet.');
+      btn.disabled = true; btn.textContent = 'Sending';
+      var row = {
+        what: what,
+        when_where: clean(form.when_where.value, 300),
+        who: clean(form.who.value, 300),
+        wants: form.wants.value,
+        contact: clean(form.contact.value, 200),
+        on_behalf: !!form.on_behalf.checked
+      };
+      fetch(cfg.url + '/rest/v1/conduct_reports', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'apikey': cfg.anonKey, 'Authorization': 'Bearer ' + cfg.anonKey, 'Prefer': 'return=minimal' },
+        body: JSON.stringify(row)
+      }).then(function (r) {
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        main.classList.add('sent');
+        window.scrollTo({ top: 0, behavior: 'auto' });
+        if (typeof window.va === 'function') window.va('event', { name: 'Conduct Report Sent' });
+      }).catch(function () {
+        fail('The report did not go through.');
+      });
+    });
+  })();
+</script>
+
+</body>
+</html>
