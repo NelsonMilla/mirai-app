@@ -7,7 +7,7 @@
 
   const str = v => (v == null ? '' : String(v)).trim();
   const HIDDEN = ['false', 'no', '0', 'hidden'];
-  const PAGES = ['landing', 'conferences', 'experience', 'startups', 'jp'];
+  const PAGES = ['landing', 'conferences', 'experience', 'startups'];  // /jp/ shows the landing cards
   const SESSIONS = ['S1', 'S2', 'F', 'Online'];
 
   // "José Cordeiro" → "jose_cordeiro", "Aubrey de Grey" → "aubrey_de_grey".

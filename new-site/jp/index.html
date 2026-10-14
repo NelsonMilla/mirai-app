@@ -630,9 +630,9 @@
   <section class="jp-page__section jp-page__speakers" aria-labelledby="speakers-title" data-track-section="speakers" data-track-position="5">
     <header class="jp-page__speakers-head">
       <div>
-        <div class="jp-page__eyebrow">研究｜未来洞察｜細胞農業｜コミュニティ</div>
+        <div class="jp-page__eyebrow">英語版トップページと同じ4名</div>
         <h2 id="speakers-title">注目の登壇者4名。</h2>
-        <p class="jp-page__section-lead">登壇確定<span data-speakers-count>71</span>名の中から4名をご紹介します。若返り研究、グローバルな未来洞察、細胞農業システム、バイオテック・コミュニティ形成など、幅広い領域を横断します。</p>
+        <p class="jp-page__section-lead">登壇確定<span data-speakers-count>71</span>名の中から、英語版トップページで紹介している4名をご紹介します。</p>
       </div>
       <div class="jp-page__speaker-summary">
         <dl class="jp-page__speaker-count">
@@ -727,9 +727,10 @@
 <script src="/speakers-photos.js"></script>
 <script src="/speakers.js"></script>
 <script>
-  /* 注目の登壇者: cards render from the sheet's Speakers tab (snapshot first,
-     sheet second; text via textContent). Name JP falls back to the Latin
-     name; the focus line appears only when Focus JP is filled. */
+  /* 注目の登壇者: the same four cards as the landing page (Show on: landing),
+     from the sheet's Speakers tab (snapshot first, sheet second; text via
+     textContent). Name JP falls back to the Latin name; the focus line
+     appears only when Focus JP is filled. */
   (() => {
     const S = window.MiraiSpeakers;
     const faces = document.querySelector('[data-speakers="jp-cards"]');
@@ -741,7 +742,7 @@
     };
     function render(model) {
       faces.textContent = '';
-      S.featured(model, 'jp').forEach(s => {
+      S.featured(model, 'landing').forEach(s => {
         const fig = el('figure', 'jp-page__face'), cap = el('figcaption');
         fig.setAttribute('role', 'listitem');
         fig.appendChild(S.photoEl(s, { alt: '', sizes: '(max-width: 430px) 90vw, (max-width: 760px) 45vw, 20vw' }));
