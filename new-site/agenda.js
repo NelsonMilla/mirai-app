@@ -47,15 +47,13 @@
   function withLink(node, text, link) {
     node.appendChild(document.createTextNode(text));
     if (!link) return node;
-    const fashion = link === '#fashion';
-    const a = el('a', '', fashion ? 'See the show ↑' : 'Details');
+    const a = el('a', '', 'Details');
     a.href = link;
     a.style.color = 'var(--accent)';
     a.style.textDecoration = 'none';
     a.setAttribute('data-analytics-action', 'site_navigation');
     a.setAttribute('data-analytics-location', 'agenda');
-    a.setAttribute('data-analytics-target', fashion ? 'fashion' : 'agenda_link');
-    if (fashion) a.setAttribute('data-fashion', ''); // hidden by html.fashion-hidden
+    a.setAttribute('data-analytics-target', 'agenda_link');
     node.appendChild(document.createTextNode(' '));
     node.appendChild(a);
     return node;

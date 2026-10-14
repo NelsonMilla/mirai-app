@@ -153,7 +153,7 @@ test('the shipped snapshot builds the merged 72 speakers', () => {
   const m = S.buildModel(w.MIRAI_SPEAKERS_SNAPSHOT);
   assert.equal(m.count, 72);
   const featured = (page) => plain(S.featured(m, page)).map(s => s.name);
-  assert.deepEqual(featured('landing'), ['Aubrey de Grey', 'Motoshi Hayano', 'Yuki Hanyu', 'Adam Gries']);
+  assert.deepEqual(featured('landing'), ['Aubrey de Grey', 'Motoshi Hayano', 'Masataka Watanabe', 'Prof. Takashi Aoi']);
   assert.deepEqual(featured('experience'), ['Aubrey de Grey', 'Motoshi Hayano', 'José Cordeiro', 'Yuki Hanyu', 'Adam Gries']);
   assert.deepEqual(featured('startups'), ['Aubrey de Grey', 'Motoshi Hayano', 'Yuki Hanyu', 'Adam Gries']);
   assert.deepEqual(featured('jp'), ['Aubrey de Grey', 'José Cordeiro', 'Yuki Hanyu', 'Adam Gries']);

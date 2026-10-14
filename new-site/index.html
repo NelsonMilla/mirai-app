@@ -38,15 +38,10 @@
 <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
 <script defer src="/_vercel/insights/script.js"></script>
 <script>
-  // showFashionShow — false hides the fashion show everywhere EXCEPT the agenda finale row: the section,
-  // the FAQ item ([data-fashion] elements), and the copy variants in copy.js.
-  // To bring it back: flip to true AND restore "Fashion Show Oct 26" in the two meta descriptions above
-  // plus the Frontier Human Fashion Show subEvent in the JSON-LD below.
   // showGlobalDeal — true since Oct 13 2026 (Karen, GlobalDeal, approved the tile and the award).
   // false hides every [data-held="karen"] element (the GlobalDeal partner tile here, the Japan
   // Landing Award tile on /startups/ and /program/). Preview while hidden: ?globaldeal=1.
-  window.MIRAI_FLAGS = Object.freeze({ showFashionShow: false, showGlobalDeal: true });
-  if (!window.MIRAI_FLAGS.showFashionShow) document.documentElement.classList.add('fashion-hidden');
+  window.MIRAI_FLAGS = Object.freeze({ showGlobalDeal: true });
   if (!window.MIRAI_FLAGS.showGlobalDeal && !/[?&]globaldeal=1\b/.test(location.search)) document.documentElement.classList.add('globaldeal-hidden');
   // Kobe University logo use approval #3182: usage window ends Dec 15 2026.
   // The [data-kobe-permit] block self-hides on Dec 15 JST — do NOT remove this
@@ -191,7 +186,6 @@
      URL bar retracts, and an unset html background flashes white. */
   html { background: var(--bg); }
   body { background: var(--bg); color: var(--ink); font-family: var(--font); overflow-x: hidden; }
-  html.fashion-hidden [data-fashion] { display: none !important; }
   html.globaldeal-hidden [data-held="karen"] { display: none !important; }
   ::selection { background: var(--accent); color: #000; }
   :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
@@ -732,21 +726,6 @@
     .ecoSeq[aria-hidden="true"] { display: none; }
   }
 
-  /* ── fashion show ── */
-  .fashion { max-width: none; padding: 0; position: relative; overflow: hidden; }
-  .fashion video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
-  .fashion .veil { position: absolute; inset: 0;
-    background: linear-gradient(100deg, rgba(5,5,6,.88) 32%, rgba(5,5,6,.5) 68%, rgba(5,5,6,.3)); }
-  .fashion .content { position: relative; padding: 120px 6vw 110px; max-width: 1440px; margin: 0 auto; width: 100%; }
-  .fashion p { color: var(--dim); max-width: 56ch; font-size: 15px; line-height: 1.7; margin: 14px 0 22px; }
-  .tags { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 26px; }
-  .kanji { display: inline-flex; flex-wrap: wrap; gap: 8px; vertical-align: middle; }
-  .kanji span { cursor: pointer; display: inline-block; border: 1px solid rgba(var(--accent-rgb),.3);
-    border-radius: 2px; padding: 7px 11px; color: var(--accent); font-size: 13px; line-height: 1;
-    min-width: 31px; text-align: center; }
-  .tags span { font-family: var(--mono); font-size: 10px; letter-spacing: .18em; color: var(--accent);
-    border: 1px solid rgba(var(--accent-rgb),.3); padding: 7px 13px; border-radius: 2px; text-transform: uppercase; }
-
   /* ── japan strip ── */
   .stripwrap { max-width: none; padding: 0; }
   .stripwrap .cap { text-align: center; padding: 26px 6vw 18px; }
@@ -1234,7 +1213,7 @@
     </div>
   <div class="voicesbar rv">
     <div class="faces">
-      <img src="img/aubrey.jpg" alt="Aubrey de Grey" loading="lazy" decoding="async" /><img src="img/hayano.jpg" alt="Motoshi Hayano" loading="lazy" decoding="async" /><img src="img/yuki.jpg" alt="Yuki Hanyu" loading="lazy" decoding="async" /><img src="img/adam.jpg" alt="Adam Gries" loading="lazy" decoding="async" />
+      <img src="img/aubrey.jpg" alt="Aubrey de Grey" loading="lazy" decoding="async" /><img src="img/hayano.jpg" alt="Motoshi Hayano" loading="lazy" decoding="async" /><img src="img/speakers/thumb/masataka_watanabe.jpeg" alt="Masataka Watanabe" loading="lazy" decoding="async" /><img src="img/speakers/thumb/takashi_aoi.jpeg" alt="Takashi Aoi" loading="lazy" decoding="async" />
     </div>
     <div class="who" data-copy="summits.line"></div>
     <a class="more" href="#speakers" data-copy="summits.link"></a>
@@ -1244,21 +1223,6 @@
 </section>
 
 <hr class="rule" />
-
-<!-- ═══ FASHION SHOW ═══ -->
-<section class="fashion" id="fashion" data-fashion data-track-section="fashion" data-track-position="6">
-  <video muted loop playsinline preload="none" loading="lazy" poster="augment_poster.jpg" aria-hidden="true">
-    <source data-src="augment.mp4" type="video/mp4" /></video>
-  <div class="veil"></div>
-  <div class="content">
-    <div class="eyebrow" data-copy="fashion.eyebrow"></div>
-    <h2 class="big" data-copy="fashion.headline"></h2>
-    <p data-copy="fashion.body"></p>
-    <div class="tags" data-copy="fashion.tags"></div>
-    <div class="mono" style="margin-bottom:26px; color:var(--faint)" data-copy="fashion.block"></div>
-    <div style="display:flex; gap:14px; flex-wrap:wrap" data-copy="fashion.block2"></div>
-  </div>
-</section>
 
 <!-- ═══ JAPAN STRIP ═══ -->
 <section class="stripwrap" aria-label="One evening in Kobe" data-track-section="kobe_evening" data-track-position="7">
@@ -1316,8 +1280,7 @@
         <summary><span class="fq-q" data-copy="faq.q6"></span><span class="fq-barcode" aria-hidden="true"></span><span class="fq-toggle mono" aria-hidden="true"></span></summary>
         <div class="fq-body"><p data-copy="faq.a6"></p></div>
       </details>
-      <!-- Hidden while showFashionShow is off; numbered last so Q·01–05 stay contiguous -->
-      <details class="faqItem" data-index="Q·06" data-fashion data-track-faq="What is the Frontier Human Fashion Show?" data-track-position="6">
+      <details class="faqItem" data-index="Q·06" data-track-faq="What is the Demo Day on October 26?" data-track-position="6">
         <summary><span class="fq-q" data-copy="faq.q5"></span><span class="fq-barcode" aria-hidden="true"></span><span class="fq-toggle mono" aria-hidden="true"></span></summary>
         <div class="fq-body"><p data-copy="faq.a5"></p></div>
       </details>
@@ -1504,37 +1467,11 @@ document.querySelectorAll('.knt-title').forEach(function (h) {
     else heroVideo.pause();
   }), { threshold: .05 }).observe(hero);
 
-  // Fashion-show video gets a source only when its section approaches view.
-  const fv = document.querySelector('.fashion video');
-  new IntersectionObserver(es => es.forEach(e => {
-    if (e.isIntersecting) {
-      const source = fv.querySelector('source[data-src]');
-      if (source && !source.src) {
-        source.src = source.dataset.src;
-        fv.load();
-      }
-      if (!noMotion && !connection?.saveData) fv.play().catch(() => {});
-    } else fv.pause();
-  }), { rootMargin: '200px 0px', threshold: .01 }).observe(fv);
-
   // reveal-on-scroll
   const ro = new IntersectionObserver(es => es.forEach(e => {
     if (e.isIntersecting) { e.target.classList.add('in'); ro.unobserve(e.target); }
   }), { threshold: .12 });
   document.querySelectorAll('.rv').forEach(el => ro.observe(el));
-
-  // kanji tap-to-reveal (touch has no title tooltips)
-  document.querySelectorAll('.kanji span').forEach(k => {
-    k.setAttribute('tabindex', '0');
-    k.setAttribute('role', 'button');
-    k.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); k.click(); } });
-    k.addEventListener('click', () => {
-      if (k._orig) return;
-      k._orig = k.textContent;
-      k.textContent = k.getAttribute('title').split(' — ')[0];
-      setTimeout(() => { k.textContent = k._orig; k._orig = null; }, 1500);
-    });
-  });
 
   // placeholder links: never navigate, flash an honest note
   document.querySelectorAll('a[href="#"]').forEach(a => {

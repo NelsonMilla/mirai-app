@@ -42,7 +42,7 @@ and visitors see the built-in copy of the agenda.
 | Block title | The block's headline | No | The Science & Tech Augmenting Life |
 | Title | The session title | Yes | Women's Health |
 | Subtitle | One short line under the title | No | The next trillion-dollar market. |
-| Link | Where the session links to | No | #fashion |
+| Link | Where the session links to | No | /program/ |
 | Publish | TRUE shows the row, FALSE hides it | No (blank shows it) | TRUE |
 
 Publish also accepts yes / no, 1 / 0, and hidden.

@@ -98,6 +98,6 @@ test('the shipped snapshot builds today\'s rail: 5 + 4 sessions and the finale',
     ['STN·03', 'Finale', 'Oct 26', 1, true],
   ]);
   assert.equal(stops[0].title, 'The Science & Tech Augmenting Life');
-  assert.equal(stops[2].sessions[0].link, '#fashion');
+  assert.equal(stops[2].sessions[0].link, '/program/');
   assert.ok(!JSON.stringify(w.MIRAI_AGENDA_SNAPSHOT).includes('&amp;'));
 });

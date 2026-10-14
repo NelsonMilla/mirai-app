@@ -13,5 +13,5 @@ window.MIRAI_AGENDA_SNAPSHOT = [
   { "block": "Summit II", "date": "", "blocktitle": "", "title": "The Stakeholders", "subtitle": "Investment, R&D, entrepreneurship — and regulation as an acceleration mechanism.", "link": "", "publish": "" },
   { "block": "Summit II", "date": "", "blocktitle": "", "title": "Japan's Model", "subtitle": "Conditional approval generating real-world evidence.", "link": "", "publish": "" },
   { "block": "Summit II", "date": "", "blocktitle": "", "title": "Visions for the Future of Longevity", "subtitle": "", "link": "", "publish": "" },
-  { "block": "Finale", "date": "Oct 26", "blocktitle": "", "title": "The Frontier Human Fashion Show & Demo Day", "subtitle": "Devices become couture.", "link": "#fashion", "publish": "" }
+  { "block": "Finale", "date": "Oct 26", "blocktitle": "", "title": "Demo Day", "subtitle": "MedTech device residents show their prototypes live.", "link": "/program/", "publish": "" }
 ];

@@ -9,7 +9,7 @@ Single static `index.html` — no framework, no build step. Deploys anywhere
 - Hero: one stable conversion offer over a high-priority poster. Desktop adds a
   muted loop only after the poster renders and the browser is idle; mobile,
   reduced-motion, data-saver, and slow connections stay poster-only.
-- Summit I Oct 17–18 · Summit II Oct 24–25 · Fashion Show Oct 26 (Monday).
+- Summit I Oct 17–18 · Summit II Oct 24–25 · Demo Day Oct 26 (Monday).
 - The landing-page agenda rail (`#agendaRail`) is rendered by `agenda.js` from a
   public Google Sheet, one row per session; the sheet's CSV export URL is set in
   `agenda-data.js`. The snapshot rows in `agenda-data.js` paint first and stay on
