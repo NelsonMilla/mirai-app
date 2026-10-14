@@ -17,7 +17,7 @@
  */
 import { test, expect, type Page } from '@playwright/test';
 
-const PAGES = ['/', '/experience/', '/startups/', '/pricing/', '/conferences/', '/jp/', '/stay/', '/program/'];
+const PAGES = ['/', '/experience/', '/startups/', '/pricing/', '/conferences/', '/jp/', '/stay/', '/program/', '/conduct/', '/conduct/report/'];
 
 /** Every page at phone and desktop; the landing page also at tablet and MacBook widths. */
 const RUNS = [

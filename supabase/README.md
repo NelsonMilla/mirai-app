@@ -1,4 +1,4 @@
-# Supabase — citizens directory
+# Supabase — citizens directory and conduct reports
 
 One table (`public.citizens`), one public view (`public.citizens_public`), email-OTP auth. Backs
 the "you" / "directory" pages under `new-site/citizens/`.
@@ -85,3 +85,22 @@ true` and no `user_id`. To remove them once real citizens exist:
 ```sql
 delete from public.citizens where is_seed;
 ```
+
+## Conduct reports (`/conduct/report/`)
+
+`migrations/0002_conduct_reports.sql` adds `public.conduct_reports`: one row per submission from
+the anonymous report form linked from the code of conduct page. Run it in **SQL Editor** the same
+way as the first migration (idempotent).
+
+- The form posts straight to `/rest/v1/conduct_reports` with the anon key from
+  `new-site/citizens/avatar/config.js` (the same file the citizens pages use).
+- RLS allows **insert only** for `anon`/`authenticated`, with `status = 'new'` forced. There is
+  no select policy and select/update/delete are revoked, so nobody with the public key can read
+  a report back, not even the person who sent it.
+- Read and triage reports in **Table Editor → conduct_reports** (or SQL). `status` moves from
+  `new` to `in_progress` to `closed`; `notes` is for the safety leads.
+- Columns: `what` (required), `when_where`, `who`, `wants` (`act` / `talk` / `log`), `contact`
+  (empty means anonymous), `on_behalf`.
+
+Verify after running the SQL: submit the form once from the local preview and check the row
+appears in Table Editor. A `404` from the form means the table does not exist yet.

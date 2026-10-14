@@ -22,6 +22,8 @@ const PAGES = [
   'citizens/index.html',
   'stay/index.html',
   'program/index.html',
+  'conduct/index.html',
+  'conduct/report/index.html',
 ];
 
 test('every listed page still exists on disk', () => {
