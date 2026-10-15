@@ -27,7 +27,8 @@ Single static `index.html` — no framework, no build step. Deploys anywhere
   snapshot rows in `speakers-data.js` paint first and stay if the fetch fails;
   `npm run speakers:snapshot` refreshes them. `speakers-photos.js` lists the portraits present
   in `img/speakers/` (regenerate with `npm run photos:manifest`; `scripts/photos-thumbs.py` makes the
-  256px copies in `img/speakers/thumb/` that the /program/ wall uses); a blank Photo cell only derives
+  256px copies in `img/speakers/thumb/` that the /program/ wall uses, plus 480px and 800px WebP copies
+  in `img/speakers/480/` and `img/speakers/800/` that /summit-i/ and /summit-ii/ serve through `srcset`); a blank Photo cell only derives
   a file that is listed, so no page requests a missing portrait. Runbook: `AGENDA.md`.
 - `/program/` opens on a wall of every speaker's portrait, then renders the agenda, day by day, from the same sheet's
   `Program` tab (one row per slot, plus the Demo Day pitch rows) and the speaker
