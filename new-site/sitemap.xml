@@ -31,6 +31,18 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://mirai-tech-city.vercel.app/summit-i/</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://mirai-tech-city.vercel.app/summit-ii/</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://mirai-tech-city.vercel.app/jp/summit-i/</loc>
     <lastmod>2026-10-14</lastmod>
     <changefreq>weekly</changefreq>

@@ -29,4 +29,6 @@
 - [Main Landing Page](https://mirai-tech-city.vercel.app/): Main event overview and schedule.
 - [Japanese Landing Page](https://mirai-tech-city.vercel.app/jp/): Japanese language overview.
 - [The Program](https://mirai-tech-city.vercel.app/program/): Full timetable for the five summit days (October 17, 18, 24, 25 and 26), with venues, speakers and the Demo Day pitches. All times JST.
+- [Summit I](https://mirai-tech-city.vercel.app/summit-i/): Summit I, The Science and Tech Augmenting Life, October 17–18 at Kobe University Integrated Research Center. Speakers, programme, venue and the $900 ticket.
+- [Summit II](https://mirai-tech-city.vercel.app/summit-ii/): Summit II, From East to West: Bridging the Longevity Gap, October 24–26, with Demo Day on the 26th. Speakers, programme, venues and the $900 ticket.
 - [Ticket Registration](https://luma.com/an4zotn9): Official Luma registration link for Summits and Residency.
