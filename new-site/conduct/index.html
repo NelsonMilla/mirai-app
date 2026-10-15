@@ -1,0 +1,493 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Code of Conduct · Mirai Tech City · Kobe 2026</title>
+<meta name="description" content="The rules every participant at Mirai Tech City follows, how to get help, and what happens when a rule is broken. Kobe, October 2026." />
+<meta name="theme-color" content="#050506" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23050506'/%3E%3Ctext x='50' y='72' font-size='62' font-family='serif' text-anchor='middle' fill='%239be8f0'%3E未%3C/text%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="preconnect" href="https://api.fontshare.com" />
+<link rel="preconnect" href="https://cdn.fontshare.com" crossorigin />
+<link href="https://api.fontshare.com/v2/css?f[]=switzer@400,500,700,800,900&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/posthog.js"></script>
+<script defer src="/analytics.js"></script>
+<link rel="stylesheet" href="/nav.css" />
+<style>
+  :root {
+    --bg: #050506; --ink: #f4f3f0; --dim: rgba(244,243,240,.62); --faint: rgba(244,243,240,.48);
+    --line: rgba(244,243,240,.14); --accent: #9be8f0; --accent-rgb: 155,232,240;
+    --font: 'Switzer', 'Inter', -apple-system, sans-serif; --mono: 'IBM Plex Mono', monospace;
+    /* Fixed shared nav: one row on desktop, two rows under 700px. --bar is the
+       height of the mobile jump bar; anchors scroll to rest below both. */
+    --nav: 112px; --bar: 0px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; background: var(--bg); }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body { min-width: 320px; overflow-x: hidden; background: var(--bg); color: var(--ink);
+    font-family: var(--font); -webkit-font-smoothing: antialiased; }
+  ::selection { background: var(--accent); color: #000; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  a { color: inherit; }
+  [id] { scroll-margin-top: calc(var(--nav) + var(--bar) + 16px); }
+
+  .wrap { max-width: 1280px; margin: 0 auto; padding: var(--nav) 6vw 0; }
+
+  /* Document head: a title block, not a hero. */
+  .doc-head { padding: 24px 0 40px; border-bottom: 1px solid var(--line); }
+  .eyebrow { font-family: var(--mono); font-size: 10px; letter-spacing: .26em; text-transform: uppercase; color: var(--accent); }
+  h1 { margin-top: 14px; font-weight: 900; text-transform: uppercase; letter-spacing: -.015em;
+    font-size: clamp(34px, 5vw, 64px); line-height: .95; text-wrap: balance; }
+  h1 .tick { color: var(--accent); }
+  .lede { margin-top: 18px; max-width: 64ch; font-size: 16px; line-height: 1.6; color: var(--dim); text-wrap: pretty; }
+  .lede b { color: var(--ink); }
+
+  /* The ten rules at a glance: a ruled board of the rule titles on the first
+     screen. Each cell jumps to the full rule in the document below. */
+  .board-label { margin-top: 36px; display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: baseline; font-family: var(--mono); font-size: 10px; letter-spacing: .26em; text-transform: uppercase; color: var(--faint); }
+  .board-label b { color: var(--ink); font-weight: 500; }
+  .board { list-style: none; margin-top: 12px; display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+  .board li { display: grid; }
+  .board a { display: grid; grid-template-rows: auto 1fr; gap: 12px; min-height: 118px; padding: 14px 16px 16px; background: var(--bg); color: var(--ink); text-decoration: none; }
+  .board a:hover, .board a:focus-visible { background: rgba(var(--accent-rgb), .05); }
+  .board a:hover b { color: var(--accent); }
+  .board .n { font-family: var(--mono); font-size: 10px; letter-spacing: .18em; color: var(--faint); }
+  .board b { font-size: clamp(16px, 1.45vw, 19px); font-weight: 800; text-transform: uppercase; letter-spacing: -.01em; line-height: 1.1; text-wrap: balance; }
+
+  /* Get help: in the contents rail on desktop, a fixed bar at the bottom on phones. */
+  .helpbar { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 1px; background: var(--line); border: 1px solid var(--line); }
+  .helpbar a { display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
+    min-height: 60px; padding: 8px 8px; text-decoration: none; background: var(--bg); color: var(--ink); }
+  .helpbar .hb-main { background: var(--ink); color: #0a0a0c; font-weight: 800; text-transform: uppercase; letter-spacing: -.01em; font-size: 15px; line-height: 1; }
+  .helpbar .hb-main small { display: block; margin-top: 5px; font-family: var(--mono); font-size: 9px; letter-spacing: .18em; font-weight: 500; }
+  .helpbar .hb-tel { background: var(--accent); color: #0a0a0c; }
+  .helpbar .hb-tel .num { font-size: 20px; font-weight: 900; line-height: 1; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+  .helpbar .hb-tel .what { margin-top: 5px; font-family: var(--mono); font-size: 9px; letter-spacing: .18em; text-transform: uppercase; font-weight: 500; }
+  .helpbar a:hover { filter: brightness(1.08); }
+  .helpbar a:focus-visible { outline: 2px solid var(--ink); outline-offset: -5px; }
+  .toc .helpbar { flex: none; margin-top: 24px; }
+  .toc .helpbar .hb-main small { letter-spacing: .1em; white-space: nowrap; }
+
+  /* Two columns on desktop: sticky contents rail, then the reading column. */
+  .layout { display: grid; grid-template-columns: 236px minmax(0, 1fr); gap: 0 72px; align-items: start; }
+
+  .toc { position: sticky; top: calc(var(--nav) - 8px); max-height: calc(100vh - var(--nav) + 8px - 24px); display: flex; flex-direction: column; padding: 40px 0 24px; }
+  .toc > ol { flex: 1 1 auto; min-height: 0; overflow-y: auto; scrollbar-width: none; }
+  .toc > ol::-webkit-scrollbar { display: none; }
+  .toc-label { font-family: var(--mono); font-size: 10px; letter-spacing: .26em; text-transform: uppercase; color: var(--faint); margin-bottom: 14px; }
+  .toc ol { list-style: none; border-left: 1px solid var(--line); }
+  .toc a { display: flex; gap: 10px; align-items: baseline; margin-left: -1px; padding: 6px 0 6px 14px; border-left: 1px solid transparent;
+    font-size: 13px; line-height: 1.35; color: var(--dim); text-decoration: none; }
+  .toc a:hover { color: var(--ink); }
+  .toc a[aria-current] { color: var(--ink); border-left-color: var(--accent); }
+  .toc a[aria-current] .n { color: var(--accent); }
+  .toc a.within { color: var(--ink); }
+  .toc .n { flex: none; min-width: 3.4em; font-family: var(--mono); font-size: 10px; letter-spacing: .06em; color: var(--faint); }
+  .toc ol ol { border-left: 0; margin: 0 0 6px; }
+  .toc ol ol a { padding: 3px 0 3px 14px; font-size: 12px; color: var(--faint); }
+  .toc ol ol a:hover { color: var(--ink); }
+  .toc ol ol .n { min-width: 3.4em; }
+
+  /* Reading column. */
+  .doc { padding-top: 8px; max-width: 680px; }
+  .sec { padding-top: 56px; }
+  .sec + .sec { margin-top: 56px; border-top: 1px solid var(--line); }
+  .sec .eyebrow { display: flex; gap: 14px; }
+  .sec .eyebrow .sn { color: var(--faint); }
+  h2 { margin-top: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: -.01em;
+    font-size: clamp(24px, 3vw, 38px); line-height: 1; text-wrap: balance; }
+  .doc p { margin-top: 16px; max-width: 64ch; font-size: 15px; line-height: 1.7; color: var(--dim); text-wrap: pretty; }
+  .doc p b { color: var(--ink); font-weight: 500; }
+  .doc p a { color: var(--accent); text-decoration: none; }
+  .doc p a:hover { text-decoration: underline; text-underline-offset: 4px; }
+  .doc p.eyebrow { margin-top: 0; max-width: none; font-size: 10px; line-height: 1.5; color: var(--accent); }
+
+  /* Sub-heads inside a section (3.1, 4.1): sentence case, 700, with a citable number. */
+  h3.sub { margin-top: 44px; display: flex; gap: 12px; align-items: baseline; font-size: 17px; font-weight: 700; letter-spacing: -.005em; line-height: 1.25; }
+  h3.sub .num { font-family: var(--mono); font-size: 10px; letter-spacing: .12em; color: var(--faint); font-weight: 400; }
+  h3.sub:target .num { color: var(--accent); }
+
+  /* The ten consent rules: one hairline-ruled row each, numbered 2.1 to 2.10. */
+  .rules { list-style: none; margin-top: 28px; border-top: 1px solid var(--line); }
+  .rule { display: grid; grid-template-columns: 4.6em 1fr; gap: 0 16px; padding: 24px 0 26px; border-bottom: 1px solid var(--line); }
+  .rule .num { align-self: start; padding-top: 5px; font-family: var(--mono); font-size: 11px; letter-spacing: .1em; color: var(--faint); text-decoration: none; }
+  .rule .num:hover { color: var(--accent); }
+  .rule h3 { font-size: clamp(17px, 1.6vw, 20px); font-weight: 800; text-transform: uppercase; letter-spacing: -.01em; line-height: 1.15; }
+  .rule p { margin-top: 8px; max-width: 60ch; }
+  .rule:target .num, .rule:target h3 { color: var(--accent); }
+
+  /* Everything else: arrow lists. */
+  .list { margin-top: 14px; padding-left: 0; list-style: none; max-width: 64ch; font-size: 15px; line-height: 1.7; color: var(--dim); }
+  .list li { padding-left: 1.4em; text-indent: -1.4em; margin-top: 8px; }
+  .list li::before { content: '→ '; color: var(--accent); }
+  .list b { color: var(--ink); font-weight: 500; }
+  .list a { color: var(--accent); text-decoration: none; }
+  .list a:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+
+  .fine { max-width: 1280px; margin: 56px auto 0; padding: 0 6vw; font-family: var(--mono);
+    font-size: 10px; line-height: 1.9; letter-spacing: .08em; text-transform: uppercase; color: var(--faint); }
+  .fine a { color: var(--accent); text-decoration: none; }
+  footer { max-width: 1280px; margin: 72px auto 0; padding: 26px 6vw 40px; border-top: 1px solid var(--line);
+    display: flex; flex-wrap: wrap; gap: 10px 28px; font-family: var(--mono); font-size: 10px;
+    letter-spacing: .16em; text-transform: uppercase; color: var(--faint); }
+  footer b { color: var(--dim); font-weight: 400; }
+  footer a { color: var(--accent); text-decoration: none; }
+
+  /* Under 980px the contents rail becomes a jump bar stuck under the nav:
+     the five sections as chips in one scrolling row, rules reachable from §2. */
+  @media (max-width: 980px) {
+    :root { --bar: 86px; }
+    .layout { display: block; }
+    .toc { position: sticky; top: calc(var(--nav) - 28px); z-index: 5; max-height: none; display: block; overflow: visible;
+      margin: 0 -6vw; padding: 28px 0 0; background: var(--bg); border-bottom: 1px solid var(--line); }
+    .toc-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+    .toc > ol { display: flex; gap: 8px; overflow-x: auto; overflow-y: hidden; padding: 10px 6vw; border-left: 0; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+    .toc > ol::-webkit-scrollbar { display: none; }
+    .toc > ol > li { flex: none; }
+    .toc > ol > li > a { margin: 0; padding: 9px 12px; border: 1px solid var(--line); border-radius: 3px; gap: 8px; font-size: 12px; white-space: nowrap; }
+    .toc > ol > li > a .n { min-width: 0; }
+    .toc a[aria-current], .toc a.within { color: var(--ink); border-color: rgba(var(--accent-rgb), .5); }
+    .toc a.within .n { color: var(--accent); }
+    .toc ol ol { display: none; }
+    .doc { padding-top: 0; max-width: none; }
+    .doc-head { padding-bottom: 32px; }
+    .board { grid-template-columns: repeat(2, 1fr); }
+    .board a { min-height: 0; }
+    body { padding-bottom: calc(66px + env(safe-area-inset-bottom)); }
+    .toc .helpbar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 60; margin: 0; border-width: 1px 0 0;
+      padding-bottom: env(safe-area-inset-bottom); }
+    .helpbar a { min-height: 64px; }
+    .helpbar .hb-main { font-size: 17px; }
+    .helpbar .hb-tel .num { font-size: 24px; }
+    /* With JS, the bar steps aside while the emergency line itself is on screen. */
+    .helpbar.is-away { transform: translateY(110%); }
+    @media (prefers-reduced-motion: no-preference) { .helpbar { transition: transform .3s ease; } }
+  }
+  @media (max-width: 700px) {
+    :root { --nav: 150px; }
+    .sec { padding-top: 44px; }
+    .sec + .sec { margin-top: 44px; }
+    .rule { grid-template-columns: 1fr; gap: 6px; padding: 20px 0 22px; }
+    .rule .num { padding-top: 0; }
+    .board-label { margin-top: 28px; }
+    .board { grid-template-columns: 1fr; }
+    .board a { grid-template-columns: 2.2em 1fr; grid-template-rows: none; gap: 0 10px; align-items: baseline; padding: 14px 14px 15px; }
+    .board b { font-size: 17px; }
+  }
+
+  @media print {
+    .topbar, .toc, .board-label, .board, footer { display: none; }
+    body, html { background: #fff; color: #000; }
+    .wrap { padding-top: 0; }
+    .doc p, .list, .rule p { color: #222; }
+    .eyebrow, .list a, .doc p a { color: #000; }
+  }
+</style>
+</head>
+<body data-analytics-offer="conduct">
+
+<script src="/nav.js"></script>
+
+<div class="wrap">
+
+  <header class="doc-head" data-track-section="hero" data-track-position="1">
+    <p class="eyebrow">Code of conduct</p>
+    <h1>The rules we enforce<span class="tick">.</span></h1>
+    <p class="lede">Everyone at Mirai Tech City should be able to work, talk, eat, go out and make friends without being touched, pursued, pressured or made uncomfortable. We take that seriously. <b>We enforce every rule on this page.</b></p>
+    <p class="board-label"><b>The ten rules</b> <span>Tap one to read it in full</span></p>
+    <ol class="board" aria-label="The ten consent rules">
+      <li><a href="#s2-1" data-analytics-action="site_navigation" data-analytics-location="rules_board" data-analytics-target="rule_1"><span class="n">01</span><b>Ask before any touch.</b></a></li>
+      <li><a href="#s2-2" data-analytics-action="site_navigation" data-analytics-location="rules_board" data-analytics-target="rule_2"><span class="n">02</span><b>Only a clear yes is a yes.</b></a></li>
+      <li><a href="#s2-3" data-analytics-action="site_navigation" data-analytics-location="rules_board" data-analytics-target="rule_3"><span class="n">03</span><b>One no is final.</b></a></li>
+      <li><a href="#s2-4" data-analytics-action="site_navigation" data-analytics-location="rules_board" data-analytics-target="rule_4"><span class="n">04</span><b>Consent is for one thing, one time.</b></a></li>
+      <li><a href="#s2-5" data-analytics-action="site_navigation" data-analytics-location="rules_board" data-analytics-target="rule_5"><span class="n">05</span><b>Do not pursue.</b></a></li>
+      <li><a href="#s2-6" data-analytics-action="site_navigation" data-analytics-location="rules_board" data-analytics-target="rule_6"><span class="n">06</span><b>Keep contact professional.</b></a></li>
+      <li><a href="#s2-7" data-analytics-action="site_navigation" data-analytics-location="rules_board" data-analytics-target="rule_7"><span class="n">07</span><b>No comments on bodies.</b></a></li>
+      <li><a href="#s2-8" data-analytics-action="site_navigation" data-analytics-location="rules_board" data-analytics-target="rule_8"><span class="n">08</span><b>Ask before you photograph or film.</b></a></li>
+      <li><a href="#s2-9" data-analytics-action="site_navigation" data-analytics-location="rules_board" data-analytics-target="rule_9"><span class="n">09</span><b>Alcohol changes nothing.</b></a></li>
+      <li><a href="#s2-10" data-analytics-action="site_navigation" data-analytics-location="rules_board" data-analytics-target="rule_10"><span class="n">10</span><b>If the team says stop, you stop.</b></a></li>
+    </ol>
+  </header>
+
+  <div class="layout">
+
+    <nav class="toc" aria-label="On this page">
+      <p class="toc-label" id="toc-label">On this page</p>
+      <ol>
+        <li><a href="#s1"><span class="n">§1</span>Who and where</a></li>
+        <li><a href="#s2"><span class="n">§2</span>Consent</a>
+          <ol>
+            <li><a href="#s2-1"><span class="n">2.1</span>Ask before any touch</a></li>
+            <li><a href="#s2-2"><span class="n">2.2</span>Only a clear yes is a yes</a></li>
+            <li><a href="#s2-3"><span class="n">2.3</span>One no is final</a></li>
+            <li><a href="#s2-4"><span class="n">2.4</span>Consent is for one thing, one time</a></li>
+            <li><a href="#s2-5"><span class="n">2.5</span>Do not pursue</a></li>
+            <li><a href="#s2-6"><span class="n">2.6</span>Keep contact professional</a></li>
+            <li><a href="#s2-7"><span class="n">2.7</span>No comments on bodies</a></li>
+            <li><a href="#s2-8"><span class="n">2.8</span>Ask before you photograph or film</a></li>
+            <li><a href="#s2-9"><span class="n">2.9</span>Alcohol changes nothing</a></li>
+            <li><a href="#s2-10"><span class="n">2.10</span>If the team says stop, you stop</a></li>
+          </ol>
+        </li>
+        <li><a href="#s3"><span class="n">§3</span>Not allowed</a>
+          <ol>
+            <li><a href="#s3-1"><span class="n">3.1</span>Sexual harassment</a></li>
+            <li><a href="#s3-2"><span class="n">3.2</span>Intimidation and pursuit</a></li>
+            <li><a href="#s3-3"><span class="n">3.3</span>Discrimination and abuse</a></li>
+            <li><a href="#s3-4"><span class="n">3.4</span>Other</a></li>
+          </ol>
+        </li>
+        <li><a href="#s4"><span class="n">§4</span>Help</a>
+          <ol>
+            <li><a href="#s4-1"><span class="n">4.1</span>What happens when you report</a></li>
+          </ol>
+        </li>
+        <li><a href="#s5"><span class="n">§5</span>Consequences</a></li>
+      </ol>
+      <div class="helpbar" id="helpbar">
+        <a class="hb-main" href="#s4" data-analytics-action="site_navigation" data-analytics-location="helpbar" data-analytics-target="help">Get help<small>Need help now?</small></a>
+        <a class="hb-tel" href="tel:110" data-analytics-action="site_navigation" data-analytics-location="helpbar" data-analytics-target="tel_110"><span class="num">110</span><span class="what">Police</span></a>
+        <a class="hb-tel" href="tel:119" data-analytics-action="site_navigation" data-analytics-location="helpbar" data-analytics-target="tel_119"><span class="num">119</span><span class="what">Ambulance</span></a>
+      </div>
+    </nav>
+
+    <main class="doc">
+
+      <section class="sec" id="s1" data-track-section="scope" data-track-position="2" aria-labelledby="scope-h">
+        <p class="eyebrow"><span class="sn">§1</span>Who and where</p>
+        <h2 id="scope-h">It applies to everyone, everywhere the city happens.</h2>
+        <p><b>Everyone:</b> residents, summit attendees, volunteers, the Mirai team, speakers, mentors, investors, sponsors, partners, venue staff and guests. A title or a badge changes nothing.</p>
+        <p><b>Everywhere:</b> the summit venues, the cowork space, the Portopia Hotel, the community houses, and every dinner, party and outing, official or not. It also covers the online spaces connected to the event: the group chat, Luma, and direct messages between participants. Before, during and after October.</p>
+        <p>We are an international group and most of us are guests in Japan. People bring different norms about distance, eye contact, hugging and directness. That is why we spell the rules out instead of assuming everyone shares the same instincts. When your instincts and these rules disagree, follow the rules.</p>
+      </section>
+
+      <section class="sec" id="s2" data-track-section="consent" data-track-position="3" aria-labelledby="consent-h">
+        <p class="eyebrow"><span class="sn">§2</span>Consent</p>
+        <h2 id="consent-h">Ten rules, followed literally.</h2>
+        <p>They are the same for everyone, whatever your gender, role or how well you think you know someone.</p>
+        <ol class="rules">
+          <li class="rule" id="s2-1">
+            <a class="num" href="#s2-1" aria-label="Rule 2.1, link to this rule">§2.1</a>
+            <div>
+              <h3>Ask before any touch.</h3>
+              <p>Hugs, a hand on the shoulder, high-fives, moving someone out of the way, touching hair, clothing or accessories. Ask out loud and wait for the answer. "Can I hug you?" is normal here.</p>
+            </div>
+          </li>
+          <li class="rule" id="s2-2">
+            <a class="num" href="#s2-2" aria-label="Rule 2.2, link to this rule">§2.2</a>
+            <div>
+              <h3>Only a clear yes is a yes.</h3>
+              <p>Silence, hesitation, a laugh, a shrug, "maybe", "I don't know", stepping back or looking away all mean no. If you are not sure, it is a no.</p>
+            </div>
+          </li>
+          <li class="rule" id="s2-3">
+            <a class="num" href="#s2-3" aria-label="Rule 2.3, link to this rule">§2.3</a>
+            <div>
+              <h3>One no is final.</h3>
+              <p>Do not ask the same person again later, in a different way, after a drink, through a friend or by message. "Not right now" counts as no.</p>
+            </div>
+          </li>
+          <li class="rule" id="s2-4">
+            <a class="num" href="#s2-4" aria-label="Rule 2.4, link to this rule">§2.4</a>
+            <div>
+              <h3>Consent is for one thing, one time.</h3>
+              <p>A yes to a drink is not a yes to a hug. A yes yesterday is not a yes today. Anyone can change their mind at any point, and when they do you stop immediately.</p>
+            </div>
+          </li>
+          <li class="rule" id="s2-5">
+            <a class="num" href="#s2-5" aria-label="Rule 2.5, link to this rule">§2.5</a>
+            <div>
+              <h3>Do not pursue.</h3>
+              <p>Do not follow someone between venues, houses or events, wait for them, position yourself near them repeatedly, or approach them again after they have moved away from you or ended a conversation.</p>
+            </div>
+          </li>
+          <li class="rule" id="s2-6">
+            <a class="num" href="#s2-6" aria-label="Rule 2.6, link to this rule">§2.6</a>
+            <div>
+              <h3>Keep contact professional.</h3>
+              <p>Offering your own card or handle is fine. Do not press for someone's number, social media or room number, and do not message anyone who has not given you their contact themselves. An introduction at a talk is not an opening for personal attention.</p>
+            </div>
+          </li>
+          <li class="rule" id="s2-7">
+            <a class="num" href="#s2-7" aria-label="Rule 2.7, link to this rule">§2.7</a>
+            <div>
+              <h3>No comments on bodies.</h3>
+              <p>No remarks about someone's body, attractiveness or sexuality, however complimentary you mean them. No sexual jokes, innuendo or propositions.</p>
+            </div>
+          </li>
+          <li class="rule" id="s2-8">
+            <a class="num" href="#s2-8" aria-label="Rule 2.8, link to this rule">§2.8</a>
+            <div>
+              <h3>Ask before you photograph or film.</h3>
+              <p>Stage sessions are photographed and recorded by the event. Off stage, ask first. No photos of anyone who has said no, and delete any they ask you to delete.</p>
+            </div>
+          </li>
+          <li class="rule" id="s2-9">
+            <a class="num" href="#s2-9" aria-label="Rule 2.9, link to this rule">§2.9</a>
+            <div>
+              <h3>Alcohol changes nothing.</h3>
+              <p>The rules are the same for you and for the other person after a drink. Someone who is drunk cannot give consent.</p>
+            </div>
+          </li>
+          <li class="rule" id="s2-10">
+            <a class="num" href="#s2-10" aria-label="Rule 2.10, link to this rule">§2.10</a>
+            <div>
+              <h3>If the team says stop, you stop.</h3>
+              <p>Immediately, without explaining or arguing. You can talk to the organisers afterwards.</p>
+            </div>
+          </li>
+        </ol>
+        <p>If you find social cues hard to read, these rules help. They replace guesswork with a fixed procedure: ask, wait, accept the answer. When in doubt, don't.</p>
+      </section>
+
+      <section class="sec" id="s3" data-track-section="harassment" data-track-position="4" aria-labelledby="harassment-h">
+        <p class="eyebrow"><span class="sn">§3</span>Not allowed</p>
+        <h2 id="harassment-h">What counts as harassment.</h2>
+        <p>Any of the following is harassment, whether or not you intended it that way, and whether or not it happened only once.</p>
+
+        <h3 class="sub" id="s3-1"><span class="num">§3.1</span>Sexual harassment</h3>
+        <ul class="list">
+          <li>Unwelcome sexual attention of any kind: propositions, requests for sex or dates after a no, sexual comments, questions about someone's sex life or body.</li>
+          <li>Touching, groping, pressing against, or kissing anyone without their clear yes.</li>
+          <li>Sexual gestures, exposing yourself, or showing sexual images to someone who did not ask to see them.</li>
+          <li>Sending sexual messages, images or links to a participant.</li>
+          <li>Repeated unwanted romantic attention after being turned down, including "friendly" contact that keeps returning to the same request.</li>
+          <li>Entering, or trying to enter, someone's hotel room, house room or sleeping space uninvited.</li>
+        </ul>
+
+        <h3 class="sub" id="s3-2"><span class="num">§3.2</span>Intimidation and pursuit</h3>
+        <ul class="list">
+          <li>Following someone, waiting for them, showing up where they are after they have moved away from you.</li>
+          <li>Blocking someone's path, cornering them, or standing so close they cannot easily leave.</li>
+          <li>Deliberate intimidation, threats, or raising your voice at a participant.</li>
+          <li>Using your role, title, money, or a job or investment offer as pressure.</li>
+          <li>Continuing a conversation someone has tried to end.</li>
+        </ul>
+
+        <h3 class="sub" id="s3-3"><span class="num">§3.3</span>Discrimination and abuse</h3>
+        <ul class="list">
+          <li>Insults, slurs, jokes or "questions" about someone's gender, gender identity, sexual orientation, disability, neurodivergence, body, age, race, ethnicity, nationality, religion or language ability.</li>
+          <li>Deliberately using the wrong name for someone.</li>
+          <li>Revealing private information about a participant (their identity, location, health, sexuality) without their permission.</li>
+        </ul>
+
+        <h3 class="sub" id="s3-4"><span class="num">§3.4</span>Other</h3>
+        <ul class="list">
+          <li>Photographing or recording people without consent, or publishing images of someone who asked you not to.</li>
+          <li>Encouraging anyone else to do any of the above.</li>
+          <li>Retaliating against someone for reporting a concern, or for supporting someone who did.</li>
+        </ul>
+        <p>This list gives examples. Anything that would make a reasonable person feel unsafe, pressured or targeted is covered, whether it appears here or not.</p>
+      </section>
+
+      <section class="sec" id="s4" data-track-section="help" data-track-position="5" aria-labelledby="help-h">
+        <p class="eyebrow"><span class="sn">§4</span>Help</p>
+        <h2 id="help-h">How to get help.</h2>
+        <p>You do not need to be sure it "counts" as harassment. If something made you uncomfortable, tell us. We would much rather hear about ten small things than miss one serious one.</p>
+        <ul class="list">
+          <li><b>Right now, in person:</b> any member of the Mirai Tech City team or a volunteer. They will stay with you and get a safety lead.</li>
+          <li><b>Safety lead:</b> Nelson Milla, chief safety lead. Email <a href="mailto:nelson@miraitech.city?subject=Conduct">nelson@miraitech.city</a> or message <a href="https://t.me/NelsonMilla" target="_blank" rel="noopener">@NelsonMilla</a> on Telegram, answered at any hour for the whole month.</li>
+          <li><b>By email:</b> <a href="mailto:team@miraitech.city?subject=Conduct">team@miraitech.city</a>, read by the organisers only.</li>
+          <li><b>Anonymous:</b> <a href="/conduct/report/" data-analytics-action="site_navigation" data-analytics-location="help" data-analytics-target="report_form">the report form</a>. No name, no email needed. We read it several times a day.</li>
+          <li id="emergency"><b>Emergency:</b> police <b><a href="tel:110">110</a></b>, ambulance and fire <b><a href="tel:119">119</a></b>. Both work from any phone in Japan. A team member will help you call and will stay with you.</li>
+        </ul>
+
+        <h3 class="sub" id="s4-1"><span class="num">§4.1</span>What happens when you report</h3>
+        <ul class="list">
+          <li>We listen first. You decide how much to tell us and whether you want us to act.</li>
+          <li>We will not put you in a room with the other person or ask you to "sort it out" with them.</li>
+          <li>We will tell you what we decide to do, and we will not share your name with the other person unless you agree.</li>
+          <li>We will not punish you for reporting, even if we decide no rule was broken.</li>
+          <li>If you ask, we can move your seat, desk or room, walk you to the Port Liner or to your room, or keep the other person out of the sessions, venues or houses you use.</li>
+        </ul>
+        <p>You can also report on behalf of someone else, or report something you saw happen to a stranger.</p>
+      </section>
+
+      <section class="sec" id="s5" data-track-section="consequences" data-track-position="6" aria-labelledby="break-h">
+        <p class="eyebrow"><span class="sn">§5</span>Consequences</p>
+        <h2 id="break-h">What happens if you break these rules.</h2>
+        <p>The organisers decide, and their decision is final. Depending on what happened, we may:</p>
+        <ul class="list">
+          <li>Tell you to stop and explain the rule. You are expected to comply immediately.</li>
+          <li>Keep you away from a specific person, or from specific sessions, parties, venues or houses.</li>
+          <li>Remove you from the event, the cowork, the community houses and the event online spaces, with no refund of your ticket. Accommodation and travel costs are yours.</li>
+          <li>Ban you from future events Frontier Humans runs, and tell other organisers in our network why.</li>
+          <li>Involve venue security or the police where the behaviour may be a crime.</li>
+        </ul>
+        <p>We do not require a pattern. A single serious incident is enough for removal. Being drunk, misreading a situation, "being from a different culture", or not meaning any harm are not defences. The rules are written out so that nobody has to guess.</p>
+        <p>If you believe you were treated unfairly, write to <a href="mailto:team@miraitech.city?subject=Conduct%20appeal">team@miraitech.city</a> after the event. We will read it and reply, but we will not reverse a removal during the event.</p>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<p class="fine" data-track-section="fine" data-track-position="7">
+  Version 1 · October 2026 · Questions: <a href="mailto:team@miraitech.city">team@miraitech.city</a> · Organised by Frontier Humans
+</p>
+
+<footer>
+  <b>Mirai Tech City</b> <span>Kobe · Oct 1–31 2026</span>
+  <a href="/experience/" data-analytics-action="site_navigation" data-analytics-location="footer" data-analytics-target="experience">What a month here is like →</a>
+  <a href="/" data-analytics-action="site_navigation" data-analytics-location="footer" data-analytics-target="home">Main site →</a>
+</footer>
+
+<script>
+  // Scroll-spy: the contents link for the section or rule nearest the top of
+  // the reading area gets aria-current. Without JS the links still jump.
+  (function () {
+    var links = document.querySelectorAll('.toc a[href^="#"]');
+    var targets = [], byId = {}, current = null, queued = false;
+    for (var i = 0; i < links.length; i++) {
+      var el = document.getElementById(links[i].getAttribute('href').slice(1));
+      if (el) { targets.push(el); byId[el.id] = links[i]; }
+    }
+    if (!targets.length) return;
+    function update() {
+      queued = false;
+      var line = parseFloat(getComputedStyle(targets[0]).scrollMarginTop) + 24;
+      var best = targets[0];
+      for (var i = 0; i < targets.length; i++) {
+        if (targets[i].getBoundingClientRect().top <= line) best = targets[i]; else break;
+      }
+      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2) best = targets[targets.length - 1];
+      if (best.id === current) return;
+      if (current) { byId[current].removeAttribute('aria-current'); within(byId[current]).classList.remove('within'); }
+      current = best.id;
+      var link = byId[current], top = within(link);
+      link.setAttribute('aria-current', 'true');
+      if (top !== link) top.classList.add('within');
+      // Mobile jump bar: bring the section chip into view.
+      var row = top.parentNode.parentNode;
+      if (row.scrollWidth > row.clientWidth) {
+        var rr = row.getBoundingClientRect(), tr = top.getBoundingClientRect();
+        row.scrollTo({ left: row.scrollLeft + (tr.left - rr.left) - (rr.width - tr.width) / 2, behavior: reduce ? 'auto' : 'smooth' });
+      }
+    }
+    function within(a) { var li = a.closest('.toc > ol > li'); return li ? li.querySelector('a') : a; }
+    var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.addEventListener('scroll', function () { if (!queued) { queued = true; requestAnimationFrame(update); } }, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+  })();
+
+  // On phones the fixed Get help bar duplicates the emergency line, so it
+  // steps aside while that line is on screen. On desktop the CSS ignores the class.
+  (function () {
+    var bar = document.getElementById('helpbar'), line = document.getElementById('emergency');
+    if (!bar || !line || !('IntersectionObserver' in window)) return;
+    new IntersectionObserver(function (entries) {
+      bar.classList.toggle('is-away', entries[0].isIntersecting);
+    }, { threshold: 0.6 }).observe(line);
+  })();
+</script>
+
+</body>
+</html>

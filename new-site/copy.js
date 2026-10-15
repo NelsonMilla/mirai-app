@@ -8,11 +8,6 @@
    index.html — social previews are read by scrapers that do
    not run JavaScript.
    ============================================================ */
-/* Fashion-show launch control: strings below pick a variant off
-   window.MIRAI_FLAGS.showFashionShow (set in index.html, which loads
-   the flags before this file). Both variants stay here so flipping
-   the flag restores the show everywhere at once. */
-const SHOW_FASHION = !!(window.MIRAI_FLAGS && window.MIRAI_FLAGS.showFashionShow);
 window.MIRAI_COPY = {
 
   /* ─── SKIP LINK ─────────────────────────── */
@@ -46,10 +41,7 @@ window.MIRAI_COPY = {
 
   /* ─── INTRO + PILLARS (under the fold) ─────────────────
      Structure and copy from marketing's hero-intro mockup:
-     one plain statement, then Accelerate / Inspire / Live.
-     The fashion-show line carries data-fashion so the
-     MIRAI_FLAGS.showFashionShow flag controls it like
-     everywhere else on the page. */
+     one plain statement, then Accelerate / Inspire / Live. */
   pillars: {
     /* The statement is a composed five-line lockup ("Brodovitch Cascade"):
        whispered mono qualifier, display subject, indented bridge, accent
@@ -63,7 +55,7 @@ window.MIRAI_COPY = {
     num2: `02`,
     gloss2: `刺激 / Shigeki`,
     title2: `Inspire`,
-    items2: `<li><b>2 summits</b> on the future of longevity, human augmentation and frontier tech</li><li data-fashion><b>Enhanced Fashion:</b> Brightmirror narratives of the future of humanity — <a href="/fashion-show/" data-analytics-action="site_navigation" data-analytics-location="pillars" data-analytics-target="fashion_show">the fashion show</a></li>`,
+    items2: `<li><b>2 summits</b> on the future of longevity, human augmentation and frontier tech</li><li><b>Demo Day</b> on October 26: MedTech device residents show their prototypes live</li>`,
     num3: `03`,
     gloss3: `暮らし / Kurashi`,
     title3: `Live`,
@@ -114,16 +106,16 @@ window.MIRAI_COPY = {
     body: `Why the next decade of longevity biomedicine runs through Japan: regenerative medicine, devices, and accelerated regulatory paths.`,
     topics: ``,
     priceRow: `<span class="priceVal">$900</span><span class="priceKey"></span>`,
-    block: `<a class="btn ghost" href="https://buy.stripe.com/dRmdRb1Kc9bn7Dx80C3Nm05" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="summit_1" data-analytics-target="summit_1">Get My Ticket</a>`,
+    block: `<a class="btn ghost" href="https://buy.stripe.com/dRmdRb1Kc9bn7Dx80C3Nm05" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="summit_1" data-analytics-target="summit_1">Get My Ticket</a><a class="more" href="/summit-i/" data-analytics-action="site_navigation" data-analytics-location="summit_1" data-analytics-target="summit_1_page">Learn more →</a>`,
     footnote: `Hotel & Transportation not included`,
-    label2: SHOW_FASHION ? `SUMMIT — 02 + FASHION SHOW` : `SUMMIT — 02`,
-    date2: SHOW_FASHION ? `October 24–26` : `October 24–25`,
+    label2: `SUMMIT — 02`,
+    date2: `October 24–25`,
     title2: `From East to West: Bridging the Longevity Gap`,
     body2: `The bottlenecks holding the field back, and what the world looks like once we cure disease.`,
     topics2: ``,
     tieIn: ``,
     priceRow2: `<span class="priceVal">$900</span><span class="priceKey"></span>`,
-    block2: `<a class="btn ghost" href="https://buy.stripe.com/00wcN774wbjv8HBdkW3Nm06" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="summit_2" data-analytics-target="summit_2">Get My Ticket</a>`,
+    block2: `<a class="btn ghost" href="https://buy.stripe.com/00wcN774wbjv8HBdkW3Nm06" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="summit_2" data-analytics-target="summit_2">Get My Ticket</a><a class="more" href="/summit-ii/" data-analytics-action="site_navigation" data-analytics-location="summit_2" data-analytics-target="summit_2_page">Learn more →</a>`,
     footnote2: `Hotel & Transportation not included`,
     line: `Across the two weekends: <b>Aubrey de Grey</b>, <b>Motoshi Hayano</b>, and 41 more.`,
     link: `Meet the speakers ↑`,
@@ -139,16 +131,6 @@ window.MIRAI_COPY = {
     eyebrow: `<span data-speakers-count>55</span> Confirmed Speakers`,
     headline: `Speakers &amp; Residents`,
     followLine: `<span data-speakers-count>55</span> confirmed · more announced through September · <a href="#doors">Follow along ↓</a>`,
-  },
-
-  /* ─── FASHION SHOW ─────────────────────────── */
-  fashion: {
-    eyebrow: `The Runway · October 26 · 19:00 JST`,
-    headline: `The Frontier Human<br/>Fashion Show`,
-    body: `A live demo day, staged as a runway show. Device residents put their prototypes on models. CES meets Tokyo Fashion Week, and everyone's wearing exoskeletons.`,
-    tags: `<span>Exoskeletons</span><span>Neural Interfaces</span><span>Smart Prosthetics</span> <span>Biosensors</span><span>Haptic Suits</span><span>AR/VR Medical</span>`,
-    block: `0 / 9 presenters revealed · <span class="kanji" role="group" aria-label="Presenter categories, tap to reveal"><span title="Armor — exoskeletons">鎧</span> <span title="Brain — neural interfaces">脳</span> <span title="Prosthetic">義</span> <span title="Sense — biosensors">感</span> <span title="Touch — haptics">触</span> <span title="Machine">機</span> <span title="Garment">衣</span> <span title="Vision">視</span> <span title="Life">命</span></span>`,
-    block2: `<a class="btn accent" href="https://luma.com/an4zotn9" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="fashion" data-analytics-target="fashion_show">Get Show Tickets</a> <a class="btn ghost" href="#apply">Put your device on the runway</a>`,
   },
 
   /* ─── ECOSYSTEM (inside the proof section) ─────────────── */
@@ -178,7 +160,7 @@ window.MIRAI_COPY = {
      ../retreat/full-program-section.html for the Retreat page. */
   agenda: {
     eyebrow: `The Agenda · Oct 17–26`,
-    headline: `Nine sessions<br/>and a runway.`,
+    headline: `Nine sessions<br/>and a demo day.`,
     ctaNote: `Oct 17–26 · Kobe · <a href="/program/" style="color:var(--accent); text-decoration:none" data-analytics-action="site_navigation" data-analytics-location="agenda" data-analytics-target="program">Full program →</a>`,
     cta: `<a class="btn accent" href="/pricing/" data-analytics-action="site_navigation" data-analytics-location="agenda" data-analytics-target="pricing">Get Tickets</a>`,
   },
@@ -187,22 +169,18 @@ window.MIRAI_COPY = {
   faq: {
     eyebrow: `FAQ`,
     headline: `Before you book<span class="fq-tick">.</span>`,
-    meta: SHOW_FASHION
-      ? `<strong>06 questions</strong> on file<br/>Kobe · Port Island<br/>Oct 01–31 · 2026`
-      : `<strong>05 questions</strong> on file<br/>Kobe · Port Island<br/>Oct 01–31 · 2026`,
+    meta: `<strong>06 questions</strong> on file<br/>Kobe · Port Island<br/>Oct 01–31 · 2026`,
     foot: `Retain your stub — further questions issued at the gate`,
     q1: `What is a popup city?`,
     a1: `A temporary village where a curated community lives, works, and builds together in one place for one month. Housing, labs, programming, and social life share the same few blocks on Port Island — and the summits are its two flagship weekends.`,
     q2: `Where exactly in Kobe?`,
     a2: `Port Island, home to KBIC (Kobe Biomedical Innovation Cluster). A purpose-built biomedical district with lab infrastructure, connected to central Kobe via the Port Liner monorail.`,
     q3: `Do I have to stay the whole month?`,
-    a3: SHOW_FASHION
-      ? `No. The city runs October 1–31, but summit tickets stand alone — come for one weekend (Oct 17–18 or Oct 24–26), or take everything and stay the month.`
-      : `No. The city runs October 1–31, but summit tickets stand alone — come for one weekend (Oct 17–18 or Oct 24–25), or take everything and stay the month.`,
+    a3: `No. The city runs October 1–31, but summit tickets stand alone — come for one weekend (Oct 17–18 or Oct 24–25), or take everything and stay the month.`,
     q4: `Where do I stay?`,
     a4: `Our partner hotel, the Portopia, is a short walk from KBIC, and the community hacker houses — The Sanctuary, Biopunk House, Aevitas, and ZuCity Japan — host residents across the city. Accommodation is booked separately; we point you to the options after you get your ticket.`,
-    q5: `What is the Frontier Human Fashion Show?`,
-    a5: `A live demo day reimagined as a runway show. Device residents showcase their prototypes on models, blending medical technology with fashion. Think CES meets Tokyo Fashion Week.`,
+    q5: `What is the Demo Day on October 26?`,
+    a5: `The closing day of the summits. MedTech device residents show their prototypes live on stage, twenty companies pitch, and the awards are handed out. See the <a href="/program/" data-analytics-action="site_navigation" data-analytics-location="faq" data-analytics-target="program">full program</a>.`,
     q6: `How do tickets and applications work?`,
     a6: `Summit tickets and the month-long PopUp (<b>$1,200</b>) check out on Stripe. PopUp bookings are reviewed within 7 days; your card is only charged once we confirm your spot. Accommodation is booked separately.`,
   },
@@ -211,9 +189,7 @@ window.MIRAI_COPY = {
   apply: {
     eyebrow: `October 2026 · 300 Curated Residents`,
     headline: `The future is<br/>built here.`,
-    buttons: SHOW_FASHION
-      ? `Tickets for the Summits &amp; Fashion Show. Applications for the PopUp.`
-      : `Tickets for the Summits. Applications for the PopUp.`,
+    buttons: `Tickets for the Summits. Applications for the PopUp.`,
     buttons2: `<a class="btn accent" href="https://book.stripe.com/bJe9AVewY4V7cXR80C3Nm07" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-location="apply" data-analytics-target="everything">Come Live Japan — $1,200</a> <a class="btn" href="/pricing/" data-analytics-action="site_navigation" data-analytics-location="apply" data-analytics-target="pricing">Get Tickets</a> <a class="btn ghost" href="#">Sponsor the City</a>`,
     footnote: `Tickets &amp; PopUp check out on Stripe · PopUp bookings confirmed within 7 days, card charged once confirmed · <a href="/pricing/" data-analytics-action="site_navigation" data-analytics-location="apply" data-analytics-target="pricing">See pricing →</a>`,
     footnote2: `Sponsors reach 300 residents and 55 speakers`,
@@ -230,7 +206,7 @@ window.MIRAI_COPY = {
     statLabel4: `Sec`,
     countdownLabel: `<span id="cdtext">Until Summit I</span> · <a href="mirai_oct1.ics" style="color:var(--accent); text-decoration:none">Add to calendar</a>`,
     jst: `Kobe right now · <b id="jst">—</b> JST`,
-    links: `<a href="#">The Group Chat →</a> <a href="https://luma.com/an4zotn9" target="_blank" rel="noopener" data-analytics-action="site_navigation" data-analytics-location="footer" data-analytics-target="luma_listing">Follow on Luma →</a> <a href="#">The Build Server →</a> <a href="#">Sponsor the City →</a> <a href="/jp/" lang="ja" hreflang="ja" data-analytics-action="site_navigation" data-analytics-location="footer" data-analytics-target="japan">日本語ページ →</a>`,
+    links: `<a href="#">The Group Chat →</a> <a href="https://luma.com/an4zotn9" target="_blank" rel="noopener" data-analytics-action="site_navigation" data-analytics-location="footer" data-analytics-target="luma_listing">Follow on Luma →</a> <a href="#">The Build Server →</a> <a href="#">Sponsor the City →</a> <a href="/conduct/" data-analytics-action="site_navigation" data-analytics-location="footer" data-analytics-target="conduct">Code of Conduct →</a> <a href="/jp/" lang="ja" hreflang="ja" data-analytics-action="site_navigation" data-analytics-location="footer" data-analytics-target="japan">日本語ページ →</a>`,
     block: `Stills: Kobe Tourism Bureau · Hideyuki Kamon (CC BY-SA) · art comments (CC BY)`,
   },
 

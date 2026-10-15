@@ -100,7 +100,7 @@ test('group: anything starting with "sci" is scientists, the rest founders', () 
 
 test('show on: lowercase page tokens, unknown ones dropped', () => {
   assert.deepEqual(one(',A,B,,,,,,"Landing; JP,conferences  startups, home, Experience",,,,,').showOn,
-    ['landing', 'jp', 'conferences', 'startups', 'experience']);
+    ['landing', 'conferences', 'startups', 'experience']);
   assert.deepEqual(one(',A,B,,,,,,,,,,,').showOn, []);
 });
 
@@ -129,7 +129,6 @@ test('featured, others and groups split the model without reordering', () => {
   const names = (list) => plain(list).map(s => s.first);
   assert.deepEqual(names(S.featured(m, 'landing')), ['A', 'D']);
   assert.deepEqual(names(S.others(m, 'landing')), ['B', 'C']);
-  assert.deepEqual(names(S.featured(m, 'jp')), ['D']);
   const g = S.groups(m);
   assert.deepEqual([names(g.scientists), names(g.founders)], [['A', 'C'], ['B', 'D']]);
 });
@@ -153,10 +152,9 @@ test('the shipped snapshot builds the merged 72 speakers', () => {
   const m = S.buildModel(w.MIRAI_SPEAKERS_SNAPSHOT);
   assert.equal(m.count, 72);
   const featured = (page) => plain(S.featured(m, page)).map(s => s.name);
-  assert.deepEqual(featured('landing'), ['Aubrey de Grey', 'Motoshi Hayano', 'Yuki Hanyu', 'Adam Gries']);
+  assert.deepEqual(featured('landing'), ['Aubrey de Grey', 'Motoshi Hayano', 'Masataka Watanabe', 'Prof. Takashi Aoi']);
   assert.deepEqual(featured('experience'), ['Aubrey de Grey', 'Motoshi Hayano', 'José Cordeiro', 'Yuki Hanyu', 'Adam Gries']);
   assert.deepEqual(featured('startups'), ['Aubrey de Grey', 'Motoshi Hayano', 'Yuki Hanyu', 'Adam Gries']);
-  assert.deepEqual(featured('jp'), ['Aubrey de Grey', 'José Cordeiro', 'Yuki Hanyu', 'Adam Gries']);
   const g = plain(S.groups(m));
   assert.equal(g.scientists.length, 27);
   assert.equal(g.founders.length, 45);

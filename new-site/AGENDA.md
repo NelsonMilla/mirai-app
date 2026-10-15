@@ -42,7 +42,7 @@ and visitors see the built-in copy of the agenda.
 | Block title | The block's headline | No | The Science & Tech Augmenting Life |
 | Title | The session title | Yes | Women's Health |
 | Subtitle | One short line under the title | No | The next trillion-dollar market. |
-| Link | Where the session links to | No | #fashion |
+| Link | Where the session links to | No | /program/ |
 | Publish | TRUE shows the row, FALSE hides it | No (blank shows it) | TRUE |
 
 Publish also accepts yes / no, 1 / 0, and hidden.
@@ -125,7 +125,7 @@ The sharing setting is the same one the agenda uses: "Anyone with the link" → 
 | Group | Scientists or Founders. Decides which half of /conferences/ lists them | Yes | Scientists |
 | Show on | Pages where this person gets a photo card | No | landing, conferences |
 | Photo | Leave empty to use the standard photo file (see Photos below), or `none` | No | none |
-| Name JP | The name in Japanese, for /jp/ | No | オーブリー・デグレイ |
+| Name JP | The name in Japanese, for /jp/ (fill it for everyone on `landing`) | No | オーブリー・デグレイ |
 | Role JP | The role in Japanese, for /jp/ | No | プレジデント兼最高科学責任者 |
 | Focus JP | One line on their work in Japanese, for /jp/ | No | マウスを用いた若返り研究 |
 | Publish | TRUE shows the row, FALSE hides it | No (blank shows it) | TRUE |
@@ -137,17 +137,18 @@ Publish also accepts yes / no, 1 / 0, and hidden.
 - **Row order is display order, everywhere.** Cards, numbered lists and the "Also in…"
   sentences all follow the order of the rows. Move a row to move the person.
 - **Show on** takes any of these words, separated by commas:
-  - `landing`: a photo card in the Speakers section of the landing page. Everyone else
-    who is published is named in the "Also in the arena" sentence under the cards.
+  - `landing`: a photo card in the Speakers section of the landing page, and the same
+    card on /jp/ using the Japanese columns. Everyone else who is published is named
+    in the "Also in the arena" sentence under the cards.
   - `conferences`: a photo card at the top of their group on /conferences/. Everyone
     else in the group is a numbered row under the cards.
   - `experience`: a photo card on /experience/. Everyone else is named under "Also in
     the city".
   - `startups`: a photo card on /startups/.
-  - `jp`: a photo card on /jp/, using the Japanese columns.
+  - `jp` is no longer read: /jp/ always shows the `landing` four.
 
   The layouts were designed for the number of cards each page has today: 4 on the
-  landing page, 5 on /experience/, 4 on /startups/, 4 on /jp/, and on /conferences/ 5
+  landing page (and so on /jp/), 5 on /experience/, 4 on /startups/, and on /conferences/ 5
   scientists and 4 founders. More or fewer still works, but check the page after.
 - **Sessions**: S1 is Summit I, S2 is Summit II, F is the Finale, Online is online.
   Separate them with commas or spaces. They show on /conferences/ as `S1 · S2`. Empty
@@ -178,7 +179,7 @@ The Display name is never used for the file name; only First name and Last name 
 
 To add or change a photo, put the file in `new-site/img/speakers/` with that name, run
 `python3 scripts/photos-thumbs.py` (it makes the small square copies the /program/ wall
-uses) and then `npm run photos:manifest` from `new-site/` (it lists the files that exist, so pages never
+uses and the WebP sizes the summit pages use) and then `npm run photos:manifest` from `new-site/` (it lists the files that exist, so pages never
 ask for a missing one), and deploy. Make sure the person's Photo cell is empty. A new photo needs a deploy; a
 sheet edit does not.
 
@@ -218,7 +219,7 @@ Publish to FALSE. To reorder, move the rows.
 - Edits never appear: check the tab is still named exactly `Speakers`, then the
   sharing setting. If the tab cannot be read, every page shows the built-in copy.
 - Someone is missing from a page: check Publish, then the spelling of the page word in
-  Show on (`landing`, `conferences`, `experience`, `startups`, `jp`).
+  Show on (`landing`, `conferences`, `experience`, `startups`).
 - Someone is in the wrong half of /conferences/: check Group starts with "sci" for
   scientists.
 - Initials instead of a photo: the Photo cell says `none` or something not starting
