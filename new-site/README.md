@@ -30,6 +30,8 @@ Single static `index.html` — no framework, no build step. Deploys anywhere
   256px copies in `img/speakers/thumb/` that the /program/ wall uses, plus 480px and 800px WebP copies
   in `img/speakers/480/` and `img/speakers/800/` that /summit-i/ and /summit-ii/ serve through `srcset`); a blank Photo cell only derives
   a file that is listed, so no page requests a missing portrait. Runbook: `AGENDA.md`.
+  Portraits taken from Wikimedia Commons keep their credit here: `george_church.jpeg` is
+  "George Church in 2023" by Christopher Michel, CC BY-SA 4.0, cropped.
 - `/program/` opens on a wall of every speaker's portrait, then renders the agenda, day by day, from the same sheet's
   `Program` tab (one row per slot, plus the Demo Day pitch rows) and the speaker
   roster from the `Speakers` tab. `program.js` builds the agenda model; speaker
