@@ -179,7 +179,7 @@ The Display name is never used for the file name; only First name and Last name 
 
 To add or change a photo, put the file in `new-site/img/speakers/` with that name, run
 `python3 scripts/photos-thumbs.py` (it makes the small square copies the /program/ wall
-uses) and then `npm run photos:manifest` from `new-site/` (it lists the files that exist, so pages never
+uses and the WebP sizes the summit pages use) and then `npm run photos:manifest` from `new-site/` (it lists the files that exist, so pages never
 ask for a missing one), and deploy. Make sure the person's Photo cell is empty. A new photo needs a deploy; a
 sheet edit does not.
 

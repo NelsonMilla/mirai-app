@@ -99,10 +99,11 @@ def build_roster(tokens, days, first):
             talks.append({'day': day_num(r['day']), 'start': r['start'], 'end': r['end'], 'block': r['block'],
                           'title': r['title'], 'panel': r['kind'] == 'panel', 'online': online})
         name = sp['displayname'] or f"{sp['firstname']} {sp['lastname']}"
+        variants = has and full == f'/img/speakers/{slug}.jpeg' and os.path.exists(os.path.join(SITE, 'img', 'speakers', '800', slug + '.webp'))
         out.append({'slug': slug, 'name': name, 'short': f"{sp['firstname']} {sp['lastname']}",
                     'org': short_org(sp, rows), 'aff': sp['affiliation'], 'bio': sp['bio'],
                     'online': 'Online' in sp['sessions'], 'photo': full if has else '', 'thumb': thumb if has else '',
-                    'talks': talks, 'sheet_talk': sp['talk']})
+                    'variants': variants, 'talks': talks, 'sheet_talk': sp['talk']})
     by = {s['slug']: s for s in out}
     ordered = [by[s] for s in first if s in by] + [s for s in out if s['slug'] not in first]
     return ordered
@@ -118,12 +119,22 @@ def tile(s, i):
     cls = 'tile' + (' big' if big else '') + (' t1' if i == 0 else '') + (' t2' if i == 1 else '') + (' xl' if i == 3 else '')
     if s['photo']:
         img = f'<img src="{s["photo"] if big else s["thumb"]}" alt="" {"width=\"800\" height=\"1000\"" if big else "width=\"256\" height=\"256\""}{" fetchpriority=\"high\"" if eager else " loading=\"lazy\""} decoding="async">'
+        if s['variants']:
+            img = f'<picture><source type="image/webp" srcset="{srcset(s["slug"], big)}" sizes="{SIZES_BIG if big else SIZES_SMALL}">{img}</picture>'
     else:
         img = f'<span class="ini" aria-hidden="true">{esc(initials(s))}</span>'
     tk = f'<span class="tk">{esc(main_talk(s))}</span>' if big and main_talk(s) else ''
     on = '<span class="on">Online</span>' if s['online'] else ''
     return (f'<div class="{cls}" data-slug="{s["slug"]}"><div class="tile-btn"><div class="pic">{img}</div>'
             f'<span class="strip"><span class="nm">{esc(s["short"])}</span><span class="org">{esc(s["org"])}</span>{on}{tk}</span></div></div>')
+
+# How wide a tile is at each breakpoint (big = 2 columns, small = 1), so the browser picks the right WebP.
+SIZES_BIG = '(max-width:699px) 50vw, (max-width:999px) 50vw, (max-width:1279px) 34vw, 25vw'
+SIZES_SMALL = '(max-width:699px) 50vw, (max-width:999px) 25vw, (max-width:1279px) 17vw, 13vw'
+
+def srcset(slug, big):
+    return (f'/img/speakers/480/{slug}.webp 480w, /img/speakers/800/{slug}.webp 800w' if big
+            else f'/img/speakers/thumb/{slug}.webp 256w, /img/speakers/480/{slug}.webp 480w')
 
 def initials(s):
     w = s['short'].split()
@@ -213,14 +224,21 @@ JS = r'''<script>
   var esc = function(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); };
   var SEAL = %(seal)s;
   var DOW = {17:'SAT', 18:'SUN', 24:'SAT', 25:'SUN', 26:'MON'};
+  var SIZES_BIG = %(sb)s, SIZES_SMALL = %(ss)s;
   function mainTalk(s){ var t = s.talks.filter(function(t){ return !t.panel && t.title.toLowerCase().indexOf('to be confirmed') < 0; }); if (t[0]) return t[0].title; if (s.sheet_talk) return s.sheet_talk; return s.talks[0] ? s.talks[0].title : ''; }
   function tile(s, i){
     var big = i < 5, eager = i < 2;
     var cls = 'tile' + (big ? ' big' : '') + (i === 0 ? ' t1' : '') + (i === 1 ? ' t2' : '') + (i === 3 ? ' xl' : '');
     var w = s.short.split(/\s+/), ini = (w[0][0] + (w.length > 1 ? w[w.length - 1][0] : '')).toUpperCase();
-    var img = '<div class="pic">' + (s.photo
+    var img = s.photo
       ? '<img src="' + (big ? s.photo : s.thumb) + '" alt="" ' + (big ? 'width="800" height="1000"' : 'width="256" height="256"') + (eager ? ' fetchpriority="high"' : ' loading="lazy"') + ' decoding="async">'
-      : '<span class="ini" aria-hidden="true">' + esc(ini) + '</span>') + '</div>';
+      : '<span class="ini" aria-hidden="true">' + esc(ini) + '</span>';
+    if (s.photo && s.variants) {
+      var set = big ? '/img/speakers/480/' + s.slug + '.webp 480w, /img/speakers/800/' + s.slug + '.webp 800w'
+                    : '/img/speakers/thumb/' + s.slug + '.webp 256w, /img/speakers/480/' + s.slug + '.webp 480w';
+      img = '<picture><source type="image/webp" srcset="' + set + '" sizes="' + (big ? SIZES_BIG : SIZES_SMALL) + '">' + img + '</picture>';
+    }
+    img = '<div class="pic">' + img + '</div>';
     var talks = s.talks.map(function(t){
       return '<li><span class="mono">10.' + t.day + ' ' + DOW[t.day] + ' ' + t.start + '–' + t.end + (t.online ? ' · ONLINE' : '') + '</span>' +
         '<span class="te">' + esc(t.title) + '</span></li>';
@@ -271,7 +289,7 @@ JS = r'''<script>
   });
   document.addEventListener('keydown', function(e){ if (e.key === 'Escape') close(true); });
 })();
-</script>''' % {'seal': json.dumps(SEAL)}
+</script>''' % {'seal': json.dumps(SEAL), 'sb': json.dumps(SIZES_BIG), 'ss': json.dumps(SIZES_SMALL)}
 
 PARTNERS = '''<!-- PARTNERS: the same set as /jp/summit-i/. Kobe University and MIC logos are used verbatim under an
      approval that runs to Dec 15 2026 ([data-kobe-permit] self-hides after that). KBIC is never listed as host. -->
@@ -331,7 +349,7 @@ def page(P):
     rest = ''.join(tile(s, i + 2) for i, s in enumerate(roster[2:14]))
     buy = lambda loc, label: (f'<a class="btn mizu" href="{P["stripe"]}" target="_blank" rel="noopener" data-analytics-action="checkout" '
                               f'data-analytics-target="{P["offer"]}" data-analytics-location="{loc}">{label}</a>')
-    data = [{k: s[k] for k in ('slug', 'name', 'short', 'org', 'aff', 'bio', 'online', 'photo', 'thumb', 'talks', 'sheet_talk')} for s in roster]
+    data = [{k: s[k] for k in ('slug', 'name', 'short', 'org', 'aff', 'bio', 'online', 'photo', 'thumb', 'variants', 'talks', 'sheet_talk')} for s in roster]
     return f'''<!doctype html>
 <html lang="en">
 <head>
