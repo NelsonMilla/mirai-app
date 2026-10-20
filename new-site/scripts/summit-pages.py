@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
-"""Build /summit-i/ and /summit-ii/ (the English summit landing pages) from the sheet snapshots.
+"""Build the shells of /summit-i/ and /summit-ii/ (the English summit landing pages).
 
 Run from anywhere:  python3 new-site/scripts/summit-pages.py
-Reads speakers-data.js and program-data.js (regenerate those first with `npm run speakers:snapshot`
-and `npm run program:snapshot`), borrows the stylesheet from /jp/summit-i/index.html, and rewrites
-summit-i/index.html and summit-ii/index.html. Copy lives in this file (P1 and P2 at the bottom).
+The wall of faces and the programme are rendered in the browser by summit-live.js from the
+Speakers and Program tabs of the sheet (snapshot first, then the live sheet), so this script
+only writes the page: copy, ticket, partners, venue, and the speaker and session counts that
+sit in the static text (the browser corrects those too). It borrows the stylesheet from
+/jp/summit-i/index.html. Copy lives in this file (P1 and P2 at the bottom).
 """
-import json, re, os, html, unicodedata, sys
+import json, re, os, html
 
 SITE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 JP = open(os.path.join(SITE, 'jp', 'summit-i', 'index.html')).read()
@@ -20,156 +22,41 @@ def load(path):
 SPK = load(os.path.join(SITE, 'speakers-data.js'))
 PRG = load(os.path.join(SITE, 'program-data.js'))
 
-def fold(s):
-    return ''.join(c for c in unicodedata.normalize('NFKD', s) if not unicodedata.combining(c)).lower()
-
 def esc(s): return html.escape(str(s), quote=True)
 
-def slug_of(sp):
-    return fold(sp['firstname'] + '_' + sp['lastname']).replace(' ', '_').replace('-', '_').replace('.', '')
+HIDDEN = ('false', 'no', '0', 'hidden')
 
-def day_num(d): return int(d.split()[1])
-DOW = {17: 'SAT', 18: 'SUN', 24: 'SAT', 25: 'SUN', 26: 'MON'}
+# The same reading of the sheet as speakers.js and program.js, reduced to what the counts need.
+def speaker_count(tokens):
+    n = 0
+    for r in SPK:
+        if not r.get('firstname', '').strip() or r.get('publish', '').strip().lower() in HIDDEN: continue
+        have = [t for t in re.split(r'[^A-Za-z0-9]+', r.get('sessions', '')) if t]
+        if any(t in tokens for t in have): n += 1
+    return n
 
-def rows_for(days):
-    return [r for r in PRG if r['publish'] != 'FALSE' and day_num(r['day']) in days]
+DATE_RE = re.compile(r'^([A-Za-z]{3,9})\.?\s+(\d{1,2})(?:\s*\(([A-Za-z]{3})[A-Za-z]*\))?(?:\s+(\d{1,2}:\d{2})\s*[–—-]\s*(\d{1,2}:\d{2}))?')
 
-def speaker_rows(sp, rows):
-    fn, ln = fold(sp['firstname']), fold(sp['lastname'])
-    out = []
-    for r in rows:
-        s = fold(r['speakers'])
-        if ln in s and fn in s: out.append(r)
-    return out
-
-# Short organisation lines for the name strips (the Program tab's parentheticals run long in English).
-ORG_SHORT = {
-    'Kobe University Graduate School of Medicine': 'Kobe University',
-    'LEV Foundation / Human Longevity Inc.': 'LEV Foundation',
-    'University of Yamanashi / Institute of Science Tokyo': 'Univ. of Yamanashi · Science Tokyo',
-    'Eightsix Science / Synconetics Organisation': 'Eightsix Science',
-    'Cornerstone / Granite Bio Innovation': 'Granite Bio Innovation',
-    'Vitalism Foundation / Vitalist Bay': 'Vitalism Foundation',
-    'Longevity advocate and documentary producer': 'Longevity advocate',
-    'Researcher and bioinformatician': 'Bioinformatician',
-    'Transhumanist AI / BCI artist': 'AI and BCI artist',
-    'International Longevity Summit': 'Intl. Longevity Summit',
-    'Healthspan Capital / Cambrian': 'Healthspan Capital',
-}
-
-def short_org(sp, rows):
-    org = _short_org(sp, rows)
-    return ORG_SHORT.get(org, org)
-
-def _short_org(sp, rows):
-    fn, ln = fold(sp['firstname']), fold(sp['lastname'])
-    for r in rows:
-        for tok in re.split(r';', r['speakers']):
-            if ln in fold(tok) and fn in fold(tok):
-                m = re.search(r'\(([^)]*)\)', tok)
-                if m:
-                    return re.sub(r',\s*(online|moderator)$', '', m.group(1).strip())
-    aff = sp['affiliation']
-    return aff.split(';')[0].split(',')[-1].strip() or aff
-
-SEAL = ('<svg class="tile-seal" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><polygon fill="#D0442C" points="96.0,50.0 95.7,57.2 92.3,63.7 90.1,70.4 87.0,76.9 82.5,82.5 76.0,85.9 71.6,92.3 64.3,94.1 57.1,95.1 50.0,95.1 42.6,96.5 35.6,94.3 29.9,89.5 23.0,87.2 18.2,81.8 12.2,77.4 10.2,70.3 6.0,64.3 4.6,57.2 5.3,50.0 6.3,43.1 4.6,35.2 7.3,28.3 14.0,23.9 17.6,17.6 21.9,11.3 29.7,10.1 35.9,6.6 42.8,4.4 50.0,3.3 57.1,5.4 63.8,7.5 71.8,7.3 76.9,13.0 81.8,18.2 87.4,22.9 90.4,29.4 92.4,36.2 96.5,42.6"/>'
-        '<text x="50" y="44.2" font-family="\'Dela Gothic One\',sans-serif" font-size="34" fill="#F4F3F0" text-anchor="middle">講</text>'
-        '<text x="50" y="80.2" font-family="\'Dela Gothic One\',sans-serif" font-size="34" fill="#F4F3F0" text-anchor="middle">演</text></svg>')
-WALL_SEAL = SEAL.replace('class="tile-seal"', 'class="wall-seal"')
-
-def build_roster(tokens, days, first):
-    rows = rows_for(days)
-    out = []
-    for sp in SPK:
-        if sp['publish'] == 'FALSE': continue
-        toks = [t.strip() for t in sp['sessions'].split(',')]
-        if not any(t in tokens for t in toks): continue
-        slug = slug_of(sp)
-        photo = sp['photo']
-        full = f'/img/speakers/{slug}.jpeg'
-        thumb = f'/img/speakers/thumb/{slug}.jpeg'
-        has = photo != 'none' and os.path.exists(os.path.join(SITE, full.lstrip('/')))
-        if not has and photo and photo != 'none' and os.path.exists(os.path.join(SITE, photo.lstrip('/'))):
-            full = thumb = photo; has = True
-        talks = []
-        fn, ln = fold(sp['firstname']), fold(sp['lastname'])
-        for r in speaker_rows(sp, rows):
-            own = next((t for t in r['speakers'].split(';') if ln in fold(t) and fn in fold(t)), '')
-            online = 'online' in fold(r['block']) or 'online' in fold(own)
-            talks.append({'day': day_num(r['day']), 'start': r['start'], 'end': r['end'], 'block': r['block'],
-                          'title': r['title'], 'panel': r['kind'] == 'panel', 'online': online})
-        name = sp['displayname'] or f"{sp['firstname']} {sp['lastname']}"
-        variants = has and full == f'/img/speakers/{slug}.jpeg' and os.path.exists(os.path.join(SITE, 'img', 'speakers', '800', slug + '.webp'))
-        out.append({'slug': slug, 'name': name, 'short': f"{sp['firstname']} {sp['lastname']}",
-                    'org': short_org(sp, rows), 'aff': sp['affiliation'], 'bio': sp['bio'],
-                    'online': 'Online' in sp['sessions'], 'photo': full if has else '', 'thumb': thumb if has else '',
-                    'variants': variants, 'talks': talks, 'sheet_talk': sp['talk']})
-    by = {s['slug']: s for s in out}
-    ordered = [by[s] for s in first if s in by] + [s for s in out if s['slug'] not in first]
-    return ordered
-
-def main_talk(s):
-    t = [x for x in s['talks'] if not x['panel'] and 'to be confirmed' not in x['title'].lower()]
-    if t: return t[0]['title']
-    if s['sheet_talk']: return s['sheet_talk']
-    return s['talks'][0]['title'] if s['talks'] else ''
-
-def tile(s, i):
-    big, eager = i < 5, i < 2
-    cls = 'tile' + (' big' if big else '') + (' t1' if i == 0 else '') + (' t2' if i == 1 else '') + (' xl' if i == 3 else '')
-    if s['photo']:
-        img = f'<img src="{s["photo"] if big else s["thumb"]}" alt="" {"width=\"800\" height=\"1000\"" if big else "width=\"256\" height=\"256\""}{" fetchpriority=\"high\"" if eager else " loading=\"lazy\""} decoding="async">'
-        if s['variants']:
-            img = f'<picture><source type="image/webp" srcset="{srcset(s["slug"], big)}" sizes="{SIZES_BIG if big else SIZES_SMALL}">{img}</picture>'
-    else:
-        img = f'<span class="ini" aria-hidden="true">{esc(initials(s))}</span>'
-    tk = f'<span class="tk">{esc(main_talk(s))}</span>' if big and main_talk(s) else ''
-    on = '<span class="on">Online</span>' if s['online'] else ''
-    return (f'<div class="{cls}" data-slug="{s["slug"]}"><div class="tile-btn"><div class="pic">{img}</div>'
-            f'<span class="strip"><span class="nm">{esc(s["short"])}</span><span class="org">{esc(s["org"])}</span>{on}{tk}</span></div></div>')
-
-# How wide a tile is at each breakpoint (big = 2 columns, small = 1), so the browser picks the right WebP.
-SIZES_BIG = '(max-width:699px) 50vw, (max-width:999px) 50vw, (max-width:1279px) 34vw, 25vw'
-SIZES_SMALL = '(max-width:699px) 50vw, (max-width:999px) 25vw, (max-width:1279px) 17vw, 13vw'
-
-def srcset(slug, big):
-    return (f'/img/speakers/480/{slug}.webp 480w, /img/speakers/800/{slug}.webp 800w' if big
-            else f'/img/speakers/thumb/{slug}.webp 256w, /img/speakers/480/{slug}.webp 480w')
-
-def initials(s):
-    w = s['short'].split()
-    return (w[0][0] + w[-1][0]).upper() if len(w) > 1 else w[0][0].upper()
-
-def programme(days, blocks_title):
-    out = []
-    for d in days:
-        rows = [r for r in rows_for([d]) if r['kind'] != 'pitch']
-        pitches = [r['title'] for r in rows_for([d]) if r['kind'] == 'pitch']
-        starts = [r['start'] for r in rows if r['start'] and r['start'] != '-']
-        ends = [r['end'] for r in rows if r['end'] and r['end'] != '-']
-        label = rows[0]['day'] if rows else ''
-        venue = next((r['venue'] for r in rows if r['venue']), '')
-        items, blk = [], None
-        for r in rows:
-            if r['title'].lower().startswith('title to be confirmed') and not r['speakers']: continue
-            if r['block'] != blk and r['kind'] != 'break':
-                blk = r['block']
-                items.append(f'<li class="blk"><span>{esc(blk)}</span></li>')
-            who = re.sub(r'\s*\((online|moderator)\)', '', r['speakers'])
-            who = f'<span class="who">{esc(who)}</span>' if who else ''
-            cls = 'row brk' if r['kind'] == 'break' else 'row'
-            items.append(f'<li class="{cls}"><span class="mono tm">{esc(r["start"])}–{esc(r["end"])}</span><div class="rb"><span class="te">{esc(r["title"])}</span>{who}</div></li>')
-        if pitches:
-            items.append(f'<li class="row"><span class="mono tm">Pitching</span><div class="rb"><span class="who">{esc(", ".join(pitches))}</span></div></li>')
-        wk = label.split()[0]
-        out.append(f'''      <div class="day">
-        <h3 class="dayh"><span class="sub">{esc(wk)} {d} October</span><span class="mono">{esc(venue.split(",")[0]) if venue else ""} · {min(starts)}–{max(ends)}</span></h3>
-        <ol class="plist">{"".join(items)}</ol>
-      </div>''')
-    return '\n'.join(out)
+def norm(r):
+    if r.get('day', '').strip():
+        return {'day': int(re.search(r'\d{1,2}', r['day']).group()), 'kind': r.get('kind', '').strip().lower()}
+    m = DATE_RE.match(r.get('date', '').strip())
+    if not m: return None
+    b, t = r.get('blocktitle', '').strip().lower(), r.get('title', '').strip().lower()
+    brk = re.match(r'^(break|networking|registration|lunch|coffee)', b) or re.match(r'^(break|networking|lunch)\b', t)
+    return {'day': int(m.group(2)), 'kind': 'break' if brk else ''}
 
 def session_count(days):
-    return len([r for r in rows_for(days) if r['kind'] not in ('break', 'pitch')])
+    n = 0
+    for r in PRG:
+        if r.get('publish', '').strip().lower() in HIDDEN: continue
+        s = norm(r)
+        if s and s['day'] in days and s['kind'] not in ('break', 'pitch'): n += 1
+    return n
+
+SEAL = ('<svg class="wall-seal" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><polygon fill="#D0442C" points="96.0,50.0 95.7,57.2 92.3,63.7 90.1,70.4 87.0,76.9 82.5,82.5 76.0,85.9 71.6,92.3 64.3,94.1 57.1,95.1 50.0,95.1 42.6,96.5 35.6,94.3 29.9,89.5 23.0,87.2 18.2,81.8 12.2,77.4 10.2,70.3 6.0,64.3 4.6,57.2 5.3,50.0 6.3,43.1 4.6,35.2 7.3,28.3 14.0,23.9 17.6,17.6 21.9,11.3 29.7,10.1 35.9,6.6 42.8,4.4 50.0,3.3 57.1,5.4 63.8,7.5 71.8,7.3 76.9,13.0 81.8,18.2 87.4,22.9 90.4,29.4 92.4,36.2 96.5,42.6"/>'
+        '<text x="50" y="44.2" font-family="\'Dela Gothic One\',sans-serif" font-size="34" fill="#F4F3F0" text-anchor="middle">講</text>'
+        '<text x="50" y="80.2" font-family="\'Dela Gothic One\',sans-serif" font-size="34" fill="#F4F3F0" text-anchor="middle">演</text></svg>')
 
 CSS = JP[JP.index('<style>'):JP.index('</style>') + 8]
 CSS = CSS.replace('</style>', '''
@@ -216,80 +103,6 @@ CSS = CSS.replace('</style>', '''
 .vlist li{border-top:1px solid rgba(5,5,6,.25);padding-top:12px;display:flex;flex-direction:column;gap:4px}
 .vlist .vname{font-size:19px}
 </style>''')
-
-JS = r'''<script>
-(function(){
-  var grid = document.getElementById('grid');
-  if (!grid) return;
-  var esc = function(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); };
-  var SEAL = %(seal)s;
-  var DOW = {17:'SAT', 18:'SUN', 24:'SAT', 25:'SUN', 26:'MON'};
-  var SIZES_BIG = %(sb)s, SIZES_SMALL = %(ss)s;
-  function mainTalk(s){ var t = s.talks.filter(function(t){ return !t.panel && t.title.toLowerCase().indexOf('to be confirmed') < 0; }); if (t[0]) return t[0].title; if (s.sheet_talk) return s.sheet_talk; return s.talks[0] ? s.talks[0].title : ''; }
-  function tile(s, i){
-    var big = i < 5, eager = i < 2;
-    var cls = 'tile' + (big ? ' big' : '') + (i === 0 ? ' t1' : '') + (i === 1 ? ' t2' : '') + (i === 3 ? ' xl' : '');
-    var w = s.short.split(/\s+/), ini = (w[0][0] + (w.length > 1 ? w[w.length - 1][0] : '')).toUpperCase();
-    var img = s.photo
-      ? '<img src="' + (big ? s.photo : s.thumb) + '" alt="" ' + (big ? 'width="800" height="1000"' : 'width="256" height="256"') + (eager ? ' fetchpriority="high"' : ' loading="lazy"') + ' decoding="async">'
-      : '<span class="ini" aria-hidden="true">' + esc(ini) + '</span>';
-    if (s.photo && s.variants) {
-      var set = big ? '/img/speakers/480/' + s.slug + '.webp 480w, /img/speakers/800/' + s.slug + '.webp 800w'
-                    : '/img/speakers/thumb/' + s.slug + '.webp 256w, /img/speakers/480/' + s.slug + '.webp 480w';
-      img = '<picture><source type="image/webp" srcset="' + set + '" sizes="' + (big ? SIZES_BIG : SIZES_SMALL) + '">' + img + '</picture>';
-    }
-    img = '<div class="pic">' + img + '</div>';
-    var talks = s.talks.map(function(t){
-      return '<li><span class="mono">10.' + t.day + ' ' + DOW[t.day] + ' ' + t.start + '–' + t.end + (t.online ? ' · ONLINE' : '') + '</span>' +
-        '<span class="te">' + esc(t.title) + '</span></li>';
-    }).join('');
-    var ph = s.thumb ? '<img src="' + s.thumb + '" alt="" width="56" height="56" loading="lazy" decoding="async">' : '<span class="ph">' + SEAL + '</span>';
-    return '<div class="' + cls + '" data-slug="' + s.slug + '">' +
-      '<button class="tile-btn" type="button" aria-expanded="false" aria-controls="d-' + s.slug + '">' + img +
-        '<span class="strip"><span class="nm">' + esc(s.short) + '</span><span class="org">' + esc(s.org) + '</span>' + (s.online ? '<span class="on">Online</span>' : '') + (big && mainTalk(s) ? '<span class="tk">' + esc(mainTalk(s)) + '</span>' : '') + '</span>' +
-      '</button>' +
-      '<div class="disc" id="d-' + s.slug + '" hidden>' +
-        '<div class="disc-top">' + ph + '<div><span class="disc-nm">' + esc(s.name) + '</span><span class="disc-org">' + esc(s.aff) + (s.online ? ' (online)' : '') + '</span></div>' +
-        '<button class="disc-x" type="button">Close</button></div>' +
-        (talks ? '<ul class="talks">' + talks + '</ul>' : '') +
-        (s.bio ? '<p class="desc">' + esc(s.bio) + '</p>' : '') +
-      '</div></div>';
-  }
-  var head = grid.querySelector('.head'), obi = grid.querySelector('.obi');
-  Array.prototype.forEach.call(grid.querySelectorAll('.tile'), function(n){ n.remove(); });
-  var html = SPEAKERS.map(tile);
-  head.insertAdjacentHTML('beforebegin', html[0] + html[1]);
-  obi.insertAdjacentHTML('afterend', html.slice(2).join(''));
-
-  var openTile = null;
-  function close(focusBack){
-    if (!openTile) return;
-    var t = openTile; openTile = null;
-    t.classList.remove('open', 'flip');
-    t.querySelector('.disc').hidden = true;
-    var b = t.querySelector('.tile-btn'); b.setAttribute('aria-expanded', 'false');
-    if (focusBack) b.focus();
-  }
-  function open(t){
-    close(false);
-    openTile = t;
-    if (!t.classList.contains('big') && t.offsetLeft + t.offsetWidth * 2 + 1 > grid.clientWidth) t.classList.add('flip');
-    t.classList.add('open');
-    t.querySelector('.disc').hidden = false;
-    t.querySelector('.tile-btn').setAttribute('aria-expanded', 'true');
-    t.querySelector('.disc-x').focus({preventScroll:true});
-  }
-  grid.addEventListener('click', function(e){
-    var x = e.target.closest('.disc-x');
-    if (x) { close(true); return; }
-    var b = e.target.closest('.tile-btn');
-    if (!b) return;
-    var t = b.closest('.tile');
-    if (t === openTile) close(true); else open(t);
-  });
-  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') close(true); });
-})();
-</script>''' % {'seal': json.dumps(SEAL), 'sb': json.dumps(SIZES_BIG), 'ss': json.dumps(SIZES_SMALL)}
 
 PARTNERS = '''<!-- PARTNERS: the same set as /jp/summit-i/. Kobe University and MIC logos are used verbatim under an
      approval that runs to Dec 15 2026 ([data-kobe-permit] self-hides after that). KBIC is never listed as host. -->
@@ -343,13 +156,9 @@ PARTNERS = '''<!-- PARTNERS: the same set as /jp/summit-i/. Kobe University and 
 </section>'''
 
 def page(P):
-    roster = P['roster']
-    n = len(roster)
-    tiles = ''.join(tile(s, i) for i, s in enumerate(roster[:2]))
-    rest = ''.join(tile(s, i + 2) for i, s in enumerate(roster[2:14]))
+    n = P['n']
     buy = lambda loc, label: (f'<a class="btn mizu" href="{P["stripe"]}" target="_blank" rel="noopener" data-analytics-action="checkout" '
                               f'data-analytics-target="{P["offer"]}" data-analytics-location="{loc}">{label}</a>')
-    data = [{k: s[k] for k in ('slug', 'name', 'short', 'org', 'aff', 'bio', 'online', 'photo', 'thumb', 'variants', 'talks', 'sheet_talk')} for s in roster]
     return f'''<!doctype html>
 <html lang="en">
 <head>
@@ -377,7 +186,7 @@ def page(P):
 <script>if (Date.now() >= new Date('2026-12-15T00:00:00+09:00').getTime()) document.documentElement.classList.add('kobe-permit-over');</script>
 {CSS}
 </head>
-<body data-analytics-offer="{P["offer"]}">
+<body data-analytics-offer="{P["offer"]}" data-summit="{P["summit"]}" data-days="{",".join(str(d) for d in P["days"])}" data-first="{",".join(P["first"])}" data-last="{",".join(P["last"])}">
 
 <header class="nav">
   <a class="wm" href="/" data-analytics-action="site_navigation" data-analytics-location="nav" data-analytics-target="full_city">Mirai Tech City<img src="/img/brand/seal-mirai-solid.png" alt="" width="240" height="240"><span class="sr"> home</span></a>
@@ -390,11 +199,10 @@ def page(P):
 </header>
 
 <main>
-<!-- THE WALL: {n} faces, headline panel, obi, seal. The script below replaces the static tiles with the full roster. -->
+<!-- THE WALL: the faces are rendered by summit-live.js from the Speakers and Program tabs of the sheet. -->
 <section class="wall" id="speakers" data-track-section="offer" data-track-position="1" aria-label="{n} speakers">
   <div class="grid" id="grid">
-    {WALL_SEAL}
-    {tiles}
+    {SEAL}
     <div class="head">
       <h1 class="h1">{P["h1"]}</h1>
       <p class="lead">{P["lead"]}</p>
@@ -404,8 +212,7 @@ def page(P):
       </div>
       <p class="note">{P["note"]}</p>
     </div>
-    <div class="obi" aria-hidden="true"><span class="mono long">{P["obi_long"]}</span><span class="mono short">{P["obi_short"]}</span></div>
-    {rest}
+    <div class="obi" aria-hidden="true"><span class="mono long" data-live="speakers">{P["obi_long"]}</span><span class="mono short" data-live="speakers">{P["obi_short"]}</span></div>
   </div>
 </section>
 
@@ -442,13 +249,11 @@ def page(P):
 
 {PARTNERS % P}
 
-<!-- PROGRAMME: from program-data.js (the Program tab of the sheet). Full timetable on /program/. -->
+<!-- PROGRAMME: rendered by summit-live.js from the Program tab of the sheet. Full timetable on /program/. -->
 <section class="prog" id="program" data-track-section="program" data-track-position="4">
   <div class="wrap">
-    <div class="top"><h2 class="sub">Programme</h2><span class="mono">{len(P["days"])} Days · {session_count(P["days"])} Sessions · JST</span><a class="lnk" href="/program/" data-analytics-action="site_navigation" data-analytics-location="program" data-analytics-target="program">Full programme</a></div>
-    <div class="days{" three" if len(P["days"]) == 3 else ""}">
-{programme(P["days"], None)}
-    </div>
+    <div class="top"><h2 class="sub">Programme</h2><span class="mono" data-live="sessions">{len(P["days"])} Days · {session_count(P["days"])} Sessions · JST</span><a class="lnk" href="/program/" data-analytics-action="site_navigation" data-analytics-location="program" data-analytics-target="program">Full programme</a></div>
+    <div class="days{" three" if len(P["days"]) == 3 else ""}" id="days"></div>
   </div>
 </section>
 
@@ -473,7 +278,7 @@ def page(P):
   <div class="wrap final-grid">
     <div class="ftext">
       <h2 class="sub">Get your ticket.</h2>
-      <p>{P["final_p"]}</p>
+      <p data-live="speakers">{P["final_p"]}</p>
       {buy("final_offer", "Get my ticket · $900")}
       <span class="mono">Stripe · $900 · {P["dates_mono"]}</span>
     </div>
@@ -507,26 +312,29 @@ def page(P):
   {buy("sticky", "Get my ticket")}
 </div>
 
-<script>
-const SPEAKERS = {json.dumps(data, ensure_ascii=False, indent=1)};
-</script>
-{JS}
+<script src="/sheet.js"></script>
+<script src="/speakers-data.js"></script>
+<script src="/speakers-photos.js"></script>
+<script src="/speakers.js"></script>
+<script src="/program-data.js"></script>
+<script src="/program.js"></script>
+<script src="/summit-live.js"></script>
 </body>
 </html>
 '''
 
 # ---------- Summit I ----------
-R1 = build_roster({'S1'}, [17, 18], ['motoshi_hayano', 'takashi_aoi', 'eleanor_sheekey', 'walter_patterson', 'yoshihiro_muragaki'])
-n1 = len(R1)
+n1 = speaker_count({'S1'})
 P1 = dict(
-    roster=R1, path='/summit-i/', offer='summit_1', stripe='https://buy.stripe.com/dRmdRb1Kc9bn7Dx80C3Nm05',
+    n=n1, summit=1, days=[17, 18], first=['motoshi_hayano', 'takashi_aoi', 'eleanor_sheekey', 'walter_patterson', 'yoshihiro_muragaki'], last=[],
+    path='/summit-i/', offer='summit_1', stripe='https://buy.stripe.com/dRmdRb1Kc9bn7Dx80C3Nm05',
     title=f'Mirai Tech City Summit I · 17–18 October 2026 · Kobe · {n1} speakers',
     og_title='Mirai Tech City Summit I · Oct 17–18 · Kobe',
     desc=f'Summit I: The Science and Tech Augmenting Life. Saturday 17 and Sunday 18 October 2026 at Kobe University Integrated Research Center, Port Island. {n1} speakers. Tickets $900 on Stripe.',
     og_image='/img/summit-pathologist.jpg',
     alt_link='<link rel="alternate" hreflang="ja" href="https://www.miraitech.city/jp/summit-i/">\n',
     jp_href='/jp/summit-i/',
-    h1=f'<span class="ln">{n1} speakers</span> <span class="ln">on ageing</span> <span class="ln">and medicine.</span> <span class="ln">Two days</span> <span class="ln">in Kobe.</span>',
+    h1=f'<span class="ln" data-live="speakers">{n1} speakers</span> <span class="ln">on ageing</span> <span class="ln">and medicine.</span> <span class="ln">Two days</span> <span class="ln">in Kobe.</span>',
     lead='Mirai Tech City Summit I: The Science and Tech Augmenting Life. Saturday 17 and Sunday 18 October 2026, Kobe University Integrated Research Center, Port Island. All talks in English.',
     when_mono='10.17 SAT · 10.18 SUN · 11:00–20:30 JST',
     note='Live in Japan? <a class="lnk" href="/jp/summit-i/" lang="ja" hreflang="ja" data-analytics-action="site_navigation" data-analytics-location="hero" data-analytics-target="japan">日本居住者向けチケット ¥6,000 →</a>',
@@ -538,7 +346,6 @@ P1 = dict(
     resident_row='Residents of Japan have a ¥6,000 ticket on Peatix, and students go free with a student ID. <a class="lnk" href="/jp/summit-i/" lang="ja" hreflang="ja" data-analytics-action="site_navigation" data-analytics-location="ticket" data-analytics-target="japan">日本語ページへ →</a>',
     intro='Summit I is held with universities, research institutes and companies in Kobe and across Japan.',
     kobe='Host of Summit I at its Integrated Research Center.',
-    days=[17, 18],
     venue_h='Venue',
     venue_body='''      <p class="vname">Kobe University Integrated Research Center, Convention Hall</p>
       <p>7-1-48 Minatojima-minamimachi, Chuo-ku, Kobe 650-0047</p>
@@ -557,19 +364,19 @@ P1 = dict(
 )
 
 # ---------- Summit II ----------
-R2 = build_roster({'S2', 'F'}, [24, 25, 26], ['aubrey_de_grey', 'masataka_watanabe', 'jose_cordeiro', 'mac_davis', 'natalie_coles_de_grey'])
-# Joe Betts-LaCroix is never placed beside Aubrey de Grey or the LEV Foundation: he goes last on the wall.
-R2 = [s for s in R2 if s['slug'] != 'joe_betts_lacroix'] + [s for s in R2 if s['slug'] == 'joe_betts_lacroix']
-n2 = len(R2)
+n2 = speaker_count({'S2', 'F'})
 P2 = dict(
-    roster=R2, path='/summit-ii/', offer='summit_2', stripe='https://buy.stripe.com/00wcN774wbjv8HBdkW3Nm06',
+    n=n2, summit=2, days=[24, 25, 26], first=['aubrey_de_grey', 'masataka_watanabe', 'jose_cordeiro', 'mac_davis', 'natalie_coles_de_grey'],
+    # Joe Betts-LaCroix is never placed beside Aubrey de Grey or the LEV Foundation: he goes last on the wall.
+    last=['joe_betts_lacroix'],
+    path='/summit-ii/', offer='summit_2', stripe='https://buy.stripe.com/00wcN774wbjv8HBdkW3Nm06',
     title=f'Mirai Tech City Summit II · 24–26 October 2026 · Kobe · {n2} speakers',
     og_title='Mirai Tech City Summit II · Oct 24–26 · Kobe',
     desc=f'Summit II: From East to West, Bridging the Longevity Gap, plus Demo Day. Saturday 24 to Monday 26 October 2026 in Kobe. {n2} speakers. Tickets $900 on Stripe.',
     og_image='/img/early-bird-bridge.jpg',
     alt_link='',
     jp_href='/jp/',
-    h1=f'<span class="ln">{n2} speakers</span> <span class="ln">on longevity.</span> <span class="ln">Three days</span> <span class="ln">in Kobe.</span>',
+    h1=f'<span class="ln" data-live="speakers">{n2} speakers</span> <span class="ln">on longevity.</span> <span class="ln">Three days</span> <span class="ln">in Kobe.</span>',
     lead='Mirai Tech City Summit II: From East to West, Bridging the Longevity Gap. Saturday 24 and Sunday 25 October on Port Island, Demo Day on Monday 26 October at Orbis Hall. All talks in English.',
     when_mono='10.24 SAT · 10.25 SUN · 10.26 MON · JST',
     note='Live in Japan? <a class="lnk" href="https://miraitechcity2026.peatix.com/" target="_blank" rel="noopener" lang="ja" hreflang="ja" data-analytics-action="checkout" data-analytics-location="hero" data-analytics-target="japan_resident">サミットⅡ 参加チケット ¥6,000 →</a>',
@@ -581,7 +388,6 @@ P2 = dict(
     resident_row='Residents of Japan have a ¥6,000 ticket on Peatix. <a class="lnk" href="https://miraitechcity2026.peatix.com/" target="_blank" rel="noopener" lang="ja" hreflang="ja" data-analytics-action="checkout" data-analytics-location="ticket" data-analytics-target="japan_resident">Peatixで申し込む →</a>',
     intro='Summit II is held with universities, research institutes and companies in Kobe and across Japan.',
     kobe='Host of the Saturday sessions at its Integrated Research Center.',
-    days=[24, 25, 26],
     venue_h='Venues',
     venue_body='''      <ul class="vlist">
         <li><span class="mono">Saturday 24 October</span><span class="vname">Kobe University Integrated Research Center, Convention Hall</span><span>7-1-48 Minatojima-minamimachi, Chuo-ku, Kobe. One minute from Keisan Kagaku Center station on the Port Liner. <a class="lnk" href="https://maps.app.goo.gl/mXhV3fUvzCiEUmVL7" target="_blank" rel="noopener" data-analytics-action="site_navigation" data-analytics-location="venue" data-analytics-target="venue_map">Map</a></span></li>
@@ -601,7 +407,4 @@ P2 = dict(
 for out, P in ((OUT_I, P1), (OUT_II, P2)):
     os.makedirs(os.path.dirname(out), exist_ok=True)
     open(out, 'w').write(page(P))
-    print(out, len(P['roster']), 'speakers;', sum(1 for s in P['roster'] if not s['photo']), 'without photo;',
-          sum(1 for s in P['roster'] if not s['talks']), 'without a matched session')
-    for s in P['roster']:
-        if not s['talks']: print('   no session match:', s['short'])
+    print(out, P['n'], 'speakers;', session_count(P['days']), 'sessions')

@@ -34,6 +34,9 @@ Single static `index.html` — no framework, no build step. Deploys anywhere
   "George Church in 2023" by Christopher Michel, CC BY-SA 4.0, cropped.
   `marian_goodell.jpeg` is Burning Man Project's official portrait, used with her written permission
   (Oct 16 2026) on the condition that Burning Man is never shown as a sponsor or partner.
+- `/summit-i/` and `/summit-ii/` are page shells written by `scripts/summit-pages.py` (copy, ticket,
+  partners, venue); `summit-live.js` renders the wall of faces and the programme from the Speakers and
+  Program tabs through `speakers.js` and `program.js`, snapshot first, then the live sheet.
 - `/program/` opens on a wall of every speaker's portrait, then renders the agenda, day by day, from the same sheet's
   `Program` tab (one row per slot, plus the Demo Day pitch rows) and the speaker
   roster from the `Speakers` tab. `program.js` builds the agenda model; speaker
