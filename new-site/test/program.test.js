@@ -94,6 +94,18 @@ test('speaker cell: ";"-separated, affiliation optional, stray spaces and empty 
   assert.deepEqual(pairs('Foo (Old) (New Co)'), [['Foo (Old)', 'New Co']]);
 });
 
+test('speaker cell: nested parentheses, moderator prefixes and a trailing ", online" are handled', () => {
+  const pairs = (cell) => people(cell).map(p => [p.name, p.affiliation, p.id]);
+  assert.deepEqual(pairs('Keiko Kobayashi (Foundation for Biomedical Research (FBRI) / KOBE Biomedical Innovation Cluster)'),
+    [['Keiko Kobayashi', 'Foundation for Biomedical Research (FBRI) / KOBE Biomedical Innovation Cluster', null]]);
+  assert.deepEqual(pairs('Louise Hecker, PhD (RIKEN Center (BDR), Kobe)'), [['Louise Hecker, PhD', 'RIKEN Center (BDR), Kobe', 'louise_hecker']]);
+  assert.deepEqual(pairs('Moderator: Takahiro Yasuda (Kobe University); moderated by José Cordeiro'),
+    [['Takahiro Yasuda', 'Kobe University', 'takahiro_yasuda'], ['José Cordeiro', '', 'jose_cordeiro']]);
+  assert.deepEqual(pairs('Dr. Aubrey de Grey , online; Louise Hecker (Baylor, online)'),
+    [['Dr. Aubrey de Grey', '', 'aubrey_de_grey'], ['Louise Hecker', 'Baylor, online', 'louise_hecker']]);
+  assert.deepEqual(pairs('Unbalanced (paren'), [['Unbalanced (paren', '', null]]);
+});
+
 test('speaker ids resolve leniently: honorifics, punctuation, diacritics and middle names ignored', () => {
   const ids = (cell) => people(cell).map(p => p.id);
   assert.deepEqual(ids('Prof. Takahiro Yasuda (Kobe University)'), ['takahiro_yasuda']);
@@ -129,37 +141,94 @@ test('publish filter and empty days skipped; empty input yields no days', () => 
   assert.deepEqual(plain(P.buildModel(undefined)), { days: [], count: 0, speakerCount: 0 });
 });
 
+/* ─── The agenda layout of the Program tab ─── */
+
+const AHEAD = 'Block,Date,Block title,Title,Subtitle,Link,Publish\n';
+const amodel = (body, speakers = SPEAKERS) => plain(P.buildModel(MiraiSheet.rowsFromCsv(AHEAD + body), speakers));
+
+test('agenda layout: Date gives the day label and times, Block title the block, Subtitle the speakers', () => {
+  const m = amodel([
+    'Summit I,Oct 17 (Sat) 11:00–11:10,Opening,Welcome,"Prof. Takahiro Yasuda (Kobe University); Louise Hecker, PhD (Baylor)",,TRUE',
+    'Summit I,Oct 17 (Sat) 11:15-11:30,Keynote,The talk,Aubrey de Grey (LEV Foundation),,',
+    'Summit I,Oct 18 (Sun) 12:00–12:30,R&D Panel,Why does good science stay in the lab?,José Cordeiro (ILS),,TRUE',
+    'Finale,Oct 26 (Mon),Demo Day,Demo Day awards,First prize: a ticket to the next Vitalist Bay,,TRUE',
+  ].join('\n'));
+  assert.deepEqual(m.days.map(d => [d.label, d.short]),
+    [['Saturday 17 October', 'Sat 17 Oct'], ['Sunday 18 October', 'Sun 18 Oct'], ['Monday 26 October', 'Mon 26 Oct']]);
+  const [a, b] = m.days[0].slots, c = m.days[1].slots[0], d = m.days[2].slots[0];
+  assert.deepEqual([a.start, a.end, a.kind, a.block, a.title, a.notes], ['11:00', '11:10', 'open', 'Opening', 'Welcome', '']);
+  assert.deepEqual(a.speakers.map(p => [p.name, p.affiliation, p.id]),
+    [['Prof. Takahiro Yasuda', 'Kobe University', 'takahiro_yasuda'], ['Louise Hecker, PhD', 'Baylor', 'louise_hecker']]);
+  assert.deepEqual([b.start, b.end, b.kind, b.speakers[0].id], ['11:15', '11:30', 'keynote', 'aubrey_de_grey']);
+  assert.deepEqual([c.kind, c.block, c.speakers[0].id], ['panel', 'R&D Panel', 'jose_cordeiro']);
+  assert.deepEqual([d.start, d.end, d.kind, d.speakers, d.notes], ['', '', 'talk', [], 'First prize: a ticket to the next Vitalist Bay']);
+  assert.equal(m.count, 4);
+});
+
+test('agenda layout: breaks keep the subtitle as a note; the weekday is computed when the cell has none; bad dates are skipped', () => {
+  const m = amodel([
+    'Summit I,Oct 17 (Sat) 14:00–14:40,Break,Lunch and networking,Get in early and get some coffee,,',
+    'Summit I,October 18 09:00–09:30,Registration and Networking,Registration,,,',
+    'Summit I,Oct 17 (Sat) 15:00–15:20,AI×Bio · online,A talk,Someone Unknown,,',
+    'Summit I,Day two,Opening,Lost,,,',
+    'Summit I,,Opening,Also lost,,,',
+  ].join('\n'));
+  assert.deepEqual(m.days.map(d => d.label), ['Saturday 17 October', 'Sunday 18 October']);
+  const [brk, talk] = m.days[0].slots;
+  assert.deepEqual([brk.kind, brk.speakers, brk.notes], ['break', [], 'Get in early and get some coffee']);
+  assert.deepEqual([talk.kind, talk.block, talk.speakers, talk.notes], ['talk', 'AI×Bio · online', [], 'Someone Unknown']);
+  assert.deepEqual([m.days[1].slots[0].kind, m.days[1].slots[0].start], ['break', '09:00']);
+  assert.equal(m.count, 3);
+});
+
+test('agenda layout: the five summit days get their venue and map link when the sheet has no Venue column', () => {
+  const m = amodel([
+    'Summit I,Oct 17 (Sat) 11:00–11:10,Opening,A,,,', 'Summit II,Oct 25 (Sun) 11:00–11:10,Opening,B,,,',
+    'Finale,Oct 26 (Mon) 12:00–12:15,Opening,C,,,', 'Other,Nov 2 (Mon) 10:00–11:00,Opening,D,,,',
+  ].join('\n'));
+  assert.deepEqual(m.days.map(d => [d.venue.split(',')[0], /^https:\/\//.test(d.venueLink)]),
+    [['Kobe University Integrated Research Center (KUIRC) Convention Hall', true], ['Kobe Portopia Hotel', true],
+     ['Orbis Hall', true], ['', false]]);
+  const own = amodel('Summit I,Oct 17 (Sat) 11:00–11:10,Opening,A,,,TRUE'.replace(AHEAD, ''), SPEAKERS);
+  assert.equal(own.days[0].venue.split(',')[0], 'Kobe University Integrated Research Center (KUIRC) Convention Hall');
+  const typed = plain(P.buildModel(MiraiSheet.rowsFromCsv('Block,Date,Block title,Title,Subtitle,Link,Publish,Venue,Venue link\n' +
+    'Summit I,Oct 17 (Sat) 11:00–11:10,Opening,A,,,,Hall 9,https://maps.test/9'), SPEAKERS));
+  assert.deepEqual([typed.days[0].venue, typed.days[0].venueLink], ['Hall 9', 'https://maps.test/9']);
+});
+
 test('cell text is kept verbatim (the page sets it as text, never HTML)', () => {
   assert.equal(slot(',,,,"<img src=x onerror=alert(1)>",,,').title, '<img src=x onerror=alert(1)>');
 });
 
 /* ─── The shipped snapshot ─── */
 
-test('the shipped snapshot builds five days, 106 slots and the Demo Day pitches', () => {
+test('the shipped snapshot (the Program tab in its agenda layout) builds five days and 99 slots', () => {
   const w = {};
   vm.runInNewContext(src('speakers-data.js') + src('program-data.js'), { window: w });
   assert.equal(w.MIRAI_PROGRAM_SHEET_CSV, 'https://docs.google.com/spreadsheets/d/1KVHJxp5W5VirLNMh6UQftPhF4iE9F247pQq5EZ8q-fI/gviz/tq?tqx=out:csv&sheet=Program');
+  assert.deepEqual(Object.keys(w.MIRAI_PROGRAM_SNAPSHOT[0]), ['block', 'date', 'blocktitle', 'title', 'subtitle', 'link', 'publish']);
   const speakers = MiraiSpeakers.buildModel(w.MIRAI_SPEAKERS_SNAPSHOT);
   const m = plain(P.buildModel(w.MIRAI_PROGRAM_SNAPSHOT, speakers));
   assert.deepEqual(m.days.map(d => d.label),
     ['Saturday 17 October', 'Sunday 18 October', 'Saturday 24 October', 'Sunday 25 October', 'Monday 26 October']);
   assert.deepEqual(m.days.map(d => d.short), ['Sat 17 Oct', 'Sun 18 Oct', 'Sat 24 Oct', 'Sun 25 Oct', 'Mon 26 Oct']);
-  assert.equal(m.count, 106);
+  assert.equal(m.count, 99);
   assert.equal(m.speakerCount, 72);
-  for (const d of m.days) assert.match(d.venueLink, /^https:\/\//, d.label);
-  const pitches = m.days.map(d => d.slots.filter(s => s.kind === 'pitch'));
-  assert.deepEqual(pitches.map(p => p.length), [0, 0, 0, 0, 8]);
-  for (const p of pitches[4]) assert.ok(p.title && p.block === 'Demo Day pitches', p.title);
-  assert.ok(pitches[4].filter(p => p.notes).length >= 7); // the booklet had a line for 7 of the 8 startups
+  for (const d of m.days) { assert.ok(d.venue, d.label); assert.match(d.venueLink, /^https:\/\//, d.label); }
+  assert.equal(m.days[3].venue.split(',')[0], 'Kobe Portopia Hotel');
+  assert.equal(m.days[4].venue.split(',')[0], 'Orbis Hall');
+  const kinds = {};
+  m.days.forEach(d => d.slots.forEach(s => { kinds[s.kind] = (kinds[s.kind] || 0) + 1; }));
+  assert.deepEqual(Object.keys(kinds).sort(), ['break', 'keynote', 'open', 'panel', 'talk']);
   const first = m.days[0].slots[0];
-  assert.deepEqual([first.start, first.end, first.kind], ['11:00', '11:10', 'open']);
-  assert.equal(first.speakers.length, 1);
-  assert.deepEqual([first.speakers[0].name, first.speakers[0].affiliation], ['Pedro Henrich', 'Unchain Bio']);
-  assert.equal(first.speakers[0].id, speakers.speakers.find(s => s.name === 'Pedro Henrich').id);
+  assert.deepEqual([first.start, first.end, first.kind, first.title, first.notes], ['10:00', '11:00', 'break', 'Registration and Networking', 'Get in early and get some coffee']);
+  const keynote = m.days[0].slots.find(s => s.kind === 'keynote');
+  assert.deepEqual([keynote.start, keynote.speakers[0].id], ['11:35', 'motoshi_hayano']);
   const all = m.days.flatMap(d => d.slots.flatMap(s => s.speakers));
-  const yasuda = all.find(p => p.name === 'Prof. Takahiro Yasuda');
+  assert.ok(all.filter(p => p.id).length > 100);
+  const yasuda = all.find(p => /Yasuda/.test(p.name));
   assert.equal(yasuda.id, speakers.speakers.find(s => s.first === 'Takahiro' && s.last === 'Yasuda').id);
-  assert.ok(m.days[0].slots.some(s => s.title === 'Title to be confirmed' && s.tbc));
+  assert.ok(m.days[2].slots.some(s => s.title === 'Title to be confirmed' && s.tbc));
   assert.ok(!JSON.stringify(w.MIRAI_PROGRAM_SNAPSHOT).includes('&amp;'));
 });
 

@@ -251,7 +251,8 @@ The /program/ page shows the speakers and the full agenda for the five summit da
 and 26 October), slot by slot, with the venue for each day and the Demo Day pitches.
 It reads the agenda from a tab called `Program` in the same "Mirai Agenda"
 spreadsheet, and the speakers from the `Speakers` tab described above. Change a time,
-a title or a speaker in the sheet and the page follows on the next load. A copy of it ships inside the site, as with the landing agenda and the speakers, so
+a title or a speaker in the sheet and the page follows on the next load; so do the
+programme and the wall of faces on `/summit-i/` and `/summit-ii/`. A copy of it ships inside the site, as with the landing agenda and the speakers, so
 visitors still see it if Google is slow or down.
 
 ## The tab
@@ -270,6 +271,28 @@ To create it (or recreate it if it is ever lost):
 The sharing setting is the same one the agenda uses: "Anyone with the link" → Viewer.
 
 ## The columns
+
+The Program tab can be kept in either of two layouts. The site reads both, and the
+`/program/`, `/summit-i/` and `/summit-ii/` pages all follow the tab on every page load.
+
+**The agenda layout** (the one in use since October 2026) has the same seven columns as
+the agenda tab:
+
+| Column | What it means | Required | Example |
+|---|---|---|---|
+| Block | Which summit the slot belongs to | Yes | Summit I |
+| Date | The day, in the form `Oct 17 (Sat)`, then the time range | Yes | Oct 17 (Sat) 11:35–11:55 |
+| Block title | The running-order label shown above the title. "Break", "Networking", "Registration", "Keynote", "Opening", "Close" and anything with "Panel" or "Fireside" set the slot's kind | No | Japan: The Global Laboratory |
+| Title | The session title | No (empty shows "to be confirmed") | Building in KBIC: what the cluster actually opens up |
+| Subtitle | Who speaks, in the speakers format below. On a break, a short line under the title instead | No | Keiko Kobayashi (KBIC / FBRI); Prof. Takahiro Yasuda (Kobe University) |
+| Link | Not used by the programme pages | No | |
+| Publish | TRUE shows the row, FALSE hides it | No (blank shows it) | TRUE |
+
+A row whose Date has no time (`Oct 26 (Mon)`) is shown without a time. The venue and map
+link for the five summit days are built in; add `Venue` and `Venue link` columns to the
+tab if a day moves.
+
+**The timetable layout** is the original one, with a column per field:
 
 | Column | What it means | Required | Example |
 |---|---|---|---|
