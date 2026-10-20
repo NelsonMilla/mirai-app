@@ -30,8 +30,7 @@ Single static `index.html` — no framework, no build step. Deploys anywhere
   256px copies in `img/speakers/thumb/` that the /program/ wall uses, plus 480px and 800px WebP copies
   in `img/speakers/480/` and `img/speakers/800/` that /summit-i/ and /summit-ii/ serve through `srcset`); a blank Photo cell only derives
   a file that is listed, so no page requests a missing portrait. Runbook: `AGENDA.md`.
-  Portraits taken from Wikimedia Commons keep their credit here: `george_church.jpeg` is
-  "George Church in 2023" by Christopher Michel, CC BY-SA 4.0, cropped.
+  Portraits taken from Wikimedia Commons keep their credit here (none at the moment).
   `marian_goodell.jpeg` is Burning Man Project's official portrait, used with her written permission
   (Oct 16 2026) on the condition that Burning Man is never shown as a sponsor or partner.
 - `/summit-i/` and `/summit-ii/` are page shells written by `scripts/summit-pages.py` (copy, ticket,
