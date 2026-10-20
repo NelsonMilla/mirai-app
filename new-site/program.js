@@ -39,22 +39,84 @@
     return index;
   }
 
+  // The last top-level "( … )" of an entry, nesting allowed: "A (B (C) / D)" → ['A', 'B (C) / D'].
+  function splitAffiliation(entry) {
+    let depth = 0, open = -1, last = null;
+    for (let i = 0; i < entry.length; i++) {
+      const c = entry[i];
+      if (c === '(') { if (depth === 0) open = i; depth++; }
+      else if (c === ')' && depth > 0) { depth--; if (depth === 0) last = [open, i]; }
+    }
+    if (!last) return [entry, ''];
+    return [entry.slice(0, last[0]) + ' ' + entry.slice(last[1] + 1), entry.slice(last[0] + 1, last[1])];
+  }
+
   // "A (X); B ; C (Y) (Z);" → [{A, X}, {B, ''}, {C (Y), Z}]; the last parenthesised group is the affiliation.
+  // "Moderator: A", "moderated by A" and a trailing ", online" are read as the name alone.
   function parseSpeakers(cell, index) {
     return str(cell).split(';').map(str).filter(Boolean).map(entry => {
-      const m = entry.match(/^(.*)\(([^()]*)\)(.*)$/);
-      const name = (m ? m[1] + ' ' + m[3] : entry).replace(/\s+/g, ' ').trim();
-      const affiliation = m ? m[2].replace(/\s+/g, ' ').trim() : '';
+      const [rawName, rawAff] = splitAffiliation(entry);
+      const name = rawName.replace(/^\s*(moderator|moderated by|chair|host)\s*:?\s+/i, '')
+        .replace(/[,\s]+(online|moderator)\s*$/i, '').replace(/\s+/g, ' ').trim();
+      const affiliation = rawAff.replace(/\s+/g, ' ').trim();
       const k = speakerKey(name);
       return { name, affiliation, id: (k && index.get(k)) || null };
     });
   }
+
+  /* The Program tab can also be kept in the agenda layout (Block, Date, Block title, Title, Subtitle,
+     Link, Publish): Date carries the day and the time range ("Oct 17 (Sat) 11:00–11:10"), Block
+     title is the session block, Subtitle is the speakers cell, or a note on breaks. These rows are
+     turned into timetable rows; the kind is read from the block title. */
+  const WEEKDAYS = { sun: 'Sunday', mon: 'Monday', tue: 'Tuesday', wed: 'Wednesday', thu: 'Thursday', fri: 'Friday', sat: 'Saturday' };
+  const MONTHS = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
+  const YEAR = 2026;
+  const DATE = /^([A-Za-z]{3,9})\.?\s+(\d{1,2})(?:\s*\(([A-Za-z]{3})[A-Za-z]*\))?(?:\s+(\d{1,2}:\d{2})\s*[–—-]\s*(\d{1,2}:\d{2}))?/;
+
+  function inferKind(block, title) {
+    const b = block.toLowerCase(), t = title.toLowerCase();
+    if (/^(break|networking|registration|lunch|coffee)/.test(b) || /^(break|networking|lunch)\b/.test(t)) return 'break';
+    if (/keynote/.test(b)) return 'keynote';
+    if (/\b(panel|fireside)\b/.test(b) || /^panel\b/.test(t)) return 'panel';
+    if (/^(opening|close|closing)$/.test(b)) return 'open';
+    return '';
+  }
+
+  function fromAgendaRow(r, index) {
+    const m = str(r.date).match(DATE);
+    if (!m) return null;
+    const mo = MONTHS.findIndex(x => x.startsWith(m[1].toLowerCase().slice(0, 3)));
+    if (mo < 0) return null;
+    const dayNum = +m[2];
+    const wd = m[3] ? WEEKDAYS[m[3].toLowerCase()] : Object.values(WEEKDAYS)[new Date(Date.UTC(YEAR, mo, dayNum)).getUTCDay()];
+    if (!wd) return null;
+    const block = str(r.blocktitle), title = str(r.title), sub = str(r.subtitle);
+    const kind = inferKind(block, title);
+    // Subtitle is the speakers cell when at least one entry is a known speaker or carries an affiliation.
+    const people = kind === 'break' ? [] : parseSpeakers(sub, index);
+    const named = people.some(p => p.id || p.affiliation);
+    return {
+      day: wd + ' ' + dayNum + ' ' + MONTHS[mo][0].toUpperCase() + MONTHS[mo].slice(1),
+      venue: str(r.venue), venuelink: str(r.venuelink),
+      start: m[4] || '', end: m[5] || '', kind, block, title,
+      speakers: named ? sub : '', notes: named ? '' : sub, publish: r.publish,
+    };
+  }
+
+  // Where each day is held, for a Program tab without Venue columns.
+  const KUIRC = ['Kobe University Integrated Research Center (KUIRC) Convention Hall, Port Island', 'https://maps.app.goo.gl/mXhV3fUvzCiEUmVL7'];
+  const DEFAULT_VENUES = {
+    'Saturday 17 October': KUIRC, 'Sunday 18 October': KUIRC, 'Saturday 24 October': KUIRC,
+    'Sunday 25 October': ['Kobe Portopia Hotel, Port Island', 'https://www.google.com/maps/search/?api=1&query=Kobe+Portopia+Hotel'],
+    'Monday 26 October': ['Orbis Hall, Kobe Fashion Museum 5F, Rokko Island', 'https://www.google.com/maps/search/?api=1&query=Kobe+Fashion+Museum+Orbis+Hall'],
+  };
 
   function buildModel(rows, speakersModel) {
     const index = speakerIndex(speakersModel);
     const days = [], byLabel = new Map();
     let count = 0;
     (rows || []).forEach(r => {
+      if (r && !str(r.day) && str(r.date)) { r = fromAgendaRow(r, index); if (!r) return; }
       const label = str(r.day);
       if (!label || HIDDEN.includes(str(r.publish).toLowerCase())) return;
       let day = byLabel.get(label);
@@ -80,7 +142,11 @@
       });
       count++;
     });
-    days.forEach(d => { delete d.linkSeen; });
+    days.forEach(d => {
+      delete d.linkSeen;
+      const v = DEFAULT_VENUES[d.label];
+      if (v && !d.venue) { d.venue = v[0]; if (!d.venueLink) d.venueLink = v[1]; }
+    });
     return { days, count, speakerCount: speakersModel ? speakersModel.count : 0 };
   }
 
