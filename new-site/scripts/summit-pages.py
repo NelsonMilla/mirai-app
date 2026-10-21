@@ -157,8 +157,12 @@ PARTNERS = '''<!-- PARTNERS: the same set as /jp/summit-i/. Kobe University and 
 
 def page(P):
     n = P['n']
-    buy = lambda loc, label: (f'<a class="btn mizu" href="{P["stripe"]}" target="_blank" rel="noopener" data-analytics-action="checkout" '
-                              f'data-analytics-target="{P["offer"]}" data-analytics-location="{loc}">{label}</a>')
+    if P.get('past'):
+        buy = lambda loc, label: (f'<a class="btn mizu" href="/summit-ii/" data-analytics-action="site_navigation" '
+                                  f'data-analytics-target="summit_2" data-analytics-location="{loc}">Summit II tickets · $900</a>')
+    else:
+        buy = lambda loc, label: (f'<a class="btn mizu" href="{P["stripe"]}" target="_blank" rel="noopener" data-analytics-action="checkout" '
+                                  f'data-analytics-target="{P["offer"]}" data-analytics-location="{loc}">{label}</a>')
     return f'''<!doctype html>
 <html lang="en">
 <head>
@@ -195,7 +199,7 @@ def page(P):
     <a class="mono" href="/pricing/" data-analytics-action="site_navigation" data-analytics-location="nav" data-analytics-target="pricing">Pricing</a>
     <a class="mono" href="{P["jp_href"]}" lang="ja" hreflang="ja" data-analytics-action="site_navigation" data-analytics-location="nav" data-analytics-target="japan">日本語</a>
   </nav>
-  <a class="btn mizu" href="{P["stripe"]}" target="_blank" rel="noopener" data-analytics-action="checkout" data-analytics-target="{P["offer"]}" data-analytics-location="nav"><span class="full">Get my ticket · </span>$900</a>
+  {buy("nav", "Get my ticket · $900")}
 </header>
 
 <main>
@@ -221,24 +225,24 @@ def page(P):
   <div class="wrap koma-grid">
     <div class="koma main">
       <h2 class="sub">{P["ticket_h"]}</h2>
-      <p class="price">$900</p>
+      <p class="price">{P.get("price", "$900")}</p>
       <p class="lead2">{P["ticket_lead"]}</p>
       <ul class="facts">
 {P["ticket_facts"]}
       </ul>
       <div class="cta">
         {buy("ticket", "Get my ticket")}
-        <span class="mono">Stripe · USD · {P["dates_mono"]}</span>
+        <span class="mono">{P.get("pay_mono", "Stripe · USD")} · {P["dates_mono"]}</span>
       </div>
     </div>
     <div class="koma side">
-      <h3 class="sub">The whole month</h3>
-      <p class="price2">$1,200 <small>The PopUp: both summits, Demo Day and the month on Port Island, October 1–31.</small></p>
+      <h3 class="sub">If you can't pay for a ticket</h3>
+      <p class="lead2">A few tickets are paid for by sponsors, for researchers, founders and artists who should be in Kobe.</p>
       <ul class="facts">
-        <li>Arrive any day. Everything through October 31.</li>
-        <li>Accommodation is booked separately.</li>
+        <li>Book a call and tell us what you work on.</li>
+        <li>We tell you whether a sponsor can cover you.</li>
       </ul>
-      <a class="btn shu" href="/pricing/" data-analytics-action="site_navigation" data-analytics-location="ticket" data-analytics-target="pricing">See all tickets</a>
+      <a class="btn shu" href="https://calendly.com/nelson-frontierhumans/mtc-acceleration-sprint?utm_source=mirai-site&amp;utm_campaign=summit-sponsorship" target="_blank" rel="noopener" data-analytics-action="site_navigation" data-analytics-location="ticket" data-analytics-target="calendly">Book a call</a>
     </div>
     <div class="rows">
       <p>{P["resident_row"]}</p>
@@ -280,7 +284,7 @@ def page(P):
       <h2 class="sub">Get your ticket.</h2>
       <p data-live="speakers">{P["final_p"]}</p>
       {buy("final_offer", "Get my ticket · $900")}
-      <span class="mono">Stripe · $900 · {P["dates_mono"]}</span>
+      <span class="mono">{P.get("pay_mono", "Stripe · $900")} · {P["dates_mono"]}</span>
     </div>
     <figure class="tape-fig">
       <div class="fr"><img src="{P["final_img"]}" alt="{esc(P["final_alt"])}" width="{P["final_w"]}" height="{P["final_h_px"]}" loading="lazy" decoding="async"></div>
@@ -308,7 +312,7 @@ def page(P):
 </footer>
 
 <div class="sticky" aria-label="Ticket">
-  <span class="lbl">$900 · {P["sticky_dates"]}</span>
+  <span class="lbl">{P.get("sticky_lbl", "$900")} · {P["sticky_dates"]}</span>
   {buy("sticky", "Get my ticket")}
 </div>
 
@@ -337,13 +341,14 @@ P1 = dict(
     h1=f'<span class="ln" data-live="speakers">{n1} speakers</span> <span class="ln">on ageing</span> <span class="ln">and medicine.</span> <span class="ln">Two days</span> <span class="ln">in Kobe.</span>',
     lead='Mirai Tech City Summit I: The Science and Tech Augmenting Life. Saturday 17 and Sunday 18 October 2026, Kobe University Integrated Research Center, Port Island. All talks in English.',
     when_mono='10.17 SAT · 10.18 SUN · 11:00–20:30 JST',
-    note='Live in Japan? <a class="lnk" href="/jp/summit-i/" lang="ja" hreflang="ja" data-analytics-action="site_navigation" data-analytics-location="hero" data-analytics-target="japan">日本居住者向けチケット ¥6,000 →</a>',
-    obi_long=f'2026.10.17 SAT · 10.18 SUN · 11:00–20:30 JST · KOBE PORT ISLAND · {n1} SPEAKERS · $900',
-    obi_short=f'10.17–18 · KOBE · {n1} SPEAKERS · $900',
-    ticket_h='Summit I ticket', dates_mono='2026.10.17–18', sticky_dates='Oct 17–18',
-    ticket_lead='Every talk and panel on both days, and the networking and drinks each evening.',
+    note='This summit has taken place. <a class="lnk" href="/summit-ii/" data-analytics-action="site_navigation" data-analytics-location="hero" data-analytics-target="summit_2">Summit II, October 24–26 →</a>',
+    obi_long=f'2026.10.17 SAT · 10.18 SUN · KOBE PORT ISLAND · {n1} SPEAKERS · TOOK PLACE',
+    obi_short=f'10.17–18 · KOBE · {n1} SPEAKERS · TOOK PLACE',
+    past=True, price='Done', pay_mono='Took place', sticky_lbl='Summit I took place',
+    ticket_h='Summit I took place on October 17–18', dates_mono='2026.10.17–18', sticky_dates='Oct 17–18',
+    ticket_lead='Thank you to everyone who came. Summit II follows on October 24–26, with Demo Day on the Monday.',
     ticket_facts='        <li>Saturday 17 and Sunday 18 October, 11:00–20:30.</li>\n        <li>Kobe University Integrated Research Center, Port Island.</li>\n        <li>Talks are in English.</li>\n        <li>Hotel and transportation are not included.</li>',
-    resident_row='Residents of Japan have a ¥6,000 ticket on Peatix, and students go free with a student ID. <a class="lnk" href="/jp/summit-i/" lang="ja" hreflang="ja" data-analytics-action="site_navigation" data-analytics-location="ticket" data-analytics-target="japan">日本語ページへ →</a>',
+    resident_row='Summit I has taken place. The speakers and the programme stay on this page as a record; the recordings follow. <a class="lnk" href="/summit-ii/" data-analytics-action="site_navigation" data-analytics-location="ticket" data-analytics-target="summit_2">Summit II tickets →</a>',
     intro='Summit I is held with universities, research institutes and companies in Kobe and across Japan.',
     kobe='Host of Summit I at its Integrated Research Center.',
     venue_h='Venue',
@@ -356,7 +361,7 @@ P1 = dict(
       <span class="mono">34.6543396 N · 135.2213202 E · Port Liner K Computer Mae</span>''',
     venue_img='/img/pillar-portliner.webp', venue_alt='A Port Liner train', venue_w=960, venue_h_px=643,
     venue_cap='Fig. 01 · Port Liner · one minute from Keisan Kagaku Center station',
-    final_p=f'Summit I ticket, $900. Saturday 17 and Sunday 18 October, Kobe University Integrated Research Center, Port Island. {n1} speakers.',
+    final_p=f'Summit I took place on Saturday 17 and Sunday 18 October at Kobe University Integrated Research Center, with {n1} speakers. Summit II is on October 24–26.',
     final_img='/img/pillar-portisland-aerial-640.webp', final_alt='Port Island from the air', final_w=640, final_h_px=427,
     final_cap='Fig. 02 · Port Island · Kobe harbour from the air',
     photo_credits='Photos · Fig. 01 Port Liner · 663highland · CC BY 2.5 · Fig. 02 Port Island aerial · 663highland · CC BY 2.5',
