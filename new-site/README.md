@@ -59,6 +59,10 @@ Single static `index.html` — no framework, no build step. Deploys anywhere
   (`grep -rn "stripe.com/" new-site --exclude-dir=_v` lists every spot). Every link redirects to
   `/stay/?session_id={CHECKOUT_SESSION_ID}&pass=<sku>`; Luma tickets are issued
   by hand from the Stripe payments list until the webhook is wired up.
+- **The $1,200 PopUp / "Everything" pass was retired from the site on Oct 21 2026** (Nelson: Summit I
+  has happened, focus on the $900 Summit II ticket). Its Stripe link stays live in Stripe but no page
+  links to it; `/pricing/` shows one fare, every CTA goes to the Summit II link, and `/summit-i/` is a
+  record page whose buttons point at `/summit-ii/` (`past=True` in `scripts/summit-pages.py`).
 - The Luma listing link in the footers (`luma.com/an4zotn9`) stays as the event
   page; the retired `/fashion-show/` still points at its own Luma event.
 - `/jp/` sells the Japan-resident ticket on Peatix (https://miraitechcity2026.peatix.com/);
