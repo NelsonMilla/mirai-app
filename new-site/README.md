@@ -33,6 +33,9 @@ Single static `index.html` — no framework, no build step. Deploys anywhere
   Portraits taken from Wikimedia Commons keep their credit here (none at the moment).
   `marian_goodell.jpeg` is Burning Man Project's official portrait, used with her written permission
   (Oct 16 2026) on the condition that Burning Man is never shown as a sponsor or partner.
+  `masayo_takahashi.jpeg` is the JapanGov "Tomodachi" (Summer 2017) interview portrait, cropped to 4:5;
+  JapanGov's copyright page allows reprinting with source attribution. Source:
+  https://japan.go.jp/tomodachi/2017/summer2017/ips_cells.html (credit: The Government of Japan).
 - `/summit-i/` and `/summit-ii/` are page shells written by `scripts/summit-pages.py` (copy, ticket,
   partners, venue); `summit-live.js` renders the wall of faces and the programme from the Speakers and
   Program tabs through `speakers.js` and `program.js`, snapshot first, then the live sheet.
