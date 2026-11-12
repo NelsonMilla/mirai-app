@@ -66,6 +66,20 @@
         "new-site"
       ],
       "port": 4326
+    },
+    {
+      "name": "site-2027",
+      "runtimeExecutable": "/opt/homebrew/bin/npm",
+      "runtimeArgs": [
+        "--prefix",
+        "site-2027",
+        "run",
+        "dev"
+      ],
+      "env": {
+        "PATH": "/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin"
+      },
+      "port": 4350
     }
   ]
 }

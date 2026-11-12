@@ -1,0 +1,578 @@
+[
+  {
+    "id": "tomonari_abe",
+    "name": "Tomonari Abe",
+    "last": "Abe",
+    "affiliation": "CEO, Abe Yoando Pharma",
+    "group": "founders",
+    "photo": "/img/speakers/tomonari_abe.jpeg"
+  },
+  {
+    "id": "takashi_aoi",
+    "name": "Prof. Takashi Aoi, MD PhD",
+    "last": "Aoi",
+    "affiliation": "Professor, Division of Stem Cell Medicine, Kobe University Graduate School of Medicine",
+    "group": "scientists",
+    "photo": "/img/speakers/takashi_aoi.jpeg"
+  },
+  {
+    "id": "kaarthik_balakrishnan",
+    "name": "Kaarthik Abhinav Balakrishnan, PhD",
+    "last": "Balakrishnan",
+    "affiliation": "Research Scientist, Eightsix Science",
+    "group": "scientists",
+    "photo": "/img/speakers/kaarthik_balakrishnan.jpeg"
+  },
+  {
+    "id": "julie_baron",
+    "name": "Julie Ying Baron",
+    "last": "Baron",
+    "affiliation": "Co-Founder and CEO, LiveBeyond",
+    "group": "founders",
+    "photo": "/img/speakers/julie_baron.jpeg"
+  },
+  {
+    "id": "joe_betts_lacroix",
+    "name": "Joe Betts-LaCroix",
+    "last": "Betts-LaCroix",
+    "affiliation": "Co-Founder and CEO, Retro Biosciences",
+    "group": "scientists",
+    "photo": "/img/speakers/joe_betts_lacroix.jpeg"
+  },
+  {
+    "id": "sophia_z_boettcher_kimura",
+    "name": "Sophia Z. Boettcher Kimura",
+    "last": "Boettcher Kimura",
+    "affiliation": "Venture Partner, Governance Partners",
+    "group": "founders",
+    "photo": "/img/speakers/sophia_z_boettcher_kimura.jpeg"
+  },
+  {
+    "id": "daniel_burger",
+    "name": "Daniel Burger, MSc",
+    "last": "Burger",
+    "affiliation": "Founder & CEO, Eightsix Science; Co-founder, Synconetics Organisation",
+    "group": "founders",
+    "photo": "/img/speakers/daniel_burger.jpeg"
+  },
+  {
+    "id": "taylor_capito",
+    "name": "Taylor Capito",
+    "last": "Capito",
+    "affiliation": "Founder, Cingularity",
+    "group": "founders",
+    "photo": "/img/speakers/taylor_capito.jpeg"
+  },
+  {
+    "id": "elen_capri",
+    "name": "Elen Capri",
+    "last": "Capri",
+    "affiliation": "Civil Diplomat, Longevity Advocate, Entrepreneur and Documentary Producer",
+    "group": "scientists",
+    "photo": "/img/speakers/elen_capri.jpeg"
+  },
+  {
+    "id": "nathan_cheng",
+    "name": "Nathan Cheng",
+    "last": "Cheng",
+    "affiliation": "Co-Founder & Co-Executive Director, Longevity Biotech Fellowship; Co-Founder & General Partner, Healthspan Capital; Co-Founder, Vitalism Foundation",
+    "group": "founders",
+    "photo": "/img/speakers/nathan_cheng.jpeg"
+  },
+  {
+    "id": "george_church",
+    "name": "Prof. George Church, PhD",
+    "last": "Church",
+    "affiliation": "Professor of Genetics, Harvard Medical School; Director, PersonalGenomes.org",
+    "group": "scientists",
+    "photo": "/img/speakers/george_church.jpeg"
+  },
+  {
+    "id": "rob_claar",
+    "name": "Rob Claar",
+    "last": "Claar",
+    "affiliation": "CEO, HekaBio",
+    "group": "founders",
+    "photo": "/img/speakers/rob_claar.jpeg"
+  },
+  {
+    "id": "natalie_coles_de_grey",
+    "name": "Natalie S. Coles de Grey",
+    "last": "Coles de Grey",
+    "affiliation": "Director of Supercentenarian Research, LEV Foundation; Scientific Advisory Board, Human Longevity Inc",
+    "group": "scientists",
+    "photo": "/img/speakers/natalie_coles_de_grey.jpeg"
+  },
+  {
+    "id": "jose_cordeiro",
+    "name": "Jose Cordeiro, MBA, PhD",
+    "last": "Cordeiro",
+    "affiliation": "Conference Chair, International Longevity Summit Madrid; Vice Chair, Humanity+; Teaching Fellow, Singularity University; author, The Death of Death",
+    "group": "scientists",
+    "photo": "/img/speakers/jose_cordeiro.jpeg"
+  },
+  {
+    "id": "mac_davis",
+    "name": "Mac Davis",
+    "last": "Davis",
+    "affiliation": "Founder & CEO, Minicircle",
+    "group": "founders",
+    "photo": "/img/speakers/mac_davis.jpeg"
+  },
+  {
+    "id": "aubrey_de_grey",
+    "name": "Aubrey de Grey, PhD",
+    "last": "de Grey",
+    "affiliation": "Founder, President and Chief Science Officer, LEV Foundation",
+    "group": "scientists",
+    "photo": "/img/speakers/aubrey_de_grey.jpeg"
+  },
+  {
+    "id": "patri_friedman",
+    "name": "Patri Friedman",
+    "last": "Friedman",
+    "affiliation": "Founder, Pronomos Capital",
+    "group": "founders",
+    "photo": "/img/speakers/patri_friedman.jpeg"
+  },
+  {
+    "id": "yutaka_fujimoto",
+    "name": "Yutaka Fujimoto",
+    "last": "Fujimoto",
+    "affiliation": "Director and CFO, J-Pharma",
+    "group": "founders",
+    "photo": "/img/speakers/yutaka_fujimoto.jpeg"
+  },
+  {
+    "id": "yuichi_fukunaga",
+    "name": "Yuichi Fukunaga",
+    "last": "Fukunaga",
+    "affiliation": "Co-founder & President, Taxa Technologies",
+    "group": "founders",
+    "photo": "/img/speakers/yuichi_fukunaga.jpeg"
+  },
+  {
+    "id": "florian_geier",
+    "name": "Florian Geier",
+    "last": "Geier",
+    "affiliation": "Senior Director, Antler Japan",
+    "group": "founders",
+    "photo": "/img/speakers/florian_geier.jpeg"
+  },
+  {
+    "id": "alice_gilman",
+    "name": "Alice Gilman, MSc",
+    "last": "Gilman",
+    "affiliation": "Co-Founder & COO, R3 Bio",
+    "group": "founders",
+    "photo": "/img/speakers/alice_gilman.jpeg"
+  },
+  {
+    "id": "cesar_gonzales",
+    "name": "Cesar Gonzales",
+    "last": "Gonzales",
+    "affiliation": "Founder and CEO, HEIRITAGE EcoCultural",
+    "group": "founders",
+    "photo": "/img/speakers/cesar_gonzales.jpeg"
+  },
+  {
+    "id": "marian_goodell",
+    "name": "Marian Goodell",
+    "last": "Goodell",
+    "affiliation": "CEO & Founding Board Member, Burning Man Project",
+    "group": "founders",
+    "photo": "/img/speakers/marian_goodell.jpeg"
+  },
+  {
+    "id": "muneaki_goto",
+    "name": "Muneaki Goto",
+    "last": "Goto",
+    "affiliation": "Chief Longevity Officer, Japan Reskilling Initiative",
+    "group": "scientists",
+    "photo": "/img/speakers/muneaki_goto.jpeg"
+  },
+  {
+    "id": "adam_gries",
+    "name": "Adam Gries",
+    "last": "Gries",
+    "affiliation": "Co-Founder, Vitalism Foundation; organiser, Vitalist Bay",
+    "group": "founders",
+    "photo": "/img/speakers/adam_gries.jpeg"
+  },
+  {
+    "id": "yuki_hanyu",
+    "name": "Yuki Hanyu, PhD",
+    "last": "Hanyu",
+    "affiliation": "Founder, Shojinmeat Project",
+    "group": "founders",
+    "photo": "/img/speakers/yuki_hanyu.jpeg"
+  },
+  {
+    "id": "motoshi_hayano",
+    "name": "Prof. Motoshi Hayano, PhD",
+    "last": "Hayano",
+    "affiliation": "Representative Director and CEO, ASAGI Labs; Associate Professor, Tokyo University of Science",
+    "group": "scientists",
+    "photo": "/img/speakers/motoshi_hayano.jpeg"
+  },
+  {
+    "id": "louise_hecker",
+    "name": "Louise Hecker, PhD",
+    "last": "Hecker",
+    "affiliation": "Associate Professor, Department of Medicine, Baylor College of Medicine",
+    "group": "scientists",
+    "photo": "/img/speakers/louise_hecker.jpeg"
+  },
+  {
+    "id": "pedro_henrich",
+    "name": "Pedro Henrich",
+    "last": "Henrich",
+    "affiliation": "Co-Founder & CEO, Unchain Bio",
+    "group": "founders",
+    "photo": "/img/speakers/pedro_henrich.jpeg"
+  },
+  {
+    "id": "juliette_humer",
+    "name": "Juliette Humer",
+    "last": "Humer",
+    "affiliation": "Founder & CEO, Muse Bio",
+    "group": "founders",
+    "photo": "/img/speakers/juliette_humer.jpeg"
+  },
+  {
+    "id": "ian_huyett",
+    "name": "Ian Huyett, JD",
+    "last": "Huyett",
+    "affiliation": "Associate Director & Head of Litigation, Cornerstone; Granite Bio Innovation",
+    "group": "founders",
+    "photo": "/img/speakers/ian_huyett.jpeg"
+  },
+  {
+    "id": "shin_ichiro_imai",
+    "name": "Dr. Shin-ichiro Imai",
+    "last": "Imai",
+    "affiliation": "Co-founder, LongGen Bioscience",
+    "group": "scientists",
+    "photo": "/img/speakers/shin_ichiro_imai.jpeg"
+  },
+  {
+    "id": "laurence_ion",
+    "name": "Laurence Ion",
+    "last": "Ion",
+    "affiliation": "Founding Steward, VitaDAO; Initiator, Viva City; Director, Vitality Healthspan Foundation",
+    "group": "founders",
+    "photo": "/img/speakers/laurence_ion.jpeg"
+  },
+  {
+    "id": "iris_jiang",
+    "name": "Iris Jiang",
+    "last": "Jiang",
+    "affiliation": "Innovation Initiatives Manager, Stellar Science Foundation",
+    "group": "scientists",
+    "photo": "/img/speakers/iris_jiang.jpeg"
+  },
+  {
+    "id": "kosuke_kato",
+    "name": "Kosuke Kato, PhD",
+    "last": "Kato",
+    "affiliation": "Assistant Professor, Pulmonary, Allergy, Critical Care & Sleep Medicine, Baylor College of Medicine",
+    "group": "scientists",
+    "photo": "/img/speakers/kosuke_kato.jpeg"
+  },
+  {
+    "id": "shingo_kawasaki",
+    "name": "Shingo Kawasaki",
+    "last": "Kawasaki",
+    "affiliation": "Senior Chief, Department of Medical Device and Healthcare, Japan Agency for Medical Research and Development (AMED)",
+    "group": "scientists",
+    "photo": "/img/speakers/shingo_kawasaki.jpeg"
+  },
+  {
+    "id": "rodney_kelly",
+    "name": "Rodney Kelly",
+    "last": "Kelly",
+    "affiliation": "Chief Growth Officer (CGO), HekaBio K.K.; MEDISO Europe Ambassador",
+    "group": "founders",
+    "photo": "/img/speakers/rodney_kelly.jpeg"
+  },
+  {
+    "id": "bilal_kharouni",
+    "name": "Bilal Kharouni",
+    "last": "Kharouni",
+    "affiliation": "Founder & CEO, ekei labs",
+    "group": "founders",
+    "photo": "/img/speakers/bilal_kharouni.jpeg"
+  },
+  {
+    "id": "kyungmin_kim",
+    "name": "Kyungmin Kim, PhD",
+    "last": "Kim",
+    "affiliation": "R&D Engineer, Keyence Corporation",
+    "group": "scientists",
+    "photo": "/img/speakers/kyungmin_kim.jpeg"
+  },
+  {
+    "id": "keiko_kobayashi",
+    "name": "Keiko Kobayashi",
+    "last": "Kobayashi",
+    "affiliation": "Head of International Ecosystem Development (Japan), Business Strategies; Senior Coordinator, Foundation for Biomedical Research and Innovation at Kobe (FBRI) / KOBE Biomedical Innovation Cluster",
+    "group": "scientists",
+    "photo": "/img/speakers/keiko_kobayashi.jpeg"
+  },
+  {
+    "id": "hisatomo_kowa",
+    "name": "Prof. Hisatomo Kowa, MD PhD",
+    "last": "Kowa",
+    "affiliation": "Professor, Kobe University",
+    "group": "scientists",
+    "photo": "/img/speakers/hisatomo_kowa.jpeg"
+  },
+  {
+    "id": "jordan_lasker",
+    "name": "Jordan Lasker, PhD",
+    "last": "Lasker",
+    "affiliation": "Researcher and bioinformatician",
+    "group": "scientists",
+    "photo": "/img/speakers/jordan_lasker.jpeg"
+  },
+  {
+    "id": "josh_mann",
+    "name": "Josh Mann",
+    "last": "Mann",
+    "affiliation": "COO, The LARTA Agency",
+    "group": "founders",
+    "photo": "/img/speakers/josh_mann.jpeg"
+  },
+  {
+    "id": "shun_maruyama",
+    "name": "Shun Maruyama",
+    "last": "Maruyama",
+    "affiliation": "Partner, Governance Partners",
+    "group": "founders",
+    "photo": "/img/speakers/shun_maruyama.jpeg"
+  },
+  {
+    "id": "victoria_masso",
+    "name": "Victoria Masso, MSc",
+    "last": "Massó",
+    "affiliation": "Co-Founder & COO, Unchain Bio",
+    "group": "founders",
+    "photo": "/img/speakers/victoria_masso.jpeg"
+  },
+  {
+    "id": "keita_masui",
+    "name": "Keita Masui",
+    "last": "Masui",
+    "affiliation": "Managing Partner, ASAGI Labs Ventures LLC",
+    "group": "founders",
+    "photo": "/img/speakers/keita_masui.jpeg"
+  },
+  {
+    "id": "tateki_matsuda",
+    "name": "Tateki Matsuda",
+    "last": "Matsuda",
+    "affiliation": "Representative Director, Japan Biohacking Association; Founder, HOLOLIFE Center Japan; Former UFC Fighter",
+    "group": "founders",
+    "photo": "/img/speakers/tateki_matsuda.jpeg"
+  },
+  {
+    "id": "ryan_mccall",
+    "name": "Ryan J. McCall, PhD",
+    "last": "McCall",
+    "affiliation": "Founder, Continuity Labs",
+    "group": "scientists",
+    "photo": "/img/speakers/ryan_mccall.jpeg"
+  },
+  {
+    "id": "aya_mcglothlin",
+    "name": "Aya McGlothlin",
+    "last": "McGlothlin",
+    "affiliation": "Full Stack Developer and Applied Software Researcher",
+    "group": "scientists",
+    "photo": "/img/speakers/aya_mcglothlin.jpeg"
+  },
+  {
+    "id": "nelson_milla",
+    "name": "Nelson Milla",
+    "last": "Milla",
+    "affiliation": "Co-Founder & CTO, Unchain Bio",
+    "group": "founders",
+    "photo": "/img/speakers/nelson_milla.jpeg"
+  },
+  {
+    "id": "masanori_miyanishi",
+    "name": "Prof. Masanori Miyanishi, MD PhD",
+    "last": "Miyanishi",
+    "affiliation": "Professor, Division of Hematopoietic Stem Cell Medicine, Kobe University Graduate School of Medicine",
+    "group": "scientists",
+    "photo": "/img/speakers/masanori_miyanishi.jpeg"
+  },
+  {
+    "id": "yoshihiro_muragaki",
+    "name": "Prof. Yoshihiro Muragaki, MD PhD",
+    "last": "Muragaki",
+    "affiliation": "Professor and Chair of Department of Medical Device Engineering at the Graduate School of Medicine, Kobe University",
+    "group": "scientists",
+    "photo": "/img/speakers/yoshihiro_muragaki.jpeg"
+  },
+  {
+    "id": "yosuke_nakashima",
+    "name": "Yosuke Nakashima, MBA",
+    "last": "Nakashima",
+    "affiliation": "VP, Operations/Business Development, Modalis Therapeutics",
+    "group": "founders",
+    "photo": "/img/speakers/yosuke_nakashima.jpeg"
+  },
+  {
+    "id": "felix_oen",
+    "name": "Dr. Felix Oen",
+    "last": "Oen",
+    "affiliation": "Co-Founder & CEO, NeoTILa Biosciences",
+    "group": "founders",
+    "photo": "/img/speakers/felix_oen.jpeg"
+  },
+  {
+    "id": "karen_onuma",
+    "name": "Karen Onuma",
+    "last": "Onuma",
+    "affiliation": "Co-Founder & COO, GlobalDeal",
+    "group": "founders",
+    "photo": "/img/speakers/karen_onuma.jpeg"
+  },
+  {
+    "id": "walter_patterson",
+    "name": "Walter Patterson",
+    "last": "Patterson",
+    "affiliation": "Founder & Chief Science Officer, Minicircle",
+    "group": "scientists",
+    "photo": "/img/speakers/walter_patterson.jpeg"
+  },
+  {
+    "id": "todd_porter",
+    "name": "Todd Porter",
+    "last": "Porter",
+    "affiliation": "Co-Founder, Prosperity Exchange",
+    "group": "founders",
+    "photo": "/img/speakers/todd_porter.jpeg"
+  },
+  {
+    "id": "brandon_possin",
+    "name": "Brandon Possin",
+    "last": "Possin",
+    "affiliation": "Founder & CEO, Merito KK; Founder, Zō Village",
+    "group": "founders",
+    "photo": "/img/speakers/brandon_possin.jpeg"
+  },
+  {
+    "id": "zain_rana",
+    "name": "Zain Rana",
+    "last": "Rana",
+    "affiliation": "Partner and Head of Business Development, APAC, GreyRigge Associates",
+    "group": "founders",
+    "photo": "/img/speakers/zain_rana.jpeg"
+  },
+  {
+    "id": "irit_rappley",
+    "name": "Irit Rappley, PhD",
+    "last": "Rappley",
+    "affiliation": "Co-Founder & CEO, NNP Labs",
+    "group": "founders",
+    "photo": "/img/speakers/irit_rappley.jpeg"
+  },
+  {
+    "id": "stuart_reid",
+    "name": "Prof. Stuart Reid FRSE",
+    "last": "Reid",
+    "affiliation": "Professor and Head of Biomedical Engineering, University of Strathclyde; Co-Director, Centre for the Cellular Microenvironment",
+    "group": "scientists",
+    "photo": "/img/speakers/stuart_reid.jpeg"
+  },
+  {
+    "id": "elliot_roth",
+    "name": "Elliot Roth",
+    "last": "Roth",
+    "affiliation": "",
+    "group": "founders",
+    "photo": "/img/speakers/elliot_roth.jpeg"
+  },
+  {
+    "id": "brian_sanders",
+    "name": "Brian Sanders",
+    "last": "Sanders",
+    "affiliation": "Host, Peak Human Podcast; Founder, Sapien",
+    "group": "founders",
+    "photo": "/img/speakers/brian_sanders.jpeg"
+  },
+  {
+    "id": "matt_scholz",
+    "name": "Matt Scholz",
+    "last": "Scholz",
+    "affiliation": "Co-Founder & CEO, Oisín Biotechnologies",
+    "group": "founders",
+    "photo": "/img/speakers/matt_scholz.jpeg"
+  },
+  {
+    "id": "eleanor_sheekey",
+    "name": "Eleanor Sheekey, PhD",
+    "last": "Sheekey",
+    "affiliation": "Postdoctoral Researcher, RIKEN BDR Kobe; creator, The Sheekey Science Show",
+    "group": "scientists",
+    "photo": "/img/speakers/eleanor_sheekey.jpeg"
+  },
+  {
+    "id": "devinder_sodhi",
+    "name": "Devinder Sodhi",
+    "last": "Sodhi",
+    "affiliation": "Founder, Learning Layer Labs",
+    "group": "founders",
+    "photo": "/img/speakers/devinder_sodhi.jpeg"
+  },
+  {
+    "id": "kentaroh_takagaki",
+    "name": "Prof. Kentaroh Takagaki, MD PhD BAgr",
+    "last": "Takagaki",
+    "affiliation": "Associate Professor, University of Yamanashi and Institute of Science Tokyo",
+    "group": "scientists",
+    "photo": "/img/speakers/kentaroh_takagaki.jpeg"
+  },
+  {
+    "id": "derya_unutmaz",
+    "name": "Derya Unutmaz, MD",
+    "last": "Unutmaz",
+    "affiliation": "Professor, The Jackson Laboratory for Genomic Medicine",
+    "group": "scientists",
+    "photo": "/img/speakers/derya_unutmaz.jpeg"
+  },
+  {
+    "id": "masataka_watanabe",
+    "name": "Prof. Masataka Watanabe, PhD",
+    "last": "Watanabe",
+    "affiliation": "Associate Professor, Department of Systems Innovation, Faculty of Engineering, The University of Tokyo",
+    "group": "scientists",
+    "photo": "/img/speakers/masataka_watanabe.jpeg"
+  },
+  {
+    "id": "paul_yang",
+    "name": "Paul Yang",
+    "last": "Yang",
+    "affiliation": "Partner, Governance Partners",
+    "group": "founders",
+    "photo": "/img/speakers/paul_yang.jpeg"
+  },
+  {
+    "id": "rie_yano",
+    "name": "Rie Yano",
+    "last": "Yano",
+    "affiliation": "Partner, Coral Capital",
+    "group": "founders",
+    "photo": "/img/speakers/rie_yano.jpeg"
+  },
+  {
+    "id": "takahiro_yasuda",
+    "name": "Prof. Takahiro Yasuda, PhD MSc",
+    "last": "Yasuda",
+    "affiliation": "Specially Appointed Professor, Department of Medical Device Engineering, Kobe University Graduate School of Medicine; Director, MedTech Innovation Center (MIC)",
+    "group": "scientists",
+    "photo": "/img/speakers/takahiro_yasuda.jpeg"
+  }
+]
