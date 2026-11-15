@@ -25,11 +25,11 @@ around 65–75 characters per line, which is what this column is set to.
 
 ## A second-level heading
 
-Text right after a heading. Headings at this level are bold and uppercase.
+Text right after a heading. Headings at this level are bold, in sentence case, numbered in gold.
 
 ### A third-level heading
 
-Third-level headings are bold but not uppercase.
+Third-level headings are bold and smaller.
 
 #### A fourth-level heading
 

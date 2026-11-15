@@ -1,0 +1,66 @@
+/* Apply: calm ruled fit block, then the final call, which ends on people. */
+.apply { background: var(--night); color: var(--ink); position: relative; overflow: hidden; }
+.sr { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+/* ── fit ── */
+.fit { max-width: 1440px; margin: 0 auto; padding: clamp(80px, 11vw, 150px) 6vw clamp(72px, 9vw, 130px); }
+.fitGrid { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 48px 8vw; margin-top: clamp(40px, 5vw, 72px); align-items: start; }
+.fitHead { margin-top: 18px; font-weight: 800; font-size: clamp(34px, 5vw, 76px); line-height: 1; letter-spacing: -.02em; text-wrap: balance; }
+.fitBody { margin-top: 26px; max-width: 46ch; font-size: clamp(16px, 1.3vw, 18px); line-height: 1.6; color: var(--dim); }
+.yes { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+.yes li { display: grid; grid-template-columns: 44px 1fr; gap: 12px; align-items: baseline; padding: 26px 0; border-bottom: 1px solid var(--line);
+  font-size: clamp(17px, 1.5vw, 21px); line-height: 1.5; font-weight: 500; }
+.yn { font-family: var(--mono); font-size: 11px; letter-spacing: .3em; color: var(--accent); }
+
+/* ── final call: ends on people, the cohort on a night street ── */
+/* Phones and tablets: the photo on top, the copy under it on night. */
+.final { position: relative; isolation: isolate; border-top: 1px solid var(--line); }
+.photo { position: relative; overflow: hidden; container-type: size; height: clamp(300px, 80vw, 600px);
+  /* Edge-only fades into the section's night (a mask, so no seam at the clip edge). */
+  --fade-x: linear-gradient(90deg, transparent, #000 7%);
+  --fade-y: linear-gradient(180deg, transparent, #000 14%, #000 72%, transparent);
+  -webkit-mask-image: var(--fade-x), var(--fade-y); mask-image: var(--fade-x), var(--fade-y);
+  -webkit-mask-composite: source-in; mask-composite: intersect; }
+/* Crop: the photo's own 4:3 box, wide enough that the frame from 27% onwards fills the panel
+   (the selfie-taker, left of 27%, falls outside) and at least as tall as the panel. */
+.crop { --w: max(150cqw, 133.4cqh); position: absolute; left: calc(var(--w) * -.27); top: 20%; translate: 0 -20%;
+  width: var(--w); aspect-ratio: 4 / 3; }
+/* warmer and brighter than the shared .grade: the faces carry the close */
+.crop .img { object-fit: cover; filter: sepia(.14) saturate(1.02) contrast(1.04) brightness(1.1); }
+
+.copy { position: relative; max-width: 1440px; margin: -36px auto 0; padding: 0 6vw clamp(80px, 12vw, 120px); }
+/* display scale: at or above the Cohort 0 and Life headlines */
+.head { margin-top: 18px; font-weight: 900; font-size: clamp(52px, 8vw, 150px); line-height: .92; letter-spacing: -.03em; text-wrap: balance; }
+.head:lang(ja) { font-size: clamp(44px, 7.2vw, 132px); line-height: 1.1; letter-spacing: 0; }
+.body { margin-top: 26px; max-width: 38ch; font-size: clamp(16px, 1.3vw, 19px); line-height: 1.6; color: var(--ink); }
+.actions { margin-top: 38px; display: flex; flex-wrap: wrap; align-items: center; gap: 20px 32px; }
+/* the site's one primary button: the dawn-gold pill (README rule 8) */
+.pill { display: inline-flex; align-items: center; gap: 14px; min-height: 52px; padding: 0 26px; border-radius: 999px;
+  background: var(--accent); color: #0b0b0d;
+  text-decoration: none; font-family: var(--mono); font-size: 12px; letter-spacing: .2em; text-transform: uppercase; font-weight: 500;
+  transition: background-color .25s ease, transform .25s ease; }
+.pill:hover { background: var(--ink); transform: translateY(-1px); }
+.arrow { font-family: var(--font); font-size: 15px; letter-spacing: 0; }
+.talk { display: inline-flex; align-items: center; min-height: 44px; color: var(--ink); text-decoration: none; font-family: var(--mono); font-size: 11px;
+  letter-spacing: .22em; text-transform: uppercase; border-bottom: 1px solid var(--accent); padding-bottom: 2px; transition: color .25s; }
+.talk:hover { color: var(--accent); }
+.pill:focus-visible, .talk:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+
+/* Desktop: a narrow copy column (the headline stacks in it), then the photo from the column's
+   edge to the right edge of the viewport. Faces start right of the column, so type never
+   sits on them. */
+@media (min-width: 1100px) {
+  .final { display: grid; align-items: center; min-height: clamp(640px, 52vw, 860px);
+    grid-template-columns: max(6vw, calc(50% - 720px + 6vw)) clamp(330px, 31.2vw, 585px) 2vw minmax(0, 1fr); }
+  /* Japanese: full-width glyphs, so a wider column keeps 「コホートへ」 on one line */
+  .final:lang(ja) { grid-template-columns: max(6vw, calc(50% - 720px + 6vw)) clamp(400px, 37vw, 690px) 2vw minmax(0, 1fr); }
+  .copy { grid-column: 2; grid-row: 1; max-width: none; margin: 0; padding: clamp(88px, 8vw, 130px) 0; }
+  .photo { grid-column: 4; grid-row: 1; align-self: stretch; height: auto;
+    --fade-x: linear-gradient(90deg, transparent, rgba(0, 0, 0, .3) 4%, rgba(0, 0, 0, .75) 8%, #000 12%);
+    --fade-y: linear-gradient(180deg, transparent, #000 14%, #000 80%, transparent); }
+  .crop { --w: max(137cqw, 133.4cqh); top: 10%; translate: 0 -10%; }
+}
+@media (max-width: 860px) {
+  .fitGrid { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) { .pill, .talk { transition: none; } .pill:hover { transform: none; } }

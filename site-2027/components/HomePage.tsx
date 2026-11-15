@@ -1,62 +1,56 @@
 import type { Metadata } from 'next';
-import type { Copy } from '@/content/site';
-import { Nav } from './Nav';
-import { Hero } from './Hero';
-import { Recap } from './Recap';
-import { Moments } from './Moments';
-import { Speakers } from './Speakers';
-import { Photos } from './Photos';
-import { Next2027 } from './Next2027';
-import { Footer } from './Footer';
-import { Reveal } from './Reveal';
-import { Life } from './Life';
-import { Voices } from './Voices';
-import { BuiltHere } from './BuiltHere';
-import { LatestPosts } from './LatestPosts';
+import type { Residency } from '@/content/residency';
+import { SiteHeader } from './SiteHeader';
+import { SiteFooter } from './SiteFooter';
 import { StructuredData } from './StructuredData';
+import { Opening } from './residency/Opening';
+import { Program } from './residency/Program';
+import { Month } from './residency/Month';
+import { Kobe } from './residency/Kobe';
+import { Cohort0 } from './residency/Cohort0';
+import { Life, Voices } from './residency/Life';
+import { Apply } from './residency/Apply';
 
-// The homepage in one language. app/page.tsx (English) and app/jp/page.tsx (Japanese)
-// both render this with their copy, so the two stay structurally identical.
-export function HomePage({ t, skip }: { t: Copy; skip: string }) {
+// The Residency 2027 landing page in one language. app/page.tsx (English) and
+// app/jp/page.tsx (Japanese) both render this with their copy, so the two stay
+// structurally identical. Section system: components/residency/README.md.
+export function HomePage({ r, lang, skip }: { r: Residency; lang: 'en' | 'ja'; skip: string }) {
   return (
-    <div lang={t.lang}>
-      <StructuredData lang={t.lang} />
-      <a className="skip" href="#2026">{skip}</a>
-      <Nav t={t} />
+    <div lang={lang} className="residency">
+      <StructuredData lang={lang} />
+      <a className="skip" href="#program">{skip}</a>
+      <SiteHeader r={r} />
       <main>
-        <Hero t={t} />
-        <Recap t={t} />
-        <hr className="rule" />
-        <Life t={t} />
-        <hr className="rule" />
-        <Moments t={t} />
-        <Voices t={t} />
-        <hr className="rule" />
-        <Speakers t={t} />
-        <hr className="rule" />
-        <BuiltHere t={t} />
-        <Photos t={t} />
-        <LatestPosts t={t} />
-        <Next2027 t={t} />
+        <Opening r={r} />
+        <Program r={r} />
+        <Month r={r} />
+        <Kobe r={r} />
+        <Cohort0 r={r} />
+        <Life r={r} />
+        <Voices r={r} />
+        <Apply r={r} />
       </main>
-      <Footer t={t} />
-      <Reveal />
+      <SiteFooter r={r} />
     </div>
   );
 }
 
 // hreflang pair: each homepage names itself canonical and points at the other.
-export function homeMetadata(t: Copy): Metadata {
+export function homeMetadata(r: Residency, lang: 'en' | 'ja'): Metadata {
+  const image = '/img/fuji/fuji-dawn.webp';
   return {
-    title: t.title,
-    description: t.description,
+    title: r.seo.title,
+    description: r.seo.description,
     alternates: {
-      canonical: t.home,
+      canonical: r.home,
       languages: { en: '/', ja: '/jp', 'x-default': '/' },
       types: { 'application/rss+xml': '/blog/rss.xml' },
     },
-    openGraph: { siteName: t.name, title: t.title, description: t.description, type: 'website', url: t.home,
-      locale: t.lang === 'ja' ? 'ja_JP' : 'en_US', alternateLocale: t.lang === 'ja' ? ['en_US'] : ['ja_JP'], images: [t.ogImage] },
-    twitter: { card: 'summary_large_image', title: t.title, description: t.description, images: [t.ogImage] },
+    openGraph: {
+      siteName: 'Mirai Tech City', title: r.seo.title, description: r.seo.description, type: 'website', url: r.home,
+      locale: lang === 'ja' ? 'ja_JP' : 'en_US', alternateLocale: lang === 'ja' ? ['en_US'] : ['ja_JP'],
+      images: [{ url: image, width: 1600, height: 1063, alt: 'Mount Fuji and Lake Shoji at sunrise' }],
+    },
+    twitter: { card: 'summary_large_image', title: r.seo.title, description: r.seo.description, images: [image] },
   };
 }

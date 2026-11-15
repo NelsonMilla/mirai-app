@@ -1,14 +1,14 @@
-import { site } from '@/content/site';
+import { residency } from '@/content/residency';
 
-// The one subscribe placement (Craig Mod / Works in Progress): end of index, end of every story.
+// The one call to action on blog pages (Craig Mod / Works in Progress): end of index, end of every story.
 export function NotifyStrip() {
   return (
     <aside className="notifyStrip">
       <div>
-        <p className="eyebrow">{site.next.eyebrow}</p>
-        <p className="ns-h">{site.hero.headline[1]}</p>
+        <p className="eyebrow">{residency.final.eyebrow}</p>
+        <p className="ns-h">{residency.final.headline}</p>
       </div>
-      <a className="btn accent" href={site.notifyHref}>{site.next.primary}</a>
+      <a className="btn accent" href={residency.applyHref} target="_blank" rel="noopener">{residency.apply}</a>
     </aside>
   );
 }

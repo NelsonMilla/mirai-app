@@ -41,7 +41,8 @@ function render(md: string) {
       heading(this: { parser: { parseInline(t: Tokens.Generic[]): string } }, t: Tokens.Heading) {
         const html = this.parser.parseInline(t.tokens);
         if (t.depth !== 2) return `<h${t.depth}>${html}</h${t.depth}>\n`;
-        const id = slugify(t.text) || `section-${toc.length + 1}`;
+        const base = slugify(t.text) || `section-${toc.length + 1}`;
+        const id = toc.some(x => x.id === base) ? `${base}-${toc.length + 1}` : base;
         toc.push({ id, text: t.text.replace(/[*_`]/g, '') });
         return `<h2 id="${id}"><a href="#${id}">${html}</a></h2>\n`;
       },

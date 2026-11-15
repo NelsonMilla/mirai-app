@@ -1,0 +1,123 @@
+/* Life in Japan (暮らし) + Voices.
+   Rhythm: head → full-bleed dinner → strip of four prints (2×2 on phones)
+   → the big people moment with two prints beside it. Phones < 800px. */
+
+.life {
+  position: relative; background: var(--night); color: var(--ink);
+  padding: clamp(80px, 9vw, 136px) 0; overflow-x: clip;
+}
+/* a faint warm glow behind the head, centred well below the top edge and masked out
+   before it, so the seam from Cohort 0 stays plain night */
+.life::before {
+  content: ""; position: absolute; inset: 0 0 auto; height: 1000px; pointer-events: none;
+  background: radial-gradient(50% 42% at 86% 46%, rgba(var(--accent-rgb), .07), transparent 70%);
+  -webkit-mask-image: linear-gradient(180deg, transparent, #000 32%);
+          mask-image: linear-gradient(180deg, transparent, #000 32%);
+}
+.inner { position: relative; width: min(1440px, 88vw); margin-inline: auto; }
+
+/* ── head ───────────────────────────────────────────── */
+.top {
+  display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 12px 16px;
+  padding-bottom: 20px; border-bottom: 1px solid var(--line);
+}
+.eyebrow { margin: 0; font-family: var(--mono); font-size: 11px; letter-spacing: .3em; text-transform: uppercase; color: var(--faint); }
+.headline {
+  margin: clamp(36px, 5vw, 80px) 0 0; max-width: 15em;
+  font-weight: 800; font-size: clamp(40px, 6.6vw, 120px); line-height: .96; letter-spacing: -.03em;
+  text-wrap: balance;
+}
+.if { color: var(--faint); }
+.lead {
+  margin: clamp(24px, 3vw, 44px) 0 0 auto; max-width: 40ch;
+  font-size: clamp(16px, 1.25vw, 19px); line-height: 1.6; color: var(--dim); text-wrap: pretty;
+}
+
+/* ── prints (every photo) ───────────────────────────── */
+.print { margin: 0; min-width: 0; }
+.frame { position: relative; overflow: hidden; aspect-ratio: var(--ratio); background: rgba(246, 241, 231, .04); }
+.img { object-fit: cover; }
+.cap {
+  padding-top: 12px;
+  font-family: var(--mono); font-size: 10.5px; line-height: 1.5; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--faint);
+}
+
+/* full-bleed dinner: native 4:3 on phones, a wide band on larger screens */
+.bleed { margin-top: clamp(48px, 6vw, 96px); }
+.bleed .cap { padding-inline: 6vw; }
+@media (min-width: 800px) {
+  .bleed .frame { aspect-ratio: auto; height: clamp(420px, 72vh, 760px); }
+  .bleed .cap { width: min(1440px, 88vw); margin-inline: auto; padding-inline: 0; }
+}
+
+/* ── strip: 2×2 on phones, four across from 800px ───── */
+.strip {
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 14px; align-items: start;
+  margin-top: clamp(48px, 6vw, 88px);
+}
+.strip .frame, .side .frame { aspect-ratio: 4 / 3; }
+@media (min-width: 800px) {
+  .strip { grid-template-columns: repeat(4, minmax(0, 1fr)); column-gap: clamp(16px, 2vw, 32px); }
+}
+
+/* ── the big people moment: full width + a pair on phones, 7fr 3fr from 800px ── */
+.moment { display: grid; gap: 14px; margin-top: clamp(56px, 7vw, 112px); }
+.side { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; align-items: start; }
+@media (min-width: 800px) {
+  .moment { grid-template-columns: minmax(0, 7fr) minmax(0, 3fr); gap: clamp(16px, 2vw, 32px); align-items: end; }
+  .side { grid-template-columns: minmax(0, 1fr); gap: clamp(16px, 2vw, 32px); }
+}
+
+/* the one scroll-linked gesture: the dinner drifts slowly inside its frame.
+   Only where scroll-driven animations exist; reduced motion keeps it still. */
+@supports (animation-timeline: view()) {
+  @media (min-width: 800px) and (prefers-reduced-motion: no-preference) {
+    .bleed .img {
+      scale: 1.12;
+      animation-name: drift; animation-duration: 1ms; animation-timing-function: linear; animation-fill-mode: both;
+      animation-timeline: view(); animation-range: cover;
+    }
+  }
+}
+@keyframes drift {
+  from { transform: translateY(-4%); }
+  to { transform: translateY(4%); }
+}
+
+/* ── Voices ─────────────────────────────────────────── */
+.voices { background: var(--night); color: var(--ink); padding: clamp(80px, 10vw, 150px) 0; }
+.vHead { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 16px 32px; }
+.vTitle { margin: 0; order: -1; font-weight: 800; font-size: clamp(34px, 4.6vw, 80px); line-height: .96; letter-spacing: -.025em; }
+.quotes {
+  list-style: none; margin: clamp(36px, 5vw, 72px) 0 0; padding: 0;
+  display: grid; grid-template-columns: minmax(0, 1fr); column-gap: clamp(32px, 6vw, 112px);
+}
+.quote { border-top: 1px solid var(--line); padding: clamp(26px, 3vw, 40px) 0 clamp(44px, 5vw, 72px); }
+.quote figure { margin: 0; }
+.quote blockquote { margin: 0; }
+.quote blockquote p {
+  margin: 0; max-width: 34ch; text-indent: -.42em;
+  font-weight: 500; font-size: clamp(21px, 2.1vw, 32px); line-height: 1.24; letter-spacing: -.012em; text-wrap: pretty;
+}
+.who {
+  display: flex; flex-wrap: wrap; gap: 6px 14px; margin-top: clamp(20px, 2vw, 28px);
+  font-family: var(--mono); font-size: 11px; line-height: 1.5; letter-spacing: .2em; text-transform: uppercase; color: var(--faint);
+}
+.who b { font-weight: 500; color: var(--ink); }
+.who b::before { content: "— "; color: var(--faint); }
+.quotes[data-odd] > :first-child:not([data-long]) blockquote p {
+  max-width: 24ch; font-weight: 600; font-size: clamp(28px, 4.2vw, 64px); line-height: 1.06; letter-spacing: -.022em;
+}
+@media (min-width: 900px) {
+  .quotes { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .quotes[data-odd] > :first-child { grid-column: 1 / -1; }
+}
+
+/* dev only: where the testimonials will go */
+.slot {
+  display: grid; place-items: center; min-height: clamp(150px, 15vw, 230px); margin-bottom: 24px; padding: 24px;
+  border: 1px dashed rgba(246, 241, 231, .3); text-align: center;
+  font-family: var(--mono); font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--faint);
+}
+.quotes[data-odd] > .slot:first-child { min-height: clamp(180px, 20vw, 300px); }

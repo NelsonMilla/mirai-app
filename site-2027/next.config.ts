@@ -6,22 +6,24 @@ import type { NextConfig } from 'next';
 // `/:rest*` also matches the bare path and any trailing slash or subpage.
 const OLD_PAGES: [string, string][] = [
   ['/experience', '/#life'],
-  ['/program', '/#2026'],
-  ['/conferences', '/#2026'],
-  ['/summit-i', '/#2026'],
-  ['/summit-ii', '/#2026'],
-  ['/fashion-show', '/#2026'],
-  ['/pricing', '/#2027'],
-  ['/summit-bundle', '/#2027'],
-  ['/startups', '/#2027'],
-  ['/sponsor', '/#2027'],
-  ['/stay', '/#2027'],
+  ['/program', '/#cohort-0'],
+  ['/conferences', '/#cohort-0'],
+  ['/summit-i', '/#cohort-0'],
+  ['/summit-ii', '/#cohort-0'],
+  ['/fashion-show', '/#cohort-0'],
+  ['/pricing', '/#apply'],
+  ['/summit-bundle', '/#apply'],
+  ['/startups', '/#apply'],
+  ['/sponsor', '/#apply'],
+  ['/stay', '/#apply'],
   ['/citizens', '/'],
   ['/conduct', '/'], // TODO: bring the code of conduct over before 2027 registration opens
   ['/jp/summit-i', '/jp'],
 ];
 
 const nextConfig: NextConfig = {
+  // Two root layouts (English and Japanese) need one global 404: app/global-not-found.tsx.
+  experimental: { globalNotFound: true },
   async redirects() {
     return [
       ...OLD_PAGES.map(([from, to]) => ({ source: `${from}/:rest*`, destination: to, permanent: true })),
