@@ -34,7 +34,7 @@ export const baseMetadata: Metadata = {
   openGraph: { siteName: site.name, images: [site.ogImage] },
   // Google Search Console: set GOOGLE_SITE_VERIFICATION in Vercel to the token from the HTML-tag method.
   verification: process.env.GOOGLE_SITE_VERIFICATION ? { google: process.env.GOOGLE_SITE_VERIFICATION } : undefined,
-  twitter: { card: 'summary_large_image', title: site.title, description: site.description },
+  twitter: { card: 'summary_large_image', site: site.x, title: site.title, description: site.description },
   icons: {
     icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23050506'/%3E%3Ctext x='50' y='72' font-size='62' font-family='Georgia' font-weight='bold' fill='%23f3c879' text-anchor='middle'%3E未%3C/text%3E%3C/svg%3E",
   },

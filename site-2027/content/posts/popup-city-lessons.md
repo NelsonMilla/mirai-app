@@ -1,7 +1,9 @@
 ---
 title: What building popup cities for three years has taught me
 date: 2026-11-16
-summary: Eight popup cities in three years, most recently Mirai Tech City in Kobe. Three lessons about people, for anyone building a community.
+seoTitle: Lessons from three years of building popup cities
+summary: Eight popup cities in three years, from Vitalia to Mirai Tech City in Kobe. Nelson Milla on three lessons about people, for anyone building a community.
+shareImage: /img/blog/popup-city-lessons/share.jpg
 category: News
 author: Nelson Milla
 authorRole: Co-founder, Mirai Tech City

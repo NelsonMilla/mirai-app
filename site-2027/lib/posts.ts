@@ -93,6 +93,8 @@ function read(file: string): Omit<Post, 'number'> {
     coverAlt: data.coverAlt ? String(data.coverAlt) : undefined,
     coverPosition: data.coverPosition ? String(data.coverPosition) : undefined,
     coverCredit: data.coverCredit ? String(data.coverCredit) : undefined,
+    seoTitle: data.seoTitle ? String(data.seoTitle) : undefined,
+    shareImage: data.shareImage ? String(data.shareImage) : undefined,
     tags: Array.isArray(data.tags) ? data.tags.map(String) : [],
     draft: data.draft === true,
     minutes: Math.max(1, Math.round(content.split(/\s+/).filter(Boolean).length / 220)),

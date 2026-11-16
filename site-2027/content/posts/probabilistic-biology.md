@@ -1,7 +1,9 @@
 ---
 title: 'Meet the Founders: Max Koko, Probabilistic Biology'
 date: 2026-11-16
-summary: Max Koko won our Demo Day in Kobe. His company, Probabilistic Biology, wants to make animal experiments work more like cloud computing.
+seoTitle: 'Max Koko, Probabilistic Biology: Demo Day winner interview'
+summary: Max Koko won Mirai Tech City's Demo Day in Kobe and a place at Antler Japan. Probabilistic Biology wants to run mouse experiments like cloud computing.
+shareImage: /img/blog/probabilistic-biology/share.jpg
 category: Companies
 author: Mirai Tech City
 company:

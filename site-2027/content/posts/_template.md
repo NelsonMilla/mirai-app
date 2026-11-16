@@ -3,7 +3,9 @@
 # The file name becomes the URL: /blog/<url-slug>
 title: Company name builds the thing
 date: 2026-11-04            # YYYY-MM-DD, newest first on /blog
-summary: One or two plain sentences. Shown on /blog and in link previews.
+summary: One or two plain sentences, 140–160 characters. Shown on /blog, in search results and link previews.
+# seoTitle: Shorter title for search results   # optional; under 60 characters, no site name needed
+# shareImage: /img/blog/url-slug/share.jpg     # optional; 1200×630 JPEG for LinkedIn/X/Slack previews
 category: Companies         # Companies | Science | Residents | Kobe | News (default News)
 author: Nelson Milla        # optional
 authorRole: Co-founder      # optional, shown after the name
