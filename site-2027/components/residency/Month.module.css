@@ -1,0 +1,275 @@
+/* Month · 富士 → 神戸 → 発表
+   Static by default (no JS, reduced motion, phones): intro, the route to scale, then the
+   three stages stacked. Wide screens: each stage is a full-screen frame with the copy over
+   the photo (bottom right, where none of the photos has a face). [data-motion] (set by JS)
+   pins the stage and drives everything from CSS variables:
+     on each stop  --w  uncovered (0→1)   --c  covered by the next (0→1)
+                   --k  kanji in (0→1)    --kb slow push-in (0→1)
+     on the track  --f  route fill (0→1, drawn to scale)  --r2 --r3 stops reached
+                   --on1 --on2 --on3 which stop is current
+   Photo geometry (as in the opening): the scene is a size container; --u is CSS px per
+   photo px, --ox/--oy the photo's offset. --W/--H photo size, (--px, --py) a photo point
+   kept at (--fx, --fy) of the frame, --z extra zoom. */
+
+.month {
+  --edge: max(6vw, 50vw - 720px); /* the 1440px inner column, as a side gutter */
+  position: relative;
+  max-width: none; margin: 0; padding: 0; /* undo the global section box */
+  background: var(--night);
+  color: var(--ink);
+  overflow-x: clip;
+}
+
+/* ── intro ──────────────────────────────────────────── */
+.intro { padding: clamp(80px, 11vw, 160px) var(--edge) clamp(44px, 6vw, 80px); }
+.top {
+  display: flex; justify-content: space-between; align-items: baseline; gap: 16px;
+  padding-bottom: 20px; border-bottom: 1px solid var(--line);
+}
+.eyebrow { font-family: var(--mono); font-size: 11px; letter-spacing: .3em; text-transform: uppercase; color: var(--faint); }
+.headline {
+  margin-top: clamp(28px, 4vw, 56px);
+  font-weight: 800; font-size: clamp(38px, 6vw, 100px); line-height: .95; letter-spacing: -.03em;
+}
+.headline span { display: block; text-wrap: balance; }
+.headline2 { color: var(--dim); }
+
+/* ── the route, to scale: 3 weeks at Fuji, 1 week in Kobe, then the last day ── */
+.track { --f: 1; --r2: 1; --r3: 1; --on1: 1; --on2: 1; --on3: 1; position: relative; }
+.stage { position: relative; }
+.route {
+  position: relative; z-index: 4;
+  display: grid; grid-template-columns: 3fr 1fr; row-gap: 12px;
+  margin: 0 var(--edge) clamp(48px, 7vw, 96px);
+}
+.stopLabel {
+  display: flex; flex-direction: column; gap: 3px;
+  font-family: var(--mono); font-size: 10px; line-height: 1.35; letter-spacing: .22em; text-transform: uppercase;
+}
+.stopLabel span { color: var(--faint); }
+.stopLabel b { font-weight: 500; color: var(--ink); }
+.endLabel { grid-column: 1 / -1; grid-row: 1; justify-self: end; text-align: right; opacity: calc(.45 + .55 * var(--on3)); }
+.fujiLabel { grid-column: 1; grid-row: 3; opacity: calc(.45 + .55 * var(--on1)); }
+.kobeLabel { grid-column: 2; grid-row: 3; opacity: calc(.45 + .55 * var(--on2)); }
+.rail {
+  grid-column: 1 / -1; grid-row: 2;
+  position: relative; height: 1px; background: rgba(246, 241, 231, .3);
+  container-type: inline-size;
+}
+.fill {
+  position: absolute; left: 0; top: -.5px; width: 100%; height: 2px;
+  background: var(--accent); transform-origin: 0 50%; transform: scaleX(var(--f));
+}
+.tick { position: absolute; top: -3px; left: calc(var(--at) * 100%); width: 1px; height: 7px; background: rgba(246, 241, 231, .45); }
+.dot {
+  position: absolute; top: 50%; width: 9px; height: 9px; margin: -4.5px 0 0 -4.5px;
+  border-radius: 50%; background: var(--night); border: 1px solid rgba(246, 241, 231, .55);
+}
+.dot::after { content: ''; position: absolute; inset: -1px; border-radius: 50%; background: var(--accent); opacity: var(--r); }
+.dot1 { left: 0; --r: 1; }
+.dot2 { left: 75%; --r: var(--r2); }
+.dot3 { left: 100%; --r: var(--r3); }
+.head { display: none; }
+
+/* ── stops ──────────────────────────────────────────── */
+.stops { list-style: none; padding-bottom: clamp(80px, 12vw, 120px); }
+.stop { --w: 1; --c: 0; --k: 1; --kb: 0; position: relative; }
+.stop + .stop { margin-top: clamp(64px, 14vw, 96px); }
+.frame { position: relative; }
+
+.scene {
+  position: relative; overflow: hidden; container-type: size;
+  height: min(125vw, 82svh); /* phones: a 4:5 frame */
+  background: #0b0d14;
+  --z: 1;
+  --u: calc(var(--z) * max(100cqw / var(--W), 100cqh / var(--H)));
+  --ox: clamp(100cqw - var(--W) * var(--u), var(--fx) * 100cqw - var(--px) * var(--u), 0px);
+  --oy: clamp(100cqh - var(--H) * var(--u), var(--fy) * 100cqh - var(--py) * var(--u), 0px);
+}
+.plate { position: absolute; inset: 0; transform-origin: calc(var(--fx) * 100%) calc(var(--fy) * 100%); }
+.layer { position: absolute; inset: 0; }
+.photo {
+  position: absolute; left: var(--ox); top: var(--oy);
+  width: calc(var(--W) * var(--u)); height: calc(var(--H) * var(--u)); max-width: none;
+}
+.kanji {
+  position: absolute; z-index: 1;
+  font-family: var(--mincho); font-weight: 600; line-height: 1; letter-spacing: -.02em; white-space: nowrap;
+  color: var(--accent);
+  pointer-events: none; user-select: none;
+}
+/* edge-only shades: never a wash over the whole photo; both edges start at full night so
+   every photo flows out of, and back into, the section ground */
+.shade {
+  position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background:
+    linear-gradient(0deg, var(--night) 0%, rgba(var(--night-rgb), .6) 12%, rgba(var(--night-rgb), 0) 34%),
+    linear-gradient(180deg, var(--night) 0%, rgba(var(--night-rgb), .5) 8%, rgba(var(--night-rgb), 0) 24%);
+}
+.dim { position: absolute; inset: 0; z-index: 1; background: var(--night); opacity: 0; pointer-events: none; }
+
+/* 1 · Fuji: closer than the opening, summit right of centre, the lake below */
+.fuji .scene { --W: 1600; --H: 1063; --px: 1110; --py: 468; --fx: .66; --fy: .36; --z: 1.22; }
+.fuji .kanji { left: 6cqw; top: 8cqh; font-size: 26cqw; text-shadow: 0 0 .4em rgba(5, 9, 26, .35); }
+
+/* 2 · Kobe: the photo drawn twice; the front copy is masked to everything below the
+   Rokko ridge (traced from the photograph, photo px), so 神戸 stands behind the mountains */
+.kobe .scene { --W: 2000; --H: 1500; --px: 600; --py: 642; --fx: .5; --fy: .46; }
+.sky {
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(5, 9, 26, .66) 0%, rgba(5, 9, 26, .44) 32%, rgba(5, 9, 26, .14) 56%, rgba(5, 9, 26, .34) 100%);
+}
+.front {
+  z-index: 1;
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='2000' height='1500' viewBox='0 0 2000 1500'%3E%3Cfilter id='b' x='-5%25' y='-5%25' width='110%25' height='110%25'%3E%3CfeGaussianBlur stdDeviation='1.6'/%3E%3C/filter%3E%3Cpath filter='url(%23b)' d='M-40 637L0 637L25 641L50 651L75 655L100 647L125 644L150 653L175 653L200 647L225 644L250 642L275 643L300 649L325 657L350 665L375 681L400 682L425 691L450 690L475 691L500 695L525 692L550 698L575 693L600 695L625 699L650 702L675 709L700 715L725 714L750 715L775 716L800 717L825 724L850 724L875 732L900 734L925 736L950 740L975 749L1000 754L1050 768L1100 776L1150 776L1200 780L1250 786L1300 786L1350 788L1400 794L1450 801L1500 810L1550 822L1600 834L1650 850L1700 856L1800 846L1900 852L2040 858L2040 1540L-40 1540Z'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='2000' height='1500' viewBox='0 0 2000 1500'%3E%3Cfilter id='b' x='-5%25' y='-5%25' width='110%25' height='110%25'%3E%3CfeGaussianBlur stdDeviation='1.6'/%3E%3C/filter%3E%3Cpath filter='url(%23b)' d='M-40 637L0 637L25 641L50 651L75 655L100 647L125 644L150 653L175 653L200 647L225 644L250 642L275 643L300 649L325 657L350 665L375 681L400 682L425 691L450 690L475 691L500 695L525 692L550 698L575 693L600 695L625 699L650 702L675 709L700 715L725 714L750 715L775 716L800 717L825 724L850 724L875 732L900 734L925 736L950 740L975 749L1000 754L1050 768L1100 776L1150 776L1200 780L1250 786L1300 786L1350 788L1400 794L1450 801L1500 810L1550 822L1600 834L1650 850L1700 856L1800 846L1900 852L2040 858L2040 1540L-40 1540Z'/%3E%3C/svg%3E");
+  -webkit-mask-size: calc(var(--W) * var(--u)) calc(var(--H) * var(--u)); mask-size: calc(var(--W) * var(--u)) calc(var(--H) * var(--u));
+  -webkit-mask-position: var(--ox) var(--oy); mask-position: var(--ox) var(--oy);
+  -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+}
+/* anchored to the ridge's highest point behind 神 (photo y 642). Shippori Mincho inks
+   .09–1.02em of the line box, so a top of ridge − .94em tucks only the bottom ~9% of 神
+   behind the mountains (戸, over the lower ridge, stands clear). Capped in size so the ink
+   never starts above 14% of the frame on wide crops. */
+.kobe .kanji {
+  --ridge: calc(var(--oy) + 642 * var(--u));
+  --ks: min(440 * var(--u), (var(--ridge) - 14cqh) / .852);
+  left: calc(var(--ox) + 130 * var(--u)); top: calc(var(--ridge) - .94 * var(--ks));
+  font-size: var(--ks);
+}
+
+/* 3 · Demo Day: portrait photo on phones, 発表 beside the speaker over the dark curtain */
+.demo .scene { --W: 1333; --H: 2000; --px: 667; --py: 1000; --fx: .5; --fy: .5; height: min(150vw, 88svh); }
+.demo .kanji {
+  writing-mode: vertical-rl;
+  left: calc(var(--ox) + 845 * var(--u)); top: calc(var(--oy) + 520 * var(--u));
+  font-size: calc(330 * var(--u));
+  text-shadow: 0 0 .3em rgba(var(--accent-rgb), .35);
+}
+.screen { display: none; }
+
+/* ── copy ───────────────────────────────────────────── */
+.copy { position: relative; z-index: 3; padding: 28px var(--edge) 0; }
+.label {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px;
+  font-family: var(--mono); font-size: 11px; letter-spacing: .26em; text-transform: uppercase;
+}
+.when { color: var(--accent); }
+.place { display: inline-flex; align-items: center; gap: 14px; color: var(--ink); }
+.place::before { content: ''; width: 22px; height: 1px; background: rgba(246, 241, 231, .5); }
+.title {
+  margin-top: 14px;
+  font-weight: 800; font-size: clamp(48px, 14vw, 76px); line-height: .9; letter-spacing: -.035em;
+}
+.body { margin-top: 16px; max-width: 40ch; font-size: 16px; line-height: 1.6; color: var(--dim); text-wrap: pretty; }
+
+/* the lab visit, as a framed print */
+.print { margin: 36px var(--edge) 0; width: min(62%, 340px); }
+.printPhoto { position: relative; aspect-ratio: 4 / 3; overflow: hidden; border: 1px solid var(--line); }
+.printPhoto img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.caption { margin-top: 10px; font-family: var(--mono); font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--faint); }
+
+/* ── wide screens: full-screen frames, copy over the photo ── */
+@media (min-width: 900px) {
+  .stops { padding-bottom: 0; }
+  .stop + .stop { margin-top: 0; }
+  .frame { height: 100vh; height: 100svh; min-height: 560px; }
+  .inner { position: absolute; inset: 0; }
+  .frame .scene { position: absolute; inset: 0; height: auto; }
+  .shade {
+    background:
+      radial-gradient(56% 62% at 100% 100%, rgba(var(--night-rgb), .84) 0%, rgba(var(--night-rgb), .56) 44%, rgba(var(--night-rgb), 0) 76%),
+      linear-gradient(0deg, var(--night) 0%, rgba(var(--night-rgb), .5) 14%, rgba(var(--night-rgb), 0) 34%),
+      linear-gradient(180deg, var(--night) 0%, rgba(var(--night-rgb), .5) 8%, rgba(var(--night-rgb), 0) 22%);
+  }
+  .copy {
+    position: absolute; right: var(--edge); bottom: clamp(56px, 10vh, 104px);
+    width: min(560px, 40vw); padding: 0;
+    text-shadow: 0 1px 18px rgba(5, 9, 26, .45);
+  }
+  /* a soft pool of night behind the copy, for the bright city in the Kobe photo */
+  .copy::before {
+    content: ''; position: absolute; z-index: -1; inset: -42% -26% -26% -24%; pointer-events: none;
+    background: radial-gradient(closest-side, rgba(var(--night-rgb), .7), rgba(var(--night-rgb), .4) 56%, rgba(var(--night-rgb), 0));
+  }
+  /* in Kobe the label sits over the white waterfront buildings: the pool moves up to it */
+  .kobe .copy::before {
+    inset: -80% -12% -14% -40%;
+    background: radial-gradient(closest-side, rgba(var(--night-rgb), .78), rgba(var(--night-rgb), .5) 56%, rgba(var(--night-rgb), 0));
+  }
+  .label { text-shadow: 0 0 2px rgba(5, 9, 26, .9), 0 0 12px rgba(5, 9, 26, .85); }
+  .title { font-size: clamp(64px, 6.4vw, 112px); }
+  .body { font-size: 17px; color: rgba(246, 241, 231, .84); }
+  .print {
+    position: absolute; z-index: 3; left: var(--edge); bottom: clamp(56px, 10vh, 104px);
+    width: clamp(180px, 15vw, 250px); margin: 0;
+  }
+  .caption { color: var(--dim); }
+
+  /* a different frame from the opening: the cone fills the screen, no sun. Twice cover,
+     but never more than 1.7 CSS px per photo px (1.8 with the push-in); heavier grain
+     hides the softness */
+  .fuji .scene {
+    --px: 1110; --py: 468; --fx: .6; --fy: .34;
+    --cv: max(100cqw / var(--W), 100cqh / var(--H));
+    --u: clamp(var(--cv), 2 * var(--cv), 1.7px);
+  }
+  .fuji .scene::after { opacity: .13; }
+  .fuji .kanji { left: max(6cqw, 50cqw - 720px); top: 13cqh; font-size: min(18cqw, 30cqh); }
+
+  /* the stage photo, with 発表 on the projection screen (screen corners traced, photo px) */
+  .demo .scene { --W: 2000; --H: 1333; --px: 1120; --py: 480; --fx: .52; --fy: .42; }
+  /* only as wide as its title, so it stays right of the daruma */
+  .demo .copy { width: fit-content; max-width: min(560px, 40vw); }
+  .screen {
+    display: block; position: absolute;
+    left: calc(var(--ox) + 765 * var(--u)); top: calc(var(--oy) + 205 * var(--u));
+    width: calc(723 * var(--u)); height: calc(551 * var(--u));
+    clip-path: polygon(0 8.5%, 95% 0, 100% 94.9%, 1% 100%);
+    background: #090b13;
+  }
+  .screen::after {
+    content: ''; position: absolute; inset: 0; opacity: var(--k);
+    background: radial-gradient(56% 52% at 52% 52%, rgba(var(--accent-rgb), .14), rgba(var(--accent-rgb), 0) 72%);
+  }
+  .demo .kanji {
+    writing-mode: horizontal-tb;
+    left: calc(var(--ox) + 838 * var(--u)); top: calc(var(--oy) + 336 * var(--u));
+    font-size: calc(286 * var(--u));
+    transform: skewY(-3deg); /* the screen is seen slightly from the left */
+  }
+}
+
+/* ── motion: pinned journey (set by JS on wide screens when motion is allowed) ── */
+.track[data-motion] { height: 300vh; }
+.track[data-motion] .stage { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; }
+.track[data-motion] .route { position: absolute; left: 0; right: 0; bottom: clamp(22px, 4vh, 40px); margin: 0 var(--edge); }
+.track[data-motion] .head {
+  display: block; position: absolute; left: 0; top: 50%;
+  width: 13px; height: 13px; margin: -6.5px 0 0 -6.5px; border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 4px rgba(var(--accent-rgb), .18), 0 0 24px rgba(var(--accent-rgb), .6);
+  transform: translate3d(calc(var(--f) * 100cqw), 0, 0);
+}
+.track[data-motion] .stops { position: absolute; inset: 0; padding: 0; }
+.track[data-motion] .stop { position: absolute; inset: 0; }
+.track[data-motion] .frame {
+  position: absolute; inset: 0; height: auto; min-height: 0; overflow: hidden;
+  transform: translate3d(0, calc((1 - var(--w)) * 100%), 0);
+  will-change: transform;
+}
+/* the gold edge of the wipe, only while it moves */
+.track[data-motion] .frame::before {
+  content: ''; position: absolute; left: 0; right: 0; top: 0; z-index: 5; height: 1px;
+  background: var(--accent); opacity: calc(var(--w) * (1 - var(--w)) * 4);
+}
+.track[data-motion] .inner { transform: translate3d(0, calc((var(--w) - 1) * 100%), 0); }
+.track[data-motion] .plate {
+  transform: translate3d(0, calc(var(--c) * -6%), 0) scale(calc(1 + var(--kb) * .06));
+  will-change: transform;
+}
+.track[data-motion] .dim { opacity: calc(var(--c) * .72); }
+.track[data-motion] .copy,
+.track[data-motion] .print { bottom: clamp(140px, 15.5vh, 168px); transform: translate3d(0, calc((1 - var(--w)) * 64px), 0); }
+.track[data-motion] .kobe .kanji { transform: translate3d(0, calc((1 - var(--k)) * 78%), 0); }
+.track[data-motion] .demo .kanji { opacity: var(--k); transform: skewY(-3deg) scale(calc(.92 + .08 * var(--k))); }

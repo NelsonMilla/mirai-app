@@ -1,0 +1,425 @@
+/* Residency 2027 opening.
+   Layer order inside the stage (back to front):
+   back photo (sky) → Diamond Fuji sun disc → FUJI → front photo (masked below the ridge)
+   → dawn grade → light (left sun, summit glow) → shade → grain → seam fade → copy.
+   Both photo copies carry the same sky shade (and the same dimmer over the real sun), so
+   they stay identical along the ridge. One light source at a time: as the summit sun rises
+   (--sun), the photo's own sun on the left is dimmed and cooled by the same variable.
+   Geometry: the photo is 1600×1063, drawn at --u CSS px per photo px (cover on wide
+   screens; wider than cover on portrait phones, with night sky above it). --ox/--oy are
+   the photo's offset, so a photo point maps to the screen as (--ox + x·--u, --oy + y·--u).
+   The summit is at photo (1110, 468). The stage is a size
+   container, so all of this resolves in CSS before any JS runs.
+   Scroll state arrives as unitless custom properties on .track (set by Opening.tsx). */
+
+.track {
+  --zoom: 1; --sink: 0; --copy: 1; --sun: 0; --survey: 0; --dark: 0; --legend: 0; --fill: 1;
+  position: relative;
+  background: var(--night);
+  color: var(--ink);
+}
+
+.sr {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+/* ── stage ──────────────────────────────────────────── */
+.stage {
+  position: relative; z-index: 1;
+  height: 100vh; height: 100svh; min-height: 560px;
+  overflow: hidden;
+  container-type: size;
+  /* geometry (tokens; resolved by each child against this container) */
+  --u: max(100cqw / 1600, 100cqh / 1063);
+  /* keep the summit a little right of centre when the photo is cropped at the sides … */
+  --ox: clamp(100cqw - 1600 * var(--u), 58cqw - 1110 * var(--u), 0px);
+  /* … and the foot of the mountain near 72% of the height when cropped top/bottom */
+  --oy: clamp(100cqh - 1063 * var(--u), 72cqh - 710 * var(--u), 0px);
+  --peak-x: calc(var(--ox) + 1110 * var(--u));
+  --peak-y: calc(var(--oy) + 468 * var(--u));
+  /* the word: as wide as the screen allows (at most 92cqw; --wem is its width in em, set
+     from the component), its cap top no higher than --top, its baseline --ov of the cap
+     height below the summit */
+  --wem: 1.996;
+  --ov: .27;
+  --top: calc(104px + 2cqw);
+  --f: min(91.8cqw / var(--wem), (var(--peak-y) - var(--top)) / (.68 * (1 - var(--ov))));
+  --cap-top: calc(var(--peak-y) - (1 - var(--ov)) * .68 * var(--f));
+  /* the row above the word (pre-line and seal) */
+  --row: calc(100cqh - var(--cap-top) + clamp(12px, 1.6cqh, 22px));
+  background: var(--night);
+}
+
+.scene {
+  position: absolute; inset: 0;
+  transform: scale(var(--zoom));
+  transform-origin: var(--peak-x) var(--peak-y);
+  will-change: transform;
+}
+.back { z-index: 1; }
+.dawn { z-index: 2; }
+.front { z-index: 4; }
+.settle {
+  position: absolute; inset: 0;
+  transform-origin: var(--peak-x) var(--peak-y);
+  animation: settle 2.8s cubic-bezier(.2, .7, .15, 1) both;
+}
+.photo {
+  position: absolute; left: var(--ox); top: var(--oy); max-width: none;
+  width: calc(1600 * var(--u)); height: calc(1063 * var(--u));
+}
+
+/* first paint, before the photo arrives: a dawn sky behind, the silhouette in front */
+.back .settle {
+  background:
+    radial-gradient(60% 40% at 16% 64%, rgba(243, 186, 104, .55), rgba(243, 186, 104, 0) 70%),
+    linear-gradient(180deg, var(--indigo) 0%, #3c5488 34%, #7c7f98 56%, #b98f62 66%, #15161d 72%);
+}
+.front .settle {
+  background: #10121a;
+  /* everything below the ridge line, traced from the photograph (photo px) */
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1600' height='1063' viewBox='0 0 1600 1063'%3E%3Cfilter id='b' x='-5%25' y='-5%25' width='110%25' height='110%25'%3E%3CfeGaussianBlur stdDeviation='1.4'/%3E%3C/filter%3E%3Cpath filter='url(%23b)' d='M-30 636L0 636L40 650L80 676L110 694L160 694L250 697L360 708L432 712L496 706L552 693L592 682L632 663L656 656L704 637L728 623L776 610L808 607L872 577L1016 497L1078 470L1092 467L1140 468L1152 474L1224 519L1288 559L1432 628L1504 659L1600 683L1630 684L1630 1100L-30 1100Z'/%3E%3C/svg%3E"), linear-gradient(#000, #000);
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1600' height='1063' viewBox='0 0 1600 1063'%3E%3Cfilter id='b' x='-5%25' y='-5%25' width='110%25' height='110%25'%3E%3CfeGaussianBlur stdDeviation='1.4'/%3E%3C/filter%3E%3Cpath filter='url(%23b)' d='M-30 636L0 636L40 650L80 676L110 694L160 694L250 697L360 708L432 712L496 706L552 693L592 682L632 663L656 656L704 637L728 623L776 610L808 607L872 577L1016 497L1078 470L1092 467L1140 468L1152 474L1224 519L1288 559L1432 628L1504 659L1600 683L1630 684L1630 1100L-30 1100Z'/%3E%3C/svg%3E"), linear-gradient(#000, #000);
+  /* second layer: everything under the photo's bottom edge (phones), so the sinking word stays hidden */
+  -webkit-mask-size: calc(1600 * var(--u)) calc(1063 * var(--u)), 100% 100%;
+  mask-size: calc(1600 * var(--u)) calc(1063 * var(--u)), 100% 100%;
+  -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+  -webkit-mask-position: var(--ox) var(--oy), 0 calc(var(--oy) + 1063 * var(--u) - 1px);
+  mask-position: var(--ox) var(--oy), 0 calc(var(--oy) + 1063 * var(--u) - 1px);
+}
+
+/* inside both photo copies, so the two stay pixel-identical along the ridge */
+.skyShade {
+  position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(180deg, rgba(5, 9, 26, .6) 0%, rgba(5, 9, 26, .32) 26%, rgba(5, 9, 26, 0) 50%);
+}
+/* also in both copies: the photo's own sun (262, 690) and its reflection on the lake (240, 900)
+   go dark and cool while the summit sun is up, so only one light source reads at a time */
+.sunDim {
+  position: absolute; pointer-events: none;
+  left: calc(var(--ox) + 250 * var(--u)); top: calc(var(--oy) + 790 * var(--u));
+  width: calc(1500 * var(--u)); height: calc(940 * var(--u)); translate: -50% -50%;
+  background: radial-gradient(closest-side, rgba(10, 16, 40, .9), rgba(10, 16, 40, .8) 30%, rgba(10, 16, 40, .46) 62%, rgba(10, 16, 40, .14) 84%, rgba(10, 16, 40, 0));
+  opacity: var(--sun);
+}
+
+/* ── the monument ───────────────────────────────────── */
+.title { margin: 0; font: inherit; }
+
+.word {
+  position: absolute; z-index: 3; left: 0; right: 0;
+  /* line-height .7: the cap top sits .035em under the box top, the baseline .715em */
+  top: calc(var(--cap-top) - .035 * var(--f));
+  font-size: var(--f); line-height: .7; font-weight: 900;
+  letter-spacing: -.04em; text-transform: uppercase; text-align: center; white-space: nowrap;
+  color: var(--ink);
+  transform: translateY(calc(var(--sink) * 78cqh));
+  opacity: calc(1 - var(--sink) * var(--sink) * var(--sink));
+  pointer-events: none; user-select: none;
+}
+.letter { display: inline-block; transform: translateX(calc(var(--i) * var(--sink) * 4.5cqw)); }
+.glyph {
+  display: inline-block;
+  animation: rise 1.35s cubic-bezier(.16, 1, .3, 1) both;
+  animation-delay: calc(.1s + (var(--i) + 1.5) * 70ms);
+}
+
+.pre {
+  position: absolute; z-index: 7;
+  left: max(20px, 50cqw - (var(--wem) / 2 - .05) * var(--f)); /* the first letter's left edge */
+  bottom: var(--row);
+  font-size: clamp(17px, 2cqw, 34px); font-weight: 500; letter-spacing: -.01em; line-height: 1.1;
+  color: var(--ink); text-shadow: 0 1px 18px rgba(5, 9, 26, .45);
+  opacity: var(--copy);
+}
+.pre > span { display: block; animation: fadeUp .9s .25s var(--ease) both; }
+/* /jp: "バイオテックで起業するなら" leads straight into the word; the Japanese face needs its heavier cut and a
+   little air to sit at the same weight as the English line and read as one phrase with it */
+.pre:lang(ja) { font-weight: 600; letter-spacing: .04em; font-feature-settings: 'palt'; white-space: nowrap; }
+
+/* the brand seal: 不死, white on vermilion, stamped once at the end of the title row */
+.seal {
+  position: absolute; z-index: 7;
+  right: max(16px, 50cqw - (var(--wem) / 2 + .01) * var(--f)); /* the last letter's right edge */
+  bottom: var(--row);
+  display: block; writing-mode: vertical-rl;
+  font-family: var(--mincho); font-weight: 700; font-size: clamp(14px, 1.1cqw, 19px);
+  line-height: 1; letter-spacing: .06em; color: #fff;
+  padding: .5em .36em;
+  background: var(--vermilion); border-radius: 3px;
+  box-shadow: inset 0 0 0 2px var(--vermilion), inset 0 0 0 3px rgba(255, 255, 255, .85), 0 6px 22px rgba(var(--night-rgb), .35);
+  rotate: -3deg;
+  opacity: var(--copy);
+  animation: stamp .55s .95s cubic-bezier(.3, 1.4, .5, 1) backwards;
+  user-select: none;
+}
+
+/* ── Diamond Fuji: the sun rises behind the summit as the word sets ──
+   Only a sliver clears the crater rim; the light is a warm glow hugging the summit. */
+.disc {
+  position: absolute; left: var(--peak-x); top: var(--peak-y);
+  width: calc(64 * var(--u)); aspect-ratio: 1; translate: -50% -50%;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fffaf0 0 20%, rgba(255, 234, 192, .9) 34%, rgba(255, 210, 148, .42) 52%, rgba(255, 190, 120, .12) 64%, rgba(255, 190, 120, 0) 72%);
+  transform: translateY(calc((1 - var(--sun)) * 52 * var(--u) + 12 * var(--u)));
+  opacity: min(.95, var(--sun) * 3);
+}
+.warm {
+  position: absolute; inset: 0; z-index: 5; pointer-events: none;
+  mix-blend-mode: soft-light;
+  /* warms around the summit only; it fades out before the photo's own sun on the left */
+  background:
+    radial-gradient(48% 56% at var(--peak-x) var(--peak-y), rgba(255, 176, 96, .85), rgba(233, 164, 99, .4) 50%, rgba(233, 164, 99, 0) 100%);
+  opacity: calc(var(--sun) * .75);
+}
+
+/* light layers, screened over the photo and moving with it */
+.light { z-index: 5; pointer-events: none; mix-blend-mode: screen; }
+/* the real sun, low on the left of the photo (262, 690), breathing; it hands over to the summit */
+.sun {
+  position: absolute;
+  left: calc(var(--ox) + 262 * var(--u)); top: calc(var(--oy) + 690 * var(--u));
+  width: calc(1000 * var(--u)); height: calc(620 * var(--u)); translate: -50% -50%;
+  opacity: calc(1 - var(--sun));
+}
+.sun::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(closest-side, rgba(255, 198, 116, .55), rgba(255, 168, 80, .18) 45%, rgba(255, 168, 80, 0));
+  animation: breathe 7s ease-in-out infinite alternate;
+}
+.bloom {
+  position: absolute; left: var(--peak-x); top: var(--peak-y); translate: -50% -50%;
+  width: calc(620 * var(--u)); height: calc(240 * var(--u));
+  background: radial-gradient(closest-side, rgba(255, 238, 204, .85) 0%, rgba(255, 214, 152, .46) 12%, rgba(243, 172, 102, .17) 36%, rgba(233, 164, 99, .05) 66%, rgba(233, 164, 99, 0) 100%);
+  opacity: var(--sun);
+}
+
+/* the survey mark, pinned at the summit on the first scroll */
+.survey {
+  position: absolute; z-index: 7;
+  left: var(--peak-x); bottom: calc(100cqh - var(--peak-y) + 6px);
+  height: clamp(84px, 15cqh, 170px);
+  padding-left: 12px; border-left: 1px solid rgba(246, 241, 231, .6);
+  font-family: var(--mono); font-size: 10.5px; letter-spacing: .14em; line-height: 1.5; white-space: nowrap;
+  color: var(--ink); text-shadow: 0 0 12px rgba(var(--night-rgb), .85), 0 1px 3px rgba(var(--night-rgb), .9);
+  opacity: var(--survey);
+  transform: translateY(calc((1 - var(--survey)) * 10px));
+  pointer-events: none;
+}
+.survey::after {
+  content: ''; position: absolute; left: -4px; bottom: -4px; width: 7px; height: 7px;
+  border: 1px solid var(--ink); border-radius: 50%;
+}
+
+/* ── shades and grain ───────────────────────────────── */
+.shade {
+  position: absolute; inset: 0; z-index: 5; pointer-events: none;
+  background:
+    radial-gradient(70% 62% at 100% 100%, rgba(var(--night-rgb), .78) 0%, rgba(var(--night-rgb), .5) 45%, rgba(var(--night-rgb), 0) 75%),
+    linear-gradient(0deg, rgba(var(--night-rgb), .5) 0%, rgba(var(--night-rgb), 0) 22%);
+}
+.shade::after {
+  content: ''; position: absolute; inset: 0; opacity: var(--dark);
+  background:
+    linear-gradient(0deg, var(--night) 0%, rgba(var(--night-rgb), 0) 16%),
+    linear-gradient(90deg, rgba(var(--night-rgb), .92) 0%, rgba(var(--night-rgb), .85) 50%, rgba(var(--night-rgb), .35) 66%, rgba(var(--night-rgb), 0) 80%);
+}
+/* film grain: hides the softness of the one photo at full bleed on retina screens */
+.grain {
+  position: absolute; inset: 0; z-index: 6; pointer-events: none;
+  opacity: .22; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.95' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 160px 160px;
+}
+/* the seam: the bottom 160px fade into --night (over the grain, under the copy), so the opening
+   flows into the program. While pinned on wide screens it arrives with the legend (--dark). */
+.stage::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: 0; z-index: 6;
+  height: 160px; pointer-events: none;
+  background: linear-gradient(0deg, var(--night) 0%, rgba(var(--night-rgb), .94) 16%, rgba(var(--night-rgb), .76) 38%, rgba(var(--night-rgb), .44) 62%, rgba(var(--night-rgb), .14) 84%, rgba(var(--night-rgb), 0) 100%);
+}
+.track[data-motion='overlay'] .stage::after { opacity: var(--dark); }
+
+/* ── the offer ──────────────────────────────────────── */
+.foot {
+  position: absolute; z-index: 7;
+  right: 4cqw; bottom: clamp(28px, 6cqh, 64px);
+  width: min(500px, 40cqw);
+  opacity: var(--copy);
+  transform: translateY(calc((1 - var(--copy)) * -28px));
+}
+.foot > * { animation: fadeUp .9s var(--ease) both; }
+.foot > :nth-child(1) { animation-delay: .4s; }
+.foot > :nth-child(2) { animation-delay: .48s; }
+.foot > :nth-child(3) { animation-delay: .56s; }
+.foot > :nth-child(4) { animation-delay: .64s; }
+.foot:focus-within { opacity: 1; transform: none; }
+/* Once the offer has faded out on scroll, it stops catching clicks (keyboard focus still restores it). */
+.track[data-faded] .foot:not(:focus-within) { pointer-events: none; }
+
+.lead {
+  font-size: clamp(20px, 1.75cqw, 28px); font-weight: 500; line-height: 1.2; letter-spacing: -.012em;
+  text-wrap: balance;
+}
+.rest { margin-top: 12px; font-size: 15px; line-height: 1.55; color: var(--dim); text-wrap: pretty; }
+.nb { white-space: nowrap; }
+.ctas { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 24px; margin-top: 22px; }
+/* the site's one primary button: the dawn-gold pill (README rule 8) */
+.apply {
+  display: inline-flex; align-items: center; gap: 14px; min-height: 52px; padding: 0 26px;
+  border-radius: 999px; background: var(--accent); color: #0b0b0d; text-decoration: none;
+  font-family: var(--mono); font-size: 12px; font-weight: 500; letter-spacing: .2em; text-transform: uppercase;
+  box-shadow: 0 10px 40px rgba(var(--night-rgb), .35);
+  transition: background-color .25s ease, transform .25s ease;
+}
+.apply:hover, .apply:focus-visible { background: var(--ink); transform: translateY(-1px); }
+.arrow { font-family: var(--font); font-size: 15px; letter-spacing: 0; }
+.talk {
+  display: inline-flex; align-items: center; min-height: 44px;
+  font-family: var(--mono); font-size: 11px; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--ink); text-decoration: underline; text-decoration-color: var(--faint);
+  text-underline-offset: 6px;
+}
+.talk:hover { text-decoration-color: var(--accent); }
+.apply:focus-visible, .talk:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+/* bottom-left, under the word, away from the offer */
+.cue {
+  position: absolute; z-index: 7; left: 4cqw; bottom: 22px;
+  display: flex; flex-direction: column; align-items: flex-start; gap: 10px;
+  font-family: var(--mono); font-size: 10px; letter-spacing: .32em; text-transform: uppercase;
+  color: var(--ink); opacity: calc(var(--copy) * .9); pointer-events: none;
+  text-shadow: 0 1px 10px rgba(var(--night-rgb), .85), 0 0 2px rgba(var(--night-rgb), .9);
+}
+.cue i { position: relative; display: block; width: 1px; height: 44px; overflow: hidden; background: rgba(246, 241, 231, .22); }
+.cue i::after {
+  content: ''; position: absolute; left: 0; top: 0; width: 1px; height: 45%; background: var(--ink);
+  animation: drip 2.4s cubic-bezier(.6, 0, .3, 1) infinite;
+}
+@media (max-height: 899px) { .cue { display: none; } }
+
+/* ── the legend (static by default: no JS or reduced motion) ── */
+.legend {
+  position: relative; z-index: 2;
+  padding: 18vh 4vw 16vh;
+  background: radial-gradient(60% 50% at 20% 30%, rgba(var(--accent-rgb), .07), rgba(var(--accent-rgb), 0) 70%), var(--night);
+}
+.legendIn {
+  display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: clamp(24px, 3.4vw, 56px);
+  align-items: start; max-width: 860px;
+}
+.legendIn > :not(.fushi) { grid-column: 2; }
+/* 不死, vertical, gold Mincho: an outline that fills with ink as the legend scrolls in */
+.fushi {
+  grid-column: 1; grid-row: 1 / span 6;
+  position: relative; writing-mode: vertical-rl;
+  font-family: var(--mincho); font-weight: 600; font-size: clamp(84px, 7.4vw, 128px); line-height: 1;
+  letter-spacing: .04em; user-select: none;
+}
+.fushiLine { display: block; color: transparent; -webkit-text-stroke: 1px rgba(var(--accent-rgb), .7); }
+.fushiInk {
+  position: absolute; inset: 0; color: var(--accent);
+  clip-path: inset(0 0 calc((1 - var(--fill)) * 100%) 0);
+}
+.legendEyebrow { font-family: var(--mono); font-size: 11px; letter-spacing: .3em; text-transform: uppercase; color: var(--accent); }
+.legendHead {
+  margin: 16px 0 22px; font-size: clamp(30px, 3.4vw, 54px); font-weight: 700; line-height: 1.04;
+  letter-spacing: -.022em; text-wrap: balance;
+}
+.story p { font-size: 15px; line-height: 1.62; color: var(--dim); max-width: 56ch; }
+.story p + p { margin-top: 12px; }
+.close { margin-top: 22px; font-size: 18px; font-weight: 500; line-height: 1.4; max-width: 42ch; }
+.credit { margin-top: 26px; font-family: var(--mono); font-size: 10px; letter-spacing: .06em; color: var(--dim); }
+
+/* ── motion: set by Opening.tsx when motion is allowed ── */
+.track[data-motion] .stage { position: sticky; top: 0; }
+
+/* wide: the legend arrives beside the mountain while the stage stays pinned */
+.track[data-motion='overlay'] { height: 250vh; }
+.track[data-motion='overlay'] .legend {
+  position: sticky; top: 0; z-index: 2;
+  height: 100vh; height: 100svh; margin-top: -100vh; margin-top: -100svh;
+  display: flex; align-items: center; padding: 88px 4vw 40px;
+  background: none;
+  opacity: var(--legend);
+  transform: translateY(calc((1 - var(--legend)) * 28px));
+  pointer-events: none;
+}
+.track[data-motion='overlay'] .legendIn { max-width: min(48vw, 680px); }
+
+/* narrow: the stage plays during a 90vh spacer, then the legend slides up over it */
+.track[data-motion='stacked'] .legend {
+  margin-top: 90vh;
+  padding-top: 220px;
+  background: linear-gradient(180deg, rgba(var(--night-rgb), 0) 0, rgba(var(--night-rgb), .9) 150px, var(--night) 220px);
+}
+
+/* ── narrow screens (phones and portrait tablets) ───── */
+@media (max-width: 899px) {
+  /* Portrait: a cover crop is only the summit (the sun and the lit lake are ~850 photo px to
+     its left). Show ~1180 photo px across instead, summit at 80% of the width and still at
+     44% of the height (where cover put it, so the title row is unchanged); the photo then
+     ends above the offer and the sky above it is night. Landscape keeps the cover crop. */
+  .stage {
+    --ov: .3;
+    --u: min(max(100cqw / 1600, 100cqh / 1063), 100cqw / 1180);
+    --ox: clamp(100cqw - 1600 * var(--u), 80cqw - 1110 * var(--u), 0px);
+    --oy: clamp(min(0px, 100cqh - 1063 * var(--u)), 44cqh - 468 * var(--u), max(0px, 100cqh - 1063 * var(--u)));
+  }
+  .photo {
+    -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 16%, #000 80%, transparent 100%);
+    mask-image: linear-gradient(180deg, transparent 0, #000 16%, #000 80%, transparent 100%);
+  }
+  /* the fill around the photo: night above (meeting the photo's top blue), night below */
+  .back .settle { background: linear-gradient(180deg, var(--night) 0, #354a77 var(--oy)); }
+  .front .settle { background: var(--night); }
+  .foot { left: max(20px, 5cqw); right: max(20px, 5cqw); width: auto; max-width: 620px; bottom: 24px; }
+  .lead { font-size: clamp(21px, 3.2cqw, 26px); }
+  .rest { font-size: 14px; margin-top: 10px; max-width: 54ch; }
+  .ctas { margin-top: 18px; gap: 4px 22px; }
+  .apply { min-height: 50px; padding: 0 22px; }
+  .cue { left: auto; right: max(20px, 5cqw); bottom: 24px; align-items: flex-end; }
+  /* shade the sky so small type above the word holds 4.5:1, but leave the lit horizon clear */
+  .skyShade { background: linear-gradient(180deg, rgba(5, 9, 26, .62) 0%, rgba(5, 9, 26, .5) 36%, rgba(5, 9, 26, 0) 50%); }
+  /* behind the offer only; the lake glow above it stays lit */
+  .shade {
+    background: linear-gradient(0deg, rgba(var(--night-rgb), .92) 0%, rgba(var(--night-rgb), .82) 30%, rgba(var(--night-rgb), .45) 37%, rgba(var(--night-rgb), 0) 45%);
+  }
+  /* the survey text hangs left of its line, so it never runs off the right edge */
+  .survey {
+    left: auto; right: calc(100cqw - var(--peak-x));
+    padding: 0 12px 0 0; border-left: 0; border-right: 1px solid rgba(246, 241, 231, .6);
+    text-align: right;
+  }
+  .survey span { display: block; }
+  .survey .sep { display: none; }
+  .survey::after { left: auto; right: -4px; }
+
+  .legend { padding: 14vh 20px 12vh; }
+  .legendIn { column-gap: 18px; }
+  .fushi { grid-row: 1 / span 2; font-size: clamp(60px, 15vw, 96px); }
+  .legendIn > .story, .legendIn > .close, .legendIn > .credit { grid-column: 1 / -1; }
+  .legendHead { font-size: clamp(26px, 7.2vw, 40px); margin-bottom: 0; }
+  .story { margin-top: 26px; }
+  .close { font-size: 17px; margin-top: 20px; }
+}
+@media (max-width: 899px) and (max-height: 700px) {
+  .rest { display: none; }
+}
+
+/* ── keyframes ──────────────────────────────────────── */
+@keyframes settle { from { transform: scale(1.07); } to { transform: none; } }
+@keyframes rise { from { transform: translateY(42%); opacity: 0; } 35% { opacity: 1; } to { transform: none; opacity: 1; } }
+@keyframes fadeUp { from { transform: translateY(14px); opacity: 0; } to { transform: none; opacity: 1; } }
+@keyframes stamp { from { transform: scale(1.7); opacity: 0; } 50% { opacity: 1; } to { transform: none; opacity: 1; } }
+@keyframes breathe { from { opacity: .35; } to { opacity: .85; } }
+@keyframes drip { from { transform: translateY(-100%); } to { transform: translateY(230%); } }
+
+/* reduced motion: the finished composition at once, nothing animates */
+@media (prefers-reduced-motion: reduce) {
+  .settle, .glyph, .pre > span, .seal, .foot > *, .cue i::after, .sun::before { animation: none; }
+  .sun::before { opacity: .6; }
+  .cue i::after { top: 30%; }
+  .apply { transition: none; }
+}

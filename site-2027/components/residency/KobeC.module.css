@@ -1,0 +1,302 @@
+/* Kobe · 神戸 · variant C "Day to night"
+   Static by default (no JS, reduced motion, phones, short or narrow screens):
+     phones   header, the day block (pale), a gold line, the night block (video, then copy), route
+     ≥900px   header, then a diptych: day panel left (--split), night panel right, gold seam
+   [data-motion] (set by JS, ≥1000×700, motion allowed): the stage pins for 70vh and --p (0→1)
+   sweeps the terminator left to right. Night (and the cream copy of the meetings panel) is
+   uncovered by a wipe made of two opposite translations.
+   Stacking inside the pinned stage: day 1 · night 2 · sweep 3 · cream copy 4 · header, route 5.
+   Photo geometry (as in Month): the plate is a size container; --u is CSS px per photo px,
+   --ox/--oy the photo's offset; the photo point (--px, --py) is kept at (--fx, --fy). */
+
+.kobe {
+  --edge: max(6vw, 50vw - 720px);
+  --split: 46%;
+  --rail-h: 64px;
+  --sky: #dfe4e8;             /* overcast day ground */
+  --sky-2: #ccd4da;
+  --ink-d: #0c111b;           /* type on the day ground */
+  --ink-d-rgb: 12, 17, 27;
+  --p: 1;
+  position: relative;
+  max-width: none; margin: 0; padding: 0;
+  background: var(--night);
+  color: var(--ink);
+  overflow-x: clip;
+}
+.track { position: relative; }
+.stage { position: relative; display: flex; flex-direction: column; }
+
+/* ── header ─────────────────────────────────────────── */
+.head { order: 0; position: relative; z-index: 5; padding: clamp(80px, 11vw, 140px) var(--edge) clamp(40px, 6vw, 64px); }
+.mark {
+  display: flex; justify-content: space-between; align-items: baseline; gap: 16px;
+  padding-bottom: 20px; border-bottom: 1px solid var(--line);
+}
+.eyebrow { font-family: var(--mono); font-size: 11px; letter-spacing: .3em; text-transform: uppercase; color: var(--faint); }
+.headline {
+  margin-top: clamp(28px, 4vw, 48px);
+  font-weight: 800; font-size: clamp(38px, 9.4vw, 84px); line-height: .95; letter-spacing: -.03em;
+}
+.headline span { display: block; text-wrap: balance; }
+.head1 { color: var(--dim); }
+
+/* ── shared copy (colours come from the layer: ink on day, cream on night) ── */
+.day, .inv { --tx: var(--ink-d); --tx-2: rgba(var(--ink-d-rgb), .76); --tx-3: rgba(var(--ink-d-rgb), .58); --hair: rgba(var(--ink-d-rgb), .22); }
+.inv, .night { --tx: var(--ink); --tx-2: rgba(246, 241, 231, .84); --tx-3: rgba(246, 241, 231, .66); --hair: rgba(246, 241, 231, .3); }
+.label {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px;
+  font-family: var(--mono); font-size: 11px; line-height: 1.5; letter-spacing: .24em; text-transform: uppercase;
+  color: var(--tx);
+}
+.nick { color: var(--accent); }
+.place { display: inline-flex; align-items: center; gap: 12px; }
+.place::before { content: ''; flex: none; width: 22px; height: 1px; background: var(--hair); }
+.title {
+  margin-top: 12px; color: var(--tx);
+  font-weight: 800; font-size: clamp(52px, 14vw, 76px); line-height: .9; letter-spacing: -.035em;
+}
+.body { margin-top: 16px; max-width: 42ch; font-size: 16px; line-height: 1.6; color: var(--tx-2); text-wrap: pretty; }
+
+/* ── day: Port Island, pale overcast panel ──────────── */
+.frame { order: 1; position: relative; }
+.day { position: relative; background: linear-gradient(168deg, var(--sky) 0%, var(--sky-2) 100%); }
+.panel { display: flex; flex-direction: column; gap: 44px; padding: 48px var(--edge) 56px; }
+.prints { display: flex; align-items: flex-start; gap: 14px; }
+.print { margin: 0; min-width: 0; }
+.big { width: 56%; }
+.small { width: 40%; margin-top: 30px; }
+.printPhoto { aspect-ratio: 4 / 3; overflow: hidden; border: 1px solid var(--hair); }
+.printPhoto img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.caption { margin-top: 9px; font-family: var(--mono); font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--tx-3); }
+
+/* motion-only layers */
+.dayPhoto, .inv, .dusk { display: none; }
+
+/* ── the terminator (phones: the line between the two blocks) ── */
+.sweep { order: 2; position: relative; height: 1px; }
+.line { position: absolute; inset: 0; background: var(--accent); box-shadow: 0 0 14px rgba(var(--accent-rgb), .55); }
+.ahead, .behind { display: none; }
+
+/* ── night: Rokko Island, the saucer ────────────────── */
+.night { order: 3; position: relative; background: var(--night); }
+.plate {
+  position: relative; overflow: hidden; container-type: size;
+  height: min(125vw, 82svh);
+  background: #05070d;
+  --W: 1920; --H: 1080; --px: 1110; --py: 370; --fx: .5; --fy: .42; --z: 1;
+  --u: calc(var(--z) * max(100cqw / var(--W), 100cqh / var(--H)));
+  --ox: clamp(100cqw - var(--W) * var(--u), var(--fx) * 100cqw - var(--px) * var(--u), 0px);
+  --oy: clamp(100cqh - var(--H) * var(--u), var(--fy) * 100cqh - var(--py) * var(--u), 0px);
+}
+.night .plate::after { opacity: .12; } /* a noisy night video frame: heavier grain */
+.push { position: absolute; inset: 0; transform-origin: calc(var(--fx) * 100%) calc(var(--fy) * 100%); }
+.video {
+  position: absolute; left: var(--ox); top: var(--oy);
+  width: calc(var(--W) * var(--u)); height: calc(var(--H) * var(--u)); max-width: none;
+  display: block; object-fit: cover;
+}
+/* edge-only shades into the section ground */
+.shade {
+  position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background:
+    linear-gradient(0deg, var(--night) 0%, rgba(var(--night-rgb), .55) 12%, rgba(var(--night-rgb), 0) 34%),
+    linear-gradient(180deg, rgba(var(--night-rgb), .5) 0%, rgba(var(--night-rgb), 0) 22%);
+}
+.demo { position: relative; z-index: 3; padding: 24px var(--edge) 8px; }
+.demo .title { font-size: clamp(60px, 17vw, 92px); }
+
+/* ── the route ──────────────────────────────────────── */
+.rail { order: 4; position: relative; z-index: 5; padding: 44px var(--edge) clamp(80px, 11vw, 120px); }
+.bar {
+  position: relative; height: 1px; margin-bottom: 16px;
+  background: rgba(246, 241, 231, .24);
+  container-type: inline-size;
+}
+.fill {
+  position: absolute; left: 0; top: -.5px; width: 100%; height: 2px;
+  background: var(--accent); transform-origin: 0 50%; transform: scaleX(var(--p));
+}
+.dot { display: none; }
+.ends {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 6px 18px;
+  font-family: var(--mono); font-size: 10px; line-height: 1.4; letter-spacing: .24em; text-transform: uppercase;
+  color: var(--dim);
+}
+.to { margin-left: auto; text-align: right; }
+.toggle {
+  display: inline-flex; align-items: center; min-height: 44px; margin: -12px 0;
+  padding: 0 0 0 18px; border: 0; border-left: 1px solid var(--line); background: none; cursor: pointer;
+  font: inherit; letter-spacing: inherit; text-transform: inherit; color: var(--dim);
+  text-decoration: underline; text-decoration-color: rgba(246, 241, 231, .3); text-underline-offset: 5px;
+}
+.toggle:hover { color: var(--ink); text-decoration-color: var(--accent); }
+
+/* ── ≥900px, still: the diptych ─────────────────────── */
+@media (min-width: 900px) {
+  .stage { display: grid; grid-template-columns: var(--split) minmax(0, 1fr); }
+  .head {
+    grid-column: 1 / -1; grid-row: 1;
+    display: grid; grid-template-columns: minmax(170px, 15vw) minmax(0, 1fr); column-gap: clamp(24px, 3vw, 48px); align-items: start;
+  }
+  .mark { flex-direction: column; align-items: flex-start; gap: 12px; padding: 0; border: 0; }
+  .mark :global(.kanjiMark) b { font-size: clamp(34px, 3.2vw, 48px); }
+  .headline { margin-top: 0; font-size: clamp(40px, 4.6vw, 76px); }
+
+  .frame { grid-column: 1; grid-row: 2; }
+  .day { height: 100%; }
+  .panel {
+    height: 100%; justify-content: space-between; gap: 40px;
+    padding: clamp(40px, 5vh, 64px) clamp(32px, 4vw, 56px) clamp(44px, 6vh, 64px) var(--edge);
+  }
+  .big { width: min(56%, 300px); }
+  .small { width: min(40%, 216px); margin-top: 34px; }
+  .title { font-size: clamp(56px, min(5.6vw, 9.5vh), 96px); }
+  .body { font-size: 17px; }
+
+  .night { grid-column: 2; grid-row: 2; display: flex; min-height: clamp(560px, 82svh, 880px); }
+  .nightIn { flex: 1; display: flex; flex-direction: column; justify-content: flex-end; }
+  .night .plate { position: absolute; inset: 0; height: auto; --fx: .5; --fy: .4; }
+  .shade {
+    background:
+      radial-gradient(70% 56% at 0% 100%, rgba(var(--night-rgb), .82) 0%, rgba(var(--night-rgb), .5) 46%, rgba(var(--night-rgb), 0) 78%),
+      linear-gradient(0deg, var(--night) 0%, rgba(var(--night-rgb), .5) 14%, rgba(var(--night-rgb), 0) 36%),
+      linear-gradient(180deg, rgba(var(--night-rgb), .72) 0%, rgba(var(--night-rgb), .3) 16%, rgba(var(--night-rgb), 0) 32%);
+  }
+  .demo { padding: 0 var(--edge) clamp(44px, 6vh, 64px) clamp(32px, 4vw, 64px); text-shadow: 0 1px 18px rgba(5, 9, 26, .45); }
+  .demo .title { font-size: clamp(64px, min(7vw, 12vh), 120px); }
+  .demo .body { font-size: 17px; max-width: 40ch; }
+
+  /* the seam: the terminator at rest */
+  .sweep { grid-column: 2; grid-row: 2; justify-self: start; z-index: 3; width: 1px; height: auto; }
+
+  .rail { grid-column: 1 / -1; grid-row: 3; padding-top: 0; }
+  .bar { margin-left: calc(-1 * var(--edge)); margin-right: calc(-1 * var(--edge)); margin-bottom: 18px; }
+}
+
+/* ── motion: the pinned sweep (JS sets [data-motion]) ── */
+.track[data-motion] { height: 170vh; }
+.track[data-motion] .stage {
+  position: sticky; top: 0; height: 100vh; height: 100svh;
+  display: flex; flex-direction: column; overflow: hidden;
+}
+.track[data-motion] .head {
+  flex: none;
+  grid-template-columns: minmax(180px, 16vw) minmax(0, 1fr);
+  padding: clamp(72px, 10vh, 108px) var(--edge) clamp(20px, 3vh, 32px);
+}
+.track[data-motion] .headline { font-size: clamp(36px, min(3.8vw, 6.4vh), 66px); }
+
+/* the frame is not a stacking context, so the cream copy (4) can sit above the night (2) */
+.track[data-motion] .frame { flex: 1; min-height: 0; }
+.track[data-motion] .day {
+  position: absolute; inset: 0; z-index: 1;
+  display: grid; grid-template-columns: var(--split) minmax(0, 1fr);
+}
+.track[data-motion] .panel { container-type: size; padding: clamp(24px, 4.4vh, 48px) clamp(28px, 3.4vw, 48px) clamp(24px, 4.4vh, 48px) var(--edge); gap: 24px; }
+.track[data-motion] .big { width: min(52cqw, 300px, 36cqh * 4 / 3); }
+.track[data-motion] .small { width: min(36cqw, 216px, 26cqh * 4 / 3); margin-top: min(34px, 5cqh); }
+
+/* the UFO building by daylight, looking up: the top 1380 photo px (saucer and sky; the
+   people on the steps stay below the crop), in a cool overcast grade */
+.track[data-motion] .dayPhoto {
+  display: block; position: relative; overflow: hidden; container-type: size;
+  border-left: 1px solid rgba(var(--ink-d-rgb), .25);
+  --W: 1800; --H: 2400;
+  --u: max(100cqh / 1380, 100cqw / var(--W));
+}
+.dayImg {
+  position: absolute; top: 0; left: clamp(100cqw - var(--W) * var(--u), 50cqw - 990 * var(--u), 0px);
+  width: calc(var(--W) * var(--u)); height: calc(var(--H) * var(--u)); max-width: none;
+}
+.cool {
+  position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(180deg, rgba(214, 224, 232, .34), rgba(120, 142, 166, .3));
+  mix-blend-mode: soft-light;
+}
+/* the afternoon getting late: the day darkens as the line comes */
+.track[data-motion] .dusk {
+  display: block; position: absolute; inset: 0; z-index: 2; pointer-events: none;
+  background: linear-gradient(90deg, rgba(var(--night-rgb), .3), rgba(31, 52, 102, .42));
+  opacity: calc(var(--p) * .8);
+}
+
+/* night: the whole stage, uncovered from the left */
+.track[data-motion] .night {
+  position: absolute; inset: 0; z-index: 2; overflow: hidden; min-height: 0;
+  transform: translate3d(calc((var(--p) - 1) * 100%), 0, 0);
+  will-change: transform;
+}
+.track[data-motion] .nightIn,
+.track[data-motion] .invIn {
+  position: absolute; inset: 0;
+  transform: translate3d(calc((1 - var(--p)) * 100%), 0, 0);
+  will-change: transform;
+}
+/* the lit saucer where the daylight one was: right of the panel, below the header */
+.track[data-motion] .night .plate { --fx: .7; --fy: .52; --z: 1.12; }
+.track[data-motion] .push {
+  transform-origin: 70% 55%;
+  transform: scale(calc(1 + .05 * var(--p))); /* closes in as night arrives */
+}
+.track[data-motion] .shade {
+  background:
+    radial-gradient(58% 50% at 84% 100%, rgba(var(--night-rgb), .9) 0%, rgba(var(--night-rgb), .62) 48%, rgba(var(--night-rgb), 0) 82%),
+    linear-gradient(90deg, rgba(var(--night-rgb), .82) 0%, rgba(var(--night-rgb), .56) 28%, rgba(var(--night-rgb), 0) 52%),
+    linear-gradient(180deg, rgba(var(--night-rgb), .9) 0%, rgba(var(--night-rgb), .55) 18%, rgba(var(--night-rgb), 0) 34%),
+    linear-gradient(0deg, var(--night) 0%, rgba(var(--night-rgb), .6) 10%, rgba(var(--night-rgb), 0) 28%);
+}
+.track[data-motion] .demo {
+  position: absolute; right: var(--edge); bottom: calc(var(--rail-h) + clamp(24px, 4.4vh, 48px));
+  width: min(560px, 40vw); padding: 0;
+  text-shadow: 0 1px 18px rgba(5, 9, 26, .55);
+}
+.track[data-motion] .demo .label,
+.track[data-motion] .invIn .label { text-shadow: 0 0 2px rgba(5, 9, 26, .9), 0 0 12px rgba(5, 9, 26, .85); }
+.track[data-motion] .demo .title { font-size: clamp(64px, min(7.4vw, 11vh), 124px); }
+
+/* the meetings panel in cream, clipped by the same wipe */
+.track[data-motion] .inv {
+  display: block; position: absolute; inset: 0; z-index: 4; overflow: hidden; pointer-events: none;
+  transform: translate3d(calc((var(--p) - 1) * 100%), 0, 0);
+  will-change: transform;
+}
+.track[data-motion] .invIn .panel { width: var(--split); height: 100%; }
+.track[data-motion] .invIn .label,
+.track[data-motion] .invIn .body { text-shadow: 0 1px 14px rgba(5, 9, 26, .6); }
+
+/* the terminator: gold line, a dusk band ahead of it, a dawn-warm edge behind it */
+.track[data-motion] .sweep {
+  position: absolute; inset: 0; z-index: 3; width: auto; height: auto; justify-self: stretch; pointer-events: none;
+  container-type: inline-size;
+  opacity: clamp(0, min(var(--p), 1 - var(--p)) * 24, 1);
+}
+.track[data-motion] .line,
+.track[data-motion] .ahead,
+.track[data-motion] .behind {
+  display: block; position: absolute; top: 0; bottom: 0; left: 0;
+  transform: translate3d(calc(var(--p) * 100cqw), 0, 0);
+}
+.track[data-motion] .line { right: auto; width: 1px; box-shadow: 0 0 14px rgba(var(--accent-rgb), .7), 0 0 44px rgba(233, 164, 99, .35); }
+.track[data-motion] .ahead {
+  width: 24cqw;
+  background: linear-gradient(90deg, rgba(var(--night-rgb), .46), rgba(31, 52, 102, .16) 45%, rgba(31, 52, 102, 0));
+}
+.track[data-motion] .behind {
+  left: -14cqw; width: 14cqw;
+  background: linear-gradient(90deg, rgba(31, 52, 102, 0), rgba(31, 52, 102, .2) 55%, rgba(233, 164, 99, .26));
+}
+
+/* the route along the bottom of the stage; its dot rides under the terminator */
+.track[data-motion] .rail {
+  flex: none; height: var(--rail-h); padding: 0 var(--edge);
+  display: flex; flex-direction: column; justify-content: center;
+}
+.track[data-motion] .bar { position: absolute; top: 0; left: 0; right: 0; margin: 0; }
+.track[data-motion] .dot {
+  display: block; position: absolute; left: 0; top: 50%;
+  width: 11px; height: 11px; margin: -5.5px 0 0 -5.5px; border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 4px rgba(var(--accent-rgb), .16), 0 0 22px rgba(var(--accent-rgb), .6);
+  transform: translate3d(calc(var(--p) * 100cqw), 0, 0);
+}

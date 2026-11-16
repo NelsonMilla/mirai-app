@@ -1,0 +1,37 @@
+{
+  "duration": 14.37,
+  "shots": [
+    {
+      "source": "Aaron1001_10261829_C007.MOV",
+      "in": 388.5,
+      "out": 391.1,
+      "description": "Japan Landing Award winners smiling with certificates (stage, Demo Day)"
+    },
+    {
+      "source": "Aaron1001_10261909_C009.MOV",
+      "in": 2.4,
+      "out": 5.0,
+      "description": "Attendees laughing together in the audience seats"
+    },
+    {
+      "source": "Aaron1001_10261829_C007.MOV",
+      "in": 1114.5,
+      "out": 1117.1,
+      "description": "Host smiling on stage, speaking to the room"
+    },
+    {
+      "source": "Aaron1001_10261829_C007.MOV",
+      "in": 831.5,
+      "out": 834.1,
+      "description": "Team members smiling on stage, one gesturing warmly"
+    },
+    {
+      "source": "Aaron1001_10261829_C007.MOV",
+      "in": 935.5,
+      "out": 938.1,
+      "description": "Whole cohort gathering for the group photo"
+    }
+  ],
+  "notes": "All shots slowed to 0.8x, 30 fps, 0.4 s crossfades; last shot crossfades back into the start of shot 1 for a seamless loop. Light contrast lift, saturation 0.9. Source is 1920x1080, no crop. Award certificates show the GlobalDeal logo (partner rules apply). Shot 3 has Japanese subtitle text on the screen behind.",
+  "poster": "frame at 9.6 s (team on stage); the award frame was not used because the certificates carry the GlobalDeal logo"
+}

@@ -1,0 +1,74 @@
+[
+  {
+    "src": "/img/kobe/ufo-exterior-night-01.webp",
+    "w": 1920,
+    "h": 1080,
+    "orientation": "landscape",
+    "alt": "The saucer-shaped entrance of the Kobe Fashion Museum lit up at night, seen from below through trees.",
+    "caption": "Kobe Fashion Museum, Rokko Island, the night of Demo Day.",
+    "focal": "35% 55%",
+    "score": 9,
+    "source": "/Users/nelson/Downloads/Aaron Footage/Aaron1001_10261925_C023.MOV @ 3.75s (frame 16 at 4 fps)",
+    "notes": "Best hero. Clear saucer, warm light, no people. Night video frame, some noise."
+  },
+  {
+    "src": "/img/kobe/ufo-exterior-day-01.webp",
+    "w": 1800,
+    "h": 2400,
+    "orientation": "portrait",
+    "alt": "The white saucer-shaped entrance of the Kobe Fashion Museum above a wide stone staircase, with two people holding umbrellas.",
+    "caption": "The Kobe Fashion Museum entrance on Rokko Island.",
+    "focal": "50% 30%",
+    "score": 8,
+    "source": "/Users/nelson/Downloads/Cellhaus/PXL_20261026_012147428.jpg (2026-10-26 10:21 JST)",
+    "notes": "Only daylight exterior. Overcast and rainy; two people on the steps (faces small/turned). Check with them before use."
+  },
+  {
+    "src": "/img/kobe/ufo-exterior-night-02.webp",
+    "w": 1920,
+    "h": 1080,
+    "orientation": "landscape",
+    "alt": "The Kobe Fashion Museum saucer glowing above a wet plaza with lit trees at night.",
+    "caption": "",
+    "focal": "60% 35%",
+    "score": 7,
+    "source": "/Users/nelson/Downloads/Aaron Footage/Aaron1001_10261924_C021.MOV @ 0.5s (frame 3 at 4 fps)",
+    "notes": "Wider context shot, saucer smaller in frame, dark. Same footage as the loop."
+  },
+  {
+    "src": "/img/kobe/ufo-banner-01.webp",
+    "w": 1920,
+    "h": 1080,
+    "orientation": "landscape",
+    "alt": "The Mirai Tech City Kobe 2026 welcome banner standing in the venue entrance hall.",
+    "caption": "Welcome banner at the venue entrance: Summit I, Summit II and Demo Day.",
+    "focal": "50% 45%",
+    "score": 7,
+    "source": "/Users/nelson/Downloads/Aaron Footage/Aaron1001_10261921_C017.MOV @ 6.5s (frame 27 at 4 fps)",
+    "notes": "Banner is legible; yellow-green cast from the lobby lighting. Lists dates and partner logos including GlobalDeal."
+  },
+  {
+    "src": "/img/kobe/orbis-hall-interior-01.webp",
+    "w": 2400,
+    "h": 1800,
+    "orientation": "landscape",
+    "alt": "Orbis Hall at the Kobe Fashion Museum before the event, with tiered seating facing the stage and screen.",
+    "caption": "",
+    "focal": "50% 50%",
+    "score": 7,
+    "source": "/Users/nelson/Downloads/Cellhaus/PXL_20261026_013423721.jpg (2026-10-26 10:34 JST)",
+    "notes": "Wide setup shot, a few staff on stage far away. Pixel wide-angle, slight distortion."
+  },
+  {
+    "src": "/img/kobe/orbis-hall-interior-02.webp",
+    "w": 2400,
+    "h": 1800,
+    "orientation": "landscape",
+    "alt": "The stage in Orbis Hall with the Summit II slide on screen and the Mirai Tech City banner stand beside it.",
+    "caption": "",
+    "focal": "45% 50%",
+    "score": 6,
+    "source": "/Users/nelson/Downloads/Cellhaus/PXL_20261026_063836503.MP.jpg (2026-10-26 15:38 JST)",
+    "notes": "Event signage visible. Two people on stage, one walking; hall empty of audience. Taken before the evening session."
+  }
+]
