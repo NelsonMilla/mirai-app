@@ -1,20 +1,25 @@
 ---
 title: 'Meet the Founders: Max Koko, Probabilistic Biology'
 date: 2026-11-16
-summary: Max Koko won our Demo Day in Kobe. His company, Probabilistic Biology, wants to make animal experiments work more like cloud computing.
+seoTitle: 'Probabilistic Biology: Max Koko on Reinventing Mouse Studies'
+seoDescription: "★ Demo Day 2026 winner Max Koko on Probabilistic Biology's datacenter of mouse cages, Antler Japan and getting drugs to patients faster. Read the interview →"
+summary: Max Koko won Mirai Tech City's Demo Day in Kobe and a place at Antler Japan. Probabilistic Biology wants to run mouse experiments like cloud computing.
+shareImage: /img/blog/probabilistic-biology/share.jpg
 category: Companies
-author: Mirai Tech City
+author: Nelson Milla
+authorRole: Co-founder, Mirai Tech City
 company:
   name: Probabilistic Biology
   url: https://meet.probabilistic.bio/
-cover: /img/blog/probabilistic-biology/cover.webp
-coverAlt: Max Koko on stage at Demo Day in Kobe, in front of a slide reading "Automated mouse cages, stacked by the thousand into a datacenter for biology"
+cover: /img/blog/probabilistic-biology/cover-stage.webp
+coverAlt: Max Koko speaking into a microphone on a dark stage at Demo Day in Kobe
+coverPosition: 65% 0%
 coverCredit: Demo Day, Kobe · Mirai Tech City
 tags: [Demo Day, Founders, Antler]
 draft: false
 ---
 
-When Max Koko pitched at our Demo Day in Kobe on 26 October, he was one of about 20 longevity, biotech and medtech founders in front of a jury of investors. He won, and his prize was a place in Antler Japan's residency, which selects fewer than 5% of its applicants.
+When Max Koko pitched at our Demo Day in Kobe on 26 October, he was one of about 20 longevity, biotech and medtech founders from around the world in front of a six-person jury: Keita Masui (ASAGI Labs Ventures), Karen Onuma-Mielke (GlobalDeal), Florian Geier (Antler Japan), Paul Yang and Sophia Z. Boettcher Kimura (Governance Partners), and Taiga Tamiya (Miyako Capital). He won, and his prize was a place in Antler Japan's residency, which selects fewer than 5% of its applicants.
 
 His company, Probabilistic Biology, wants to make animal experiments work more like cloud computing: a datacenter of cages fitted with non-invasive sensors, starting with mice, where every animal yields far more data and experiments can be run from a laptop. We asked him why he thinks the mouse experiment needs rebuilding.
 
@@ -50,7 +55,7 @@ Two things changed: sensors got cheap and AI got really good. AI is producing hy
 
 Two things. First, every cage carries non-invasive physical sensors that record continuously, with the aim of estimating what today takes invasive procedures to measure. Second, scale: in one facility, every animal produces far more data per experiment than in a small study run for a single readout, and the experiment can be run remotely, like cloud computing.
 
-![Max Koko on stage beside a slide reading "Labs sell many mice measured thinly, or a few measured deeply. We sell both."](/img/blog/probabilistic-biology/mice-measured.webp "Many mice measured thinly, or a few measured deeply: Probabilistic Biology sells both · Mirai Tech City")
+![Max Koko on stage beside a slide reading "Labs sell many mice measured thinly, or a few measured deeply. We sell both."](/img/blog/probabilistic-biology/mice-slide.webp "Many mice measured thinly, or a few measured deeply: Probabilistic Biology sells both · Mirai Tech City")
 
 ## What's the biggest thing that's broken in how experiments get done today, and what does it cost science and patients?
 
@@ -73,6 +78,8 @@ First capital, and a reason to start full-time. Specifically, it's Antler Japan,
 Modern stem cell science started here with Yamanaka's iPS cells, and Japan is one of very few developed countries that treats biotechnology as an opportunity rather than something to fear.
 
 Thanks to you at Mirai Tech City, I toured Nobel laureate Yamanaka's lab and was introduced to many brilliant scientists. Thank you for organizing it. They innovate within cultural norms very different from what I'd normally call an innovative culture. It showed me that my way of doing things isn't the only way.
+
+![Max Koko smiling at a temple viewpoint in Kyoto, with autumn trees and the city behind him](/img/blog/probabilistic-biology/kyoto.webp "Max Koko in Kyoto")
 
 ## What's the hardest part of building this?
 

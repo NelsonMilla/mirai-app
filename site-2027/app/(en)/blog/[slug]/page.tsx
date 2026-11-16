@@ -19,21 +19,28 @@ export function generateStaticParams() {
 
 type Props = { params: Promise<{ slug: string }> };
 
+// Post dates are calendar days in Kobe; give search engines a full ISO 8601 time with the zone.
+const jst = (d: string) => `${d}T00:00:00+09:00`;
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = getPost((await params).slug);
   if (!post) return {};
-  const image = post.cover ?? site.ogImage;
+  const image = post.shareImage
+    ? { url: post.shareImage, width: 1200, height: 630, alt: post.coverAlt ?? post.title }
+    : post.cover ?? site.ogImage;
+  const headline = post.seoTitle ?? post.title;
+  const description = post.seoDescription ?? post.summary;
   return {
-    title: `${post.title} · ${site.name}`,
-    description: post.summary,
+    title: post.seoTitle ?? `${post.title} · ${site.name}`,
+    description,
     authors: post.author ? [{ name: post.author }] : undefined,
     keywords: post.tags,
     alternates: { canonical: `/blog/${post.slug}` },
     robots: post.draft ? { index: false } : undefined,
-    openGraph: { type: 'article', siteName: site.name, url: `/blog/${post.slug}`, title: post.title, description: post.summary,
-      publishedTime: post.date, modifiedTime: post.updated, authors: post.author ? [post.author] : undefined, tags: post.tags,
+    openGraph: { type: 'article', siteName: site.name, url: `/blog/${post.slug}`, title: headline, description,
+      publishedTime: jst(post.date), modifiedTime: post.updated && jst(post.updated), authors: post.author ? [post.author] : undefined, tags: post.tags,
       section: post.category, images: [image] },
-    twitter: { card: 'summary_large_image', title: post.title, description: post.summary, images: [image] },
+    twitter: { card: 'summary_large_image', site: site.x, title: headline, description, images: [image] },
   };
 }
 
@@ -46,13 +53,13 @@ export default async function PostPage({ params }: Props) {
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
-    headline: post.title,
-    description: post.summary,
+    headline: post.seoTitle ?? post.title,
+    description: post.seoDescription ?? post.summary,
     articleSection: post.category,
     wordCount: post.minutes * 220,
-    datePublished: post.date,
-    dateModified: post.updated ?? post.date,
-    image: `${site.url}${post.cover ?? site.ogImage}`,
+    datePublished: jst(post.date),
+    dateModified: jst(post.updated ?? post.date),
+    image: [post.shareImage, post.cover ?? site.ogImage].filter(Boolean).map(src => `${site.url}${src}`),
     url: `${site.url}/blog/${post.slug}`,
     mainEntityOfPage: `${site.url}/blog/${post.slug}`,
     author: { '@type': post.author && post.author !== site.name ? 'Person' : 'Organization', name: post.author ?? site.name },
@@ -70,7 +77,8 @@ export default async function PostPage({ params }: Props) {
         <header className={`postHero${post.cover ? ' hasCover' : ''}`}>
           {post.cover && (
             <>
-              <Image className="heroImg" src={post.cover} alt={post.coverAlt ?? ''} fill priority sizes="100vw" />
+              <Image className="heroImg" src={post.cover} alt={post.coverAlt ?? ''} fill priority sizes="100vw"
+                style={post.coverPosition ? { objectPosition: post.coverPosition } : undefined} />
               <span className="heroVeil" />
             </>
           )}
