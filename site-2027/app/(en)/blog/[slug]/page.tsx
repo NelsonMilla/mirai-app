@@ -28,17 +28,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const image = post.shareImage
     ? { url: post.shareImage, width: 1200, height: 630, alt: post.coverAlt ?? post.title }
     : post.cover ?? site.ogImage;
+  const headline = post.seoTitle ?? post.title;
+  const description = post.seoDescription ?? post.summary;
   return {
     title: post.seoTitle ?? `${post.title} · ${site.name}`,
-    description: post.summary,
+    description,
     authors: post.author ? [{ name: post.author }] : undefined,
     keywords: post.tags,
     alternates: { canonical: `/blog/${post.slug}` },
     robots: post.draft ? { index: false } : undefined,
-    openGraph: { type: 'article', siteName: site.name, url: `/blog/${post.slug}`, title: post.title, description: post.summary,
+    openGraph: { type: 'article', siteName: site.name, url: `/blog/${post.slug}`, title: headline, description,
       publishedTime: jst(post.date), modifiedTime: post.updated && jst(post.updated), authors: post.author ? [post.author] : undefined, tags: post.tags,
       section: post.category, images: [image] },
-    twitter: { card: 'summary_large_image', site: site.x, title: post.title, description: post.summary, images: [image] },
+    twitter: { card: 'summary_large_image', site: site.x, title: headline, description, images: [image] },
   };
 }
 
@@ -51,8 +53,8 @@ export default async function PostPage({ params }: Props) {
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
-    headline: post.title,
-    description: post.summary,
+    headline: post.seoTitle ?? post.title,
+    description: post.seoDescription ?? post.summary,
     articleSection: post.category,
     wordCount: post.minutes * 220,
     datePublished: jst(post.date),

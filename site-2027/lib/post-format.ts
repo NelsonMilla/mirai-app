@@ -27,7 +27,8 @@ export type PostMeta = {
   coverAlt?: string;
   coverPosition?: string; // CSS object-position for the hero crop, e.g. "65% 0%" (default centre)
   coverCredit?: string;
-  seoTitle?: string; // search-result <title>, under 60 characters; the page H1 stays `title`
+  seoTitle?: string; // search-result and link-preview title, under 60 characters; the page H1 stays `title`
+  seoDescription?: string; // search-result and link-preview description, 150–160 characters; /blog cards keep `summary`
   shareImage?: string; // 1200×630 JPEG for link previews (LinkedIn, X, Slack); falls back to cover
   tags: string[];
   draft: boolean;

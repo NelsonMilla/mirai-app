@@ -1,7 +1,8 @@
 ---
 title: 'Meet the Founders: Max Koko, Probabilistic Biology'
 date: 2026-11-16
-seoTitle: 'Max Koko, Probabilistic Biology: Demo Day winner interview'
+seoTitle: 'Probabilistic Biology: Max Koko on Reinventing Mouse Studies'
+seoDescription: "★ Demo Day 2026 winner Max Koko on Probabilistic Biology's datacenter of mouse cages, Antler Japan and getting drugs to patients faster. Read the interview →"
 summary: Max Koko won Mirai Tech City's Demo Day in Kobe and a place at Antler Japan. Probabilistic Biology wants to run mouse experiments like cloud computing.
 shareImage: /img/blog/probabilistic-biology/share.jpg
 category: Companies

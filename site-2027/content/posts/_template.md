@@ -4,7 +4,8 @@
 title: Company name builds the thing
 date: 2026-11-04            # YYYY-MM-DD, newest first on /blog
 summary: One or two plain sentences, 140–160 characters. Shown on /blog, in search results and link previews.
-# seoTitle: Shorter title for search results   # optional; under 60 characters, no site name needed
+# seoTitle: Keyword First: Hook With a Number   # optional; under 60 chars, main keyword in the first 30
+# seoDescription: ✓ Benefit ✓ Benefit. Keyword-rich line. Read more →   # optional; 150–160 chars, for Google and link previews
 # shareImage: /img/blog/url-slug/share.jpg     # optional; 1200×630 JPEG for LinkedIn/X/Slack previews
 category: Companies         # Companies | Science | Residents | Kobe | News (default News)
 author: Nelson Milla        # optional

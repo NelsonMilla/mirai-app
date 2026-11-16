@@ -94,6 +94,7 @@ function read(file: string): Omit<Post, 'number'> {
     coverPosition: data.coverPosition ? String(data.coverPosition) : undefined,
     coverCredit: data.coverCredit ? String(data.coverCredit) : undefined,
     seoTitle: data.seoTitle ? String(data.seoTitle) : undefined,
+    seoDescription: data.seoDescription ? String(data.seoDescription) : undefined,
     shareImage: data.shareImage ? String(data.shareImage) : undefined,
     tags: Array.isArray(data.tags) ? data.tags.map(String) : [],
     draft: data.draft === true,
