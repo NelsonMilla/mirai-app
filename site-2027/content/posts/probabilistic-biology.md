@@ -19,7 +19,7 @@ tags: [Demo Day, Founders, Antler]
 draft: false
 ---
 
-When Max Koko pitched at our Demo Day in Kobe on 26 October, he was one of about 20 longevity, biotech and medtech founders from around the world in front of a six-person jury: Keita Masui (ASAGI Labs Ventures), Karen Onuma-Mielke (GlobalDeal), Florian Geier (Antler Japan), Paul Yang and Sophia Z. Boettcher Kimura (Governance Partners), and Taiga Tamiya. He won, and his prize was a place in Antler Japan's residency, which selects fewer than 5% of its applicants.
+When Max Koko pitched at our Demo Day in Kobe on 26 October, he was one of about 20 longevity, biotech and medtech founders from around the world in front of a six-person jury: Keita Masui (ASAGI Labs Ventures), Karen Onuma-Mielke (GlobalDeal), Florian Geier (Antler Japan), Paul Yang and Sophia Z. Boettcher Kimura (Governance Partners), and Taiga Tamiya (Miyako Capital). He won, and his prize was a place in Antler Japan's residency, which selects fewer than 5% of its applicants.
 
 His company, Probabilistic Biology, wants to make animal experiments work more like cloud computing: a datacenter of cages fitted with non-invasive sensors, starting with mice, where every animal yields far more data and experiments can be run from a laptop. We asked him why he thinks the mouse experiment needs rebuilding.
 
