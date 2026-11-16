@@ -5,6 +5,7 @@ import type { Metadata, Viewport } from 'next';
 import { IBM_Plex_Mono, Shippori_Mincho } from 'next/font/google';
 import localFont from 'next/font/local';
 import { site } from '@/content/site';
+import PostHog from '@/components/PostHog';
 import './globals.css';
 
 // Switzer (Fontshare, ITF Free Font License) is self-hosted from app/fonts so it is
@@ -47,7 +48,7 @@ export function Html({ lang, children }: { lang: 'en' | 'ja'; children: React.Re
       <head>
         <noscript><style>{'.rv{opacity:1;transform:none}'}</style></noscript>
       </head>
-      <body>{children}</body>
+      <body>{children}<PostHog /></body>
     </html>
   );
 }
