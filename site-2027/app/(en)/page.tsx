@@ -4,5 +4,5 @@ import { residency } from '@/content/residency';
 export const metadata = homeMetadata(residency, 'en');
 
 export default function Home() {
-  return <HomePage r={residency} lang="en" skip="Skip to the program" />;
+  return <HomePage r={residency} lang="en" skip="See the program" />;
 }

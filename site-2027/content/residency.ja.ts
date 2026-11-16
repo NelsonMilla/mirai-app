@@ -22,20 +22,19 @@ export const residencyJa: Residency = {
     ...residency.hero,
     eyebrow: 'レジデンシー・2027年3月',
     sub: '創業初期の再生医療スタートアップのための、1か月のレジデンシーです。富士山のふもとで3週間集中して取り組み、神戸で1週間の面談を行い、ティム・\u2060ドレイパー氏ら投資家を迎えるデモデイに臨みます。',
-    meta: ['2027年3月', '富士山 → 神戸', '再生医療'],
-    // The giant Latin word "Fuji" sits behind the summit; pre is the line above it.
-    pre: '1か月の舞台は',
+    // The giant Latin word (hero.word, "Japan") sits behind the summit; pre is the line above it.
+    pre: 'バイオテックで起業するなら',
     survey: ['3,776 m', '北緯35.3606° 東経138.7274°'],
     scrollCue: 'スクロール',
   },
 
   legend: {
     eyebrow: 'なぜ富士山か',
-    headline: '富士山には、不老不死を求める古い伝説が残っています',
+    headline: '富士山の最も古い伝説は、不老不死を求める物語です',
     paragraphs: [
-      '一説には、秦の始皇帝が徐福を海の向こうへ遣わし、不死の薬を探させ、徐福は日本にたどり着いたと伝えられています。',
+      '秦の始皇帝は徐福を海の向こうへ遣わし、不死の薬を探させました。徐福がたどり着いたのは、日本でした。',
       '日本最古の物語ともいわれる竹取物語では、帝が不死の薬を、天にもっとも近い山である富士山の頂で燃やさせます。山の名を「不死（ふし）」に由来するとする言い伝えもあります。',
-      '3月、私たちは再生医療という実際の課題に取り組む創業者を、この山にお迎えします。',
+      '私たちは、再生医療という実際の課題に取り組む創業者を、この山にお迎えします。',
     ],
   },
 
@@ -75,9 +74,9 @@ export const residencyJa: Residency = {
 
   kobe: {
     eyebrow: '第4週・神戸',
-    headline: '最終週：神戸で面談、そしてデモデイ',
+    headline: '最終週：面談＋デモデイ',
     meetings: {
-      place: 'ポートアイランド・神戸医療産業都市',
+      place: '神戸医療産業都市',
       title: '面談',
       body: '日本最大級のバイオメディカルクラスターである、ポートアイランドの神戸医療産業都市に移ります。最初の3週間で整理した相手との面談を、私たちが手配します。',
     },
@@ -104,7 +103,7 @@ export const residencyJa: Residency = {
   cohort0: {
     ...residency.cohort0,
     eyebrow: 'Cohort 0・神戸・2026年10月',
-    headline: '7社が来日し、5社が日本での拠点づくりを進めています',
+    headline: '7社中5社が、日本での拠点づくりを進めています',
     lead: '7社が、初めて日本でのビジネスに取り組みました。うち5社は現在、日本に恒久的な拠点を設ける準備を進めています。Antlerの支援対象となった企業、GlobalDealから現物支援を受けた企業もあり、全社が日本で新たなパートナーシップを築きました。',
     stats: [
       { value: '7', label: '日本に初めて進出した企業' },
@@ -122,7 +121,7 @@ export const residencyJa: Residency = {
 
   life: {
     eyebrow: '日本での暮らし',
-    headline: '資金調達に至らなくても、日本での1か月は充実します',
+    headline: '会社を築きに来て、素晴らしい人たちに惹かれて残る',
     lead: '神戸で過ごしたCohort 0の実際の写真です。食事、ラボ、旅、そして人々。',
   },
 
@@ -130,7 +129,13 @@ export const residencyJa: Residency = {
     ...residency.voices,
     eyebrow: '参加者の声',
     headline: 'Cohort 0より',
-    // TODO: testimonials are being collected.
+    // Translations of the English quotes (same people, same order). Draft: confirm with each founder.
+    items: [
+      {
+        quote: 'Mirai Tech Cityの皆さんのおかげで、ノーベル賞受賞者・山中伸弥教授の研究室を見学し、多くの優れた科学者を紹介していただきました。',
+        name: 'Max Koko', role: 'CEO・創業者', company: 'Probabilistic Bio',
+      },
+    ],
   },
 
   final: {
@@ -159,7 +164,7 @@ export const residencyJa: Residency = {
     'ufo-banner-01': { alt: '会場の入口ホールに立つ、Mirai Tech City Kobe 2026のウェルカムバナー。', caption: '会場入口のウェルカムバナー：サミットI、サミットII、デモデイ。' },
     'orbis-hall-interior-01': { alt: '開場前の神戸ファッション美術館オルビスホール。ステージとスクリーンに向かう階段状の客席。', caption: '' },
     'orbis-hall-interior-02': { alt: 'オルビスホールのステージ。スクリーンにサミットIIのスライド、横にMirai Tech Cityのバナースタンド。', caption: '' },
-    'lab-supercomputer-01': { alt: '暗い大きなホールで、ガラス越しに並ぶコンピューターの筐体。', caption: 'Cohort 0のラボ見学（2026年10月）。' },
+    'lab-supercomputer-01': { alt: '暗い大きなホールで、ガラス越しに並ぶコンピューターの筐体。', caption: 'Cohort 0で見学したスーパーコンピュータ「富岳」（2026年10月）。' },
     'ufo-loop': { alt: '夜の神戸ファッション美術館のUFOの映像。', caption: '' },
     'people-group-night-street-01': { alt: '夜の通りで寄り添い、カメラに笑顔を向ける大勢のグループ。', caption: '' },
     'meal-pub-01': { alt: '木の内装のパブで丸いテーブルを囲み、笑い合うグループ。', caption: 'みんなで夕食。' },

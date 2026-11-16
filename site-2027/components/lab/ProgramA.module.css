@@ -1,0 +1,54 @@
+/* Lab variant A, "Quiet monument". One display size (the statement) and one body size (the
+   four paragraphs); the opening already carries the giant type, so this section stays calm. */
+.program { position: relative; background: var(--night); color: var(--ink); overflow: hidden; padding: clamp(80px, 8.4vw, 132px) 6vw clamp(88px, 8vw, 120px); }
+/* One faint indigo wash behind the text block, faded out before both seams so they stay --night. */
+.program::before { content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(55% 32% at 22% 34%, color-mix(in srgb, var(--indigo) 26%, transparent), transparent 72%);
+  -webkit-mask-image: linear-gradient(180deg, transparent, #000 28%, #000 60%, transparent 85%); mask-image: linear-gradient(180deg, transparent, #000 28%, #000 60%, transparent 85%); }
+.inner { position: relative; max-width: 1440px; margin: 0 auto; }
+
+.top { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding-bottom: 20px; border-bottom: 1px solid var(--line); }
+.eyebrow { font-family: var(--mono); font-size: 11px; letter-spacing: .3em; text-transform: uppercase; color: var(--faint); margin: 0; }
+
+/* ── Mission: one statement, then a ruled two-by-two text block ── */
+.mission { padding: clamp(88px, 10vw, 168px) 0 clamp(72px, 8vw, 128px); }
+.statement { margin: 0; font-family: var(--font); font-weight: 500; font-size: clamp(46px, 7.2vw, 128px); line-height: 1; letter-spacing: -.035em; color: var(--ink); }
+.num { margin-left: -.04em; font-variant-numeric: lining-nums; }
+.unit { color: var(--accent); }
+.statement:lang(ja) { font-weight: 400; letter-spacing: 0; font-feature-settings: 'palt'; }
+
+.text { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(36px, 3.6vw, 56px) clamp(32px, 5vw, 96px); margin-top: clamp(64px, 7.2vw, 112px); }
+/* The hairline spans the column; the right padding caps the reading measure at 34em. */
+.text p { margin: 0; padding: 22px max(0px, calc(100% - 34em)) 0 0; border-top: 1px solid var(--line); font-size: clamp(16px, 1.25vw, 18px); line-height: 1.6; color: var(--dim); text-wrap: pretty; }
+.text p:first-child { color: var(--ink); }
+/* ASRM is told apart only by a gold hairline, never by size. */
+.text .asrm { border-top-color: rgba(var(--accent-rgb), .6); }
+.text p:lang(ja) { font-size: clamp(15px, 1.15vw, 17px); line-height: 1.9; letter-spacing: .02em; }
+
+@media (max-width: 900px) {
+  .text { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+  .text p { padding-top: 18px; }
+}
+
+/* ── What you get in four weeks (unchanged from Program.module.css) ── */
+.receive { margin-top: clamp(48px, 4vw, 56px); }
+.receiveHead { display: flex; justify-content: space-between; align-items: baseline; gap: 16px 32px; flex-wrap: wrap; padding-bottom: 18px; }
+.receiveTitle { margin: 0; font-weight: 800; font-size: clamp(28px, 3.6vw, 52px); line-height: 1; letter-spacing: -.02em; }
+.list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+.row { position: relative; display: grid; grid-template-columns: 64px minmax(0, 1fr) minmax(0, 1.1fr); grid-template-areas: "n title body"; gap: 8px clamp(20px, 3vw, 48px); align-items: center; min-height: clamp(84px, 7vw, 100px); padding: 14px clamp(112px, 11vw, 168px) 14px 0; border-bottom: 1px solid var(--line); outline: none; overflow: hidden; transition: background .6s var(--ease); }
+.n { grid-area: n; font-family: var(--mono); font-size: 11px; letter-spacing: .3em; color: var(--accent); }
+.title { grid-area: title; margin: 0; font-weight: 800; font-size: clamp(22px, 2.6vw, 40px); line-height: 1.05; letter-spacing: -.02em; }
+.body { grid-area: body; margin: 0; font-size: 16px; line-height: 1.6; color: var(--dim); max-width: 46ch; position: relative; z-index: 1; }
+.kanji { position: absolute; right: 0; top: 50%; font-family: var(--mincho); font-weight: 700; font-size: clamp(76px, 6.6vw, 96px); line-height: 1; color: rgba(var(--accent-rgb), .0); -webkit-text-stroke: 1px rgba(246, 241, 231, .22); transform: translateY(-50%); transition: color 1s var(--ease), -webkit-text-stroke-color 1s var(--ease), transform 1.1s var(--ease); pointer-events: none; }
+.row:hover, .row:focus-visible { background: linear-gradient(90deg, transparent, rgba(var(--accent-rgb), .05)); }
+.row:hover .kanji, .row:focus-visible .kanji { color: var(--accent); -webkit-text-stroke-color: var(--accent); transform: translateY(-50%) scale(1.04); }
+.row:focus-visible { box-shadow: inset 0 0 0 1px var(--accent); }
+
+@media (max-width: 900px) {
+  .row { grid-template-columns: 44px minmax(0, 1fr); grid-template-areas: "n title" ". body"; padding: 20px 104px 20px 0; align-items: start; }
+  .kanji { font-size: 88px; top: 20px; transform: none; }
+  .row:hover .kanji, .row:focus-visible .kanji { transform: scale(1.04); }
+}
+/* Phones: no room beside the text, so the ghost kanji are left out. */
+@media (max-width: 640px) { .row { padding-right: 0; } .kanji { display: none; } }
+@media (prefers-reduced-motion: reduce) { .row, .kanji { transition: none; } .row:hover .kanji, .row:focus-visible .kanji { transform: translateY(-50%); } }

@@ -21,6 +21,12 @@ const PHOTO = '/img/fuji/fuji-dawn.webp';
 const keepHyphens = (text: string) =>
   text.split(/(\S+-\S+)/).map((part, i) => (i % 2 ? <span key={i} className={s.nb}>{part}</span> : part));
 
+// Width of the giant word in em (Switzer 900, uppercase, −.04em tracking), measured in the
+// browser. The word's size, the line above it and the seal are placed from this. When
+// hero.word changes, measure the new word and add it here; others get a wide estimate.
+const WORD_EM: Record<string, number> = { FUJI: 1.996, JAPAN: 3.108 };
+const wordEm = (word: string) => WORD_EM[word.toUpperCase()] ?? word.length * 0.66;
+
 const clamp01 = (n: number) => Math.min(1, Math.max(0, n));
 const inOut = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
 const out = (t: number) => 1 - Math.pow(1 - t, 3);
@@ -29,14 +35,13 @@ const VARS = ['--zoom', '--sink', '--copy', '--sun', '--survey', '--dark', '--le
 export function Opening({ r = residency }: { r?: Residency } = {}) {
   const NEW_TAB = <span className={s.sr}> {r.newTab}</span>;
   const SURVEY = r.hero.survey;
-  const pre = r.hero.pre; // "A month at Mount"
-  const word = r.hero.word; // "Fuji"
+  const pre = r.hero.pre; // "Build Your Biotech Startup in"
+  const word = r.hero.word; // "Japan"
   // First sentence vs the rest; works for ". " (English) and "。" (Japanese).
   const m = r.hero.sub.match(/^(.+?[.。])\s*([\s\S]*)$/);
   const lead = m ? m[1] : r.hero.sub;
   const rest = m ? m[2] : '';
   const [story1, story2, close] = r.legend.paragraphs;
-  const meta = r.hero.meta.map(m => <li key={m}>{m}</li>);
   const track = useRef<HTMLDivElement>(null);
   const stage = useRef<HTMLDivElement>(null);
   const legend = useRef<HTMLDivElement>(null);
@@ -104,7 +109,7 @@ export function Opening({ r = residency }: { r?: Residency } = {}) {
 
   return (
     <div className={s.track} id="top" ref={track}>
-      <div className={s.stage} ref={stage}>
+      <div className={s.stage} ref={stage} style={{ '--wem': wordEm(word) } as React.CSSProperties}>
         {/* back: the whole photograph (sky) */}
         <div className={`${s.scene} ${s.back}`}>
           <div className={s.settle}>
@@ -157,12 +162,10 @@ export function Opening({ r = residency }: { r?: Residency } = {}) {
           <span>{SURVEY[0]}</span><span className={s.sep} aria-hidden="true"> · </span><span>{SURVEY[1]}</span>
         </p>
         <span className={s.seal} aria-hidden="true">{r.hero.kanji}</span>
-        <ul className={s.metaTop}>{meta}</ul>
 
         <div className={s.foot}>
           <p className={s.lead}>{keepHyphens(lead)}</p>
           <p className={s.rest}>{rest}</p>
-          <ul className={s.meta}>{meta}</ul>
           <div className={s.ctas}>
             <a className={s.apply} href={r.applyHref} target="_blank" rel="noopener noreferrer">
               {r.apply}<span className={s.arrow} aria-hidden="true">↗</span>{NEW_TAB}

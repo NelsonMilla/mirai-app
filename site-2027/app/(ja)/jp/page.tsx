@@ -4,5 +4,5 @@ import { residencyJa } from '@/content/residency.ja';
 export const metadata = homeMetadata(residencyJa, 'ja');
 
 export default function HomeJa() {
-  return <HomePage r={residencyJa} lang="ja" skip="プログラムへ移動" />;
+  return <HomePage r={residencyJa} lang="ja" skip="プログラムを見る" />;
 }

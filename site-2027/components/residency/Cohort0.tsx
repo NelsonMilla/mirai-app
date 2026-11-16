@@ -9,19 +9,24 @@
 // Without JS or with reduced motion everything renders in its finished state; JS only
 // arms the entrance when the figure starts below the fold, and plays the video in view.
 import Image from 'next/image';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, type CSSProperties } from 'react';
 import { residency, type Residency } from '@/content/residency';
 import speakers from '@/content/speakers-2026.json';
 import s from './Cohort0.module.css';
 
-// Left to right, Kobe University → Harvard. Joe Betts-LaCroix is left out on purpose
-// (never beside Aubrey de Grey or Natalie Coles de Grey).
+// Left to right, Kobe University → Harvard. Joe Betts-LaCroix is never beside Aubrey de
+// Grey or Natalie Coles de Grey: keep Watanabe between them (8 across on desktop) and Joe
+// off Aubrey's column (4 across on phones: Aubrey ends row one, Joe is second in row two).
 const FACES = [
   'takashi_aoi', 'motoshi_hayano', 'rie_yano', 'aubrey_de_grey',
-  'masataka_watanabe', 'florian_geier', 'louise_hecker', 'george_church',
+  'masataka_watanabe', 'joe_betts_lacroix', 'louise_hecker', 'george_church',
 ]
   .map(id => speakers.find(p => p.id === id))
   .filter((p): p is (typeof speakers)[number] => Boolean(p));
+// Photos that are not headshots, zoomed so the face fills the disc like the others.
+const FACE_CROP: Record<string, CSSProperties> = {
+  joe_betts_lacroix: { transform: 'translate(25%, 45%) scale(1.9)' }, // waist-up shot on black
+};
 // "Prof. George Church, PhD" → "George Church"
 const plainName = (name: string) => name.replace(/^(Prof\.|Dr\.)\s+/, '').replace(/,.*$/, '');
 
@@ -177,7 +182,7 @@ export function Cohort0({ r = residency }: { r?: Residency } = {}) {
             {FACES.map(p => (
               <li key={p.id}>
                 <span className={`${s.face} grain`}>
-                  <Image className="grade" src={p.photo} alt="" fill sizes="64px" />
+                  <Image className="grade" src={p.photo} alt="" fill sizes={FACE_CROP[p.id] ? '128px' : '64px'} style={FACE_CROP[p.id]} />
                 </span>
                 <span className={s.name}>{plainName(p.name)}</span>
               </li>

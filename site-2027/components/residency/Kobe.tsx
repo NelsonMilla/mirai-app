@@ -228,14 +228,16 @@ export function Kobe({ r = residency }: { r?: Residency } = {}) {
   const lab = tx(file(LAB), LAB);
   const day = tx(file(DAY), DAY);
   const loop = tx('ufo-loop', LOOP_STILL);
-  // "Port Island · Kobe Biomedical Innovation Cluster" → island, stop ("・" in Japanese).
+  // A place may start with its island: "Rokko Island · Kobe Fashion Museum" → stop "Kobe Fashion
+  // Museum" ("・" in Japanese). The map's island names come from the route line instead.
   const split = (place: string) => {
     const m = place.match(/^(.+?)\s*([·・])\s*(.+)$/);
-    return m ? { island: m[1], stop: m[3], sep: m[2] === '・' ? '・' : ' · ' } : { island: place, stop: place, sep: ' · ' };
+    return m ? { stop: m[3], sep: m[2] === '・' ? '・' : ' · ' } : { stop: place, sep: ' · ' };
   };
   const port = split(k.meetings.place);
   const rokko = split(k.demo.place);
-  const labels = { port: port.island, rokko: rokko.island, route: k.route, kbic: port.stop, ufo: rokko.stop };
+  const [portIsland, rokkoIsland] = k.route.split(/\s*→\s*/); // "Port Island → Rokko Island"
+  const labels = { port: portIsland, rokko: rokkoIsland, route: k.route, kbic: port.stop, ufo: rokko.stop };
   // Two display lines: split after the colon ("：" in Japanese).
   const hm = k.headline.match(/^(.+?[:：])\s*([\s\S]*)$/);
   const [head1, head2] = hm ? [hm[1], hm[2]] : [k.headline, ''];

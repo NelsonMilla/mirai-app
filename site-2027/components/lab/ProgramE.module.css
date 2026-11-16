@@ -1,0 +1,75 @@
+/* Lab variant E · "Still frame". One display size (the statement), one lead size, one body size.
+   The photo carries the feeling: full-bleed, warm-graded, rising out of --night under the
+   statement. Nothing moves. Type never sits over faces: the statement only touches the photo's
+   faded ceiling band, everything else is set below the frame. */
+.program { position: relative; background: var(--night); color: var(--ink); overflow: hidden; padding: clamp(80px, 8.4vw, 132px) 6vw clamp(88px, 8vw, 120px); }
+.inner { position: relative; max-width: 1440px; margin: 0 auto; }
+
+.top { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding-bottom: 20px; border-bottom: 1px solid var(--line); }
+.eyebrow { font-family: var(--mono); font-size: 11px; letter-spacing: .3em; text-transform: uppercase; color: var(--faint); margin: 0; }
+
+/* ── Mission: statement → the still frame → lead → three ruled paragraphs ── */
+.mission { --big: clamp(46px, 7vw, 120px); padding: clamp(52px, 5.6vw, 88px) 0 clamp(72px, 8vw, 128px); }
+.statement { position: relative; z-index: 1; margin: 0; font-family: var(--font); font-weight: 800; font-size: var(--big); line-height: 1; letter-spacing: -.03em; color: var(--ink); }
+.num { margin-left: -.04em; }
+.digits { font-family: var(--font-switzer), sans-serif; }
+.unit { color: var(--accent); }
+.statement:lang(ja) { font-weight: 700; letter-spacing: 0; font-feature-settings: 'palt'; }
+.statement:lang(ja) .digits { letter-spacing: -.03em; }
+
+/* The still: edge to edge, starting half a line above the statement's baseline. Its top band
+   is the ceiling and the lamp (no faces), masked into --night so the room rises out of the dark
+   under the words. Height: a screen tall where it can be, never wider than 1.82:1 (a shorter
+   crop would cut the chin of the man in front) and never taller than 3:2. */
+.still { margin: calc(var(--big) * -.5) 0 0; }
+.frame { position: relative; width: 100vw; margin-left: calc(50% - 50vw); height: clamp(55vw, 100svh, 66.667vw); overflow: hidden; background: var(--night);
+  -webkit-mask-image: linear-gradient(180deg, transparent 0, rgba(0,0,0,.35) 9%, #000 22%, #000 96%, transparent 100%);
+          mask-image: linear-gradient(180deg, transparent 0, rgba(0,0,0,.35) 9%, #000 22%, #000 96%, transparent 100%); }
+.img { object-fit: cover; }
+.cap { margin: 14px 0 0; text-align: right; font-family: var(--mono); font-size: 10.5px; line-height: 1.5; letter-spacing: .2em; text-transform: uppercase; color: var(--faint); }
+.cap:lang(ja) { letter-spacing: .12em; }
+
+.lead { margin: clamp(24px, 2.6vw, 40px) 0 0; max-width: 32em; font-size: clamp(19px, 1.7vw, 24px); line-height: 1.45; font-weight: 500; color: var(--ink); text-wrap: pretty; }
+.lead:lang(ja) { max-width: 30em; font-size: clamp(17px, 1.45vw, 21px); line-height: 1.75; letter-spacing: .02em; }
+
+.text { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px clamp(28px, 3.6vw, 64px); margin-top: clamp(48px, 5vw, 80px); }
+.text p { margin: 0; padding-top: 22px; border-top: 1px solid var(--line); font-size: clamp(16px, 1.2vw, 17px); line-height: 1.6; color: var(--dim); max-width: 34em; text-wrap: pretty; }
+/* ASRM, the key claim: full cream under a gold hairline, never bigger. */
+.text .asrm { color: var(--ink); border-top-color: rgba(var(--accent-rgb), .6); }
+.text p:lang(ja) { font-size: clamp(15px, 1.1vw, 16px); line-height: 1.9; letter-spacing: .02em; }
+
+@media (max-width: 900px) {
+  .text { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+  .text p { padding-top: 18px; }
+}
+/* Phones: the whole 4:3 frame, nobody cropped; caption reads from the left like the text. */
+@media (max-width: 640px) {
+  .still { margin-top: calc(var(--big) * -.25); }
+  .frame { height: 75vw;
+    -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 16%, #000 97%, transparent 100%);
+            mask-image: linear-gradient(180deg, transparent 0, #000 16%, #000 97%, transparent 100%); }
+  .cap { text-align: left; }
+}
+
+/* ── What you get in four weeks ── */
+.receive { margin-top: clamp(48px, 4vw, 56px); }
+.receiveHead { display: flex; justify-content: space-between; align-items: baseline; gap: 16px 32px; flex-wrap: wrap; padding-bottom: 18px; }
+.receiveTitle { margin: 0; font-weight: 800; font-size: clamp(28px, 3.6vw, 52px); line-height: 1; letter-spacing: -.02em; }
+.list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+.row { position: relative; display: grid; grid-template-columns: 64px minmax(0, 1fr) minmax(0, 1.1fr); grid-template-areas: "n title body"; gap: 8px clamp(20px, 3vw, 48px); align-items: center; min-height: clamp(84px, 7vw, 100px); padding: 14px clamp(112px, 11vw, 168px) 14px 0; border-bottom: 1px solid var(--line); outline: none; overflow: hidden; transition: background .6s var(--ease); }
+.n { grid-area: n; font-family: var(--mono); font-size: 11px; letter-spacing: .3em; color: var(--accent); }
+.title { grid-area: title; margin: 0; font-weight: 800; font-size: clamp(22px, 2.6vw, 40px); line-height: 1.05; letter-spacing: -.02em; }
+.body { grid-area: body; margin: 0; font-size: 16px; line-height: 1.6; color: var(--dim); max-width: 46ch; position: relative; z-index: 1; }
+.kanji { position: absolute; right: 0; top: 50%; font-family: var(--mincho); font-weight: 700; font-size: clamp(76px, 6.6vw, 96px); line-height: 1; color: rgba(var(--accent-rgb), .0); -webkit-text-stroke: 1px rgba(246, 241, 231, .22); transform: translateY(-50%); transition: color 1s var(--ease), -webkit-text-stroke-color 1s var(--ease), transform 1.1s var(--ease); pointer-events: none; }
+.row:hover, .row:focus-visible { background: linear-gradient(90deg, transparent, rgba(var(--accent-rgb), .05)); }
+.row:hover .kanji, .row:focus-visible .kanji { color: var(--accent); -webkit-text-stroke-color: var(--accent); transform: translateY(-50%) scale(1.04); }
+.row:focus-visible { box-shadow: inset 0 0 0 1px var(--accent); }
+
+@media (max-width: 900px) {
+  .row { grid-template-columns: 44px minmax(0, 1fr); grid-template-areas: "n title" ". body"; padding: 20px 104px 20px 0; align-items: start; }
+  .kanji { font-size: 88px; top: 20px; transform: none; }
+  .row:hover .kanji, .row:focus-visible .kanji { transform: scale(1.04); }
+}
+/* Phones: no room beside the text, so the ghost kanji are left out. */
+@media (max-width: 640px) { .row { padding-right: 0; } .kanji { display: none; } }
+@media (prefers-reduced-motion: reduce) { .row, .kanji { transition: none; } .row:hover .kanji, .row:focus-visible .kanji { transform: translateY(-50%); } }

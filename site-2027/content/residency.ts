@@ -32,11 +32,12 @@ export const residency = {
     // Used by the /lab design-round variants only (the shipped opening uses pre + word).
     claims: ['A month at Mount Fuji', 'Build your company at Mount Fuji', 'Four weeks in Japan. One Demo Day.'],
     sub: 'A one-month residency for early-stage regenerative medicine startups. Three weeks of focused work at the foot of Mount Fuji, one week of meetings in Kobe, and a Demo Day with investors including Tim Draper.',
+    // Used by the /lab design-round variants only (Nelson removed the tags from the opening, Nov 16 2026).
     meta: ['March 2027', 'Mount Fuji → Kobe', 'Regenerative medicine'],
     kanji: '不死', // fushi, "without death": one old reading of the name Fuji
     // The giant word set behind the summit, and the line above it.
-    pre: 'A month at Mount',
-    word: 'Fuji',
+    pre: 'Build Your Biotech Startup in',
+    word: 'Japan',
     survey: ['3,776 m', '35.3606° N 138.7274° E'],
     scrollCue: 'Scroll',
   },
@@ -44,11 +45,11 @@ export const residency = {
   // ── The legend (why Fuji) ────────────────────────────────
   legend: {
     eyebrow: 'Why Fuji',
-    headline: "Some of Fuji's oldest legends are about the search for eternal life",
+    headline: "Fuji's oldest legends are about the search for eternal life",
     paragraphs: [
-      'One legend says the first emperor of China sent Xu Fu across the sea to find the elixir of immortality, and that he landed in Japan.',
+      'The first emperor of China sent Xu Fu across the sea to find the elixir of immortality, and he landed in Japan.',
       'In The Tale of the Bamboo Cutter, often called the oldest Japanese story, an emperor has the elixir of life burned on the summit of Mount Fuji, the mountain closest to heaven. One popular reading of the name is 不死, fushi: without death.',
-      'In March, we bring founders who are working on the real thing to the mountain.',
+      'We are bringing founders who are working on the real thing to the mountain.',
     ],
   },
 
@@ -96,9 +97,10 @@ export const residency = {
   // venue we use"). Photos: content/photos-kobe.json.
   kobe: {
     eyebrow: 'Week 4 · Kobe',
-    headline: 'The last week: meetings in Kobe, then Demo Day',
+    headline: 'The last week: meetings + Demo Day',
     meetings: {
-      place: 'Port Island · Kobe Biomedical Innovation Cluster',
+      // A place may start with its island ("Island · Place"); the map's island names come from `route`.
+      place: 'Kobe Biomedical Innovation Cluster',
       title: 'Meetings',
       body: "Move into the Kobe Biomedical Innovation Cluster on Port Island, Japan's largest biomedical cluster. We arrange meetings with the people and organizations you mapped in the first three weeks.",
     },
@@ -126,7 +128,7 @@ export const residency = {
   // ── Cohort 0 (proof) ─────────────────────────────────────
   cohort0: {
     eyebrow: 'Cohort 0 · Kobe, October 2026',
-    headline: 'Seven came. Five are building a base in Japan.',
+    headline: 'Five out of seven are building a base in Japan.',
     lead: 'Seven companies came to do business in Japan for the first time. Five are now working to establish a permanent presence here. Some were picked up by Antler, others received in-kind support from GlobalDeal, and every one of them made new partnerships in Japan.',
     stats: [
       { value: '7', label: 'First-time Japan entrants' },
@@ -135,8 +137,9 @@ export const residency = {
       { value: '76', label: 'Speakers' },
       { value: '17', label: 'Demo Day teams' },
     ],
-    // The five establishing a permanent presence (results report p.10). Plans in progress, Nov 2026.
-    companies: ['Avenyx Bio', 'aeon.science', 'Cingularity', 'Muse Bio', 'Biokami'],
+    // The five establishing a permanent presence (results report p.10; Nelson swapped Biokami for
+    // Probabilistic Bio on Nov 16 2026). Plans in progress, Nov 2026.
+    companies: ['Avenyx Bio', 'aeon.science', 'Cingularity', 'Muse Bio', 'Probabilistic Bio'],
     companiesLabel: 'Establishing a permanent presence in Japan',
     note: 'Company plans in progress, November 2026.',
     filmCaption: 'Demo Day · Kobe · Oct 26 2026',
@@ -148,7 +151,7 @@ export const residency = {
   // ── Life (real photos) ───────────────────────────────────
   life: {
     eyebrow: 'Life in Japan',
-    headline: "Even if you don't raise, you'll have a great month in Japan",
+    headline: 'Come to build your company, stay for the great people',
     lead: 'Real photos from Cohort 0 in Kobe: the dinners, the labs, the trips, the people.',
   },
 
@@ -156,8 +159,13 @@ export const residency = {
   voices: {
     eyebrow: 'In their words',
     headline: 'From Cohort 0',
-    // TODO: testimonials are being collected. { quote, name, role, company }
-    items: [] as { quote: string; name: string; role: string; company?: string }[],
+    // Testimonials from Cohort 0 founders (more being collected). { quote, name, role, company }
+    items: [
+      {
+        quote: "Thanks to you at Mirai Tech City, I toured Nobel laureate Yamanaka's lab and was introduced to many brilliant scientists.",
+        name: 'Max Koko', role: 'CEO, Founder', company: 'Probabilistic Bio',
+      },
+    ] as { quote: string; name: string; role: string; company?: string }[],
   },
 
   // ── Final call ───────────────────────────────────────────
@@ -184,10 +192,10 @@ export const residency = {
   photoText: {
     // English overrides where the page shows a photo differently from the manifest.
     'ufo-exterior-day-01': { alt: 'The white saucer-shaped entrance of the Kobe Fashion Museum above a wide stone staircase.', caption: 'The Kobe Fashion Museum entrance on Rokko Island.' },
-    'lab-supercomputer-01': { alt: 'Rows of computer cabinets behind a glass wall in a large dark hall.', caption: 'A lab tour during Cohort 0, October 2026.' },
+    'lab-supercomputer-01': { alt: 'Rows of computer cabinets behind a glass wall in a large dark hall.', caption: 'Fugaku supercomputer during Cohort 0, October 2026.' },
   } as Record<string, { alt: string; caption?: string }>,
   // Readings shown under each section's kanji mark (romaji in English, hiragana in Japanese).
-  marks: { program: 'Mirai', month: 'Fuji', kobe: 'Butai · The stage', cohort: 'Jisseki', life: 'Kurashi · Daily life', apply: 'Ōbo · Apply' },
+  marks: { program: 'Mirai', month: 'Fuji', kobe: 'The stage', cohort: 'Jisseki', life: 'Kurashi · Daily life', apply: 'Ōbo · Apply' },
   ui: { source: 'Source', primaryNav: 'Primary', footerNav: 'Footer', menu: 'Menu', close: 'Close', play: 'Play', pause: 'Pause', rss: 'RSS' },
 
   credits: 'Mt. Fuji and Lake Shojiko at sunrise, by hogeasdf, CC BY 2.0, via Wikimedia Commons. Colour graded and cropped.',

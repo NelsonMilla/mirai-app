@@ -1,0 +1,82 @@
+/* Lab variant I · "Problem, then promise". Mission: two statements at one display size, the
+   problem in cool slate, the promise in dawn gold, numbers stacked in their own column. One
+   gesture (the promise arrives once, ≤1.2 s, opacity and a short rise). Sizes: one display
+   (the pair), one lead, one body. No glow, no sky: the ground is plain --night. */
+.program { position: relative; background: var(--night); color: var(--ink); overflow: hidden; padding: clamp(80px, 8.4vw, 132px) 6vw clamp(88px, 8vw, 120px); }
+.inner { position: relative; max-width: 1440px; margin: 0 auto; }
+
+.top { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding-bottom: 20px; border-bottom: 1px solid var(--line); }
+.eyebrow { font-family: var(--mono); font-size: 11px; letter-spacing: .3em; text-transform: uppercase; color: var(--faint); margin: 0; }
+
+/* ── Mission: one grid. Column 1 holds the two numbers (so they stand exactly one above the
+   other), column 2 the words after them; the text below hangs from column 2. The column gap
+   is one word space at display size (none in Japanese). ── */
+.mission {
+  --slate: #7886a2;
+  display: grid; grid-template-columns: max-content minmax(0, 1fr); column-gap: .24em; align-items: start;
+  padding: clamp(64px, 6.4vw, 104px) 0 clamp(72px, 8vw, 128px);
+  font-size: clamp(min(34px, 8.6vw), 5.6vw, 92px);
+}
+.mission:lang(ja) { column-gap: 0; font-size: clamp(min(26px, 6.9vw), 4.6vw, 76px); }
+
+.line { grid-column: 1 / -1; display: grid; grid-template-columns: subgrid; margin: 0; font-family: var(--font); font-size: 1em; font-weight: 800; line-height: 1.02; letter-spacing: -.03em; }
+.line:lang(ja) { font-weight: 700; line-height: 1.2; letter-spacing: 0; font-feature-settings: 'palt'; }
+.before { grid-column: 1 / -1; }
+.num { grid-column: 1; }
+.w { grid-column: 2; }
+.digits { font-family: var(--font-switzer), sans-serif; }
+.line:lang(ja) .digits { letter-spacing: -.03em; }
+
+/* The problem: cool slate, readable (5.5:1 on --night), never ghosted. */
+.problem { color: var(--slate); }
+/* The promise: the same number, in dawn gold, one short beat below. */
+.promise { margin-top: .14em; color: var(--accent); }
+
+/* The text hangs from the word column: who we are + the goal as the lead, then ASRM and Kobe
+   in one column, each under a hairline. */
+.lead { grid-column: 2; margin: clamp(40px, 4.4vw, 72px) 0 0; max-width: 31em; font-size: clamp(19px, 1.7vw, 24px); line-height: 1.45; font-weight: 500; color: var(--ink); text-wrap: pretty; }
+.lead:lang(ja) { max-width: 30em; font-size: clamp(17px, 1.45vw, 21px); line-height: 1.75; letter-spacing: .02em; }
+.text { grid-column: 2; max-width: 40rem; margin-top: clamp(40px, 4vw, 64px); }
+.text p { margin: 0; padding: 20px 0 24px; border-top: 1px solid var(--line); font-size: clamp(16px, 1.2vw, 17px); line-height: 1.6; color: var(--dim); text-wrap: pretty; }
+/* ASRM, the key claim: full cream under a gold hairline, never bigger. */
+.text .asrm { color: var(--ink); border-top-color: rgba(var(--accent-rgb), .6); }
+.text p:lang(ja) { font-size: clamp(15px, 1.1vw, 16px); line-height: 1.9; letter-spacing: .02em; }
+
+/* Phones: the pair keeps its number column; the text reads from the left edge. */
+@media (max-width: 640px) {
+  .lead, .text { grid-column: 1 / -1; }
+}
+
+/* ── The one gesture: the promise is held back only when JS runs and motion is allowed, and
+   arrives once when the problem reaches the upper two thirds of the screen (data-in, from an
+   IntersectionObserver). Without JS or with reduced motion it is simply there. ── */
+.promise { transition: opacity 1.2s var(--ease) .5s, transform 1.2s var(--ease) .5s; }
+@media (scripting: enabled) and (prefers-reduced-motion: no-preference) {
+  .program:not([data-in]) .promise { opacity: 0; transform: translateY(.16em); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .promise { transition: none; }
+}
+
+/* ── What you get in four weeks ── */
+.receive { margin-top: clamp(48px, 4vw, 56px); }
+.receiveHead { display: flex; justify-content: space-between; align-items: baseline; gap: 16px 32px; flex-wrap: wrap; padding-bottom: 18px; }
+.receiveTitle { margin: 0; font-weight: 800; font-size: clamp(28px, 3.6vw, 52px); line-height: 1; letter-spacing: -.02em; }
+.list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+.row { position: relative; display: grid; grid-template-columns: 64px minmax(0, 1fr) minmax(0, 1.1fr); grid-template-areas: "n title body"; gap: 8px clamp(20px, 3vw, 48px); align-items: center; min-height: clamp(84px, 7vw, 100px); padding: 14px clamp(112px, 11vw, 168px) 14px 0; border-bottom: 1px solid var(--line); outline: none; overflow: hidden; transition: background .6s var(--ease); }
+.n { grid-area: n; font-family: var(--mono); font-size: 11px; letter-spacing: .3em; color: var(--accent); }
+.title { grid-area: title; margin: 0; font-weight: 800; font-size: clamp(22px, 2.6vw, 40px); line-height: 1.05; letter-spacing: -.02em; }
+.body { grid-area: body; margin: 0; font-size: 16px; line-height: 1.6; color: var(--dim); max-width: 46ch; position: relative; z-index: 1; }
+.kanji { position: absolute; right: 0; top: 50%; font-family: var(--mincho); font-weight: 700; font-size: clamp(76px, 6.6vw, 96px); line-height: 1; color: rgba(var(--accent-rgb), .0); -webkit-text-stroke: 1px rgba(246, 241, 231, .22); transform: translateY(-50%); transition: color 1s var(--ease), -webkit-text-stroke-color 1s var(--ease), transform 1.1s var(--ease); pointer-events: none; }
+.row:hover, .row:focus-visible { background: linear-gradient(90deg, transparent, rgba(var(--accent-rgb), .05)); }
+.row:hover .kanji, .row:focus-visible .kanji { color: var(--accent); -webkit-text-stroke-color: var(--accent); transform: translateY(-50%) scale(1.04); }
+.row:focus-visible { box-shadow: inset 0 0 0 1px var(--accent); }
+
+@media (max-width: 900px) {
+  .row { grid-template-columns: 44px minmax(0, 1fr); grid-template-areas: "n title" ". body"; padding: 20px 104px 20px 0; align-items: start; }
+  .kanji { font-size: 88px; top: 20px; transform: none; }
+  .row:hover .kanji, .row:focus-visible .kanji { transform: scale(1.04); }
+}
+/* Phones: no room beside the text, so the ghost kanji are left out. */
+@media (max-width: 640px) { .row { padding-right: 0; } .kanji { display: none; } }
+@media (prefers-reduced-motion: reduce) { .row, .kanji { transition: none; } .row:hover .kanji, .row:focus-visible .kanji { transform: translateY(-50%); } }

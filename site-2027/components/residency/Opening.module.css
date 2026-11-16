@@ -38,11 +38,13 @@
   --oy: clamp(100cqh - 1063 * var(--u), 72cqh - 710 * var(--u), 0px);
   --peak-x: calc(var(--ox) + 1110 * var(--u));
   --peak-y: calc(var(--oy) + 468 * var(--u));
-  /* the word: as wide as the screen allows, its cap top no higher than --top,
-     its baseline --ov of the cap height below the summit */
+  /* the word: as wide as the screen allows (at most 92cqw; --wem is its width in em, set
+     from the component), its cap top no higher than --top, its baseline --ov of the cap
+     height below the summit */
+  --wem: 1.996;
   --ov: .27;
   --top: calc(104px + 2cqw);
-  --f: min(46cqw, (var(--peak-y) - var(--top)) / (.68 * (1 - var(--ov))));
+  --f: min(91.8cqw / var(--wem), (var(--peak-y) - var(--top)) / (.68 * (1 - var(--ov))));
   --cap-top: calc(var(--peak-y) - (1 - var(--ov)) * .68 * var(--f));
   /* the row above the word (pre-line and seal) */
   --row: calc(100cqh - var(--cap-top) + clamp(12px, 1.6cqh, 22px));
@@ -125,21 +127,21 @@
 
 .pre {
   position: absolute; z-index: 7;
-  left: max(20px, 50cqw - .948 * var(--f));
+  left: max(20px, 50cqw - (var(--wem) / 2 - .05) * var(--f)); /* the first letter's left edge */
   bottom: var(--row);
   font-size: clamp(17px, 2cqw, 34px); font-weight: 500; letter-spacing: -.01em; line-height: 1.1;
   color: var(--ink); text-shadow: 0 1px 18px rgba(5, 9, 26, .45);
   opacity: var(--copy);
 }
 .pre > span { display: block; animation: fadeUp .9s .25s var(--ease) both; }
-/* /jp: "1か月の舞台は" leads straight into FUJI; the Japanese face needs its heavier cut and a
+/* /jp: "バイオテックで起業するなら" leads straight into the word; the Japanese face needs its heavier cut and a
    little air to sit at the same weight as the English line and read as one phrase with it */
 .pre:lang(ja) { font-weight: 600; letter-spacing: .04em; font-feature-settings: 'palt'; white-space: nowrap; }
 
 /* the brand seal: 不死, white on vermilion, stamped once at the end of the title row */
 .seal {
   position: absolute; z-index: 7;
-  right: max(16px, 50cqw - 1.008 * var(--f));
+  right: max(16px, 50cqw - (var(--wem) / 2 + .01) * var(--f)); /* the last letter's right edge */
   bottom: var(--row);
   display: block; writing-mode: vertical-rl;
   font-family: var(--mincho); font-weight: 700; font-size: clamp(14px, 1.1cqw, 19px);
@@ -262,14 +264,6 @@
 }
 .rest { margin-top: 12px; font-size: 15px; line-height: 1.55; color: var(--dim); text-wrap: pretty; }
 .nb { white-space: nowrap; }
-.meta, .metaTop {
-  list-style: none; display: flex; flex-wrap: wrap; row-gap: 6px;
-  font-family: var(--mono); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--ink);
-}
-.meta { margin-top: 20px; padding-top: 14px; border-top: 1px solid var(--line); }
-.meta li:not(:last-child)::after, .metaTop li:not(:last-child)::after { content: '/'; margin: 0 .9em; color: var(--faint); }
-/* narrow screens only: the facts sit in the empty sky above the headline */
-.metaTop { display: none; }
 .ctas { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 24px; margin-top: 22px; }
 /* the site's one primary button: the dawn-gold pill (README rule 8) */
 .apply {
@@ -383,14 +377,6 @@
   .foot { left: max(20px, 5cqw); right: max(20px, 5cqw); width: auto; max-width: 620px; bottom: 24px; }
   .lead { font-size: clamp(21px, 3.2cqw, 26px); }
   .rest { font-size: 14px; margin-top: 10px; max-width: 54ch; }
-  .foot .meta { display: none; }
-  .metaTop {
-    display: flex; position: absolute; z-index: 7; left: max(20px, 5cqw); right: max(20px, 5cqw);
-    bottom: calc(var(--row) + 40px);
-    font-size: 10.5px; letter-spacing: .12em; line-height: 1.5;
-    opacity: var(--copy); animation: fadeUp 1s .45s var(--ease) backwards;
-  }
-  .metaTop li:not(:last-child)::after { margin: 0 .6em; }
   .ctas { margin-top: 18px; gap: 4px 22px; }
   .apply { min-height: 50px; padding: 0 22px; }
   .cue { left: auto; right: max(20px, 5cqw); bottom: 24px; align-items: flex-end; }
@@ -432,7 +418,7 @@
 
 /* reduced motion: the finished composition at once, nothing animates */
 @media (prefers-reduced-motion: reduce) {
-  .settle, .glyph, .pre > span, .seal, .foot > *, .metaTop, .cue i::after, .sun::before { animation: none; }
+  .settle, .glyph, .pre > span, .seal, .foot > *, .cue i::after, .sun::before { animation: none; }
   .sun::before { opacity: .6; }
   .cue i::after { top: 30%; }
   .apply { transition: none; }

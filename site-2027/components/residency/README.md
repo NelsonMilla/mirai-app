@@ -2,7 +2,7 @@
 
 The homepage is the landing page for the **Mirai Tech City Residency, March 2027**
 (brief: `site-2027/brief.md`). Its look comes from the opening round's winner
-(`/lab/a`, "Monument": giant FUJI behind the real summit). Every section follows
+(`/lab/a`, "Monument": giant word behind the real summit, now JAPAN). Every section follows
 these rules so the page reads as one piece.
 
 ## Content
