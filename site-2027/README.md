@@ -46,7 +46,6 @@ canonical URL, Open Graph + Twitter cards (cover image, else the site image),
 schema.org `BlogPosting` JSON-LD, `/sitemap.xml`, `/robots.txt` and an RSS feed
 at `/blog/rss.xml`. Drafts are `noindex` and never reach the sitemap or feed.
 Add `updated: YYYY-MM-DD` when you meaningfully edit a published post.
-`style-preview.md` is a draft showing every element; keep it for style checks.
 
 Design (borrowed moves, see `.impeccable/benchmarks/`): category tabs and a
 lead story on `/blog`, numbered issues ("No. 03"), a full-bleed hero with the
@@ -55,8 +54,7 @@ numbered wide figures (`![alt](src "caption")` on its own line), pull quotes
 from `>` blocks, a sign-off, author/company credits, and a "Next story" block.
 Categories: Companies, Science, Residents, Kobe, News (`category:` frontmatter).
 
-Files starting with `_` are ignored. `example-post.md` and `demo-*.md` are draft demos (cover photos are
-stand-ins from new-site); delete them once real posts are in. Parsing is `gray-matter` + `marked` in
+Files starting with `_` are ignored. Parsing is `gray-matter` + `marked` in
 `lib/posts.ts`; pages are `app/blog/page.tsx` and `app/blog/[slug]/page.tsx`,
 all generated at build time.
 
