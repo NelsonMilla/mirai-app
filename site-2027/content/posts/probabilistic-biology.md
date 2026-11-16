@@ -6,7 +6,8 @@ seoDescription: "★ Demo Day 2026 winner Max Koko on Probabilistic Biology's da
 summary: Max Koko won Mirai Tech City's Demo Day in Kobe and a place at Antler Japan. Probabilistic Biology wants to run mouse experiments like cloud computing.
 shareImage: /img/blog/probabilistic-biology/share.jpg
 category: Companies
-author: Mirai Tech City
+author: Nelson Milla
+authorRole: Co-founder, Mirai Tech City
 company:
   name: Probabilistic Biology
   url: https://meet.probabilistic.bio/
@@ -18,7 +19,7 @@ tags: [Demo Day, Founders, Antler]
 draft: false
 ---
 
-When Max Koko pitched at our Demo Day in Kobe on 26 October, he was one of about 20 longevity, biotech and medtech founders in front of a jury of investors. He won, and his prize was a place in Antler Japan's residency, which selects fewer than 5% of its applicants.
+When Max Koko pitched at our Demo Day in Kobe on 26 October, he was one of about 20 longevity, biotech and medtech founders from around the world in front of a jury of investors. He won, and his prize was a place in Antler Japan's residency, which selects fewer than 5% of its applicants.
 
 His company, Probabilistic Biology, wants to make animal experiments work more like cloud computing: a datacenter of cages fitted with non-invasive sensors, starting with mice, where every animal yields far more data and experiments can be run from a laptop. We asked him why he thinks the mouse experiment needs rebuilding.
 
