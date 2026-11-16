@@ -14,6 +14,7 @@ company:                    # optional
 cover: /img/blog/url-slug/cover.jpg   # optional; put images in public/img/blog/<url-slug>/
 coverAlt: What the cover photo shows
 coverCredit: Photo by …      # optional, small credit on the hero
+# coverPosition: 65% 0%      # optional; where the hero crop anchors (x y), default centre
 tags: [Founders, Demo Day]  # optional
 # updated: 2026-11-05       # optional; last real edit (search engines read it)
 draft: true                 # true = visible in `npm run dev` only

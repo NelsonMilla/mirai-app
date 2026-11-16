@@ -25,6 +25,7 @@ export type PostMeta = {
   company?: { name: string; url?: string; line?: string };
   cover?: string; // e.g. /img/blog/acme-bio/cover.jpg
   coverAlt?: string;
+  coverPosition?: string; // CSS object-position for the hero crop, e.g. "65% 0%" (default centre)
   coverCredit?: string;
   tags: string[];
   draft: boolean;

@@ -91,6 +91,7 @@ function read(file: string): Omit<Post, 'number'> {
       : undefined,
     cover: data.cover ? String(data.cover) : undefined,
     coverAlt: data.coverAlt ? String(data.coverAlt) : undefined,
+    coverPosition: data.coverPosition ? String(data.coverPosition) : undefined,
     coverCredit: data.coverCredit ? String(data.coverCredit) : undefined,
     tags: Array.isArray(data.tags) ? data.tags.map(String) : [],
     draft: data.draft === true,

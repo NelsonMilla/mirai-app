@@ -70,7 +70,8 @@ export default async function PostPage({ params }: Props) {
         <header className={`postHero${post.cover ? ' hasCover' : ''}`}>
           {post.cover && (
             <>
-              <Image className="heroImg" src={post.cover} alt={post.coverAlt ?? ''} fill priority sizes="100vw" />
+              <Image className="heroImg" src={post.cover} alt={post.coverAlt ?? ''} fill priority sizes="100vw"
+                style={post.coverPosition ? { objectPosition: post.coverPosition } : undefined} />
               <span className="heroVeil" />
             </>
           )}

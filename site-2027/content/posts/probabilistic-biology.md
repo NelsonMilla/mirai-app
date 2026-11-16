@@ -7,8 +7,9 @@ author: Mirai Tech City
 company:
   name: Probabilistic Biology
   url: https://meet.probabilistic.bio/
-cover: /img/blog/probabilistic-biology/cover.webp
-coverAlt: Max Koko on stage at Demo Day in Kobe, in front of a slide reading "Automated mouse cages, stacked by the thousand into a datacenter for biology"
+cover: /img/blog/probabilistic-biology/cover-stage.webp
+coverAlt: Max Koko speaking into a microphone on a dark stage at Demo Day in Kobe
+coverPosition: 65% 0%
 coverCredit: Demo Day, Kobe · Mirai Tech City
 tags: [Demo Day, Founders, Antler]
 draft: false
@@ -50,7 +51,7 @@ Two things changed: sensors got cheap and AI got really good. AI is producing hy
 
 Two things. First, every cage carries non-invasive physical sensors that record continuously, with the aim of estimating what today takes invasive procedures to measure. Second, scale: in one facility, every animal produces far more data per experiment than in a small study run for a single readout, and the experiment can be run remotely, like cloud computing.
 
-![Max Koko on stage beside a slide reading "Labs sell many mice measured thinly, or a few measured deeply. We sell both."](/img/blog/probabilistic-biology/mice-measured.webp "Many mice measured thinly, or a few measured deeply: Probabilistic Biology sells both · Mirai Tech City")
+![Max Koko on stage beside a slide reading "Labs sell many mice measured thinly, or a few measured deeply. We sell both."](/img/blog/probabilistic-biology/mice-slide.webp "Many mice measured thinly, or a few measured deeply: Probabilistic Biology sells both · Mirai Tech City")
 
 ## What's the biggest thing that's broken in how experiments get done today, and what does it cost science and patients?
 
@@ -73,6 +74,8 @@ First capital, and a reason to start full-time. Specifically, it's Antler Japan,
 Modern stem cell science started here with Yamanaka's iPS cells, and Japan is one of very few developed countries that treats biotechnology as an opportunity rather than something to fear.
 
 Thanks to you at Mirai Tech City, I toured Nobel laureate Yamanaka's lab and was introduced to many brilliant scientists. Thank you for organizing it. They innovate within cultural norms very different from what I'd normally call an innovative culture. It showed me that my way of doing things isn't the only way.
+
+![Max Koko smiling at a temple viewpoint in Kyoto, with autumn trees and the city behind him](/img/blog/probabilistic-biology/kyoto.webp "Max Koko in Kyoto")
 
 ## What's the hardest part of building this?
 
