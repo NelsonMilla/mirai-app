@@ -33,16 +33,24 @@ const speakers = rows
       last,
       affiliation: str(r.affiliation),
       group: /^sci/i.test(str(r.group)) ? 'scientists' : 'founders',
+      // Which 2026 events they spoke at, from the sheet's Sessions cell ("S1, S2, F, Online").
+      events: ['S1', 'S2', 'F'].filter(e => str(r.sessions).split(/\s*,\s*/).includes(e)),
       photo,
     };
   })
+  // Only people with a portrait are listed (Nelson, Nov 18 2026); add the photo to bring someone back.
+  .filter(s => s.photo)
   .sort((a, b) => a.last.localeCompare(b.last, 'en', { sensitivity: 'base' }));
 
-// Standing rule: Joe Betts-LaCroix is never placed beside Aubrey de Grey / LEV.
-// Alphabetical order keeps them apart today; fail loudly if a new name ever closes the gap.
+// Standing rule: Joe Betts-LaCroix is never placed beside Aubrey de Grey or Natalie Coles
+// de Grey (LEV). Alphabetical order keeps them apart today; the /2026 grid is at most 6
+// across, so 8 places apart is never a neighbour (side, above or diagonal). Fail loudly
+// if a new name ever closes the gap.
 const at = l => speakers.findIndex(s => s.last === l);
-if (at('Betts-LaCroix') >= 0 && at('de Grey') >= 0 && Math.abs(at('Betts-LaCroix') - at('de Grey')) < 8) {
-  throw new Error('Betts-LaCroix and de Grey are within 8 places; reorder before shipping.');
+for (const lev of ['de Grey', 'Coles de Grey']) {
+  if (at('Betts-LaCroix') >= 0 && at(lev) >= 0 && Math.abs(at('Betts-LaCroix') - at(lev)) < 8) {
+    throw new Error(`Betts-LaCroix and ${lev} are within 8 places; reorder before shipping.`);
+  }
 }
 
 writeFileSync(new URL('../content/speakers-2026.json', import.meta.url), JSON.stringify(speakers, null, 2) + '\n');

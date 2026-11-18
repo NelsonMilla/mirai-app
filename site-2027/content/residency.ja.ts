@@ -117,6 +117,7 @@ export const residencyJa: Residency = {
     filmCaption: 'デモデイ・神戸・2026年10月26日',
     filmLabel: '2026年デモデイの映像：登壇するチーム、笑顔の観客、集合写真に収まるCohort 0の参加者。',
     network: '名の登壇者（2026年、神戸大学からハーバード大学まで）',
+    lastYearLink: '2026年の全登壇者とアジェンダ（英語）',
   },
 
   life: {
@@ -148,6 +149,7 @@ export const residencyJa: Residency = {
     { href: '/jp#program', label: 'プログラム' },
     { href: '/jp#month', label: '1か月の流れ' },
     { href: '/jp#cohort-0', label: 'Cohort 0' },
+    { href: '/2026', label: '2026年' },
     { href: '/blog', label: 'ブログ' },
   ],
   navCta: '応募する',

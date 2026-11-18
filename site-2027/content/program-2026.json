@@ -1,0 +1,800 @@
+[
+  {
+    "id": "summit-i",
+    "name": "Summit I",
+    "dates": "Oct 17–18",
+    "days": [
+      {
+        "day": "Oct 17 (Sat)",
+        "sessions": [
+          {
+            "time": "10:00–11:00",
+            "track": "Registration and Networking",
+            "title": "Registration and Networking",
+            "people": "",
+            "quiet": true
+          },
+          {
+            "time": "11:00–11:10",
+            "track": "Opening",
+            "title": "Welcome",
+            "people": "Victoria Masso, MSc (Mirai Tech City), Pedro Henrich (Unchain Biomedical)"
+          },
+          {
+            "time": "11:15–11:30",
+            "track": "Opening",
+            "title": "Host welcome and format of the event",
+            "people": "Keiko Kobayashi (KBIC-FBRI); Prof. Takahiro Yasuda, PhD MSc (Kobe University)"
+          },
+          {
+            "time": "11:35–11:55",
+            "track": "Keynote",
+            "title": "The information theory of ageing, and why I built the company here",
+            "people": "Prof. Motoshi Hayano, PhD (ASAGI Labs)"
+          },
+          {
+            "time": "12:00–12:20",
+            "track": "Japan: The Global Laboratory",
+            "title": "Building in KBIC: what the cluster actually opens up",
+            "people": "Keiko Kobayashi (Foundation for Biomedical Research and Innovation at Kobe (FBRI) / KOBE Biomedical Innovation Cluster)"
+          },
+          {
+            "time": "12:25–12:45",
+            "track": "Japan: The Global Laboratory",
+            "title": "Building medtech in Japan: what we had to overcome, and why we built the MIC",
+            "people": "Prof. Takahiro Yasuda, PhD MSc (Kobe University Graduate School of Medicine)"
+          },
+          {
+            "time": "12:50–13:10",
+            "track": "Japan: The Global Laboratory",
+            "title": "Engineering Cell Fate, Transforming Medicine — iPS Cell–Based Innovations in Drug Discovery and Cell Therapy",
+            "people": "Prof. Takashi Aoi, MD PhD (Kobe University Graduate School of Medicine)"
+          },
+          {
+            "time": "13:15–13:35",
+            "track": "Japan: The Global Laboratory",
+            "title": "A 295-year-old pharmacy in the final twenty of a 101M dollar prize",
+            "people": "Tomonari Abe (Abe Yoando Pharma)"
+          },
+          {
+            "time": "13:40–14:00",
+            "track": "Japan: The Global Laboratory",
+            "title": "Japan is Now: The Global Laboratory for Medical Innovation",
+            "people": "Rodney Kelly (HekaBio K.K.)"
+          },
+          {
+            "time": "14:00–14:50",
+            "track": "Break",
+            "title": "Lunch and networking",
+            "people": "",
+            "quiet": true
+          },
+          {
+            "time": "14:50–15:45",
+            "track": "Japan: The Global Laboratory",
+            "title": "Panel: Building life sciences in Japan: the enabling environment",
+            "people": "Moderator: Sean Yoshikawa (Decoto International); Iris Jiang (Stellar Science Foundation); Rodney Kelly (HekaBio K.K.); Eleanor Sheekey, PhD (RIKEN BDR Kobe); Keiko Kobayashi (FBRI); Prof. Takahiro Yasuda, PhD MSc (Kobe University); Yuichi Fukunaga (Taxa Technologies)"
+          },
+          {
+            "time": "15:45–16:05",
+            "track": "Break",
+            "title": "Networking and drinks",
+            "people": "",
+            "quiet": true
+          },
+          {
+            "time": "16:05–16:25",
+            "track": "Bioengineering the Human Body",
+            "title": "Cells vs. the ECM: who's in charge of tissue aging?",
+            "people": "Eleanor Sheekey, PhD (RIKEN Center for Biosystems Dynamics Research (BDR), Kobe)"
+          },
+          {
+            "time": "16:30–16:50",
+            "track": "Bioengineering the Human Body",
+            "title": "Precision medicine, Oncology",
+            "people": "Dr. Felix Oen (NeoTILa Biosciences)"
+          },
+          {
+            "time": "16:55–17:15",
+            "track": "Bioengineering the Human Body",
+            "title": "Psilocybin and biological aging: from discovery to human studies",
+            "people": "Louise Hecker, PhD (Baylor College of Medicine)"
+          },
+          {
+            "time": "17:20–17:40",
+            "track": "Bioengineering the Human Body",
+            "title": "Live Long Enough to Live Forever: Use diet & lifestyle to extend your life and reach the next frontier of human longevity.",
+            "people": "Brian Sanders (Peak Human Podcast)"
+          },
+          {
+            "time": "17:45–18:05",
+            "track": "Bioengineering the Human Body",
+            "title": "Solarpunk protein to biofacturing: synthetic biology and DIY bio",
+            "people": "Yuki Hanyu, PhD (Shojinmeat Project)"
+          },
+          {
+            "time": "18:10–18:30",
+            "track": "Bioengineering the Human Body",
+            "title": "Menstrual blood as a renewable stem cell source",
+            "people": "Juliette Humer (Muse Bio)"
+          },
+          {
+            "time": "18:35–18:50",
+            "track": "Bioengineering the Human Body",
+            "remote": "online",
+            "title": "From Black Holes to Broken Bones",
+            "people": "Prof. Stuart Reid FRSE (University of Strathclyde)"
+          },
+          {
+            "time": "18:55–19:10",
+            "track": "AI×Bio",
+            "remote": "online",
+            "title": "AI as a co-scientist for longevity: what changes now",
+            "people": "Derya Unutmaz, MD (The Jackson Laboratory for Genomic Medicine)"
+          },
+          {
+            "time": "19:10–19:15",
+            "track": "Close",
+            "title": "Day 1 close and evening logistics",
+            "people": "Victoria Masso, MSc (Mirai Tech City)"
+          },
+          {
+            "time": "19:15–20:30",
+            "track": "Networking",
+            "title": "Networking and drinks",
+            "people": "",
+            "quiet": true
+          }
+        ]
+      },
+      {
+        "day": "Oct 18 (Sun)",
+        "sessions": [
+          {
+            "time": "10:00–11:00",
+            "track": "Registration and Networking",
+            "title": "Registration and Networking",
+            "people": "",
+            "quiet": true
+          },
+          {
+            "time": "11:00–11:10",
+            "track": "Opening",
+            "title": "Day 2 framing",
+            "people": "Victoria Masso, MSc (Mirai Tech City)"
+          },
+          {
+            "time": "11:10–11:30",
+            "track": "Bioengineering the Human Body",
+            "title": "The ageing blood system: why old bone marrow makes the wrong cells",
+            "people": "Prof. Masanori Miyanishi, MD PhD (Kobe University Graduate School of Medicine)"
+          },
+          {
+            "time": "11:35–11:55",
+            "track": "Bioengineering the Human Body",
+            "title": "Psilocybin beyond the brain: new approaches to skin aging and repair",
+            "people": "Kosuke Kato, PhD (Baylor College of Medicine)"
+          },
+          {
+            "time": "12:00–12:10",
+            "track": "Bioengineering the Human Body",
+            "remote": "online",
+            "title": "Beyond Aging Clocks: Measuring Biological Function Over Time",
+            "people": "Ryan J. McCall, PhD (Continuity Labs)"
+          },
+          {
+            "time": "12:15–12:30",
+            "track": "AI×Bio",
+            "title": "Implication of AI in Neurocognitive Development",
+            "people": "Taylor Capito (Cingularity)"
+          },
+          {
+            "time": "12:35–12:55",
+            "track": "Beyond Biology: Augmentation",
+            "title": "The degrees of freedom of the brain",
+            "people": "Prof. Kentaroh Takagaki, MD PhD BAgr (University of Yamanashi and Institute of Science Tokyo)"
+          },
+          {
+            "time": "13:00–13:20",
+            "track": "Beyond Biology: Augmentation",
+            "title": "Isolated brain perfusion and electrophysiology",
+            "people": "Kaarthik Abhinav Balakrishnan, PhD (Eightsix Science)"
+          },
+          {
+            "time": "13:25–13:45",
+            "track": "Beyond Biology: Augmentation",
+            "title": "A Biopunk Manifesto",
+            "people": "Elliot Roth (Haus Fund)"
+          },
+          {
+            "time": "13:45–14:25",
+            "track": "Break",
+            "title": "Lunch and networking",
+            "people": "",
+            "quiet": true
+          },
+          {
+            "time": "14:25–14:45",
+            "track": "AI×Bio×Medtech",
+            "title": "The Smart Cyber Operating Theater: AI, robotics and a networked operating room",
+            "people": "Prof. Yoshihiro Muragaki, MD PhD (Department of Medical Device Engineering, Graduate School of Medicine, Kobe University)"
+          },
+          {
+            "time": "14:50–15:10",
+            "track": "AI×Bio×Medtech",
+            "title": "Shipping real things with AI: what the builder community is actually making",
+            "people": "Devinder Sodhi (Learning Layer Labs)"
+          },
+          {
+            "time": "15:15–15:35",
+            "track": "AI×Bio×Medtech",
+            "title": "From epigenetics to new therapies",
+            "people": "Bilal Kharouni (ekei labs)"
+          },
+          {
+            "time": "15:35–15:55",
+            "track": "Japan: The Global Laboratory",
+            "title": "Guide to AMED",
+            "people": "Shingo Kawasaki (Japan Agency for Medical Research and Development (AMED))"
+          },
+          {
+            "time": "15:55–16:05",
+            "track": "Break",
+            "title": "Coffee and networking",
+            "people": "",
+            "quiet": true
+          },
+          {
+            "time": "16:05–16:25",
+            "track": "AI×Bio×Medtech",
+            "title": "Ethics as a competitive advantage",
+            "people": "Alice Gilman, MSc (R3 Bio)"
+          },
+          {
+            "time": "16:30–16:50",
+            "track": "Japan: The Global Laboratory",
+            "title": "A Sento in New York City",
+            "people": "Yuval Zohar (Architect and designer)"
+          },
+          {
+            "time": "16:50–16:55",
+            "track": "XPRIZE Healthspan",
+            "title": "Opening Words - XPRIZE Healthspan",
+            "people": "Jamie Justice, PhD (XPRIZE Healthspan)"
+          },
+          {
+            "time": "16:55–17:15",
+            "track": "XPRIZE Healthspan",
+            "title": "Minicircle: plasmid gene therapy in the $101M healthspan race",
+            "people": "Walter Patterson (Minicircle)"
+          },
+          {
+            "time": "17:20–17:40",
+            "track": "XPRIZE Healthspan",
+            "title": "Sixteen companies, one consortium: how Japanese industry organised around healthspan",
+            "people": "Prof. Motoshi Hayano, PhD (ASAGI Labs)"
+          },
+          {
+            "time": "17:45–18:05",
+            "track": "XPRIZE Healthspan",
+            "remote": "online",
+            "title": "Editing the Epigenome, Not the Genome: CRISPR-GNDM for FSHD, a Disease of Aberrant Gene Regulation",
+            "people": "Yosuke Nakashima, MBA (Modalis Therapeutics)"
+          },
+          {
+            "time": "18:10–18:40",
+            "track": "XPRIZE Healthspan",
+            "title": "Panel: Innovation prizes: drivers of healthspan research",
+            "people": "Moderator: Muneaki Goto (Japan Reskilling Initiative); Walter Patterson (Minicircle); Prof. Motoshi Hayano, PhD (ASAGI Labs)"
+          },
+          {
+            "time": "18:40–19:00",
+            "track": "Closing keynote",
+            "title": "Japan’s Initiatives Aimed at Preventing Dementia ~From the J-MINT PRIME TAMBA Study to Social Implementation~",
+            "people": "Prof. Hisatomo Kowa, MD PhD (Kobe University)"
+          },
+          {
+            "time": "19:00–19:10",
+            "track": "Close",
+            "title": "Summit I close",
+            "people": "Victoria Masso, MSc (Mirai Tech City)"
+          },
+          {
+            "time": "19:10–20:30",
+            "track": "Networking",
+            "title": "Networking and drinks",
+            "people": "",
+            "quiet": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "summit-ii",
+    "name": "Summit II",
+    "dates": "Oct 24–25",
+    "days": [
+      {
+        "day": "Oct 24 (Sat)",
+        "sessions": [
+          {
+            "time": "10:00–11:00",
+            "track": "Registration and Networking",
+            "title": "Registration and Networking",
+            "people": "",
+            "quiet": true
+          },
+          {
+            "time": "11:00–11:05",
+            "track": "Opening",
+            "title": "Introduction to Summit II",
+            "people": "Victoria Masso, MSc (Mirai Tech City)"
+          },
+          {
+            "time": "11:10–11:30",
+            "track": "Keynote",
+            "title": "RMR1 was a qualified win: what combining four rejuvenation therapies did, and what RMR2 does next",
+            "people": "Aubrey de Grey, PhD (LEV Foundation)"
+          },
+          {
+            "time": "11:35–11:55",
+            "track": "The Longevity Imperative",
+            "title": "The death of death: the scientific possibility of physical immortality",
+            "people": "Jose Cordeiro, MBA, PhD (International Longevity Summit)"
+          },
+          {
+            "time": "12:00–12:20",
+            "track": "The Longevity Imperative",
+            "title": "Research and prospects of supercentenarian data",
+            "people": "Natalie S. Coles de Grey (LEV Foundation / Human Longevity Inc.)"
+          },
+          {
+            "time": "12:25–12:55",
+            "track": "The Longevity Imperative",
+            "title": "Panel: Defining the Evidentiary Standard for Ageing as a Treatable Condition",
+            "people": "Aubrey de Grey, PhD; Jose Cordeiro, MBA, PhD; Natalie S. Coles de Grey; moderated by Nelson Milla (Unchain Bio)"
+          },
+          {
+            "time": "13:00–13:15",
+            "track": "The Longevity Imperative",
+            "remote": "online",
+            "title": "Fireside: Building the Vitalism Foundation and the largest longevity community in the US, and why we are looking at Japan",
+            "people": "Adam Gries (Vitalism Foundation / Vitalist Bay); Rie Yano (Coral Capital); moderated by Pedro Henrich (Unchain Bio)"
+          },
+          {
+            "time": "13:15–13:50",
+            "track": "Break",
+            "title": "Lunch and networking",
+            "people": "",
+            "quiet": true
+          },
+          {
+            "time": "13:50–14:10",
+            "track": "R&D: Closing the Translation Gap",
+            "title": "Does Japan train clinicians who can work across science, engineering, regulation and business?",
+            "people": "Prof. Kentaroh Takagaki, MD PhD BAgr (University of Yamanashi / Institute of Science Tokyo)"
+          },
+          {
+            "time": "14:15–14:35",
+            "track": "R&D: Closing the Translation Gap",
+            "remote": "online",
+            "title": "Cognitive Immunity: An Artificial Life Response to Self-Replicating AI",
+            "people": "Olaf Witkowski, PhD (Cognisee)"
+          },
+          {
+            "time": "14:40–15:00",
+            "track": "R&D: Closing the Translation Gap",
+            "title": "The business of biotech: translating research into a marketable product",
+            "people": "Irit Rappley, PhD (NNP Labs)"
+          },
+          {
+            "time": "15:05–15:25",
+            "track": "R&D: Closing the Translation Gap",
+            "title": "Building muscle, killing fat: taking a longevity gene therapy to the clinic",
+            "people": "Matt Scholz (Oisín Biotechnologies)"
+          },
+          {
+            "time": "15:30–15:50",
+            "track": "R&D: Closing the Translation Gap",
+            "title": "From a lab clock to a product: commercialising LinAge2",
+            "people": "Julie Ying Baron (LiveBeyond)"
+          },
+          {
+            "time": "15:55–16:25",
+            "track": "R&D: Closing the Translation Gap",
+            "title": "Panel: Why does good science stay in the lab?",
+            "people": "Prof. Kentaroh Takagaki, MD PhD BAgr (Institute of Science Tokyo); Irit Rappley, PhD (NNP Labs); Julie Ying Baron (LiveBeyond); Matt Scholz (Oisín Biotechnologies); Zain Rana (GreyRigge Associates); moderated by Karen Onuma (GlobalDeal)"
+          },
+          {
+            "time": "16:25–16:30",
+            "track": "Break",
+            "title": "Coffee and networking",
+            "people": "",
+            "quiet": true
+          },
+          {
+            "time": "16:30–16:50",
+            "track": "From Lab to Market",
+            "title": "Routes to market: why we build longevity science in Japan",
+            "people": "Keita Masui (ASAGI Labs Ventures)"
+          },
+          {
+            "time": "16:55–17:15",
+            "track": "From Lab to Market",
+            "title": "Early-stage capital and cross-border founding teams in Japan",
+            "people": "Florian Geier (Antler Japan)"
+          },
+          {
+            "time": "17:20–17:40",
+            "track": "From Lab to Market",
+            "title": "From Lab to IPO and Beyond: The Funding Gap Facing Japanese Biotech",
+            "people": "Yutaka Fujimoto (J-Pharma)"
+          },
+          {
+            "time": "17:45–18:25",
+            "track": "From Lab to Market",
+            "title": "Panel: Funding longevity and biotech in Japan: what investors need to see",
+            "people": "Keita Masui (ASAGI Labs Ventures); Florian Geier (Antler Japan); Paul Yang (Governance Partners); Karen Onuma (GlobalDeal, moderator)"
+          },
+          {
+            "time": "18:30–18:50",
+            "track": "From Lab to Market",
+            "title": "How America is losing the longevity race",
+            "people": "Jordan Lasker, PhD (Researcher and bioinformatician)"
+          },
+          {
+            "time": "18:50–19:10",
+            "track": "From Lab to Market",
+            "title": "What Is the Point of Living Longer? A 40-year journey into attitude, purpose and the way we choose to live.",
+            "people": "Anthony Willoughby"
+          },
+          {
+            "time": "19:10–19:30",
+            "track": "Closing Keynote",
+            "remote": "online",
+            "title": "Biotech and ageing",
+            "people": "Prof. George Church, PhD (Harvard Medical School)"
+          },
+          {
+            "time": "19:30–20:30",
+            "track": "Close and networking",
+            "title": "Day close, then networking and drinks",
+            "people": "",
+            "quiet": true
+          }
+        ]
+      },
+      {
+        "day": "Oct 25 (Sun)",
+        "sessions": [
+          {
+            "time": "10:00–11:00",
+            "track": "Registration and Networking",
+            "title": "Registration and Networking",
+            "people": "",
+            "quiet": true
+          },
+          {
+            "time": "11:00–11:05",
+            "track": "Opening",
+            "title": "Introduction",
+            "people": "Victoria Masso, MSc (Mirai Tech City)"
+          },
+          {
+            "time": "11:10–11:30",
+            "track": "Japan: The Global Laboratory",
+            "title": "Why Japan makes sense for Minicircle, and why it should matter for others",
+            "people": "Mac Davis (Minicircle)"
+          },
+          {
+            "time": "11:35–11:55",
+            "track": "Japan: The Global Laboratory",
+            "remote": "online",
+            "title": "LongGen Bioscience: Bringing World-Leading Aging and Longevity Research to Society",
+            "people": "Shun Maruyama (Governance Partners); Shin-ichiro Imai, MD, PhD (Washington University School of Medicine / LongGen Bioscience)"
+          },
+          {
+            "time": "12:00–12:10",
+            "track": "AI×Bio×Medtech",
+            "remote": "online",
+            "title": "When will Superintelligence solve disease?",
+            "people": "Joe Betts-LaCroix (Retro Biosciences)"
+          },
+          {
+            "time": "12:15–12:35",
+            "track": "Regulation and Market Access",
+            "title": "The regulatory advantage: why we license therapies into Japan first",
+            "people": "Rob Claar (HekaBio)"
+          },
+          {
+            "time": "12:40–13:00",
+            "track": "Regulation and Market Access",
+            "title": "Ship in Japan first: the data case",
+            "people": "Pedro Henrich (Unchain Bio)"
+          },
+          {
+            "time": "13:00–13:40",
+            "track": "Break",
+            "title": "Lunch and networking",
+            "people": "",
+            "quiet": true
+          },
+          {
+            "time": "13:40–14:00",
+            "track": "Regulation and Market Access",
+            "title": "Panel: Governance for open innovation",
+            "people": "Laurence Ion (VitaDAO); Patri Friedman (Pronomos Capital, online); Ian Huyett, JD (Cornerstone / Granite Bio Innovation); Josh Mann (The LARTA Agency); moderated by Pedro Henrich (Unchain Bio)"
+          },
+          {
+            "time": "14:05–14:30",
+            "track": "Japan: The Global Laboratory",
+            "title": "From Lab to Industry: Building a Scientific Career in Japan as an International Researcher",
+            "people": "Eleanor Sheekey, PhD (RIKEN BDR Kobe); Aya McGlothlin (Happa World); Kyungmin Kim, PhD; moderated by Elliot Roth (Haus Fund)"
+          },
+          {
+            "time": "14:35–14:55",
+            "track": "Keynote",
+            "title": "Digital Immortality via Seamless Mind Uploading and AI Replacement of Damaged Brain Circuitry - An Innovative BMI with Precision Read/Write Access -",
+            "people": "Prof. Masataka Watanabe, PhD (University of Tokyo)"
+          },
+          {
+            "time": "15:00–15:20",
+            "track": "East to West",
+            "title": "Functional brain isolation, and why we are building it in Japan",
+            "people": "Daniel Burger, MSc (Eightsix Science / Synconetics Organisation)"
+          },
+          {
+            "time": "15:50–16:20",
+            "track": "The Human Layer",
+            "title": "Fireside: Building the communities that carry the future",
+            "people": "Todd Porter (Prosperity Exchange); Marian Goodell (Burning Man Project); moderated by Victoria Masso, MSc (Mirai Tech City)"
+          },
+          {
+            "time": "16:20–16:40",
+            "track": "Break",
+            "title": "Coffee and networking",
+            "people": "",
+            "quiet": true
+          },
+          {
+            "time": "16:40–17:00",
+            "track": "Visions for the Future of Human Lifespan",
+            "title": "Fireside: Frontier longevity science",
+            "people": "Nathan Cheng (Longevity Biotech Fellowship); Prof. Masataka Watanabe, PhD (University of Tokyo); Nelson Milla (Unchain Bio); moderated by Pedro Henrich (Unchain Bio)"
+          },
+          {
+            "time": "17:05–17:50",
+            "track": "Closing fireside",
+            "title": "The future of longevity science: the east and the west",
+            "people": "Aubrey de Grey, PhD (LEV Foundation); Masayo Takahashi, MD, PhD (Vision Care Inc.); moderated by Nelson Milla(Mirai Tech City)"
+          },
+          {
+            "time": "17:50–18:00",
+            "track": "Close",
+            "title": "Day close",
+            "people": "Victoria Masso, MSc (Mirai Tech City)"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "demo-day",
+    "name": "Demo Day",
+    "dates": "Oct 26",
+    "days": [
+      {
+        "day": "Oct 26 (Mon)",
+        "sessions": [
+          {
+            "time": "10:00–12:00",
+            "track": "Registration and Networking",
+            "title": "Registration and Networking",
+            "people": "",
+            "quiet": true
+          },
+          {
+            "time": "12:00–12:15",
+            "track": "Opening",
+            "title": "Welcome and introductions",
+            "people": ""
+          },
+          {
+            "time": "12:20–12:40",
+            "track": "Lifestyle Longevity",
+            "title": "Why Longevity Needs a Culture, Not Just a Cure",
+            "people": "Elen Capri (Longevity advocate and documentary producer)"
+          },
+          {
+            "time": "12:45–13:10",
+            "track": "Keynote",
+            "remote": "recorded",
+            "title": "Aging, goal-directedness, and bioelectricity",
+            "people": "Prof. Michael Levin, PhD (Tufts University)"
+          },
+          {
+            "time": "13:10–13:30",
+            "track": "Lifestyle Longevity",
+            "title": "The Missing Variable: What Happens Between the Interventions",
+            "people": "Tateki Matsuda (Japan Biohacking Association)"
+          },
+          {
+            "time": "13:35–13:55",
+            "track": "Lifestyle Longevity",
+            "title": "Building startup societies in rural Japan: what Zō Village is learning",
+            "people": "Brandon Possin (Zō Village)"
+          },
+          {
+            "time": "14:00–14:20",
+            "track": "Lifestyle Longevity",
+            "title": "Longevity, Dawn of a New Civilization: A Longer Life Needs a Larger Purpose",
+            "people": "Cesar Gonzales (HEIRITAGE EcoCultural)"
+          },
+          {
+            "time": "14:25–15:00",
+            "track": "Demo Day",
+            "title": "Networking and snacks with founders",
+            "people": "",
+            "quiet": true
+          },
+          {
+            "time": "15:00–15:20",
+            "track": "Lifestyle Longevity",
+            "remote": "online",
+            "title": "Longevity-driven management: why healthspan is a business metric",
+            "people": "Muneaki Goto (Japan Reskilling Initiative)"
+          },
+          {
+            "time": "15:25–15:30",
+            "track": "Demo Day pitch",
+            "title": "Ekei Labs",
+            "people": "Bilal Kharouni (Ekei Labs)"
+          },
+          {
+            "time": "15:33–15:38",
+            "track": "Demo Day pitch",
+            "title": "Smart Tissues",
+            "people": "Denise Zujur, PhD (Smart Tissues)"
+          },
+          {
+            "time": "15:41–15:46",
+            "track": "Demo Day pitch",
+            "title": "REM Analytics",
+            "people": "Paulo Refinetti (REM Analytics, Switzerland)",
+            "winner": "GlobalDeal Japan Landing Award"
+          },
+          {
+            "time": "15:49–15:54",
+            "track": "Demo Day pitch",
+            "title": "Eightsix Science",
+            "people": "Daniel Burger, MSc (Eightsix Science)"
+          },
+          {
+            "time": "15:57–16:02",
+            "track": "Demo Day pitch",
+            "title": "Avenyx Bio",
+            "people": "Parth Shinde (Avenyx Bio)",
+            "winner": "GlobalDeal Japan Landing Award"
+          },
+          {
+            "time": "16:04–16:09",
+            "track": "Demo Day pitch",
+            "title": "HALOS Biosciences",
+            "people": "Dominique Darvas (HALOS Biosciences)"
+          },
+          {
+            "time": "16:12–16:17",
+            "track": "Demo Day pitch",
+            "title": "Hypervariant",
+            "people": "Christian Clough (Hypervariant)"
+          },
+          {
+            "time": "16:20–16:25",
+            "track": "Demo Day pitch",
+            "title": "aeon.science",
+            "people": "Eric Jing Mockler (aeon.science)",
+            "winner": "Antler Residency Award"
+          },
+          {
+            "time": "16:27–16:32",
+            "track": "Demo Day pitch",
+            "title": "Cingularity",
+            "people": "Taylor Capito (Cingularity)"
+          },
+          {
+            "time": "16:35–16:45",
+            "track": "Break",
+            "title": "Break",
+            "people": "",
+            "quiet": true
+          },
+          {
+            "time": "16:45–16:50",
+            "track": "Demo Day pitch",
+            "title": "NNP Labs",
+            "people": "Irit Rappley, PhD (NNP Labs)"
+          },
+          {
+            "time": "16:54–16:59",
+            "track": "Demo Day pitch",
+            "title": "Kobe University (Medical Device Engineering)",
+            "people": "Prof. Tooru Ooya (Kobe University)",
+            "winner": "Vitalist Bay Award"
+          },
+          {
+            "time": "17:03–17:08",
+            "track": "Demo Day pitch",
+            "title": "Synconetics Organisation",
+            "people": "Prof. Masataka Watanabe, PhD (Synconetics Organisation)",
+            "winner": "Meet the Drapers Award"
+          },
+          {
+            "time": "17:11–17:16",
+            "track": "Demo Day pitch",
+            "title": "PRIMA Genetics",
+            "people": "Misako Yamazaki; Alexey Buyakofu (PRIMA Genetics, Switzerland)"
+          },
+          {
+            "time": "17:20–17:25",
+            "track": "Demo Day pitch",
+            "title": "Oval.bio",
+            "people": "Mike Kiamanesh (Oval.bio)"
+          },
+          {
+            "time": "17:29–17:34",
+            "track": "Demo Day pitch",
+            "title": "MyCells",
+            "people": "Juliette Humer (MyCells)",
+            "winner": "GlobalDeal Japan Landing Award"
+          },
+          {
+            "time": "17:38–17:43",
+            "track": "Demo Day pitch",
+            "title": "Biokami",
+            "people": "Max Koko (Biokami)",
+            "winner": "Antler Residency Award"
+          },
+          {
+            "time": "17:46–17:51",
+            "track": "Demo Day pitch",
+            "title": "Symbiont Labs",
+            "people": "Frazier Farrell (ZEN Global)"
+          },
+          {
+            "time": "17:55–18:10",
+            "track": "Break",
+            "title": "Break (jury deliberates)",
+            "people": "",
+            "quiet": true
+          },
+          {
+            "time": "18:15–18:25",
+            "track": "Demo Day",
+            "title": "Results and awards: Antler Residency Award, Meet the Drapers Award and Vitalist Bay Award",
+            "people": "Antler Residency Award: Biokami (Max Koko) and aeon.science (Eric Jing Mockler). Meet the Drapers Award: Synconetics Organisation (Prof. Masataka Watanabe, PhD). Vitalist Bay Award: Kobe University, Medical Device Engineering (Prof. Tooru Ooya)."
+          },
+          {
+            "time": "18:30–18:40",
+            "track": "Demo Day",
+            "title": "Japan Landing Award, presented by GlobalDeal",
+            "people": "Karen Onuma (GlobalDeal). Winners: REM Analytics (Paulo Refinetti), Avenyx Bio (Parth Shinde) and MyCells (Juliette Humer)"
+          },
+          {
+            "time": "18:45–19:00",
+            "track": "Close",
+            "title": "Closing: The Mirai of Mirai Tech City & Daruma painting",
+            "people": "Victoria Masso, MSc (Mirai Tech City); Aya McGlothlin (Happa World)"
+          },
+          {
+            "time": "19:00–20:30",
+            "track": "Networking",
+            "title": "Networking",
+            "people": "",
+            "quiet": true
+          }
+        ]
+      }
+    ]
+  }
+]

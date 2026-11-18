@@ -22,7 +22,7 @@ const FACES = [
   'masataka_watanabe', 'joe_betts_lacroix', 'louise_hecker', 'george_church',
 ]
   .map(id => speakers.find(p => p.id === id))
-  .filter((p): p is (typeof speakers)[number] => Boolean(p));
+  .filter((p): p is (typeof speakers)[number] & { photo: string } => Boolean(p?.photo));
 // Photos that are not headshots, zoomed so the face fills the disc like the others.
 const FACE_CROP: Record<string, CSSProperties> = {
   joe_betts_lacroix: { transform: 'translate(25%, 45%) scale(1.9)' }, // waist-up shot on black
@@ -177,7 +177,10 @@ export function Cohort0({ r = residency }: { r?: Residency } = {}) {
         </dl>
 
         <div className={s.network}>
-          <p className={s.networkLine}>{NETWORK_LINE}</p>
+          <div>
+            <p className={s.networkLine}>{NETWORK_LINE}</p>
+            <a className={s.more} href="/2026">{c.lastYearLink}<span aria-hidden="true"> →</span></a>
+          </div>
           <ul className={s.faces}>
             {FACES.map(p => (
               <li key={p.id}>
