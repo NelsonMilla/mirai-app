@@ -128,19 +128,19 @@ export const residency = {
   // ── Cohort 0 (proof) ─────────────────────────────────────
   cohort0: {
     eyebrow: 'Cohort 0 · Kobe, October 2026',
-    headline: 'Five out of seven are building a base in Japan.',
-    lead: 'Seven companies came to do business in Japan for the first time. Five are now working to establish a permanent presence here. Some were picked up by Antler, others received in-kind support from GlobalDeal, and every one of them made new partnerships in Japan.',
+    headline: 'All seven are building a base in Japan.',
+    lead: 'Seven companies came to do business in Japan for the first time. All seven are continuing to build here. Some were picked up by Antler, others received in-kind support from GlobalDeal, and every one of them made new partnerships in Japan.',
     stats: [
       { value: '7', label: 'First-time Japan entrants' },
-      { value: '5', label: 'Establishing a permanent presence' },
+      { value: '7', label: 'Continuing to build in Japan' },
       { value: '150+', label: 'Attendees' },
       { value: '76', label: 'Speakers' },
       { value: '17', label: 'Demo Day teams' },
     ],
-    // The five establishing a permanent presence (results report p.10; Nelson swapped Biokami for
-    // Probabilistic Bio on Nov 16 2026). Plans in progress, Nov 2026.
-    companies: ['Avenyx Bio', 'aeon.science', 'Cingularity', 'Muse Bio', 'Probabilistic Bio'],
-    companiesLabel: 'Establishing a permanent presence in Japan',
+    // All seven Cohort 0 teams are continuing to build in Japan (Japan program manager, Nov 18
+    // 2026: HALOS Biosciences and Eightsix Science added to the five from the results report p.10).
+    companies: ['Avenyx Bio', 'aeon.science', 'Cingularity', 'Muse Bio', 'Probabilistic Bio', 'HALOS Biosciences', 'Eightsix Science'],
+    companiesLabel: 'Continuing to build in Japan',
     note: 'Company plans in progress, November 2026.',
     filmCaption: 'Demo Day · Kobe · Oct 26 2026',
     filmLabel: 'Demo Day 2026 footage: teams on stage, the audience laughing, the cohort gathering for a group photo.',
