@@ -78,17 +78,6 @@
     "photo": "/img/speakers/daniel_burger.jpeg"
   },
   {
-    "id": "alexey_buyakofu",
-    "name": "Alexey Buyakofu",
-    "last": "Buyakofu",
-    "affiliation": "PRIMA Genetics",
-    "group": "founders",
-    "events": [
-      "F"
-    ],
-    "photo": null
-  },
-  {
     "id": "taylor_capito",
     "name": "Taylor Capito",
     "last": "Capito",
@@ -145,17 +134,6 @@
     "photo": "/img/speakers/rob_claar.jpeg"
   },
   {
-    "id": "christian_clough",
-    "name": "Christian Clough",
-    "last": "Clough",
-    "affiliation": "Hypervariant",
-    "group": "founders",
-    "events": [
-      "F"
-    ],
-    "photo": null
-  },
-  {
     "id": "natalie_coles_de_grey",
     "name": "Natalie S. Coles de Grey",
     "last": "Coles de Grey",
@@ -178,17 +156,6 @@
     "photo": "/img/speakers/jose_cordeiro.jpeg"
   },
   {
-    "id": "dominique_darvas",
-    "name": "Dominique Darvas",
-    "last": "Darvas",
-    "affiliation": "HALOS Biosciences",
-    "group": "founders",
-    "events": [
-      "F"
-    ],
-    "photo": null
-  },
-  {
     "id": "mac_davis",
     "name": "Mac Davis",
     "last": "Davis",
@@ -209,17 +176,6 @@
       "S2"
     ],
     "photo": "/img/speakers/aubrey_de_grey.jpeg"
-  },
-  {
-    "id": "frazier_farrell",
-    "name": "Frazier Farrell",
-    "last": "Farrell",
-    "affiliation": "ZEN Global",
-    "group": "founders",
-    "events": [
-      "F"
-    ],
-    "photo": null
   },
   {
     "id": "patri_friedman",
@@ -425,17 +381,6 @@
     "photo": "/img/speakers/iris_jiang.jpeg"
   },
   {
-    "id": "eric_jing_mockler",
-    "name": "Eric Jing Mockler",
-    "last": "Jing Mockler",
-    "affiliation": "aeon.science",
-    "group": "founders",
-    "events": [
-      "F"
-    ],
-    "photo": null
-  },
-  {
     "id": "kosuke_kato",
     "name": "Kosuke Kato, PhD",
     "last": "Kato",
@@ -481,17 +426,6 @@
     "photo": "/img/speakers/bilal_kharouni.jpeg"
   },
   {
-    "id": "mike_kiamanesh",
-    "name": "Mike Kiamanesh",
-    "last": "Kiamanesh",
-    "affiliation": "Oval.bio",
-    "group": "founders",
-    "events": [
-      "F"
-    ],
-    "photo": null
-  },
-  {
     "id": "kyungmin_kim",
     "name": "Kyungmin Kim, PhD",
     "last": "Kim",
@@ -514,17 +448,6 @@
     "photo": "/img/speakers/keiko_kobayashi.jpeg"
   },
   {
-    "id": "max_koko",
-    "name": "Max Koko",
-    "last": "Koko",
-    "affiliation": "Biokami",
-    "group": "founders",
-    "events": [
-      "F"
-    ],
-    "photo": null
-  },
-  {
     "id": "hisatomo_kowa",
     "name": "Prof. Hisatomo Kowa, MD PhD",
     "last": "Kowa",
@@ -545,17 +468,6 @@
       "S2"
     ],
     "photo": "/img/speakers/jordan_lasker.jpeg"
-  },
-  {
-    "id": "michael_levin",
-    "name": "Prof. Michael Levin, PhD",
-    "last": "Levin",
-    "affiliation": "Vannevar Bush Distinguished Professor of Biology, Tufts University",
-    "group": "scientists",
-    "events": [
-      "F"
-    ],
-    "photo": null
   },
   {
     "id": "josh_mann",
@@ -705,17 +617,6 @@
     "photo": "/img/speakers/karen_onuma.jpeg"
   },
   {
-    "id": "tooru_ooya",
-    "name": "Prof. Tooru Ooya",
-    "last": "Ooya",
-    "affiliation": "Kobe University, Medical Device Engineering",
-    "group": "scientists",
-    "events": [
-      "F"
-    ],
-    "photo": null
-  },
-  {
     "id": "walter_patterson",
     "name": "Walter Patterson",
     "last": "Patterson",
@@ -770,17 +671,6 @@
       "F"
     ],
     "photo": "/img/speakers/irit_rappley.jpeg"
-  },
-  {
-    "id": "paulo_refinetti",
-    "name": "Paulo Refinetti",
-    "last": "Refinetti",
-    "affiliation": "REM Analytics",
-    "group": "founders",
-    "events": [
-      "F"
-    ],
-    "photo": null
   },
   {
     "id": "stuart_reid",
@@ -839,17 +729,6 @@
     "photo": "/img/speakers/eleanor_sheekey.jpeg"
   },
   {
-    "id": "parth_shinde",
-    "name": "Parth Shinde",
-    "last": "Shinde",
-    "affiliation": "Avenyx Bio",
-    "group": "founders",
-    "events": [
-      "F"
-    ],
-    "photo": null
-  },
-  {
     "id": "devinder_sodhi",
     "name": "Devinder Sodhi",
     "last": "Sodhi",
@@ -892,7 +771,7 @@
     "events": [
       "F"
     ],
-    "photo": null
+    "photo": "/img/speakers/taiga_tamiya.jpeg"
   },
   {
     "id": "derya_unutmaz",
@@ -940,17 +819,6 @@
     "photo": "/img/speakers/olaf_witkowski.jpeg"
   },
   {
-    "id": "misako_yamazaki",
-    "name": "Misako Yamazaki",
-    "last": "Yamazaki",
-    "affiliation": "PRIMA Genetics",
-    "group": "founders",
-    "events": [
-      "F"
-    ],
-    "photo": null
-  },
-  {
     "id": "paul_yang",
     "name": "Paul Yang",
     "last": "Yang",
@@ -983,16 +851,5 @@
       "S1"
     ],
     "photo": "/img/speakers/takahiro_yasuda.jpeg"
-  },
-  {
-    "id": "denise_zujur",
-    "name": "Denise Zujur, PhD",
-    "last": "Zujur",
-    "affiliation": "Smart Tissues",
-    "group": "founders",
-    "events": [
-      "F"
-    ],
-    "photo": null
   }
 ]

@@ -40,10 +40,6 @@
   background: linear-gradient(160deg, var(--indigo), var(--night)); border: 1px solid var(--line);
 }
 .photo img { object-fit: cover; object-position: 50% 28%; }
-.initials {
-  position: absolute; inset: 0; display: grid; place-items: center;
-  font-size: clamp(28px, 3vw, 42px); font-weight: 800; letter-spacing: -.02em; color: rgba(var(--accent-rgb), .55);
-}
 .name { margin-top: 14px; font-size: 16px; font-weight: 700; line-height: 1.25; letter-spacing: -.005em; }
 .aff { margin-top: 6px; font-size: 13px; line-height: 1.45; color: var(--dim); }
 .events { margin-top: 10px; font-family: var(--mono); font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--faint); }

@@ -10,9 +10,6 @@ import s from './LastYear.module.css';
 
 const t = site.lastYear;
 const sessionCount = program.reduce((n, e) => n + e.days.reduce((m, d) => m + d.sessions.filter(x => !('quiet' in x)).length, 0), 0);
-// "Prof. Takashi Aoi, MD PhD" → "TA"
-const initials = (name: string) => name.replace(/^(Prof\.|Dr\.)\s+/, '').replace(/,.*$/, '')
-  .split(/\s+/).filter(Boolean).map(w => w[0]).filter((_, i, a) => i === 0 || i === a.length - 1).join('');
 
 export function LastYear() {
   return (
@@ -43,9 +40,8 @@ export function LastYear() {
           {speakers.map(p => (
             <li key={p.id} className={s.card}>
               <span className={`${s.photo} grain`}>
-                {p.photo
-                  ? <Image className="grade" src={p.photo} alt="" fill sizes="(max-width: 640px) 45vw, (max-width: 1100px) 23vw, 220px" />
-                  : <span className={s.initials} aria-hidden="true">{initials(p.name)}</span>}
+                {/* sync-speakers.mjs only lists people with a portrait */}
+                <Image className="grade" src={p.photo!} alt="" fill sizes="(max-width: 640px) 45vw, (max-width: 1100px) 23vw, 220px" />
               </span>
               <span className={s.name}>{p.name}</span>
               {p.affiliation && <span className={s.aff}>{p.affiliation}</span>}

@@ -38,6 +38,8 @@ const speakers = rows
       photo,
     };
   })
+  // Only people with a portrait are listed (Nelson, Nov 18 2026); add the photo to bring someone back.
+  .filter(s => s.photo)
   .sort((a, b) => a.last.localeCompare(b.last, 'en', { sensitivity: 'base' }));
 
 // Standing rule: Joe Betts-LaCroix is never placed beside Aubrey de Grey or Natalie Coles
