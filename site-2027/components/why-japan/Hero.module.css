@@ -33,9 +33,8 @@
   color: var(--ink); text-decoration: none;
 }
 .next .mono { color: var(--accent); }
-.nextTitle { font-size: 15px; font-weight: 600; }
 .arrow { color: var(--accent); display: inline-block; transition: transform .3s var(--ease); }
-.next:hover .nextTitle, .next:focus-visible .nextTitle { color: var(--accent); }
+.next:hover .mono, .next:focus-visible .mono { color: var(--ink); }
 .next:hover .arrow { transform: translateY(3px); }
 
 /* ── the print ── */

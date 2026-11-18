@@ -16,10 +16,11 @@ export function Hero() {
         <p className={`eyebrow ${s.eyebrow}`}>{t.eyebrow}</p>
         <h1 className={s.h1}>{t.headline}</h1>
         <p className={s.lead}>{t.lead}</p>
-        {/* "Next" is the one added label: a plain pointer to the section below. */}
+        {/* "Next" is the one added label: a plain pointer to the section below. The section's
+            title stays visually out of the link so it is not shown twice in a row (anti-slop pass). */}
         <a className={s.next} href="#routes">
           <span className="mono">Next</span>
-          <span className={s.nextTitle}>{t.routes.title}</span>
+          <span className="sr-only">{t.routes.title}</span>
           <span className={s.arrow} aria-hidden="true">↓</span>
         </a>
       </div>
