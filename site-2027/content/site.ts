@@ -17,4 +17,22 @@ export const site = {
     lead: 'The companies, scientists and builders behind Mirai Tech City, and what they are working on.',
     empty: 'The first posts are on their way.',
   },
+
+  // The /2026 page: last year's speakers and agenda. Data: content/speakers-2026.json and
+  // content/program-2026.json (npm run speakers:sync / program:sync).
+  lastYear: {
+    eyebrow: 'Last year · Kobe · October 2026',
+    headline: 'Mirai Tech City 2026',
+    lead: 'In October 2026 we held two summits and a Demo Day in Kobe. Here is everyone who spoke and the full agenda.',
+    seoTitle: '2026 speakers and agenda',
+    seoDescription: 'Every speaker and session from Mirai Tech City 2026 in Kobe: Summit I, Summit II and Demo Day, October 17–26.',
+    speakersTitle: 'Speakers',
+    speakersLead: 'Scientists, founders and investors from Japan and around the world, in alphabetical order.',
+    agendaTitle: 'Agenda',
+    agendaLead: 'The full program as it ran. Times are Japan time.',
+    events: { S1: 'Summit I', S2: 'Summit II', F: 'Demo Day' } as Record<string, string>,
+    online: 'Online',
+    recorded: 'Recorded',
+    winner: 'Winner',
+  },
 };

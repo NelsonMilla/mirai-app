@@ -6,10 +6,10 @@ import type { NextConfig } from 'next';
 // `/:rest*` also matches the bare path and any trailing slash or subpage.
 const OLD_PAGES: [string, string][] = [
   ['/experience', '/#life'],
-  ['/program', '/#cohort-0'],
-  ['/conferences', '/#cohort-0'],
-  ['/summit-i', '/#cohort-0'],
-  ['/summit-ii', '/#cohort-0'],
+  ['/program', '/2026#agenda'],
+  ['/conferences', '/2026'],
+  ['/summit-i', '/2026#summit-i'],
+  ['/summit-ii', '/2026#summit-ii'],
   ['/fashion-show', '/#cohort-0'],
   ['/pricing', '/#apply'],
   ['/summit-bundle', '/#apply'],

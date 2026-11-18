@@ -5,6 +5,9 @@
     "last": "Abe",
     "affiliation": "CEO, Abe Yoando Pharma",
     "group": "founders",
+    "events": [
+      "S1"
+    ],
     "photo": "/img/speakers/tomonari_abe.jpeg"
   },
   {
@@ -13,6 +16,9 @@
     "last": "Aoi",
     "affiliation": "Professor, Division of Stem Cell Medicine, Kobe University Graduate School of Medicine",
     "group": "scientists",
+    "events": [
+      "S1"
+    ],
     "photo": "/img/speakers/takashi_aoi.jpeg"
   },
   {
@@ -21,6 +27,9 @@
     "last": "Balakrishnan",
     "affiliation": "Research Scientist, Eightsix Science",
     "group": "scientists",
+    "events": [
+      "S1"
+    ],
     "photo": "/img/speakers/kaarthik_balakrishnan.jpeg"
   },
   {
@@ -29,6 +38,9 @@
     "last": "Baron",
     "affiliation": "Co-Founder and CEO, LiveBeyond",
     "group": "founders",
+    "events": [
+      "S2"
+    ],
     "photo": "/img/speakers/julie_baron.jpeg"
   },
   {
@@ -37,6 +49,9 @@
     "last": "Betts-LaCroix",
     "affiliation": "Co-Founder and CEO, Retro Biosciences",
     "group": "scientists",
+    "events": [
+      "S2"
+    ],
     "photo": "/img/speakers/joe_betts_lacroix.jpeg"
   },
   {
@@ -45,6 +60,9 @@
     "last": "Boettcher Kimura",
     "affiliation": "Venture Partner, Governance Partners",
     "group": "founders",
+    "events": [
+      "F"
+    ],
     "photo": "/img/speakers/sophia_z_boettcher_kimura.jpeg"
   },
   {
@@ -53,7 +71,22 @@
     "last": "Burger",
     "affiliation": "Founder & CEO, Eightsix Science; Co-founder, Synconetics Organisation",
     "group": "founders",
+    "events": [
+      "S2",
+      "F"
+    ],
     "photo": "/img/speakers/daniel_burger.jpeg"
+  },
+  {
+    "id": "alexey_buyakofu",
+    "name": "Alexey Buyakofu",
+    "last": "Buyakofu",
+    "affiliation": "PRIMA Genetics",
+    "group": "founders",
+    "events": [
+      "F"
+    ],
+    "photo": null
   },
   {
     "id": "taylor_capito",
@@ -61,6 +94,10 @@
     "last": "Capito",
     "affiliation": "Founder, Cingularity",
     "group": "founders",
+    "events": [
+      "S1",
+      "F"
+    ],
     "photo": "/img/speakers/taylor_capito.jpeg"
   },
   {
@@ -69,6 +106,9 @@
     "last": "Capri",
     "affiliation": "Civil Diplomat, Longevity Advocate, Entrepreneur and Documentary Producer",
     "group": "scientists",
+    "events": [
+      "F"
+    ],
     "photo": "/img/speakers/elen_capri.jpeg"
   },
   {
@@ -77,6 +117,9 @@
     "last": "Cheng",
     "affiliation": "Co-Founder & Co-Executive Director, Longevity Biotech Fellowship; Co-Founder & General Partner, Healthspan Capital; Co-Founder, Vitalism Foundation",
     "group": "founders",
+    "events": [
+      "S2"
+    ],
     "photo": "/img/speakers/nathan_cheng.jpeg"
   },
   {
@@ -85,6 +128,9 @@
     "last": "Church",
     "affiliation": "Professor of Genetics, Harvard Medical School; Director, PersonalGenomes.org",
     "group": "scientists",
+    "events": [
+      "S2"
+    ],
     "photo": "/img/speakers/george_church.jpeg"
   },
   {
@@ -93,7 +139,21 @@
     "last": "Claar",
     "affiliation": "CEO, HekaBio",
     "group": "founders",
+    "events": [
+      "S2"
+    ],
     "photo": "/img/speakers/rob_claar.jpeg"
+  },
+  {
+    "id": "christian_clough",
+    "name": "Christian Clough",
+    "last": "Clough",
+    "affiliation": "Hypervariant",
+    "group": "founders",
+    "events": [
+      "F"
+    ],
+    "photo": null
   },
   {
     "id": "natalie_coles_de_grey",
@@ -101,6 +161,9 @@
     "last": "Coles de Grey",
     "affiliation": "Director of Supercentenarian Research, LEV Foundation; Scientific Advisory Board, Human Longevity Inc",
     "group": "scientists",
+    "events": [
+      "S2"
+    ],
     "photo": "/img/speakers/natalie_coles_de_grey.jpeg"
   },
   {
@@ -109,7 +172,21 @@
     "last": "Cordeiro",
     "affiliation": "Conference Chair, International Longevity Summit Madrid; Vice Chair, Humanity+; Teaching Fellow, Singularity University; author, The Death of Death",
     "group": "scientists",
+    "events": [
+      "S2"
+    ],
     "photo": "/img/speakers/jose_cordeiro.jpeg"
+  },
+  {
+    "id": "dominique_darvas",
+    "name": "Dominique Darvas",
+    "last": "Darvas",
+    "affiliation": "HALOS Biosciences",
+    "group": "founders",
+    "events": [
+      "F"
+    ],
+    "photo": null
   },
   {
     "id": "mac_davis",
@@ -117,6 +194,9 @@
     "last": "Davis",
     "affiliation": "Founder & CEO, Minicircle",
     "group": "founders",
+    "events": [
+      "S2"
+    ],
     "photo": "/img/speakers/mac_davis.jpeg"
   },
   {
@@ -125,7 +205,21 @@
     "last": "de Grey",
     "affiliation": "Founder, President and Chief Science Officer, LEV Foundation",
     "group": "scientists",
+    "events": [
+      "S2"
+    ],
     "photo": "/img/speakers/aubrey_de_grey.jpeg"
+  },
+  {
+    "id": "frazier_farrell",
+    "name": "Frazier Farrell",
+    "last": "Farrell",
+    "affiliation": "ZEN Global",
+    "group": "founders",
+    "events": [
+      "F"
+    ],
+    "photo": null
   },
   {
     "id": "patri_friedman",
@@ -133,6 +227,9 @@
     "last": "Friedman",
     "affiliation": "Founder, Pronomos Capital",
     "group": "founders",
+    "events": [
+      "S2"
+    ],
     "photo": "/img/speakers/patri_friedman.jpeg"
   },
   {
@@ -141,6 +238,9 @@
     "last": "Fujimoto",
     "affiliation": "Director and CFO, J-Pharma",
     "group": "founders",
+    "events": [
+      "S2"
+    ],
     "photo": "/img/speakers/yutaka_fujimoto.jpeg"
   },
   {
@@ -149,6 +249,9 @@
     "last": "Fukunaga",
     "affiliation": "Co-founder & President, Taxa Technologies",
     "group": "founders",
+    "events": [
+      "S1"
+    ],
     "photo": "/img/speakers/yuichi_fukunaga.jpeg"
   },
   {
@@ -157,6 +260,10 @@
     "last": "Geier",
     "affiliation": "Senior Director, Antler Japan",
     "group": "founders",
+    "events": [
+      "S2",
+      "F"
+    ],
     "photo": "/img/speakers/florian_geier.jpeg"
   },
   {
@@ -165,6 +272,9 @@
     "last": "Gilman",
     "affiliation": "Co-Founder & COO, R3 Bio",
     "group": "founders",
+    "events": [
+      "S1"
+    ],
     "photo": "/img/speakers/alice_gilman.jpeg"
   },
   {
@@ -173,6 +283,9 @@
     "last": "Gonzales",
     "affiliation": "Founder and CEO, HEIRITAGE EcoCultural",
     "group": "founders",
+    "events": [
+      "F"
+    ],
     "photo": "/img/speakers/cesar_gonzales.jpeg"
   },
   {
@@ -181,6 +294,9 @@
     "last": "Goodell",
     "affiliation": "CEO & Founding Board Member, Burning Man Project",
     "group": "founders",
+    "events": [
+      "S2"
+    ],
     "photo": "/img/speakers/marian_goodell.jpeg"
   },
   {
@@ -189,6 +305,11 @@
     "last": "Goto",
     "affiliation": "Chief Longevity Officer, Japan Reskilling Initiative",
     "group": "scientists",
+    "events": [
+      "S1",
+      "S2",
+      "F"
+    ],
     "photo": "/img/speakers/muneaki_goto.jpeg"
   },
   {
@@ -197,6 +318,9 @@
     "last": "Gries",
     "affiliation": "Co-Founder, Vitalism Foundation; organiser, Vitalist Bay",
     "group": "founders",
+    "events": [
+      "S2"
+    ],
     "photo": "/img/speakers/adam_gries.jpeg"
   },
   {
@@ -205,6 +329,9 @@
     "last": "Hanyu",
     "affiliation": "Founder, Shojinmeat Project",
     "group": "founders",
+    "events": [
+      "S1"
+    ],
     "photo": "/img/speakers/yuki_hanyu.jpeg"
   },
   {
@@ -213,6 +340,9 @@
     "last": "Hayano",
     "affiliation": "Representative Director and CEO, ASAGI Labs; Associate Professor, Tokyo University of Science",
     "group": "scientists",
+    "events": [
+      "S1"
+    ],
     "photo": "/img/speakers/motoshi_hayano.jpeg"
   },
   {
@@ -221,6 +351,9 @@
     "last": "Hecker",
     "affiliation": "Associate Professor, Department of Medicine, Baylor College of Medicine",
     "group": "scientists",
+    "events": [
+      "S1"
+    ],
     "photo": "/img/speakers/louise_hecker.jpeg"
   },
   {
@@ -229,6 +362,10 @@
     "last": "Henrich",
     "affiliation": "Co-Founder & CEO, Unchain Bio",
     "group": "founders",
+    "events": [
+      "S1",
+      "S2"
+    ],
     "photo": "/img/speakers/pedro_henrich.jpeg"
   },
   {
@@ -237,6 +374,10 @@
     "last": "Humer",
     "affiliation": "Founder & CEO, Muse Bio",
     "group": "founders",
+    "events": [
+      "S1",
+      "F"
+    ],
     "photo": "/img/speakers/juliette_humer.jpeg"
   },
   {
@@ -245,14 +386,20 @@
     "last": "Huyett",
     "affiliation": "Associate Director & Head of Litigation, Cornerstone; Granite Bio Innovation",
     "group": "founders",
+    "events": [
+      "S2"
+    ],
     "photo": "/img/speakers/ian_huyett.jpeg"
   },
   {
     "id": "shin_ichiro_imai",
-    "name": "Dr. Shin-ichiro Imai",
+    "name": "Shin-ichiro Imai, MD, PhD",
     "last": "Imai",
-    "affiliation": "Co-founder, LongGen Bioscience",
+    "affiliation": "Professor, Department of Developmental Biology and Department of Medicine, Washington University School of Medicine; Theodore & Bertha Bryan Distinguished Professor (Environmental Medicine)",
     "group": "scientists",
+    "events": [
+      "S2"
+    ],
     "photo": "/img/speakers/shin_ichiro_imai.jpeg"
   },
   {
@@ -261,6 +408,9 @@
     "last": "Ion",
     "affiliation": "Founding Steward, VitaDAO; Initiator, Viva City; Director, Vitality Healthspan Foundation",
     "group": "founders",
+    "events": [
+      "S2"
+    ],
     "photo": "/img/speakers/laurence_ion.jpeg"
   },
   {
@@ -269,7 +419,21 @@
     "last": "Jiang",
     "affiliation": "Innovation Initiatives Manager, Stellar Science Foundation",
     "group": "scientists",
+    "events": [
+      "S1"
+    ],
     "photo": "/img/speakers/iris_jiang.jpeg"
+  },
+  {
+    "id": "eric_jing_mockler",
+    "name": "Eric Jing Mockler",
+    "last": "Jing Mockler",
+    "affiliation": "aeon.science",
+    "group": "founders",
+    "events": [
+      "F"
+    ],
+    "photo": null
   },
   {
     "id": "kosuke_kato",
@@ -277,6 +441,9 @@
     "last": "Kato",
     "affiliation": "Assistant Professor, Pulmonary, Allergy, Critical Care & Sleep Medicine, Baylor College of Medicine",
     "group": "scientists",
+    "events": [
+      "S1"
+    ],
     "photo": "/img/speakers/kosuke_kato.jpeg"
   },
   {
@@ -285,6 +452,9 @@
     "last": "Kawasaki",
     "affiliation": "Senior Chief, Department of Medical Device and Healthcare, Japan Agency for Medical Research and Development (AMED)",
     "group": "scientists",
+    "events": [
+      "S1"
+    ],
     "photo": "/img/speakers/shingo_kawasaki.jpeg"
   },
   {
@@ -293,6 +463,9 @@
     "last": "Kelly",
     "affiliation": "Chief Growth Officer (CGO), HekaBio K.K.; MEDISO Europe Ambassador",
     "group": "founders",
+    "events": [
+      "S1"
+    ],
     "photo": "/img/speakers/rodney_kelly.jpeg"
   },
   {
@@ -301,7 +474,22 @@
     "last": "Kharouni",
     "affiliation": "Founder & CEO, ekei labs",
     "group": "founders",
+    "events": [
+      "S1",
+      "F"
+    ],
     "photo": "/img/speakers/bilal_kharouni.jpeg"
+  },
+  {
+    "id": "mike_kiamanesh",
+    "name": "Mike Kiamanesh",
+    "last": "Kiamanesh",
+    "affiliation": "Oval.bio",
+    "group": "founders",
+    "events": [
+      "F"
+    ],
+    "photo": null
   },
   {
     "id": "kyungmin_kim",
@@ -309,6 +497,9 @@
     "last": "Kim",
     "affiliation": "R&D Engineer, Keyence Corporation",
     "group": "scientists",
+    "events": [
+      "S2"
+    ],
     "photo": "/img/speakers/kyungmin_kim.jpeg"
   },
   {
@@ -317,7 +508,21 @@
     "last": "Kobayashi",
     "affiliation": "Head of International Ecosystem Development (Japan), Business Strategies; Senior Coordinator, Foundation for Biomedical Research and Innovation at Kobe (FBRI) / KOBE Biomedical Innovation Cluster",
     "group": "scientists",
+    "events": [
+      "S1"
+    ],
     "photo": "/img/speakers/keiko_kobayashi.jpeg"
+  },
+  {
+    "id": "max_koko",
+    "name": "Max Koko",
+    "last": "Koko",
+    "affiliation": "Biokami",
+    "group": "founders",
+    "events": [
+      "F"
+    ],
+    "photo": null
   },
   {
     "id": "hisatomo_kowa",
@@ -325,6 +530,9 @@
     "last": "Kowa",
     "affiliation": "Professor, Kobe University",
     "group": "scientists",
+    "events": [
+      "S1"
+    ],
     "photo": "/img/speakers/hisatomo_kowa.jpeg"
   },
   {
@@ -333,7 +541,21 @@
     "last": "Lasker",
     "affiliation": "Researcher and bioinformatician",
     "group": "scientists",
+    "events": [
+      "S2"
+    ],
     "photo": "/img/speakers/jordan_lasker.jpeg"
+  },
+  {
+    "id": "michael_levin",
+    "name": "Prof. Michael Levin, PhD",
+    "last": "Levin",
+    "affiliation": "Vannevar Bush Distinguished Professor of Biology, Tufts University",
+    "group": "scientists",
+    "events": [
+      "F"
+    ],
+    "photo": null
   },
   {
     "id": "josh_mann",
@@ -341,6 +563,9 @@
     "last": "Mann",
     "affiliation": "COO, The LARTA Agency",
     "group": "founders",
+    "events": [
+      "S2"
+    ],
     "photo": "/img/speakers/josh_mann.jpeg"
   },
   {
@@ -349,6 +574,9 @@
     "last": "Maruyama",
     "affiliation": "Partner, Governance Partners",
     "group": "founders",
+    "events": [
+      "S2"
+    ],
     "photo": "/img/speakers/shun_maruyama.jpeg"
   },
   {
@@ -357,6 +585,10 @@
     "last": "Massó",
     "affiliation": "Co-Founder & COO, Unchain Bio",
     "group": "founders",
+    "events": [
+      "S1",
+      "S2"
+    ],
     "photo": "/img/speakers/victoria_masso.jpeg"
   },
   {
@@ -365,6 +597,10 @@
     "last": "Masui",
     "affiliation": "Managing Partner, ASAGI Labs Ventures LLC",
     "group": "founders",
+    "events": [
+      "S2",
+      "F"
+    ],
     "photo": "/img/speakers/keita_masui.jpeg"
   },
   {
@@ -373,6 +609,9 @@
     "last": "Matsuda",
     "affiliation": "Representative Director, Japan Biohacking Association; Founder, HOLOLIFE Center Japan; Former UFC Fighter",
     "group": "founders",
+    "events": [
+      "F"
+    ],
     "photo": "/img/speakers/tateki_matsuda.jpeg"
   },
   {
@@ -381,6 +620,9 @@
     "last": "McCall",
     "affiliation": "Founder, Continuity Labs",
     "group": "scientists",
+    "events": [
+      "S1"
+    ],
     "photo": "/img/speakers/ryan_mccall.jpeg"
   },
   {
@@ -389,6 +631,10 @@
     "last": "McGlothlin",
     "affiliation": "Full Stack Developer and Applied Software Researcher",
     "group": "scientists",
+    "events": [
+      "S2",
+      "F"
+    ],
     "photo": "/img/speakers/aya_mcglothlin.jpeg"
   },
   {
@@ -397,6 +643,9 @@
     "last": "Milla",
     "affiliation": "Co-Founder & CTO, Unchain Bio",
     "group": "founders",
+    "events": [
+      "S2"
+    ],
     "photo": "/img/speakers/nelson_milla.jpeg"
   },
   {
@@ -405,6 +654,9 @@
     "last": "Miyanishi",
     "affiliation": "Professor, Division of Hematopoietic Stem Cell Medicine, Kobe University Graduate School of Medicine",
     "group": "scientists",
+    "events": [
+      "S1"
+    ],
     "photo": "/img/speakers/masanori_miyanishi.jpeg"
   },
   {
@@ -413,6 +665,9 @@
     "last": "Muragaki",
     "affiliation": "Professor and Chair of Department of Medical Device Engineering at the Graduate School of Medicine, Kobe University",
     "group": "scientists",
+    "events": [
+      "S1"
+    ],
     "photo": "/img/speakers/yoshihiro_muragaki.jpeg"
   },
   {
@@ -421,6 +676,9 @@
     "last": "Nakashima",
     "affiliation": "VP, Operations/Business Development, Modalis Therapeutics",
     "group": "founders",
+    "events": [
+      "S1"
+    ],
     "photo": "/img/speakers/yosuke_nakashima.jpeg"
   },
   {
@@ -429,6 +687,9 @@
     "last": "Oen",
     "affiliation": "Co-Founder & CEO, NeoTILa Biosciences",
     "group": "founders",
+    "events": [
+      "S1"
+    ],
     "photo": "/img/speakers/felix_oen.jpeg"
   },
   {
@@ -437,7 +698,22 @@
     "last": "Onuma",
     "affiliation": "Co-Founder & COO, GlobalDeal",
     "group": "founders",
+    "events": [
+      "S2",
+      "F"
+    ],
     "photo": "/img/speakers/karen_onuma.jpeg"
+  },
+  {
+    "id": "tooru_ooya",
+    "name": "Prof. Tooru Ooya",
+    "last": "Ooya",
+    "affiliation": "Kobe University, Medical Device Engineering",
+    "group": "scientists",
+    "events": [
+      "F"
+    ],
+    "photo": null
   },
   {
     "id": "walter_patterson",
@@ -445,6 +721,9 @@
     "last": "Patterson",
     "affiliation": "Founder & Chief Science Officer, Minicircle",
     "group": "scientists",
+    "events": [
+      "S1"
+    ],
     "photo": "/img/speakers/walter_patterson.jpeg"
   },
   {
@@ -453,6 +732,9 @@
     "last": "Porter",
     "affiliation": "Co-Founder, Prosperity Exchange",
     "group": "founders",
+    "events": [
+      "S2"
+    ],
     "photo": "/img/speakers/todd_porter.jpeg"
   },
   {
@@ -461,6 +743,9 @@
     "last": "Possin",
     "affiliation": "Founder & CEO, Merito KK; Founder, Zō Village",
     "group": "founders",
+    "events": [
+      "F"
+    ],
     "photo": "/img/speakers/brandon_possin.jpeg"
   },
   {
@@ -469,6 +754,9 @@
     "last": "Rana",
     "affiliation": "Partner and Head of Business Development, APAC, GreyRigge Associates",
     "group": "founders",
+    "events": [
+      "S2"
+    ],
     "photo": "/img/speakers/zain_rana.jpeg"
   },
   {
@@ -477,7 +765,22 @@
     "last": "Rappley",
     "affiliation": "Co-Founder & CEO, NNP Labs",
     "group": "founders",
+    "events": [
+      "S2",
+      "F"
+    ],
     "photo": "/img/speakers/irit_rappley.jpeg"
+  },
+  {
+    "id": "paulo_refinetti",
+    "name": "Paulo Refinetti",
+    "last": "Refinetti",
+    "affiliation": "REM Analytics",
+    "group": "founders",
+    "events": [
+      "F"
+    ],
+    "photo": null
   },
   {
     "id": "stuart_reid",
@@ -485,14 +788,20 @@
     "last": "Reid",
     "affiliation": "Professor and Head of Biomedical Engineering, University of Strathclyde; Co-Director, Centre for the Cellular Microenvironment",
     "group": "scientists",
+    "events": [
+      "S1"
+    ],
     "photo": "/img/speakers/stuart_reid.jpeg"
   },
   {
     "id": "elliot_roth",
     "name": "Elliot Roth",
     "last": "Roth",
-    "affiliation": "",
+    "affiliation": "Cofounder, The Haus Fund",
     "group": "founders",
+    "events": [
+      "S2"
+    ],
     "photo": "/img/speakers/elliot_roth.jpeg"
   },
   {
@@ -501,6 +810,9 @@
     "last": "Sanders",
     "affiliation": "Host, Peak Human Podcast; Founder, Sapien",
     "group": "founders",
+    "events": [
+      "S1"
+    ],
     "photo": "/img/speakers/brian_sanders.jpeg"
   },
   {
@@ -509,6 +821,9 @@
     "last": "Scholz",
     "affiliation": "Co-Founder & CEO, Oisín Biotechnologies",
     "group": "founders",
+    "events": [
+      "S2"
+    ],
     "photo": "/img/speakers/matt_scholz.jpeg"
   },
   {
@@ -517,7 +832,22 @@
     "last": "Sheekey",
     "affiliation": "Postdoctoral Researcher, RIKEN BDR Kobe; creator, The Sheekey Science Show",
     "group": "scientists",
+    "events": [
+      "S1",
+      "S2"
+    ],
     "photo": "/img/speakers/eleanor_sheekey.jpeg"
+  },
+  {
+    "id": "parth_shinde",
+    "name": "Parth Shinde",
+    "last": "Shinde",
+    "affiliation": "Avenyx Bio",
+    "group": "founders",
+    "events": [
+      "F"
+    ],
+    "photo": null
   },
   {
     "id": "devinder_sodhi",
@@ -525,6 +855,9 @@
     "last": "Sodhi",
     "affiliation": "Founder, Learning Layer Labs",
     "group": "founders",
+    "events": [
+      "S1"
+    ],
     "photo": "/img/speakers/devinder_sodhi.jpeg"
   },
   {
@@ -533,7 +866,33 @@
     "last": "Takagaki",
     "affiliation": "Associate Professor, University of Yamanashi and Institute of Science Tokyo",
     "group": "scientists",
+    "events": [
+      "S1",
+      "S2"
+    ],
     "photo": "/img/speakers/kentaroh_takagaki.jpeg"
+  },
+  {
+    "id": "masayo_takahashi",
+    "name": "Masayo Takahashi, MD, PhD",
+    "last": "Takahashi",
+    "affiliation": "President and CEO, Vision Care Inc.",
+    "group": "scientists",
+    "events": [
+      "S2"
+    ],
+    "photo": "/img/speakers/masayo_takahashi.jpeg"
+  },
+  {
+    "id": "taiga_tamiya",
+    "name": "Taiga Tamiya",
+    "last": "Tamiya",
+    "affiliation": "Miyako Capital",
+    "group": "founders",
+    "events": [
+      "F"
+    ],
+    "photo": null
   },
   {
     "id": "derya_unutmaz",
@@ -541,6 +900,9 @@
     "last": "Unutmaz",
     "affiliation": "Professor, The Jackson Laboratory for Genomic Medicine",
     "group": "scientists",
+    "events": [
+      "S1"
+    ],
     "photo": "/img/speakers/derya_unutmaz.jpeg"
   },
   {
@@ -549,7 +911,44 @@
     "last": "Watanabe",
     "affiliation": "Associate Professor, Department of Systems Innovation, Faculty of Engineering, The University of Tokyo",
     "group": "scientists",
+    "events": [
+      "S2",
+      "F"
+    ],
     "photo": "/img/speakers/masataka_watanabe.jpeg"
+  },
+  {
+    "id": "anthony_willoughby",
+    "name": "Anthony Willoughby",
+    "last": "Willoughby",
+    "affiliation": "Founder, The Nomadic School of Business",
+    "group": "founders",
+    "events": [
+      "S2"
+    ],
+    "photo": "/img/speakers/anthony_willoughby.jpeg"
+  },
+  {
+    "id": "olaf_witkowski",
+    "name": "Olaf Witkowski, PhD",
+    "last": "Witkowski",
+    "affiliation": "Founder and Chief Scientist, Cognisee",
+    "group": "scientists",
+    "events": [
+      "S2"
+    ],
+    "photo": "/img/speakers/olaf_witkowski.jpeg"
+  },
+  {
+    "id": "misako_yamazaki",
+    "name": "Misako Yamazaki",
+    "last": "Yamazaki",
+    "affiliation": "PRIMA Genetics",
+    "group": "founders",
+    "events": [
+      "F"
+    ],
+    "photo": null
   },
   {
     "id": "paul_yang",
@@ -557,6 +956,10 @@
     "last": "Yang",
     "affiliation": "Partner, Governance Partners",
     "group": "founders",
+    "events": [
+      "S2",
+      "F"
+    ],
     "photo": "/img/speakers/paul_yang.jpeg"
   },
   {
@@ -565,6 +968,9 @@
     "last": "Yano",
     "affiliation": "Partner, Coral Capital",
     "group": "founders",
+    "events": [
+      "S2"
+    ],
     "photo": "/img/speakers/rie_yano.jpeg"
   },
   {
@@ -573,6 +979,20 @@
     "last": "Yasuda",
     "affiliation": "Specially Appointed Professor, Department of Medical Device Engineering, Kobe University Graduate School of Medicine; Director, MedTech Innovation Center (MIC)",
     "group": "scientists",
+    "events": [
+      "S1"
+    ],
     "photo": "/img/speakers/takahiro_yasuda.jpeg"
+  },
+  {
+    "id": "denise_zujur",
+    "name": "Denise Zujur, PhD",
+    "last": "Zujur",
+    "affiliation": "Smart Tissues",
+    "group": "founders",
+    "events": [
+      "F"
+    ],
+    "photo": null
   }
 ]

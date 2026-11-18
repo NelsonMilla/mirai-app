@@ -146,6 +146,7 @@ export const residency = {
     filmLabel: 'Demo Day 2026 footage: teams on stage, the audience laughing, the cohort gathering for a group photo.',
     // Prefixed with the speaker count. Only name institutions shown in the face strip.
     network: 'speakers in 2026, from Kobe University to Harvard',
+    lastYearLink: 'All 2026 speakers and the full agenda', // links to /2026
   },
 
   // ── Life (real photos) ───────────────────────────────────
@@ -179,6 +180,7 @@ export const residency = {
     { href: '/#program', label: 'Program' },
     { href: '/#month', label: 'The month' },
     { href: '/#cohort-0', label: 'Cohort 0' },
+    { href: '/2026', label: '2026' },
     { href: '/blog', label: 'Blog' },
   ],
   navCta: 'Apply',

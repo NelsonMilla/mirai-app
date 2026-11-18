@@ -245,6 +245,12 @@
   background: #0b0d14;
 }
 .face img { object-fit: cover; object-position: 50% 28%; }
+.more {
+  display: inline-block; margin-top: 14px; padding: 6px 0;
+  font-size: 15px; font-weight: 600; color: var(--accent); text-decoration: none;
+  border-bottom: 1px solid rgba(var(--accent-rgb), .35); transition: border-color .2s;
+}
+.more:hover { border-color: var(--accent); }
 .name {
   font-family: var(--mono); font-size: 10px; line-height: 1.4; letter-spacing: .12em; text-transform: uppercase;
   color: var(--faint);
