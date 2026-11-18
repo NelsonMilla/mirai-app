@@ -17,6 +17,11 @@ export function Notes() {
           </li>
         ))}
       </ol>
+      <p className={s.credit}>
+        Lead photo: {t.aerial.credit}{' '}
+        <a href={t.aerial.source} target="_blank" rel="noopener">Source</a> ·{' '}
+        <a href={t.aerial.license} target="_blank" rel="noopener">Licence</a>. Resized and colour graded.
+      </p>
     </section>
   );
 }

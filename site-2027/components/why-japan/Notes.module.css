@@ -8,3 +8,5 @@
 .notes li { scroll-margin-top: 120px; break-inside: avoid; padding-bottom: 8px; }
 @media (max-width: 760px) { .notes ol { columns: 1; } }
 .notes a { color: var(--dim); }
+.credit { margin-top: 18px; color: var(--faint); font-size: 12px; line-height: 1.6; }
+.credit a { color: var(--dim); }

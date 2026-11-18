@@ -9,10 +9,10 @@ import { residency } from '@/content/residency';
 import { whyJapan as t } from '@/content/why-japan';
 import s from './Closing.module.css';
 
-// Checked by eye: a posed (not selfie) group on a hillside path, no stage speakers, no drinks,
-// no readable brand marks at this size.
+// The 2026 group (moved here from the hero, Nov 18 2026). Checked by eye: a posed group
+// (photographer's shot, not a selfie); no stage, no drinks, no readable brand marks.
 const PHOTO = (photos as { src: string; alt: string; caption: string; focal: string }[])
-  .find(p => p.src.endsWith('/people-friends-hike-01.webp'))!;
+  .find(p => p.src.endsWith('/people-group-laughing-01.webp'))!;
 
 export function Closing() {
   return (
