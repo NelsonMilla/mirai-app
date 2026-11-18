@@ -1,0 +1,77 @@
+/* /why-japan · 日本. Masthead uses the global blog classes; this file is the photo band, the
+   seven cards, the "Why now" timeline and the notes. Night ground, cream type, gold for marks. */
+
+.band {
+  position: relative; display: block; max-width: calc(1440px - 12vw); margin: 0 auto;
+  aspect-ratio: 21 / 9; overflow: hidden; border: 1px solid var(--line);
+}
+@media (max-width: 1440px) { .band { margin: 0 6vw; } }
+@media (max-width: 640px) { .band { aspect-ratio: 4 / 3; } }
+.band img { object-fit: cover; }
+
+.block { max-width: 1440px; margin: 0 auto; padding: clamp(72px, 7vw, 110px) 6vw 0; scroll-margin-top: 90px; }
+.head {
+  display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 18px 48px;
+  padding-bottom: 24px; border-bottom: 1px solid var(--line);
+}
+.h2 { margin-top: 14px; font-size: clamp(40px, 6vw, 88px); font-weight: 800; line-height: .94; letter-spacing: -.03em; max-width: 14ch; }
+.sub { color: var(--dim); font-size: 15px; line-height: 1.7; max-width: 58ch; }
+.sub b { color: var(--ink); font-weight: 600; }
+.fn { font-family: var(--mono); font-size: .62em; line-height: 0; margin-left: 2px; }
+.fn a { color: var(--accent); text-decoration: none; }
+
+/* ── seven cards: two wide, then three and two ── */
+.cards { list-style: none; margin-top: 36px; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 20px; }
+.card { grid-column: span 2; display: flex; flex-direction: column; min-width: 0; border: 1px solid var(--line);
+  background: rgba(246,241,231,.02); }
+.card.wide, .card:nth-child(n+6) { grid-column: span 3; }
+.plate { position: relative; display: block; aspect-ratio: 16 / 10; overflow: hidden; background: linear-gradient(160deg, var(--indigo), var(--night)); }
+.wide .plate { aspect-ratio: 16 / 9; }
+.plate img { object-fit: cover; }
+.read { display: flex; flex-direction: column; gap: 10px; padding: 22px 22px 26px; flex: 1; }
+.title { font-size: clamp(22px, 2.2vw, 32px); font-weight: 800; line-height: 1.05; letter-spacing: -.02em; }
+.fig { font-size: clamp(40px, 4.4vw, 64px); font-weight: 800; line-height: 1; letter-spacing: -.03em; color: var(--accent);
+  font-variant-numeric: tabular-nums; }
+.body { color: var(--dim); font-size: 15px; line-height: 1.6; max-width: 46ch; }
+.fact { margin-top: auto; padding-top: 16px; border-top: 1px solid var(--line); display: flex; flex-direction: column; gap: 6px; }
+.factVal { font-size: 20px; font-weight: 700; color: var(--accent); }
+.ledger { display: grid; grid-template-columns: max-content minmax(0, 1fr); align-items: center; gap: 14px 20px; margin-top: 4px; }
+.ledger > div { display: contents; }
+.ledger .fig { font-size: clamp(30px, 3vw, 44px); }
+.ledger dd { line-height: 1.6; }
+.ledger dd b { color: var(--ink); font-weight: 500; }
+
+@media (max-width: 1000px) {
+  .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .card, .card.wide, .card:nth-child(n+6) { grid-column: span 1; }
+  .card.wide { grid-column: span 2; }
+}
+@media (max-width: 640px) {
+  .cards { grid-template-columns: minmax(0, 1fr); }
+  .card.wide { grid-column: span 1; }
+}
+
+/* ── why now ── */
+.now { margin-top: 36px; display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 48px; align-items: start; }
+.nowPlate { position: sticky; top: 100px; display: block; aspect-ratio: 4 / 5; overflow: hidden; border: 1px solid var(--line); }
+.nowPlate img { object-fit: cover; }
+.chron { list-style: none; }
+.entry { display: grid; grid-template-columns: 110px minmax(0, 1fr); gap: 4px 28px; padding: 22px 0; border-bottom: 1px solid var(--line); }
+.entry:first-child { padding-top: 0; }
+.date { font-family: var(--mono); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); padding-top: 4px; }
+.entryHead { font-size: clamp(18px, 1.6vw, 22px); font-weight: 700; line-height: 1.3; text-wrap: pretty; }
+.entryBody { margin-top: 8px; color: var(--dim); font-size: 15px; line-height: 1.65; max-width: 60ch; }
+.entryHead + .entryBody { margin-top: 10px; }
+.entryBody b { color: var(--ink); font-weight: 600; }
+@media (max-width: 1000px) {
+  .now { grid-template-columns: minmax(0, 1fr); }
+  .nowPlate { position: relative; top: 0; aspect-ratio: 16 / 9; }
+}
+@media (max-width: 640px) { .entry { grid-template-columns: minmax(0, 1fr); } }
+
+/* ── notes ── */
+.notes { padding-bottom: clamp(48px, 5vw, 80px); }
+.notes h2 { padding-bottom: 14px; border-bottom: 1px solid var(--line); }
+.notes ol { margin-top: 18px; padding-left: 20px; display: grid; gap: 10px; color: var(--faint); font-size: 13px; line-height: 1.6; max-width: 90ch; }
+.notes li { scroll-margin-top: 100px; }
+.notes a { color: var(--dim); }

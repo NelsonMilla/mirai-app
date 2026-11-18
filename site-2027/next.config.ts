@@ -7,7 +7,7 @@ import type { NextConfig } from 'next';
 const OLD_PAGES: [string, string][] = [
   ['/experience', '/#life'],
   ['/program', '/2026#agenda'],
-  ['/conferences', '/2026'],
+  ['/conferences', '/why-japan'], // the 2026 page's Japan thesis lives on there
   ['/summit-i', '/2026#summit-i'],
   ['/summit-ii', '/2026#summit-ii'],
   ['/fashion-show', '/#cohort-0'],
