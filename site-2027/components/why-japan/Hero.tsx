@@ -1,14 +1,12 @@
-// /why-japan hero. The claim on the left, set on night; one large graded aerial of Port Island,
-// home of the Kobe Biomedical Innovation Cluster, bleeding to the right and top edges (behind the
-// glass header), the way the homepage opens on Fuji. Type never sits on the photo: it only fades
+// /why-japan hero. The claim on the left, set on night; a large graded film loop from inside the
+// Kobe Biomedical Innovation Cluster (HeroFilm) bleeding to the right and top edges (behind the
+// glass header), the way the homepage opens on Fuji. Type never sits on the film: it only fades
 // into the night at its inner and bottom edges. (The 2026 group photo moved to the closing.)
 // Server component; the only motion is a CSS develop-in that ends in the finished state.
 // At 900px and under the claim, lead and Next come first, then the print full-bleed.
-import Image from 'next/image';
 import { whyJapan as t } from '@/content/why-japan';
+import { HeroFilm } from './HeroFilm';
 import s from './Hero.module.css';
-
-const LEAD = t.aerial;
 
 export function Hero() {
   return (
@@ -26,14 +24,7 @@ export function Hero() {
         </a>
       </div>
 
-      <figure className={s.print}>
-        <span className={`${s.plate} grain`}>
-          <Image className={`grade ${s.img}`} src={LEAD.src} alt={LEAD.alt} fill priority
-            sizes="(max-width: 900px) 100vw, 60vw" style={{ objectPosition: '58% 50%' }} />
-          <span className={s.fade} aria-hidden="true" />
-        </span>
-        <figcaption className={`mono ${s.caption}`}>{LEAD.caption}</figcaption>
-      </figure>
+      <HeroFilm />
     </header>
   );
 }

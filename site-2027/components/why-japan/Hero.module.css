@@ -82,3 +82,12 @@
   .h1 { letter-spacing: -.03em; line-height: .92; }
   .caption { font-size: 10px; letter-spacing: .14em; }
 }
+
+/* The film's caption carries the pause control (WCAG 2.2.2: moving content can be paused). */
+.caption { display: flex; align-items: baseline; gap: 16px; }
+.toggle {
+  font: inherit; letter-spacing: inherit; text-transform: inherit; color: var(--dim);
+  background: none; border: 0; padding: 10px 0; cursor: pointer;
+  text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--line);
+}
+.toggle:hover, .toggle:focus-visible { color: var(--ink); text-decoration-color: var(--accent); }

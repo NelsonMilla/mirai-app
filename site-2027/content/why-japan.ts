@@ -12,15 +12,11 @@ export const whyJapan = {
   headline: 'Japan is the best global ecosystem for frontier biotech.',
   lead: 'The only developed country where a therapy can sell on Phase 1 safety data, and where the fastest route to market is the official one.',
   hero: { src: '/img/why-japan/kobe-harbor.webp', alt: 'Kobe harbour at golden hour, the Port Island cluster across the water' },
-  // The page's lead photo (Nelson, Nov 18 2026: "a picture of KBIC… an aerial view").
-  // "151229 Kobe Port Japan02bs" by 663highland, CC BY 2.5, Wikimedia Commons; resized and graded.
-  aerial: {
-    src: '/img/why-japan/kbic-aerial.webp',
-    alt: 'Port Island in Kobe from the air, with Kobe Airport and its bridge in the foreground',
-    caption: 'Port Island, home of the Kobe Biomedical Innovation Cluster', // added plain label
-    credit: '"151229 Kobe Port Japan02bs" by 663highland, CC BY 2.5, via Wikimedia Commons.',
-    source: 'https://commons.wikimedia.org/wiki/File:151229_Kobe_Port_Japan02bs.jpg',
-    license: 'https://creativecommons.org/licenses/by/2.5/',
+  // The page's lead film (Nelson, Nov 18 2026: KBIC, more visual impact): a silent loop cut from
+  // Mirai's own 4K film of the 2026 visits on Port Island. Shot list: public/media/kbic-loop.json.
+  film: {
+    label: 'A short silent film from Port Island in Kobe: the RIKEN computing centre, supercomputer hardware, a 3D anatomy display, a clinical training lab and a cleanroom.',
+    caption: 'Port Island, Kobe · October 2026', // added plain label
   },
 
   routes: {

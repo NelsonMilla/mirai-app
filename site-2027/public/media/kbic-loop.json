@@ -1,0 +1,13 @@
+{
+  "source": "~/Downloads/Mirai Tech City 2026.MOV (3840x2160, 59.94fps, Mirai's own 2026 film)",
+  "note": "Each shot trimmed 2 frames at both ends, played at half speed (60fps -> 30fps slow motion), scaled to 1920x1080. Shots with the MIC, Kobe University or RIKEN signs, and any shot with speakers, were left out.",
+  "duration": 5.87,
+  "shots": [
+    { "in": 13.230, "out": 13.864, "crop": "right 62% (drops the RIKEN sign)", "description": "RIKEN Center for Computational Science building, Port Island" },
+    { "in": 8.342, "out": 8.809, "description": "Fugaku supercomputer CPU board, close-up" },
+    { "in": 4.438, "out": 5.222, "description": "3D anatomy display in a lab" },
+    { "in": 12.880, "out": 13.230, "description": "Copper cryogenic hardware, close-up" },
+    { "in": 14.665, "out": 15.299, "description": "Clinical training manikin and glassware" },
+    { "in": 30.314, "out": 30.781, "crop": "right 72% (drops an equipment maker's logo)", "description": "Two people in a cleanroom under yellow light" }
+  ]
+}
