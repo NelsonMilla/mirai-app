@@ -180,6 +180,7 @@ export const residency = {
     { href: '/#program', label: 'Program' },
     { href: '/#month', label: 'The month' },
     { href: '/#cohort-0', label: 'Cohort 0' },
+    { href: '/why-japan', label: 'Why Japan' },
     { href: '/2026', label: '2026' },
     { href: '/blog', label: 'Blog' },
   ],

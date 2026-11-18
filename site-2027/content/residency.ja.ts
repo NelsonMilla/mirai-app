@@ -149,6 +149,7 @@ export const residencyJa: Residency = {
     { href: '/jp#program', label: 'プログラム' },
     { href: '/jp#month', label: '1か月の流れ' },
     { href: '/jp#cohort-0', label: 'Cohort 0' },
+    { href: '/why-japan', label: 'なぜ日本か' },
     { href: '/2026', label: '2026年' },
     { href: '/blog', label: 'ブログ' },
   ],

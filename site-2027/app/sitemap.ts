@@ -13,6 +13,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${site.url}/jp`, changeFrequency: 'weekly', priority: 0.9,
       alternates: { languages: { en: site.url, ja: `${site.url}/jp` } } },
     { url: `${site.url}/2026`, changeFrequency: 'yearly', priority: 0.6 },
+    { url: `${site.url}/why-japan`, changeFrequency: 'yearly', priority: 0.7 },
     { url: `${site.url}/blog`, lastModified: latest, changeFrequency: 'weekly', priority: 0.8 },
     ...posts.map(p => ({ url: `${site.url}/blog/${p.slug}`, lastModified: p.updated ?? p.date, changeFrequency: 'monthly' as const, priority: 0.7 })),
   ];
