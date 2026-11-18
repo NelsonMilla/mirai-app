@@ -1,0 +1,87 @@
+/* Why now, "Years as monuments". The years are the architecture: giant Switzer numerals, events
+   at reading size on the right. Desktop only: the events column sets each row's height and the
+   numeral is sticky inside its row (pure CSS, no scroll handler), so 2026 holds while its events
+   and the dinner print pass. 2027 breaks the split: full measure, no sticky column. It is hollow
+   as styling only; "Ahead" and the gold Today
+   rule come from NowMarks.tsx. */
+
+.section { max-width: 1440px; margin: 0 auto; padding: clamp(80px, 8vw, 128px) 6vw 0; scroll-margin-top: 90px; }
+.head { padding-bottom: 24px; }
+.kanji span { font-size: 11px; }
+.eyebrow { margin-top: 18px; }
+.h2 { margin-top: 14px; font-size: clamp(40px, 6vw, 88px); font-weight: 800; line-height: .94; letter-spacing: -.03em; }
+
+.years { list-style: none; }
+.year {
+  display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 0 48px; align-items: stretch;
+  border-top: 1px solid var(--line); padding: 26px 0 40px;
+}
+.year.last { padding-bottom: 0; }
+
+/* The monument. Its row is as tall as its events, so the numeral holds at the top while they
+   pass, then the row's end carries it away. */
+.mark { position: sticky; top: 96px; align-self: start; min-width: 0; }
+.num {
+  font-size: clamp(96px, 16vw, 236px); font-weight: 900; line-height: .78; letter-spacing: -.055em;
+  font-variant-numeric: tabular-nums; color: var(--ink); margin-left: -.04em;
+}
+.last .num { color: transparent; -webkit-text-stroke: 2.5px var(--ink); }
+
+/* Plain mono label, no chip: sits top-right of the numeral column so it causes no shift. */
+.aheadLabel {
+  position: absolute; top: 2px; right: 0;
+  font-family: var(--mono); font-size: 12px; letter-spacing: .3em; text-transform: uppercase; color: var(--accent);
+}
+
+/* A 2026 dinner print closes the 2026 events: secondary, wide and low. */
+.photo { margin-top: 8px; }
+.photo figure { margin: 0; }
+.plate {
+  position: relative; display: block; aspect-ratio: 3 / 2; overflow: hidden;
+  background: linear-gradient(160deg, var(--indigo), var(--night));
+}
+.plate img { object-fit: cover; }
+.photo figcaption { margin-top: 10px; padding-top: 8px; border-top: 1px solid var(--line); color: var(--dim); }
+
+/* 2027: the one full-width beat. The hollow numeral runs across the measure; its entry sits
+   beneath it in the right-hand column, straight above the closing's call. */
+.year.last { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); }
+.last .mark { position: relative; top: auto; grid-column: 1 / -1; }
+.last .num { font-size: clamp(112px, 27vw, 388px); line-height: .8; }
+.last .events { grid-column: 2; margin-top: clamp(20px, 2.4vw, 36px); }
+.last .evHead { font-size: clamp(22px, 2.2vw, 32px); }
+
+/* Today (grafted from the rail): a gold hairline with a dot and a mono label, between Oct 2026
+   and 2027. It takes the place of the grey rule above 2027. */
+.today {
+  position: relative; display: flex; align-items: center; gap: 14px;
+  padding: 0 0 14px;
+}
+.today::before { content: ""; flex: none; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); }
+.today::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: var(--accent);
+}
+.todayLabel { font-family: var(--mono); font-size: 12px; letter-spacing: .24em; text-transform: uppercase; color: var(--accent); white-space: nowrap; }
+.today + .year { border-top-color: transparent; }
+.todayInline { margin-left: 14px; padding-left: 14px; border-left: 1px solid rgba(var(--accent-rgb), .5); }
+
+.events { list-style: none; }
+.event { padding: 0 0 24px; }
+.event + .event { padding-top: 20px; border-top: 1px solid var(--line); }
+.date { font-family: var(--mono); font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+.evHead { font-size: clamp(20px, 1.8vw, 26px); font-weight: 700; line-height: 1.25; letter-spacing: -.01em; text-wrap: pretty; max-width: 26ch; }
+.evBody { color: var(--dim); font-size: 16px; line-height: 1.65; max-width: 52ch; }
+.evBody + .evBody, .evHead + .evBody { margin-top: 14px; }
+.evBody b { color: var(--ink); font-weight: 600; }
+
+@media (max-width: 900px) {
+  .year { grid-template-columns: minmax(0, 1fr); padding: 22px 0 32px; }
+  .mark { position: relative; top: auto; margin-bottom: 24px; }
+  .num { font-size: clamp(80px, 30vw, 176px); }
+  .last .num { -webkit-text-stroke-width: 2px; }
+  .photo { margin-top: 24px; }
+  .plate { aspect-ratio: 16 / 9; }
+  .year.last { grid-template-columns: minmax(0, 1fr); }
+  .last .events { grid-column: 1; }
+  .last .num { font-size: clamp(80px, 30vw, 176px); }
+}

@@ -1,0 +1,124 @@
+/* /lab/wj-reasons-c · Editorial spreads. Two near-full-viewport spreads, then a fast run of
+   numbers, then one wide band. Full-width section; every child sets its own gutter so photos can
+   bleed to the viewport edge while type keeps the 1440px measure. */
+
+.wrap {
+  --g: max(6vw, calc(50% - 720px + 6vw));
+  background: var(--night);
+  padding: clamp(72px, 7vw, 110px) 0 0;
+  scroll-margin-top: 90px;
+}
+
+/* ── header ── */
+.head {
+  display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 28px 6vw; align-items: end;
+  padding: 0 var(--g) clamp(40px, 4.4vw, 64px);
+}
+.eyebrow { margin-top: 22px; }
+.h2 { margin-top: 14px; font-size: clamp(44px, 6.4vw, 104px); font-weight: 800; line-height: .92; letter-spacing: -.03em; text-wrap: balance; }
+.lead { color: var(--dim); font-size: clamp(15px, 1.15vw, 17px); line-height: 1.7; max-width: 52ch; padding-bottom: 6px; }
+.lead b { color: var(--ink); font-weight: 600; }
+
+/* ── the two spreads ── */
+.spread { display: grid; border-top: 1px solid var(--line); }
+.photo { position: relative; overflow: hidden; margin: 0; background: linear-gradient(160deg, var(--indigo), var(--night)); }
+.photo img { object-fit: cover; }
+.copy { display: flex; flex-direction: column; min-width: 0; }
+.body { color: var(--dim); font-size: clamp(16px, 1.3vw, 19px); line-height: 1.6; max-width: 34ch; }
+
+/* A: half-width photo off the left edge; type in the right half, ledger at the foot. */
+.spreadA { grid-template-columns: minmax(0, 50%) minmax(0, 1fr); height: clamp(580px, 84vh, 760px); }
+.spreadA .copy { padding: clamp(40px, 4vw, 64px) var(--g) clamp(36px, 3.6vw, 56px) 5vw; }
+.titleA { margin-top: 20px; font-size: clamp(52px, 6.6vw, 112px); font-weight: 800; line-height: .9; letter-spacing: -.035em; text-wrap: balance; }
+.spreadA .body { margin-top: 28px; }
+.spreadA .ledger { margin-top: auto; }
+
+/* B: the headline runs larger and wider; the print is narrower and leaves off the right edge. */
+.spreadB { grid-template-columns: minmax(0, 1fr) minmax(0, 36%); height: clamp(520px, 72vh, 660px); }
+.spreadB .copy { padding: clamp(40px, 4vw, 64px) 4vw clamp(36px, 3.6vw, 56px) var(--g); }
+.titleB { margin-top: 20px; font-size: clamp(60px, 8.6vw, 150px); font-weight: 900; line-height: .86; letter-spacing: -.04em; text-wrap: balance; }
+.foot { margin-top: auto; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 20px 4vw; align-items: end; }
+
+/* the fact under each spread: route, then time, as a caption ledger */
+.ledger { border-top: 1px solid var(--line); padding-top: 14px; display: grid; gap: 8px; max-width: 440px; }
+.ledger dd { font-size: clamp(20px, 1.8vw, 26px); font-weight: 700; letter-spacing: -.01em; color: var(--accent); }
+
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .settle { animation: settle linear both; animation-timeline: view(); animation-range: entry 0% cover 45%; }
+  }
+}
+@keyframes settle { from { transform: scale(1.08); } to { transform: scale(1); } }
+
+/* ── the run: four quick rows ── */
+.run {
+  list-style: none; padding: clamp(56px, 5.4vw, 80px) var(--g) 0; border-top: 1px solid var(--line);
+}
+.row {
+  display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 5fr) 200px; gap: 12px 4vw; align-items: center;
+  padding: 14px 0; border-bottom: 1px solid var(--line);
+}
+.row:first-child { border-top: 1px solid var(--line); }
+.fig { font-size: clamp(52px, 6.4vw, 104px); font-weight: 800; line-height: .9; letter-spacing: -.035em; color: var(--accent);
+  font-variant-numeric: tabular-nums; white-space: nowrap; }
+.rowTitle { font-size: clamp(28px, 3vw, 46px); font-weight: 800; line-height: 1; letter-spacing: -.025em; }
+.rowText { display: flex; flex-direction: column; gap: 8px; }
+.rowText h3 { font-weight: 400; }
+.rowBody { color: var(--dim); font-size: 15px; line-height: 1.6; max-width: 52ch; }
+.thumb { position: relative; display: block; aspect-ratio: 16 / 10; overflow: hidden; }
+.thumb img { object-fit: cover; }
+
+/* ── the close: one wide band, the three returns along its foot ── */
+.finale { padding: clamp(56px, 5.4vw, 80px) var(--g) 0; }
+.finaleLabel { font-weight: 400; color: var(--accent); }
+.band {
+  position: relative; margin-top: 16px; min-height: clamp(340px, 29vw, 420px); overflow: hidden;
+  display: flex; align-items: flex-end; border: 1px solid var(--line);
+}
+.band img { object-fit: cover; object-position: 50% 40%; }
+.band::before {
+  content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background: linear-gradient(to top, rgba(var(--night-rgb), .92) 0%, rgba(var(--night-rgb), .6) 34%, rgba(var(--night-rgb), 0) 68%);
+}
+.returns { position: relative; z-index: 3; width: 100%; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.returns > div { padding: 0 clamp(18px, 2.4vw, 36px) clamp(22px, 2.4vw, 34px); border-left: 1px solid var(--line); }
+.returns > div:first-child { border-left: 0; }
+.returns dt { font-size: clamp(64px, 8.4vw, 136px); font-weight: 900; line-height: .86; letter-spacing: -.045em; color: var(--accent);
+  font-variant-numeric: tabular-nums; }
+.returns dd { margin-top: 14px; display: flex; flex-direction: column; gap: 4px; }
+.returns dd b { font-size: clamp(17px, 1.5vw, 21px); font-weight: 700; color: var(--ink); }
+.returns dd .mono { color: var(--ink); opacity: .78; }
+
+/* ── tablet ── */
+@media (max-width: 1100px) {
+  .head { grid-template-columns: minmax(0, 1fr); }
+  .row { grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr) 150px; }
+}
+
+/* ── phone and narrow tablet: spreads stack, photo first ── */
+@media (max-width: 860px) {
+  .spreadA, .spreadB { grid-template-columns: minmax(0, 1fr); height: auto; }
+  .spreadA .photo { aspect-ratio: 4 / 5; max-height: 78vh; }
+  .spreadB .photo { order: -1; aspect-ratio: 3 / 4; max-height: 70vh; }
+  .spreadB .photo img { object-position: 12% 40% !important; } /* keep the face in frame */
+  .spreadA .copy, .spreadB .copy { padding: 32px 6vw 48px; }
+  .spreadA .ledger { margin-top: 36px; }
+  .foot { grid-template-columns: minmax(0, 1fr); margin-top: 28px; }
+  .returns { grid-template-columns: minmax(0, 1fr); }
+  .returns > div { border-left: 0; border-top: 1px solid var(--line); padding-top: 18px; display: grid;
+    grid-template-columns: auto minmax(0, 1fr); gap: 16px; align-items: end; }
+  .returns > div:first-child { border-top: 0; }
+  .returns dt { font-size: clamp(54px, 15vw, 88px); }
+  .returns dd { margin-top: 0; padding-bottom: 4px; }
+  .band { min-height: 0; aspect-ratio: auto; flex-direction: column; align-items: stretch; }
+  .band img { position: relative !important; height: auto !important; aspect-ratio: 16 / 10; }
+  .band::before { display: none; }
+  .returns { padding-top: 8px; }
+}
+@media (max-width: 640px) {
+  .row { grid-template-columns: minmax(0, 1fr) 88px; gap: 12px 18px; padding: 20px 0; }
+  .rowText { grid-column: 1 / -1; grid-row: 2; }
+  .thumb { grid-column: 2; grid-row: 1; aspect-ratio: 1; }
+  .fig { font-size: clamp(48px, 15vw, 72px); }
+}
+.fig sup { font-size: .26em; vertical-align: top; position: relative; top: .3em; margin-left: 4px; }

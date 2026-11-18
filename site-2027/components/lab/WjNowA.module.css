@@ -1,0 +1,78 @@
+/* /lab/wj-now-a · The rail. Night ground, cream type, gold only for the marks and Today. */
+
+.section { padding: clamp(80px, 9vw, 150px) 0 0; scroll-margin-top: 90px; }
+.wrap { max-width: 1440px; margin: 0 auto; padding: 0 6vw; }
+
+.h2 { margin-top: 14px; font-size: clamp(64px, 11vw, 176px); font-weight: 900; line-height: .86; letter-spacing: -.035em; }
+
+/* Panorama: the train's streak runs into the rail below it. */
+.plate { position: relative; display: block; margin-top: clamp(28px, 3vw, 44px); aspect-ratio: 40 / 9; overflow: hidden;
+  border: 1px solid var(--line); background: linear-gradient(160deg, var(--indigo), var(--night)); }
+.plate img { object-fit: cover; object-position: 50% 52%; }
+
+/* ── the rail ── */
+.rail { position: relative; margin-top: clamp(64px, 6vw, 88px); view-timeline-name: --wjrail; }
+/* faint full-width line: the axis runs edge to edge, the scale lives inside the content box */
+.rail::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 1px; background: var(--line); }
+.track { position: relative; height: 1px; }
+.base { position: absolute; inset: 0; }
+.past { position: absolute; left: 0; top: -1px; height: 3px; background: var(--ink); transform-origin: 0 50%; }
+.ahead { position: absolute; right: 0; top: 0; height: 1px;
+  background: repeating-linear-gradient(90deg, var(--faint) 0 6px, transparent 6px 12px); }
+.tick { position: absolute; top: -4px; width: 1px; height: 9px; background: var(--faint); }
+.tick.year { top: -12px; height: 25px; background: var(--dim); }
+/* 2025 is a whole year: a gold span under that stretch of the axis */
+.span { position: absolute; top: 6px; height: 3px; background: var(--accent); }
+.dot { position: absolute; top: 0; width: 13px; height: 13px; margin: -6px 0 0 -6.5px; border-radius: 50%;
+  background: var(--accent); box-shadow: 0 0 0 4px var(--night); }
+.dot.future { background: var(--night); border: 2px solid var(--accent); }
+.today { position: absolute; bottom: 0; width: 2px; height: 58px; margin-left: -1px; background: var(--accent); }
+.todayLabel { position: absolute; bottom: 100%; right: -1px; padding-bottom: 8px; white-space: nowrap;
+  font-family: var(--mono); font-size: 11px; letter-spacing: .24em; text-transform: uppercase; color: var(--accent); }
+.today::after { content: ""; position: absolute; bottom: -5px; left: -4px; width: 10px; height: 10px; border-radius: 50%;
+  background: var(--accent); }
+
+.leaders { display: block; width: 100%; height: clamp(56px, 5vw, 80px); overflow: visible; }
+.leaders line { stroke: var(--faint); stroke-width: 1; }
+
+/* ── columns hanging from the rail ── */
+.cols { list-style: none; display: grid; grid-template-columns: var(--cols); padding-bottom: 8px; }
+.col { min-width: 0; padding: 16px 32px 0 0; border-top: 1px solid var(--line); }
+.colAhead .date { color: var(--dim); }
+.date { display: block; font-size: clamp(26px, 2.5vw, 40px); font-weight: 800; line-height: 1; letter-spacing: -.025em;
+  color: var(--ink); font-variant-numeric: tabular-nums; }
+.item + .item { margin-top: 22px; padding-top: 18px; border-top: 1px solid var(--line); }
+.date + .item { margin-top: 18px; }
+.head { font-size: 17px; font-weight: 700; line-height: 1.35; text-wrap: pretty; }
+.body { color: var(--dim); font-size: 15px; line-height: 1.65; max-width: 46ch; text-wrap: pretty; }
+.head + .body { margin-top: 12px; }
+.body b { color: var(--ink); font-weight: 600; }
+
+/* ── the one gesture: the rail draws to Today as it enters, then Today appears ── */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .past { animation: wjDraw linear both; animation-timeline: --wjrail; animation-range: entry 0% cover 15%; }
+    .today { animation: wjToday linear both; animation-timeline: --wjrail; animation-range: cover 11% cover 16%; }
+  }
+}
+@keyframes wjDraw { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes wjToday { from { opacity: 0; } to { opacity: 1; } }
+
+/* ── below 1100: the rail stays to scale, the columns stack ── */
+@media (max-width: 1100px) {
+  .leaders { display: none; }
+  .rail { margin-bottom: 40px; }
+  .cols { grid-template-columns: minmax(0, 1fr); max-width: 640px; }
+  .col { position: relative; padding: 24px 0 28px 28px; border-top: 0; border-left: 1px solid var(--line); }
+  .col::before { content: ""; position: absolute; left: -5px; top: 30px; width: 9px; height: 9px; border-radius: 50%;
+    background: var(--accent); }
+  .colAhead { border-left-style: dashed; }
+  .colAhead::before { background: var(--night); border: 2px solid var(--accent); width: 9px; height: 9px; left: -6px; }
+}
+@media (max-width: 640px) {
+  .plate { aspect-ratio: 16 / 9; }
+  .today { height: 46px; }
+  .dot { width: 11px; height: 11px; margin: -5px 0 0 -5.5px; box-shadow: 0 0 0 3px var(--night); }
+  .tick { display: none; }
+  .tick.year { display: block; }
+}

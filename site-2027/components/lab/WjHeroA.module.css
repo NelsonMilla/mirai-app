@@ -1,0 +1,72 @@
+/* /lab/wj-hero-a · Monument. The claim at viewport scale; the photo is a slit window that
+   closes the last line. Night ground, cream type, gold only for the eyebrow, kanji and cue. */
+
+:global(html):has(.hero), :global(body):has(.hero) { background: var(--night); }
+
+.hero {
+  --f: clamp(44px, min(8.8vw, 14.2svh), 172px);
+  max-width: 1440px; margin: 0 auto;
+  padding: clamp(104px, 13svh, 136px) 6vw clamp(28px, 4svh, 44px);
+  background: var(--night);
+}
+
+.top {
+  display: flex; justify-content: space-between; align-items: baseline; gap: 20px;
+  padding-bottom: clamp(14px, 2svh, 22px); border-bottom: 1px solid var(--line);
+}
+.mark b { font-size: clamp(24px, 2.4vw, 36px); }
+
+/* ── the claim ── */
+.claim {
+  margin-top: clamp(14px, 2.2svh, 26px);
+  font-size: var(--f); font-weight: 900; line-height: .9; letter-spacing: -.035em; word-spacing: .06em;
+  text-wrap: balance;
+}
+.last { display: flex; align-items: stretch; gap: .16em; }
+.word { flex: none; }
+.window {
+  position: relative; flex: 1 1 auto; min-width: 2em;
+  margin: .1em 0 .06em; overflow: hidden; border: 1px solid var(--line);
+  background: linear-gradient(160deg, var(--indigo), var(--night));
+}
+.window img { object-fit: cover; }
+.shutter {
+  position: absolute; inset: 0; z-index: 3; background: var(--night);
+  transform-origin: 100% 50%; transform: scaleX(0);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .shutter { animation: open 1.3s var(--ease) .35s both; }
+}
+@keyframes open { from { transform: scaleX(1); } to { transform: scaleX(0); } }
+
+/* ── the reason, the caption, the way on ── */
+.foot {
+  display: flex; justify-content: space-between; align-items: flex-end; gap: 22px 48px; flex-wrap: wrap;
+  margin-top: clamp(20px, 3.4svh, 40px); padding-top: clamp(16px, 2.4svh, 26px);
+  border-top: 1px solid var(--line);
+}
+.lead {
+  font-size: clamp(18px, 1.75vw, 26px); font-weight: 500; line-height: 1.38; letter-spacing: -.01em;
+  max-width: 42ch; color: var(--ink);
+}
+.side { display: flex; flex-direction: column; align-items: flex-end; gap: 14px; text-align: right; }
+.caption {
+  font-family: var(--mono); font-size: 10px; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--faint); max-width: 34ch; line-height: 1.6;
+}
+.cue {
+  display: inline-flex; align-items: center; gap: 12px; min-height: 44px;
+  font-family: var(--mono); font-size: 11px; letter-spacing: .3em; text-transform: uppercase;
+  color: var(--accent); text-decoration: none;
+}
+.cue span { font-family: var(--font); font-size: 18px; letter-spacing: 0; }
+.cue:hover span { transform: translateY(3px); }
+.cue span { display: inline-block; transition: transform .3s var(--ease); }
+
+@media (max-width: 640px) {
+  .hero { --f: clamp(40px, 13.4vw, 76px); padding-top: 100px; }
+  .claim { letter-spacing: -.03em; line-height: .92; }
+  .last { flex-wrap: wrap; row-gap: .14em; }
+  .window { flex-basis: 100%; height: 1.15em; margin: .04em 0 0; }
+  .side { align-items: flex-start; text-align: left; }
+}

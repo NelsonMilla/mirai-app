@@ -108,6 +108,9 @@ export const whyJapan = {
     ],
   },
 
+  // Added plain label (Nov 18 2026): the text link to the homepage program in the closing beat.
+  programLink: 'See the program',
+
   notesTitle: 'Sources and notes',
   notes: [
     'Act on the Safety of Regenerative Medicine (MHLW). The route under which a cell or gene therapy is provided on a self-pay basis once Phase 1 safety data exists.',

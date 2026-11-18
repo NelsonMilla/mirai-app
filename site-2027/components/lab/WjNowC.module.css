@@ -1,0 +1,83 @@
+/* Why now · C "Dossier": a hairline-ruled record file. Gold for stamps and note numbers,
+   vermilion only for the one hanko seal. */
+
+.sec { max-width: 1440px; margin: 0 auto; padding: clamp(72px, 7vw, 110px) 6vw 0; scroll-margin-top: 90px; }
+
+/* ── file cover: title left, a small attached print with the seal right ── */
+.head {
+  display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 28px 48px;
+  padding-bottom: 28px;
+}
+.h2 { margin-top: 14px; font-size: clamp(56px, 9vw, 150px); font-weight: 800; line-height: .9; letter-spacing: -.035em; }
+.cover { position: relative; width: clamp(200px, 20vw, 280px); margin-right: 14px; }
+.print { position: relative; display: block; aspect-ratio: 4 / 3; overflow: hidden; border: 1px solid var(--line);
+  outline: 1px solid var(--line); outline-offset: 6px; }
+.print img { object-fit: cover; }
+.seal {
+  position: absolute; z-index: 3; right: -14px; bottom: -18px;
+  writing-mode: vertical-rl; font-family: var(--mincho); font-weight: 700; font-size: 17px; line-height: 1;
+  letter-spacing: .08em; color: #fff; padding: .55em .4em; background: var(--vermilion); border-radius: 3px;
+  transform: rotate(-4deg);
+}
+
+/* ── the records ── */
+.file { list-style: none; border-top: 1px solid var(--ink); border-bottom: 1px solid var(--line); }
+.rec {
+  display: grid; grid-template-columns: 200px minmax(0, 1fr) minmax(0, 340px);
+  border-bottom: 1px solid var(--line);
+}
+.rec:last-child { border-bottom: 0; }
+.rec > div { padding: 30px 28px 34px; min-width: 0; }
+.rec > div + div { border-left: 1px solid var(--line); }
+.rec > div:first-child { padding-left: 0; }
+.rec > div:last-child { padding-right: 0; }
+
+.stampCell { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
+.stamp {
+  display: inline-block; font-family: var(--mono); font-size: 13px; font-weight: 500; letter-spacing: .2em;
+  text-transform: uppercase; white-space: nowrap; color: var(--accent);
+  padding: 8px 12px 8px 14px; border: 1px solid rgba(var(--accent-rgb), .6);
+  outline: 1px solid rgba(var(--accent-rgb), .3); outline-offset: 3px; margin: 4px;
+}
+.upcoming { font-family: var(--mono); font-size: 10px; letter-spacing: .26em; text-transform: uppercase; color: var(--dim); margin-left: 4px; }
+.ahead .stamp { color: var(--dim); border: 1px dashed rgba(246,241,231,.4); outline: 0; }
+
+.text { display: grid; gap: 22px; align-content: start; }
+.item + .item { padding-top: 22px; border-top: 1px dashed var(--line); }
+.entryHead { font-size: clamp(20px, 1.9vw, 28px); font-weight: 700; line-height: 1.22; letter-spacing: -.01em; text-wrap: pretty; max-width: 30ch; }
+.entryBody { color: var(--dim); font-size: 16px; line-height: 1.65; max-width: 60ch; }
+.entryHead + .entryBody { margin-top: 12px; }
+.entryBody b { color: var(--ink); font-weight: 600; }
+.ahead .entryHead { color: var(--dim); }
+
+.cite { display: grid; gap: 14px; align-content: start; }
+.note { display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 10px; color: var(--dim); font-size: 13px; line-height: 1.6; }
+.noteN { font-family: var(--mono); font-size: 11px; color: var(--accent); padding-top: 2px; }
+.blank { font-family: var(--mono); color: var(--faint); }
+
+@media (max-width: 1100px) {
+  .rec { grid-template-columns: 170px minmax(0, 1fr); }
+  .cite { grid-column: 2; border-left: 1px solid var(--line); padding-top: 0 !important; }
+  .rec > .cite { padding-left: 28px; }
+  .blank { display: none; }
+  .cite:has(.blank) { display: none; }
+}
+@media (max-width: 640px) {
+  .head { align-items: flex-start; }
+  .rec { grid-template-columns: minmax(0, 1fr); padding: 26px 0 28px; }
+  .rec > div, .rec > div:first-child, .rec > div:last-child, .rec > div + div { padding: 0; border-left: 0; }
+  .rec > .text { padding-top: 16px; }
+  .rec > .cite { grid-column: 1; padding: 16px 0 0 !important; margin-top: 18px; border-top: 1px dashed var(--line); border-left: 0; }
+  .stampCell { flex-direction: row; align-items: center; gap: 14px; }
+}
+
+/* the one gesture: the seal is pressed onto the file as it scrolls in, then stays */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .seal { animation: press linear both; animation-timeline: view(); animation-range: entry 10% entry 80%; }
+  }
+}
+@keyframes press {
+  from { opacity: 0; transform: rotate(-4deg) scale(1.7); }
+  to { opacity: 1; transform: rotate(-4deg) scale(1); }
+}

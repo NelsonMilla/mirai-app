@@ -1,0 +1,10 @@
+/* /why-japan · footnote markers and the sources list. */
+.fn { font-family: var(--mono); font-size: .62em; line-height: 0; margin-left: 2px; }
+.fn a { color: var(--accent); text-decoration: none; scroll-margin-top: 120px; }
+
+.notes { max-width: 1440px; margin: 0 auto; padding: clamp(64px, 6vw, 96px) 6vw clamp(40px, 4vw, 56px); }
+.notes h2 { padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+.notes ol { margin-top: 16px; padding-left: 20px; columns: 2; column-gap: clamp(32px, 4vw, 72px); color: var(--faint); font-size: 12.5px; line-height: 1.6; }
+.notes li { scroll-margin-top: 120px; break-inside: avoid; padding-bottom: 8px; }
+@media (max-width: 760px) { .notes ol { columns: 1; } }
+.notes a { color: var(--dim); }

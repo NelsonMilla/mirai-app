@@ -33,7 +33,7 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
 html { background: var(--bg); }
-html:has(.masthead, .postHero, .notFound), body:has(.masthead, .postHero, .notFound) { background: var(--night); }
+html:has(.masthead, .postHero, .notFound, .wjPage), body:has(.masthead, .postHero, .notFound, .wjPage) { background: var(--night); }
 body { background: var(--bg); color: var(--ink); font-family: var(--font); overflow-x: hidden; }
 ::selection { background: var(--accent); color: #000; }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
