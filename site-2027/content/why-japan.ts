@@ -60,7 +60,7 @@ export const whyJapan = {
       label: 'Health market, per year',
       figure: '$146B',
       fn: 5,
-      body: '¥23.8 trillion. 3.7% of GDP, the third-largest pharmaceutical market and R&D spender on earth. Biotech R&D up 32% last year.',
+      body: '¥23.8 trillion. 3.7% of GDP, the third-largest pharmaceutical market and R&D spender in the world. Biotech R&D up 32% last year.',
     },
     {
       img: { src: '/img/why-japan/port-island-aerial.webp', alt: "Kobe's port islands from the air, engineered land in Osaka Bay" },
@@ -74,7 +74,7 @@ export const whyJapan = {
       label: 'National insurance covers',
       figure: '70–90%',
       fn: 7,
-      body: 'Of what a patient pays, with a monthly cap. Demand does not wait on reimbursement fights.',
+      body: 'Of what a patient pays, with a monthly cap. Patients do not wait for reimbursement decisions.',
     },
     {
       img: { src: '/img/why-japan/expressway.webp', alt: 'An elevated expressway through a Japanese city at night, traffic drawn into one unbroken line' },
@@ -102,7 +102,7 @@ export const whyJapan = {
       {
         date: '',
         bold: 'The standard.',
-        body: 'Data generated here to ICH E6(R3) can be used directly in FDA and EMA filings. Start in Japan and the work counts everywhere.',
+        body: 'Data generated here to ICH E6(R3) can be used directly in FDA and EMA filings.',
       },
       { date: 'Jun 2026', head: 'Annex 2 adopted: real-world data counts as evidence', fn: 4 },
       {
