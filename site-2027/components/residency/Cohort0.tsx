@@ -1,7 +1,7 @@
 'use client';
 // Cohort 0 (実績, track record): the proof that companies stayed in Japan.
-// 7 → 5 is drawn as seven marks between two dimension lines: the cream line spans all
-// seven entrants, the gold line the five that are staying. On wide screens the five lit
+// 7 → 7 is drawn as seven marks between two dimension lines: the cream line spans all
+// seven entrants, the gold line the ones still building in Japan (all seven since Nov 18 2026). On wide screens the lit
 // discs carry the company names and the two unlit ones are bare hairline rings; below
 // 1000px the marks shrink to a small tally and the names show as the list instead.
 // Then the lead, the companies label and the apply pill beside the Demo Day footage, the
@@ -34,7 +34,7 @@ const VIDEO = { wide: '/media/cohort0-loop.mp4', small: '/media/cohort0-loop-720
 
 export function Cohort0({ r = residency }: { r?: Residency } = {}) {
   const c = r.cohort0;
-  const [entrants, staying, ...secondary] = c.stats; // 7, 5 | 150+, 76, 17
+  const [entrants, staying, ...secondary] = c.stats; // 7, 7 | 150+, 76, 17
   const speakerCount = c.stats[3]?.value; // "76"
   const FILM_CAPTION = c.filmCaption;
   const FILM_LABEL = c.filmLabel;

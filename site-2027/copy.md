@@ -224,27 +224,29 @@ text (the lines starting with `>`), then ask Claude to put it into the site.
 > Cohort 0 · Kobe, October 2026
 
 **Headline** `cohort0.headline`
-> Five out of seven are building a base in Japan.
+> All seven are building a base in Japan.
 
 **Paragraph** `cohort0.lead` *(the GlobalDeal wording needs Karen's sign-off)*
-> Seven companies came to do business in Japan for the first time. Five are now working to establish a permanent presence here. Some were picked up by Antler, others received in-kind support from GlobalDeal, and every one of them made new partnerships in Japan.
+> Seven companies came to do business in Japan for the first time. All seven are continuing to build here. Some were picked up by Antler, others received in-kind support from GlobalDeal, and every one of them made new partnerships in Japan.
 
 **Numbers** `cohort0.stats` *(number · label)*
 > - 7 · First-time Japan entrants
-> - 5 · Establishing a permanent presence
+> - 7 · Continuing to build in Japan
 > - 150+ · Attendees
 > - 76 · Speakers
 > - 17 · Demo Day teams
 
-**The five companies** `cohort0.companies`
+**The seven companies** `cohort0.companies`
 > - Avenyx Bio
 > - aeon.science
 > - Cingularity
 > - Muse Bio
 > - Probabilistic Bio
+> - HALOS Biosciences
+> - Eightsix Science
 
 **Label over the company list** `cohort0.companiesLabel`
-> Establishing a permanent presence in Japan
+> Continuing to build in Japan
 
 **Small note under the list** `cohort0.note`
 > Company plans in progress, November 2026.
