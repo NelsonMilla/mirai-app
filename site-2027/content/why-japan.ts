@@ -11,7 +11,6 @@ export const whyJapan = {
   eyebrow: 'Why Japan',
   headline: 'Japan is the best global ecosystem for frontier biotech.',
   lead: 'The only developed country where a therapy can sell on Phase 1 safety data, and where the fastest route to market is the official one.',
-  hero: { src: '/img/why-japan/kobe-harbor.webp', alt: 'Kobe harbour at golden hour, the Port Island cluster across the water' },
   // The page's lead film (Nelson, Nov 18 2026: KBIC, more visual impact): a silent loop cut from
   // Mirai's own 4K film of the 2026 visits on Port Island. Shot list: public/media/kbic-loop.json.
   film: {
@@ -35,7 +34,6 @@ export const whyJapan = {
   cards: [
     {
       wide: true,
-      img: { src: '/img/why-japan/microscope.jpg', alt: 'A researcher silhouetted at a microscope, lit from behind', pos: '55% 32%' },
       label: 'Research base',
       title: 'Nobel-winning researchers',
       body: "At Kyoto and Osaka, RIKEN's labs, purpose-built clinical clusters.",
@@ -50,34 +48,29 @@ export const whyJapan = {
       fact: { label: 'Act on the Safety of Regenerative Medicine', value: '6–12 months' },
     },
     {
-      img: { src: '/img/why-japan/lab-robot.webp', alt: 'A robotic arm moving sample plates in an automated laboratory' },
       label: 'Patient follow-up',
       title: 'One national database',
       body: 'Every patient is followed for life, to a standard the FDA and EMA accept.',
     },
     {
-      img: { src: '/img/why-japan/kansai-night.webp', alt: 'Kansai at night from above, the city lit to the horizon', pos: '50% 58%' },
       label: 'Health market, per year',
       figure: '$146B',
       fn: 5,
       body: '¥23.8 trillion. 3.7% of GDP, the third-largest pharmaceutical market and R&D spender in the world. Biotech R&D up 32% last year.',
     },
     {
-      img: { src: '/img/why-japan/port-island-aerial.webp', alt: "Kobe's port islands from the air, engineered land in Osaka Bay" },
       label: 'AMED grants match registered VC',
       figure: '2:1',
       fn: 6,
       body: 'Non-dilutive. Raise a round and the state matches it twice over.',
     },
     {
-      img: { src: '/img/why-japan/portliner.webp', alt: "The Port Liner train crossing Kobe's red Port Island bridge" },
       label: 'National insurance covers',
       figure: '70–90%',
       fn: 7,
       body: 'Of what a patient pays, with a monthly cap. Patients do not wait for reimbursement decisions.',
     },
     {
-      img: { src: '/img/why-japan/expressway.webp', alt: 'An elevated expressway through a Japanese city at night, traffic drawn into one unbroken line' },
       label: 'What the route returns',
       ledger: [
         { figure: '10×', label: 'To first revenue', bold: 'Faster' },
@@ -90,7 +83,6 @@ export const whyJapan = {
   now: {
     label: 'The path, the standard & the demand',
     title: 'Why now.',
-    img: '/img/why-japan/night-train.webp',
     entries: [
       { date: '2025', head: 'ICH E6(R3) becomes the global clinical-data standard', fn: 3 },
       {
