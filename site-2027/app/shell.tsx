@@ -5,6 +5,7 @@ import type { Metadata, Viewport } from 'next';
 import { IBM_Plex_Mono, Shippori_Mincho } from 'next/font/google';
 import localFont from 'next/font/local';
 import { site } from '@/content/site';
+import { Analytics } from '@vercel/analytics/next';
 import PostHog from '@/components/PostHog';
 import './globals.css';
 
@@ -48,7 +49,7 @@ export function Html({ lang, children }: { lang: 'en' | 'ja'; children: React.Re
       <head>
         <noscript><style>{'.rv{opacity:1;transform:none}'}</style></noscript>
       </head>
-      <body>{children}<PostHog /></body>
+      <body>{children}<PostHog /><Analytics /></body>
     </html>
   );
 }

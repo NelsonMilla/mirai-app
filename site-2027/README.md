@@ -82,5 +82,8 @@ all generated at build time.
   `../new-site` at runtime (Vercel deploys one folder). The sync script is the
   only thing that reads `new-site/`, at authoring time.
 - Plain copy: literal titles and body, no jargon.
-- Not wired yet: PostHog analytics, Vercel project, partner logos (the Kobe
+- Analytics: PostHog (`components/PostHog.tsx`) and Vercel Web Analytics
+  (`<Analytics />` in `app/shell.tsx`; turn on Web Analytics for the Vercel
+  project). `Apply Clicked` goes to both.
+- Not wired yet: Vercel project, partner logos (the Kobe
   logo approval ends Dec 15 2026; partner wording rules apply).

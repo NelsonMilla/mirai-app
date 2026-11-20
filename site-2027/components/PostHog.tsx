@@ -3,7 +3,10 @@
 // by design (event ingest only). Never loads on localhost, so dev traffic stays off the funnel.
 // Page views come from the SDK (`defaults` also captures client-side navigation); the one custom
 // event is `Apply Clicked` on any link to the Typeform application, with the section it was in.
+// It also goes to Vercel Web Analytics (page views there come from <Analytics /> in app/shell.tsx),
+// same two-sink pattern as new-site/analytics.js; Vercel records the path itself.
 import { useEffect } from 'react';
+import { track } from '@vercel/analytics';
 
 const TOKEN = 'phc_zLkJimThxemsd9r6RsEdfrPspU8TkfgNJfoSteH5uQjJ';
 
@@ -33,6 +36,7 @@ export default function PostHog() {
       if (!a) return;
       const where = a.closest('[id]')?.id || a.closest('header, nav, footer, aside')?.tagName.toLowerCase() || 'page';
       window.posthog?.capture('Apply Clicked', { location: where, path: window.location.pathname });
+      track('Apply Clicked', { location: where });
     };
     document.addEventListener('click', onClick, true);
     return () => document.removeEventListener('click', onClick, true);
