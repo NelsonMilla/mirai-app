@@ -63,7 +63,7 @@ export default async function PostPage({ params }: Props) {
     url: `${site.url}/blog/${post.slug}`,
     mainEntityOfPage: `${site.url}/blog/${post.slug}`,
     author: { '@type': post.author && post.author !== site.name ? 'Person' : 'Organization', name: post.author ?? site.name },
-    publisher: { '@type': 'Organization', name: site.name, url: site.url },
+    publisher: { '@type': 'Organization', '@id': `${site.url}/#org`, name: site.name, url: site.url, sameAs: site.sameAs },
     keywords: post.tags.join(', ') || undefined,
     about: post.company ? { '@type': 'Organization', name: post.company.name, url: post.company.url } : undefined,
   };

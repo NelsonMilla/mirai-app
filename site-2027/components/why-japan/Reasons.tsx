@@ -53,8 +53,8 @@ export function Reasons() {
           <p className={s.spreadBody}>{ips.body}</p>
         </div>
         <figure className={`${s.photo} grain`}>
-          <Image className={`grade ${s.settle}`} src={ips.img.src} alt={ips.img.alt} fill
-            sizes="(max-width: 860px) 100vw, 38vw" style={{ objectPosition: ips.img.pos }} />
+          <Image className={`grade ${s.settle}`} src={ips.img!.src} alt={ips.img!.alt} fill
+            sizes="(max-width: 860px) 100vw, 38vw" style={{ objectPosition: ips.img!.pos }} />
         </figure>
       </article>
 

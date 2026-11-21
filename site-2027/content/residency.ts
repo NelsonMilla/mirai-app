@@ -160,13 +160,14 @@ export const residency = {
   voices: {
     eyebrow: 'In their words',
     headline: 'From Cohort 0',
-    // Testimonials from Cohort 0 founders (more being collected). { quote, name, role, company }
+    // Testimonials from Cohort 0 founders (more being collected). { quote, name, role, company, link? }
     items: [
       {
         quote: "Thanks to you at Mirai Tech City, I toured Nobel laureate Yamanaka's lab and was introduced to many brilliant scientists.",
         name: 'Max Koko', role: 'CEO, Founder', company: 'Probabilistic Bio',
+        link: { href: '/blog/probabilistic-biology', label: 'Read the interview' },
       },
-    ] as { quote: string; name: string; role: string; company?: string }[],
+    ] as { quote: string; name: string; role: string; company?: string; link?: { href: string; label: string } }[],
   },
 
   // ── Final call ───────────────────────────────────────────

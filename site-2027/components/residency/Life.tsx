@@ -120,6 +120,7 @@ export function Voices({ r = residency }: { r?: Residency } = {}) {
                     <figcaption className={s.who}>
                       <b>{q.name}</b>
                       <span>{q.company ? `${q.role}, ${q.company}` : q.role}</span>
+                      {q.link && <a className={s.more} href={q.link.href}>{q.link.label} →</a>}
                     </figcaption>
                   </figure>
                 </li>

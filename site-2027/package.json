@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start --port 4350",
     "speakers:sync": "node scripts/sync-speakers.mjs",
-    "program:sync": "node scripts/sync-program.mjs"
+    "program:sync": "node scripts/sync-program.mjs",
+    "indexnow": "node scripts/indexnow.mjs"
   },
   "dependencies": {
     "gray-matter": "4.0.3",

@@ -7,6 +7,9 @@ export const site = {
   url: 'https://www.miraitech.city', // canonical URLs, sitemap and RSS are built from this
   ogImage: '/img/fuji/fuji-dawn.webp', // link-preview image when a page has none of its own
   x: '@MiraiTechCity', // X (Twitter) account, for twitter:site on link previews
+  // Official profiles, listed as sameAs in the Organization structured data so search engines
+  // and AI assistants tie them to the site. Add LinkedIn etc. here once confirmed.
+  sameAs: ['https://x.com/MiraiTechCity'],
   // Defaults for pages that don't set their own (the homepage and blog do).
   title: residency.seo.title,
   description: residency.seo.description,

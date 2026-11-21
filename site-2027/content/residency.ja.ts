@@ -135,6 +135,7 @@ export const residencyJa: Residency = {
       {
         quote: 'Mirai Tech Cityの皆さんのおかげで、ノーベル賞受賞者・山中伸弥教授の研究室を見学し、多くの優れた科学者を紹介していただきました。',
         name: 'Max Koko', role: 'CEO・創業者', company: 'Probabilistic Bio',
+        link: { href: '/blog/probabilistic-biology', label: 'インタビューを読む（英語）' },
       },
     ],
   },
