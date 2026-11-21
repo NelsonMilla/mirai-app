@@ -10,7 +10,7 @@ const place = {
   name: 'Kobe, Japan',
   address: { '@type': 'PostalAddress', addressLocality: 'Kobe', addressRegion: 'Hyogo', addressCountry: 'JP' },
 };
-const org = { '@type': 'Organization', '@id': `${site.url}/#org`, name: site.name, url: site.url, email: 'team@miraitech.city' };
+const org = { '@type': 'Organization', '@id': `${site.url}/#org`, name: site.name, url: site.url, email: 'team@miraitech.city', sameAs: site.sameAs };
 const ev = (name: string, startDate: string, endDate: string, description?: string) => ({
   '@type': 'Event', name, startDate, endDate, description,
   eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
